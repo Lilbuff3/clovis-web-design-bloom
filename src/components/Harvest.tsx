@@ -23,12 +23,13 @@ function Yield({ y, i }: { y: Y; i: number }) {
 
 function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [viewMode, setViewMode] = useState<"web" | "photo">("web");
+
   return (
     <article className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
       <div className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}>
         <div
-          className="reveal relative mx-auto max-w-xl"
-          data-hover
+          className="relative mx-auto max-w-xl"
           onPointerMove={(e) => {
             const r = e.currentTarget.getBoundingClientRect();
             setTilt({ x: (e.clientX - r.left) / r.width - 0.5, y: (e.clientY - r.top) / r.height - 0.5 });
@@ -36,35 +37,120 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           onPointerLeave={() => setTilt({ x: 0, y: 0 })}
           style={{ perspective: 1000 }}
         >
-          <div
-            className={`arch clip-reveal relative aspect-[4/5] overflow-hidden ${c.tint} shadow-[0_50px_80px_-40px_rgba(30,43,35,.5)] transition-transform duration-300 ease-out`}
-            style={{ transform: `rotateY(${tilt.x * 8}deg) rotateX(${-tilt.y * 8}deg)` }}
-          >
-            <img
-              src={c.img}
-              alt={`${c.client} project artwork`}
-              className="h-full w-full object-cover transition-transform duration-700"
-              style={{ transform: `scale(1.08) translate(${tilt.x * -14}px, ${tilt.y * -14}px)` }}
-              loading="lazy"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/40 to-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-cream">
-              <span className="font-mono text-[11px] uppercase tracking-[.18em]">{c.place}</span>
-              <span className="rounded-full bg-cream px-3 py-1 font-mono text-[11px] text-ink">PageSpeed 100</span>
-            </div>
-          </div>
           {/* Crate label sticker */}
           <div
-            data-speed="0.35"
-            className={`absolute -top-5 ${flip ? "-left-3 md:-left-8 -rotate-6" : "-right-3 md:-right-8 rotate-6"} w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-xl transition-transform duration-500 hover:rotate-0`}
+            className={`absolute -top-4 z-20 ${flip ? "-left-2 md:-left-6 -rotate-3" : "-right-2 md:-right-6 rotate-3"} w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-xl transition-transform duration-300 hover:rotate-0`}
           >
             <div className="flex items-center justify-between border-b border-dashed border-ink/40 pb-1.5 font-mono text-[9px] uppercase tracking-[.2em]">
               <span>Crate</span>
               <span>Nº {c.no}</span>
             </div>
-            <div className="font-display wonk mt-1.5 text-lg italic leading-tight">{c.client}</div>
+            <div className="font-display wonk mt-1 text-base italic leading-tight text-ink">{c.client}</div>
             <div className="mt-1 font-mono text-[9px] uppercase tracking-[.15em] text-ink/60">
               Grown {c.year} · Central Valley
+            </div>
+          </div>
+
+          {/* Hand-Grown Browser Showcase Window */}
+          <div
+            className="rounded-[28px] md:rounded-[36px] border-2 border-ink bg-cream p-2.5 md:p-3.5 shadow-[0_30px_70px_-25px_rgba(30,43,35,0.45)] transition-transform duration-300 ease-out"
+            style={{ transform: `rotateY(${tilt.x * 6}deg) rotateX(${-tilt.y * 6}deg)` }}
+          >
+            {/* Browser top chrome */}
+            <div className="mb-2 flex items-center justify-between px-1.5 pt-1">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-persimmon shadow-inner" />
+                <span className="h-2.5 w-2.5 rounded-full bg-citrus shadow-inner" />
+                <span className="h-2.5 w-2.5 rounded-full bg-leaf shadow-inner" />
+              </div>
+
+              {/* Address bar pill */}
+              <div className="mx-2 flex flex-1 max-w-[280px] items-center justify-between rounded-full border border-ink/15 bg-paper/80 px-3 py-1 font-mono text-[11px] text-ink/80 shadow-inner">
+                <span className="truncate flex items-center gap-1">
+                  <span className="text-[10px] opacity-60">🔒</span>
+                  <span>{c.urlDisplay}</span>
+                </span>
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-1.5 text-[10px] font-semibold text-persimmon hover:underline flex-shrink-0"
+                >
+                  Live ↗
+                </a>
+              </div>
+
+              {/* PageSpeed 100 pill */}
+              <div className="flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 font-mono text-[10px] font-bold text-leaf">
+                <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
+                <span>100</span>
+              </div>
+            </div>
+
+            {/* Display Stage */}
+            <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[20px] md:rounded-[24px] border border-ink/10 bg-paper">
+              {viewMode === "web" ? (
+                <div className="relative h-full w-full overflow-hidden group">
+                  <img
+                    src={c.previewImg}
+                    alt={`${c.client} hand-built website`}
+                    className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <a
+                    href={c.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-3 right-3 rounded-full bg-ink/90 px-3 py-1.5 font-mono text-[11px] font-medium text-cream shadow-lg backdrop-blur-sm transition-transform hover:scale-105"
+                  >
+                    Open live website ↗
+                  </a>
+                </div>
+              ) : (
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src={c.photoImg}
+                    alt={`${c.client} on-site photography`}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/60 to-transparent p-4 text-cream">
+                    <span className="font-mono text-[11px] uppercase tracking-wider">{c.place}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Bottom inspection pill toggle */}
+            <div className="mt-2.5 flex items-center justify-between border-t border-dashed border-ink/15 px-2 pt-2 font-mono text-[11px]">
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setViewMode("web")}
+                  className={`rounded-full px-3 py-1 text-xs transition ${
+                    viewMode === "web"
+                      ? "bg-ink font-medium text-cream shadow-sm"
+                      : "text-ink/65 hover:text-ink"
+                  }`}
+                >
+                  🖥️ Live Website
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("photo")}
+                  className={`rounded-full px-3 py-1 text-xs transition ${
+                    viewMode === "photo"
+                      ? "bg-ink font-medium text-cream shadow-sm"
+                      : "text-ink/65 hover:text-ink"
+                  }`}
+                >
+                  📸 On-Site Photo
+                </button>
+              </div>
+              <span className="hidden sm:inline-block font-mono text-[10px] text-ink/50 uppercase tracking-wider">
+                {c.place}
+              </span>
             </div>
           </div>
         </div>
