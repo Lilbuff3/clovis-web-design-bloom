@@ -37,17 +37,21 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           onPointerLeave={() => setTilt({ x: 0, y: 0 })}
           style={{ perspective: 1000 }}
         >
-          {/* Crate label sticker */}
-          <div
-            className={`absolute -top-4 z-20 ${flip ? "-left-2 md:-left-6 -rotate-3" : "-right-2 md:-right-6 rotate-3"} w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-xl transition-transform duration-300 hover:rotate-0`}
-          >
-            <div className="flex items-center justify-between border-b border-dashed border-ink/40 pb-1.5 font-mono text-[9px] uppercase tracking-[.2em]">
-              <span>Crate</span>
-              <span>Nº {c.no}</span>
-            </div>
-            <div className="font-display wonk mt-1 text-base italic leading-tight text-ink">{c.client}</div>
-            <div className="mt-1 font-mono text-[9px] uppercase tracking-[.15em] text-ink/60">
-              Grown {c.year} · Central Valley
+          {/* Crate label sticker pinned cleanly above the browser frame */}
+          <div className={`mb-3.5 flex ${flip ? "justify-start pl-2 sm:pl-4" : "justify-end pr-2 sm:pr-4"}`}>
+            <div
+              className={`w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-lg transition-transform duration-300 hover:rotate-0 ${
+                flip ? "-rotate-2" : "rotate-2"
+              }`}
+            >
+              <div className="flex items-center justify-between border-b border-dashed border-ink/40 pb-1.5 font-mono text-[9px] uppercase tracking-[.2em]">
+                <span>Crate</span>
+                <span>Nº {c.no}</span>
+              </div>
+              <div className="font-display wonk mt-1 text-base italic leading-tight text-ink">{c.client}</div>
+              <div className="mt-1 font-mono text-[9px] uppercase tracking-[.15em] text-ink/60">
+                Grown {c.year} · Central Valley
+              </div>
             </div>
           </div>
 
@@ -57,7 +61,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
             style={{ transform: `rotateY(${tilt.x * 6}deg) rotateX(${-tilt.y * 6}deg)` }}
           >
             {/* Browser top chrome */}
-            <div className="mb-2 flex items-center justify-between px-1.5 pt-1">
+            <div className="mb-2.5 flex items-center justify-between px-1.5 pt-1">
               <div className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-persimmon shadow-inner" />
                 <span className="h-2.5 w-2.5 rounded-full bg-citrus shadow-inner" />
@@ -87,8 +91,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
               </div>
             </div>
 
-            {/* Display Stage */}
-            <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[20px] md:rounded-[24px] border border-ink/10 bg-paper">
+            {/* Display Stage - 16:9 aspect-video matches exact 1280x720 preview dimensions */}
+            <div className="relative aspect-video w-full overflow-hidden rounded-[20px] md:rounded-[24px] border border-ink/10 bg-paper">
               {viewMode === "web" ? (
                 <div className="relative h-full w-full overflow-hidden group">
                   <img
