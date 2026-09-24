@@ -68,7 +68,7 @@ export function Season() {
   const [ref, p] = useSectionProgress<HTMLDivElement>();
   const active = Math.min(3, Math.floor(p * 4));
   return (
-    <section id="season" className="relative bg-cream px-5 py-24 md:px-8 md:py-36">
+    <section id="season" className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The growing season</div>
@@ -148,7 +148,7 @@ export function Season() {
 export function Compare() {
   const [mine, setMine] = useState(true);
   return (
-    <section className="relative overflow-hidden bg-sage px-5 py-24 md:px-8 md:py-32">
+    <section id="compare" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div>
@@ -164,7 +164,7 @@ export function Compare() {
           </div>
           <button
             onClick={() => setMine((m) => !m)}
-            className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium"
+            data-magnetic="0.15" className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium"
             aria-pressed={mine}
           >
             <span

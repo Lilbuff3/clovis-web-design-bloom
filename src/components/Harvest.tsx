@@ -37,7 +37,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           style={{ perspective: 1000 }}
         >
           <div
-            className={`arch relative aspect-[4/5] overflow-hidden ${c.tint} shadow-[0_50px_80px_-40px_rgba(30,43,35,.5)] transition-transform duration-300 ease-out`}
+            className={`arch clip-reveal relative aspect-[4/5] overflow-hidden ${c.tint} shadow-[0_50px_80px_-40px_rgba(30,43,35,.5)] transition-transform duration-300 ease-out`}
             style={{ transform: `rotateY(${tilt.x * 8}deg) rotateX(${-tilt.y * 8}deg)` }}
           >
             <img
@@ -55,6 +55,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           </div>
           {/* Crate label sticker */}
           <div
+            data-speed="0.35"
             className={`absolute -top-5 ${flip ? "-left-3 md:-left-8 -rotate-6" : "-right-3 md:-right-8 rotate-6"} w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-xl transition-transform duration-500 hover:rotate-0`}
           >
             <div className="flex items-center justify-between border-b border-dashed border-ink/40 pb-1.5 font-mono text-[9px] uppercase tracking-[.2em]">
@@ -116,7 +117,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 
 export function Harvest() {
   return (
-    <section id="harvest" className="relative overflow-hidden bg-[#f3e9d6] px-5 py-24 md:px-8 md:py-36">
+    <section id="harvest" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
@@ -152,11 +153,11 @@ export function Harvest() {
               <p className="mt-5 max-w-md text-lg leading-relaxed text-cream/80">
                 The $500 launch price holds for the first five Central Valley businesses. After that, it's $750 — still honest, just less of a steal.
               </p>
-              <a href={SMS_LINK} className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
+              <a href={SMS_LINK} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
                 Claim a spot by text <span aria-hidden>→</span>
               </a>
             </div>
-            <div className="relative h-80 md:h-full md:min-h-[480px]">
+            <div className="clip-reveal relative h-80 md:h-full md:min-h-[480px]">
               <img src="/images/seedling.jpg" alt="A seedling sprouting in a terracotta pot on a sunny windowsill" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             </div>
           </div>

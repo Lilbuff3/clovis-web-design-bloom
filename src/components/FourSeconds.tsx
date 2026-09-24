@@ -198,7 +198,7 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="test" className="relative bg-paper px-5 py-24 md:px-8 md:py-36">
+    <section id="test" className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -247,7 +247,7 @@ export function FourSeconds() {
             </div>
           </div>
 
-          <div ref={ref} className="lg:col-span-7">
+          <div ref={ref} className="lg:col-span-7" data-cursor={running ? "Racing" : "Race"} onClick={() => !running && run()}>
             <div className="relative flex flex-col items-center justify-center gap-10 rounded-[40px] bg-sage/70 px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
               <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-citrus/70 blur-2xl" />
               <Phone label="Typical template" tone="slow">

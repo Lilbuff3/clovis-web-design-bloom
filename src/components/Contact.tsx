@@ -36,7 +36,7 @@ export function Contact() {
   const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(message)}`;
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-blush px-5 py-24 md:px-8 md:py-36">
+    <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">
       <video
         src={VIDEO_SHADOW}
         autoPlay
@@ -137,7 +137,7 @@ export function Contact() {
             </div>
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <a href={smsHref} className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition hover:bg-persimmon">
+            <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon">
               Send this to Adam →
             </a>
             <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
@@ -164,8 +164,8 @@ export function Contact() {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-citrus to-persimmon px-5 pb-28 pt-20 text-ink sm:pb-8 md:px-8">
-      <div className="mx-auto max-w-7xl">
+    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
+      <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <p className="font-display wonk max-w-md text-3xl italic leading-tight">Hand-grown websites for the people who keep the Valley running.</p>

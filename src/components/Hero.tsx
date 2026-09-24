@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
+import { onIntroDone } from "../lib/smooth";
 import { PHONE_DISPLAY, SMS_LINK, VIDEO_ORCHARD } from "../lib/data";
 
 function RotatingBadge() {
@@ -39,17 +40,19 @@ function ClovisClock() {
 export function Hero() {
   const { y } = usePageScroll();
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 60);
-    return () => clearTimeout(t);
-  }, []);
+  useEffect(() => onIntroDone(() => setLoaded(true)), []);
   const par = Math.min(y, 900);
 
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-[#f8e6b8]">
+    <section id="top" data-intro className="relative min-h-[100svh] overflow-hidden bg-[#f8e6b8]">
       {/* Illustration */}
+      <div
+        className="absolute inset-0 transition-transform duration-[2400ms] ease-[cubic-bezier(.2,.7,.1,1)]"
+        style={{ transform: loaded ? "scale(1)" : "scale(1.22)" }}
+      >
       <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
         <img src="/images/hero.jpg" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
+      </div>
       </div>
       {/* Halo for the painted sun */}
       <div
@@ -66,7 +69,7 @@ export function Hero() {
       />
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-32 md:px-8 md:pt-36">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-32 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className={`flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 transition-all duration-1000 ${loaded ? "opacity-100" : "translate-y-3 opacity-0"}`}>
           <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">Nº 01 — Spring 2026 almanac</span>
           <span className="hidden sm:inline">Fresno · Clovis · Madera · the whole Valley</span>
@@ -98,7 +101,7 @@ export function Hero() {
             <span className="bg-citrus/60 px-1">You get my cell number, not a ticket queue.</span>
           </p>
           <div className="flex flex-col items-start gap-3">
-            <a href={SMS_LINK} className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition hover:bg-persimmon">
+            <a href={SMS_LINK} data-magnetic="0.3" className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
@@ -120,6 +123,12 @@ export function Hero() {
           <div className="hidden rounded-2xl border border-cream/40 bg-cream/75 px-4 py-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/80 backdrop-blur-md md:block">
             <ClovisClock />
           </div>
+          <a href="#manifesto" className={`group absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[.25em] text-ink/70 transition-opacity delay-1000 duration-1000 md:flex ${loaded ? "opacity-100" : "opacity-0"}`}>
+            Scroll
+            <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
+              <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />
+            </span>
+          </a>
           <div className="ml-auto animate-float">
             <RotatingBadge />
           </div>

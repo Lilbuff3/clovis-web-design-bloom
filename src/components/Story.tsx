@@ -1,20 +1,12 @@
 import { useState } from "react";
 import { care, faqs, letters, plans, SMS_LINK, VIDEO_SHADOW } from "../lib/data";
 
-const rules = [
-  "No templates sold as custom. Ever.",
-  "Prices published — never behind a phone call.",
-  "You keep the code, the domain and the logins.",
-  "I don't disappear. When you text, I answer.",
-  "If one page is enough, that's what I'll tell you.",
-];
-
 export function Grower() {
   return (
-    <section id="grower" className="relative overflow-hidden bg-paper px-5 py-24 md:px-8 md:py-36">
+    <section id="grower" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
         <div className="reveal relative lg:col-span-5">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush">
+          <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush">
             <img src="/images/studio.jpg" alt="Adam's sunlit workbench in Clovis with a laptop, sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" />
             <video
               src={VIDEO_SHADOW}
@@ -26,7 +18,7 @@ export function Grower() {
               aria-hidden
             />
           </div>
-          <div className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
+          <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">The workbench</div>
               <div className="font-display text-lg">Clovis, California</div>
@@ -61,21 +53,7 @@ export function Grower() {
           </blockquote>
 
           <div className="mt-12">
-            <div className="font-mono text-[11px] uppercase tracking-[.2em] text-ink/60">Rules of the orchard</div>
-            <ol className="mt-4 border-t border-ink/15">
-              {rules.map((r, i) => (
-                <li
-                  key={r}
-                  className="reveal group relative flex items-center gap-5 overflow-hidden border-b border-ink/15 py-4"
-                  style={{ ["--d" as string]: `${i * 70}ms` }}
-                >
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-citrus transition-transform duration-500 group-hover:scale-x-100" />
-                  <span className="relative font-mono text-xs text-ink/50">0{i + 1}</span>
-                  <span className="relative text-lg transition-transform duration-500 group-hover:translate-x-2 md:text-xl">{r}</span>
-                </li>
-              ))}
-            </ol>
-            <a href={SMS_LINK} className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition hover:bg-persimmon">
+            <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
               Text Adam directly →
             </a>
           </div>
@@ -87,7 +65,7 @@ export function Grower() {
 
 export function Stand() {
   return (
-    <section id="stand" className="relative overflow-hidden bg-[#f3e9d6] px-5 py-24 md:px-8 md:py-36">
+    <section id="stand" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">06 — The farm stand</div>
@@ -195,7 +173,7 @@ export function Stand() {
 
 export function Letters() {
   return (
-    <section className="relative overflow-hidden bg-sky/70 px-5 py-24 md:px-8 md:py-36">
+    <section id="letters" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/70">07 — Letters from the valley</div>
         <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
@@ -253,7 +231,7 @@ export function Letters() {
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="relative bg-paper px-5 py-24 md:px-8 md:py-36">
+    <section id="faq" className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
