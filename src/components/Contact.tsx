@@ -26,11 +26,11 @@ export function Contact() {
   const [when, setWhen] = useState(whens[0]);
 
   const message = useMemo(() => {
-    const who = name.trim() ? `Hi Adam, it's ${name.trim()}` : "Hi Adam";
+    const who = name.trim() ? `Hi, Adam! It's ${name.trim()}` : "Hi, Adam!";
     const what = trade.trim() ? ` — I run ${trade.trim()}` : "";
     const n = need === "Not sure yet" ? "I'm not sure what I need yet" : `I'm interested in ${need.replace(/ \(.*\)/, "").replace(/^A /, "a ")}`;
     const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "just looking for now";
-    return `${who}${what}. ${n}, ${w}. Can we talk?`;
+    return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
   }, [name, trade, need, when]);
 
   const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(message)}`;
@@ -114,18 +114,15 @@ export function Contact() {
                   <div className="mt-1 text-[13px] font-semibold">Adam · Clovis Web Design</div>
                   <div className="font-mono text-[10px] text-ink/50">{PHONE_DISPLAY}</div>
                 </div>
-                <div className="flex min-h-[300px] flex-col justify-end gap-2 px-4 py-5">
-                  <div className="max-w-[80%] self-start rounded-3xl rounded-bl-md bg-ink/[.07] px-4 py-2.5 text-[14px] leading-snug">
-                    Hey! This is Adam — I build the sites myself. What are you working on? 🌱
-                  </div>
+                <div className="flex min-h-[260px] flex-col justify-end gap-2 px-4 py-5">
                   <div
                     key={message}
-                    className="max-w-[85%] self-end rounded-3xl rounded-br-md bg-persimmon px-4 py-2.5 text-[14px] leading-snug text-white"
+                    className="max-w-[90%] self-end rounded-3xl rounded-br-md bg-persimmon px-4 py-3 text-[14px] leading-snug text-white shadow-md"
                     style={{ animation: "pop .35s cubic-bezier(.3,1.4,.5,1)" }}
                   >
                     {message}
                   </div>
-                  <div className="self-end font-mono text-[9px] text-ink/40">Preview · not sent yet</div>
+                  <div className="self-end font-mono text-[9px] text-ink/40">Preview · ready to send</div>
                 </div>
                 <div className="flex items-center gap-2 border-t border-ink/10 px-3 py-3">
                   <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink/40">iMessage</div>
