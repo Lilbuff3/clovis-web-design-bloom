@@ -59,6 +59,32 @@ export function onIntroDone(cb: () => void) {
   return () => window.removeEventListener("intro:done", cb);
 }
 
+/**
+ * Scroll to a homepage section by id — for /#id links arriving from /boost and
+ * for direct loads with a hash (getLenis() resets to the top, so the browser's
+ * own jump never survives). Waits for the intro, lets ScrollTrigger add its pin
+ * spacers first (they roughly triple the page height), and corrects once on
+ * arrival in case late images moved the target.
+ */
+export function scrollToSection(id: string) {
+  onIntroDone(() => {
+    const el = id === "top" ? null : document.getElementById(id);
+    if (id !== "top" && !el) return;
+    ScrollTrigger.refresh();
+    const l = getLenis();
+    l.start();
+    const go = (retry: boolean) =>
+      l.scrollTo(el ?? 0, {
+        offset: el ? -8 : 0,
+        duration: 1.5,
+        onComplete: () => {
+          if (retry && el && Math.abs(el.getBoundingClientRect().top + 8) > 4) go(false);
+        },
+      });
+    go(true);
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /* Chapters — drives background colour morph, nav state, indicator     */
 /* ------------------------------------------------------------------ */

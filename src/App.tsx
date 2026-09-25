@@ -15,7 +15,7 @@ import { ScrollProgress } from "./components/primitives";
 import { MobileTextBar } from "./components/MobileTextBar";
 import { useGlobalReveal } from "./lib/hooks";
 import { useAutoRefresh, useChapterTriggers, useMagnetic, useParallax } from "./lib/motion";
-import { getLenis, useChapter } from "./lib/smooth";
+import { scrollToSection, useChapter } from "./lib/smooth";
 import { useSilentClean } from "./utils/utm";
 
 function getPath() {
@@ -103,6 +103,11 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  // Direct loads like cloviswebdesign.com/#faq
+  useEffect(() => {
+    if (window.location.hash.length > 1) scrollToSection(window.location.hash.slice(1));
+  }, []);
+
   const navigateTo = (path: string) => {
     if (typeof window !== "undefined") {
       const [pathname, hash] = path.split("#");
@@ -110,19 +115,8 @@ export default function App() {
       window.history.pushState({}, "", path);
       setCurrentPath(targetPath);
       if (hash) {
-        setTimeout(() => {
-          const target = hash === "top" ? 0 : document.getElementById(hash);
-          if (target !== null) {
-            try {
-              const lenis = getLenis();
-              lenis.start();
-              lenis.scrollTo(target, { offset: hash === "top" ? 0 : -8, duration: 1.5 });
-            } catch {
-              const el = document.getElementById(hash);
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }
-          }
-        }, 120);
+        // Give the homepage a moment to mount before measuring it.
+        setTimeout(() => scrollToSection(hash), 120);
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
