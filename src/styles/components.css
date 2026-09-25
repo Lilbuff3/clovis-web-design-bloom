@@ -53,10 +53,11 @@
 .navbar_logo:hover .logo_mark { transform: rotate(-90deg); }
 .navbar_logo-text {
   display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  flex-direction: column;
+  gap: 0.2rem;
+  line-height: 1;
   font-family: var(--_font---display);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   letter-spacing: -0.03em;
   font-variation-settings: "opsz" 72, "wght" 560, "SOFT" 100;
 }
@@ -86,9 +87,9 @@
   font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
 }
 .navbar_link:hover .navbar_link-inner,
-.navbar_link:focus-visible .navbar_link-inner { transform: translateY(-100%); }
+.navbar_link:focus-visible .navbar_link-inner,
+.navbar_link.is-active .navbar_link-inner { transform: translateY(-100%); }
 .navbar_actions { display: flex; align-items: center; gap: var(--_space---gap-m); }
-.navbar_time { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--_color---text-muted); }
 .navbar_cta { padding: 0.8rem 1.25rem; font-size: 0.9rem; }
 .navbar_burger {
   display: none;
@@ -130,8 +131,6 @@
 .navbar_overlay-foot { display: flex; flex-direction: column; gap: var(--_space---gap-s); align-items: flex-start; }
 @keyframes overlayIn { from { opacity: 0; transform: translateY(1.5rem); } }
 
-@media (max-width: 1280px) { .navbar_time-status { display: none; } }
-@media (max-width: 991px) { .navbar_time { display: none; } }
 @media (max-width: 991px) {
   .navbar_menu { display: none; }
   .navbar_burger { display: inline-block; }

@@ -1,5 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { ChapterIndicator, Marquee, Nav, SunCursor } from "./components/Chrome";
+import { ChapterIndicator, Marquee, SunCursor } from "./components/Chrome";
+import { Header } from "./components/Header";
+import { Footer } from "./components/BespokeFooter";
 import { Hero } from "./components/Hero";
 import { FourSeconds } from "./components/FourSeconds";
 import { Harvest } from "./components/Harvest";
@@ -10,7 +12,7 @@ import { medical } from "./data/content";
 import { ChapterRail, HOME_CHAPTERS } from "./components/ChapterRail";
 import { Compare, Season } from "./components/Season";
 import { FAQ, Grower, Letters, Stand } from "./components/Story";
-import { Contact, Footer } from "./components/Contact";
+import { Contact } from "./components/Contact";
 import { Manifesto, RulesGallery, ValleyZoom } from "./components/Scenes";
 import { Preloader } from "./components/Preloader";
 import { ScrollProgress } from "./components/primitives";
@@ -134,7 +136,7 @@ export default function App() {
       <ScrollProgress />
       <SunCursor />
       <ChapterRail chapters={HOME_CHAPTERS} />
-      <Nav onNavigate={navigateTo} />
+      <Header onNavigate={navigateTo} />
       <ChapterIndicator />
       <Canvas>
         <Hero />

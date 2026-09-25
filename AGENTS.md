@@ -42,7 +42,7 @@ python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live chec
   `BespokeFooter`, `MobileTextBar`), a route + `SEO` entry in `App.tsx`, an entry in
   `entry-server.tsx`, a `vercel.json` rewrite, a sitemap URL and a `validate_seo.py` check.
 - `src/data/content.ts` holds **every word and fact**: `studio` (name, phone, SMS/tel
-  links), `navLinks` (both navs), the homepage sections in page order, then `medical`
+  links), `navLinks` (header and footer), the homepage sections in page order, then `medical`
   (the /medical-websites page) and `boostCases`/`boostFaqs`. Change copy there, not in components. Phone is
   **(559) 575-3014**, and only `studio` should spell it.
 - Motion, one home per kind:
@@ -52,11 +52,15 @@ python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live chec
     `[data-magnetic]`).
   - `src/lib/hooks.ts`: per-element React hooks (reveal, in-view, progress, count-up,
     `useMagneticRef`).
+- One header and footer on every page: `Header.tsx` (citrus-slice `LogoMark`; links roll
+  up into orange italic on hover and for the section you're in; big serif menu on phones;
+  `isBoostPage` adds the /boost banner, `isSubPage` points links back home) and
+  `BespokeFooter.tsx` (sitemap, contact, towns served, live Clovis clock).
 - `src/components/primitives.tsx`: shared bits for /boost and the hero (`Button`,
   `Reveal`, `SectionHeader`, `Cursor`, `ScrollProgress`, `AmbientVideo`).
 - Styles: `src/index.css` holds the Tailwind `@theme` colours/fonts and shared helpers
   (`.line-mask`, `.reveal`, `.grain`…), then `@import`s `src/styles/` in cascade order:
-  `tokens.css` → `global.css` → `components.css` (the /boost navbar and footer, hero
+  `tokens.css` → `global.css` → `components.css` (the site header and footer, hero
   kinetic letters, the mobile text bar) → `boost.css`. A class used in a component must be
   defined in one of those files, and a rule no element can match shouldn't be there.
 - Video: `public/video/*.mp4` are 9 s muted loops with a crossfaded seam, each with a

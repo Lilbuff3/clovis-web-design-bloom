@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { medical, studio, VIDEO_SHADOW } from "../data/content";
+import { studio, VIDEO_SHADOW } from "../data/content";
 import { AmbientVideo } from "./primitives";
 import { buildSmsHref } from "../utils/sms";
 import { SunMark } from "./Chrome";
@@ -153,41 +153,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  );
-}
-
-export function Footer() {
-  return (
-    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
-      <div data-footer-inner className="mx-auto max-w-7xl">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Hand-grown websites for the people who keep the Valley running.</p>
-          </div>
-          <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className="text-ink/60">Visit</div>
-            <a href="#test" className="block hover:underline">The four-second test</a>
-            <a href="#harvest" className="block hover:underline">Harvest</a>
-            <a href="#season" className="block hover:underline">Process</a>
-            <a href="#stand" className="block hover:underline">Prices</a>
-            <a href={medical.path} className="block hover:underline">Medical practices</a>
-          </div>
-          <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className="text-ink/60">Reach</div>
-            <a href={studio.smsHref} className="block hover:underline">Text {studio.phoneDisplay}</a>
-            <span className="block">Clovis, California</span>
-            <span className="block">Fresno & the Central Valley</span>
-          </div>
-        </div>
-        <div className="font-display wonk mt-16 select-none text-center text-[clamp(3.5rem,15.5vw,15rem)] font-[450] italic leading-[0.8] tracking-[-0.04em]">
-          Clovis<span className="not-italic">·</span>web
-        </div>
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
-          <span>© {new Date().getFullYear()} Adam Youssef · Clovis Web Design</span>
-          <span>This page: hand-built · no template · no tracking pixels</span>
-          <a href="#top" className="hover:underline">Back to sunrise ↑</a>
-        </div>
-      </div>
-    </footer>
   );
 }

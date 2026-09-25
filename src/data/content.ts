@@ -304,6 +304,13 @@ export const medical = {
   lede:
     "A clinic runs on its staff. Every question the website answers, like where to park, which form to bring or how to send a referral, is a call the front desk doesn't have to take. That time matters as much to your patients as it does to your doctors.",
   sms: "Hi, Adam! I saw your medical practice websites page. I'd like to talk about a site for our practice.",
+  /** Hero tiles, Kidney Specialist's numbers (see `cases[0]`). */
+  badges: [
+    { value: "+140%", label: "Provider referrals, by Dr. Masood's count" },
+    { value: "100/100", label: "Google PageSpeed on the practice's site" },
+    { value: "EN + ES", label: "Every page, form and notice" },
+    { value: "0", label: "Patient health data collected online" },
+  ],
   caseIntro:
     "A nephrology practice with its main office in Madera and a second clinic in Fresno, inside Trust Clinic. Dr. Masood's first concern was patient privacy, so the site had to be built around patients while protecting both them and the practice.",
   built: [

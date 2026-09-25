@@ -727,11 +727,6 @@
   justify-content: space-between;
   gap: 1rem;
 }
-@media (max-width: 640px) {
-  .boost-banner_badge {
-    display: none;
-  }
-}
 .boost-back-btn {
   background: transparent;
   border: none;
@@ -758,6 +753,12 @@
 }
 .boost-banner_phone:hover {
   color: var(--_color---highlight);
+}
+/* On phones the banner wrapped to four lines; the logo goes home and the text bar has the number. */
+@media (max-width: 640px) {
+  .boost-page_banner {
+    display: none;
+  }
 }
 
 /* Standalone Hero */

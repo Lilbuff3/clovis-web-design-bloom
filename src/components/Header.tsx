@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navLinks, studio } from "../data/content";
+import { getLenis, useChapter } from "../lib/smooth";
 import { Button } from "./primitives";
 
 export function useClovisTime() {
@@ -68,7 +69,7 @@ export function Header({
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  const { time, status } = useClovisTime();
+  const { time } = useClovisTime();
 
   useEffect(() => {
     let last = window.scrollY;
@@ -82,7 +83,12 @@ export function Header({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const chapter = useChapter();
+  const wasOpen = useRef(false);
   useEffect(() => {
+    if (open) getLenis().stop();
+    else if (wasOpen.current) getLenis().start();
+    wasOpen.current = open;
     document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
@@ -120,14 +126,10 @@ export function Header({
       }
       return;
     }
-    if (href.startsWith("#")) {
+    // Homepage: #section links are scrolled by the global Lenis anchor handler (smooth.ts).
+    if (href.startsWith("/") && onNavigate) {
       e.preventDefault();
-      const id = href.replace(/^#/, "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        window.history.pushState(null, "", href);
-      }
+      onNavigate(href);
     }
   };
 
@@ -145,7 +147,7 @@ export function Header({
                 ← Explore Full Studio Portfolio
               </button>
               <div className="boost-banner_badge text-style-eyebrow">
-                <span className="status_dot" aria-hidden="true" /> Live Conversion Engine · Clovis, CA
+                <span className="status_dot" aria-hidden="true" /> Built by hand in Clovis, CA
               </div>
               <a href={studio.phoneHref} className="boost-banner_phone text-style-eyebrow font-mono">
                 Direct: {studio.phoneDisplay}
@@ -167,7 +169,7 @@ export function Header({
             >
               <LogoMark />
               <span className="navbar_logo-text">
-                Clovis<span className="navbar_logo-sub">Web Design</span>
+                Clovis Web Design<span className="navbar_logo-sub">Hand-grown in Clovis, CA</span>
               </span>
             </a>
 
@@ -178,7 +180,7 @@ export function Header({
                     <a
                       href={resolveHref(l.href)}
                       onClick={(e) => handleLinkClick(l.href, e)}
-                      className={`navbar_link ${l.isBoost ? "is-boost-link" : ""}`}
+                      className={`navbar_link ${l.isBoost ? "is-boost-link" : ""} ${!offHome && (l.ids as readonly string[]).includes(chapter.id) ? "is-active" : ""}`}
                     >
                       <span className="navbar_link-inner" data-text={l.label}>
                         {l.label}
@@ -190,14 +192,6 @@ export function Header({
             </nav>
 
             <div className="navbar_actions">
-              <span
-                className="navbar_time text-style-eyebrow"
-                title={`Local time in Clovis: ${time} · Adam is ${status}`}
-                aria-label={`Local time in Clovis: ${time}, Adam is ${status}`}
-              >
-                <span className="status_dot" aria-hidden="true" /> Clovis {time}
-                <span className="navbar_time-status text-color-muted"> · {status}</span>
-              </span>
               <Button label="Text Adam" href={studio.smsHref} variant="primary" showIcon={false} className="navbar_cta" />
               <button
                 type="button"

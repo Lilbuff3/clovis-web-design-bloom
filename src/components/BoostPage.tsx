@@ -94,8 +94,8 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
                     <span className="boost-badge-label text-size-small">PageSpeed Mobile on All Client Sites</span>
                   </div>
                   <div className="boost-badge-card">
-                    <span className="boost-badge-num font-mono">&lt; 0.8s</span>
-                    <span className="boost-badge-label text-size-small">Full Interactive Paint on 2 Bars LTE</span>
+                    <span className="boost-badge-num font-mono">≤ 0.8s</span>
+                    <span className="boost-badge-label text-size-small">Mobile load on client sites</span>
                   </div>
                   <div className="boost-badge-card">
                     <span className="boost-badge-num font-mono">7 Days</span>

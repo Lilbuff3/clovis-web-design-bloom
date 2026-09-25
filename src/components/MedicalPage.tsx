@@ -43,6 +43,14 @@ export function MedicalPage({ onNavigate }: { onNavigate?: (path: string) => voi
                   <Button label="Text Adam" href={sms} variant="accent" showIcon={false} />
                   <Button label={`See ${kidney.urlDisplay}`} href={kidney.url} variant="ghost" external />
                 </div>
+                <div className="boost-hero_badges">
+                  {medical.badges.map((b) => (
+                    <div key={b.label} className="boost-badge-card">
+                      <span className="boost-badge-num font-mono">{b.value}</span>
+                      <span className="boost-badge-label text-size-small">{b.label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -59,18 +67,6 @@ export function MedicalPage({ onNavigate }: { onNavigate?: (path: string) => voi
             <Cards items={medical.built} />
 
             <Reveal className="boost-proof_card mt-10">
-              <div className="boost-proof_metrics">
-                {kidney.yields.map((y) => (
-                  <div key={y.label} className="boost-proof_metric-item">
-                    <span className="boost-proof_val font-mono">
-                      {y.prefix ?? ""}
-                      {y.value.toFixed(y.decimals ?? 0)}
-                      {y.suffix}
-                    </span>
-                    <span className="boost-proof_tag text-size-small">{y.label}</span>
-                  </div>
-                ))}
-              </div>
               <blockquote className="boost-proof_quote text-size-large">“{drMasood.quote}”</blockquote>
               <div className="boost-proof_author">
                 <div className="boost-proof_author-name font-medium">{drMasood.name}</div>
