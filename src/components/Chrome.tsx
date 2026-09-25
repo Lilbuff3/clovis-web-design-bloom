@@ -29,13 +29,14 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 const links = [
   { href: "#test", label: "The test", ids: ["test"] },
   { href: "#harvest", label: "Harvest", ids: ["harvest"] },
+  { href: "/boost", label: "Boost™", ids: ["boost"], isBoost: true },
   { href: "#season", label: "Process", ids: ["season", "compare"] },
   { href: "#grower", label: "About", ids: ["grower", "rules"] },
   { href: "#stand", label: "Prices", ids: ["stand", "letters"] },
   { href: "#faq", label: "FAQ", ids: ["faq"] },
 ];
 
-export function Nav() {
+export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}) {
   const { y, p } = usePageScroll();
   const chapter = useChapter();
   const [open, setOpen] = useState(false);
@@ -58,6 +59,17 @@ export function Nav() {
     wasOpen.current = open;
   }, [open]);
 
+  const handleLinkClick = (href: string, e: React.MouseEvent) => {
+    if (href.startsWith("/")) {
+      e.preventDefault();
+      setOpen(false);
+      if (onNavigate) onNavigate(href);
+      else window.location.href = href;
+      return;
+    }
+    setOpen(false);
+  };
+
   const scrolled = y > 40;
   return (
     <>
@@ -70,7 +82,17 @@ export function Nav() {
             scrolled ? "border-ink/10 bg-cream/80 shadow-[0_10px_40px_-20px_rgba(30,43,35,.35)] backdrop-blur-xl" : "border-transparent bg-transparent"
           }`}
         >
-          <a href="#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          <a
+            href="#top"
+            className="group flex items-center gap-2.5"
+            onClick={(e) => {
+              if (window.location.pathname !== "/" && onNavigate) {
+                e.preventDefault();
+                onNavigate("/");
+              }
+              setOpen(false);
+            }}
+          >
             <SunMark className="h-9 w-9 transition-transform duration-700 group-hover:rotate-[360deg]" progress={p} />
             <span className="leading-none">
               <span className="font-display block text-[1.15rem] font-semibold">Clovis Web Design</span>
@@ -80,10 +102,26 @@ export function Nav() {
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
             {links.map((l) => {
               const active = (l.ids as readonly string[]).includes(chapter.id);
+              if (l.isBoost) {
+                return (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={(e) => handleLinkClick(l.href, e)}
+                    className="relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[15px] font-semibold text-persimmon hover:bg-persimmon/10 transition-colors"
+                    data-cursor="label"
+                    data-cursor-label="Boost"
+                  >
+                    <span className="status_dot" aria-hidden="true" />
+                    <span>{l.label}</span>
+                  </a>
+                );
+              }
               return (
                 <a
                   key={l.href}
                   href={l.href}
+                  onClick={(e) => handleLinkClick(l.href, e)}
                   className={`relative rounded-full px-3.5 py-2 text-[15px] transition-all duration-300 ${active ? "bg-ink text-cream" : "text-ink/75 hover:bg-ink/5 hover:text-ink"}`}
                 >
                   {l.label}
@@ -96,6 +134,8 @@ export function Nav() {
               href={SMS_LINK}
               data-magnetic="0.25"
               className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon sm:flex"
+              data-cursor="label"
+              data-cursor-label="Say hi"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-citrus opacity-75" />
@@ -123,11 +163,14 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => handleLinkClick(l.href, e)}
               className="font-display wonk flex items-baseline justify-between border-b border-ink/15 py-3 text-5xl italic transition-all duration-700"
               style={{ transitionDelay: open ? `${200 + i * 60}ms` : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(30px)" }}
             >
-              {l.label}
+              <span className="flex items-center gap-2">
+                {l.isBoost && <span className="status_dot" aria-hidden="true" />}
+                {l.label}
+              </span>
               <span className="font-mono text-xs not-italic text-ink/50">0{i + 1}</span>
             </a>
           ))}
@@ -140,81 +183,75 @@ export function Nav() {
   );
 }
 
-/** Sun cursor — trails the pointer, swells on links, and shows labels on [data-cursor] zones. */
+/** Refined cursor follower — lerps smoothly, expands to interactive ring, and shows labels on [data-cursor] / [data-cursor-label] */
 export function SunCursor() {
-  const dot = useRef<HTMLDivElement>(null);
-  const tag = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
   const [enabled, setEnabled] = useState(false);
-  const [label, setLabel] = useState<string | null>(null);
+
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     setEnabled(true);
     document.documentElement.classList.add("has-cursor");
-    let x = innerWidth / 2,
-      y = innerHeight / 2,
-      tx = x,
-      ty = y,
-      s = 1,
-      ts = 1,
-      raf = 0,
-      cur: string | null = null,
-      visible = false;
-    const move = (e: PointerEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-      if (!visible && dot.current) {
-        visible = true;
-        dot.current.style.opacity = "1";
-      }
-      const t = e.target as HTMLElement;
-      const zone = t.closest<HTMLElement>("[data-cursor]");
-      const l = zone && !t.closest("a,button,input") ? zone.dataset.cursor! : null;
-      if (l !== cur) {
-        cur = l;
-        setLabel(l);
-      }
-      ts = l ? 5.4 : t.closest("a,button,[data-hover],input") ? 3 : 1;
-    };
-    const leave = () => {
-      visible = false;
-      if (dot.current) dot.current.style.opacity = "0";
-    };
+    const el = root.current;
+    if (!el) return;
+
+    let x = -100,
+      y = -100,
+      cx = -100,
+      cy = -100,
+      raf = 0;
+
     const loop = () => {
-      x += (tx - x) * 0.18;
-      y += (ty - y) * 0.18;
-      s += (ts - s) * 0.15;
-      if (dot.current) dot.current.style.transform = `translate(${x}px, ${y}px) translate(-50%,-50%) scale(${s})`;
-      if (tag.current) tag.current.style.transform = `translate(${x}px, ${y}px) translate(-50%,-50%)`;
+      cx += (x - cx) * 0.2;
+      cy += (y - cy) * 0.2;
+      el.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
-    window.addEventListener("pointermove", move);
-    document.addEventListener("pointerleave", leave);
+
+    const move = (e: PointerEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      const t = (e.target as HTMLElement).closest<HTMLElement>(
+        "[data-cursor], a, button, [role='tab'], input, textarea, select"
+      );
+      el.classList.remove("is-hover", "is-label");
+      if (t) {
+        const mode = t.dataset.cursor;
+        const customLabel = t.dataset.cursorLabel || (mode === "label" ? "" : null);
+        if (customLabel) {
+          el.classList.add("is-label");
+          if (labelRef.current) labelRef.current.textContent = customLabel;
+        } else if (mode !== "none") {
+          el.classList.add("is-hover");
+        }
+      }
+    };
+
+    const leave = () => el.classList.add("is-hidden");
+    const enter = () => el.classList.remove("is-hidden");
+
+    window.addEventListener("pointermove", move, { passive: true });
+    document.documentElement.addEventListener("pointerleave", leave);
+    document.documentElement.addEventListener("pointerenter", enter);
     raf = requestAnimationFrame(loop);
+
     return () => {
-      window.removeEventListener("pointermove", move);
-      document.removeEventListener("pointerleave", leave);
       cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", move);
+      document.documentElement.removeEventListener("pointerleave", leave);
+      document.documentElement.removeEventListener("pointerenter", enter);
       document.documentElement.classList.remove("has-cursor");
     };
   }, []);
+
   if (!enabled) return null;
   return (
-    <>
-      <div
-        ref={dot}
-        className="pointer-events-none fixed left-0 top-0 z-[90] h-4 w-4 rounded-full bg-persimmon opacity-0 mix-blend-multiply transition-opacity"
-        style={{ boxShadow: "0 0 0 6px rgba(255,180,59,.25)" }}
-        aria-hidden
-      />
-      <div ref={tag} className="pointer-events-none fixed left-0 top-0 z-[91]" aria-hidden>
-        <span
-          className="block font-mono text-[11px] uppercase tracking-[.16em] text-cream transition-all duration-300"
-          style={{ opacity: label ? 1 : 0, transform: label ? "scale(1)" : "scale(.5)" }}
-        >
-          {label}
-        </span>
+    <div ref={root} className="cursor_component" aria-hidden="true">
+      <div className="cursor_ring">
+        <span ref={labelRef} className="cursor_label" />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,92 @@
+/* ==========================================================================
+   WEBFLOW & BESPOKE VARIABLES — mirrored 1:1 as CSS custom properties
+   Collections: Color / Typography / Spacing / Radius / Motion
+   Harmonized with Central Valley orchard palette & Bloom theme
+   ========================================================================== */
+
+:root {
+  /* ---------- COLOR · Primitives (Central Valley orchard palette) ---------- */
+  --_primitive---almond-50: #fcf8f0;
+  --_primitive---almond-100: #f7f0e3;
+  --_primitive---almond-200: #eae0cf;
+  --_primitive---almond-300: #d9cbb3;
+  --_primitive---ink-900: #1e2b23;
+  --_primitive---ink-700: #3a453e;
+  --_primitive---ink-500: #4a5a4f;
+  --_primitive---persimmon-500: #ee5a2f;
+  --_primitive---persimmon-700: #c9431d;
+  --_primitive---citrus-400: #ffb43b;
+  --_primitive---citrus-200: #fbe0a8;
+  --_primitive---grove-900: #1e2b23;
+  --_primitive---grove-700: #2e6a4c;
+  --_primitive---grove-100: #dbe5cf;
+  --_primitive---fig-600: #7a3b52;
+
+  /* ---------- COLOR · Semantic tokens ---------- */
+  --_color---background: var(--_primitive---almond-100);
+  --_color---surface: var(--_primitive---almond-50);
+  --_color---surface-sunk: var(--_primitive---almond-200);
+  --_color---border: rgba(30, 43, 35, 0.12);
+  --_color---border-strong: rgba(30, 43, 35, 0.28);
+  --_color---accent: var(--_primitive---persimmon-500);
+  --_color---accent-text: var(--_primitive---persimmon-700);
+  --_color---highlight: var(--_primitive---citrus-400);
+  --_color---highlight-soft: var(--_primitive---citrus-200);
+  --_color---brand: var(--_primitive---grove-900);
+  --_color---brand-soft: var(--_primitive---grove-700);
+  --_color---text-primary: var(--_primitive---ink-900);
+  --_color---text-muted: var(--_primitive---ink-500);
+  --_color---text-on-brand: var(--_primitive---almond-100);
+  --_color---text-on-brand-muted: rgba(247, 240, 227, 0.75);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --_font---display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --_font---body: "Instrument Sans", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --_font---mono: "JetBrains Mono", "DM Mono", ui-monospace, monospace;
+
+  /* Fluid type scale — clamp(min, preferred, max) mapped 360px → 1600px */
+  --_type---display: clamp(3.4rem, 1.2rem + 9.6vw, 11.5rem);
+  --_type---h1: clamp(3rem, 1.4rem + 6.4vw, 8.5rem);
+  --_type---h2: clamp(2.4rem, 1.35rem + 4.2vw, 5.75rem);
+  --_type---h3: clamp(1.5rem, 1.15rem + 1.4vw, 2.4rem);
+  --_type---h4: clamp(1.125rem, 1.02rem + 0.42vw, 1.4rem);
+  --_type---body-large: clamp(1.125rem, 1.02rem + 0.45vw, 1.4rem);
+  --_type---body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
+  --_type---small: 0.875rem;
+  --_type---eyebrow: 0.75rem;
+
+  --_leading---tight: 0.92;
+  --_leading---snug: 1.12;
+  --_leading---body: 1.6;
+
+  /* ---------- SPACING ---------- */
+  --_space---global: clamp(1.25rem, 0.6rem + 3vw, 3rem);
+  --_space---section-small: clamp(4rem, 3rem + 4vw, 6rem);
+  --_space---section-medium: clamp(5.5rem, 3.5rem + 7vw, 10rem);
+  --_space---section-large: clamp(6rem, 3.5rem + 8vw, 10.5rem);
+  --_space---gap-xs: 0.5rem;
+  --_space---gap-s: 1rem;
+  --_space---gap-m: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --_space---gap-l: clamp(2rem, 1.4rem + 2.4vw, 4rem);
+  --_space---gap-xl: clamp(3rem, 2rem + 4vw, 7rem);
+
+  /* ---------- CONTAINERS ---------- */
+  --_container---small: 48rem;
+  --_container---medium: 64rem;
+  --_container---large: 90rem;
+
+  /* ---------- RADIUS ---------- */
+  --_radius---s: 0.375rem;
+  --_radius---m: 0.875rem;
+  --_radius---l: 1.75rem;
+  --_radius---pill: 999px;
+
+  /* ---------- MOTION ---------- */
+  --_ease---out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --_ease---out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --_ease---in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --_ease---spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --_duration---fast: 220ms;
+  --_duration---base: 480ms;
+  --_duration---slow: 1100ms;
+}

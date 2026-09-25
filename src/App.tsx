@@ -1,28 +1,25 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ChapterIndicator, Marquee, Nav, SunCursor } from "./components/Chrome";
 import { Hero } from "./components/Hero";
 import { FourSeconds } from "./components/FourSeconds";
 import { Harvest } from "./components/Harvest";
+import { Boost } from "./components/Boost";
+import { BoostPage } from "./components/BoostPage";
+import { ChapterRail, HOME_CHAPTERS } from "./components/ChapterRail";
 import { Compare, Season } from "./components/Season";
 import { FAQ, Grower, Letters, Stand } from "./components/Story";
 import { Contact, Footer } from "./components/Contact";
 import { Manifesto, RulesGallery, ValleyZoom } from "./components/Scenes";
 import { Preloader } from "./components/Preloader";
+import { ScrollProgress } from "./components/primitives";
+import { MobileTextBar } from "./components/MobileTextBar";
 import { useGlobalReveal } from "./lib/hooks";
 import { useAutoRefresh, useChapterTriggers, useMagnetic, useParallax } from "./lib/motion";
 import { useChapter } from "./lib/smooth";
-import { PHONE_DISPLAY, SMS_LINK } from "./lib/data";
 
-function MobileTextBar() {
-  return (
-    <a
-      href={SMS_LINK}
-      className="fixed bottom-4 left-4 right-4 z-40 flex items-center justify-between rounded-full bg-ink py-2 pl-5 pr-2 text-cream shadow-2xl sm:hidden"
-    >
-      <span className="text-[15px]">Text Adam · {PHONE_DISPLAY}</span>
-      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon">→</span>
-    </a>
-  );
+function getPath() {
+  if (typeof window === "undefined") return "/";
+  return window.location.pathname.toLowerCase();
 }
 
 /** The page canvas — its colour melts from chapter to chapter as you scroll. */
@@ -39,28 +36,71 @@ function Canvas({ children }: { children: ReactNode }) {
 }
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(getPath);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(getPath());
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const navigateTo = (path: string) => {
+    if (typeof window !== "undefined") {
+      const [pathname, hash] = path.split("#");
+      const targetPath = (pathname || "/").toLowerCase();
+      window.history.pushState({}, "", path);
+      setCurrentPath(targetPath);
+      if (hash) {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 60);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   useChapterTriggers();
   useParallax();
   useMagnetic();
   useGlobalReveal();
   useAutoRefresh();
 
+  // Dedicated /boost high-conversion route
+  if (currentPath === "/boost" || currentPath === "/boost/") {
+    return <BoostPage onNavigate={navigateTo} />;
+  }
+
   return (
     <div className="grain relative">
       <Preloader />
+      <ScrollProgress />
       <SunCursor />
-      <Nav />
+      <ChapterRail chapters={HOME_CHAPTERS} />
+      <Nav onNavigate={navigateTo} />
       <ChapterIndicator />
       <Canvas>
         <Hero />
         <Marquee
           className="bg-persimmon text-cream"
-          items={["$500 landing pages", "Live in a week", "100/100 PageSpeed", "You own the code", "No monthly hostage fees", "English + Español", "Your cell, not a ticket queue"]}
+          items={[
+            "$500 landing pages",
+            "Live in a week",
+            "100/100 PageSpeed",
+            "You own the code",
+            "No monthly hostage fees",
+            "English + Español",
+            "Your cell, not a ticket queue",
+          ]}
         />
         <Manifesto />
         <ValleyZoom />
         <FourSeconds />
         <Harvest />
+        <Boost onNavigate={navigateTo} />
         <Season />
         <Compare />
         <Grower />
@@ -70,7 +110,14 @@ export default function App() {
           reverse
           base={0.5}
           className="-rotate-[1.5deg] scale-[1.03] bg-leaf text-cream"
-          items={["Hand-built", "No page builders", "Built for two bars of signal", "Text-to-book", "Bilingual when you need it", "Nothing to log into"]}
+          items={[
+            "Hand-built",
+            "No page builders",
+            "Built for two bars of signal",
+            "Text-to-book",
+            "Bilingual when you need it",
+            "Nothing to log into",
+          ]}
         />
         <Letters />
         <FAQ />
