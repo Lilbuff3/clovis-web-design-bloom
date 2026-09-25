@@ -298,22 +298,6 @@ body {
 }
 
 /* ---------- Marquee ---------- */
-.marquee_component {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee_track {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  gap: var(--_space---gap-l);
-  padding-right: var(--_space---gap-l);
-  animation: marquee 38s linear infinite;
-}
-.marquee_component:hover .marquee_track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-100%); } }
 
 /* ---------- Reduced motion ---------- */

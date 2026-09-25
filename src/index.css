@@ -1,8 +1,7 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 @import "./styles/global.css";
-@import "./styles/sections-a.css";
-@import "./styles/sections-b.css";
+@import "./styles/components.css";
 @import "./styles/boost.css";
 
 @theme {

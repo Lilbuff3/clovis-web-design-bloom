@@ -1,5 +1,7 @@
 /* ==========================================================================
-   SECTIONS A — navbar · hero · manifesto · proof · capabilities
+   COMPONENTS — navbar (/boost header) · hero kinetic type · footer
+   (/boost) · mobile text/call bar (both pages). Loaded after global.css,
+   before boost.css; keep that order, later rules win ties.
    ========================================================================== */
 
 .status_dot {
@@ -196,28 +198,133 @@
 .hero_card-foot:hover { background: var(--_color---accent); color: var(--_color---text-primary); }
 .hero_card-phone { font-family: var(--_font---display); font-size: 1.6rem; letter-spacing: -0.02em; font-variation-settings: "opsz" 72, "wght" 450, "SOFT" 100; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.marquee_item { display: inline-flex; align-items: center; gap: var(--_space---gap-l); white-space: nowrap; }
-.marquee_sep { color: var(--_color---accent); font-size: 1rem; }
 
 @media (max-width: 991px) {
   .hero_card { grid-column: 1 / -1; grid-row: 2; margin: -3rem 1rem 0; max-width: 24rem; }
 }
 
-/* ---------- MANIFESTO ---------- */
+/* ---------- FOOTER (/boost) ---------- */
+.footer_component { padding-top: var(--_space---section-small); overflow: hidden; }
+.footer_top { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--_space---gap-m); row-gap: var(--_space---gap-l); padding-bottom: var(--_space---gap-l); }
+.footer_brand { grid-column: 1 / span 5; display: flex; flex-direction: column; gap: var(--_space---gap-s); max-width: 26rem; }
+.footer_col { grid-column: span 2; display: flex; flex-direction: column; gap: 0.9rem; }
+.footer_col:last-child { grid-column: span 3; }
+.footer_col h2 { color: var(--_color---text-muted); }
+.footer_col ul { display: flex; flex-direction: column; gap: 0.4rem; }
+.footer_link { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size 500ms var(--_ease---out-expo); font-weight: 500; }
+.footer_link:hover { background-size: 100% 1px; }
+.footer_wordmark {
+  font-family: var(--_font---display);
+  font-size: clamp(6rem, 1rem + 27vw, 30rem);
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+  text-align: center;
+  font-variation-settings: "opsz" 144, "wght" 380, "SOFT" 100;
+  padding-block: 0.05em 0.12em;
+  user-select: none;
+  transition: font-variation-settings 1.2s var(--_ease---out-expo);
+}
+.footer_wordmark:hover { font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 0; }
+.footer_wordmark .text-italic-serif { color: var(--_color---accent); }
+.footer_bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--_color---border-strong); color: var(--_color---text-muted); }
+.footer_bottom > span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.footer_top-link:hover { color: var(--_color---accent-text); }
+@media (max-width: 991px) {
+  .footer_brand { grid-column: 1 / -1; }
+  .footer_col, .footer_col:last-child { grid-column: span 4; }
+}
+@media (max-width: 599px) { .footer_col, .footer_col:last-child { grid-column: 1 / -1; } }
 
-/* ---------- PROOF (dark "grove" plate) ---------- */
-@media (max-width: 599px) {
-
-  /* Mobile scaled typography & paddings for phone mockups */
+/* ---------- MOBILE STICKY TEXT & CALL BAR ---------- */
+.mobile_text_bar {
+  display: none;
+}
+@media (max-width: 640px) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  .mobile_text_bar {
+    display: block;
+    position: fixed;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    left: 1rem;
+    right: 1rem;
+    z-index: 55;
+    pointer-events: none;
+    transition: transform 400ms var(--_ease---out-expo), opacity 300ms ease;
+  }
+  .mobile_text_bar.is-hidden {
+    transform: translateY(120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mobile_text_bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mobile_text_bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.4rem 0.35rem 1.1rem;
+    border-radius: var(--_radius---pill);
+    background: var(--_color---text-primary);
+    color: var(--_color---surface);
+    box-shadow: 0 20px 40px -10px rgba(30, 26, 22, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .mobile_text_bar-sms {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .mobile_text_bar-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .mobile_text_bar-label {
+    letter-spacing: -0.01em;
+  }
+  .mobile_text_bar-phone {
+    opacity: 0.7;
+    font-size: 0.85em;
+  }
+  .mobile_text_bar-send {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--_color---accent);
+    color: var(--_color---surface);
+    flex-shrink: 0;
+    transition: transform 200ms ease;
+  }
+  .mobile_text_bar-sms:active .mobile_text_bar-send {
+    transform: scale(0.92);
+  }
+  .mobile_text_bar-call {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--_color---surface);
+    flex-shrink: 0;
+    transition: background 200ms ease;
+  }
+  .mobile_text_bar-call:active {
+    background: rgba(255, 255, 255, 0.22);
+  }
 }
 
-/* --- Mock sites inside the phones & timeline --- */
-
-/* Handbuilt mock */
-
-/* Template / Slow mock */
-
-/* ---------- CAPABILITIES ---------- */
-
-/* Capability visuals */
-@keyframes pop { from { transform: scale(0); } }
