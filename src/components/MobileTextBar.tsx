@@ -1,37 +1,12 @@
 import { useEffect, useState } from "react";
-import { studio } from "../data/content";
+import { studio, texts } from "../data/content";
 import { buildSmsHref } from "../utils/sms";
 
-export function MobileTextBar({
-  smsMessage = "Hi, Adam! Saw your site, wanted to ask about a website for my business.",
-}: {
-  smsMessage?: string;
-} = {}) {
+export function MobileTextBar({ smsMessage = texts.hello }: { smsMessage?: string } = {}) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Hide bar when user reaches the contact section, boost closing, or footer to prevent overlap
-    const contactEl = document.getElementById("contact");
-    const closingEl = document.getElementById("boost-closing");
-    const footerEl = document.querySelector(".footer_component") || document.querySelector("footer");
-
-    if (!contactEl && !closingEl && !footerEl) return;
-
-    if (typeof IntersectionObserver === "undefined") {
-      const onScroll = () => {
-        const contactTop = contactEl?.getBoundingClientRect().top ?? Infinity;
-        const closingTop = closingEl?.getBoundingClientRect().top ?? Infinity;
-        const footerTop = footerEl?.getBoundingClientRect().top ?? Infinity;
-        const isNearBottom =
-          contactTop < window.innerHeight ||
-          closingTop < window.innerHeight ||
-          footerTop < window.innerHeight;
-        setVisible(!isNearBottom);
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
-    }
-
+    // Hide the bar while a page's own closing call to action or the footer is on screen, so they don't overlap.
     // Entries only report targets that changed, so remember which are on screen.
     const onScreen = new Set<Element>();
     const observer = new IntersectionObserver(
@@ -41,11 +16,7 @@ export function MobileTextBar({
       },
       { threshold: 0.02 }
     );
-
-    if (contactEl) observer.observe(contactEl);
-    if (closingEl) observer.observe(closingEl);
-    if (footerEl) observer.observe(footerEl);
-
+    document.querySelectorAll("#contact, #boost-closing, #medical-closing, footer").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 

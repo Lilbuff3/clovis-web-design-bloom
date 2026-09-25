@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { navLinks, studio } from "../data/content";
+import { navLinks, studio, texts } from "../data/content";
 import { getLenis, useChapter } from "../lib/smooth";
+import { buildSmsHref } from "../utils/sms";
 import { Button } from "./primitives";
 
 export function useClovisTime() {
@@ -60,12 +61,15 @@ export function Header({
   isBoostPage = false,
   isSubPage = false,
   onNavigate,
+  smsMessage = texts.hello,
 }: {
   isBoostPage?: boolean;
   /** Any page other than the homepage and /boost: links go back to the homepage, no Boost banner. */
   isSubPage?: boolean;
   onNavigate?: (path: string) => void;
+  smsMessage?: string;
 }) {
+  const smsHref = buildSmsHref(studio.smsHref, smsMessage);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
@@ -192,7 +196,7 @@ export function Header({
             </nav>
 
             <div className="navbar_actions">
-              <Button label="Text Adam" href={studio.smsHref} variant="primary" showIcon={false} className="navbar_cta" />
+              <Button label="Text Adam" href={smsHref} variant="primary" showIcon={false} className="navbar_cta" />
               <button
                 type="button"
                 className="navbar_burger"
@@ -230,7 +234,7 @@ export function Header({
           </ul>
         </nav>
         <div className="navbar_overlay-foot">
-          <a href={studio.smsHref} className="button is-accent">
+          <a href={smsHref} className="button is-accent">
             Text {studio.phoneDisplay}
           </a>
           <span className="text-style-eyebrow text-color-muted">{studio.location} · {time}</span>

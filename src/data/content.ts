@@ -12,6 +12,16 @@ export const studio = {
   location: "Clovis, California",
 };
 
+/** Every text button opens with one of these, so nobody faces a blank message and Adam can see what they tapped. */
+export const texts = {
+  hello: "Hi, Adam! Saw your site, wanted to ask about a website for my business.",
+  spot: "Hi, Adam! I'd like to claim one of your launch spots.",
+  plan: (name: string) => `Hi, Adam! I'm interested in the ${name} plan for my business.`,
+  boost: "Hi, Adam! Saw the Conversion Boost page. I'd like to check how fast my website can be built and see your schedule.",
+  /** Shown instead of a dead sms: link on Windows and Linux computers; the phone number follows it. */
+  onComputer: "Texting needs a phone. Text or call me from yours:",
+};
+
 /** Site nav, shared by the homepage (Chrome.tsx) and /boost (Header.tsx). `ids` mark the active section. */
 export const navLinks = [
   { href: "#test", label: "The test", ids: ["test"] },

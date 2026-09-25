@@ -27,7 +27,7 @@ export function MedicalPage({ onNavigate }: { onNavigate?: (path: string) => voi
   return (
     <div className="page-wrapper">
       <ScrollProgress />
-      <Header isSubPage onNavigate={onNavigate} />
+      <Header isSubPage onNavigate={onNavigate} smsMessage={medical.sms} />
 
       <main id="main" className="main-wrapper">
         <section className="section_boost-hero" aria-labelledby="medical-heading">
@@ -127,7 +127,7 @@ export function MedicalPage({ onNavigate }: { onNavigate?: (path: string) => voi
           </div>
         </section>
 
-        <section className="section_boost-closing">
+        <section id="medical-closing" className="section_boost-closing">
           <div className="padding-global padding-section-medium">
             <div className="container-large">
               <Reveal className="boost_closing-card">
@@ -149,7 +149,7 @@ export function MedicalPage({ onNavigate }: { onNavigate?: (path: string) => voi
         </section>
       </main>
 
-      <Footer />
+      <Footer smsMessage={medical.sms} />
       <MobileTextBar smsMessage={medical.sms} />
     </div>
   );

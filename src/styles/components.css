@@ -325,5 +325,19 @@
   .mobile_text_bar-call:active {
     background: rgba(255, 255, 255, 0.22);
   }
+  /* 48px tap targets without a taller pill. The text link only grows vertically, so the two never overlap. */
+  .mobile_text_bar-sms,
+  .mobile_text_bar-call {
+    position: relative;
+  }
+  .mobile_text_bar-sms::after,
+  .mobile_text_bar-call::after {
+    content: "";
+    position: absolute;
+    inset: -0.375rem;
+  }
+  .mobile_text_bar-sms::after {
+    inset: -0.375rem 0;
+  }
 }
 

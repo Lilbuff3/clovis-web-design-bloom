@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { cases, studio } from "../data/content";
+import { cases, studio, texts } from "../data/content";
+import { buildSmsHref } from "../utils/sms";
 import { useCountUp } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string; decimals?: number; display?: string };
@@ -254,7 +255,7 @@ export function Harvest() {
               <p className="mt-5 max-w-md text-lg leading-relaxed text-cream/80">
                 The $500 launch price holds for the first five Central Valley businesses. After that, it's $750 — still honest, just less of a steal.
               </p>
-              <a href={studio.smsHref} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
+              <a href={buildSmsHref(studio.smsHref, texts.spot)} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
                 Claim a spot by text <span aria-hidden>→</span>
               </a>
             </div>

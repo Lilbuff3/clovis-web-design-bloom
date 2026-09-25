@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { studio, VIDEO_SHADOW } from "../data/content";
 import { AmbientVideo } from "./primitives";
-import { buildSmsHref } from "../utils/sms";
+import { buildSmsHref, contactMessage } from "../utils/sms";
 import { SunMark } from "./Chrome";
 
 const needs = ["A one-page site ($500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
@@ -27,14 +27,7 @@ export function Contact() {
   const [need, setNeed] = useState(needs[0]);
   const [when, setWhen] = useState(whens[0]);
 
-  const message = useMemo(() => {
-    const who = name.trim() ? `Hi, Adam! It's ${name.trim()}` : "Hi, Adam!";
-    const what = trade.trim() ? ` — I run ${trade.trim()}` : "";
-    const n = need === "Not sure yet" ? "I'm not sure what I need yet" : `I'm interested in ${need.replace(/ \(.*\)/, "").replace(/^A /, "a ")}`;
-    const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "just looking for now";
-    return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
-  }, [name, trade, need, when]);
-
+  const message = contactMessage(name, trade, need, when);
   const smsHref = buildSmsHref(studio.smsHref, message);
 
   return (

@@ -63,6 +63,9 @@ const DIAGNOSTIC_PILLARS = [
   },
 ];
 
+/** Where the calculator's sliders start. */
+const START = { ticket: 850, visitors: 1200, speed: 4.2 };
+
 export function Boost({
   isStandalone = false,
   onNavigate,
@@ -70,9 +73,9 @@ export function Boost({
   isStandalone?: boolean;
   onNavigate?: (path: string) => void;
 }) {
-  const [ticketValue, setTicketValue] = useState(850);
-  const [visitors, setVisitors] = useState(1200);
-  const [speed, setSpeed] = useState(4.2);
+  const [ticketValue, setTicketValue] = useState(START.ticket);
+  const [visitors, setVisitors] = useState(START.visitors);
+  const [speed, setSpeed] = useState(START.speed);
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
   // Teardown generator state
@@ -140,32 +143,32 @@ export function Boost({
     };
   }, [ticketValue, visitors, speed]);
 
+  // Only quote calculator numbers the visitor actually set. The homepage has no calculator at all.
+  const usedCalc = ticketValue !== START.ticket || visitors !== START.visitors || speed !== START.speed;
+
   const teardownMessage = useMemo(() => {
     const cleanUrl = siteUrl.trim() || "my website";
     const cleanTrade = userTrade.trim() ? ` for my ${userTrade.trim()} business` : "";
-    // The homepage has no calculator, so don't quote its default numbers there.
-    if (!isStandalone) {
+    if (!isStandalone || !usedCalc) {
       return `Hi, Adam! Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}? I'd like to see my mobile speed and where customers are bouncing.`;
     }
     if (calc.lostCallers === 0) {
       return `Hi, Adam! I ran the Boost calculator for ${cleanUrl}${cleanTrade}. My site is fast, but I'd love a quick 3-minute video teardown to see if my mobile call buttons and layout are converting at peak efficiency.`;
     }
     return `Hi, Adam! I ran the Boost calculator. My site loads in ~${speed.toFixed(1)}s and I estimate we're losing around $${calc.monthlyLostRevenue.toLocaleString()}/mo. Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}?`;
-  }, [isStandalone, siteUrl, userTrade, speed, calc.monthlyLostRevenue, calc.lostCallers]);
+  }, [isStandalone, usedCalc, siteUrl, userTrade, speed, calc.monthlyLostRevenue, calc.lostCallers]);
 
   const teardownSmsHref = buildSmsHref(studio.smsHref, teardownMessage);
 
   const handleCopyDraft = async () => {
+    const draft = `${teardownMessage} (To: ${studio.phoneDisplay})`;
     try {
-      if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText(`${teardownMessage} (To: ${studio.phoneDisplay})`);
-        setCopiedDraft(true);
-        setTimeout(() => setCopiedDraft(false), 3500);
-      }
-    } catch {
-      // Fallback
+      await navigator.clipboard.writeText(draft);
       setCopiedDraft(true);
       setTimeout(() => setCopiedDraft(false), 3500);
+    } catch {
+      // No clipboard access: let them copy it by hand instead of claiming it worked.
+      window.prompt("Copy this message:", draft);
     }
   };
 

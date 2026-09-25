@@ -8,7 +8,7 @@ import { Harvest } from "./components/Harvest";
 import { Boost } from "./components/Boost";
 import { BoostPage } from "./components/BoostPage";
 import { MedicalPage } from "./components/MedicalPage";
-import { medical } from "./data/content";
+import { medical, studio, texts } from "./data/content";
 import { ChapterRail, HOME_CHAPTERS } from "./components/ChapterRail";
 import { Compare, Season } from "./components/Season";
 import { FAQ, Grower, Letters, Stand } from "./components/Story";
@@ -17,7 +17,7 @@ import { Manifesto, RulesGallery, ValleyZoom } from "./components/Scenes";
 import { Preloader } from "./components/Preloader";
 import { ScrollProgress } from "./components/primitives";
 import { MobileTextBar } from "./components/MobileTextBar";
-import { useGlobalReveal } from "./lib/hooks";
+import { useDesktopTextFallback, useGlobalReveal } from "./lib/hooks";
 import { useAutoRefresh, useChapterTriggers, useMagnetic, useParallax } from "./lib/motion";
 import { scrollToSection, useChapter } from "./lib/smooth";
 import { useSilentClean } from "./utils/utm";
@@ -80,23 +80,13 @@ function updateSeo(path: string) {
 }
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(getPath);
+  const [currentPath] = useState(getPath);
 
   useSilentClean(currentPath);
 
   useEffect(() => {
     updateSeo(currentPath);
   }, [currentPath]);
-
-  useEffect(() => {
-    const handlePopState = () => {
-      const p = getPath();
-      setCurrentPath(p);
-      updateSeo(p);
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
 
   // Direct loads like cloviswebdesign.com/#faq
   useEffect(() => {
@@ -105,21 +95,12 @@ export default function App() {
     }
   }, []);
 
-  const navigateTo = (path: string) => {
-    if (typeof window !== "undefined") {
-      const [pathname, hash] = path.split("#");
-      const targetPath = (pathname || "/").toLowerCase();
-      window.history.pushState({}, "", path);
-      setCurrentPath(targetPath);
-      if (hash) {
-        // Give the homepage a moment to mount before measuring it.
-        setTimeout(() => scrollToSection(hash), 120);
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    }
-  };
+  // Every call goes to another page, and each page is its own prerendered file, so load it for real.
+  // The motion and reveal hooks below only run on first mount: swapping pages in place left the
+  // homepage invisible.
+  const navigateTo = (path: string) => window.location.assign(path);
 
+  useDesktopTextFallback(`${texts.onComputer} ${studio.phoneDisplay}`);
   useChapterTriggers();
   useParallax();
   useMagnetic();

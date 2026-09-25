@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build && node scripts/generate-boost-html.js && node scripts/prerender.js",
     "preview": "vite preview",
-    "test": "node --test scripts/test_utm.js"
+    "test": "node --test scripts/test_utm.js scripts/test_sms.js"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

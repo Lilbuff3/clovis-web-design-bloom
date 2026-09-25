@@ -74,6 +74,37 @@ export function useGlobalReveal() {
   }, []);
 }
 
+/**
+ * Windows and Linux computers can't open sms: links, so there a text button shows `note` (which
+ * ends with the number) instead of doing nothing. Phones, tablets and Macs (Messages) keep the link.
+ */
+export function useDesktopTextFallback(note: string) {
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches || /Mac/.test(navigator.userAgent)) return;
+    const toast = document.createElement("div");
+    toast.setAttribute("role", "status");
+    toast.className =
+      "fixed bottom-6 left-1/2 z-[200] w-[min(92vw,30rem)] -translate-x-1/2 rounded-2xl bg-ink px-6 py-4 text-center text-lg text-cream shadow-lg";
+    toast.hidden = true;
+    document.body.appendChild(toast);
+    let timer = 0;
+    const onClick = (e: MouseEvent) => {
+      if (!(e.target as Element).closest?.('a[href^="sms:"]')) return;
+      e.preventDefault();
+      toast.hidden = false;
+      toast.textContent = note;
+      clearTimeout(timer);
+      timer = window.setTimeout(() => (toast.hidden = true), 8000);
+    };
+    document.addEventListener("click", onClick);
+    return () => {
+      document.removeEventListener("click", onClick);
+      clearTimeout(timer);
+      toast.remove();
+    };
+  }, [note]);
+}
+
 /** Progress (0..1) of an element passing through the viewport. */
 export function useSectionProgress<T extends HTMLElement>() {
   const ref = useRef<T>(null);

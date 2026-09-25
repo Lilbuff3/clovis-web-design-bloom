@@ -1,7 +1,8 @@
-import { medical, navLinks, studio } from "../data/content";
+import { medical, navLinks, studio, texts } from "../data/content";
+import { buildSmsHref } from "../utils/sms";
 import { LogoMark, useClovisTime } from "./Header";
 
-export function Footer() {
+export function Footer({ smsMessage = texts.hello }: { smsMessage?: string } = {}) {
   const { time, status } = useClovisTime();
   return (
     <footer className="footer_component">
@@ -36,18 +37,13 @@ export function Footer() {
               <h2 className="text-style-eyebrow">Reach Adam</h2>
               <ul role="list">
                 <li>
-                  <a href={studio.smsHref} className="footer_link">
+                  <a href={buildSmsHref(studio.smsHref, smsMessage)} className="footer_link">
                     Text {studio.phoneDisplay}
                   </a>
                 </li>
                 <li>
                   <a href={studio.phoneHref} className="footer_link">
                     Call
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${studio.email}`} className="footer_link">
-                    Email
                   </a>
                 </li>
               </ul>

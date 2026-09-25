@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { care, faqs, letters, plans, studio, VIDEO_SHADOW } from "../data/content";
+import { care, faqs, letters, plans, studio, texts, VIDEO_SHADOW } from "../data/content";
+import { buildSmsHref } from "../utils/sms";
 import { AmbientVideo } from "./primitives";
 
 export function Grower() {
@@ -49,7 +50,7 @@ export function Grower() {
           </blockquote>
 
           <div className="mt-12">
-            <a href={studio.smsHref} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
+            <a href={buildSmsHref(studio.smsHref, texts.hello)} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
               Text Adam directly →
             </a>
           </div>
@@ -122,7 +123,7 @@ export function Stand() {
                       <span className="font-semibold text-ink">Best for: </span>
                       {pl.for}
                     </p>
-                    <a href={studio.smsHref} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon">
+                    <a href={buildSmsHref(studio.smsHref, texts.plan(pl.name))} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon">
                       Pick {pl.name} →
                     </a>
                   </div>

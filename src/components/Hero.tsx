@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { prefersReducedMotion, usePageScroll } from "../lib/hooks";
 import { onIntroDone } from "../lib/smooth";
-import { studio, VIDEO_ORCHARD } from "../data/content";
+import { studio, texts, VIDEO_ORCHARD } from "../data/content";
+import { buildSmsHref } from "../utils/sms";
 import { AmbientVideo } from "./primitives";
 
 function RotatingBadge() {
@@ -89,7 +90,7 @@ function StudioTicketCard() {
         </div>
       </dl>
       <a
-        href={studio.smsHref}
+        href={buildSmsHref(studio.smsHref, texts.spot)}
         className="hero_card-foot flex items-center justify-between border-t border-dashed border-ink/20 pt-2 text-persimmon hover:text-ink transition-colors"
         data-cursor="hover"
       >
@@ -246,7 +247,7 @@ export function Hero() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <a
-                href={studio.smsHref}
+                href={buildSmsHref(studio.smsHref, texts.hello)}
                 data-magnetic="0.3"
                 className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon"
                 data-cursor="label"

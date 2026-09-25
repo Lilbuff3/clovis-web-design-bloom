@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { studio, boostCases, boostFaqs } from "../data/content";
+import { studio, texts, boostCases, boostFaqs } from "../data/content";
+import { buildSmsHref } from "../utils/sms";
 import { Header } from "./Header";
 import { Footer } from "./BespokeFooter";
 import { MobileTextBar } from "./MobileTextBar";
@@ -9,6 +10,7 @@ import { Button, Cursor, Reveal, ScrollProgress } from "./primitives";
 import { getLenis } from "../lib/smooth";
 
 export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }) {
+  const smsHref = buildSmsHref(studio.smsHref, texts.boost);
   useEffect(() => {
     const rawHash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
     if (rawHash && rawHash !== "top") {
@@ -42,7 +44,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
       <ChapterRail chapters={BOOST_CHAPTERS} />
 
       {/* Header with integrated top banner & client routing */}
-      <Header isBoostPage={true} onNavigate={onNavigate} />
+      <Header isBoostPage={true} onNavigate={onNavigate} smsMessage={texts.boost} />
 
       <main id="main" className="main-wrapper">
         {/* Boost Page Specific Hero */}
@@ -73,7 +75,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
                   </a>
                   <Button
                     label="Text Adam Directly"
-                    href={studio.smsHref}
+                    href={smsHref}
                     variant="ghost"
                     showIcon={false}
                   />
@@ -204,7 +206,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
 
                   <div className="boost_closing-actions">
                     <a
-                      href={studio.smsHref}
+                      href={smsHref}
                       className="button is-accent"
                       data-cursor="label"
                       data-cursor-label="Text"
@@ -239,8 +241,8 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
         </section>
       </main>
 
-      <Footer />
-      <MobileTextBar smsMessage="Hi, Adam! Saw the Conversion Boost page. I'd like to check how fast my website can be built and see your schedule." />
+      <Footer smsMessage={texts.boost} />
+      <MobileTextBar smsMessage={texts.boost} />
     </div>
   );
 }
