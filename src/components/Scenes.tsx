@@ -205,7 +205,7 @@ export function RulesGallery() {
           {rules.map((r, i) => (
             <article
               key={r.rule}
-              className={`rg-card relative flex h-[62vh] min-h-[420px] w-[82vw] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[36px] p-7 shadow-[0_40px_70px_-40px_rgba(30,43,35,.55)] md:h-[70vh] md:w-[34vw] md:p-10 ${r.cls}`}
+              className={`rg-card swipe-card relative flex h-[62vh] min-h-[420px] w-[82vw] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[36px] p-7 shadow-[0_40px_70px_-40px_rgba(30,43,35,.55)] md:h-[70vh] md:w-[34vw] md:p-10 ${r.cls}`}
             >
               <div className="flex items-start justify-between">
                 <span className="font-mono text-[11px] uppercase tracking-[.2em] opacity-70">Rule {String(i + 1).padStart(2, "0")} / 05</span>

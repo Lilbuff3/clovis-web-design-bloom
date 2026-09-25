@@ -26,7 +26,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
   const [viewMode, setViewMode] = useState<"web" | "photo">("web");
 
   return (
-    <article className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <article className="swipe-card grid w-[86vw] shrink-0 snap-start items-center gap-10 md:w-[70vw] lg:w-auto lg:grid-cols-12 lg:gap-16">
       <div className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}>
         <div
           className="relative mx-auto max-w-xl"
@@ -226,7 +226,7 @@ export function Harvest() {
           </p>
         </div>
 
-        <div className="mt-20 space-y-32">
+        <div className="-mx-5 mt-14 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:px-8 lg:mx-0 lg:mt-20 lg:block lg:space-y-32 lg:overflow-visible lg:px-0 lg:pb-0">
           {cases.map((c, i) => (
             <CaseSpread key={c.no} c={c} flip={i % 2 === 1} />
           ))}

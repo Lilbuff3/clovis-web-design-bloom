@@ -67,6 +67,9 @@ function Plant({ p }: { p: number }) {
 export function Season() {
   const [ref, p] = useSectionProgress<HTMLDivElement>();
   const active = Math.min(3, Math.floor(p * 4));
+  // Phones: the plant grows as you swipe through the stages instead of as you scroll.
+  const [swipeP, setSwipeP] = useState(0);
+  const stage = Math.round(swipeP * 3);
   return (
     <section id="season" className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
@@ -86,7 +89,7 @@ export function Season() {
           </p>
         </div>
 
-        <div ref={ref} className="mt-16 grid gap-10 lg:grid-cols-12">
+        <div ref={ref} className="mt-16 grid gap-6 lg:grid-cols-12 lg:gap-10">
           <div className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-24 flex h-[calc(100vh-8rem)] flex-col">
               <div className="relative flex-1 overflow-hidden rounded-[40px] bg-sky/60">
@@ -111,31 +114,48 @@ export function Season() {
             </div>
           </div>
 
-          <div className="space-y-6 lg:col-span-7 lg:space-y-[18vh] lg:py-[8vh]">
+          <div className="relative h-64 overflow-hidden rounded-[32px] bg-sky/60 lg:hidden">
+            <div className="absolute left-5 top-5 font-mono text-[11px] uppercase tracking-[.2em] text-ink/60">Stage {stage + 1} of 4</div>
+            <div className="absolute right-5 top-3 font-display wonk text-4xl italic text-ink/90">{seasons[stage].name}</div>
+            <div className="absolute inset-x-5 bottom-0 top-10">
+              <Plant p={swipeP} />
+            </div>
+          </div>
+
+          <div
+            onScroll={(e) => {
+              const el = e.currentTarget;
+              setSwipeP(el.scrollLeft / (el.scrollWidth - el.clientWidth || 1));
+            }}
+            className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:px-8 lg:col-span-7 lg:mx-0 lg:block lg:space-y-[18vh] lg:overflow-visible lg:px-0 lg:py-[8vh]"
+          >
             {seasons.map((s, i) => (
-              <div
-                key={s.key}
-                className={`reveal rounded-[32px] border p-7 transition-all duration-500 md:p-10 ${
-                  i === active ? "border-ink/15 bg-paper shadow-[0_30px_60px_-40px_rgba(30,43,35,.45)]" : "border-ink/10 bg-paper/50"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-display wonk text-2xl italic text-persimmon">
-                    {String(i + 1).padStart(2, "0")} · {s.name}
-                  </span>
-                  <span className="rounded-full bg-ink px-3 py-1 font-mono text-[11px] text-cream">{s.when}</span>
+              // .reveal sits on a wrapper whose className never changes: React rewriting the
+              // card's className when `active` moves would wipe the "in" the observer added.
+              <div key={s.key} className="swipe-card reveal w-[82vw] shrink-0 snap-start md:w-[60vw] lg:w-auto">
+                <div
+                  className={`h-full rounded-[32px] border p-7 transition-all duration-500 max-lg:bg-paper md:p-10 ${
+                    i === active ? "border-ink/15 bg-paper shadow-[0_30px_60px_-40px_rgba(30,43,35,.45)]" : "border-ink/10 bg-paper/50"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-display wonk text-2xl italic text-persimmon">
+                      {String(i + 1).padStart(2, "0")} · {s.name}
+                    </span>
+                    <span className="rounded-full bg-ink px-3 py-1 font-mono text-[11px] text-cream">{s.when}</span>
+                  </div>
+                  <h3 className="font-display mt-5 text-3xl font-[450] leading-tight md:text-4xl">{s.title}</h3>
+                  <p className="mt-4 text-[17px] leading-relaxed text-ink/80">{s.body}</p>
+                  <div className="mt-6 font-mono text-[10px] uppercase tracking-[.2em] text-ink/50">What you get</div>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {s.gets.map((g) => (
+                      <li key={g} className="flex gap-2.5 rounded-2xl bg-cream p-3 text-[14.5px] leading-snug">
+                        <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-leaf" style={{ boxShadow: "inset 0 0 0 4px #DBE5CF" }} />
+                        {g}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-display mt-5 text-3xl font-[450] leading-tight md:text-4xl">{s.title}</h3>
-                <p className="mt-4 text-[17px] leading-relaxed text-ink/80">{s.body}</p>
-                <div className="mt-6 font-mono text-[10px] uppercase tracking-[.2em] text-ink/50">What you get</div>
-                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {s.gets.map((g) => (
-                    <li key={g} className="flex gap-2.5 rounded-2xl bg-cream p-3 text-[14.5px] leading-snug">
-                      <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-leaf" style={{ boxShadow: "inset 0 0 0 4px #DBE5CF" }} />
-                      {g}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>

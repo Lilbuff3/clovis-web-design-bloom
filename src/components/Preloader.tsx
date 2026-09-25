@@ -7,9 +7,15 @@ const words = ["Watering", "Pruning", "Picking", "Ready"];
 export function Preloader() {
   const [skip] = useState(() => {
     try {
-      return sessionStorage.getItem(KEY) === "1" || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // Phones go straight to the page; the sunrise is for mouse users on their first visit.
+      return (
+        sessionStorage.getItem(KEY) === "1" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        !window.matchMedia("(pointer: fine)").matches
+      );
     } catch {
-      return false;
+      // No storage (private mode) or no window (prerender): skip it.
+      return true;
     }
   });
   const [gone, setGone] = useState(skip);
