@@ -11,7 +11,8 @@ FOVEA eye-doctor design) is retired and serves nothing.
 
 ```bash
 npm run dev        # http://localhost:5173
-npm run build      # → dist/index.html (single file) + public/ assets
+npm run build      # → dist/index.html (single file), dist/boost.html, public/ assets
+npm test           # UTM attribution tests (scripts/test_utm.js)
 npx tsc --noEmit   # types
 python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live checks
 ```
@@ -30,30 +31,33 @@ python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live chec
 ## Where things live
 
 - `src/App.tsx`: homepage section order, plus the tiny `/boost` router (pushState).
-  `vercel.json` rewrites every path to `index.html` so `/boost` works on reload.
-- Copy and facts, in two places for now:
-  - `src/lib/data.ts`: phone, videos and the homepage sections (Hero, Harvest, Season, Story, Contact…).
-  - `src/data/content.ts`: `studio` (phone, SMS links) and the Header, Boost, BoostPage,
-    footer and MobileTextBar content.
-  Phone is **(559) 575-3014** in both; change both together.
-- Motion: `src/lib/smooth.ts` (Lenis + GSAP ScrollTrigger + chapter colours),
-  `src/lib/motion.ts` and `src/lib/hooks.ts` (homepage), `src/hooks/motion.ts` (Hero
-  kinetic type, `primitives.tsx`).
-- Styles: `src/index.css` holds the Tailwind `@theme` colours/fonts and the shared
-  helpers (`.line-mask`, `.reveal`, `.grain`…), and `@import`s `src/styles/`
-  (`tokens.css` → `global.css` → `sections-a.css` → `sections-b.css` → `boost.css`).
-  A class used in a component must be defined in one of those imported files.
+  `scripts/generate-boost-html.js` writes `dist/boost.html` with /boost's own SEO, and
+  `vercel.json` rewrites `/boost` to it and everything else to `index.html`.
+- `src/data/content.ts` holds **every word and fact**: `studio` (name, phone, SMS/tel
+  links), `navLinks` (both navs), the homepage sections in page order, then
+  `boostCases`/`boostFaqs`. Change copy there, not in components. Phone is
+  **(559) 575-3014**, and only `studio` should spell it.
+- Motion, one home per kind:
+  - `src/lib/smooth.ts`: Lenis + GSAP setup, chapter colours, the intro signal, and
+    `scrollToSection(id)`, which is how `/#id` links land (from /boost and on direct loads).
+  - `src/lib/motion.ts`: page-wide GSAP hooks (chapters, `[data-speed]` parallax,
+    `[data-magnetic]`).
+  - `src/lib/hooks.ts`: per-element React hooks (reveal, in-view, progress, count-up,
+    `useMagneticRef`).
+- `src/components/primitives.tsx`: shared bits for /boost and the hero (`Button`,
+  `Reveal`, `SectionHeader`, `Cursor`, `ScrollProgress`, `AmbientVideo`).
+- Styles: `src/index.css` holds the Tailwind `@theme` colours/fonts and shared helpers
+  (`.line-mask`, `.reveal`, `.grain`…), then `@import`s `src/styles/` in cascade order:
+  `tokens.css` → `global.css` → `components.css` (the /boost navbar and footer, hero
+  kinetic letters, the mobile text bar) → `boost.css`. A class used in a component must be
+  defined in one of those files, and a rule no element can match shouldn't be there.
+- Video: `public/video/*.mp4` are 9 s muted loops with a crossfaded seam, each with a
+  WebP poster from its first frame. Always render them through `AmbientVideo`, which
+  plays them only on screen and shows the poster alone under reduced motion or Save-Data.
+  Never hotlink stock video.
 - SEO lives in `index.html` (meta, geo tags, JSON-LD `@graph`) plus `public/robots.txt`,
   `sitemap.xml`, `site.webmanifest`. Keep `scripts/validate_seo.py` passing.
 - Fonts load from Google Fonts in `index.html`. Images are in `public/images/`.
-
-## Known debt (consolidate when nobody else is mid-edit)
-
-- Two content modules and two motion-hook modules overlap (`useParallax`, `useMagnetic`,
-  `useCountUp` exist twice). Pick one of each.
-- `sections-b.css` is a ported stylesheet; most of its ~200 classes are unused.
-- The hero videos (`VIDEO_ORCHARD`, `VIDEO_SHADOW`) are hotlinked from Pexels. Host your
-  own compressed loops in `public/` instead.
 
 ## Rules
 
