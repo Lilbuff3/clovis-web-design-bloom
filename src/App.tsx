@@ -105,7 +105,9 @@ export default function App() {
 
   // Direct loads like cloviswebdesign.com/#faq
   useEffect(() => {
-    if (window.location.hash.length > 1) scrollToSection(window.location.hash.slice(1));
+    if (typeof window !== "undefined" && window.location.hash.length > 1) {
+      scrollToSection(window.location.hash.slice(1));
+    }
   }, []);
 
   const navigateTo = (path: string) => {

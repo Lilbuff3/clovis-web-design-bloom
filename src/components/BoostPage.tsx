@@ -6,10 +6,27 @@ import { MobileTextBar } from "./MobileTextBar";
 import { Boost } from "./Boost";
 import { ChapterRail, BOOST_CHAPTERS } from "./ChapterRail";
 import { Button, Cursor, Reveal, ScrollProgress } from "./primitives";
+import { getLenis } from "../lib/smooth";
 
 export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }) {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    const rawHash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
+    if (rawHash && rawHash !== "top") {
+      setTimeout(() => {
+        const el = document.getElementById(rawHash);
+        if (el) {
+          try {
+            const lenis = getLenis();
+            lenis.start();
+            lenis.scrollTo(el, { offset: -8, duration: 1.2 });
+          } catch {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
     document.title = "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit";
   }, []);
 

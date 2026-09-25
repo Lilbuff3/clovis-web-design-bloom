@@ -7,7 +7,7 @@ export const UTM_STORAGE_KEY = "clovis_utm";
 
 /**
  * Known advertising and tracking query parameter keys (lowercase).
- * Covers Google Ads (gclid, gbraid, wbraid, dclid), Meta/Facebook (fbclid),
+ * Covers Google Ads (gclid, gbraid, wbraid, dclid, gad_source, gclsrc), Meta/Facebook (fbclid),
  * Microsoft/Bing (msclkid), Twitter/X (twclid), TikTok (ttclid), etc.
  */
 const KNOWN_TRACKING_KEYS = new Set([
@@ -24,6 +24,8 @@ const KNOWN_TRACKING_KEYS = new Set([
   "gbraid",
   "wbraid",
   "dclid",
+  "gad_source",
+  "gclsrc",
   "fbclid",
   "msclkid",
   "twclid",
@@ -33,7 +35,20 @@ const KNOWN_TRACKING_KEYS = new Set([
   "mc_cid",
   "mc_eid",
   "igshid",
+  "srsltid",
+  "rdt_cid",
+  "irclickid",
 ]);
+
+/** In-memory fallback cache for restricted environments (e.g. private mode, iframes). */
+let memoryUtmCache: Record<string, string> = {};
+
+/**
+ * Resets the in-memory fallback cache (used primarily in test suites).
+ */
+export function clearMemoryUtmCache(): void {
+  memoryUtmCache = {};
+}
 
 /**
  * Checks whether a URL query parameter key represents an attribution/tracking tag.
@@ -46,17 +61,26 @@ export function isTrackingParam(key: string): boolean {
 }
 
 /**
- * Reads stored UTM/tracking attribution from sessionStorage.
- * Returns an empty object if unavailable, invalid, or running server-side.
+ * Reads stored UTM/tracking attribution from sessionStorage, falling back to
+ * the in-memory cache if sessionStorage is blocked or unavailable.
+ * Guarantees a valid object return, never null or primitive.
  */
 export function getStoredUtm(): Record<string, string> {
-  if (typeof window === "undefined") return {};
-  try {
-    const raw = window.sessionStorage.getItem(UTM_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
+  let stored: Record<string, string> = {};
+  if (typeof window !== "undefined") {
+    try {
+      const raw = window.sessionStorage.getItem(UTM_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          stored = parsed as Record<string, string>;
+        }
+      }
+    } catch {
+      // Storage access blocked or restricted (e.g. private browsing, third-party iframe)
+    }
   }
+  return { ...memoryUtmCache, ...stored };
 }
 
 /**
@@ -73,18 +97,29 @@ export function saveTrackingParams(): Record<string, string> | null {
 
     for (const [key, value] of searchParams.entries()) {
       if (isTrackingParam(key)) {
-        trackingParams[key.toLowerCase()] = value;
+        const trimmed = value.trim();
+        if (trimmed) {
+          trackingParams[key.toLowerCase()] = trimmed;
+        }
       }
     }
 
     if (Object.keys(trackingParams).length === 0) return null;
 
-    const existing = getStoredUtm();
-    const merged = { ...existing, ...trackingParams };
-    window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(merged));
+    // Cache in memory for immediate resilience
+    memoryUtmCache = { ...memoryUtmCache, ...trackingParams };
+
+    try {
+      const existing = getStoredUtm();
+      const merged = { ...existing, ...trackingParams };
+      window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(merged));
+    } catch (err) {
+      console.warn("Unable to save tracking parameters to sessionStorage:", err);
+    }
+
     return trackingParams;
   } catch (err) {
-    console.warn("Unable to save tracking parameters to sessionStorage:", err);
+    console.warn("Unable to parse tracking parameters:", err);
     return null;
   }
 }
@@ -104,24 +139,31 @@ export function cleanTrackingUrl(): boolean {
 
     for (const [key, value] of searchParams.entries()) {
       if (isTrackingParam(key)) {
-        trackingParams[key.toLowerCase()] = value;
+        const trimmed = value.trim();
+        if (trimmed) {
+          trackingParams[key.toLowerCase()] = trimmed;
+        }
         keysToDelete.push(key);
       }
     }
 
     if (keysToDelete.length === 0) return false;
 
-    // Ensure attribution parameters are preserved in sessionStorage before stripping
-    try {
-      const existing = getStoredUtm();
-      const merged = { ...existing, ...trackingParams };
-      window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(merged));
-    } catch (err) {
-      console.warn("Unable to save tracking parameters to sessionStorage:", err);
+    // Ensure non-empty attribution parameters are preserved before stripping URL
+    if (Object.keys(trackingParams).length > 0) {
+      memoryUtmCache = { ...memoryUtmCache, ...trackingParams };
+      try {
+        const existing = getStoredUtm();
+        const merged = { ...existing, ...trackingParams };
+        window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(merged));
+      } catch (err) {
+        console.warn("Unable to save tracking parameters to sessionStorage:", err);
+      }
     }
 
-    // Delete all tracking keys from searchParams
-    for (const key of keysToDelete) {
+    // Delete all unique tracking keys from searchParams
+    const uniqueKeys = Array.from(new Set(keysToDelete));
+    for (const key of uniqueKeys) {
       searchParams.delete(key);
     }
 
@@ -135,6 +177,43 @@ export function cleanTrackingUrl(): boolean {
     console.warn("Unable to silently clean tracking parameters from URL:", err);
     return false;
   }
+}
+
+/**
+ * Enriches Vercel Analytics events with stored attribution parameters.
+ * If the address bar has already been cleaned via replaceState before the
+ * analytics script fires, this restores the UTM parameters to event.url
+ * so that the Vercel Analytics dashboard retains full attribution.
+ */
+export function enrichAnalyticsEvent<T extends { url: string }>(event: T): T {
+  try {
+    const utm = getStoredUtm();
+    if (!utm || Object.keys(utm).length === 0) return event;
+
+    const base =
+      typeof window !== "undefined" && window.location.origin
+        ? window.location.origin
+        : "https://cloviswebdesign.com";
+    const parsedUrl = new URL(event.url, base);
+    let modified = false;
+
+    for (const [key, value] of Object.entries(utm)) {
+      if (value && !parsedUrl.searchParams.has(key)) {
+        parsedUrl.searchParams.set(key, value);
+        modified = true;
+      }
+    }
+
+    if (modified) {
+      return {
+        ...event,
+        url: parsedUrl.toString(),
+      };
+    }
+  } catch (err) {
+    console.warn("Analytics event enrichment failed:", err);
+  }
+  return event;
 }
 
 /**
