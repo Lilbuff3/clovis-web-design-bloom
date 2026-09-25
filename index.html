@@ -95,7 +95,6 @@
           "paymentAccepted": "Cash, Credit Card, Check, ACH, Invoice",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Centroid, Old Town Clovis",
             "addressLocality": "Clovis",
             "addressRegion": "CA",
             "postalCode": "93612",
@@ -132,6 +131,15 @@
             ]
           },
           "areaServed": [
+            {
+              "@type": "GeoCircle",
+              "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": 36.8252,
+                "longitude": -119.7029
+              },
+              "geoRadius": "55000"
+            },
             {
               "@type": "City",
               "name": "Clovis",
@@ -182,9 +190,23 @@
             }
           ],
           "sameAs": [
-            "https://github.com/Lilbuff3/clovis-web-design-bloom",
-            "https://bigbrosdumpster.com",
-            "https://www.kidneyspecialistinc.com"
+            "https://github.com/Lilbuff3/clovis-web-design-bloom"
+          ],
+          "workExample": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.kidneyspecialistinc.com/#website",
+              "name": "Kidney Specialist Inc.",
+              "url": "https://www.kidneyspecialistinc.com",
+              "description": "Medical practice website engineered for HIPAA compliance and provider referral growth across the Central Valley."
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://bigbrosdumpster.com/#website",
+              "name": "Big Bros Dumpster Co.",
+              "url": "https://bigbrosdumpster.com",
+              "description": "Local commercial and residential dumpster rental website engineered for high-converting direct phone and SMS dispatch."
+            }
           ],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -240,10 +262,18 @@
           "review": [
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@id": "https://cloviswebdesign.com/#business"
+              },
               "author": {
                 "@type": "Person",
                 "name": "Dr. Sheikh Mohammad Masood, MD",
-                "jobTitle": "Founding President & Medical Director, Kidney Specialist Inc."
+                "jobTitle": "Founding President & Medical Director",
+                "worksFor": {
+                  "@type": "MedicalOrganization",
+                  "name": "Kidney Specialist Inc.",
+                  "url": "https://www.kidneyspecialistinc.com"
+                }
               },
               "reviewRating": {
                 "@type": "Rating",
@@ -254,10 +284,18 @@
             },
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@id": "https://cloviswebdesign.com/#business"
+              },
               "author": {
                 "@type": "Person",
                 "name": "William Maldonado Ramirez",
-                "jobTitle": "Co-Owner & Head of Operations, Big Bros Dumpster Rentals"
+                "jobTitle": "Co-Owner & Head of Operations",
+                "worksFor": {
+                  "@type": "LocalBusiness",
+                  "name": "Big Bros Dumpster Rentals",
+                  "url": "https://bigbrosdumpster.com"
+                }
               },
               "reviewRating": {
                 "@type": "Rating",
@@ -298,7 +336,22 @@
             "@id": "https://cloviswebdesign.com/#business"
           },
           "description": "Fast, hand-built websites grown in Clovis, CA by Adam Youssef. Landing pages from $500, live in a week. You own the code, the domain, everything.",
+          "breadcrumb": {
+            "@id": "https://cloviswebdesign.com/#breadcrumbs"
+          },
           "inLanguage": "en-US"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://cloviswebdesign.com/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://cloviswebdesign.com/"
+            }
+          ]
         },
         {
           "@type": "FAQPage",

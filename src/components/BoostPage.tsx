@@ -10,7 +10,7 @@ import { Button, Cursor, Reveal, ScrollProgress } from "./primitives";
 export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
-    document.title = "Conversion Boost™ — Clovis Web Design";
+    document.title = "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit";
   }, []);
 
   const currentMonthYear = useMemo(() => {

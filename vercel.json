@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/(.*)",
@@ -13,6 +15,14 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/boost",
+      "destination": "/boost/index.html"
+    },
+    {
+      "source": "/boost/",
+      "destination": "/boost/index.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"

@@ -4,4 +4,4 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://cloviswebdesign.com/sitemap.xml
-Host: https://cloviswebdesign.com
+Host: cloviswebdesign.com

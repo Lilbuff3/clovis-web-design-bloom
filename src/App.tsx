@@ -35,12 +35,66 @@ function Canvas({ children }: { children: ReactNode }) {
   );
 }
 
+function updateSeo(path: string) {
+  if (typeof document === "undefined") return;
+  const isBoost = path === "/boost" || path === "/boost/";
+  if (isBoost) {
+    document.title = "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit";
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://cloviswebdesign.com/boost");
+
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) {
+      desc.setAttribute("content", "Stop losing local calls to a four-second mobile lag. Hand-built websites that score 100/100 on Google PageSpeed for Fresno & Clovis businesses. Launch the loss calculator.");
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute("content", "https://cloviswebdesign.com/boost");
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", "Conversion Boost™ — Stop Losing Local Calls | Clovis Web Design");
+  } else {
+    document.title = "Clovis Web Design — Hand-grown websites for Fresno & the Central Valley";
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://cloviswebdesign.com/");
+
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) {
+      desc.setAttribute("content", "Fast, hand-built websites grown in Clovis, CA by Adam Youssef. Landing pages from $500, live in a week. You own the code, the domain, everything.");
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute("content", "https://cloviswebdesign.com/");
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", "Clovis Web Design — Hand-grown websites for Fresno & the Central Valley");
+  }
+}
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getPath);
 
   useEffect(() => {
+    updateSeo(currentPath);
+  }, [currentPath]);
+
+  useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(getPath());
+      const p = getPath();
+      setCurrentPath(p);
+      updateSeo(p);
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);

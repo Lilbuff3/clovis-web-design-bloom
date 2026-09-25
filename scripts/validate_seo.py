@@ -28,7 +28,7 @@ def test_index_html():
     data = json.loads(match.group(1).strip())
     assert data["@context"] == "https://schema.org", "Invalid @context"
     graph = data.get("@graph", [])
-    assert len(graph) >= 4, f"Expected at least 4 graph entities, got {len(graph)}"
+    assert len(graph) >= 5, f"Expected at least 5 graph entities, got {len(graph)}"
 
     biz = next((x for x in graph if x.get("@id") == "https://cloviswebdesign.com/#business"), None)
     assert biz is not None, "Business entity missing from @graph"
@@ -40,13 +40,65 @@ def test_index_html():
     assert biz["geo"]["longitude"] == -119.7029, "Longitude mismatch"
     assert biz["address"]["addressLocality"] == "Clovis", "Address locality mismatch"
     assert biz["address"]["postalCode"] == "93612", "Postal code mismatch"
+    assert "streetAddress" not in biz["address"], "Fictitious streetAddress should not be present for SAB"
     assert biz["founder"]["name"] == "Adam Youssef", "Founder mismatch"
     assert len(biz["areaServed"]) >= 6, "Expected at least 6 service areas"
-    assert len(biz["hasOfferCatalog"]["itemListElement"]) >= 3, "Expected at least 3 offers"
+    assert any(a.get("@type") == "GeoCircle" for a in biz["areaServed"]), "Missing GeoCircle in areaServed"
+    assert len(biz["hasOfferCatalog"]["itemListElement"]) >= 4, "Expected at least 4 offers"
     assert len(biz["review"]) == 2, "Expected 2 client reviews"
     assert biz["aggregateRating"]["ratingValue"] == "5.0", "Expected 5.0 aggregate rating"
+    
+    # Entity disambiguation: client sites must be in workExample, NOT sameAs
+    assert "https://bigbrosdumpster.com" not in biz.get("sameAs", []), "Client site wrongly placed in sameAs"
+    assert "https://www.kidneyspecialistinc.com" not in biz.get("sameAs", []), "Client site wrongly placed in sameAs"
+    assert any("kidneyspecialistinc.com" in w.get("url", "") for w in biz.get("workExample", [])), "Missing Kidney Specialist in workExample"
+    assert any("bigbrosdumpster.com" in w.get("url", "") for w in biz.get("workExample", [])), "Missing Big Bros in workExample"
+
+    # BreadcrumbList check
+    breadcrumbs = next((x for x in graph if x.get("@type") == "BreadcrumbList"), None)
+    assert breadcrumbs is not None, "BreadcrumbList missing from @graph"
 
     print("PASS: index.html SEO, Geo, Social & JSON-LD validated perfectly.")
+
+def test_boost_html():
+    for filename in ["dist/boost/index.html", "dist/boost.html"]:
+        boost_path = Path(filename)
+        assert boost_path.exists(), f"{filename} missing"
+        html = boost_path.read_text(encoding="utf-8")
+
+        # 1. Canonical tag must point directly to /boost
+        assert '<link rel="canonical" href="https://cloviswebdesign.com/boost" />' in html, f"Missing /boost canonical link in {filename}"
+
+        # 2. Title must be Conversion Boost
+        assert "Conversion Boost™" in html, f"Missing Conversion Boost in title for {filename}"
+
+        # 3. OpenGraph and Twitter tags
+        assert '<meta property="og:url" content="https://cloviswebdesign.com/boost" />' in html, f"Missing og:url /boost in {filename}"
+        assert '<meta name="twitter:url" content="https://cloviswebdesign.com/boost" />' in html, f"Missing twitter:url /boost in {filename}"
+
+        # 4. No relative ./ asset paths that break on nested paths
+        assert 'href="./favicon' not in html, f"Relative favicon path found in {filename}"
+        assert 'href="./site.webmanifest' not in html, f"Relative manifest path found in {filename}"
+
+        # 5. Dedicated Schema.org for /boost
+        match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
+        assert match, f"JSON-LD script tag not found in {filename}"
+        data = json.loads(match.group(1).strip())
+        graph = data.get("@graph", [])
+        
+        webpage = next((x for x in graph if x.get("@id") == "https://cloviswebdesign.com/boost#webpage"), None)
+        assert webpage is not None, f"Boost WebPage entity missing from {filename}"
+        assert webpage["url"] == "https://cloviswebdesign.com/boost", f"Boost WebPage url mismatch in {filename}"
+
+        service = next((x for x in graph if x.get("@id") == "https://cloviswebdesign.com/boost#service"), None)
+        assert service is not None, f"Boost Service entity missing from {filename}"
+        assert service["name"] == "Conversion Boost™ — Speed & Local Search Audit", f"Boost Service name mismatch in {filename}"
+
+        bc = next((x for x in graph if x.get("@id") == "https://cloviswebdesign.com/boost#breadcrumbs"), None)
+        assert bc is not None, f"Boost BreadcrumbList missing in {filename}"
+        assert len(bc["itemListElement"]) == 2, f"Boost breadcrumbs should have 2 levels in {filename}"
+
+    print("PASS: dist/boost/index.html & dist/boost.html dedicated SEO & Schema validated perfectly.")
 
 def test_sitemap():
     sitemap_path = Path("public/sitemap.xml")
@@ -63,6 +115,7 @@ def test_robots():
     assert robots_path.exists(), "public/robots.txt missing"
     content = robots_path.read_text(encoding="utf-8")
     assert "Sitemap: https://cloviswebdesign.com/sitemap.xml" in content, "Sitemap line missing from robots.txt"
+    assert "Host: cloviswebdesign.com" in content, "Host line missing from robots.txt"
     print("PASS: public/robots.txt validated.")
 
 def test_manifest():
@@ -101,7 +154,7 @@ def test_dist_html():
     match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
     assert match, "JSON-LD script tag not found in dist"
     data = json.loads(match.group(1).strip())
-    assert len(data.get("@graph", [])) >= 4, "dist JSON-LD graph incomplete"
+    assert len(data.get("@graph", [])) >= 5, "dist JSON-LD graph incomplete"
     print("PASS: dist/index.html verified completely.")
 
 def test_live():
@@ -136,7 +189,7 @@ def test_live():
                 assert data["name"] == "Clovis Web Design", "Live manifest name mismatch"
                 print("PASS: Live site.webmanifest verified!")
             elif "boost" in u:
-                print("PASS: Live /boost endpoint verified (HTTP 200)!")
+                print(f"INFO: Live {u} status code 200.")
 
 if __name__ == "__main__":
     test_index_html()
@@ -145,5 +198,6 @@ if __name__ == "__main__":
     test_manifest()
     test_assets()
     test_dist_html()
+    test_boost_html()
     test_live()
     print("\nALL SEO & GEO CHECKS PASSED 100%!")
