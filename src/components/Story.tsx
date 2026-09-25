@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { care, faqs, letters, plans, studio, VIDEO_SHADOW } from "../data/content";
+import { AmbientVideo } from "./primitives";
 
 export function Grower() {
   return (
@@ -8,14 +9,9 @@ export function Grower() {
         <div className="reveal relative lg:col-span-5">
           <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush">
             <img src="/images/studio.jpg" alt="Adam's sunlit workbench in Clovis with a laptop, sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" />
-            <video
-              src={VIDEO_SHADOW}
-              autoPlay
-              muted
-              loop
-              playsInline
+            <AmbientVideo
+              {...VIDEO_SHADOW}
               className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-multiply grayscale"
-              aria-hidden
             />
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">

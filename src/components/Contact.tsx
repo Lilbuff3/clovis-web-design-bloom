@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { studio, VIDEO_SHADOW } from "../data/content";
+import { AmbientVideo } from "./primitives";
 import { buildSmsHref } from "../utils/sms";
 import { SunMark } from "./Chrome";
 
@@ -38,13 +39,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">
-      <video
-        src={VIDEO_SHADOW}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden
+      <AmbientVideo
+        {...VIDEO_SHADOW}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[.14] mix-blend-multiply grayscale"
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">

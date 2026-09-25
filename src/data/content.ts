@@ -23,8 +23,9 @@ export const navLinks = [
   { href: "#faq", label: "FAQ", ids: ["faq"] },
 ];
 
-export const VIDEO_ORCHARD = "https://videos.pexels.com/video-files/855231/855231-hd_1920_1080_24fps.mp4";
-export const VIDEO_SHADOW = "https://videos.pexels.com/video-files/35084306/14863152_1920_1080_60fps.mp4";
+/** Self-hosted 9 s loops cut from Pexels clips (free licence): a mandarin on the tree, and palm shadow on a wall. */
+export const VIDEO_ORCHARD = { src: "/video/orchard.mp4", poster: "/video/orchard.webp" };
+export const VIDEO_SHADOW = { src: "/video/shadow.mp4", poster: "/video/shadow.webp" };
 
 // ---------------------------------------------------------------------------
 // Homepage

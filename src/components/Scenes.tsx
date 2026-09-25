@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "../lib/smooth";
 import { VIDEO_ORCHARD } from "../data/content";
+import { AmbientVideo } from "./primitives";
 
 /* ------------------------------------------------------------------ */
 /* Manifesto — words ripen as you scroll                               */
@@ -106,7 +107,7 @@ export function ValleyZoom() {
         </div>
         <div className="vz-box relative h-[70vh] w-full overflow-hidden rounded-[28px] bg-leaf shadow-[0_40px_80px_-40px_rgba(30,43,35,.6)]">
           <div className="vz-media absolute inset-0">
-            <video src={VIDEO_ORCHARD} autoPlay muted loop playsInline poster="/images/hero.jpg" className="h-full w-full object-cover" />
+            <AmbientVideo {...VIDEO_ORCHARD} className="h-full w-full object-cover" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" />
           <div className="vz-cap absolute inset-x-0 bottom-0 p-6 text-cream md:p-14">

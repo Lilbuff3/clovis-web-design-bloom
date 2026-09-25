@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { prefersReducedMotion, usePageScroll } from "../lib/hooks";
 import { onIntroDone } from "../lib/smooth";
 import { studio, VIDEO_ORCHARD } from "../data/content";
+import { AmbientVideo } from "./primitives";
 
 function RotatingBadge() {
   return (
@@ -219,15 +220,7 @@ export function Hero() {
             <span className="inline-flex items-center gap-[0.18em]">
               <Kinetic text="grown" className="is-italic wonk text-persimmon" start={10} />
               <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle mx-1">
-                <video
-                  src={VIDEO_ORCHARD}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/images/hero.jpg"
-                  className="h-full w-full object-cover"
-                />
+                <AmbientVideo {...VIDEO_ORCHARD} className="h-full w-full object-cover" />
               </span>
               <Kinetic text="by" start={17} />
             </span>

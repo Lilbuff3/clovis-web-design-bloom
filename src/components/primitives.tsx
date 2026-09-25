@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ElementType, type ReactNode, type CSSProperties } from "react";
-import { useInView, useMagneticRef } from "../lib/hooks";
+import { prefersReducedMotion, useInView, useMagneticRef } from "../lib/hooks";
 
 /* ---------------------------------------------------------------------------
    Icons
@@ -28,6 +28,26 @@ export function Reveal({ as: Tag = "div", children, className = "", index = 0, s
       {children}
     </Tag>
   );
+}
+
+/* ---------------------------------------------------------------------------
+   AmbientVideo — decorative muted loop from public/video/. Loads and plays
+   only while on screen; reduced motion or Save-Data get the poster alone.
+--------------------------------------------------------------------------- */
+export function AmbientVideo({ src, poster, className = "" }: { src: string; poster: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (!v || prefersReducedMotion() || saveData) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-hidden className={className} />;
 }
 
 /* ---------------------------------------------------------------------------
