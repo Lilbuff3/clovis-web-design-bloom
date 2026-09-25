@@ -13,6 +13,7 @@ FOVEA eye-doctor design) is retired and serves nothing.
 npm run dev        # http://localhost:5173
 npm run build      # → dist/index.html (single file) + public/ assets
 npx tsc --noEmit   # types
+python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live checks
 ```
 
 ## Deploy: a push to `main` is a production deploy
@@ -42,6 +43,8 @@ npx tsc --noEmit   # types
   helpers (`.line-mask`, `.reveal`, `.grain`…), and `@import`s `src/styles/`
   (`tokens.css` → `global.css` → `sections-a.css` → `sections-b.css` → `boost.css`).
   A class used in a component must be defined in one of those imported files.
+- SEO lives in `index.html` (meta, geo tags, JSON-LD `@graph`) plus `public/robots.txt`,
+  `sitemap.xml`, `site.webmanifest`. Keep `scripts/validate_seo.py` passing.
 - Fonts load from Google Fonts in `index.html`. Images are in `public/images/`.
 
 ## Known debt (consolidate when nobody else is mid-edit)
