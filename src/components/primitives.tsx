@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ElementType, type ReactNode, type CSSProperties } from "react";
-import { useInView, useMagnetic } from "../hooks/motion";
+import { useInView, useMagneticRef } from "../lib/hooks";
 
 /* ---------------------------------------------------------------------------
    Icons
@@ -7,11 +7,6 @@ import { useInView, useMagnetic } from "../hooks/motion";
 export const ArrowIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M3 13L13 3M13 3H5.5M13 3V10.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-export const PlusIcon = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
   </svg>
 );
 
@@ -35,20 +30,6 @@ export function Reveal({ as: Tag = "div", children, className = "", index = 0, s
   );
 }
 
-/** Line-masked heading reveal. Pass lines as array of ReactNodes. */
-export function MaskedLines({ lines, className = "", as: Tag = "h2" }: { lines: ReactNode[]; className?: string; as?: ElementType }) {
-  const [ref, inView] = useInView<HTMLElement>();
-  return (
-    <Tag ref={ref} className={`${className} ${inView ? "is-in" : ""}`}>
-      {lines.map((line, i) => (
-        <span className="reveal-mask" key={i}>
-          <span style={{ "--i": i } as CSSProperties}>{line}</span>
-        </span>
-      ))}
-    </Tag>
-  );
-}
-
 /* ---------------------------------------------------------------------------
    Button component
    Props → Webflow component props:
@@ -65,7 +46,7 @@ type ButtonProps = {
   className?: string;
 };
 export function Button({ label, href, variant = "primary", showIcon = true, magnetic = false, external, cursorLabel, className = "" }: ButtonProps) {
-  const mag = useMagnetic<HTMLAnchorElement>(magnetic ? 0.3 : 0);
+  const mag = useMagneticRef<HTMLAnchorElement>(magnetic ? 0.3 : 0);
   const variantClass = variant === "primary" ? "" : `is-${variant}`;
   return (
     <a
@@ -120,30 +101,6 @@ export function SectionHeader({ index, label, heading, lede, dark, headingId }: 
           {lede}
         </div>
       )}
-    </div>
-  );
-}
-
-/* ---------------------------------------------------------------------------
-   Marquee
---------------------------------------------------------------------------- */
-export function Marquee({ items, className = "", separator = "✺" }: { items: string[]; className?: string; separator?: string }) {
-  const track = (hidden: boolean) => (
-    <div className="marquee_track" aria-hidden={hidden || undefined}>
-      {items.map((item, i) => (
-        <span key={i} className="marquee_item">
-          <span>{item}</span>
-          <span className="marquee_sep" aria-hidden="true">
-            {separator}
-          </span>
-        </span>
-      ))}
-    </div>
-  );
-  return (
-    <div className={`marquee_component ${className}`}>
-      {track(false)}
-      {track(true)}
     </div>
   );
 }

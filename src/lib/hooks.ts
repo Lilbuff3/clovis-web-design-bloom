@@ -1,5 +1,57 @@
 import { useEffect, useRef, useState } from "react";
 
+export const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/** Per-element "scroll into view" — true once the element enters the viewport. */
+export function useInView<T extends Element>(options: IntersectionObserverInit = { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }) {
+  const ref = useRef<T>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (prefersReducedMotion()) {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        io.disconnect();
+      }
+    }, options);
+    io.observe(el);
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return [ref, inView] as const;
+}
+
+/** Magnetic micro-interaction — element drifts toward the cursor. Page-wide [data-magnetic] version: lib/motion.ts. */
+export function useMagneticRef<T extends HTMLElement>(strength = 0.35) {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReducedMotion() || !window.matchMedia("(pointer: fine)").matches) return;
+    const move = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
+    };
+    const leave = () => {
+      el.style.transform = "";
+    };
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerleave", leave);
+    return () => {
+      el.removeEventListener("pointermove", move);
+      el.removeEventListener("pointerleave", leave);
+    };
+  }, [strength]);
+  return ref;
+}
+
 /** Adds `.in` to every `.reveal` / `.line-mask` / `.reveal-mask` / [data-reveal] element as it enters the viewport. */
 export function useGlobalReveal() {
   useEffect(() => {

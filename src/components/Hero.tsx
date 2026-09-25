@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { usePageScroll } from "../lib/hooks";
+import { prefersReducedMotion, usePageScroll } from "../lib/hooks";
 import { onIntroDone } from "../lib/smooth";
 import { PHONE_DISPLAY, SMS_LINK, VIDEO_ORCHARD } from "../lib/data";
-import { prefersReducedMotion } from "../hooks/motion";
 
 function RotatingBadge() {
   return (
