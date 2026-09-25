@@ -69,7 +69,7 @@
   font-variation-settings: normal;
 }
 .navbar_links { display: flex; justify-content: center; gap: clamp(1.25rem, 2.2vw, 2.5rem); }
-.navbar_link { display: inline-block; overflow: hidden; font-weight: 500; font-size: 0.95rem; }
+.navbar_link { display: inline-block; overflow: hidden; white-space: nowrap; font-weight: 500; font-size: 0.95rem; }
 .navbar_link-inner {
   position: relative;
   display: inline-block;
