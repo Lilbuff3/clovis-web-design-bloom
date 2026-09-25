@@ -44,6 +44,7 @@ export const cases = [
     previewImg: "/images/kidney-preview.webp",
     photoImg: "/images/kidney.jpg",
     tint: "bg-sky",
+    more: { href: "/medical-websites", label: "How I build for medical practices" },
     headline: "A medical site that never touches patient data — and scores a perfect 100.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["No patient data on the web", "Printable forms instead of online ones", "Guides patients actually use"],
@@ -284,6 +285,107 @@ export const faqs = [
     a: "By not collecting patient information on the website at all. The site routes people to a phone call or referral fax — channels your practice already handles correctly. Nothing sensitive is stored on the web server, because nothing sensitive is collected there.",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// /medical-websites page. Kidney Specialist facts are Adam's notes or visible on
+// kidneyspecialistinc.com (checked 2026-09-25). Don't claim more than that.
+// ---------------------------------------------------------------------------
+
+export const medical = {
+  path: "/medical-websites",
+  seo: {
+    title: "Medical Practice Websites in Fresno & Madera | Clovis Web Design",
+    description:
+      "Websites for medical, dental and therapy practices: English and Spanish on every page, clear patient guides, easy referrals, and no patient data online. Built in Clovis.",
+  },
+  eyebrow: "Medical, dental & therapy practices · Fresno, Madera & the Central Valley",
+  heading: "Medical practice websites that work like a",
+  headingEm: "second front desk.",
+  lede:
+    "A clinic runs on its staff. Every question the website answers, like where to park, which form to bring or how to send a referral, is a call the front desk doesn't have to take. That time matters as much to your patients as it does to your doctors.",
+  sms: "Hi, Adam! I saw your medical practice websites page. I'd like to talk about a site for our practice.",
+  caseIntro:
+    "A nephrology practice with its main office in Madera and a second clinic in Fresno, inside Trust Clinic. Dr. Masood's first concern was patient privacy, so the site had to be built around patients while protecting both them and the practice.",
+  built: [
+    {
+      title: "Directions you can see",
+      body: "I made a drawing of each clinic, the Madera main office and the Fresno office inside Trust Clinic, so patients can spot the building, the entrance and the accessible parking before they leave home.",
+    },
+    {
+      title: "Handouts people actually read",
+      body: "The practice's old black-and-white handouts are now illustrated guides on diet, potassium, blood sugar and 24-hour urine collection, including Dr. Masood's own diet rules. Every guide prints or saves as a PDF.",
+    },
+    {
+      title: "Tools for lab numbers",
+      body: "Plain-language tools that explain a patient's own results, like an HbA1c calculator and the stages of kidney disease by eGFR, so a number on a lab sheet means something.",
+    },
+    {
+      title: "Pages for how people search",
+      body: "People search for what they're feeling, so the common reasons patients come in, like blood pressure that won't come down, protein in the urine or swelling in the legs, each have their own page.",
+    },
+    {
+      title: "A referral page other offices can use",
+      body: "One page with the fax number, a one-page fax sheet to print, a checklist of what to send, and the practice's NPI numbers for prior authorizations.",
+    },
+    {
+      title: "Forms you print, not submit",
+      body: "Patient forms download and print at home, sized for US Letter. It saves the staff time, patients get what they need without coming in, and nothing about anyone's health is typed into the website.",
+    },
+    {
+      title: "Every word in Spanish too",
+      body: "Every page, form, guide and notice has a Spanish version.",
+    },
+    {
+      title: "The privacy and accessibility paperwork",
+      body: "I wrote the practice's Notice of Privacy Practices and its privacy policy, and built the site to WCAG 2.1 AA, with an accessibility statement to match.",
+    },
+  ],
+  planIntro:
+    "My goal is a site that looks good, brings in patients through search and referrals, and takes work off your front desk by fitting into what you already use.",
+  plan: [
+    {
+      title: "I start with your office manager",
+      body: "Before I design anything, I ask what eats their day: the calls they keep taking, the forms they keep resending, the things patients always ask. The site is built to answer those first.",
+    },
+    {
+      title: "It works with what you already run",
+      body: "Patient portal, EHR, scheduling: I connect the website to the systems you have, and automate what I can so patients get timely information without a phone call.",
+    },
+    {
+      title: "Privacy by leaving things out",
+      body: "California keeps tightening the rules for medical websites. The simplest protection is a site that never collects health information; anything sensitive stays inside your EHR's own portal.",
+    },
+    {
+      title: "Not just kidneys",
+      body: "Medical, dental, therapy and other specialists. If your patients call with the same questions every day, the website can answer them first.",
+    },
+  ],
+  pricing: `Most practices fit ${plans[2].name}: ${plans[2].price} and ${plans[2].time}, built to your field's accessibility and privacy rules, and I stay on it for 90 days after launch. A smaller practice can start with ${plans[1].name} at ${plans[1].price}. Portal and EHR work gets priced once I've seen what you run, before you pay anything.`,
+  faqs: [
+    {
+      q: "Can patients fill out intake forms on the website?",
+      a: "They can download and print them, the way Kidney Specialist does. Anything that carries health information belongs in your EHR's patient portal, and I can link to it or connect it.",
+    },
+    {
+      q: "Can you connect the site to our EHR or patient portal?",
+      a: "Usually, yes. Tell me what you run, and I'll tell you what's possible, from a simple link to automations, and what it costs before you pay anything.",
+    },
+    {
+      q: "Can the whole site be in Spanish?",
+      a: "Yes. On the Kidney Specialist site every page, form and notice has a Spanish version, and I'll do the same for you.",
+    },
+    {
+      q: "Do you write the privacy notices?",
+      a: "I wrote Kidney Specialist's Notice of Privacy Practices and privacy policy, in English and Spanish, and I can draft yours the same way. Your compliance officer or attorney should still have the last word.",
+    },
+    {
+      q: "Do you only build for kidney doctors?",
+      a: "No. Nephrology is where I started. I'm open to medical, dental, therapy and other specialist practices.",
+    },
+  ],
+  closing: "Tell me what your front desk answers every day.",
+  closingBody: "Text me and we'll set up a time to talk, at your office or on the phone.",
+};
 
 // ---------------------------------------------------------------------------
 // /boost page

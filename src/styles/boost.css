@@ -859,6 +859,7 @@
 }
 .boost-proof_metrics {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--_color---border);

@@ -5,6 +5,8 @@ import { FourSeconds } from "./components/FourSeconds";
 import { Harvest } from "./components/Harvest";
 import { Boost } from "./components/Boost";
 import { BoostPage } from "./components/BoostPage";
+import { MedicalPage } from "./components/MedicalPage";
+import { medical } from "./data/content";
 import { ChapterRail, HOME_CHAPTERS } from "./components/ChapterRail";
 import { Compare, Season } from "./components/Season";
 import { FAQ, Grower, Letters, Stand } from "./components/Story";
@@ -36,52 +38,43 @@ function Canvas({ children }: { children: ReactNode }) {
   );
 }
 
+/** Client-side SEO for pushState navigation. Crawlers get each page's own HTML from the build. */
+const SEO: Record<string, { title: string; description: string; ogTitle?: string }> = {
+  "/": {
+    title: "Clovis Web Design — Hand-grown websites for Fresno & the Central Valley",
+    description: "Fast, hand-built websites grown in Clovis, CA by Adam Youssef. Landing pages from $500, live in a week. You own the code, the domain, everything.",
+  },
+  "/boost": {
+    title: "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit",
+    description: "Stop losing local calls to a four-second mobile lag. Hand-built websites that score 100/100 on Google PageSpeed for Fresno & Clovis businesses. Launch the loss calculator.",
+    ogTitle: "Conversion Boost™ — Stop Losing Local Calls | Clovis Web Design",
+  },
+  [medical.path]: medical.seo,
+};
+
+/** Ignores a trailing slash; unknown paths fall back to the homepage. */
+function pageOf(path: string) {
+  const p = path.replace(/\/+$/, "") || "/";
+  return p in SEO ? p : "/";
+}
+
 function updateSeo(path: string) {
   if (typeof document === "undefined") return;
-  const isBoost = path === "/boost" || path === "/boost/";
-  if (isBoost) {
-    document.title = "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit";
+  const page = pageOf(path);
+  const { title, description, ogTitle } = SEO[page];
+  const url = `https://cloviswebdesign.com${page}`;
+  document.title = title;
 
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", "https://cloviswebdesign.com/boost");
-
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) {
-      desc.setAttribute("content", "Stop losing local calls to a four-second mobile lag. Hand-built websites that score 100/100 on Google PageSpeed for Fresno & Clovis businesses. Launch the loss calculator.");
-    }
-
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) ogUrl.setAttribute("content", "https://cloviswebdesign.com/boost");
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute("content", "Conversion Boost™ — Stop Losing Local Calls | Clovis Web Design");
-  } else {
-    document.title = "Clovis Web Design — Hand-grown websites for Fresno & the Central Valley";
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", "https://cloviswebdesign.com/");
-
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) {
-      desc.setAttribute("content", "Fast, hand-built websites grown in Clovis, CA by Adam Youssef. Landing pages from $500, live in a week. You own the code, the domain, everything.");
-    }
-
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) ogUrl.setAttribute("content", "https://cloviswebdesign.com/");
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute("content", "Clovis Web Design — Hand-grown websites for Fresno & the Central Valley");
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.setAttribute("rel", "canonical");
+    document.head.appendChild(canonical);
   }
+  canonical.setAttribute("href", url);
+  document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+  document.querySelector('meta[property="og:url"]')?.setAttribute("content", url);
+  document.querySelector('meta[property="og:title"]')?.setAttribute("content", ogTitle ?? title);
 }
 
 export default function App() {
@@ -131,13 +124,12 @@ export default function App() {
   useGlobalReveal();
   useAutoRefresh();
 
-  // Dedicated /boost high-conversion route
-  if (currentPath === "/boost" || currentPath === "/boost/") {
-    return <BoostPage onNavigate={navigateTo} />;
-  }
+  const page = pageOf(currentPath);
+  if (page === "/boost") return <BoostPage onNavigate={navigateTo} />;
+  if (page === medical.path) return <MedicalPage onNavigate={navigateTo} />;
 
   return (
-    <div className="grain relative">
+    <div className="grain relative overflow-x-clip">
       <Preloader />
       <ScrollProgress />
       <SunCursor />

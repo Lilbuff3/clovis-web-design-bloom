@@ -57,9 +57,12 @@ export function LogoMark({ size = 30 }: { size?: number }) {
 
 export function Header({
   isBoostPage = false,
+  isSubPage = false,
   onNavigate,
 }: {
   isBoostPage?: boolean;
+  /** Any page other than the homepage and /boost: links go back to the homepage, no Boost banner. */
+  isSubPage?: boolean;
   onNavigate?: (path: string) => void;
 }) {
   const [scrolled, setScrolled] = useState(false);
@@ -86,15 +89,16 @@ export function Header({
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const offHome = isBoostPage || isSubPage;
   const resolveHref = (href: string) => {
-    if (isBoostPage && href.startsWith("#")) return `/${href}`;
+    if (offHome && href.startsWith("#")) return `/${href}`;
     return href;
   };
 
   const handleLogoClick = (e: React.MouseEvent) => {
     if (!onNavigate) return;
     e.preventDefault();
-    if (isBoostPage) {
+    if (offHome) {
       onNavigate("/");
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -103,8 +107,8 @@ export function Header({
   };
 
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
-    if (isBoostPage) {
-      if (href === "/boost") {
+    if (offHome) {
+      if (isBoostPage && href === "/boost") {
         e.preventDefault();
         const el = document.getElementById("boost-calc") || document.getElementById("boost");
         if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -112,7 +116,7 @@ export function Header({
       }
       if (onNavigate) {
         e.preventDefault();
-        onNavigate(`/${href}`);
+        onNavigate(resolveHref(href));
       }
       return;
     }
@@ -155,7 +159,7 @@ export function Header({
         <div className="container-large">
           <div className="navbar_inner">
             <a
-              href={isBoostPage ? "/" : "#top"}
+              href={offHome ? "/" : "#top"}
               onClick={handleLogoClick}
               className="navbar_logo"
               aria-label={`${studio.name} — home`}

@@ -108,6 +108,7 @@ def test_sitemap():
     urls = [elem.text for elem in root.findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
     assert "https://cloviswebdesign.com/" in urls, "Main URL missing from sitemap"
     assert "https://cloviswebdesign.com/boost" in urls, "Boost URL missing from sitemap"
+    assert "https://cloviswebdesign.com/medical-websites" in urls, "Medical page URL missing from sitemap"
     print("PASS: public/sitemap.xml validated with URLs:", urls)
 
 def test_robots():
@@ -157,6 +158,18 @@ def test_dist_html():
     assert len(data.get("@graph", [])) >= 5, "dist JSON-LD graph incomplete"
     print("PASS: dist/index.html verified completely.")
 
+def test_dist_medical():
+    html = Path("dist/medical-websites.html").read_text(encoding="utf-8")
+    assert '<link rel="canonical" href="https://cloviswebdesign.com/medical-websites" />' in html, "Medical page canonical wrong"
+    assert "<title>Medical Practice Websites" in html, "Medical page title missing"
+    match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
+    graph = json.loads(match.group(1))["@graph"]
+    types = [str(x.get("@type")) for x in graph]
+    assert "Service" in types and "FAQPage" in types and "BreadcrumbList" in types, f"Medical JSON-LD incomplete: {types}"
+    root = html.split('<div id="root">', 1)[1]
+    assert "second front desk" in root and "Kidney Specialist" in root, "Medical page body not prerendered"
+    print("PASS: dist/medical-websites.html has its own canonical, title, schema and prerendered body.")
+
 def test_live():
     import urllib.request
     urls_to_test = [
@@ -202,5 +215,6 @@ if __name__ == "__main__":
     test_assets()
     test_dist_html()
     test_boost_html()
+    test_dist_medical()
     test_live()
     print("\nALL SEO & GEO CHECKS PASSED 100%!")

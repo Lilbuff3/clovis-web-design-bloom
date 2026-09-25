@@ -24,7 +24,11 @@
       "destination": "/boost.html"
     },
     {
-      "source": "/((?!boost).*)",
+      "source": "/medical-websites",
+      "destination": "/medical-websites.html"
+    },
+    {
+      "source": "/((?!boost|medical-websites).*)",
       "destination": "/index.html"
     }
   ],

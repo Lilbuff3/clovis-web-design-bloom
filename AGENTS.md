@@ -30,12 +30,20 @@ python scripts/validate_seo.py   # meta, JSON-LD, sitemap/robots, then live chec
 
 ## Where things live
 
-- `src/App.tsx`: homepage section order, plus the tiny `/boost` router (pushState).
+- `src/App.tsx`: homepage section order, plus the tiny pushState router for `/boost` and
+  `/medical-websites` (its `SEO` table sets title/canonical on client-side navigation).
   `scripts/generate-boost-html.js` writes `dist/boost.html` with /boost's own SEO, and
-  `vercel.json` rewrites `/boost` to it and everything else to `index.html`.
+  `vercel.json` rewrites `/boost` and `/medical-websites` to their files and everything
+  else to `index.html`.
+- Build-time HTML: `src/entry-server.tsx` lists every built page. `scripts/prerender.js`
+  server-renders each into `#root` (so crawlers without JS see the text); a page with a
+  `head` also gets its own `dist/<page>.html` with that title, canonical, meta and JSON-LD.
+  To add a page: copy in `content.ts`, a component (reuse `Header isSubPage`,
+  `BespokeFooter`, `MobileTextBar`), a route + `SEO` entry in `App.tsx`, an entry in
+  `entry-server.tsx`, a `vercel.json` rewrite, a sitemap URL and a `validate_seo.py` check.
 - `src/data/content.ts` holds **every word and fact**: `studio` (name, phone, SMS/tel
-  links), `navLinks` (both navs), the homepage sections in page order, then
-  `boostCases`/`boostFaqs`. Change copy there, not in components. Phone is
+  links), `navLinks` (both navs), the homepage sections in page order, then `medical`
+  (the /medical-websites page) and `boostCases`/`boostFaqs`. Change copy there, not in components. Phone is
   **(559) 575-3014**, and only `studio` should spell it.
 - Motion, one home per kind:
   - `src/lib/smooth.ts`: Lenis + GSAP setup, chapter colours, the intro signal, and

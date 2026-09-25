@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { studio, VIDEO_SHADOW } from "../data/content";
+import { medical, studio, VIDEO_SHADOW } from "../data/content";
 import { AmbientVideo } from "./primitives";
 import { buildSmsHref } from "../utils/sms";
 import { SunMark } from "./Chrome";
@@ -170,6 +170,7 @@ export function Footer() {
             <a href="#harvest" className="block hover:underline">Harvest</a>
             <a href="#season" className="block hover:underline">Process</a>
             <a href="#stand" className="block hover:underline">Prices</a>
+            <a href={medical.path} className="block hover:underline">Medical practices</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Reach</div>

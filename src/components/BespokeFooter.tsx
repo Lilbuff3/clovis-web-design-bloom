@@ -1,4 +1,4 @@
-import { navLinks, studio } from "../data/content";
+import { medical, navLinks, studio } from "../data/content";
 import { LogoMark, useClovisTime } from "./Header";
 
 export function Footer() {
@@ -17,13 +17,19 @@ export function Footer() {
             <nav className="footer_col" aria-label="Footer">
               <h2 className="text-style-eyebrow">Sitemap</h2>
               <ul role="list">
+                {/* This footer is only used off the homepage, so its #section links go back there. */}
                 {navLinks.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="footer_link">
+                    <a href={l.href.startsWith("#") ? `/${l.href}` : l.href} className="footer_link">
                       {l.label}
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a href={medical.path} className="footer_link">
+                    Medical practices
+                  </a>
+                </li>
               </ul>
             </nav>
             <div className="footer_col">

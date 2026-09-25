@@ -196,6 +196,14 @@ body {
     rotate: 4deg;
   }
 }
+/* In a swipe row the card-in animation is the entrance. The scroll fade would keep the
+   next card's peek (under 15% visible) hidden, and that peek is what says "swipe". */
+@media (max-width: 1023px) {
+  .snap-x > .swipe-card.reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .swipe-card {

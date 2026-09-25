@@ -202,6 +202,15 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
             </span>
           ))}
         </div>
+
+        {c.more && (
+          <a
+            href={c.more.href}
+            className="mt-6 inline-block py-3 font-medium underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon"
+          >
+            {c.more.label} →
+          </a>
+        )}
       </div>
     </article>
   );
