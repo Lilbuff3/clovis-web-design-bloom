@@ -19,7 +19,7 @@
 
 ### Exact NAP & Profile Details
 - **Business Name**: `Clovis Web Design`
-- **Address / Locality**: Clovis, CA 93612 (Fresno County)
+- **Address / Locality**: Clovis, CA 93619 (Fresno County)
   *(If registered as a Service Area Business without public storefront, define service radius: 35 miles covering Fresno, Clovis, Madera, Sanger, Selma, and Visalia).*
 - **Primary Phone**: `(559) 575-3014`
 - **Website URL**: `https://cloviswebdesign.com/?utm_source=gbp&utm_medium=organic&utm_campaign=local_pack`

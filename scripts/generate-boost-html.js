@@ -96,13 +96,13 @@ const boostSchema = {
         "@type": "PostalAddress",
         "addressLocality": "Clovis",
         "addressRegion": "CA",
-        "postalCode": "93612",
+        "postalCode": "93619",
         "addressCountry": "US"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 36.8252,
-        "longitude": -119.7029
+        "latitude": 36.8346,
+        "longitude": -119.6596
       },
       "founder": {
         "@type": "Person",

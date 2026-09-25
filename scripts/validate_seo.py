@@ -14,8 +14,8 @@ def test_index_html():
     # 2. Geo tags check
     assert '<meta name="geo.region" content="US-CA" />' in html, "Missing geo.region"
     assert '<meta name="geo.placename" content="Clovis" />' in html, "Missing geo.placename"
-    assert '<meta name="geo.position" content="36.8252;-119.7029" />' in html, "Missing geo.position"
-    assert '<meta name="ICBM" content="36.8252, -119.7029" />' in html, "Missing ICBM"
+    assert '<meta name="geo.position" content="36.8346;-119.6596" />' in html, "Missing geo.position"
+    assert '<meta name="ICBM" content="36.8346, -119.6596" />' in html, "Missing ICBM"
 
     # 3. OpenGraph & Twitter tags
     assert '<meta property="og:title"' in html, "Missing og:title"
@@ -36,10 +36,10 @@ def test_index_html():
     assert "LocalBusiness" in biz["@type"], "LocalBusiness missing from @type"
     assert biz["name"] == "Clovis Web Design", f"Incorrect business name: {biz.get('name')}"
     assert biz["telephone"] == "+15595753014", f"Incorrect phone: {biz.get('telephone')}"
-    assert biz["geo"]["latitude"] == 36.8252, "Latitude mismatch"
-    assert biz["geo"]["longitude"] == -119.7029, "Longitude mismatch"
+    assert biz["geo"]["latitude"] == 36.8346, "Latitude mismatch"
+    assert biz["geo"]["longitude"] == -119.6596, "Longitude mismatch"
     assert biz["address"]["addressLocality"] == "Clovis", "Address locality mismatch"
-    assert biz["address"]["postalCode"] == "93612", "Postal code mismatch"
+    assert biz["address"]["postalCode"] == "93619", "Postal code mismatch"
     assert "streetAddress" not in biz["address"], "Fictitious streetAddress should not be present for SAB"
     assert biz["founder"]["name"] == "Adam Youssef", "Founder mismatch"
     assert len(biz["areaServed"]) >= 6, "Expected at least 6 service areas"
