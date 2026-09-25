@@ -61,19 +61,14 @@ body {
 .page-wrapper { position: relative; }
 .main-wrapper { position: relative; }
 .padding-global { padding-inline: var(--_space---global); }
-.container-large,
-.container-medium,
-.container-small { width: 100%; margin-inline: auto; }
+.container-large { width: 100%; margin-inline: auto; }
 .container-large { max-width: var(--_container---large); }
-.container-medium { max-width: var(--_container---medium); }
-.container-small { max-width: var(--_container---small); }
 .padding-section-small { padding-block: var(--_space---section-small); }
 .padding-section-medium { padding-block: var(--_space---section-medium); }
 .padding-section-large { padding-block: var(--_space---section-large); }
 
 /* ---------- Typography utilities ---------- */
 .heading-style-display,
-.heading-style-h1,
 .heading-style-h2,
 .heading-style-h3,
 .heading-style-h4 {
@@ -83,7 +78,6 @@ body {
   font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
 }
 .heading-style-display { font-size: var(--_type---display); line-height: var(--_leading---tight); }
-.heading-style-h1 { font-size: var(--_type---h1); line-height: var(--_leading---tight); }
 .heading-style-h2 { font-size: var(--_type---h2); line-height: 0.98; }
 .heading-style-h3 { font-size: var(--_type---h3); line-height: var(--_leading---snug); letter-spacing: -0.02em; font-variation-settings: "opsz" 60, "SOFT" 30; }
 .heading-style-h4 { font-size: var(--_type---h4); line-height: 1.25; letter-spacing: -0.01em; font-family: var(--_font---body); font-weight: 600; font-variation-settings: normal; }
@@ -94,7 +88,6 @@ body {
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
 .text-color-accent { color: var(--_color---accent); }
-.text-color-accent-strong { color: var(--_color---accent-text); }
 .text-color-muted { color: var(--_color---text-muted); }
 .text-size-large { font-size: var(--_type---body-large); line-height: 1.5; }
 .text-size-small { font-size: var(--_type---small); }
@@ -105,8 +98,6 @@ body {
   text-transform: uppercase;
   line-height: 1.4;
 }
-.max-width-medium { max-width: 36rem; }
-.max-width-large { max-width: 46rem; }
 
 /* ---------- Section header component ---------- */
 .section-header_component {
@@ -198,7 +189,6 @@ body {
   transition: transform var(--_duration---base) var(--_ease---out-expo);
 }
 .button:hover .button_icon { transform: rotate(-45deg); }
-.button-group { display: flex; flex-wrap: wrap; gap: var(--_space---gap-s); align-items: center; }
 
 /* Underline text link */
 .text-link {
