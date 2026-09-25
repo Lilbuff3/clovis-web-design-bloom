@@ -189,7 +189,10 @@ def test_live():
                 assert data["name"] == "Clovis Web Design", "Live manifest name mismatch"
                 print("PASS: Live site.webmanifest verified!")
             elif "boost" in u:
-                print(f"INFO: Live {u} status code 200.")
+                assert '<link rel="canonical" href="https://cloviswebdesign.com/boost" />' in content, "Live /boost missing canonical link"
+                assert "Conversion Boost" in content, "Live /boost missing Conversion Boost in title/content"
+                assert 'https://cloviswebdesign.com/boost#service' in content, "Live /boost missing service schema"
+                print("PASS: Live /boost endpoint verified with dedicated Canonical, Title & Schema!")
 
 if __name__ == "__main__":
     test_index_html()
