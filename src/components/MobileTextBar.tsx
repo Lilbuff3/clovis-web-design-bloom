@@ -32,10 +32,12 @@ export function MobileTextBar({
       return () => window.removeEventListener("scroll", onScroll);
     }
 
+    // Entries only report targets that changed, so remember which are on screen.
+    const onScreen = new Set<Element>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const isNearBottom = entries.some((entry) => entry.isIntersecting);
-        setVisible(!isNearBottom);
+        for (const e of entries) e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target);
+        setVisible(onScreen.size === 0);
       },
       { threshold: 0.02 }
     );
