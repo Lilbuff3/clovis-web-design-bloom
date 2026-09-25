@@ -104,6 +104,40 @@ def test_dist_html():
     assert len(data.get("@graph", [])) >= 4, "dist JSON-LD graph incomplete"
     print("PASS: dist/index.html verified completely.")
 
+def test_live():
+    import urllib.request
+    urls_to_test = [
+        "https://cloviswebdesign.com/",
+        "https://cloviswebdesign.com/robots.txt",
+        "https://cloviswebdesign.com/sitemap.xml",
+        "https://cloviswebdesign.com/site.webmanifest",
+        "https://cloviswebdesign.com/boost",
+    ]
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    for u in urls_to_test:
+        req = urllib.request.Request(u, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            code = resp.getcode()
+            content = resp.read().decode("utf-8")
+            assert code == 200, f"HTTP {code} on {u}"
+            if u == "https://cloviswebdesign.com/":
+                assert '<link rel="canonical" href="https://cloviswebdesign.com/" />' in content, "Live missing canonical"
+                assert '<meta name="geo.region" content="US-CA" />' in content, "Live missing geo"
+                assert 'application/ld+json' in content, "Live missing JSON-LD"
+                print("PASS: Live https://cloviswebdesign.com/ verified with Schema.org & Meta tags!")
+            elif "robots.txt" in u:
+                assert "Sitemap: https://cloviswebdesign.com/sitemap.xml" in content, "Live missing sitemap in robots"
+                print("PASS: Live robots.txt verified!")
+            elif "sitemap.xml" in u:
+                assert "https://cloviswebdesign.com/boost" in content, "Live sitemap missing boost"
+                print("PASS: Live sitemap.xml verified!")
+            elif "site.webmanifest" in u:
+                data = json.loads(content)
+                assert data["name"] == "Clovis Web Design", "Live manifest name mismatch"
+                print("PASS: Live site.webmanifest verified!")
+            elif "boost" in u:
+                print("PASS: Live /boost endpoint verified (HTTP 200)!")
+
 if __name__ == "__main__":
     test_index_html()
     test_sitemap()
@@ -111,4 +145,5 @@ if __name__ == "__main__":
     test_manifest()
     test_assets()
     test_dist_html()
+    test_live()
     print("\nALL SEO & GEO CHECKS PASSED 100%!")
