@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { care, faqs, letters, plans, SMS_LINK, VIDEO_SHADOW } from "../lib/data";
+import { care, faqs, letters, plans, studio, VIDEO_SHADOW } from "../data/content";
 
 export function Grower() {
   return (
@@ -53,7 +53,7 @@ export function Grower() {
           </blockquote>
 
           <div className="mt-12">
-            <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
+            <a href={studio.smsHref} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
               Text Adam directly →
             </a>
           </div>
@@ -126,7 +126,7 @@ export function Stand() {
                       <span className="font-semibold text-ink">Best for: </span>
                       {pl.for}
                     </p>
-                    <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon">
+                    <a href={studio.smsHref} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon">
                       Pick {pl.name} →
                     </a>
                   </div>

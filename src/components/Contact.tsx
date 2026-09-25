@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL, VIDEO_SHADOW } from "../lib/data";
+import { studio, VIDEO_SHADOW } from "../data/content";
 import { buildSmsHref } from "../utils/sms";
 import { SunMark } from "./Chrome";
 
@@ -34,7 +34,7 @@ export function Contact() {
     return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
   }, [name, trade, need, when]);
 
-  const smsHref = buildSmsHref(PHONE_TEL, message);
+  const smsHref = buildSmsHref(studio.smsHref, message);
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">
@@ -113,7 +113,7 @@ export function Contact() {
                 <div className="flex flex-col items-center border-b border-ink/10 bg-cream/80 px-4 pb-3 pt-8">
                   <SunMark className="h-12 w-12" />
                   <div className="mt-1 text-[13px] font-semibold">Adam · Clovis Web Design</div>
-                  <div className="font-mono text-[10px] text-ink/50">{PHONE_DISPLAY}</div>
+                  <div className="font-mono text-[10px] text-ink/50">{studio.phoneDisplay}</div>
                 </div>
                 <div className="flex min-h-[260px] flex-col justify-end gap-2 px-4 py-5">
                   <div
@@ -138,8 +138,8 @@ export function Contact() {
             <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon">
               Send this to Adam →
             </a>
-            <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
-              or just call {PHONE_DISPLAY}
+            <a href={studio.phoneHref} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
+              or just call {studio.phoneDisplay}
             </a>
           </div>
           <div className="mt-8 grid grid-cols-3 gap-2 text-center">
@@ -177,7 +177,7 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Reach</div>
-            <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
+            <a href={studio.smsHref} className="block hover:underline">Text {studio.phoneDisplay}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno & the Central Valley</span>
           </div>

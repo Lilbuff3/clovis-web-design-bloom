@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { studio, cases, faqs } from "../data/content";
+import { studio, boostCases, boostFaqs } from "../data/content";
 import { Header } from "./Header";
 import { Footer } from "./BespokeFooter";
 import { MobileTextBar } from "./MobileTextBar";
@@ -114,7 +114,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
               </div>
 
               <div className="boost-proof_grid">
-                {cases.map((c) => (
+                {boostCases.map((c) => (
                   <Reveal key={c.id} className="boost-proof_card">
                     <div className="boost-proof_metrics">
                       <div className="boost-proof_metric-item">
@@ -160,7 +160,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
               </div>
 
               <div className="boost-faq_grid">
-                {faqs.slice(0, 4).map((f) => (
+                {boostFaqs.slice(0, 4).map((f) => (
                   <div key={f.q} className="boost-faq_item">
                     <h3 className="heading-style-h4">{f.q}</h3>
                     <p className="text-color-muted text-size-small">{f.a}</p>

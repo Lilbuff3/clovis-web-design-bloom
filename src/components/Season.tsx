@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { compare, seasons } from "../lib/data";
+import { compare, seasons } from "../data/content";
 import { useSectionProgress } from "../lib/hooks";
 
 function Leaf({ x, y, flip, show, scale = 1 }: { x: number; y: number; flip?: boolean; show: boolean; scale?: number }) {

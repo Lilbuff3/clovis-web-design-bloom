@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, SMS_LINK } from "../lib/data";
+import { navLinks, studio } from "../data/content";
 import { CHAPTERS, getLenis, useChapter } from "../lib/smooth";
 
 export function SunMark({ className = "", progress = 1 }: { className?: string; progress?: number }) {
@@ -25,16 +25,6 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
     </svg>
   );
 }
-
-const links = [
-  { href: "#test", label: "The test", ids: ["test"] },
-  { href: "#harvest", label: "Harvest", ids: ["harvest"] },
-  { href: "/boost", label: "Boost™", ids: ["boost"], isBoost: true },
-  { href: "#season", label: "Process", ids: ["season", "compare"] },
-  { href: "#grower", label: "About", ids: ["grower", "rules"] },
-  { href: "#stand", label: "Prices", ids: ["stand", "letters"] },
-  { href: "#faq", label: "FAQ", ids: ["faq"] },
-];
 
 export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}) {
   const { y, p } = usePageScroll();
@@ -100,7 +90,7 @@ export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}
             </span>
           </a>
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
-            {links.map((l) => {
+            {navLinks.map((l) => {
               const active = (l.ids as readonly string[]).includes(chapter.id);
               if (l.isBoost) {
                 return (
@@ -131,7 +121,7 @@ export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}
           </div>
           <div className="flex items-center gap-2">
             <a
-              href={SMS_LINK}
+              href={studio.smsHref}
               data-magnetic="0.25"
               className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon sm:flex"
               data-cursor="label"
@@ -159,7 +149,7 @@ export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}
       >
         <div className="flex flex-col">
-          {links.map((l, i) => (
+          {navLinks.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
@@ -175,8 +165,8 @@ export function Nav({ onNavigate }: { onNavigate?: (path: string) => void } = {}
             </a>
           ))}
         </div>
-        <a href={SMS_LINK} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
-          Text {PHONE_DISPLAY}
+        <a href={studio.smsHref} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
+          Text {studio.phoneDisplay}
         </a>
       </div>
     </>

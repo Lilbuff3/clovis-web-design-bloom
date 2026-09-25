@@ -87,7 +87,7 @@ export function Header({
   }, [open]);
 
   const resolveHref = (href: string) => {
-    if (isBoostPage && href !== "#boost") return `/${href}`;
+    if (isBoostPage && href.startsWith("#")) return `/${href}`;
     return href;
   };
 
@@ -104,7 +104,7 @@ export function Header({
 
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
     if (isBoostPage) {
-      if (href === "#boost") {
+      if (href === "/boost") {
         e.preventDefault();
         const el = document.getElementById("boost-calc") || document.getElementById("boost");
         if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -174,7 +174,7 @@ export function Header({
                     <a
                       href={resolveHref(l.href)}
                       onClick={(e) => handleLinkClick(l.href, e)}
-                      className={`navbar_link ${l.href === "#boost" ? "is-boost-link" : ""}`}
+                      className={`navbar_link ${l.isBoost ? "is-boost-link" : ""}`}
                     >
                       <span className="navbar_link-inner" data-text={l.label}>
                         {l.label}

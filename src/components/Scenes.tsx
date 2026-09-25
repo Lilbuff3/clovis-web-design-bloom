@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "../lib/smooth";
-import { VIDEO_ORCHARD } from "../lib/data";
+import { VIDEO_ORCHARD } from "../data/content";
 
 /* ------------------------------------------------------------------ */
 /* Manifesto — words ripen as you scroll                               */

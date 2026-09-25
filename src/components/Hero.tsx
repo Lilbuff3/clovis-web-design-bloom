@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { prefersReducedMotion, usePageScroll } from "../lib/hooks";
 import { onIntroDone } from "../lib/smooth";
-import { PHONE_DISPLAY, SMS_LINK, VIDEO_ORCHARD } from "../lib/data";
+import { studio, VIDEO_ORCHARD } from "../data/content";
 
 function RotatingBadge() {
   return (
@@ -88,12 +88,12 @@ function StudioTicketCard() {
         </div>
       </dl>
       <a
-        href={SMS_LINK}
+        href={studio.smsHref}
         className="hero_card-foot flex items-center justify-between border-t border-dashed border-ink/20 pt-2 text-persimmon hover:text-ink transition-colors"
         data-cursor="hover"
       >
         <span className="font-mono text-[10px] uppercase tracking-widest font-semibold">Text</span>
-        <span className="hero_card-phone font-mono text-[12px] font-bold">{PHONE_DISPLAY}</span>
+        <span className="hero_card-phone font-mono text-[12px] font-bold">{studio.phoneDisplay}</span>
       </a>
     </div>
   );
@@ -253,7 +253,7 @@ export function Hero() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <a
-                href={SMS_LINK}
+                href={studio.smsHref}
                 data-magnetic="0.3"
                 className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon"
                 data-cursor="label"
@@ -265,7 +265,7 @@ export function Hero() {
                   </svg>
                 </span>
                 <span className="leading-tight">
-                  <span className="block text-[15px] font-medium">Text {PHONE_DISPLAY}</span>
+                  <span className="block text-[15px] font-medium">Text {studio.phoneDisplay}</span>
                   <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
                 </span>
               </a>
