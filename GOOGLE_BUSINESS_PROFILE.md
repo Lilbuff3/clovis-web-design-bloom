@@ -2,7 +2,8 @@
 **Business**: Clovis Web Design  
 **Founder**: Adam Youssef  
 **Phone**: (559) 575-3014  
-**Centroid**: Clovis, CA 93612 (36.8252° N, 119.7029° W)  
+**Centroid**: Clovis, CA 93619 (36.8346° N, 119.6596° W)  
+**Live profile**: [maps.google.com/?cid=5133720235419656762](https://maps.google.com/?cid=5133720235419656762) (linked from the site's JSON-LD `hasMap`/`sameAs`)  
 **Website**: [cloviswebdesign.com](https://cloviswebdesign.com)  
 
 ---
@@ -98,7 +99,7 @@ Upload these existing production assets into your GBP Photos tab:
 
 Keep NAP (*Name, Address, Phone*) 100% identical across all profiles:
 - **Business Name**: Clovis Web Design
-- **Address**: Clovis, CA 93612
+- **Address**: Clovis, CA 93619
 - **Phone**: (559) 575-3014
 - **Website**: `https://cloviswebdesign.com`
 

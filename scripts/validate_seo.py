@@ -48,6 +48,12 @@ def test_index_html():
     assert len(biz["review"]) == 2, "Expected 2 client reviews"
     assert "aggregateRating" not in biz, "Self-published aggregateRating earns no stars on LocalBusiness; keep it out"
     
+    # Linked to the Google Business Profile, with the same hours as the profile (Mon–Fri 8–6, Sat 8–4)
+    gbp = "https://maps.google.com/?cid=5133720235419656762"
+    assert biz["hasMap"] == gbp and gbp in biz["sameAs"], "Business entity not linked to its Google Business Profile"
+    hours = {(str(h["dayOfWeek"]), h["opens"], h["closes"]) for h in biz["openingHoursSpecification"]}
+    assert hours == {("['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']", "08:00", "18:00"), ("Saturday", "08:00", "16:00")}, f"Hours drifted from the GBP: {hours}"
+
     # Entity disambiguation: client sites must be in workExample, NOT sameAs
     assert "https://bigbrosdumpster.com" not in biz.get("sameAs", []), "Client site wrongly placed in sameAs"
     assert "https://www.kidneyspecialistinc.com" not in biz.get("sameAs", []), "Client site wrongly placed in sameAs"
