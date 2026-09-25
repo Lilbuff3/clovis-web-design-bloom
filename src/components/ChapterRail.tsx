@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getLenis } from "../lib/smooth";
 
 export interface Chapter {
   id: string;
@@ -76,9 +77,16 @@ export function ChapterRail({ chapters = HOME_CHAPTERS }: { chapters?: Chapter[]
 
   const scrollTo = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    const target = id === "top" ? 0 : document.getElementById(id);
+    if (target !== null) {
+      try {
+        const lenis = getLenis();
+        lenis.start();
+        lenis.scrollTo(target, { offset: id === "top" ? 0 : -8, duration: 1.5 });
+      } catch {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
       history.pushState(null, "", `#${id}`);
       setActiveId(id);
     }

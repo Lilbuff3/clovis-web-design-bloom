@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-/** Adds `.in` to every `.reveal` / `.line-mask` / [data-reveal] element as it enters the viewport. */
+/** Adds `.in` to every `.reveal` / `.line-mask` / `.reveal-mask` / [data-reveal] element as it enters the viewport. */
 export function useGlobalReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]")).filter(
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .reveal-mask, .clip-reveal, [data-reveal]")).filter(
       (el) => !el.closest("[data-intro]")
     );
     const io = new IntersectionObserver(

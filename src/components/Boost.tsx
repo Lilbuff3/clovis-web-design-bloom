@@ -152,9 +152,9 @@ export function Boost({
     const cleanUrl = siteUrl.trim() || "my website";
     const cleanTrade = userTrade.trim() ? ` for my ${userTrade.trim()} business` : "";
     if (calc.lostCallers === 0) {
-      return `Hi Adam — I ran the Boost calculator for ${cleanUrl}${cleanTrade}. My site is fast, but I'd love a quick 3-minute video teardown to see if my mobile call buttons and layout are converting at peak efficiency.`;
+      return `Hi, Adam! I ran the Boost calculator for ${cleanUrl}${cleanTrade}. My site is fast, but I'd love a quick 3-minute video teardown to see if my mobile call buttons and layout are converting at peak efficiency.`;
     }
-    return `Hi Adam — I ran the Boost calculator. My site loads in ~${speed.toFixed(1)}s and I estimate we're losing around $${calc.monthlyLostRevenue.toLocaleString()}/mo. Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}?`;
+    return `Hi, Adam! I ran the Boost calculator. My site loads in ~${speed.toFixed(1)}s and I estimate we're losing around $${calc.monthlyLostRevenue.toLocaleString()}/mo. Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}?`;
   }, [siteUrl, userTrade, speed, calc.monthlyLostRevenue, calc.lostCallers]);
 
   const teardownSmsHref = buildSmsHref(studio.smsHref, teardownMessage);

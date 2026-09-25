@@ -15,7 +15,7 @@ import { ScrollProgress } from "./components/primitives";
 import { MobileTextBar } from "./components/MobileTextBar";
 import { useGlobalReveal } from "./lib/hooks";
 import { useAutoRefresh, useChapterTriggers, useMagnetic, useParallax } from "./lib/motion";
-import { useChapter } from "./lib/smooth";
+import { getLenis, useChapter } from "./lib/smooth";
 
 function getPath() {
   if (typeof window === "undefined") return "/";
@@ -54,9 +54,18 @@ export default function App() {
       setCurrentPath(targetPath);
       if (hash) {
         setTimeout(() => {
-          const el = document.getElementById(hash);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
-        }, 60);
+          const target = hash === "top" ? 0 : document.getElementById(hash);
+          if (target !== null) {
+            try {
+              const lenis = getLenis();
+              lenis.start();
+              lenis.scrollTo(target, { offset: hash === "top" ? 0 : -8, duration: 1.5 });
+            } catch {
+              const el = document.getElementById(hash);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        }, 120);
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }

@@ -217,7 +217,7 @@ export function Hero() {
             <Kinetic text="Websites," start={0} />
           </span>
           <span className="line-mask block" style={{ ["--d" as string]: "200ms" }}>
-            <span className="flex items-center gap-[0.18em]">
+            <span className="inline-flex items-center gap-[0.18em]">
               <Kinetic text="grown" className="is-italic wonk text-persimmon" start={10} />
               <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle mx-1">
                 <video

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { PHONE_DISPLAY, PHONE_TEL, VIDEO_SHADOW } from "../lib/data";
+import { buildSmsHref } from "../utils/sms";
 import { SunMark } from "./Chrome";
 
 const needs = ["A one-page site ($500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
@@ -33,7 +34,7 @@ export function Contact() {
     return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
   }, [name, trade, need, when]);
 
-  const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(message)}`;
+  const smsHref = buildSmsHref(PHONE_TEL, message);
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">

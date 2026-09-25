@@ -230,7 +230,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
       </main>
 
       <Footer />
-      <MobileTextBar smsMessage="Hi Adam — saw the Conversion Boost page. I'd like to check how fast my website can be built and see your schedule." />
+      <MobileTextBar smsMessage="Hi, Adam! Saw the Conversion Boost page. I'd like to check how fast my website can be built and see your schedule." />
     </div>
   );
 }

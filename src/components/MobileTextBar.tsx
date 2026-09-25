@@ -3,7 +3,7 @@ import { studio } from "../data/content";
 import { buildSmsHref } from "../utils/sms";
 
 export function MobileTextBar({
-  smsMessage = "Hi Adam — saw your site, wanted to ask about a website for my business.",
+  smsMessage = "Hi, Adam! Saw your site, wanted to ask about a website for my business.",
 }: {
   smsMessage?: string;
 } = {}) {
@@ -13,7 +13,7 @@ export function MobileTextBar({
     // Hide bar when user reaches the contact section, boost closing, or footer to prevent overlap
     const contactEl = document.getElementById("contact");
     const closingEl = document.getElementById("boost-closing");
-    const footerEl = document.querySelector(".footer_component");
+    const footerEl = document.querySelector(".footer_component") || document.querySelector("footer");
 
     if (!contactEl && !closingEl && !footerEl) return;
 
