@@ -16,6 +16,7 @@ import { MobileTextBar } from "./components/MobileTextBar";
 import { useGlobalReveal } from "./lib/hooks";
 import { useAutoRefresh, useChapterTriggers, useMagnetic, useParallax } from "./lib/motion";
 import { getLenis, useChapter } from "./lib/smooth";
+import { useSilentClean } from "./utils/utm";
 
 function getPath() {
   if (typeof window === "undefined") return "/";
@@ -85,6 +86,8 @@ function updateSeo(path: string) {
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getPath);
+
+  useSilentClean(currentPath);
 
   useEffect(() => {
     updateSeo(currentPath);
