@@ -188,7 +188,7 @@ export function RulesGallery() {
         <div
           ref={track}
           data-cursor="Scroll"
-          className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:w-max md:snap-none md:gap-8 md:overflow-visible md:px-[6vw] md:pb-0"
+          className="flex snap-x snap-mandatory scroll-px-5 items-stretch gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:w-max md:snap-none md:gap-8 md:overflow-visible md:px-[6vw] md:pb-0"
         >
           <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-center md:w-[40vw] md:pr-10">
             <div className="font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">Rules of the orchard</div>

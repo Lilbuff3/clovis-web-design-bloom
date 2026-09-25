@@ -79,7 +79,7 @@ export function Stand() {
         {/* wooden rail */}
         <div className="relative mt-16">
           <div className="absolute inset-x-0 top-0 h-3 rounded-full bg-[#b98a5a] shadow-[inset_0_-3px_0_rgba(0,0,0,.15)]" />
-          <div className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-10 pt-3 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:gap-10">
+          <div className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 pb-10 pt-3 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:gap-10">
             {plans.map((pl, i) => (
               <div key={pl.code} className="swipe-card group flex w-[82vw] shrink-0 snap-start flex-col items-center md:w-auto" style={{ perspective: 800 }}>
                 <div className="h-10 w-[2px] bg-ink/50 md:h-14" />

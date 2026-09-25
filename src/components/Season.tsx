@@ -127,7 +127,7 @@ export function Season() {
               const el = e.currentTarget;
               setSwipeP(el.scrollLeft / (el.scrollWidth - el.clientWidth || 1));
             }}
-            className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:px-8 lg:col-span-7 lg:mx-0 lg:block lg:space-y-[18vh] lg:overflow-visible lg:px-0 lg:py-[8vh]"
+            className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:scroll-px-8 md:px-8 lg:col-span-7 lg:mx-0 lg:block lg:space-y-[18vh] lg:overflow-visible lg:px-0 lg:py-[8vh]"
           >
             {seasons.map((s, i) => (
               // .reveal sits on a wrapper whose className never changes: React rewriting the

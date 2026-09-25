@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { studio, boostCases, boostFaqs } from "../data/content";
 import { Header } from "./Header";
 import { Footer } from "./BespokeFooter";
@@ -30,13 +30,6 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
     document.title = "Conversion Boost™ — Clovis Web Design | Mobile Speed & Local SEO Audit";
   }, []);
 
-  const currentMonthYear = useMemo(() => {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "long",
-      year: "numeric",
-    }).format(new Date());
-  }, []);
-
   return (
     <div className="page-wrapper is-boost-page">
       <a href="#boost-calc" className="skip-link">
@@ -60,7 +53,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
                 <div className="boost-hero_meta text-style-eyebrow">
                   <span>Special Project · Central Valley Businesses</span>
                   <span className="status_dot" aria-hidden="true" />
-                  <span>{currentMonthYear} Intake</span>
+                  <span>$500 launch price</span>
                 </div>
 
                 <h1 id="boost-hero-heading" className="heading-style-display boost-hero_heading">
@@ -70,7 +63,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
 
                 <p className="text-size-large boost-hero_lede">
                   Most local websites in Fresno and Clovis are built on bloated 5MB templates that freeze on two bars of
-                  cell reception. We hand-build ultra-fast sites that score <strong>100/100 on Google PageSpeed</strong>,
+                  cell reception. I hand-build ultra-fast sites that score <strong>100/100 on Google PageSpeed</strong>,
                   put your phone number right under the customer’s thumb, and pay for themselves in days.
                 </p>
 
@@ -196,7 +189,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
                 <div className="boost_closing-inner">
                   <div className="boost_closing-scarcity text-style-eyebrow">
                     <span className="status_dot" aria-hidden="true" />
-                    <span>Intake Cap: Only 2 Client Spots Left for {currentMonthYear}</span>
+                    <span>$500 for the first five Central Valley businesses</span>
                   </div>
 
                   <h2 className="heading-style-h2 boost_closing-heading">
@@ -205,7 +198,7 @@ export function BoostPage({ onNavigate }: { onNavigate: (path: string) => void }
                   </h2>
 
                   <p className="text-size-large boost_closing-lede text-color-muted">
-                    $500 one-off launch build. Live in 7 days. You own the code, domain, and hosting on day one.
+                    $500 one-off launch build. Live in a week. You own the code, domain, and hosting on day one.
                     Zero monthly hostage fees, zero lock-in, and guaranteed 100/100 PageSpeed.
                   </p>
 

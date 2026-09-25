@@ -31,6 +31,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
         <div
           className="relative mx-auto max-w-xl"
           onPointerMove={(e) => {
+            // Mouse only: a finger swiping the row would leave the frame stuck at an angle.
+            if (e.pointerType !== "mouse") return;
             const r = e.currentTarget.getBoundingClientRect();
             setTilt({ x: (e.clientX - r.left) / r.width - 0.5, y: (e.clientY - r.top) / r.height - 0.5 });
           }}
@@ -78,7 +80,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                   href={c.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-1.5 text-[10px] font-semibold text-persimmon hover:underline flex-shrink-0"
+                  className="tap-target relative ml-1.5 text-[10px] font-semibold text-persimmon hover:underline flex-shrink-0"
                 >
                   Live ↗
                 </a>
@@ -106,7 +108,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                     href={c.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute bottom-3 right-3 rounded-full bg-ink/90 px-3 py-1.5 font-mono text-[11px] font-medium text-cream shadow-lg backdrop-blur-sm transition-transform hover:scale-105"
+                    className="tap-target absolute bottom-3 right-3 rounded-full bg-ink/90 px-3 py-1.5 font-mono text-[11px] font-medium text-cream shadow-lg backdrop-blur-sm transition-transform hover:scale-105"
                   >
                     Open live website ↗
                   </a>
@@ -132,7 +134,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <button
                   type="button"
                   onClick={() => setViewMode("web")}
-                  className={`rounded-full px-3 py-1 text-xs transition ${
+                  className={`tap-target relative rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "web"
                       ? "bg-ink font-medium text-cream shadow-sm"
                       : "text-ink/65 hover:text-ink"
@@ -143,7 +145,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <button
                   type="button"
                   onClick={() => setViewMode("photo")}
-                  className={`rounded-full px-3 py-1 text-xs transition ${
+                  className={`tap-target relative rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "photo"
                       ? "bg-ink font-medium text-cream shadow-sm"
                       : "text-ink/65 hover:text-ink"
@@ -226,7 +228,7 @@ export function Harvest() {
           </p>
         </div>
 
-        <div className="-mx-5 mt-14 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:px-8 lg:mx-0 lg:mt-20 lg:block lg:space-y-32 lg:overflow-visible lg:px-0 lg:pb-0">
+        <div className="-mx-5 mt-14 flex snap-x snap-mandatory scroll-px-5 items-start gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:scroll-px-8 md:px-8 lg:mx-0 lg:mt-20 lg:block lg:space-y-32 lg:overflow-visible lg:px-0 lg:pb-0">
           {cases.map((c, i) => (
             <CaseSpread key={c.no} c={c} flip={i % 2 === 1} />
           ))}
