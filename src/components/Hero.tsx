@@ -212,24 +212,24 @@ export function Hero() {
             loaded ? "in" : ""
           }`}
         >
-          <span className="sr-only">Websites, grown by hand in Clovis.</span>
+          <span className="sr-only">Web design, grown by hand in Clovis.</span>
           <span className="line-mask block" style={{ ["--d" as string]: "80ms" }}>
-            <Kinetic text="Websites," start={0} />
+            <Kinetic text="Web design," start={0} />
           </span>
           <span className="line-mask block" style={{ ["--d" as string]: "200ms" }}>
             <span className="inline-flex items-center gap-[0.18em]">
-              <Kinetic text="grown" className="is-italic wonk text-persimmon" start={10} />
+              <Kinetic text="grown" className="is-italic wonk text-persimmon" start={12} />
               <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle mx-1">
                 <AmbientVideo {...VIDEO_ORCHARD} className="h-full w-full object-cover" />
               </span>
-              <Kinetic text="by" start={17} />
+              <Kinetic text="by" start={19} />
             </span>
           </span>
           <span className="line-mask block" style={{ ["--d" as string]: "320ms" }}>
             <span>
-              <Kinetic text="hand " start={20} />
-              <Kinetic text="in " className="is-italic wonk" start={25} />
-              <Kinetic text="Clovis." start={28} />
+              <Kinetic text="hand " start={22} />
+              <Kinetic text="in " className="is-italic wonk" start={27} />
+              <Kinetic text="Clovis." start={30} />
             </span>
           </span>
         </h1>
@@ -264,7 +264,7 @@ export function Hero() {
               </a>
               <a
                 href="#test"
-                className="group flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4 text-ink hover:text-persimmon transition-colors"
+                className="group flex items-center gap-2 py-3 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4 text-ink hover:text-persimmon transition-colors"
               >
                 run the four-second test
                 <span className="transition group-hover:translate-y-1">↓</span>

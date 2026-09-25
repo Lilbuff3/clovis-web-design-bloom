@@ -94,7 +94,7 @@ export const CHAPTERS = [
   { id: "valley", name: "The Valley", bg: "#fcf8f0" },
   { id: "test", name: "The test", bg: "#f7f0e3" },
   { id: "harvest", name: "Harvest", bg: "#f3e9d6" },
-  { id: "boost", name: "Boost Engine", bg: "#fbf7f0" },
+  { id: "boost", name: "Free teardown", bg: "#fbf7f0" },
   { id: "season", name: "Process", bg: "#fcf8f0" },
   { id: "compare", name: "Farm stand?", bg: "#dbe5cf" },
   { id: "grower", name: "The grower", bg: "#f7f0e3" },
@@ -121,6 +121,7 @@ export function useChapter() {
       subs.add(cb);
       return () => subs.delete(cb);
     },
+    () => current,
     () => current
   );
 }

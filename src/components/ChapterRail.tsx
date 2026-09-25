@@ -12,7 +12,7 @@ export const HOME_CHAPTERS: Chapter[] = [
   { id: "manifesto", num: "01", name: "Manifesto" },
   { id: "test", num: "02", name: "The Race" },
   { id: "harvest", num: "03", name: "Harvest" },
-  { id: "boost", num: "04", name: "Boost Engine" },
+  { id: "boost", num: "04", name: "Free teardown" },
   { id: "season", num: "05", name: "7-Day Path" },
   { id: "compare", num: "06", name: "Contrast" },
   { id: "grower", num: "07", name: "The Grower" },

@@ -41,8 +41,8 @@
 
   /* ---------- TYPOGRAPHY ---------- */
   --_font---display: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --_font---body: "Instrument Sans", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --_font---mono: "JetBrains Mono", "DM Mono", ui-monospace, monospace;
+  --_font---body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --_font---mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Fluid type scale — clamp(min, preferred, max) mapped 360px → 1600px */
   --_type---display: clamp(3.4rem, 1.2rem + 9.6vw, 11.5rem);

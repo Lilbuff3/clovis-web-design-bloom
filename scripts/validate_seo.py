@@ -46,7 +46,7 @@ def test_index_html():
     assert any(a.get("@type") == "GeoCircle" for a in biz["areaServed"]), "Missing GeoCircle in areaServed"
     assert len(biz["hasOfferCatalog"]["itemListElement"]) >= 4, "Expected at least 4 offers"
     assert len(biz["review"]) == 2, "Expected 2 client reviews"
-    assert biz["aggregateRating"]["ratingValue"] == "5.0", "Expected 5.0 aggregate rating"
+    assert "aggregateRating" not in biz, "Self-published aggregateRating earns no stars on LocalBusiness; keep it out"
     
     # Entity disambiguation: client sites must be in workExample, NOT sameAs
     assert "https://bigbrosdumpster.com" not in biz.get("sameAs", []), "Client site wrongly placed in sameAs"

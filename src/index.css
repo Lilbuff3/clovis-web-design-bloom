@@ -18,8 +18,8 @@
   --color-blush: #f7d3bf;
 
   --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
-  --font-sans: "Instrument Sans", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "DM Mono", ui-monospace, monospace;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --animate-spin-slow: spin 22s linear infinite;
   --animate-marquee: marquee 38s linear infinite;

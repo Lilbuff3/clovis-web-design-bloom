@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-boost-html.js",
+    "build": "vite build && node scripts/generate-boost-html.js && node scripts/prerender.js",
     "preview": "vite preview",
     "test": "node --test scripts/test_utm.js"
   },

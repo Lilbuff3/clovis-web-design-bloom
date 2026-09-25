@@ -33,7 +33,7 @@ const DIAGNOSTIC_PILLARS = [
     num: "02",
     tag: "Mobile Ergonomics",
     title: "The Natural Thumb-Zone Call Trigger",
-    loss: "Burying your phone number inside a hamburger menu or behind a 12-field form causes 68% of local mobile prospects to tap back and call the next competitor.",
+    loss: "Burying your phone number inside a hamburger menu or behind a 12-field form sends local mobile prospects back to call the next competitor.",
     fix: "Persistent, one-tap 'Text Adam' and 'Call Now' triggers positioned precisely where a contractor or homeowner's thumb rests.",
     metric: "1-Tap SMS / Call",
   },
@@ -57,7 +57,7 @@ const DIAGNOSTIC_PILLARS = [
     num: "05",
     tag: "Local Geo-Search",
     title: "Outranking National Middlemen",
-    loss: "National lead brokers (Angi, Yelp, Thumbtack) siphon high-intent local calls and resell your own neighborhood leads back to you at 30–50% margin.",
+    loss: "National lead brokers (Angi, Yelp, Thumbtack) siphon high-intent local calls and resell your own neighborhood leads back to you.",
     fix: "Dedicated geo-targeted service area structures with rich Schema.org local business markup to secure high-intent #1 spots.",
     metric: "#1 Local Intent",
   },
@@ -86,14 +86,6 @@ export function Boost({
   const speedId = useId();
   const urlId = useId();
   const tradeId = useId();
-
-  // Dynamic month for genuine scarcity
-  const currentMonthYear = useMemo(() => {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "long",
-      year: "numeric",
-    }).format(new Date());
-  }, []);
 
   // Behavioral calculation based on Google & Akamai conversion research
   const calc = useMemo(() => {
@@ -151,11 +143,15 @@ export function Boost({
   const teardownMessage = useMemo(() => {
     const cleanUrl = siteUrl.trim() || "my website";
     const cleanTrade = userTrade.trim() ? ` for my ${userTrade.trim()} business` : "";
+    // The homepage has no calculator, so don't quote its default numbers there.
+    if (!isStandalone) {
+      return `Hi, Adam! Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}? I'd like to see my mobile speed and where customers are bouncing.`;
+    }
     if (calc.lostCallers === 0) {
       return `Hi, Adam! I ran the Boost calculator for ${cleanUrl}${cleanTrade}. My site is fast, but I'd love a quick 3-minute video teardown to see if my mobile call buttons and layout are converting at peak efficiency.`;
     }
     return `Hi, Adam! I ran the Boost calculator. My site loads in ~${speed.toFixed(1)}s and I estimate we're losing around $${calc.monthlyLostRevenue.toLocaleString()}/mo. Could you do a free 3-minute video teardown for ${cleanUrl}${cleanTrade}?`;
-  }, [siteUrl, userTrade, speed, calc.monthlyLostRevenue, calc.lostCallers]);
+  }, [isStandalone, siteUrl, userTrade, speed, calc.monthlyLostRevenue, calc.lostCallers]);
 
   const teardownSmsHref = buildSmsHref(studio.smsHref, teardownMessage);
 
@@ -202,343 +198,347 @@ export function Boost({
             }
           />
 
-          {/* Scarcity & Capacity Alert Pill */}
-          <Reveal className="boost_scarcity-bar">
-            <div className="boost_scarcity-inner">
-              <span className="boost_scarcity-indicator" aria-hidden="true" />
-              <div className="boost_scarcity-text">
-                <strong>Current Studio Intake ({currentMonthYear}):</strong> Only 2 client build spots open for this month. First come, first served.
-              </div>
-              <a href="#fees" className="boost_scarcity-link">
-                $500 Launch Offer details →
-              </a>
-            </div>
-          </Reveal>
+          {isStandalone && (
+            <>
+              {/* Scarcity & Capacity Alert Pill */}
+              <Reveal className="boost_scarcity-bar">
+                <div className="boost_scarcity-inner">
+                  <span className="boost_scarcity-indicator" aria-hidden="true" />
+                  <div className="boost_scarcity-text">
+                    <strong>Launch price:</strong> $500 holds for the first five Central Valley businesses. After that it's $750.
+                  </div>
+                  <a href="/#stand" className="boost_scarcity-link">
+                    See every price →
+                  </a>
+                </div>
+              </Reveal>
 
-          {/* Interactive Cost-of-Inactivity & Revenue Leak Calculator */}
-          <Reveal id="boost-calc" className="boost_calculator-card">
-            <div className="boost_calc-header">
-              <div className="boost_calc-badge text-style-eyebrow">Interactive Psychological Engine</div>
-              <h3 className="heading-style-h3">Cost-of-Inactivity &amp; Revenue Leak Calculator</h3>
-              <p className="text-color-muted text-size-small">
-                Grounded in Google &amp; Akamai behavioral conversion data. Select a trade preset or adjust the sliders to
-                calculate your actual revenue bleed.
-              </p>
+              {/* Interactive Cost-of-Inactivity & Revenue Leak Calculator */}
+              <Reveal id="boost-calc" className="boost_calculator-card">
+                <div className="boost_calc-header">
+                  <div className="boost_calc-badge text-style-eyebrow">Try your numbers</div>
+                  <h3 className="heading-style-h3">Cost-of-Inactivity &amp; Revenue Leak Calculator</h3>
+                  <p className="text-color-muted text-size-small">
+                    Grounded in Google &amp; Akamai behavioral conversion data. Select a trade preset or adjust the sliders to
+                    calculate your actual revenue bleed.
+                  </p>
 
-              {/* Trade Presets */}
-              <div className="boost_presets-row">
-                <span className="text-style-eyebrow text-color-muted">Quick trade presets:</span>
-                <div className="boost_presets-list">
-                  {PRESETS.map((p) => (
-                    <button
-                      key={p.name}
-                      type="button"
-                      className={`boost_preset-btn ${activePreset === p.name ? "is-active" : ""}`}
-                      onClick={() => applyPreset(p)}
-                    >
-                      <span aria-hidden="true">{p.icon}</span>
-                      <span>{p.name}</span>
-                    </button>
+                  {/* Trade Presets */}
+                  <div className="boost_presets-row">
+                    <span className="text-style-eyebrow text-color-muted">Quick trade presets:</span>
+                    <div className="boost_presets-list">
+                      {PRESETS.map((p) => (
+                        <button
+                          key={p.name}
+                          type="button"
+                          className={`boost_preset-btn ${activePreset === p.name ? "is-active" : ""}`}
+                          onClick={() => applyPreset(p)}
+                        >
+                          <span aria-hidden="true">{p.icon}</span>
+                          <span>{p.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="boost_calc-grid">
+                  {/* Sliders Column */}
+                  <div className="boost_calc-controls">
+                    {/* Control 1: Customer Value */}
+                    <div className="boost_control-group">
+                      <div className="boost_control-header">
+                        <label htmlFor={ticketId} className="boost_control-label">
+                          Average Customer / Job Value
+                        </label>
+                        <div className="boost_stepper-row">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setTicketValue((v) => Math.max(150, v - 100));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Decrease customer value by $100"
+                          >
+                            −
+                          </button>
+                          <span className="boost_control-value font-mono">
+                            ${ticketValue.toLocaleString()}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setTicketValue((v) => Math.min(5000, v + 100));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Increase customer value by $100"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <input
+                        id={ticketId}
+                        type="range"
+                        min="150"
+                        max="5000"
+                        step="50"
+                        value={ticketValue}
+                        onChange={(e) => {
+                          setTicketValue(Number(e.target.value));
+                          setActivePreset(null);
+                        }}
+                        className="boost_slider"
+                        style={{ "--p": `${((ticketValue - 150) / (5000 - 150)) * 100}%` } as CSSProperties}
+                      />
+                      <div className="boost_control-hints text-style-eyebrow">
+                        <span>$150 (Maintenance)</span>
+                        <span>$2,500</span>
+                        <span>$5,000+ (Big project)</span>
+                      </div>
+                    </div>
+
+                    {/* Control 2: Monthly Visitors */}
+                    <div className="boost_control-group">
+                      <div className="boost_control-header">
+                        <label htmlFor={visitorsId} className="boost_control-label">
+                          Estimated Monthly Site Visitors
+                        </label>
+                        <div className="boost_stepper-row">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setVisitors((v) => Math.max(100, v - 100));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Decrease visitors by 100"
+                          >
+                            −
+                          </button>
+                          <span className="boost_control-value font-mono">
+                            {visitors.toLocaleString()} <small className="text-color-muted">visitors/mo</small>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setVisitors((v) => Math.min(8000, v + 100));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Increase visitors by 100"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <input
+                        id={visitorsId}
+                        type="range"
+                        min="100"
+                        max="8000"
+                        step="50"
+                        value={visitors}
+                        onChange={(e) => {
+                          setVisitors(Number(e.target.value));
+                          setActivePreset(null);
+                        }}
+                        className="boost_slider"
+                        style={{ "--p": `${((visitors - 100) / (8000 - 100)) * 100}%` } as CSSProperties}
+                      />
+                      <div className="boost_control-hints text-style-eyebrow">
+                        <span>100 local</span>
+                        <span>4,000</span>
+                        <span>8,000+ high traffic</span>
+                      </div>
+                    </div>
+
+                    {/* Control 3: Current Mobile Speed */}
+                    <div className="boost_control-group">
+                      <div className="boost_control-header">
+                        <label htmlFor={speedId} className="boost_control-label">
+                          Current Mobile Load Speed
+                        </label>
+                        <div className="boost_stepper-row">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSpeed((v) => Math.max(0.8, Number((v - 0.2).toFixed(1))));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Make speed 0.2s faster"
+                          >
+                            −
+                          </button>
+                          <span className={`boost_control-value font-mono is-${calc.severity}`}>
+                            {speed.toFixed(1)}s <small className="text-color-muted">(Central Valley LTE)</small>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSpeed((v) => Math.min(7.5, Number((v + 0.2).toFixed(1))));
+                              setActivePreset(null);
+                            }}
+                            className="boost_step-btn"
+                            aria-label="Make speed 0.2s slower"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <input
+                        id={speedId}
+                        type="range"
+                        min="0.8"
+                        max="7.5"
+                        step="0.1"
+                        value={speed}
+                        onChange={(e) => {
+                          setSpeed(Number(e.target.value));
+                          setActivePreset(null);
+                        }}
+                        className="boost_slider"
+                        style={{ "--p": `${((speed - 0.8) / (7.5 - 0.8)) * 100}%` } as CSSProperties}
+                      />
+                      <div className="boost_control-hints text-style-eyebrow">
+                        <span className="text-color-highlight">0.8s (Clovis Hand-Built)</span>
+                        <span>4.0s (Average WP)</span>
+                        <span className="text-color-accent">7.5s (Bloated Template)</span>
+                      </div>
+                    </div>
+
+                    {/* Severity Status Box */}
+                    <div className={`boost_status-box is-${calc.severity}`}>
+                      <div className="boost_status-title">{calc.severityLabel}</div>
+                      <p className="boost_status-body text-size-small">{calc.severityDesc}</p>
+                    </div>
+                  </div>
+
+                  {/* Output & Psychological Loss Ledger */}
+                  <div className="boost_calc-results">
+                    <div className="boost_results-inner">
+                      <div className="boost_results-badge text-style-eyebrow">What the wait costs you</div>
+
+                      {/* Primary Loss Metric */}
+                      {calc.lostCallers === 0 ? (
+                        <div className="boost_loss-block is-optimal">
+                          <div className="text-style-eyebrow text-color-highlight">Peak Efficiency Benchmark</div>
+                          <div className="boost_loss-amount is-zero">
+                            $0 <span className="boost_loss-period">/ month lost</span>
+                          </div>
+                          <div className="boost_loss-annual font-mono text-size-small text-color-highlight">
+                            Retaining all ~{calc.optimalCallers} estimated callers each month
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="boost_loss-block">
+                          <div className="text-style-eyebrow text-color-muted">Estimated Revenue Leaking to Competitors</div>
+                          <div className="boost_loss-amount">
+                            ${calc.monthlyLostRevenue.toLocaleString()}
+                            <span className="boost_loss-period"> / month</span>
+                          </div>
+                          <div className="boost_loss-annual font-mono text-size-small">
+                            ${calc.annualLostRevenue.toLocaleString()} projected over 12 months
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Callers Breakdown */}
+                      <div className="boost_breakdown-grid">
+                        <div className="boost_breakdown-item">
+                          <div className={`boost_breakdown-num font-mono ${calc.lostCallers === 0 ? "text-color-highlight" : "text-color-accent"}`}>
+                            {calc.lostCallers === 0 ? "0 Lost" : `~${calc.lostCallers}`}
+                          </div>
+                          <div className="boost_breakdown-label text-size-small">
+                            {calc.lostCallers === 0 ? "100% of mobile callers retained" : "Qualified callers lost every month"}
+                          </div>
+                        </div>
+                        <div className="boost_breakdown-item">
+                          <div className="boost_breakdown-num font-mono text-color-highlight">
+                            {calc.lostCallers === 0 ? "100/100" : `${calc.roiMultiple}×`}
+                          </div>
+                          <div className="boost_breakdown-label text-size-small">
+                            {calc.lostCallers === 0 ? "Perfect Google PageSpeed target" : "12-Mo ROI multiple on a $500 build"}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* The Clovis Solution Comparison */}
+                      <div className="boost_comparison-box">
+                        <div className="boost_comp-row">
+                          <span className="boost_comp-label">Current template speed:</span>
+                          <span className="boost_comp-val font-mono">{speed.toFixed(1)}s mobile lag</span>
+                        </div>
+                        <div className="boost_comp-row is-winner">
+                          <span className="boost_comp-label">Clovis Hand-Built speed:</span>
+                          <span className="boost_comp-val font-mono">0.7s · PageSpeed 100 ✓</span>
+                        </div>
+                        <p className="boost_comp-foot text-size-small text-color-muted">
+                          At the <strong>$500 launch price</strong>, your new site pays for itself with the{" "}
+                          <span className="text-color-primary font-medium">very first saved customer</span>.
+                        </p>
+                      </div>
+
+                      <a
+                        href="#teardown"
+                        className="button is-accent boost_calc-cta"
+                        data-cursor="label"
+                        data-cursor-label="Audit"
+                      >
+                        <span>Request Free 3-Min Video Teardown</span>
+                        <ArrowIcon size={13} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* 5-Point Psychological Diagnostic Breakdown */}
+              <div id="boost-diag" className="boost_diagnostic-section">
+                <div className="boost_diag-intro">
+                  <span className="text-style-eyebrow text-color-accent">Five places sites lose people</span>
+                  <h3 className="heading-style-h3">
+                    Why most template sites <span className="text-italic-serif">lose the call.</span>
+                  </h3>
+                  <p className="text-color-muted">
+                    Visitors decide whether they trust a local business in under four seconds. Here's where cheap templates
+                    lose people, and what I build instead.
+                  </p>
+                </div>
+
+                <div className="boost_diag-grid">
+                  {DIAGNOSTIC_PILLARS.map((p, i) => (
+                    <Reveal key={p.num} index={i} className="boost_diag-card">
+                      <div className="boost_diag-head">
+                        <span className="boost_diag-num font-mono">{p.num}</span>
+                        <span className="boost_diag-tag text-style-eyebrow">{p.tag}</span>
+                        <span className="boost_diag-badge font-mono">{p.metric}</span>
+                      </div>
+                      <h4 className="heading-style-h4">{p.title}</h4>
+                      <div className="boost_diag-body">
+                        <div className="boost_diag-loss">
+                          <strong className="text-color-accent">Where it loses people:</strong> {p.loss}
+                        </div>
+                        <div className="boost_diag-fix">
+                          <strong className="text-color-brand-soft">What I build:</strong> {p.fix}
+                        </div>
+                      </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>
-            </div>
-
-            <div className="boost_calc-grid">
-              {/* Sliders Column */}
-              <div className="boost_calc-controls">
-                {/* Control 1: Customer Value */}
-                <div className="boost_control-group">
-                  <div className="boost_control-header">
-                    <label htmlFor={ticketId} className="boost_control-label">
-                      Average Customer / Job Value
-                    </label>
-                    <div className="boost_stepper-row">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setTicketValue((v) => Math.max(150, v - 100));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Decrease customer value by $100"
-                      >
-                        −
-                      </button>
-                      <span className="boost_control-value font-mono">
-                        ${ticketValue.toLocaleString()}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setTicketValue((v) => Math.min(5000, v + 100));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Increase customer value by $100"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <input
-                    id={ticketId}
-                    type="range"
-                    min="150"
-                    max="5000"
-                    step="50"
-                    value={ticketValue}
-                    onChange={(e) => {
-                      setTicketValue(Number(e.target.value));
-                      setActivePreset(null);
-                    }}
-                    className="boost_slider"
-                    style={{ "--p": `${((ticketValue - 150) / (5000 - 150)) * 100}%` } as CSSProperties}
-                  />
-                  <div className="boost_control-hints text-style-eyebrow">
-                    <span>$150 (Maintenance)</span>
-                    <span>$2,500</span>
-                    <span>$5,000+ (Big project)</span>
-                  </div>
-                </div>
-
-                {/* Control 2: Monthly Visitors */}
-                <div className="boost_control-group">
-                  <div className="boost_control-header">
-                    <label htmlFor={visitorsId} className="boost_control-label">
-                      Estimated Monthly Site Visitors
-                    </label>
-                    <div className="boost_stepper-row">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setVisitors((v) => Math.max(100, v - 100));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Decrease visitors by 100"
-                      >
-                        −
-                      </button>
-                      <span className="boost_control-value font-mono">
-                        {visitors.toLocaleString()} <small className="text-color-muted">visitors/mo</small>
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setVisitors((v) => Math.min(8000, v + 100));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Increase visitors by 100"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <input
-                    id={visitorsId}
-                    type="range"
-                    min="100"
-                    max="8000"
-                    step="50"
-                    value={visitors}
-                    onChange={(e) => {
-                      setVisitors(Number(e.target.value));
-                      setActivePreset(null);
-                    }}
-                    className="boost_slider"
-                    style={{ "--p": `${((visitors - 100) / (8000 - 100)) * 100}%` } as CSSProperties}
-                  />
-                  <div className="boost_control-hints text-style-eyebrow">
-                    <span>100 local</span>
-                    <span>4,000</span>
-                    <span>8,000+ high traffic</span>
-                  </div>
-                </div>
-
-                {/* Control 3: Current Mobile Speed */}
-                <div className="boost_control-group">
-                  <div className="boost_control-header">
-                    <label htmlFor={speedId} className="boost_control-label">
-                      Current Mobile Load Speed
-                    </label>
-                    <div className="boost_stepper-row">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSpeed((v) => Math.max(0.8, Number((v - 0.2).toFixed(1))));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Make speed 0.2s faster"
-                      >
-                        −
-                      </button>
-                      <span className={`boost_control-value font-mono is-${calc.severity}`}>
-                        {speed.toFixed(1)}s <small className="text-color-muted">(Central Valley LTE)</small>
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSpeed((v) => Math.min(7.5, Number((v + 0.2).toFixed(1))));
-                          setActivePreset(null);
-                        }}
-                        className="boost_step-btn"
-                        aria-label="Make speed 0.2s slower"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <input
-                    id={speedId}
-                    type="range"
-                    min="0.8"
-                    max="7.5"
-                    step="0.1"
-                    value={speed}
-                    onChange={(e) => {
-                      setSpeed(Number(e.target.value));
-                      setActivePreset(null);
-                    }}
-                    className="boost_slider"
-                    style={{ "--p": `${((speed - 0.8) / (7.5 - 0.8)) * 100}%` } as CSSProperties}
-                  />
-                  <div className="boost_control-hints text-style-eyebrow">
-                    <span className="text-color-highlight">0.8s (Clovis Hand-Built)</span>
-                    <span>4.0s (Average WP)</span>
-                    <span className="text-color-accent">7.5s (Bloated Template)</span>
-                  </div>
-                </div>
-
-                {/* Severity Status Box */}
-                <div className={`boost_status-box is-${calc.severity}`}>
-                  <div className="boost_status-title">{calc.severityLabel}</div>
-                  <p className="boost_status-body text-size-small">{calc.severityDesc}</p>
-                </div>
-              </div>
-
-              {/* Output & Psychological Loss Ledger */}
-              <div className="boost_calc-results">
-                <div className="boost_results-inner">
-                  <div className="boost_results-badge text-style-eyebrow">Your Psychological Loss Ledger</div>
-
-                  {/* Primary Loss Metric */}
-                  {calc.lostCallers === 0 ? (
-                    <div className="boost_loss-block is-optimal">
-                      <div className="text-style-eyebrow text-color-highlight">Peak Efficiency Benchmark</div>
-                      <div className="boost_loss-amount is-zero">
-                        $0 <span className="boost_loss-period">/ month lost</span>
-                      </div>
-                      <div className="boost_loss-annual font-mono text-size-small text-color-highlight">
-                        Retaining all ~{calc.optimalCallers} estimated callers each month
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="boost_loss-block">
-                      <div className="text-style-eyebrow text-color-muted">Estimated Revenue Leaking to Competitors</div>
-                      <div className="boost_loss-amount">
-                        ${calc.monthlyLostRevenue.toLocaleString()}
-                        <span className="boost_loss-period"> / month</span>
-                      </div>
-                      <div className="boost_loss-annual font-mono text-size-small">
-                        ${calc.annualLostRevenue.toLocaleString()} projected over 12 months
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Callers Breakdown */}
-                  <div className="boost_breakdown-grid">
-                    <div className="boost_breakdown-item">
-                      <div className={`boost_breakdown-num font-mono ${calc.lostCallers === 0 ? "text-color-highlight" : "text-color-accent"}`}>
-                        {calc.lostCallers === 0 ? "0 Lost" : `~${calc.lostCallers}`}
-                      </div>
-                      <div className="boost_breakdown-label text-size-small">
-                        {calc.lostCallers === 0 ? "100% of mobile callers retained" : "Qualified callers lost every month"}
-                      </div>
-                    </div>
-                    <div className="boost_breakdown-item">
-                      <div className="boost_breakdown-num font-mono text-color-highlight">
-                        {calc.lostCallers === 0 ? "100/100" : `${calc.roiMultiple}×`}
-                      </div>
-                      <div className="boost_breakdown-label text-size-small">
-                        {calc.lostCallers === 0 ? "Perfect Google PageSpeed target" : "12-Mo ROI multiple on a $500 build"}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* The Clovis Solution Comparison */}
-                  <div className="boost_comparison-box">
-                    <div className="boost_comp-row">
-                      <span className="boost_comp-label">Current template speed:</span>
-                      <span className="boost_comp-val font-mono">{speed.toFixed(1)}s mobile lag</span>
-                    </div>
-                    <div className="boost_comp-row is-winner">
-                      <span className="boost_comp-label">Clovis Hand-Built speed:</span>
-                      <span className="boost_comp-val font-mono">0.7s · PageSpeed 100 ✓</span>
-                    </div>
-                    <p className="boost_comp-foot text-size-small text-color-muted">
-                      At our <strong>$500 launch price</strong>, your new site pays for itself with the{" "}
-                      <span className="text-color-primary font-medium">very first saved customer</span>.
-                    </p>
-                  </div>
-
-                  <a
-                    href="#teardown"
-                    className="button is-accent boost_calc-cta"
-                    data-cursor="label"
-                    data-cursor-label="Audit"
-                  >
-                    <span>Request Free 3-Min Video Teardown</span>
-                    <ArrowIcon size={13} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* 5-Point Psychological Diagnostic Breakdown */}
-          <div id="boost-diag" className="boost_diagnostic-section">
-            <div className="boost_diag-intro">
-              <span className="text-style-eyebrow text-color-accent">The 5 Psychological Friction Points</span>
-              <h3 className="heading-style-h3">
-                Why 9 out of 10 Central Valley website templates <span className="text-italic-serif">fail to convert.</span>
-              </h3>
-              <p className="text-color-muted">
-                Visitors decide whether they trust a local business in under four seconds. Here is the exact psychological
-                anatomy of why cheap templates leak customers — and how we engineer every build to win.
-              </p>
-            </div>
-
-            <div className="boost_diag-grid">
-              {DIAGNOSTIC_PILLARS.map((p, i) => (
-                <Reveal key={p.num} index={i} className="boost_diag-card">
-                  <div className="boost_diag-head">
-                    <span className="boost_diag-num font-mono">{p.num}</span>
-                    <span className="boost_diag-tag text-style-eyebrow">{p.tag}</span>
-                    <span className="boost_diag-badge font-mono">{p.metric}</span>
-                  </div>
-                  <h4 className="heading-style-h4">{p.title}</h4>
-                  <div className="boost_diag-body">
-                    <div className="boost_diag-loss">
-                      <strong className="text-color-accent">The Psychological Leak:</strong> {p.loss}
-                    </div>
-                    <div className="boost_diag-fix">
-                      <strong className="text-color-brand-soft">The Clovis Engineering:</strong> {p.fix}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+            </>
+          )}
 
           {/* 1-Click Free 3-Minute Video Teardown Generator (Reciprocity Engine) */}
           <Reveal id="boost-teardown" className="boost_teardown-card">
             <div id="teardown" className="section-anchor" aria-hidden="true" />
             <div className="boost_teardown-content">
               <div className="boost_teardown-copy">
-                <span className="text-style-eyebrow text-color-accent">№ Reciprocity — Free Upfront Proof</span>
+                <span className="text-style-eyebrow text-color-accent">Free, no strings</span>
                 <h3 className="heading-style-h3">
                   Want to see your exact mobile speed and where customers are bouncing?
                 </h3>
@@ -633,25 +633,29 @@ export function Boost({
             </div>
           </Reveal>
 
-          {/* Standalone Route Callout (only shown when embedded on homepage) */}
+          {/* Homepage: the calculator and friction points live on /boost */}
           {!isStandalone && (
             <div className="boost_standalone-callout">
               <div className="boost_standalone-callout-inner">
                 <div className="boost_standalone-callout-text">
-                  <span className="text-style-eyebrow text-color-accent">Standalone Experience Available</span>
-                  <div className="font-medium">Direct URL for marketing &amp; mobile visitors:</div>
+                  <span className="text-style-eyebrow text-color-accent">Want the dollar figure?</span>
+                  <div className="font-medium">Put your own numbers into the cost calculator.</div>
                   <div className="text-size-small text-color-muted">
-                    Bookmark or share <code>cloviswebdesign.com/boost</code> for the focused, standalone teardown landing page.
+                    It shows what a slow page costs you each month, plus the five places template sites lose people.
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => (onNavigate ? onNavigate("/boost") : (window.location.href = "/boost"))}
+                <a
+                  href="/boost"
+                  onClick={(e) => {
+                    if (!onNavigate) return;
+                    e.preventDefault();
+                    onNavigate("/boost");
+                  }}
                   className="button is-light boost_standalone-btn"
                   data-cursor="hover"
                 >
-                  <span>Open Dedicated /boost Page →</span>
-                </button>
+                  <span>Run the cost calculator →</span>
+                </a>
               </div>
             </div>
           )}
