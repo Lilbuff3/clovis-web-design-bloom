@@ -178,6 +178,7 @@ def test_live():
         "https://cloviswebdesign.com/sitemap.xml",
         "https://cloviswebdesign.com/site.webmanifest",
         "https://cloviswebdesign.com/boost",
+        "https://cloviswebdesign.com/medical-websites",
     ]
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     for u in urls_to_test:
@@ -196,11 +197,17 @@ def test_live():
                 print("PASS: Live robots.txt verified!")
             elif "sitemap.xml" in u:
                 assert "https://cloviswebdesign.com/boost" in content, "Live sitemap missing boost"
+                assert "https://cloviswebdesign.com/medical-websites" in content, "Live sitemap missing medical-websites"
                 print("PASS: Live sitemap.xml verified!")
             elif "site.webmanifest" in u:
                 data = json.loads(content)
                 assert data["name"] == "Clovis Web Design", "Live manifest name mismatch"
                 print("PASS: Live site.webmanifest verified!")
+            elif "medical-websites" in u:
+                assert '<link rel="canonical" href="https://cloviswebdesign.com/medical-websites" />' in content, "Live /medical-websites canonical wrong"
+                assert "second front desk" in content, "Live /medical-websites body not prerendered"
+                assert 'https://cloviswebdesign.com/medical-websites#service' in content, "Live /medical-websites missing service schema"
+                print("PASS: Live /medical-websites verified with its own canonical, schema and prerendered body!")
             elif "boost" in u:
                 assert '<link rel="canonical" href="https://cloviswebdesign.com/boost" />' in content, "Live /boost missing canonical link"
                 assert "Conversion Boost" in content, "Live /boost missing Conversion Boost in title/content"
