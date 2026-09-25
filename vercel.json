@@ -17,14 +17,14 @@
   "rewrites": [
     {
       "source": "/boost",
-      "destination": "/boost/index.html"
+      "destination": "/boost.html"
     },
     {
       "source": "/boost/",
-      "destination": "/boost/index.html"
+      "destination": "/boost.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!boost).*)",
       "destination": "/index.html"
     }
   ],
