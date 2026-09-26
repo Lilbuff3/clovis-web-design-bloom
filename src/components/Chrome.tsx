@@ -30,8 +30,8 @@ const links = [
   { href: "#test", label: "The test", ids: ["test"] },
   { href: "#harvest", label: "Harvest", ids: ["harvest"] },
   { href: "#season", label: "Process", ids: ["season", "compare"] },
-  { href: "#grower", label: "About", ids: ["grower", "rules"] },
   { href: "#stand", label: "Prices", ids: ["stand", "letters"] },
+  { href: "#grower", label: "About", ids: ["grower", "rules"] },
   { href: "#faq", label: "FAQ", ids: ["faq"] },
 ];
 
