@@ -11,7 +11,7 @@ function RotatingBadge() {
           <path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
         </defs>
         <text className="font-mono" fontSize="15.5" letterSpacing="4.2" fill="#1E2B23">
-          <textPath href="#circ">HAND-GROWN · NO PRESERVATIVES · LIVE IN A WEEK ·</textPath>
+          <textPath href="#circ">HIGH-CONVERTING · 100/100 SPEED · LIVE IN 1 WEEK ·</textPath>
         </text>
       </svg>
       <div className="absolute inset-[30%] flex items-center justify-center rounded-full bg-persimmon text-cream shadow-lg">
@@ -71,8 +71,8 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-32 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className={`flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 transition-all duration-1000 ${loaded ? "opacity-100" : "translate-y-3 opacity-0"}`}>
-          <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">Nº 01 — Spring 2026 almanac</span>
-          <span className="hidden sm:inline">Fresno · Clovis · Madera · the whole Valley</span>
+          <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">CLOVIS &amp; FRESNO WEB STUDIO</span>
+          <span className="hidden sm:inline">Direct with the builder · Zero agency lock-in</span>
         </div>
 
         <h1 className={`font-display mt-6 text-[clamp(3.1rem,10.4vw,10.25rem)] font-[420] leading-[0.9] text-ink ${loaded ? "in" : ""}`}>
@@ -81,7 +81,7 @@ export function Hero() {
           </span>
           <span className="line-mask" style={{ ["--d" as string]: "200ms" }}>
             <span className="flex items-center gap-[0.18em]">
-              <em className="wonk font-[380] text-persimmon">grown</em>
+              <em className="wonk font-[380] text-persimmon">built</em>
               <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle">
                 <video src={VIDEO_ORCHARD} autoPlay muted loop playsInline poster="/images/hero.jpg" className="h-full w-full object-cover" />
               </span>
@@ -97,8 +97,7 @@ export function Hero() {
 
         <div className={`mt-8 grid max-w-3xl gap-6 transition-all delay-500 duration-1000 md:grid-cols-[1.3fr_1fr] ${loaded ? "opacity-100" : "translate-y-6 opacity-0"}`}>
           <p className="text-lg leading-relaxed text-ink/85 md:text-xl">
-            Fast, hand-made websites for Fresno &amp; Central Valley businesses — picked fresh, nothing artificial, yours to keep.{" "}
-            <span className="bg-citrus/60 px-1">You get my cell number, not a ticket queue.</span>
+            Fast, custom websites for Fresno &amp; Central Valley businesses — no templates, zero agency lock-in, yours to keep. You get my cell number, not a ticket queue.
           </p>
           <div className="flex flex-col items-start gap-3">
             <a href={SMS_LINK} data-magnetic="0.3" className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon">

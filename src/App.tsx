@@ -55,7 +55,7 @@ export default function App() {
         <Hero />
         <Marquee
           className="bg-persimmon text-cream"
-          items={["$500 landing pages", "Live in a week", "100/100 PageSpeed", "You own the code", "No monthly hostage fees", "English + Español", "Your cell, not a ticket queue"]}
+          items={["$500 landing pages", "Live in 1 week", "100/100 Google PageSpeed", "100% Client-Owned", "Zero monthly hostage fees", "Google Maps 3-Pack Ready", "Direct cell to the builder"]}
         />
         <Manifesto />
         <ValleyZoom />
@@ -70,7 +70,7 @@ export default function App() {
           reverse
           base={0.5}
           className="-rotate-[1.5deg] scale-[1.03] bg-leaf text-cream"
-          items={["Hand-built", "No page builders", "Built for two bars of signal", "Text-to-book", "Bilingual when you need it", "Nothing to log into"]}
+          items={["Custom-built", "Zero template bloat", "Built for two bars of signal", "Tap-to-call & text-to-book", "Bilingual English + Español", "Done-for-you copywriting"]}
         />
         <Letters />
         <FAQ />

@@ -32,7 +32,7 @@ export function Grower() {
         </div>
 
         <div className="lg:col-span-7 lg:pl-6">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">05 — The grower</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">05 — About the Builder</div>
           <h2 className="font-display mt-5 text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
             <span className="line-mask"><span>One person.</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -49,7 +49,7 @@ export function Grower() {
             <p>So I listen before I design, I write before I build, and I hand you the keys at the end.</p>
           </div>
           <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-4 border-citrus pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
-            “You don't rent the tree from me. You own the orchard.”
+            “You don't rent your website from an agency. You own the code, the domain, and the keys.”
           </blockquote>
 
           <div className="mt-12">
@@ -68,7 +68,7 @@ export function Stand() {
     <section id="stand" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">06 — The farm stand</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">06 — Transparent Pricing</div>
           <h2 className="font-display mx-auto mt-5 max-w-4xl text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
             <span className="line-mask"><span>Prices on the tag,</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -77,7 +77,7 @@ export function Stand() {
               </span>
             </span>
           </h2>
-          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No call to find out what it costs. Every price is right here, and every site is yours to keep.</p>
+          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
         </div>
 
         {/* wooden rail */}
@@ -140,9 +140,9 @@ export function Stand() {
         <div className="reveal mt-24 rounded-[36px] border border-ink/10 bg-cream p-6 md:p-10">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-leaf">After the harvest</div>
+              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-leaf">After Launch</div>
               <h3 className="font-display mt-3 text-4xl font-[420] leading-tight">
-                Tending is <em className="wonk">optional</em>. I mean it.
+                Ongoing care is <em className="wonk">optional</em>. I mean it.
               </h3>
               <p className="mt-4 text-[15.5px] leading-relaxed text-ink/75">
                 Your site runs fine without me. Plain files — no plugins to update, nothing that breaks at 2 a.m. These are for people who'd rather send one text than
@@ -175,16 +175,16 @@ export function Letters() {
   return (
     <section id="letters" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
-        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/70">07 — Letters from the valley</div>
+        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/70">07 — Client Reviews</div>
         <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-          <span className="line-mask"><span>They wrote</span></span>
+          <span className="line-mask"><span>Real owners.</span></span>
           <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
             <span>
-              <em className="wonk text-persimmon">back.</em>
+              <em className="wonk text-persimmon">Measured ROI.</em>
             </span>
           </span>
         </h2>
-        <p className="reveal mt-4 text-lg text-ink/75">Two clients, in their own words, unedited.</p>
+        <p className="reveal mt-4 text-lg text-ink/75">Central Valley business owners, in their own words, unedited.</p>
 
         <div className="mt-16 grid gap-10 md:grid-cols-2">
           {letters.map((l, i) => (
@@ -235,7 +235,7 @@ export function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">08 — Porch questions</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">08 — Frequently Asked Questions</div>
             <h2 className="font-display mt-5 text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
               <span className="line-mask"><span>What people ask</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -244,7 +244,7 @@ export function FAQ() {
                 </span>
               </span>
             </h2>
-            <p className="reveal mt-6 text-lg text-ink/75">Didn't see yours? Text it. You'll get a straight answer, even if it's “you don't need me yet.”</p>
+            <p className="reveal mt-6 text-lg text-ink/75">Didn't see your question? Text it. You'll get a straight answer, even if it's “you don't need a new website yet.”</p>
           </div>
         </div>
         <div className="lg:col-span-8">

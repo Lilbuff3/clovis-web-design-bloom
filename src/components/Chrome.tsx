@@ -27,10 +27,10 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 }
 
 const links = [
-  { href: "#test", label: "The test", ids: ["test"] },
-  { href: "#harvest", label: "Harvest", ids: ["harvest"] },
+  { href: "#test", label: "Speed Test", ids: ["test"] },
+  { href: "#harvest", label: "Client Work", ids: ["harvest"] },
   { href: "#season", label: "Process", ids: ["season", "compare"] },
-  { href: "#stand", label: "Prices", ids: ["stand", "letters"] },
+  { href: "#stand", label: "Pricing", ids: ["stand", "letters"] },
   { href: "#grower", label: "About", ids: ["grower", "rules"] },
   { href: "#faq", label: "FAQ", ids: ["faq"] },
 ];
@@ -74,7 +74,7 @@ export function Nav() {
             <SunMark className="h-9 w-9 transition-transform duration-700 group-hover:rotate-[360deg]" progress={p} />
             <span className="leading-none">
               <span className="font-display block text-[1.15rem] font-semibold">Clovis Web Design</span>
-              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">hand-grown in Clovis, CA</span>
+              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">Web Studio · Clovis, CA</span>
             </span>
           </a>
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">

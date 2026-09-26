@@ -7,12 +7,12 @@ import { VIDEO_ORCHARD } from "../lib/data";
 /* ------------------------------------------------------------------ */
 type Tok = string | { img: string; alt: string };
 const manifesto: Tok[] = [
-  "Most", "websites", "are", "bolted", "together", "from", "the", "same", "parts", "bin.",
-  "Mine", "are", "grown", { img: "/images/studio.jpg", alt: "workbench" }, "by", "hand,", "in", "Clovis",
+  "Most", "agency", "websites", "are", "bolted", "together", "from", "the", "same", "slow", "templates.",
+  "Mine", "are", "crafted", { img: "/images/studio.jpg", alt: "workbench" }, "by", "hand,", "in", "Clovis",
   { img: "/images/hero.jpg", alt: "orchard" }, "—", "one", "business", "at", "a", "time,", "for", "the", "four", "seconds",
-  "between", "someone", "searching", "and", "someone", "calling.", { img: "/images/seedling.jpg", alt: "seedling" },
+  "between", "someone", "searching", "and", "someone", "calling.", { img: "/images/seedling.jpg", alt: "code" },
 ];
-const accent = new Set(["grown", "hand,", "four", "seconds"]);
+const accent = new Set(["crafted", "hand,", "four", "seconds"]);
 
 export function Manifesto() {
   const ref = useRef<HTMLElement>(null);
@@ -190,11 +190,11 @@ export function RulesGallery() {
           className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:w-max md:snap-none md:gap-8 md:overflow-visible md:px-[6vw] md:pb-0"
         >
           <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-center md:w-[40vw] md:pr-10">
-            <div className="font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">Rules of the orchard</div>
+            <div className="font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">Our Commitments</div>
             <h2 className="font-display mt-5 text-[clamp(2.8rem,5.6vw,6rem)] font-[420] leading-[0.92]">
-              Five rules, <em className="wonk text-leaf">nailed to the barn door.</em>
+              Five standards, <em className="wonk text-leaf">put in writing.</em>
             </h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80">How the practice runs, in writing, so you can hold me to it.</p>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80">How I work with every business, in writing, so you can hold me to it.</p>
             <div className="mt-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/60">
               <span className="hidden md:inline">Scroll</span>
               <span className="md:hidden">Swipe</span>

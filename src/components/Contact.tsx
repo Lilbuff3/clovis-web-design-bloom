@@ -48,7 +48,7 @@ export function Contact() {
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">09 — The front gate</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">09 — Start a Project</div>
           <h2 className="font-display mt-5 text-[clamp(3rem,8vw,7.5rem)] font-[420] leading-[0.9]">
             <span className="line-mask"><span>Start with</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -58,7 +58,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No forms to wade through, no call you didn't ask for. Tap a few things below and I'll write the first message for you — even if you don't have a website yet.
+            No forms to wade through, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -165,20 +165,20 @@ export function Footer() {
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Hand-grown websites for the people who keep the Valley running.</p>
+            <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Visit</div>
-            <a href="#test" className="block hover:underline">The four-second test</a>
-            <a href="#harvest" className="block hover:underline">Harvest</a>
+            <a href="#test" className="block hover:underline">Speed Test</a>
+            <a href="#harvest" className="block hover:underline">Client Work</a>
             <a href="#season" className="block hover:underline">Process</a>
-            <a href="#stand" className="block hover:underline">Prices</a>
+            <a href="#stand" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <span className="block">Clovis, California</span>
-            <span className="block">Fresno & the Central Valley</span>
+            <span className="block">Fresno &amp; the Central Valley</span>
           </div>
         </div>
         <div className="font-display wonk mt-16 select-none text-center text-[clamp(3.5rem,15.5vw,15rem)] font-[450] italic leading-[0.8] tracking-[-0.04em]">
@@ -186,8 +186,8 @@ export function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
           <span>© {new Date().getFullYear()} Adam Youssef · Clovis Web Design</span>
-          <span>This page: hand-built · no template · no tracking pixels</span>
-          <a href="#top" className="hover:underline">Back to sunrise ↑</a>
+          <span>This page: custom-built · no templates · no tracking pixels</span>
+          <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>
       </div>
     </footer>

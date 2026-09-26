@@ -253,7 +253,7 @@ export function FourSeconds() {
               <Phone label="Typical template" tone="slow">
                 <SlowSite t={t} />
               </Phone>
-              <Phone label="Hand-grown" tone="fast">
+              <Phone label="Custom-built" tone="fast">
                 <FastSite t={t} />
               </Phone>
             </div>

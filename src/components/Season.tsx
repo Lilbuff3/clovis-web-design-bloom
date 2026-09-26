@@ -71,12 +71,12 @@ export function Season() {
     <section id="season" className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The growing season</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The Process</div>
           <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-            <span className="line-mask"><span>Seed to harvest</span></span>
+            <span className="line-mask"><span>From discovery</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
               <span>
-                in <em className="wonk text-persimmon">six days.</em>
+                to launch in <em className="wonk text-persimmon">six days.</em>
               </span>
             </span>
           </h2>
@@ -152,12 +152,12 @@ export function Compare() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-leaf">04 — Same five questions</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-leaf">04 — How We Compare</div>
             <h2 className="font-display mt-5 text-[clamp(2.4rem,5.5vw,5rem)] font-[420] leading-[0.95]">
-              <span className="line-mask"><span>Supermarket,</span></span>
+              <span className="line-mask"><span>Traditional agency,</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
                 <span>
-                  or <em className="wonk text-leaf">farm stand?</em>
+                  or <em className="wonk text-leaf">dedicated builder?</em>
                 </span>
               </span>
             </h2>

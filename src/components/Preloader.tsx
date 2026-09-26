@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getLenis, gsap, markIntroDone } from "../lib/smooth";
 
 const KEY = "cwd-intro-seen";
-const words = ["Watering", "Pruning", "Picking", "Ready"];
+const words = ["Designing", "Coding", "Optimizing", "Ready"];
 
 export function Preloader() {
   const [skip] = useState(() => {
@@ -68,7 +68,7 @@ export function Preloader() {
         <div className="flex items-start justify-between font-mono text-[11px] uppercase tracking-[.2em]">
           <span className="pl-fade">Clovis Web Design</span>
           <span className="pl-fade text-right text-ink/60">
-            Hand-grown in
+            Custom-built in
             <br />
             Clovis, California
           </span>
@@ -119,7 +119,7 @@ export function Preloader() {
               </div>
             </div>
             <p className="pl-note mt-3 max-w-[260px] translate-y-2 font-mono text-[10.5px] uppercase leading-relaxed tracking-[.14em] text-ink/60 opacity-0">
-              The page loaded in {loadMs}ms. This sunrise is just for fun — tap to skip.
+              The page loaded in {loadMs}ms. Built for speed — tap anywhere to skip.
             </p>
           </div>
           <div className="font-display text-[clamp(5rem,20vw,16rem)] font-[380] leading-[0.8] tabular-nums">

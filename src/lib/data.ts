@@ -20,13 +20,13 @@ export const cases = [
     tint: "bg-sky",
     headline: "A medical site that never touches patient data — and scores a perfect 100.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
-    planted: ["No patient data on the web", "Printable forms instead of online ones", "Guides patients actually use"],
+    planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
     stack: ["Astro", "English + Español", "WCAG 2.1 AA", "No-PHI design"],
     yields: [
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
       { value: 140, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
-      { value: 0, suffix: "", label: "Online forms collecting patient data" },
-      { value: 12.6, suffix: ":1", label: "Text contrast ratio", decimals: 1 },
+      { value: 0, suffix: "", label: "Online forms collecting patient data (Zero PHI risk)" },
+      { value: 12.6, suffix: ":1", label: "Text contrast ratio (WCAG 2.1 AA)", decimals: 1 },
     ],
   },
   {
@@ -43,11 +43,11 @@ export const cases = [
     tint: "bg-blush",
     headline: "Number one on Google for “dumpster rental Fresno.”",
     problem: "National brokers were outranking the company that actually owns the trucks.",
-    planted: ["A page for every service area", "Flat prices, right on the page", "Driveway protection, said out loud"],
+    planted: ["Dedicated service area pages for Fresno & Clovis", "Upfront flat pricing on the page", "Driveway protection highlighted for trust"],
     stack: ["Local SEO", "English + Español", "Text-to-book", "PageSpeed 100"],
     yields: [
       { value: 1, prefix: "#", suffix: "", label: "On Google for “dumpster rental Fresno”" },
-      { value: 4, prefix: "+", suffix: "", label: "Trucks bought to keep up with demand" },
+      { value: 4, prefix: "+", suffix: "", label: "Trucks added to keep up with demand" },
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
       { value: 1.5, suffix: "", label: "Avg. position on high-intent searches (1–2)", decimals: 1, display: "1–2" },
     ],
@@ -56,59 +56,59 @@ export const cases = [
 
 export const seasons = [
   {
-    key: "seed",
-    name: "Seed",
-    title: "Discovery — we talk",
+    key: "discovery",
+    name: "Discovery",
+    title: "Discovery — we talk strategy",
     when: "Day 1",
     body:
-      "Forty-five minutes on the phone or at your shop. What you do, who calls you, what they ask before they book, and what you keep explaining twice. I look at who else shows up when someone searches your trade around here — then tell you, in plain English, what the site needs. If you need less than you came for, I'll say that too.",
+      "Forty-five minutes on the phone or at your shop. What you do, who calls you, what they ask before they book, and what you keep explaining twice. I analyze who currently ranks for your trade across Clovis and Fresno — then tell you, in plain English, exactly what the site needs to convert. If one simple page is enough, that's what I'll recommend.",
     gets: [
-      "A plain-English rundown of what the site should do and why",
-      "An honest look at who you're up against locally",
-      "Cost and timeline, before you pay anything",
-      "A straight answer on whether you need me at all",
+      "A plain-English rundown of what the site needs and why",
+      "A clear audit of your top local competitors on Google",
+      "Fixed cost and timeline upfront, before you pay a dime",
+      "An honest answer on whether you need a new website yet",
     ],
   },
   {
-    key: "sprout",
-    name: "Sprout",
+    key: "design",
+    name: "Design & Copy",
     title: "Design direction — see it before it's built",
     when: "Days 2–3",
     body:
-      "I write the copy from the recording of our conversation — in your words, not mine — and lay out how the page will look. Nobody hands you a blank document to fill in. That's the step that stalls most website projects for months, so I do it.",
+      "I write every word of copy from the recording of our conversation — in your authentic voice, not generic marketing fluff — and lay out the mobile and desktop experience. Nobody hands you a blank 20-page document to fill in. We remove the writing bottleneck that stalls most projects for months.",
     gets: [
-      "Real copy from what you actually said — no lorem ipsum",
-      "The layout, so you know exactly what's coming",
-      "Colour and type tuned for reading at arm's length",
-      "One round of changes built into the price",
+      "Done-for-you copy drawn directly from how you talk to clients",
+      "Interactive layout so you see exactly what's coming",
+      "Typography and contrast engineered for readability in bright sunlight",
+      "Full revision round included to fine-tune details",
     ],
   },
   {
-    key: "grow",
-    name: "Grow",
-    title: "Build — by hand",
+    key: "build",
+    name: "Custom Build",
+    title: "Hand-coded build — zero bloat",
     when: "Days 3–5",
     body:
-      "No page builder, no template, nothing bolted on that slows it down. Your number goes everywhere it should, and the whole thing is built to come up fast on a phone with two bars of signal — because that's where most people will see it.",
+      "No drag-and-drop page builders, no 40 bloated plugins, and nothing that slows down your mobile load time. Your phone and SMS buttons are positioned where thumbs naturally tap, and every page is structured so Google and AI search engines instantly recognize your trade and service radius.",
     gets: [
-      "Hand-written code, zero CMS lock-in, nothing to log into",
-      "One tap to call or text you from anywhere on the page",
-      "Marked up so Google reads your trade, your area, your number",
-      "Checked on a real phone, not just a desktop window",
+      "Clean, hand-written code with zero CMS lock-in or login bloat",
+      "One tap to call or text from anywhere on the page",
+      "Local schema markup so Google reads your trade, city, and phone",
+      "Tested rigorously on real mobile devices under slow cell signal",
     ],
   },
   {
-    key: "harvest",
-    name: "Harvest",
-    title: "Launch & 90 days of tending",
+    key: "launch",
+    name: "Launch",
+    title: "Launch & 90-day guarantee",
     when: "Day 6 onward",
     body:
-      "I point the domain, get it into Google, and tidy up your Google listing. For 90 days, anything genuinely broken I fix free — you text, I sort it. After that the site is still yours and still works. The care plan's there if you want it; no hard feelings if you don't.",
+      "I connect your domain, deploy the high-speed code, and verify your presence in Google Search Console and Google Maps. For 90 days, any bugs or fixes are handled free — text me directly and it's resolved. When we launch, you receive 100% of the code and credentials. The site is yours to keep forever.",
     gets: [
-      "Domain pointed, site live, Google told it exists",
-      "Code and domain in your name — handed over, not lent",
-      "90 days of free repairs, by text, direct to me",
-      "An optional care plan, never a hostage fee",
+      "Live site launched, domain configured, and Google index submitted",
+      "Full ownership of code, domain, and hosting handed to you",
+      "90 days of direct-text warranty support with the builder",
+      "Optional maintenance plan — never a monthly hostage fee",
     ],
   },
 ];
@@ -144,7 +144,7 @@ export const compare = [
 export const plans = [
   {
     code: "01",
-    name: "Seedling",
+    name: "Starter",
     kind: "Landing page",
     time: "1 week",
     price: "$500",
@@ -155,17 +155,17 @@ export const plans = [
     items: [
       "One page, hand-built, live in a week",
       "Your number everywhere — one tap to call or text",
-      "Loads before anyone gets bored",
+      "Loads in under 1 second on mobile devices",
       "Set up so Google knows who & where you are",
       "Yours on day one — code, domain, the lot",
-      "One round of changes",
+      "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
-    for: "Contractors, shops and one-person trades who need a real page today.",
+    for: "Contractors, shops, and one-person trades who need high conversion today.",
   },
   {
     code: "02",
-    name: "Grove",
+    name: "Growth",
     kind: "Local authority",
     time: "3–4 weeks",
     price: "$2,500",
@@ -173,7 +173,7 @@ export const plans = [
     hole: "bg-paper",
     items: [
       "3–5 pages, each written from a recorded conversation",
-      "A page for every town you serve, built for local searches",
+      "A page for every town you serve, built for local Google searches",
       "A full Spanish version at /es/",
       "Still yours on day one, still no lock-in",
     ],
@@ -182,8 +182,8 @@ export const plans = [
   },
   {
     code: "03",
-    name: "Orchard",
-    kind: "Flagship",
+    name: "Flagship",
+    kind: "Custom system",
     time: "4–6 weeks",
     price: "$5,000",
     color: "bg-sky",
@@ -200,9 +200,9 @@ export const plans = [
 ];
 
 export const care = [
-  { name: "No plan", price: "$0", blurb: "Take the keys and go. The site is yours and keeps working without me." },
-  { name: "Care Plan", price: "$99", blurb: "Hosting, updates and small changes handled. Cancel any month — the site stays yours." },
-  { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus the site keeps growing. Same deal: cancel any month." },
+  { name: "No plan", price: "$0", blurb: "Take full ownership and go. The site is 100% yours and keeps working without me." },
+  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and small changes handled. Cancel anytime — the site stays yours." },
+  { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content additions and local SEO tuning. Cancel anytime." },
 ];
 
 export const letters = [

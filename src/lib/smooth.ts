@@ -63,19 +63,19 @@ export function onIntroDone(cb: () => void) {
 /* Chapters — drives background colour morph, nav state, indicator     */
 /* ------------------------------------------------------------------ */
 export const CHAPTERS = [
-  { id: "top", name: "Sunrise", bg: "#f7f0e3" },
-  { id: "manifesto", name: "Manifesto", bg: "#fcf8f0" },
+  { id: "top", name: "Overview", bg: "#f7f0e3" },
+  { id: "manifesto", name: "Philosophy", bg: "#fcf8f0" },
   { id: "valley", name: "The Valley", bg: "#fcf8f0" },
-  { id: "test", name: "The test", bg: "#f7f0e3" },
-  { id: "harvest", name: "Harvest", bg: "#f3e9d6" },
+  { id: "test", name: "Speed Test", bg: "#f7f0e3" },
+  { id: "harvest", name: "Client Work", bg: "#f3e9d6" },
   { id: "season", name: "Process", bg: "#fcf8f0" },
-  { id: "compare", name: "Farm stand?", bg: "#dbe5cf" },
-  { id: "grower", name: "The grower", bg: "#f7f0e3" },
-  { id: "rules", name: "Rules", bg: "#fbe7c4" },
-  { id: "stand", name: "Prices", bg: "#f3e9d6" },
-  { id: "letters", name: "Letters", bg: "#d8e7f0" },
-  { id: "faq", name: "Questions", bg: "#f7f0e3" },
-  { id: "contact", name: "Say hello", bg: "#f7d3bf" },
+  { id: "compare", name: "Compare", bg: "#dbe5cf" },
+  { id: "grower", name: "About", bg: "#f7f0e3" },
+  { id: "rules", name: "Standards", bg: "#fbe7c4" },
+  { id: "stand", name: "Pricing", bg: "#f3e9d6" },
+  { id: "letters", name: "Reviews", bg: "#d8e7f0" },
+  { id: "faq", name: "FAQ", bg: "#f7f0e3" },
+  { id: "contact", name: "Get in Touch", bg: "#f7d3bf" },
 ] as const;
 
 export type Chapter = (typeof CHAPTERS)[number] & { index: number };
