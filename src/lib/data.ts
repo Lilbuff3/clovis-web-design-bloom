@@ -21,7 +21,7 @@ export const cases = [
     stack: ["Astro", "English + Español", "WCAG 2.1 AA", "No-PHI design"],
     yields: [
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
-      { value: 140, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
+      { value: 40, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
       { value: 0, suffix: "", label: "Online forms collecting patient data (Zero PHI risk)" },
       { value: 12.6, suffix: ":1", label: "Text contrast ratio (WCAG 2.1 AA)", decimals: 1 },
     ],
@@ -205,7 +205,7 @@ export const care = [
 export const letters = [
   {
     quote:
-      "My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 140%!",
+      "My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!",
     name: "Dr. Sheikh Mohammad Masood, MD",
     role: "Founding President & Medical Director",
     place: "Madera, CA",
@@ -255,3 +255,110 @@ export const faqs = [
     a: "By not collecting patient information on the website at all. The site routes people to a phone call or referral fax — channels your practice already handles correctly. Nothing sensitive is stored on the web server, because nothing sensitive is collected there.",
   },
 ];
+
+// --- Schema.org Structured Metadata ---
+export const knowsAbout = [
+  "HIPAA Compliance",
+  "ADA Title III Compliance",
+  "EHR Portal Integration",
+  "WCAG 2.1 AA Accessibility",
+  "Zero-PHI Web Architecture",
+  "Medical Practice Web Design",
+  "Local SEO & Google Maps 3-Pack Optimization",
+];
+
+export const hasOfferCatalog = {
+  "@type": "OfferCatalog",
+  "name": "Web Design & Local Authority Services",
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "name": "Starter Launchpad",
+      "price": "500",
+      "priceCurrency": "USD",
+      "description": "High-converting single-page website, 100/100 PageSpeed, live in 1 week, 100% client-owned.",
+    },
+    {
+      "@type": "Offer",
+      "name": "Growth Local Authority System",
+      "price": "2500",
+      "priceCurrency": "USD",
+      "description": "Multi-page SEO route silos, Google Maps 3-Pack grounding, custom copy, and dual English+Español architecture.",
+    },
+    {
+      "@type": "Offer",
+      "name": "HIPAA-Compliant Medical Practice Web Design",
+      "price": "5000",
+      "priceCurrency": "USD",
+      "url": "https://cloviswebdesign.com/services/medical-web-design/",
+      "description": "Zero-PHI healthcare web engineering, HIPAA-compliant patient communication architecture, ADA Title III defense, and EHR portal integration.",
+    },
+  ],
+};
+
+export const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": "https://cloviswebdesign.com/#business",
+      "name": "Clovis Web Design",
+      "url": "https://cloviswebdesign.com",
+      "telephone": "+15595753014",
+      "priceRange": "$500 - $5,000",
+      "image": "https://cloviswebdesign.com/images/hero.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Clovis",
+        "addressRegion": "CA",
+        "postalCode": "93612",
+        "addressCountry": "US",
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.8252,
+        "longitude": -119.7029,
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:00",
+          "closes": "19:00",
+        },
+      ],
+      "founder": {
+        "@type": "Person",
+        "@id": "https://cloviswebdesign.com/#adam",
+        "name": "Adam Youssef",
+        "jobTitle": "Founder & Lead Developer",
+        "sameAs": "https://www.linkedin.com/in/adamyoussef",
+        "knowsAbout": knowsAbout,
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Clovis",
+          "sameAs": "https://www.wikidata.org/wiki/Q949704",
+        },
+        {
+          "@type": "City",
+          "name": "Fresno",
+          "sameAs": "https://www.wikidata.org/wiki/Q43048",
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Central Valley",
+          "sameAs": "https://www.wikidata.org/wiki/Q271014",
+        },
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/clovis-web-design",
+        "https://clovischamber.com/directory",
+      ],
+      "knowsAbout": knowsAbout,
+      "hasOfferCatalog": hasOfferCatalog,
+    },
+  ],
+};
+

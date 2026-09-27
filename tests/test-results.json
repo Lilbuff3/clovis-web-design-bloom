@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-27T08:17:33.248Z",
-  "total": 23,
-  "passed": 23,
+  "timestamp": "2026-09-27T13:42:45.541Z",
+  "total": 32,
+  "passed": 32,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -212,6 +212,83 @@
           "status": "PASS",
           "error": null,
           "details": "Zero legacy smooth scroll tickers or blocking preloader hooks present in production bundles"
+        }
+      ]
+    },
+    "6": {
+      "name": "Medical Engineering, HIPAA Compliance & GEO Verification",
+      "tests": [
+        {
+          "id": "T6.1",
+          "tier": 6,
+          "title": "Medical practice web design silo pre-rendered static HTML with deep semantic volume",
+          "status": "PASS",
+          "error": null,
+          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 12071 chars)"
+        },
+        {
+          "id": "T6.2",
+          "tier": 6,
+          "title": "HIPAA compliance architecture, unencrypted SMS/Sheets risks, and generic SMS alert copy",
+          "status": "PASS",
+          "error": null,
+          "details": "HIPAA compliance architecture verified: unencrypted risk analysis, compliant generic SMS copy, and BAA intake workflows present"
+        },
+        {
+          "id": "T6.3",
+          "tier": 6,
+          "title": "Front-desk triage: Deflecting the 3 Big Questions, insurance carrier list, and scheduling portals",
+          "status": "PASS",
+          "error": null,
+          "details": "Front-desk triage verified: 3 Big Questions deflected, 9 insurance carriers listed, 4 scheduling portals referenced, intake packet available"
+        },
+        {
+          "id": "T6.4",
+          "tier": 6,
+          "title": "ADA Title III drive-by lawsuit defense and FTC 16 CFR Part 465 compliant review management",
+          "status": "PASS",
+          "error": null,
+          "details": "ADA Title III defense (WCAG 2.1 AA, drive-by protection) and FTC 16 CFR Part 465 review compliance (zero public PHI) verified"
+        },
+        {
+          "id": "T6.5",
+          "tier": 6,
+          "title": "Provider credentials, clinical philosophy, compliant before/after galleries & clinic photography",
+          "status": "PASS",
+          "error": null,
+          "details": "Provider credentials (board certifications, clinical philosophy), compliant elective galleries, and clinic photography verified"
+        },
+        {
+          "id": "T6.6",
+          "tier": 6,
+          "title": "Contractor vs. Medical Clinic comparative matrix rendered as semantic HTML table",
+          "status": "PASS",
+          "error": null,
+          "details": "Semantic comparison table verified across all 5 operational dimensions (Goal, Speed, Storage, Decision, Price)"
+        },
+        {
+          "id": "T6.7",
+          "tier": 6,
+          "title": "Primary <h2> headings aligned with Google Business Profile categories for Maps justifications",
+          "status": "PASS",
+          "error": null,
+          "details": "Primary <h2> headings verified matching GBP categories (\"Medical clinic\", \"Doctor\", \"Website designer\") for Google Maps justifications"
+        },
+        {
+          "id": "T6.8",
+          "tier": 6,
+          "title": "Generative Engine Optimization: Primary <h2> answer blocks are atomic 134–167 word semantic units",
+          "status": "PASS",
+          "error": null,
+          "details": "Verified 3 atomic GEO semantic units strictly conforming to 134–167 words with local entity anchors"
+        },
+        {
+          "id": "T6.9",
+          "tier": 6,
+          "title": "Schema.org JSON-LD hasOfferCatalog includes Medical Practice offering and knowsAbout grounding",
+          "status": "PASS",
+          "error": null,
+          "details": "Schema.org JSON-LD verified: Medical offering in hasOfferCatalog, knowsAbout populated with HIPAA, ADA, and EHR topics"
         }
       ]
     }

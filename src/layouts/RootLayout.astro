@@ -1,6 +1,7 @@
 ---
 import '../index.css';
 import MobileActionBar from '../components/MobileActionBar.astro';
+import { schemaGraph } from '../lib/data';
 
 interface Props {
   title?: string;
@@ -13,90 +14,6 @@ const {
   description = "Fast, custom-built websites for Clovis, Fresno & Central Valley businesses. 100/100 Google PageSpeed, built to win Google Maps, 100% client-owned. Start with a text.",
   canonicalURL = Astro.url.href,
 } = Astro.props;
-
-// Authoritative Schema.org @graph
-const schemaGraph = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": ["LocalBusiness", "ProfessionalService"],
-      "@id": "https://cloviswebdesign.com/#business",
-      "name": "Clovis Web Design",
-      "url": "https://cloviswebdesign.com",
-      "telephone": "+15595753014",
-      "priceRange": "$500 - $5,000",
-      "image": "https://cloviswebdesign.com/images/hero.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Clovis",
-        "addressRegion": "CA",
-        "postalCode": "93612",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 36.8252,
-        "longitude": -119.7029
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "07:00",
-          "closes": "19:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "@id": "https://cloviswebdesign.com/#adam",
-        "name": "Adam Youssef",
-        "jobTitle": "Founder & Lead Developer",
-        "sameAs": "https://www.linkedin.com/in/adamyoussef"
-      },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Clovis",
-          "sameAs": "https://www.wikidata.org/wiki/Q949704"
-        },
-        {
-          "@type": "City",
-          "name": "Fresno",
-          "sameAs": "https://www.wikidata.org/wiki/Q43048"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Central Valley",
-          "sameAs": "https://www.wikidata.org/wiki/Q271014"
-        }
-      ],
-      "sameAs": [
-        "https://www.linkedin.com/company/clovis-web-design",
-        "https://clovischamber.com/directory"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Web Design & Local Authority Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "name": "Starter Launchpad",
-            "price": "500",
-            "priceCurrency": "USD",
-            "description": "High-converting single-page website, 100/100 PageSpeed, live in 1 week, 100% client-owned."
-          },
-          {
-            "@type": "Offer",
-            "name": "Growth Local Authority System",
-            "price": "2500",
-            "priceCurrency": "USD",
-            "description": "Multi-page SEO route silos, Google Maps 3-Pack grounding, custom copy, and dual English+Español architecture."
-          }
-        ]
-      }
-    }
-  ]
-};
 ---
 
 <!doctype html>

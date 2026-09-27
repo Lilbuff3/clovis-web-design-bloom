@@ -12,10 +12,12 @@
  * Tier 3: Mobile Performance, Action Bar & Above-the-Fold UX
  * Tier 4: Multi-Page Route Silos & Navigation Inter-linkage
  * Tier 5: Binary Integrity, Adversarial & Robustness Verification
+ * Tier 6: Medical Engineering, HIPAA Compliance & GEO Verification
  *
  * Execution:
  *   node tests/verify-e2e.mjs
  *   node tests/verify-e2e.mjs --tier=1
+ *   node tests/verify-e2e.mjs --tier=6
  *   node tests/verify-e2e.mjs --json
  * ============================================================================
  */
@@ -63,6 +65,7 @@ const results = {
     3: { name: 'Mobile Performance, Action Bar & Above-the-Fold UX', tests: [] },
     4: { name: 'Multi-Page Route Silos & Inter-linkage', tests: [] },
     5: { name: 'Binary Integrity, Adversarial & Robustness Verification', tests: [] },
+    6: { name: 'Medical Engineering, HIPAA Compliance & GEO Verification', tests: [] },
   },
 };
 
@@ -149,6 +152,21 @@ function extractJsonLdScripts(html) {
     }
   }
   return scripts;
+}
+
+/**
+ * Strips HTML tags and entities, then counts whitespace-delimited words.
+ * Replacing tags with ' ' prevents words from concatenating across inline elements.
+ */
+function countWords(htmlOrText) {
+  if (!htmlOrText) return 0;
+  const clean = htmlOrText
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/&#[0-9]+;/g, ' ')
+    .trim();
+  const tokens = clean.split(/\s+/).filter(w => w.length > 0);
+  return tokens.length;
 }
 
 // ============================================================================
@@ -854,6 +872,313 @@ assertTest(5, 'T5.3', 'Absence of legacy blocking SPA artifacts (Lenis singleton
 });
 
 // ============================================================================
+// TIER 6: Medical Engineering, HIPAA Compliance & GEO Verification
+// ============================================================================
+
+const MEDICAL_HTML_PATH = path.join(DIST_DIR, 'services', 'medical-web-design', 'index.html');
+
+function getMedicalHtml() {
+  if (!fs.existsSync(MEDICAL_HTML_PATH)) {
+    throw new Error(`dist/services/medical-web-design/index.html does not exist. Run "npm run build" first.`);
+  }
+  return fs.readFileSync(MEDICAL_HTML_PATH, 'utf-8');
+}
+
+assertTest(6, 'T6.1', 'Medical practice web design silo pre-rendered static HTML with deep semantic volume', () => {
+  const html = getMedicalHtml();
+  const stat = fs.statSync(MEDICAL_HTML_PATH);
+
+  if (stat.size < 5000) {
+    throw new Error(`Medical landing page HTML is unexpectedly small (${stat.size} bytes, expected >= 5KB)`);
+  }
+
+  const h1s = extractTextBetweenTags(html, 'h1');
+  const h2s = extractTextBetweenTags(html, 'h2');
+  const ps = extractTextBetweenTags(html, 'p');
+
+  if (h1s.length < 1) throw new Error(`Missing <h1> heading on medical landing page.`);
+  if (h2s.length < 5) throw new Error(`Found only ${h2s.length} <h2> headings (expected at least 5 deep sections).`);
+  if (ps.length < 10) throw new Error(`Found only ${ps.length} <p> paragraphs (expected at least 10).`);
+
+  const combinedLength = [...h1s, ...h2s, ...ps].join(' ').length;
+  if (combinedLength < 2500) {
+    throw new Error(`Semantic text volume too low (${combinedLength} chars, expected >= 2,500 chars).`);
+  }
+
+  return `Medical landing page pre-rendered with rich semantic hierarchy (${h1s.length} h1, ${h2s.length} h2s, ${ps.length} ps, ${combinedLength} chars)`;
+});
+
+assertTest(6, 'T6.2', 'HIPAA compliance architecture, unencrypted SMS/Sheets risks, and generic SMS alert copy', () => {
+  const html = getMedicalHtml();
+
+  // 1. Unencrypted SMS and personal Google Sheets HIPAA violation risks
+  const hasRiskCopy = /(?:unencrypted\s+SMS|personal\s+Google\s+Sheets|Sheets).*(?:violat|breach|HIPAA|PHI)/i.test(html) ||
+                      (html.includes('HIPAA') && html.includes('Google Sheets') && /unencrypted/i.test(html));
+  if (!hasRiskCopy) {
+    throw new Error(`Missing copy detailing why unencrypted SMS and personal Google Sheets violate federal HIPAA rules when handling PHI.`);
+  }
+
+  // 2. Compliant generic SMS notification alert
+  const hasGenericSms = /New appointment request received for\s+(?:\[Clinic Name\]|[A-Za-z0-9\s]+)\.\s*Log into secure portal to review/i.test(html) ||
+                        (/New appointment request received/i.test(html) && /Log into secure portal to review/i.test(html));
+  if (!hasGenericSms) {
+    throw new Error(`Missing compliant generic SMS alert copy ("New appointment request received for [Clinic Name]. Log into secure portal to review").`);
+  }
+
+  // 3. BAA-secured intake workflows & supported tool direct links
+  const hasBaa = /BAA|Business Associate Agreement/i.test(html);
+  const hasTools = /(?:Jotform HIPAA|FormDr|Spruce Health|EHR direct)/i.test(html);
+  if (!hasBaa || !hasTools) {
+    throw new Error(`Missing BAA-secured intake workflows or tool references (Jotform HIPAA, FormDr, Spruce Health, EHR direct links).`);
+  }
+
+  return `HIPAA compliance architecture verified: unencrypted risk analysis, compliant generic SMS copy, and BAA intake workflows present`;
+});
+
+assertTest(6, 'T6.3', 'Front-desk triage: Deflecting the 3 Big Questions, insurance carrier list, and scheduling portals', () => {
+  const html = getMedicalHtml();
+
+  // Deflect the 3 Big Questions
+  const q1 = /Do you take my insurance\??/i.test(html);
+  const q2 = /Are you accepting new patients\??/i.test(html);
+  const q3 = /Can I book for next Tuesday\??/i.test(html);
+
+  const missingQuestions = [];
+  if (!q1) missingQuestions.push('"Do you take my insurance?"');
+  if (!q2) missingQuestions.push('"Are you accepting new patients?"');
+  if (!q3) missingQuestions.push('"Can I book for next Tuesday?"');
+
+  if (missingQuestions.length > 0) {
+    throw new Error(`Front-desk triage missing deflection copy for questions: ${missingQuestions.join(', ')}`);
+  }
+
+  // Insurance carrier list (minimum 4 recognized carriers)
+  const carriers = ['Blue Shield', 'Anthem', 'Medicare', 'Medi-Cal', 'CalViva', 'UnitedHealthcare', 'Aetna', 'Cigna', 'Kaiser'];
+  const foundCarriers = carriers.filter(c => new RegExp(`\\b${c}\\b`, 'i').test(html));
+  if (foundCarriers.length < 4) {
+    throw new Error(`Insufficient insurance carrier list: found ${foundCarriers.length} (${foundCarriers.join(', ')}), expected at least 4.`);
+  }
+
+  // Scheduling portal integrations (minimum 2 recognized portals)
+  const portals = ['Zocdoc', 'NexHealth', 'Kareo', 'AthenaHealth'];
+  const foundPortals = portals.filter(p => new RegExp(`\\b${p}\\b`, 'i').test(html));
+  if (foundPortals.length < 2) {
+    throw new Error(`Insufficient scheduling portal integrations: found ${foundPortals.length} (${foundPortals.join(', ')}), expected at least 2.`);
+  }
+
+  // Downloadable new-patient intake packet
+  const hasIntakePacket = /(?:downloadable|printable|PDF)\s+(?:new-patient|patient|registration|intake)\s+(?:intake\s+packet|packet|forms?|documents?)/i.test(html) ||
+                          /intake packet/i.test(html);
+  if (!hasIntakePacket) {
+    throw new Error(`Missing downloadable new-patient intake packet reference or download action.`);
+  }
+
+  return `Front-desk triage verified: 3 Big Questions deflected, ${foundCarriers.length} insurance carriers listed, ${foundPortals.length} scheduling portals referenced, intake packet available`;
+});
+
+assertTest(6, 'T6.4', 'ADA Title III drive-by lawsuit defense and FTC 16 CFR Part 465 compliant review management', () => {
+  const html = getMedicalHtml();
+
+  // ADA Title III defense
+  const hasAda = /ADA Title III/i.test(html) && /drive-by/i.test(html);
+  const hasWcag = /WCAG 2\.1 AA/i.test(html) && /screen-reader/i.test(html);
+  if (!hasAda || !hasWcag) {
+    throw new Error(`Missing ADA Title III drive-by lawsuit defense, WCAG 2.1 AA text contrast, or screen-reader navigation copy.`);
+  }
+
+  // Compliant Review Management under FTC 16 CFR Part 465
+  const hasFtc = /16 CFR Part 465|FTC 16 CFR/i.test(html);
+  if (!hasFtc) {
+    throw new Error(`Missing explicit reference to FTC 16 CFR Part 465 regulations for compliant review acquisition.`);
+  }
+
+  // Zero public acknowledgment of patient identity in review responses
+  const hasZeroPhiReview = /(?:zero public acknowledgment|never confirm or deny|zero public PHI|without acknowledging patient)/i.test(html);
+  if (!hasZeroPhiReview) {
+    throw new Error(`Missing HIPAA review constraint: strictly prohibiting public acknowledgment or confirmation of patient identity in review replies.`);
+  }
+
+  return `ADA Title III defense (WCAG 2.1 AA, drive-by protection) and FTC 16 CFR Part 465 review compliance (zero public PHI) verified`;
+});
+
+assertTest(6, 'T6.5', 'Provider credentials, clinical philosophy, compliant before/after galleries & clinic photography', () => {
+  const html = getMedicalHtml();
+
+  // Provider credentials & clinical philosophy
+  const hasBoardCert = /board[\s-]certif/i.test(html);
+  const hasPhilosophy = /clinical philosoph/i.test(html);
+  if (!hasBoardCert || !hasPhilosophy) {
+    throw new Error(`Missing provider credentialing copy (board certifications and clinical philosophy).`);
+  }
+
+  // Compliant before-and-after galleries for elective/cash-pay practices
+  const hasGallery = /(?:before-and-after|before\s+and\s+after)/i.test(html);
+  const hasSpecialties = /(?:cosmetic dentistry|medspa|dermatology|elective)/i.test(html);
+  if (!hasGallery || !hasSpecialties) {
+    throw new Error(`Missing compliant before-and-after gallery architecture for elective/cash-pay practices (cosmetic dentistry, medspas, dermatology).`);
+  }
+
+  // Clinic interior photography
+  const hasClinicPhotos = /clinic interior|facility photograph/i.test(html);
+  if (!hasClinicPhotos) {
+    throw new Error(`Missing presentation of clinic interior photography and facility comfort.`);
+  }
+
+  return `Provider credentials (board certifications, clinical philosophy), compliant elective galleries, and clinic photography verified`;
+});
+
+assertTest(6, 'T6.6', 'Contractor vs. Medical Clinic comparative matrix rendered as semantic HTML table', () => {
+  const html = getMedicalHtml();
+
+  const tableMatch = html.match(/<table[^>]*>([\s\S]*?)<\/table>/i);
+  if (!tableMatch) {
+    throw new Error(`Missing semantic <table> element for Contractor vs. Medical Clinic comparison matrix.`);
+  }
+
+  const tableHtml = tableMatch[1];
+
+  // Header column checks
+  const hasContractorTh = /<th[^>]*>[\s\S]*?(?:Contractor|Home Services)[\s\S]*?<\/th>/i.test(tableHtml);
+  const hasMedicalTh = /<th[^>]*>[\s\S]*?(?:Medical Clinic|Healthcare)[\s\S]*?<\/th>/i.test(tableHtml);
+  if (!hasContractorTh || !hasMedicalTh) {
+    throw new Error(`Comparison table <th> headers must clearly contrast "Contractor / Home Services" with "Medical Clinic / Healthcare".`);
+  }
+
+  // 5 required comparative dimensions
+  const dims = [
+    { name: 'Primary Goal', test: /(?:Primary Goal|Goal)/i.test(tableHtml) && /(?:phone ring|paying leads)/i.test(tableHtml) && /(?:front-desk|friction|qualified appointments)/i.test(tableHtml) },
+    { name: 'Speed-to-Lead', test: /(?:Speed-to-Lead|Speed to Lead)/i.test(tableHtml) && /(?:<60s|60s|raw lead)/i.test(tableHtml) && /(?:Generic alert|secure portal|HIPAA-compliant portal)/i.test(tableHtml) },
+    { name: 'Data Storage', test: /(?:Data Storage|Storage)/i.test(tableHtml) && /(?:Google Sheets|Airtable|CRM)/i.test(tableHtml) && /(?:EHR|EMR|BAA|encrypted storage)/i.test(tableHtml) },
+    { name: 'Top Decision Factor', test: /(?:Decision Factor|Top Factor)/i.test(tableHtml) && /(?:Cost|speed|lead volume)/i.test(tableHtml) && /(?:Compliance|HIPAA|ADA|reputation|booking ease)/i.test(tableHtml) },
+    { name: 'Price Sensitivity', test: /(?:Price Sensitivity|Budget)/i.test(tableHtml) && /(?:Moderate|ROI)/i.test(tableHtml) && /(?:Low price sensitivity|substantial practice budgets|practice budgets)/i.test(tableHtml) },
+  ];
+
+  const missingDims = dims.filter(d => !d.test).map(d => d.name);
+  if (missingDims.length > 0) {
+    throw new Error(`Comparison matrix table missing required dimensions: ${missingDims.join(', ')}`);
+  }
+
+  return `Semantic comparison table verified across all 5 operational dimensions (Goal, Speed, Storage, Decision, Price)`;
+});
+
+assertTest(6, 'T6.7', 'Primary <h2> headings aligned with Google Business Profile categories for Maps justifications', () => {
+  const html = getMedicalHtml();
+  const h2s = extractTextBetweenTags(html, 'h2');
+
+  const hasMedicalClinic = h2s.some(t => /medical clinic/i.test(t));
+  const hasDoctor = h2s.some(t => /\bdoctor\b/i.test(t));
+  const hasWebDesigner = h2s.some(t => /website designer/i.test(t));
+
+  const missingGbp = [];
+  if (!hasMedicalClinic) missingGbp.push('"Medical clinic"');
+  if (!hasDoctor) missingGbp.push('"Doctor"');
+  if (!hasWebDesigner) missingGbp.push('"Website designer"');
+
+  if (missingGbp.length > 0) {
+    throw new Error(`Missing required Google Business Profile category alignment in <h2> headings: ${missingGbp.join(', ')}. Headings found: ${h2s.join(' | ')}`);
+  }
+
+  return `Primary <h2> headings verified matching GBP categories ("Medical clinic", "Doctor", "Website designer") for Google Maps justifications`;
+});
+
+assertTest(6, 'T6.8', 'Generative Engine Optimization: Primary <h2> answer blocks are atomic 134–167 word semantic units', () => {
+  const html = getMedicalHtml();
+
+  // Search for explicit semantic units marked with data-geo-unit="true" or class="geo-unit"
+  const geoUnitRegex = /<(?:div|p|section)[^>]*(?:data-geo-unit=["']true["']|class=["'][^"']*geo-unit[^"']*["'])[^>]*>([\s\S]*?)<\/(?:div|p|section)>/gi;
+  let units = [];
+  let match;
+
+  while ((match = geoUnitRegex.exec(html)) !== null) {
+    units.push(match[1]);
+  }
+
+  // If no explicit data attributes, extract paragraphs immediately following the 3 GBP category <h2> headings
+  if (units.length === 0) {
+    const sectionRegex = /<h2[^>]*>([\s\S]*?)<\/h2>[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/gi;
+    let sMatch;
+    while ((sMatch = sectionRegex.exec(html)) !== null) {
+      const heading = sMatch[1].replace(/<[^>]+>/g, '').trim();
+      if (/medical clinic|doctor|website designer/i.test(heading)) {
+        units.push(sMatch[2]);
+      }
+    }
+  }
+
+  if (units.length === 0) {
+    throw new Error(`Zero GEO semantic answer units detected. Annotate primary <h2> answer blocks with data-geo-unit="true" or follow GBP headings with an atomic <p class="geo-unit">.`);
+  }
+
+  const lengthErrors = [];
+  const anchorErrors = [];
+
+  units.forEach((unitHtml, idx) => {
+    const wordCount = countWords(unitHtml);
+    const cleanText = unitHtml.replace(/<[^>]+>/g, ' ').trim();
+
+    if (wordCount < 134 || wordCount > 167) {
+      lengthErrors.push(`Unit ${idx + 1}: ${wordCount} words (must be strictly 134–167 words). Text snippet: "${cleanText.slice(0, 60)}..."`);
+    }
+
+    const hasLocalAnchor = /Fresno|Clovis|Madera|Central Valley/i.test(cleanText);
+    if (!hasLocalAnchor) {
+      anchorErrors.push(`Unit ${idx + 1} missing local entity anchor (Fresno, Clovis, Madera, or Central Valley).`);
+    }
+  });
+
+  if (lengthErrors.length > 0 || anchorErrors.length > 0) {
+    const issues = [...lengthErrors, ...anchorErrors].join('\n - ');
+    throw new Error(`GEO semantic unit violations:\n - ${issues}`);
+  }
+
+  return `Verified ${units.length} atomic GEO semantic units strictly conforming to 134–167 words with local entity anchors`;
+});
+
+assertTest(6, 'T6.9', 'Schema.org JSON-LD hasOfferCatalog includes Medical Practice offering and knowsAbout grounding', () => {
+  const jsonLd = getRootJsonLd();
+  const biz = findBusinessNode(jsonLd);
+  if (!biz) throw new Error(`Business entity node not found in Schema.org @graph.`);
+
+  // 1. Verify hasOfferCatalog contains Medical offering
+  const catalog = biz.hasOfferCatalog;
+  if (!catalog) throw new Error(`Missing "hasOfferCatalog" on business node.`);
+  const catalogStr = JSON.stringify(catalog);
+
+  const hasMedicalOffer = /medical|healthcare/i.test(catalogStr) && /HIPAA/i.test(catalogStr);
+  if (!hasMedicalOffer) {
+    throw new Error(`hasOfferCatalog must explicitly include the HIPAA-compliant Medical Practice Web Design service offering.`);
+  }
+
+  // 2. Verify knowsAbout array
+  const knowsAbout = biz.knowsAbout;
+  if (!knowsAbout || !Array.isArray(knowsAbout) || knowsAbout.length === 0) {
+    throw new Error(`Business node must include a non-empty "knowsAbout" array.`);
+  }
+
+  const knowsStr = JSON.stringify(knowsAbout);
+  const hasHipaaTopic = /HIPAA/i.test(knowsStr);
+  const hasAdaTopic = /ADA Title III/i.test(knowsStr);
+  const hasEhrTopic = /EHR/i.test(knowsStr);
+
+  const missingTopics = [];
+  if (!hasHipaaTopic) missingTopics.push('HIPAA Compliance');
+  if (!hasAdaTopic) missingTopics.push('ADA Title III Compliance');
+  if (!hasEhrTopic) missingTopics.push('EHR Portal Integration');
+
+  if (missingTopics.length > 0) {
+    throw new Error(`knowsAbout missing required healthcare web engineering topics: ${missingTopics.join(', ')}.`);
+  }
+
+  // 3. Confirm strict isolation of Wikidata URIs
+  const forbiddenWikidataInKnows = /wikidata\.org/i.test(knowsStr);
+  if (forbiddenWikidataInKnows) {
+    throw new Error(`CRITICAL: Geographic Wikidata URIs must NEVER appear in knowsAbout. Isolate exclusively in areaServed.`);
+  }
+
+  return `Schema.org JSON-LD verified: Medical offering in hasOfferCatalog, knowsAbout populated with HIPAA, ADA, and EHR topics`;
+});
+
+// ============================================================================
 // Output & Reporting Engine
 // ============================================================================
 
@@ -866,7 +1191,7 @@ function printHumanReport() {
   console.log(` Timestamp:   ${new Date().toISOString()}`);
   console.log('-'.repeat(78));
 
-  for (let tier = 1; tier <= 5; tier++) {
+  for (const tier of Object.keys(results.tiers).map(Number)) {
     if (targetTier !== null && targetTier !== tier) continue;
 
     const tData = results.tiers[tier];
