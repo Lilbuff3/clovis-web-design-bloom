@@ -1,0 +1,67 @@
+---
+import RootLayout from '../layouts/RootLayout.astro';
+import { Nav, Marquee } from '../components/Chrome';
+import { Hero } from '../components/Hero';
+import { Manifesto, ValleyZoom, RulesGallery } from '../components/Scenes';
+import { FourSeconds } from '../components/FourSeconds';
+import { Harvest } from '../components/Harvest';
+import { Season, Compare } from '../components/Season';
+import { Grower, Stand, Letters, FAQ } from '../components/Story';
+import { Contact, Footer } from '../components/Contact';
+
+const marqueeItems1 = [
+  "$500 landing pages",
+  "Live in 1 week",
+  "100/100 Google PageSpeed",
+  "100% Client-Owned",
+  "Zero monthly hostage fees",
+  "Google Maps 3-Pack Ready",
+  "Direct cell to the builder"
+];
+
+const marqueeItems2 = [
+  "Custom-built",
+  "Zero template bloat",
+  "Built for two bars of signal",
+  "Tap-to-call & text-to-book",
+  "Bilingual English + Español",
+  "Done-for-you copywriting"
+];
+---
+
+<RootLayout>
+  <Nav client:load />
+  
+  <main class="relative z-10 rounded-b-[40px] shadow-[0_40px_60px_-30px_rgba(30,43,35,.35)] md:rounded-b-[72px] bg-paper">
+    <Hero client:load />
+    
+    <Marquee
+      client:idle
+      className="bg-persimmon text-cream"
+      items={marqueeItems1}
+    />
+    
+    <Manifesto client:visible />
+    <ValleyZoom client:visible />
+    <FourSeconds client:visible />
+    <Harvest client:visible />
+    <Season client:visible />
+    <Compare client:visible />
+    <Grower client:visible />
+    <RulesGallery client:visible />
+    <Stand client:visible />
+    
+    <Marquee
+      client:idle
+      reverse
+      className="-rotate-[1.5deg] scale-[1.03] bg-leaf text-cream"
+      items={marqueeItems2}
+    />
+    
+    <Letters client:visible />
+    <FAQ client:visible />
+    <Contact client:visible />
+  </main>
+  
+  <Footer client:visible />
+</RootLayout>

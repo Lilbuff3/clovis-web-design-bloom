@@ -2,9 +2,6 @@ export const PHONE_DISPLAY = "(559) 575-3014";
 export const PHONE_TEL = "+15595753014";
 export const SMS_LINK = `sms:${PHONE_TEL}`;
 
-export const VIDEO_ORCHARD = "https://videos.pexels.com/video-files/855231/855231-hd_1920_1080_24fps.mp4";
-export const VIDEO_SHADOW = "https://videos.pexels.com/video-files/35084306/14863152_1920_1080_60fps.mp4";
-
 export const cases = [
   {
     no: "01",

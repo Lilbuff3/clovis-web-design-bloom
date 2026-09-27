@@ -1,0 +1,87 @@
+---
+import RootLayout from '../../layouts/RootLayout.astro';
+import { Nav } from '../../components/Chrome';
+import { Footer } from '../../components/Contact';
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+---
+
+<RootLayout 
+  title="Fresno Local SEO & Google Maps 3-Pack Optimization"
+  description="Dominate local search in Fresno and Clovis. Schema.org entity grounding, localized keyword silos, and high-converting landing pages. Direct with Adam."
+>
+  <Nav client:load />
+
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-leaf">
+      GBP Secondary Category: Internet Marketing Service · Fresno, CA
+    </div>
+    
+    <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
+      Fresno Local SEO &amp; Google Maps 3-Pack
+    </h1>
+
+    <p class="mt-6 text-xl leading-relaxed text-ink/85">
+      Win the top 3 spots in Google Maps across Fresno, Clovis, Madera, and the broader Central Valley. As a specialized Fresno internet marketing service, we combine deep Schema.org entity architecture, localized service silos, and mobile sites that convert searchers into immediate phone calls.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4 items-center">
+      <a 
+        href={SMS_LINK}
+        class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+      >
+        <span>💬</span> Text Adam at {PHONE_DISPLAY}
+      </a>
+      <a 
+        href={`tel:${PHONE_TEL}`}
+        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
+      >
+        <span>📞</span> Call {PHONE_DISPLAY}
+      </a>
+    </div>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+        Knowledge Graph Entity Grounding for Central Valley Businesses
+      </h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Google's search algorithms no longer rely on simple keyword stuffing. Modern local SEO requires authoritative Schema.org JSON-LD linked directly to authoritative Wikidata entities such as Q949704 (Clovis), Q43048 (Fresno), and Q271014 (Central Valley).
+      </p>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        By connecting your Google Business Profile categories directly with machine-readable structured data in your website's source code, your company establishes undeniable geographic relevance and ranking authority across the entire Fresno metropolitan area.
+      </p>
+    </section>
+
+    <section class="mt-12 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+        Verified Central Valley Case Studies
+      </h2>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
+          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Trade Contractor SEO</div>
+          <h3 class="font-display text-xl text-ink font-medium mt-1">Big Bros Dumpster Rentals</h3>
+          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
+            Captured #1 Google ranking in Clovis and Fresno commercial waste search through structured Wikidata entity grounding and sub-second mobile page loads.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
+          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Clinical Authority</div>
+          <h3 class="font-display text-xl text-ink font-medium mt-1">Kidney Specialist Inc.</h3>
+          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
+            Secured +140% patient referral growth and dominant regional search presence across Fresno and Madera with HIPAA-compliant, zero-PHI web design.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+        Conversion-Focused Architecture That Turns Clicks into Jobs
+      </h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Ranking number one in Google Maps is useless if your site fails to capture the lead. Every page we build features instant tap-to-call, text-to-book integrations, and sub-second load times designed for trade contractors and service providers.
+      </p>
+    </section>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

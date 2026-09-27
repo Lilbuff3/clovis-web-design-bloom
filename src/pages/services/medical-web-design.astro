@@ -1,0 +1,65 @@
+---
+import RootLayout from '../../layouts/RootLayout.astro';
+import { Nav } from '../../components/Chrome';
+import { Footer } from '../../components/Contact';
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+---
+
+<RootLayout 
+  title="Medical Practice Web Design — HIPAA Compliant, Zero-PHI Architecture"
+  description="Private practice medical websites in Fresno & Central Valley. 100/100 PageSpeed, accessible typography, zero online PHI liability. Direct with Adam."
+>
+  <Nav client:load />
+
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">
+      Healthcare Web Engineering · Fresno &amp; Central Valley, CA
+    </div>
+    
+    <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
+      Medical Practice Web Design
+    </h1>
+
+    <p class="mt-6 text-xl leading-relaxed text-ink/85">
+      Zero-PHI web design for medical clinics, private practices, and healthcare specialists in Fresno, Clovis, and Madera. 100% HIPAA compliance by architectural design, WCAG 2.1 AA accessibility, and perfect 100/100 performance scores.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4 items-center">
+      <a 
+        href={SMS_LINK}
+        class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+      >
+        <span>💬</span> Text Adam at {PHONE_DISPLAY}
+      </a>
+      <a 
+        href={`tel:${PHONE_TEL}`}
+        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
+      >
+        <span>📞</span> Call {PHONE_DISPLAY}
+      </a>
+    </div>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+        Architectural Zero-PHI: Total Immunity from Data Breach Liability
+      </h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Many digital agencies install vulnerable third-party web forms, tracking pixels (like Meta Pixel and Google Analytics), and contact forms that unintentionally collect Protected Health Information (PHI). This exposes medical practices to severe HIPAA violations and regulatory audits under OCR guidelines.
+      </p>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Our healthcare websites eliminate PHI liability entirely at the architectural level. We never collect, store, or transmit patient medical records through browser databases. Instead, we provide secure downloadable intake documentation, verified telephone routing, and direct EHR portal linkage.
+      </p>
+    </section>
+
+    <section class="mt-12 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+        Clinical Case Study: Kidney Specialist Inc.
+      </h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        For Dr. Masood's nephrology practice in Madera and Fresno, we redesigned their patient portal with full English and Spanish bilingual architecture, 12.6:1 WCAG 2.1 AA text contrast ratio, and zero online form collection. Provider referrals increased by over 140% while the practice achieved a perfect 100/100 Google PageSpeed score.
+      </p>
+    </section>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

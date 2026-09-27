@@ -1,22 +1,14 @@
 import { useState } from "react";
-import { care, faqs, letters, plans, SMS_LINK, VIDEO_SHADOW } from "../lib/data";
+import { care, faqs, letters, plans, SMS_LINK } from "../lib/data";
 
 export function Grower() {
   return (
     <section id="grower" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
         <div className="reveal relative lg:col-span-5">
-          <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush">
-            <img src="/images/studio.jpg" alt="Adam's sunlit workbench in Clovis with a laptop, sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" />
-            <video
-              src={VIDEO_SHADOW}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-multiply grayscale"
-              aria-hidden
-            />
+          <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush shadow-xl">
+            <img src="/images/studio.jpg" alt="Adam's sunlit workbench in Clovis with a laptop, sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-persimmon/10 mix-blend-multiply" aria-hidden="true" />
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
             <div>

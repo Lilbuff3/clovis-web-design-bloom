@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL, VIDEO_SHADOW } from "../lib/data";
+import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 
 const needs = ["A one-page site ($500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
@@ -37,14 +37,9 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">
-      <video
-        src={VIDEO_SHADOW}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[.14] mix-blend-multiply grayscale"
+      <div 
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-persimmon/[0.04] to-paper" 
+        aria-hidden="true"
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
@@ -163,20 +158,28 @@ export function Footer() {
   return (
     <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
       <div data-footer-inner className="mx-auto max-w-7xl">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
             <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
+            <div className="text-ink/60">Services</div>
+            <a href="/services/web-design-clovis/" className="block hover:underline">Clovis Web Design</a>
+            <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
+            <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
+            <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
+          </div>
+          <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Visit</div>
-            <a href="#test" className="block hover:underline">Speed Test</a>
-            <a href="#harvest" className="block hover:underline">Client Work</a>
-            <a href="#season" className="block hover:underline">Process</a>
-            <a href="#stand" className="block hover:underline">Pricing</a>
+            <a href="/#test" className="block hover:underline">Speed Test</a>
+            <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#season" className="block hover:underline">Process</a>
+            <a href="/#stand" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
+            <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

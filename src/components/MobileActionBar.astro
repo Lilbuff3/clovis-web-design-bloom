@@ -1,0 +1,83 @@
+---
+import { PHONE_DISPLAY, PHONE_TEL } from '../lib/data';
+---
+
+<aside class="fixed inset-x-0 bottom-0 z-40 block md:hidden bg-cream/95 backdrop-blur-md border-t border-ink/10 px-4 py-2.5 shadow-[0_-10px_25px_-5px_rgba(30,43,35,0.15)]">
+  <div class="flex items-center justify-between gap-2 max-w-lg mx-auto">
+    <!-- Availability indicator -->
+    <div class="flex items-center gap-1.5 font-mono text-[11px] text-ink/75">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-leaf opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-leaf"></span>
+      </span>
+      <span class="truncate">Adam's at the workbench · Available</span>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-2 shrink-0">
+      <a
+        href={`tel:${PHONE_TEL}`}
+        class="inline-flex items-center gap-1 rounded-full bg-ink/10 px-3 py-1.5 font-mono text-[12px] font-semibold text-ink transition hover:bg-ink/20"
+        aria-label="Call Adam"
+      >
+        <span>📞</span> Call
+      </a>
+      <a
+        href={`sms:${PHONE_TEL}`}
+        class="inline-flex items-center gap-1 rounded-full bg-persimmon px-3 py-1.5 font-mono text-[12px] font-semibold text-cream shadow transition hover:bg-persimmon-deep"
+        aria-label="Text Adam"
+      >
+        <span>💬</span> Text
+      </a>
+      <button
+        type="button"
+        data-audit="true"
+        id="audit-drawer-btn"
+        class="inline-flex items-center gap-1 rounded-full border border-ink/20 bg-cream px-3 py-1.5 font-mono text-[12px] font-medium text-ink transition hover:bg-ink/5"
+      >
+        Instant Audit
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Slide-up Instant Audit Drawer Dialog -->
+<dialog id="audit-modal" class="fixed inset-x-0 bottom-0 top-auto z-50 m-0 w-full max-w-lg rounded-t-3xl border-t border-ink/15 bg-paper p-6 shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-sm">
+  <div class="flex items-start justify-between">
+    <div>
+      <div class="font-mono text-[11px] uppercase tracking-widest text-persimmon">Free 60-Second Review</div>
+      <h3 class="font-display mt-1 text-2xl font-semibold text-ink">Instant Audit Request</h3>
+    </div>
+    <button type="button" id="close-audit-modal" class="rounded-full p-2 text-ink/60 hover:text-ink">
+      ✕
+    </button>
+  </div>
+  <p class="mt-2 text-sm text-ink/80">Text your website URL directly to Adam's cell for an honest speed &amp; SEO audit.</p>
+  <div class="mt-4 flex flex-col gap-3">
+    <a
+      href={`sms:${PHONE_TEL}?&body=${encodeURIComponent("Hi Adam, could you do a quick audit on my website?")}`}
+      class="flex items-center justify-center rounded-full bg-persimmon py-3 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+    >
+      Text Adam ({PHONE_DISPLAY})
+    </a>
+  </div>
+</dialog>
+
+<script>
+  const btn = document.getElementById('audit-drawer-btn');
+  const modal = document.getElementById('audit-modal') as HTMLDialogElement | null;
+  const closeBtn = document.getElementById('close-audit-modal');
+
+  btn?.addEventListener('click', () => {
+    modal?.showModal();
+  });
+  closeBtn?.addEventListener('click', () => {
+    modal?.close();
+  });
+  modal?.addEventListener('click', (e) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+    if (!isInDialog) modal.close();
+  });
+</script>

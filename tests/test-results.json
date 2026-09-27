@@ -1,0 +1,219 @@
+{
+  "timestamp": "2026-09-27T08:17:33.248Z",
+  "total": 23,
+  "passed": 23,
+  "failed": 0,
+  "skipped": 0,
+  "successRate": 100,
+  "tiers": {
+    "1": {
+      "name": "Build & Static Pre-rendering Architecture",
+      "tests": [
+        {
+          "id": "T1.1",
+          "tier": 1,
+          "title": "Static HTML file generation for all 5 required route silos",
+          "status": "PASS",
+          "error": null,
+          "details": "All 5 route silos exist as static pre-rendered HTML files in dist/"
+        },
+        {
+          "id": "T1.2",
+          "tier": 1,
+          "title": "Pure semantic first-byte copy (h1, h2, p) across all 5 routes",
+          "status": "PASS",
+          "error": null,
+          "details": "All 5 routes contain rich semantic copy on first byte (verified h1, h2, and p elements)"
+        },
+        {
+          "id": "T1.3",
+          "tier": 1,
+          "title": "Zero empty client-side mounting shells (<div id=\"root\"></div>) in dist/",
+          "status": "PASS",
+          "error": null,
+          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 5 HTML files"
+        },
+        {
+          "id": "T1.4",
+          "tier": 1,
+          "title": "Zero external references to fonts.googleapis.com or fonts.gstatic.com in dist/",
+          "status": "PASS",
+          "error": null,
+          "details": "Zero external Google Fonts calls found across all dist/ assets"
+        },
+        {
+          "id": "T1.5",
+          "tier": 1,
+          "title": "Zero external references to videos.pexels.com in dist/",
+          "status": "PASS",
+          "error": null,
+          "details": "Zero external Pexels video stream references found across all dist/ assets"
+        },
+        {
+          "id": "T1.6",
+          "tier": 1,
+          "title": "Self-hosted fonts (.woff2) exist with valid binary headers and family coverage",
+          "status": "PASS",
+          "error": null,
+          "details": "Found 10 valid self-hosted .woff2 fonts with verified \"wOF2\" binary headers covering required typography"
+        }
+      ]
+    },
+    "2": {
+      "name": "Knowledge Graph & Schema.org JSON-LD Verification",
+      "tests": [
+        {
+          "id": "T2.1",
+          "tier": 2,
+          "title": "Valid Schema.org JSON-LD <script> with @graph in root layout",
+          "status": "PASS",
+          "error": null,
+          "details": "Valid JSON-LD @graph found with 1 entity nodes"
+        },
+        {
+          "id": "T2.2",
+          "tier": 2,
+          "title": "@type includes [\"LocalBusiness\", \"ProfessionalService\"]",
+          "status": "PASS",
+          "error": null,
+          "details": "Business entity node correctly typed as [\"LocalBusiness\", \"ProfessionalService\"]"
+        },
+        {
+          "id": "T2.3",
+          "tier": 2,
+          "title": "Core business identity (name, telephone: +15595753014, priceRange)",
+          "status": "PASS",
+          "error": null,
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"$500 - $5,000\""
+        },
+        {
+          "id": "T2.4",
+          "tier": 2,
+          "title": "Founder Person node for Adam Youssef",
+          "status": "PASS",
+          "error": null,
+          "details": "Verified founder Person node: Adam Youssef"
+        },
+        {
+          "id": "T2.5",
+          "tier": 2,
+          "title": "areaServed contains Wikidata URIs (Q949704, Q43048, Q271014)",
+          "status": "PASS",
+          "error": null,
+          "details": "All 3 required Wikidata entities (Q949704, Q43048, Q271014) present in areaServed"
+        },
+        {
+          "id": "T2.6",
+          "tier": 2,
+          "title": "CRITICAL TEST: Geographic Wikidata URIs EXCLUSIVELY in areaServed, NEVER in top-level sameAs",
+          "status": "PASS",
+          "error": null,
+          "details": "PASSED: Top-level sameAs contains 0 geographic/Wikidata URIs; all geographic entities isolated in areaServed"
+        },
+        {
+          "id": "T2.7",
+          "tier": 2,
+          "title": "Top-level sameAs contains only verified official agency profiles",
+          "status": "PASS",
+          "error": null,
+          "details": "Top-level sameAs contains 2 verified official agency profiles"
+        },
+        {
+          "id": "T2.8",
+          "tier": 2,
+          "title": "hasOfferCatalog with Starter ($500) and Growth ($2,500) services",
+          "status": "PASS",
+          "error": null,
+          "details": "hasOfferCatalog successfully configured with Starter ($500) and Growth ($2,500) offerings"
+        }
+      ]
+    },
+    "3": {
+      "name": "Mobile Performance, Action Bar & Above-the-Fold UX",
+      "tests": [
+        {
+          "id": "T3.1",
+          "tier": 3,
+          "title": "Mobile Action Bar with tap-to-call, tap-to-text, availability status, and audit trigger",
+          "status": "PASS",
+          "error": null,
+          "details": "Mobile Action Bar verified with tap-to-call, tap-to-text, availability status, and audit trigger"
+        },
+        {
+          "id": "T3.2",
+          "tier": 3,
+          "title": "Lead & Latency Visualizer relocated to FourSeconds (#test) and NOT in hero (#top)",
+          "status": "PASS",
+          "error": null,
+          "details": "Lead & Latency Visualizer verified inside FourSeconds section (#test) and confirmed absent from Hero (#top)"
+        },
+        {
+          "id": "T3.3",
+          "tier": 3,
+          "title": "Hero section displays headline, $500 pricing anchor, and primary CTA for mobile fold compliance",
+          "status": "PASS",
+          "error": null,
+          "details": "Hero section contains headline, $500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
+        }
+      ]
+    },
+    "4": {
+      "name": "Multi-Page Route Silos & Inter-linkage",
+      "tests": [
+        {
+          "id": "T4.1",
+          "tier": 4,
+          "title": "Direct founder phone / SMS contact links present across all 5 route silos",
+          "status": "PASS",
+          "error": null,
+          "details": "All 5 route silos contain direct founder phone or SMS contact access"
+        },
+        {
+          "id": "T4.2",
+          "tier": 4,
+          "title": "Inter-silo navigation linkage across all service silos",
+          "status": "PASS",
+          "error": null,
+          "details": "Root layout links directly to all 4 specialized service silos"
+        },
+        {
+          "id": "T4.3",
+          "tier": 4,
+          "title": "Valid HTML5 document structure across all routes (doctype, charset, viewport meta)",
+          "status": "PASS",
+          "error": null,
+          "details": "All 5 routes conform to valid HTML5 boilerplate with charset, viewport, and title"
+        }
+      ]
+    },
+    "5": {
+      "name": "Binary Integrity, Adversarial & Robustness Verification",
+      "tests": [
+        {
+          "id": "T5.1",
+          "tier": 5,
+          "title": "WOFF2 font binary integrity: minimum byte density and non-empty glyph tables",
+          "status": "PASS",
+          "error": null,
+          "details": "All 10 WOFF2 font files verified with authentic byte density (>5KB)"
+        },
+        {
+          "id": "T5.2",
+          "tier": 5,
+          "title": "Adversarial check: Schema.org JSON-LD contains zero unescaped tags or injection payloads",
+          "status": "PASS",
+          "error": null,
+          "details": "Schema.org JSON-LD verified clean of injection vectors and unescaped HTML tags"
+        },
+        {
+          "id": "T5.3",
+          "tier": 5,
+          "title": "Absence of legacy blocking SPA artifacts (Lenis singleton, GSAP ticker, Preloader) in production",
+          "status": "PASS",
+          "error": null,
+          "details": "Zero legacy smooth scroll tickers or blocking preloader hooks present in production bundles"
+        }
+      ]
+    }
+  }
+}
