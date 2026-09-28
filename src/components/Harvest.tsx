@@ -225,7 +225,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 export function Harvest() {
   useGlobalReveal();
   return (
-    <section id="harvest" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
+    <section id="harvest" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
@@ -244,14 +244,14 @@ export function Harvest() {
           </p>
         </div>
 
-        <div className="mt-20 space-y-32">
+        <div className="mt-14 space-y-16 md:space-y-20">
           {cases.map((c, i) => (
             <CaseSpread key={c.no} c={c} flip={i % 2 === 1} />
           ))}
         </div>
 
         {/* Project 03 — Modern Upcoming Project Specification */}
-        <div className="reveal relative mt-32 overflow-hidden rounded-[40px] bg-leaf text-cream">
+        <div className="reveal relative mt-16 md:mt-20 overflow-hidden rounded-[40px] bg-leaf text-cream">
           <div className="grid items-center md:grid-cols-2">
             <div className="p-8 md:p-14">
               <div className="font-mono text-[11px] uppercase tracking-[.2em] text-citrus">Project Nº 03 — Next in line</div>

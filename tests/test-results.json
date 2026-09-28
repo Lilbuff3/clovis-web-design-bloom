@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-28T03:48:22.797Z",
+  "timestamp": "2026-09-28T10:20:13.469Z",
   "total": 32,
   "passed": 32,
   "failed": 0,
@@ -224,7 +224,7 @@
           "title": "Medical practice web design silo pre-rendered static HTML with deep semantic volume",
           "status": "PASS",
           "error": null,
-          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 12071 chars)"
+          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 12173 chars)"
         },
         {
           "id": "T6.2",

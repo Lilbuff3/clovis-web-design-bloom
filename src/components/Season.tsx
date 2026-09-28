@@ -128,7 +128,7 @@ export function Season() {
   const [ref, p] = useSectionProgress<HTMLDivElement>();
   const active = Math.min(3, Math.floor(p * 4));
   return (
-    <section id="season" className="relative px-5 py-24 md:px-8 md:py-36">
+    <section id="season" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The Process</div>
@@ -165,7 +165,7 @@ export function Season() {
             </div>
           </div>
 
-          <div className="space-y-6 lg:col-span-7 lg:space-y-[18vh] lg:py-[8vh]">
+          <div className="space-y-6 lg:col-span-7 lg:space-y-12 lg:py-4">
             {seasons.map((s, i) => (
               <div
                 key={s.key}
@@ -203,7 +203,7 @@ export function Compare() {
   useGlobalReveal();
   const [mine, setMine] = useState(true);
   return (
-    <section id="compare" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32">
+    <section id="compare" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useGlobalReveal } from "../lib/hooks";
+import { LeadLeakAudit } from "./LeadLeakAudit";
 
 const END = 7200;
 
@@ -200,7 +201,7 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="test" className="relative px-5 py-24 md:px-8 md:py-36">
+    <section id="test" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -265,7 +266,7 @@ export function FourSeconds() {
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
+        <div className="mt-14 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
           {[
             ["Largest Contentful Paint", "< 1.0s", "Google calls anything under 2.5s good."],
             ["Cumulative Layout Shift", "0.0", "Nothing jumps around while it loads."],
@@ -278,6 +279,11 @@ export function FourSeconds() {
               <div className="mt-3 text-sm text-ink/70">{d}</div>
             </div>
           ))}
+        </div>
+
+        {/* 60-Second Lead-Leak & Competitor Teardown */}
+        <div id="teardown" className="reveal mt-14 md:mt-20" style={{ ["--d" as string]: "200ms" }}>
+          <LeadLeakAudit />
         </div>
       </div>
     </section>

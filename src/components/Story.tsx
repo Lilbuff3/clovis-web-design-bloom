@@ -5,7 +5,7 @@ import { useGlobalReveal } from "../lib/hooks";
 export function Grower() {
   useGlobalReveal();
   return (
-    <section id="grower" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
+    <section id="grower" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
         <div className="reveal relative lg:col-span-5">
           <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush shadow-xl">
@@ -60,7 +60,7 @@ export function Grower() {
 export function Stand() {
   useGlobalReveal();
   return (
-    <section id="stand" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
+    <section id="stand" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">06 — Transparent Pricing</div>
@@ -169,7 +169,7 @@ export function Stand() {
 export function Letters() {
   useGlobalReveal();
   return (
-    <section id="letters" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
+    <section id="letters" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/70">07 — Client Reviews</div>
         <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
@@ -219,7 +219,7 @@ export function FAQ() {
   useGlobalReveal();
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="relative px-5 py-24 md:px-8 md:py-36">
+    <section id="faq" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">

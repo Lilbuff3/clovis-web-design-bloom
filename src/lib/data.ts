@@ -265,6 +265,8 @@ export const knowsAbout = [
   "Zero-PHI Web Architecture",
   "Medical Practice Web Design",
   "Local SEO & Google Maps 3-Pack Optimization",
+  "Google Gemini AI Performance Audit",
+  "Core Web Vitals Optimization",
 ];
 
 export const hasOfferCatalog = {

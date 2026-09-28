@@ -38,7 +38,7 @@ export function Contact() {
   const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(message)}`;
 
   return (
-    <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-24 md:rounded-b-[72px] md:px-8 md:py-36">
+    <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-14 md:rounded-b-[72px] md:px-8 md:py-20">
       <div 
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-persimmon/[0.04] to-paper" 
         aria-hidden="true"
