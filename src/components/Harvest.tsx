@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cases, SMS_LINK } from "../lib/data";
-import { useCountUp } from "../lib/hooks";
+import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string; decimals?: number; display?: string };
 
@@ -93,44 +93,59 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 
             {/* Display Stage - 16:9 aspect-video matches exact 1280x720 preview dimensions */}
             <div className="relative aspect-video w-full overflow-hidden rounded-[20px] md:rounded-[24px] border border-ink/10 bg-paper">
-              {viewMode === "web" ? (
-                <div className="relative h-full w-full overflow-hidden group">
-                  <img
-                    src={c.previewImg}
-                    alt={`${c.client} hand-built website`}
-                    className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-3 right-3 rounded-full bg-ink/90 px-3 py-1.5 font-mono text-[11px] font-medium text-cream shadow-lg backdrop-blur-sm transition-transform hover:scale-105"
-                  >
-                    Open live website ↗
-                  </a>
+              {/* Web preview buffer */}
+              <div
+                aria-hidden={viewMode !== "web"}
+                className={`absolute inset-0 h-full w-full overflow-hidden group transition-opacity duration-300 ${
+                  viewMode === "web" ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
+                }`}
+              >
+                <img
+                  src={c.previewImg}
+                  alt={`${c.client} hand-built website`}
+                  className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={viewMode === "web" ? 0 : -1}
+                  className="absolute bottom-3 right-3 rounded-full bg-ink/90 px-3 py-1.5 font-mono text-[11px] font-medium text-cream shadow-lg backdrop-blur-sm transition-transform hover:scale-105"
+                >
+                  Open live website ↗
+                </a>
+              </div>
+
+              {/* On-site photo buffer */}
+              <div
+                aria-hidden={viewMode !== "photo"}
+                className={`absolute inset-0 h-full w-full overflow-hidden transition-opacity duration-300 ${
+                  viewMode === "photo" ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
+                }`}
+              >
+                <img
+                  src={c.photoImg}
+                  alt={`${c.client} on-site photography`}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/60 to-transparent p-4 text-cream">
+                  <span className="font-mono text-[11px] uppercase tracking-wider">{c.place}</span>
                 </div>
-              ) : (
-                <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    src={c.photoImg}
-                    alt={`${c.client} on-site photography`}
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/60 to-transparent p-4 text-cream">
-                    <span className="font-mono text-[11px] uppercase tracking-wider">{c.place}</span>
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
 
             {/* Bottom inspection pill toggle */}
             <div className="mt-2.5 flex items-center justify-between border-t border-dashed border-ink/15 px-2 pt-2 font-mono text-[11px]">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5" role="tablist" aria-label="Project view mode">
                 <button
                   type="button"
+                  role="tab"
+                  aria-selected={viewMode === "web"}
                   onClick={() => setViewMode("web")}
                   className={`rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "web"
@@ -142,6 +157,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 </button>
                 <button
                   type="button"
+                  role="tab"
+                  aria-selected={viewMode === "photo"}
                   onClick={() => setViewMode("photo")}
                   className={`rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "photo"
@@ -206,6 +223,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 }
 
 export function Harvest() {
+  useGlobalReveal();
   return (
     <section id="harvest" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
@@ -232,7 +250,7 @@ export function Harvest() {
           ))}
         </div>
 
-        {/* Project 03 */}
+        {/* Project 03 — Modern Upcoming Project Specification */}
         <div className="reveal relative mt-32 overflow-hidden rounded-[40px] bg-leaf text-cream">
           <div className="grid items-center md:grid-cols-2">
             <div className="p-8 md:p-14">
@@ -247,8 +265,63 @@ export function Harvest() {
                 Claim a spot by text <span aria-hidden>→</span>
               </a>
             </div>
-            <div className="clip-reveal relative h-80 md:h-full md:min-h-[480px]">
-              <img src="/images/seedling.jpg" alt="A seedling sprouting in a terracotta pot on a sunny windowsill" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+            
+            <div className="relative flex h-full min-h-[360px] md:min-h-[480px] flex-col justify-center p-6 md:p-10 bg-ink/95 text-cream border-t md:border-t-0 md:border-l border-cream/10">
+              <div className="rounded-2xl border border-cream/15 bg-ink/80 p-5 shadow-2xl backdrop-blur-sm font-mono text-xs">
+                {/* Code Window Header */}
+                <div className="flex items-center justify-between border-b border-cream/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-persimmon/80" />
+                    <span className="h-3 w-3 rounded-full bg-citrus/80" />
+                    <span className="h-3 w-3 rounded-full bg-leaf/80" />
+                  </div>
+                  <span className="text-[11px] text-cream/50 tracking-wider">upcoming-launch.config.ts</span>
+                  <span className="rounded bg-leaf/20 px-2 py-0.5 text-[10px] font-semibold text-leaf">READY FOR QUEUE</span>
+                </div>
+
+                {/* Wireframe Specs */}
+                <div className="mt-4 space-y-2.5 font-mono text-[12px] leading-relaxed">
+                  <p className="text-cream/40">// Production Blueprint · Slot Nº 03</p>
+                  <p>
+                    <span className="text-persimmon">const</span> <span className="text-citrus">clientProject</span> = &#123;
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">tier:</span> <span className="text-sage">"Starter Launchpad"</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">rate:</span> <span className="text-citrus">"$500 (Locked)"</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">turnaround:</span> <span className="text-sage">"6 Days to Deployment"</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">speedTarget:</span> <span className="text-leaf">"100/100 Core Web Vitals"</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">ownership:</span> <span className="text-sage">"100% Client-Owned Keys"</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-cream/70">agencyRetainer:</span> <span className="text-persimmon">$0.00</span>
+                  </p>
+                  <p>&#125;;</p>
+                </div>
+
+                {/* Wireframe / Blueprint Miniature Grid */}
+                <div className="mt-5 rounded-xl border border-dashed border-cream/20 bg-cream/5 p-3.5">
+                  <div className="flex items-center justify-between text-[11px] text-cream/60">
+                    <span>STATUS: ALLOCATING NEXT LOCAL BUSINESS</span>
+                    <span className="flex items-center gap-1.5 text-citrus font-semibold">
+                      <span className="h-2 w-2 rounded-full bg-citrus animate-ping" />
+                      RESERVED SPOT
+                    </span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-3 gap-2">
+                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Hero + CTA</div>
+                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Mobile Speed</div>
+                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Maps 3-Pack</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

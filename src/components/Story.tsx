@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { care, faqs, letters, plans, SMS_LINK } from "../lib/data";
+import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
+  useGlobalReveal();
   return (
     <section id="grower" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
@@ -56,6 +58,7 @@ export function Grower() {
 }
 
 export function Stand() {
+  useGlobalReveal();
   return (
     <section id="stand" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
@@ -164,6 +167,7 @@ export function Stand() {
 }
 
 export function Letters() {
+  useGlobalReveal();
   return (
     <section id="letters" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-7xl">
@@ -188,19 +192,10 @@ export function Letters() {
               style={{ ["--d" as string]: `${i * 120}ms` }}
             >
               <div className="absolute right-6 top-6 flex items-start gap-3">
-                <div className="relative hidden h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-ink/25 font-mono text-[8px] uppercase leading-tight tracking-widest text-ink/40 sm:flex">
-                  <span className="text-center">
-                    {l.place.split(",")[0]}
-                    <br />
-                    2025
+                <div className="relative flex h-14 w-28 items-center justify-center rounded-full border border-ink/20 bg-paper/70 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-ink/70 shadow-sm backdrop-blur-sm">
+                  <span className="text-center font-medium">
+                    {l.place.split(",")[0]} · Verified
                   </span>
-                </div>
-                <div className={`flex h-20 w-16 flex-col items-center justify-center ${l.stamp} p-1`} style={{ outline: "3px dotted #fcf8f0", outlineOffset: "-3px" }}>
-                  <svg viewBox="0 0 24 24" className="h-8 w-8">
-                    <circle cx="12" cy="13" r="7" fill="#EE5A2F" />
-                    <path d="M12 6c1.4-2.8 4-3.6 6.2-3-.7 2.4-3.1 3.9-6.2 3z" fill="#2E6A4C" />
-                  </svg>
-                  <span className="mt-1 font-mono text-[7px] uppercase tracking-widest">Clovis</span>
                 </div>
               </div>
               <div className="font-display wonk text-7xl leading-none text-persimmon">“</div>
@@ -221,6 +216,7 @@ export function Letters() {
 }
 
 export function FAQ() {
+  useGlobalReveal();
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="faq" className="relative px-5 py-24 md:px-8 md:py-36">

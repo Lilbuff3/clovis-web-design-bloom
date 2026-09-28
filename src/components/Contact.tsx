@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
+import { useGlobalReveal } from "../lib/hooks";
 
 const needs = ["A one-page site ($500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
 const whens = ["ASAP", "This month", "Just looking"];
@@ -20,6 +21,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 export function Contact() {
+  useGlobalReveal();
   const [name, setName] = useState("");
   const [trade, setTrade] = useState("");
   const [need, setNeed] = useState(needs[0]);

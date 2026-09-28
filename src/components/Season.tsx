@@ -1,70 +1,130 @@
 import { useState } from "react";
 import { compare, seasons } from "../lib/data";
-import { useSectionProgress } from "../lib/hooks";
+import { useSectionProgress, useGlobalReveal } from "../lib/hooks";
 
-function Leaf({ x, y, flip, show, scale = 1 }: { x: number; y: number; flip?: boolean; show: boolean; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -scale : scale} ${scale})`}>
-      <g style={{ transform: show ? "scale(1)" : "scale(0)", transformOrigin: "0 0", transition: "transform .8s cubic-bezier(.3,1.6,.5,1)" }}>
-        <path d="M0 0 C 18 -26, 58 -30, 78 -14 C 58 6, 22 12, 0 0 Z" fill="#2E6A4C" />
-        <path d="M0 0 C 26 -10, 50 -14, 76 -14" stroke="#DBE5CF" strokeWidth="1.5" fill="none" opacity=".6" />
-      </g>
-    </g>
-  );
-}
+const milestones = [
+  {
+    step: "01",
+    name: "Discovery",
+    when: "Day 1",
+    description: "45-minute interview & local Google Maps audit",
+    badge: "Strategic Intake",
+  },
+  {
+    step: "02",
+    name: "Copy & Design",
+    when: "Days 2–3",
+    description: "Done-for-you copywriting & mobile layout proof",
+    badge: "No Blank Forms",
+  },
+  {
+    step: "03",
+    name: "Custom Build",
+    when: "Days 3–5",
+    description: "Semantic hand-written code & 100/100 speed tuning",
+    badge: "Zero Bloat",
+  },
+  {
+    step: "04",
+    name: "Launch",
+    when: "Day 6+",
+    description: "Domain live, Google index verified & keys handed over",
+    badge: "100% Client-Owned",
+  },
+];
 
-function Fruit({ x, y, show, delay = 0 }: { x: number; y: number; show: boolean; delay?: number }) {
+function MilestoneStepper({ p, active }: { p: number; active: number }) {
   return (
-    <g transform={`translate(${x} ${y})`}>
-      <g style={{ transform: show ? "scale(1)" : "scale(0)", transformOrigin: "0 0", transition: `transform .9s cubic-bezier(.3,1.7,.5,1) ${delay}ms` }}>
-        <circle r="17" fill="#EE5A2F" />
-        <circle r="5" cx="-6" cy="-6" fill="#FFB43B" opacity=".7" />
-        <path d="M0 -17 c3 -6 8 -7 12 -6 -2 5 -7 7 -12 6z" fill="#2E6A4C" />
-      </g>
-    </g>
-  );
-}
+    <div className="flex h-full flex-col justify-between">
+      {/* Header */}
+      <div>
+        <div className="flex items-center justify-between border-b border-ink/10 pb-4 font-mono text-[11px] uppercase tracking-[.2em]">
+          <span className="font-semibold text-persimmon">Milestone Stepper</span>
+          <span className="text-ink/60">Phase {active + 1} of 4</span>
+        </div>
+        <div className="mt-4 font-display wonk text-4xl text-ink">
+          {milestones[active].name}
+        </div>
+      </div>
 
-function Plant({ p }: { p: number }) {
-  const stem = Math.min(1, p / 0.8);
-  return (
-    <svg viewBox="0 0 320 520" className="h-full w-full">
-      {/* sun rises */}
-      <circle cx="238" cy={150 - p * 60} r={40 + p * 16} fill="#FFB43B" opacity={0.25 + p * 0.55} />
-      {/* soil */}
-      <ellipse cx="160" cy="480" rx="120" ry="18" fill="#C9A77A" opacity=".45" />
-      <path d="M95 470 h130 l-14 44 h-102 z" fill="#D9774E" />
-      <rect x="88" y="458" width="144" height="18" rx="6" fill="#E58A5F" />
-      {/* seed */}
-      <ellipse cx="160" cy="458" rx="10" ry="7" fill="#7A5A3A" style={{ opacity: p < 0.05 ? 1 : 0.2, transition: "opacity .6s" }} />
-      {/* stem */}
-      <path
-        d="M160 458 C 150 400, 175 350, 158 290 S 150 180, 165 90"
-        fill="none"
-        stroke="#2E6A4C"
-        strokeWidth="7"
-        strokeLinecap="round"
-        pathLength={1}
-        strokeDasharray="1"
-        strokeDashoffset={1 - stem}
-      />
-      <Leaf x={162} y={400} show={p > 0.12} scale={0.8} />
-      <Leaf x={160} y={380} flip show={p > 0.2} scale={0.75} />
-      <Leaf x={160} y={310} show={p > 0.35} />
-      <Leaf x={158} y={285} flip show={p > 0.42} />
-      <Leaf x={154} y={210} show={p > 0.56} scale={0.95} />
-      <Leaf x={156} y={190} flip show={p > 0.62} scale={0.9} />
-      <Leaf x={162} y={130} show={p > 0.72} scale={0.8} />
-      <Leaf x={164} y={112} flip show={p > 0.76} scale={0.7} />
-      <Fruit x={228} y={300} show={p > 0.84} />
-      <Fruit x={92} y={262} show={p > 0.86} delay={120} />
-      <Fruit x={214} y={206} show={p > 0.9} delay={240} />
-      <Fruit x={104} y={170} show={p > 0.93} delay={360} />
-    </svg>
+      {/* Stepper track */}
+      <div className="my-6 space-y-4">
+        {milestones.map((m, i) => {
+          const isDone = active > i || (i === 3 && p >= 0.95);
+          const isActive = active === i && !isDone;
+          return (
+            <div key={m.step} className="relative flex items-start gap-4">
+              {/* Connecting line between nodes */}
+              {i < milestones.length - 1 && (
+                <div
+                  className="absolute left-4 top-8 -bottom-4 w-0.5 bg-ink/10"
+                  aria-hidden="true"
+                >
+                  <div
+                    className="w-full bg-leaf transition-all duration-300"
+                    style={{
+                      height: `${Math.min(1, Math.max(0, p * 4 - i)) * 100}%`,
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Node indicator */}
+              <div
+                className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-mono text-xs font-semibold transition-all duration-300 ${
+                  isDone
+                    ? "bg-leaf text-cream shadow-sm"
+                    : isActive
+                    ? "bg-persimmon text-cream shadow-md ring-4 ring-persimmon/20"
+                    : "border-2 border-ink/20 bg-cream text-ink/40"
+                }`}
+              >
+                {isDone ? "✓" : m.step}
+              </div>
+
+              {/* Node details */}
+              <div className="flex-1 pb-1">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span
+                    className={`font-mono text-xs uppercase tracking-wider font-medium ${
+                      isActive ? "text-persimmon font-bold" : isDone ? "text-ink" : "text-ink/50"
+                    }`}
+                  >
+                    {m.name}
+                  </span>
+                  <span className="font-mono text-[10px] text-ink/50">{m.when}</span>
+                </div>
+                <p className="mt-1 text-[13px] leading-snug text-ink/75">{m.description}</p>
+                {isActive && (
+                  <span className="mt-2 inline-block rounded-full bg-persimmon/10 px-2.5 py-0.5 font-mono text-[10px] uppercase font-semibold text-persimmon">
+                    {m.badge}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Progress Footer */}
+      <div className="border-t border-ink/10 pt-4">
+        <div className="flex items-center justify-between font-mono text-[11px]">
+          <span className="text-ink/60">Milestone Progress</span>
+          <span className="font-semibold text-ink">{Math.round(p * 100)}%</span>
+        </div>
+        <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
+          <div
+            className="h-full bg-persimmon transition-all duration-150"
+            style={{ width: `${Math.min(100, Math.max(0, p * 100))}%` }}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 
 export function Season() {
+  useGlobalReveal();
   const [ref, p] = useSectionProgress<HTMLDivElement>();
   const active = Math.min(3, Math.floor(p * 4));
   return (
@@ -89,14 +149,8 @@ export function Season() {
         <div ref={ref} className="mt-16 grid gap-10 lg:grid-cols-12">
           <div className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-24 flex h-[calc(100vh-8rem)] flex-col">
-              <div className="relative flex-1 overflow-hidden rounded-[40px] bg-sky/60">
-                <div className="absolute left-6 top-6 font-mono text-[11px] uppercase tracking-[.2em] text-ink/60">
-                  Stage {active + 1} of 4
-                </div>
-                <div className="absolute right-6 top-4 font-display wonk text-6xl italic text-ink/90">{seasons[active].name}</div>
-                <div className="absolute inset-x-6 bottom-0 top-16">
-                  <Plant p={p} />
-                </div>
+              <div className="relative flex-1 overflow-hidden rounded-[40px] border border-ink/10 bg-cream p-7 shadow-xl">
+                <MilestoneStepper p={p} active={active} />
               </div>
               <div className="mt-4 grid grid-cols-4 gap-2">
                 {seasons.map((s, i) => (
@@ -146,6 +200,7 @@ export function Season() {
 }
 
 export function Compare() {
+  useGlobalReveal();
   const [mine, setMine] = useState(true);
   return (
     <section id="compare" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32">

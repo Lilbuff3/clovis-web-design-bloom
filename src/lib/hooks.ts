@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-/** Adds `.in` to every `.reveal` / `.line-mask` / [data-reveal] element as it enters the viewport. */
+/** Adds `.in` to every `.reveal` / `.line-mask` / .clip-reveal / [data-reveal] element as it enters the viewport. */
 export function useGlobalReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]"));
@@ -15,7 +15,17 @@ export function useGlobalReveal() {
       },
       { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
     );
-    els.forEach((el) => io.observe(el));
+
+    // Immediately mark visible or already scrolled-past elements to avoid hydration flashes or scroll-up hiding
+    els.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add("in");
+      } else {
+        io.observe(el);
+      }
+    });
+
     return () => io.disconnect();
   }, []);
 }
