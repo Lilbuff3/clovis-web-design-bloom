@@ -137,7 +137,8 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 type="button"
                 key={t}
                 onClick={() => setTrade(t)}
-                className={`rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-200 ${
+                aria-pressed={trade === t}
+                className={`rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${
                   trade === t
                     ? "scale-[1.02] border-ink bg-ink text-cream font-medium shadow-sm"
                     : "border-ink/20 bg-paper/60 text-ink/80 hover:border-ink/40 hover:bg-paper"
@@ -151,11 +152,12 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
         {/* Business Name and City */}
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
+          <label className="block" htmlFor="audit-business">
             <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
               2. Business name <span className="text-persimmon">*</span>
             </span>
             <input
+              id="audit-business"
               type="text"
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
@@ -165,11 +167,12 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             />
           </label>
 
-          <label className="block">
+          <label className="block" htmlFor="audit-city">
             <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
               3. City / Service Area
             </span>
             <input
+              id="audit-city"
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -180,12 +183,13 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
         </div>
 
         {/* Optional Website URL */}
-        <label className="block">
+        <label className="block" htmlFor="audit-url">
           <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
             <span>4. Current website URL (Optional)</span>
             <span className="text-ink/40">Leave blank if starting fresh</span>
           </span>
           <input
+            id="audit-url"
             type="text"
             value={websiteUrl}
             onChange={(e) => setWebsiteUrl(e.target.value)}
