@@ -14,6 +14,8 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory',
+    // One 13 KB stylesheet was the only render-blocking request (PageSpeed: ~1.5s on mobile).
+    inlineStylesheets: 'always',
   },
   integrations: [
     react(),

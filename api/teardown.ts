@@ -89,7 +89,7 @@ Identify 3 concrete search signals local competitors in ${city} rank for that st
 - Localized service silos or bilingual access (English + Spanish) for Central Valley customers.
 
 ### 3. The 3-Step Instant Fix Roadmap
-Show how a hand-coded Astro SSG site solves these leaks in 6 days for a $500 flat fee with 100% client code ownership.
+Show how a hand-coded Astro SSG site solves these leaks in 6 days for a $1,500 flat fee with 100% client code ownership.
 
 Keep sentences punchy and grounded in the Central Valley market. Do not use generic buzzwords or corporate jargon.`;
 
@@ -206,7 +206,7 @@ function generateFallbackStream(
 1. **Sub-1-Second Hand-Coded Astro Site:** Eliminates 100% of template bloat, scoring a verified 100/100 on Google PageSpeed with zero layout shift.
 2. **Local 3-Pack Schema Architecture:** Hard-codes deep geographic entity grounding directly into the source code to win Google Maps rankings.
 3. **Intent-Termination Mobile Conversion:** Deploys a persistent action bar that routes leads directly to your cell via SMS or direct call.
-- **Investment:** Launch offer is **$500 flat**, live in 6 days, with 100% client code ownership.`;
+- **Investment:** The Starter site is **$1,500 flat**, live in about a week, with 100% client code ownership.`;
 
   // Stream out the fallback text in realistic chunks with delay
   const encoder = new TextEncoder();

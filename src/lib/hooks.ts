@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-/** Adds `.in` to every `.reveal` / `.line-mask` / .clip-reveal / [data-reveal] element as it enters the viewport. */
+/** Marks every `.reveal` / `.line-mask` / .clip-reveal / [data-reveal] element with `data-in` as it enters the viewport.
+ *  An attribute, not a class: React rewrites `className` when a card's classes change, which would hide it again. */
 export function useGlobalReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]"));
@@ -8,7 +9,7 @@ export function useGlobalReveal() {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("in");
+            e.target.setAttribute("data-in", "");
             io.unobserve(e.target);
           }
         });
@@ -20,7 +21,7 @@ export function useGlobalReveal() {
     els.forEach((el) => {
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight) {
-        el.classList.add("in");
+        el.setAttribute("data-in", "");
       } else {
         io.observe(el);
       }
@@ -85,13 +86,14 @@ export function usePageScroll() {
   return { y, p };
 }
 
-/** Count up to a number when visible. */
+/** Count up to a number when visible. Starts at the real number, so the built HTML (and anyone without JS) never shows 0. */
 export function useCountUp(target: number, duration = 1600) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(target);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || el.getBoundingClientRect().top < window.innerHeight) return;
+    setVal(0);
     let raf = 0;
     const io = new IntersectionObserver(
       ([e]) => {

@@ -21,11 +21,14 @@ function RotatingBadge() {
 }
 
 function ClovisClock() {
-  const [now, setNow] = useState(() => new Date());
+  // Set after mount: the page is built once, so a build-time clock never matches the browser's and breaks hydration.
+  const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
+    setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 20000);
     return () => clearInterval(id);
   }, []);
+  if (!now) return <span>Clovis, California</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
   const status = hour >= 7 && hour < 19 ? "Adam's at the workbench" : hour >= 19 && hour < 23 ? "Adam's winding down — text anyway" : "Adam's asleep — he'll text back at sunrise";
@@ -48,7 +51,7 @@ export function Hero() {
         style={{ transform: "scale(1)" }}
       >
         <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
-          <img src="/images/hero.jpg" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
+          <img src="/images/hero.webp" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
         </div>
       </div>
       {/* Halo for the painted sun */}
@@ -81,7 +84,7 @@ export function Hero() {
             <span className="flex items-center gap-[0.18em]">
               <em className="wonk font-[380] text-persimmon">built</em>
               <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle">
-                <img src="/images/hero.jpg" alt="Clovis orchard rows at sunrise" className="h-full w-full object-cover" width="120" height="50" loading="eager" decoding="async" />
+                <img src="/images/hero.webp" alt="Clovis orchard rows at sunrise" className="h-full w-full object-cover" width="120" height="50" loading="eager" decoding="async" />
               </span>
               <span>by</span>
             </span>

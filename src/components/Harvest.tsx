@@ -9,7 +9,7 @@ function Yield({ y, i }: { y: Y; i: number }) {
   const shown = y.display && v >= y.value * 0.999 ? y.display : v.toFixed(y.decimals ?? 0);
   return (
     <div className="border-t border-ink/15 pt-4">
-      <div className="font-display text-5xl font-[400] tabular-nums md:text-6xl">
+      <div className="font-display text-4xl font-[400] tabular-nums sm:text-5xl md:text-6xl">
         <span ref={ref}>
           {y.prefix}
           {shown}
@@ -26,7 +26,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
   const [viewMode, setViewMode] = useState<"web" | "photo">("web");
 
   return (
-    <article className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <article className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
       <div className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}>
         <div
           className="relative mx-auto max-w-xl"
@@ -241,7 +241,7 @@ export function ClientWork() {
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            Two practices, both live. Don't take my word for the speed — open either site on your phone, out in the parking lot, and time it yourself.
+            Two businesses, both live. Don't take my word for the speed — open either site on your phone, out in the parking lot, and time it yourself.
           </p>
         </div>
 
