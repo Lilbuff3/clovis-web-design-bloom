@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { care, faqs, letters, plans, SMS_LINK } from "../lib/data";
+import { care, faqs, plans, SMS_LINK } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
@@ -10,12 +10,12 @@ export function Grower() {
       <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
         <div className="reveal relative lg:col-span-5">
           <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush shadow-xl">
-            <img src="/images/studio.jpg" alt="Adam's sunlit workbench in Clovis with a laptop, sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+            <img src="/images/studio.jpg" alt="A sunlit desk with a laptop, a sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" decoding="async" />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-persimmon/10 mix-blend-multiply" aria-hidden="true" />
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">The workbench</div>
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">Based in</div>
               <div className="font-display text-lg">Clovis, California</div>
             </div>
             <div className="text-right font-mono text-[10px] leading-relaxed text-ink/60">
@@ -38,10 +38,13 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I am a full-stack web engineer and technical designer based in Clovis, CA. Instead of bloated WordPress themes or slow drag-and-drop builders, I hand-engineer production websites using modern Astro, React, and TypeScript.
+              I'm <strong className="font-semibold">Adam Youssef</strong>. I build websites by hand in Clovis — no WordPress themes, no drag-and-drop builders. I write the code myself in Astro, React and TypeScript, which is why the sites load fast on a phone.
             </p>
             <p>
-              Every build integrates four core in-demand disciplines: <strong className="font-semibold text-ink">bespoke UI/UX design</strong>, <strong className="font-semibold text-ink">done-for-you strategic copywriting</strong>, <strong className="font-semibold text-ink">local SEO &amp; knowledge graph engineering</strong>, and <strong className="font-semibold text-ink">accessible, sub-second code</strong>. You get my cell number, and the person who answers is the engineer writing the code.
+              I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers. You get my cell number, and the person who answers is the one writing the code.
+            </p>
+            <p className="text-[16px] text-ink/70">
+              <strong className="font-semibold text-ink">Agencies and designers:</strong> I also build from your Figma files, under your name. Text me the project and the deadline.
             </p>
           </div>
           <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-4 border-citrus pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
@@ -169,63 +172,6 @@ export function Stand() {
   );
 }
 
-export function Letters() {
-  useGlobalReveal();
-  return (
-    <section id="letters" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
-      <span id="reviews" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl">
-        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">07 — Client Reviews &amp; Production Proof</div>
-        <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-          <span className="line-mask"><span>In-demand skills.</span></span>
-          <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-            <span>
-              <em className="wonk text-persimmon">Proven in production.</em>
-            </span>
-          </span>
-        </h2>
-        <p className="reveal mt-4 text-lg text-ink/75">What it did for them, in their words.</p>
-
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
-          {letters.map((l, i) => (
-            <figure
-              key={l.name}
-              className={`reveal relative flex flex-col justify-between rounded-2xl bg-cream p-7 shadow-[0_30px_50px_-35px_rgba(30,43,35,.5)] transition-transform duration-500 hover:shadow-xl md:p-9 ${
-                i % 2 === 0 ? "md:-rotate-1" : "md:rotate-1"
-              }`}
-              style={{ ["--d" as string]: `${i * 100}ms` }}
-            >
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink/10 pb-4">
-                  <span className="inline-block rounded-full bg-persimmon/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-persimmon-deep">
-                    {l.skill}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-ink/60">
-                    {l.place.split(",")[0]} · Client
-                  </span>
-                </div>
-                <div className="font-display wonk mt-4 text-5xl leading-none text-persimmon/70">“</div>
-                <blockquote className="font-display -mt-2 text-[18px] font-[380] leading-[1.45] md:text-[20px] text-ink/90">
-                  {l.quote}
-                </blockquote>
-              </div>
-              <figcaption className="mt-8 flex items-center gap-4 border-t border-dashed border-ink/20 pt-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink font-display text-lg text-cream">
-                  {l.name.replace("Dr. ", "")[0]}
-                </span>
-                <div>
-                  <span className="block font-medium text-ink leading-tight">{l.name}</span>
-                  <span className="block text-xs text-ink/60 leading-tight mt-0.5">{l.role}</span>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export function FAQ() {
   useGlobalReveal();
   const [open, setOpen] = useState<number | null>(0);
@@ -234,7 +180,7 @@ export function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">08 — Frequently Asked Questions</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">07 — Frequently Asked Questions</div>
             <h2 className="font-display mt-5 text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
               <span className="line-mask"><span>What people ask</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -277,5 +223,4 @@ export function FAQ() {
 
 export const About = Grower;
 export const Pricing = Stand;
-export const Reviews = Letters;
 

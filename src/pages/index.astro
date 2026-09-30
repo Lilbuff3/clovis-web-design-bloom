@@ -5,7 +5,8 @@ import { Hero } from '../components/Hero';
 import { FourSeconds } from '../components/FourSeconds';
 import { Harvest } from '../components/Harvest';
 import { Season, Compare } from '../components/Season';
-import { Grower, Stand, Letters, FAQ } from '../components/Story';
+import { Grower, Stand, FAQ } from '../components/Story';
+import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
 ---
 
@@ -16,11 +17,15 @@ import { Contact, Footer } from '../components/Contact';
     <Hero client:load />
     <FourSeconds client:visible />
     <Harvest client:visible />
+    <section id="check" class="px-5 pb-14 md:px-8 md:pb-20">
+      <div class="mx-auto max-w-7xl">
+        <LeadLeakAudit client:visible />
+      </div>
+    </section>
     <Season client:visible />
     <Compare client:visible />
     <Grower client:visible />
     <Stand client:visible />
-    <Letters client:visible />
     <FAQ client:visible />
     <Contact client:visible />
   </main>

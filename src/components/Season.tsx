@@ -8,7 +8,7 @@ const milestones = [
     name: "Discovery",
     when: "Day 1",
     description: "45-minute interview & local Google Maps audit",
-    badge: "Strategic Intake",
+    badge: "45-minute call",
   },
   {
     step: "02",
@@ -22,14 +22,14 @@ const milestones = [
     name: "Custom Build",
     when: "Days 3–5",
     description: "Semantic hand-written code & 100/100 speed tuning",
-    badge: "Zero Bloat",
+    badge: "Hand-written code",
   },
   {
     step: "04",
     name: "Launch",
     when: "Day 6+",
     description: "Domain live, Google index verified & keys handed over",
-    badge: "100% Client-Owned",
+    badge: "Yours on day one",
   },
 ];
 
@@ -39,7 +39,7 @@ function MilestoneStepper({ p, active }: { p: number; active: number }) {
       {/* Header */}
       <div>
         <div className="flex items-center justify-between border-b border-ink/10 pb-4 font-mono text-[11px] uppercase tracking-[.2em]">
-          <span className="font-semibold text-persimmon">Milestone Stepper</span>
+          <span className="font-semibold text-persimmon">Where we are</span>
           <span className="text-ink/60">Phase {active + 1} of 4</span>
         </div>
         <div className="mt-4 font-display wonk text-4xl text-ink">
@@ -109,7 +109,7 @@ function MilestoneStepper({ p, active }: { p: number; active: number }) {
       {/* Progress Footer */}
       <div className="border-t border-ink/10 pt-4">
         <div className="flex items-center justify-between font-mono text-[11px]">
-          <span className="text-ink/60">Milestone Progress</span>
+          <span className="text-ink/60">Progress</span>
           <span className="font-semibold text-ink">{Math.round(p * 100)}%</span>
         </div>
         <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-ink/10">

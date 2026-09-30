@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cases, SMS_LINK } from "../lib/data";
+import { cases, plans, SMS_LINK } from "../lib/data";
 import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string; decimals?: number; display?: string };
@@ -217,6 +217,13 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
             </span>
           ))}
         </div>
+
+        <figure className="mt-8 border-l-2 border-persimmon/60 pl-5">
+          <blockquote className="font-display text-[19px] font-[380] leading-[1.45] text-ink/90 md:text-[21px]">“{c.quote.text}”</blockquote>
+          <figcaption className="mt-3 text-sm text-ink/70">
+            <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
+          </figcaption>
+        </figure>
       </div>
     </article>
   );
@@ -267,62 +274,18 @@ export function ClientWork() {
               </a>
             </div>
             
-            <div className="relative flex h-full min-h-[360px] md:min-h-[480px] flex-col justify-center p-6 md:p-10 bg-ink/95 text-cream border-t md:border-t-0 md:border-l border-cream/10">
-              <div className="rounded-2xl border border-cream/15 bg-ink/80 p-5 shadow-2xl backdrop-blur-sm font-mono text-xs">
-                {/* Code Window Header */}
-                <div className="flex items-center justify-between border-b border-cream/10 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="h-3 w-3 rounded-full bg-persimmon/80" />
-                    <span className="h-3 w-3 rounded-full bg-citrus/80" />
-                    <span className="h-3 w-3 rounded-full bg-leaf/80" />
-                  </div>
-                  <span className="text-[11px] text-cream/50 tracking-wider">upcoming-launch.config.ts</span>
-                  <span className="rounded bg-leaf/20 px-2 py-0.5 text-[10px] font-semibold text-leaf">READY FOR QUEUE</span>
-                </div>
-
-                {/* Wireframe Specs */}
-                <div className="mt-4 space-y-2.5 font-mono text-[12px] leading-relaxed">
-                  <p className="text-cream/40">// Production Blueprint · Slot Nº 03</p>
-                  <p>
-                    <span className="text-persimmon">const</span> <span className="text-citrus">clientProject</span> = &#123;
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">tier:</span> <span className="text-sage">"Starter Launchpad"</span>,
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">rate:</span> <span className="text-citrus">"$1,500 flat"</span>,
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">turnaround:</span> <span className="text-sage">"6 Days to Deployment"</span>,
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">speedTarget:</span> <span className="text-leaf">"100/100 Core Web Vitals"</span>,
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">ownership:</span> <span className="text-sage">"100% Client-Owned Keys"</span>,
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-cream/70">agencyRetainer:</span> <span className="text-persimmon">$0.00</span>
-                  </p>
-                  <p>&#125;;</p>
-                </div>
-
-                {/* Wireframe / Blueprint Miniature Grid */}
-                <div className="mt-5 rounded-xl border border-dashed border-cream/20 bg-cream/5 p-3.5">
-                  <div className="flex items-center justify-between text-[11px] text-cream/60">
-                    <span>STATUS: ALLOCATING NEXT LOCAL BUSINESS</span>
-                    <span className="flex items-center gap-1.5 text-citrus font-semibold">
-                      <span className="h-2 w-2 rounded-full bg-citrus animate-ping" />
-                      RESERVED SPOT
+            <div className="flex h-full flex-col justify-center border-t border-cream/10 bg-ink/95 p-8 md:border-l md:border-t-0 md:p-14">
+              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-cream/60">What {plans[0].price} gets you</div>
+              <ul className="mt-5 space-y-3 text-[16px] leading-snug text-cream/90">
+                {plans[0].items.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="text-citrus" aria-hidden>
+                      ✓
                     </span>
-                  </div>
-                  <div className="mt-3 grid grid-cols-3 gap-2">
-                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Hero + CTA</div>
-                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Mobile Speed</div>
-                    <div className="h-8 rounded bg-cream/10 flex items-center justify-center text-[10px] text-cream/70">Maps 3-Pack</div>
-                  </div>
-                </div>
-              </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

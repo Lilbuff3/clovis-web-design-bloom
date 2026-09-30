@@ -45,7 +45,7 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | :--- | :--- |
 | Hand-grown / Grown by hand | Custom-built / Hand-coded / Precision-built |
 | Harvest / Two crates still ripe | Client Work / Proven Results / Measured Case Studies |
-| Seedling ($500 plan) | The Starter / The Landing Page / Core Launchpad |
+| Seedling ($1,500 plan) | The Starter / The Landing Page / Core Launchpad |
 | Grove ($2,500 plan) | Growth / Local Authority / Multi-Page System |
 | Orchard ($5,000 plan) | Flagship / Custom System / Bespoke Enterprise |
 | The growing season | The Process / From Discovery to Launch |
@@ -94,7 +94,7 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 
 ### 3. The Local Main Street Business (Restaurants, Retail, Specialty Shops)
 * **Pains:** Limited budget, overwhelmed by tech, needs to display hours, menu, directions, and contact cleanly.
-* **Winning Copy Angle:** The $500 one-page package, live in 7 days, looks high-end on iPhone and Android.
+* **Winning Copy Angle:** The $1,500 one-page Starter, live in about a week, looks high-end on iPhone and Android.
 
 ---
 
@@ -106,12 +106,12 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | `#manifesto` | Kinetic Typography | The philosophy of hand-crafted, lightweight code vs. bloated agency templates. |
 | `#valley` | Valley Zoom Video | Highlighting that local customers browse on phones in trucks, shops, and job sites. |
 | `#test` | Four-Second Stopwatch | The tangible business cost of slow websites and the power of instant conversion. |
-| `#harvest` | Showcase Cards | Documented client case studies with verified metrics (Kidney Specialist Inc. & Big Bros Dumpster). |
+| `#harvest` | Showcase Cards | Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with the client's own quote. Only real clients, only quotes they approved. |
+| `#check` | Free Website Check | Loads the visitor's site, runs Google PageSpeed, checks tap-to-call, schema and Spanish; Gemini explains only those measured facts (`api/teardown.ts`). |
 | `#season` | 4-Stage Process | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
 | `#grower` | Studio & Workbench | Adam Youssef bio, local roots, commitment to craft, 100% client code ownership. |
 | `#rules` | Horizontal Gallery | Five transparent standards: No templates, upfront pricing, client owns keys, direct phone line, honest scope. |
-| `#stand` | Hanging Price Tags | Upfront package pricing ($500 Landing Page, $2,500 Local Authority, $5,000 Flagship). Optional care plans. |
-| `#letters` | Direct Client Quotes | Dr. Sheikh Mohammad Masood & William Maldonado Ramirez testimonials with verified ROI. |
+| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
 | `#faq` | Accordion | Direct answers to questions about ownership, timelines, copy, and maintenance. |
 | `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |

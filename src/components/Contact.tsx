@@ -46,7 +46,7 @@ export function Contact() {
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">09 — Start a Project</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">08 — Start a Project</div>
           <h2 className="font-display mt-5 text-[clamp(3rem,8vw,7.5rem)] font-[420] leading-[0.9]">
             <span className="line-mask"><span>Start with</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>

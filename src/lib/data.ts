@@ -19,6 +19,11 @@ export const cases = [
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
     stack: ["Astro", "English + Español", "WCAG 2.1 AA", "No-PHI design"],
+    quote: {
+      text: "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%.",
+      name: "Dr. Sheikh Mohammad Masood, MD",
+      role: "Founding President & Medical Director",
+    },
     yields: [
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
       { value: 40, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
@@ -42,6 +47,11 @@ export const cases = [
     problem: "National brokers were outranking the company that actually owns the trucks.",
     planted: ["Dedicated service area pages for Fresno & Clovis", "Upfront flat pricing on the page", "Driveway protection highlighted for trust"],
     stack: ["Local SEO", "English + Español", "Text-to-book", "PageSpeed 100"],
+    quote: {
+      text: "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up.",
+      name: "William Maldonado Ramirez",
+      role: "Co-Owner & Head of Operations",
+    },
     yields: [
       { value: 1, prefix: "#", suffix: "", label: "On Google for “dumpster rental Fresno”" },
       { value: 4, prefix: "+", suffix: "", label: "Trucks added to keep up with demand" },
@@ -200,26 +210,6 @@ export const care = [
   { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content additions and local SEO tuning. Cancel anytime." },
 ];
 
-export const letters = [
-  {
-    skill: "Medical practice",
-    quote:
-      "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%.",
-    name: "Dr. Sheikh Mohammad Masood, MD",
-    role: "Founding President & Medical Director, Kidney Specialist Inc.",
-    place: "Madera & Fresno, CA",
-    stamp: "bg-sky",
-  },
-  {
-    skill: "Dumpster rental",
-    quote:
-      "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up.",
-    name: "William Maldonado Ramirez",
-    role: "Co-Owner & Head of Operations, Big Bros Dumpster Rentals",
-    place: "Fresno, CA",
-    stamp: "bg-blush",
-  },
-];
 
 export const faqs = [
   {
@@ -257,43 +247,42 @@ export const faqs = [
 ];
 
 // --- Schema.org Structured Metadata ---
+// Only things shown on the page. Google expects structured data to match what visitors see.
 export const knowsAbout = [
-  "HIPAA Compliance",
-  "ADA Title III Compliance",
-  "EHR Portal Integration",
-  "WCAG 2.1 AA Accessibility",
-  "Zero-PHI Web Architecture",
-  "Medical Practice Web Design",
-  "Local SEO & Google Maps 3-Pack Optimization",
-  "Google Gemini AI Performance Audit",
-  "Core Web Vitals Optimization",
+  "Web design",
+  "Local SEO",
+  "Website speed",
+  "Web accessibility (WCAG 2.1 AA)",
+  "Websites for medical practices",
+  "HIPAA-aware web design",
+  "Bilingual English and Spanish websites",
 ];
 
+// Mirrors the price tags in `plans`.
 export const hasOfferCatalog = {
   "@type": "OfferCatalog",
-  "name": "Web Design & Local Authority Services",
+  "name": "Websites",
   "itemListElement": [
     {
       "@type": "Offer",
-      "name": "Starter Launchpad",
+      "name": "Starter",
       "price": "1500",
       "priceCurrency": "USD",
-      "description": "High-converting single-page website, 100/100 PageSpeed, live in 1 week, 100% client-owned.",
+      "description": "A one-page website, built by hand and live in about a week. You own the code and the domain.",
     },
     {
       "@type": "Offer",
-      "name": "Growth Local Authority System",
+      "name": "Growth",
       "price": "2500",
       "priceCurrency": "USD",
-      "description": "Multi-page SEO route silos, Google Maps 3-Pack grounding, custom copy, and dual English+Español architecture.",
+      "description": "3–5 pages written from a recorded conversation, a page for every town you serve, and a full Spanish version.",
     },
     {
       "@type": "Offer",
-      "name": "HIPAA-Compliant Medical Practice Web Design",
+      "name": "Flagship",
       "price": "5000",
       "priceCurrency": "USD",
-      "url": "https://cloviswebdesign.com/services/medical-web-design/",
-      "description": "Zero-PHI healthcare web engineering, HIPAA-compliant patient communication architecture, ADA Title III defense, and EHR portal integration.",
+      "description": "A custom design with booking or quoting, built to your industry's accessibility and privacy rules, with 90 days of support after launch.",
     },
   ],
 };
@@ -334,29 +323,14 @@ export const schemaGraph = {
         "@id": "https://cloviswebdesign.com/#adam",
         "name": "Adam Youssef",
         "jobTitle": "Founder & Lead Developer",
-        "sameAs": "https://www.linkedin.com/in/adamyoussef",
         "knowsAbout": knowsAbout,
       },
+      // No Wikidata links: the old IDs pointed at Rhodes, Greece and a district of St. Petersburg.
+      // No sameAs: only add profiles Adam has confirmed are his.
       "areaServed": [
-        {
-          "@type": "City",
-          "name": "Clovis",
-          "sameAs": "https://www.wikidata.org/wiki/Q949704",
-        },
-        {
-          "@type": "City",
-          "name": "Fresno",
-          "sameAs": "https://www.wikidata.org/wiki/Q43048",
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Central Valley",
-          "sameAs": "https://www.wikidata.org/wiki/Q271014",
-        },
-      ],
-      "sameAs": [
-        "https://www.linkedin.com/company/clovis-web-design",
-        "https://clovischamber.com/directory",
+        { "@type": "City", "name": "Clovis, CA" },
+        { "@type": "City", "name": "Fresno, CA" },
+        { "@type": "City", "name": "Madera, CA" },
       ],
       "knowsAbout": knowsAbout,
       "hasOfferCatalog": hasOfferCatalog,

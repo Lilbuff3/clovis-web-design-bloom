@@ -496,7 +496,7 @@ assertTest(2, 'T2.4', 'Founder Person node for Adam Youssef', () => {
   return `Verified founder Person node: ${founder.name}`;
 });
 
-assertTest(2, 'T2.5', 'areaServed contains Wikidata URIs (Q949704, Q43048, Q271014)', () => {
+assertTest(2, 'T2.5', 'areaServed names Clovis and Fresno, with no wrong Wikidata IDs', () => {
   const jsonLd = getRootJsonLd();
   const biz = findBusinessNode(jsonLd);
   if (!biz) throw new Error(`Business node not found.`);
@@ -507,24 +507,14 @@ assertTest(2, 'T2.5', 'areaServed contains Wikidata URIs (Q949704, Q43048, Q2710
   }
 
   const serialized = JSON.stringify(areaServed);
-  const requiredEntities = [
-    { code: 'Q949704', label: 'Clovis' },
-    { code: 'Q43048', label: 'Fresno' },
-    { code: 'Q271014', label: 'Central Valley' },
-  ];
+  const missing = ['Clovis', 'Fresno'].filter((city) => !serialized.includes(city));
+  if (missing.length > 0) throw new Error(`areaServed is missing: ${missing.join(', ')}`);
 
-  const missing = [];
-  for (const ent of requiredEntities) {
-    if (!serialized.includes(ent.code)) {
-      missing.push(`${ent.label} (Wikidata ID ${ent.code})`);
-    }
-  }
+  // These IDs were once used here and are wrong: a Wikimedia list page, Rhodes (Greece), a St. Petersburg district.
+  const wrong = ['Q949704', 'Q43048', 'Q271014'].filter((id) => serialized.includes(id));
+  if (wrong.length > 0) throw new Error(`areaServed links to wrong Wikidata entities: ${wrong.join(', ')}`);
 
-  if (missing.length > 0) {
-    throw new Error(`Missing required Wikidata URIs in areaServed:\n - ${missing.join('\n - ')}`);
-  }
-
-  return `All 3 required Wikidata entities (Q949704, Q43048, Q271014) present in areaServed`;
+  return `areaServed names ${areaServed.map((a) => a.name).join(', ')}`;
 });
 
 assertTest(2, 'T2.6', 'CRITICAL TEST: Geographic Wikidata URIs EXCLUSIVELY in areaServed, NEVER in top-level sameAs', () => {
@@ -562,33 +552,22 @@ assertTest(2, 'T2.6', 'CRITICAL TEST: Geographic Wikidata URIs EXCLUSIVELY in ar
   return `PASSED: Top-level sameAs contains 0 geographic/Wikidata URIs; all geographic entities isolated in areaServed`;
 });
 
-assertTest(2, 'T2.7', 'Top-level sameAs contains only verified official agency profiles', () => {
+assertTest(2, 'T2.7', 'Top-level sameAs (if any) lists only profile sites, only ones Adam confirmed', () => {
   const jsonLd = getRootJsonLd();
   const biz = findBusinessNode(jsonLd);
   if (!biz) throw new Error(`Business node not found.`);
 
+  // Optional: only add profiles Adam has confirmed are his.
   const sameAs = Array.isArray(biz.sameAs) ? biz.sameAs : biz.sameAs ? [biz.sameAs] : [];
-  if (sameAs.length === 0) {
-    throw new Error(`Business sameAs array is empty. Expected official agency profiles.`);
-  }
+  const validProfileDomains = ['linkedin.com', 'twitter.com', 'x.com', 'facebook.com', 'github.com', 'instagram.com', 'google.com'];
+  const notAdams = ['linkedin.com/in/adamyoussef', 'linkedin.com/company/clovis-web-design', 'clovischamber.com/directory'];
 
-  const validProfileDomains = ['linkedin.com', 'clovischamber.com', 'twitter.com', 'x.com', 'facebook.com', 'github.com'];
-  const nonProfileUrls = [];
+  const bad = sameAs.filter((url) => !validProfileDomains.some((d) => url.includes(d)) || notAdams.some((u) => url.includes(u)));
+  const founderSameAs = JSON.stringify(biz.founder?.sameAs ?? '');
+  bad.push(...notAdams.filter((u) => founderSameAs.includes(u)));
+  if (bad.length > 0) throw new Error(`sameAs lists profiles that aren't Adam's or aren't profiles:\n - ${bad.join('\n - ')}`);
 
-  for (const url of sameAs) {
-    const isAgencyProfile = validProfileDomains.some(d => url.includes(d));
-    if (!isAgencyProfile) {
-      nonProfileUrls.push(url);
-    }
-  }
-
-  if (nonProfileUrls.length > 0) {
-    throw new Error(
-      `Found unrecognized or invalid URLs in agency sameAs (expected official profiles only):\n - ${nonProfileUrls.join('\n - ')}`
-    );
-  }
-
-  return `Top-level sameAs contains ${sameAs.length} verified official agency profiles`;
+  return `sameAs has ${sameAs.length} confirmed profile(s)`;
 });
 
 assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services', () => {
@@ -1134,48 +1113,22 @@ assertTest(6, 'T6.8', 'Generative Engine Optimization: Primary <h2> answer block
   return `Verified ${units.length} atomic GEO semantic units strictly conforming to 134–167 words with local entity anchors`;
 });
 
-assertTest(6, 'T6.9', 'Schema.org JSON-LD hasOfferCatalog includes Medical Practice offering and knowsAbout grounding', () => {
+assertTest(6, 'T6.9', 'Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)', () => {
   const jsonLd = getRootJsonLd();
   const biz = findBusinessNode(jsonLd);
   if (!biz) throw new Error(`Business entity node not found in Schema.org @graph.`);
 
-  // 1. Verify hasOfferCatalog contains Medical offering
-  const catalog = biz.hasOfferCatalog;
-  if (!catalog) throw new Error(`Missing "hasOfferCatalog" on business node.`);
-  const catalogStr = JSON.stringify(catalog);
-
-  const hasMedicalOffer = /medical|healthcare/i.test(catalogStr) && /HIPAA/i.test(catalogStr);
-  if (!hasMedicalOffer) {
-    throw new Error(`hasOfferCatalog must explicitly include the HIPAA-compliant Medical Practice Web Design service offering.`);
-  }
-
-  // 2. Verify knowsAbout array
   const knowsAbout = biz.knowsAbout;
-  if (!knowsAbout || !Array.isArray(knowsAbout) || knowsAbout.length === 0) {
-    throw new Error(`Business node must include a non-empty "knowsAbout" array.`);
-  }
-
+  if (!Array.isArray(knowsAbout) || knowsAbout.length === 0) throw new Error(`Business node must include a non-empty "knowsAbout" array.`);
   const knowsStr = JSON.stringify(knowsAbout);
-  const hasHipaaTopic = /HIPAA/i.test(knowsStr);
-  const hasAdaTopic = /ADA Title III/i.test(knowsStr);
-  const hasEhrTopic = /EHR/i.test(knowsStr);
 
-  const missingTopics = [];
-  if (!hasHipaaTopic) missingTopics.push('HIPAA Compliance');
-  if (!hasAdaTopic) missingTopics.push('ADA Title III Compliance');
-  if (!hasEhrTopic) missingTopics.push('EHR Portal Integration');
+  if (!/medical/i.test(knowsStr) || !/HIPAA/i.test(knowsStr)) throw new Error(`knowsAbout should name the medical-practice work (HIPAA-aware sites).`);
+  // Claims Adam can't back up: he hasn't built EHR integrations, and a web designer can't promise legal defense.
+  const unbacked = [/EHR/i, /ADA Title III/i, /Defense/i].filter((r) => r.test(knowsStr + JSON.stringify(biz.hasOfferCatalog ?? {})));
+  if (unbacked.length > 0) throw new Error(`knowsAbout / offers make claims Adam can't back up: ${unbacked.join(', ')}`);
+  if (/wikidata.org/i.test(knowsStr)) throw new Error(`Wikidata URIs must never appear in knowsAbout.`);
 
-  if (missingTopics.length > 0) {
-    throw new Error(`knowsAbout missing required healthcare web engineering topics: ${missingTopics.join(', ')}.`);
-  }
-
-  // 3. Confirm strict isolation of Wikidata URIs
-  const forbiddenWikidataInKnows = /wikidata\.org/i.test(knowsStr);
-  if (forbiddenWikidataInKnows) {
-    throw new Error(`CRITICAL: Geographic Wikidata URIs must NEVER appear in knowsAbout. Isolate exclusively in areaServed.`);
-  }
-
-  return `Schema.org JSON-LD verified: Medical offering in hasOfferCatalog, knowsAbout populated with HIPAA, ADA, and EHR topics`;
+  return `knowsAbout: ${knowsAbout.join(', ')}`;
 });
 
 // ============================================================================

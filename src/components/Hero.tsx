@@ -10,7 +10,7 @@ function RotatingBadge() {
           <path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
         </defs>
         <text className="font-mono" fontSize="15.5" letterSpacing="4.2" fill="#1E2B23">
-          <textPath href="#circ">FULL-STACK CRAFT · LOCAL SEO · CONVERSION UI ·</textPath>
+          <textPath href="#circ">BUILT BY HAND · FAST ON A PHONE · </textPath>
         </text>
       </svg>
       <div className="absolute inset-[30%] flex items-center justify-center rounded-full bg-persimmon text-cream shadow-lg">
@@ -31,7 +31,7 @@ function ClovisClock() {
   if (!now) return <span>Clovis, California</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
-  const status = hour >= 7 && hour < 19 ? "Adam's at the workbench" : hour >= 19 && hour < 23 ? "Adam's winding down — text anyway" : "Adam's asleep — he'll text back at sunrise";
+  const status = hour >= 7 && hour < 19 ? "Adam's working" : hour >= 19 && hour < 23 ? "Adam's winding down — text anyway" : "Adam's asleep — he'll text back at sunrise";
   return (
     <span>
       {time} in Clovis · {status}
@@ -71,9 +71,8 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 opacity-100">
-          <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">FULL-STACK WEB STUDIO · CLOVIS &amp; FRESNO</span>
+          <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">WEB DESIGN · CLOVIS &amp; FRESNO</span>
           <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
-          <span className="hidden sm:inline">Bespoke UI · Local SEO · Modern Tech Stack</span>
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
@@ -97,8 +96,9 @@ export function Hero() {
         </h1>
 
         <div className="mt-6 grid max-w-3xl gap-6 opacity-100 md:grid-cols-[1.3fr_1fr]">
-          <p className="text-lg leading-relaxed text-ink/85 md:text-xl">
-            Custom engineering, local SEO, and high-converting UI for Central Valley businesses. From custom Astro/React builds to Google 3-Pack dominance — no templates, zero agency lock-in, starting at $1,500. You get my cell number, not a ticket queue.
+          {/* Frosted backing: on laptop-height screens this paragraph lands on the painted orchard */}
+          <p className="-mx-4 rounded-2xl bg-cream/70 px-4 py-3 text-lg leading-relaxed text-ink/85 backdrop-blur-sm md:text-xl">
+            Websites for Central Valley businesses that load fast on a phone and make it easy to call you. No templates, no monthly lock-in, from $1,500. You get my cell number, not a ticket queue.
           </p>
           <div className="flex flex-col items-start gap-3">
             <a href={SMS_LINK} data-magnetic="0.3" className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon">
@@ -112,8 +112,8 @@ export function Hero() {
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
               </span>
             </a>
-            <a href="#test" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
-              explore skills &amp; capabilities
+            <a href="#work" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+              See the work
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
           </div>
