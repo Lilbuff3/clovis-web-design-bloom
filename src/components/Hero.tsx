@@ -14,7 +14,7 @@ function RotatingBadge() {
         </text>
       </svg>
       <div className="absolute inset-[30%] flex items-center justify-center rounded-full bg-persimmon text-cream shadow-lg">
-        <span className="font-display wonk text-xl italic md:text-2xl">$500</span>
+        <span className="font-display wonk text-base italic md:text-xl">$1,500</span>
       </div>
     </div>
   );
@@ -69,7 +69,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 opacity-100">
           <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">FULL-STACK WEB STUDIO · CLOVIS &amp; FRESNO</span>
-          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$500 STARTER LAUNCHPAD</span>
+          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
           <span className="hidden sm:inline">Bespoke UI · Local SEO · Modern Tech Stack</span>
         </div>
 
@@ -95,7 +95,7 @@ export function Hero() {
 
         <div className="mt-6 grid max-w-3xl gap-6 opacity-100 md:grid-cols-[1.3fr_1fr]">
           <p className="text-lg leading-relaxed text-ink/85 md:text-xl">
-            Custom engineering, local SEO, and high-converting UI for Central Valley businesses. From custom Astro/React builds to Google 3-Pack dominance — no templates, zero agency lock-in, starting at $500. You get my cell number, not a ticket queue.
+            Custom engineering, local SEO, and high-converting UI for Central Valley businesses. From custom Astro/React builds to Google 3-Pack dominance — no templates, zero agency lock-in, starting at $1,500. You get my cell number, not a ticket queue.
           </p>
           <div className="flex flex-col items-start gap-3">
             <a href={SMS_LINK} data-magnetic="0.3" className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon">

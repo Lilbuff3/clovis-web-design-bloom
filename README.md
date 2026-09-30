@@ -1,6 +1,6 @@
 # Clovis Web Design
 
-> Hand-grown websites for Fresno & the Central Valley by Adam Youssef. $500 landing pages, live in a week.
+> Hand-grown websites for Fresno & the Central Valley by Adam Youssef. $1,500 landing pages, live in a week.
 
 ## Tech Stack
 - React 19 + TypeScript

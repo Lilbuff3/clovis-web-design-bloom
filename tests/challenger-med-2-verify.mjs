@@ -371,7 +371,7 @@ export function auditComparisonTable(filePath) {
     },
     {
       name: 'Price Sensitivity',
-      contractorKeywords: ['$500', '$2,500', 'roi-focused'],
+      contractorKeywords: ['$1,500', '$2,500', 'roi-focused'],
       medicalKeywords: ['low price sensitivity', '$5,000', 'budget']
     }
   ];

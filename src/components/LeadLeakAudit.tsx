@@ -26,7 +26,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const cleanCity = city.trim() || "Clovis, CA";
 
   const smsMessage = useMemo(() => {
-    return `Hi Adam! I ran the lead-leak teardown for ${cleanBusiness} in ${cleanCity} (${trade}). The report flagged our mobile bounce tax and missing Google Maps schema. Can we discuss fixing this with your $500 launch package?`;
+    return `Hi Adam! I ran the lead-leak teardown for ${cleanBusiness} in ${cleanCity} (${trade}). The report flagged our mobile bounce tax and missing Google Maps schema. Can we discuss fixing this with your $1,500 starter site?`;
   }, [cleanBusiness, cleanCity, trade]);
 
   const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(smsMessage)}`;
@@ -262,13 +262,13 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <div className="mt-6 rounded-3xl border-2 border-persimmon bg-gradient-to-br from-cream via-paper to-blush/40 p-6 shadow-xl">
               <div className="flex items-center justify-between">
                 <span className="rounded-full bg-persimmon px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-cream">
-                  Next Step · $500 Launch Offer
+                  Next Step · $1,500 Starter Site
                 </span>
                 <span className="font-mono text-xs text-ink/60">Live in 6 Days</span>
               </div>
 
               <h4 className="font-display mt-3 text-2xl font-[420] text-ink">
-                Ready to plug these leaks for <em className="wonk text-persimmon">$500 flat?</em>
+                Ready to plug these leaks for <em className="wonk text-persimmon">$1,500 flat?</em>
               </h4>
               <p className="mt-1.5 text-sm text-ink/80 leading-snug">
                 Text this diagnostic breakdown directly to Adam's cell. No sales pitch, no account rep — the person who answers builds your site.

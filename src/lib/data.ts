@@ -144,9 +144,7 @@ export const plans = [
     name: "Starter",
     kind: "Landing page",
     time: "1 week",
-    price: "$500",
-    was: "$750",
-    note: "Launch price · first 5 Central Valley businesses",
+    price: "$1,500",
     color: "bg-citrus",
     hole: "bg-paper",
     items: [
@@ -229,12 +227,12 @@ export const faqs = [
     a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them and walk.",
   },
   {
-    q: "What do I actually get for $500?",
+    q: "What do I actually get for $1,500?",
     a: "One page, built by hand, live in about a week. Your number sits at the top, the bottom, and on a bar that follows people down the page. It loads fast on a phone, Google understands who you are and where you work, and it's yours the day it goes live. It isn't a multi-page site, a blog or a logo — if you need those, I'll quote them properly.",
   },
   {
-    q: "Why $500 when everyone else wants thousands?",
-    a: "It's a launch offer limited to the first five businesses, and one page really is about a day of my time once we've talked. After those five it goes to $750 — still less than most shops charge for a template. Bigger builds cost more because they take longer. No trick.",
+    q: "Why $1,500 for one page?",
+    a: "Because it's built for your business, not dropped into a template. I write the words from a conversation with you, build it by hand, and set it up so Google knows who you are and where you work. Agencies often charge double that and keep the keys. Bigger builds cost more because they take longer. No trick.",
   },
   {
     q: "Do I have to write all the words myself?",
@@ -278,7 +276,7 @@ export const hasOfferCatalog = {
     {
       "@type": "Offer",
       "name": "Starter Launchpad",
-      "price": "500",
+      "price": "1500",
       "priceCurrency": "USD",
       "description": "High-converting single-page website, 100/100 PageSpeed, live in 1 week, 100% client-owned.",
     },
@@ -309,7 +307,7 @@ export const schemaGraph = {
       "name": "Clovis Web Design",
       "url": "https://cloviswebdesign.com",
       "telephone": "+15595753014",
-      "priceRange": "$500 - $5,000",
+      "priceRange": "$1,500 - $5,000",
       "image": "https://cloviswebdesign.com/images/hero.jpg",
       "address": {
         "@type": "PostalAddress",

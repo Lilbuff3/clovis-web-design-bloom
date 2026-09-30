@@ -260,7 +260,7 @@ export function ClientWork() {
                 This spot's <em className="wonk text-citrus">yours</em>, if you want it.
               </h3>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-cream/80">
-                The $500 launch price holds for the first five Central Valley businesses. After that, it's $750 — still less than half what traditional agencies charge for a generic template.
+                One page, built by hand for your business, $1,500 flat. You own the code and the domain from day one.
               </p>
               <a href={SMS_LINK} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
                 Claim a spot by text <span aria-hidden>→</span>
@@ -290,7 +290,7 @@ export function ClientWork() {
                     <span className="text-cream/70">tier:</span> <span className="text-sage">"Starter Launchpad"</span>,
                   </p>
                   <p className="pl-4">
-                    <span className="text-cream/70">rate:</span> <span className="text-citrus">"$500 (Locked)"</span>,
+                    <span className="text-cream/70">rate:</span> <span className="text-citrus">"$1,500 flat"</span>,
                   </p>
                   <p className="pl-4">
                     <span className="text-cream/70">turnaround:</span> <span className="text-sage">"6 Days to Deployment"</span>,

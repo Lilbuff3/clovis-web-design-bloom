@@ -459,8 +459,8 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, pr
     errors.push(`telephone must be "+15595753014", got: "${biz.telephone}"`);
   }
 
-  if (!biz.priceRange || !biz.priceRange.includes('$500')) {
-    errors.push(`priceRange must include "$500 - $5,000", got: "${biz.priceRange}"`);
+  if (!biz.priceRange || !biz.priceRange.includes('$1,500')) {
+    errors.push(`priceRange must include "$1,500 - $5,000", got: "${biz.priceRange}"`);
   }
 
   if (errors.length > 0) {
@@ -591,7 +591,7 @@ assertTest(2, 'T2.7', 'Top-level sameAs contains only verified official agency p
   return `Top-level sameAs contains ${sameAs.length} verified official agency profiles`;
 });
 
-assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($500) and Growth ($2,500) services', () => {
+assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services', () => {
   const jsonLd = getRootJsonLd();
   const graph = jsonLd['@graph'];
   const biz = findBusinessNode(jsonLd);
@@ -608,14 +608,14 @@ assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($500) and Growth ($2,500) s
   }
 
   const catalogStr = JSON.stringify(catalog);
-  const hasStarter = catalogStr.includes('500') || catalogStr.includes('Starter');
+  const hasStarter = catalogStr.includes('1500') || catalogStr.includes('Starter');
   const hasGrowth = catalogStr.includes('2500') || catalogStr.includes('2,500') || catalogStr.includes('Growth');
 
   if (!hasStarter || !hasGrowth) {
-    throw new Error(`hasOfferCatalog must contain Starter ($500) and Growth ($2,500) service offerings.`);
+    throw new Error(`hasOfferCatalog must contain Starter ($1,500) and Growth ($2,500) service offerings.`);
   }
 
-  return `hasOfferCatalog successfully configured with Starter ($500) and Growth ($2,500) offerings`;
+  return `hasOfferCatalog successfully configured with Starter ($1,500) and Growth ($2,500) offerings`;
 });
 
 // ============================================================================
@@ -696,7 +696,7 @@ assertTest(3, 'T3.2', 'Lead & Latency Visualizer relocated to FourSeconds (#test
 });
 
 
-assertTest(3, 'T3.3', 'Hero section displays headline, $500 pricing anchor, and primary CTA for mobile fold compliance', () => {
+assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, and primary CTA for mobile fold compliance', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
 
@@ -705,14 +705,14 @@ assertTest(3, 'T3.3', 'Hero section displays headline, $500 pricing anchor, and 
   const heroHtml = heroSectionMatch ? heroSectionMatch[1] : html.substring(0, 3000);
 
   const hasHeadline = /Websites,?\s*(?:built\s*by\s*hand\s*in\s*Clovis|built\s*in\s*Clovis)/i.test(heroHtml) || /<h1/i.test(heroHtml);
-  const has500Anchor = /\$500/i.test(heroHtml);
+  const has500Anchor = /\$1,500/i.test(heroHtml);
   const hasCta = /sms:\+?1?5595753014|tel:\+?1?5595753014/i.test(heroHtml);
 
   if (!hasHeadline) throw new Error(`Hero section missing primary <h1> headline`);
-  if (!has500Anchor) throw new Error(`Hero section missing $500 pricing anchor within initial viewport markup`);
+  if (!has500Anchor) throw new Error(`Hero section missing $1,500 pricing anchor within initial viewport markup`);
   if (!hasCta) throw new Error(`Hero section missing direct SMS/call CTA button`);
 
-  return `Hero section contains headline, $500 anchor, and primary CTA ensuring mobile fold compliance (<750px)`;
+  return `Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)`;
 });
 
 // ============================================================================
