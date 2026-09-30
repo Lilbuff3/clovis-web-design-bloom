@@ -151,11 +151,12 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
         {/* Business Name and City */}
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
+          <label htmlFor="audit-business-name" className="block">
             <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
               2. Business name <span className="text-persimmon">*</span>
             </span>
             <input
+              id="audit-business-name"
               type="text"
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
@@ -165,11 +166,12 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             />
           </label>
 
-          <label className="block">
+          <label htmlFor="audit-city" className="block">
             <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
               3. City / Service Area
             </span>
             <input
+              id="audit-city"
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -180,12 +182,13 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
         </div>
 
         {/* Optional Website URL */}
-        <label className="block">
+        <label htmlFor="audit-website-url" className="block">
           <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
             <span>4. Current website URL (Optional)</span>
             <span className="text-ink/40">Leave blank if starting fresh</span>
           </span>
           <input
+            id="audit-website-url"
             type="text"
             value={websiteUrl}
             onChange={(e) => setWebsiteUrl(e.target.value)}

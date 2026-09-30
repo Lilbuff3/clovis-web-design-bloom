@@ -60,18 +60,20 @@ export function Contact() {
 
           <div className="reveal mt-10 space-y-7">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
+              <label htmlFor="contact-name" className="block">
                 <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">Your name</span>
                 <input
+                  id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Maria"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink/30 focus:border-persimmon"
                 />
               </label>
-              <label className="block">
+              <label htmlFor="contact-trade" className="block">
                 <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you do</span>
                 <input
+                  id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
                   placeholder="a taquería in Old Town"
