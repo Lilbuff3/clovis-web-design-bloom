@@ -184,7 +184,7 @@ export function Letters() {
             </span>
           </span>
         </h2>
-        <p className="reveal mt-4 text-lg text-ink/75">From HIPAA compliance to Google 3-Pack rankings and white-label agency overflow — real outcomes, unedited.</p>
+        <p className="reveal mt-4 text-lg text-ink/75">What it did for them, in their words.</p>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
           {letters.map((l, i) => (
@@ -201,7 +201,7 @@ export function Letters() {
                     {l.skill}
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-wider text-ink/60">
-                    {l.place.split(",")[0]} · Verified Client
+                    {l.place.split(",")[0]} · Client
                   </span>
                 </div>
                 <div className="font-display wonk mt-4 text-5xl leading-none text-persimmon/70">“</div>
