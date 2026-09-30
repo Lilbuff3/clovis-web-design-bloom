@@ -11,7 +11,8 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-4 py-2.5 text-[14.5px] transition-all duration-300 ${
+      aria-pressed={active}
+      className={`rounded-full border px-4 py-2.5 text-[14.5px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 ${
         active ? "scale-[1.03] border-ink bg-ink text-cream" : "border-ink/20 bg-cream/70 hover:border-ink/50 hover:bg-cream"
       }`}
     >
@@ -60,18 +61,20 @@ export function Contact() {
 
           <div className="reveal mt-10 space-y-7">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
+              <label className="block" htmlFor="contact-name">
                 <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">Your name</span>
                 <input
+                  id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Maria"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink/30 focus:border-persimmon"
                 />
               </label>
-              <label className="block">
+              <label className="block" htmlFor="contact-trade">
                 <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you do</span>
                 <input
+                  id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
                   placeholder="a taquería in Old Town"
