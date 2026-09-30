@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useId } from "react";
 import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 
 const TRADES = [
@@ -21,23 +21,21 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [errorMsg, setErrorMsg] = useState("");
 
   const resultsRef = useRef<HTMLDivElement>(null);
+  const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
 
-  const cleanBusiness = businessName.trim() || "My Business";
-  const cleanCity = city.trim() || "Clovis, CA";
-
-  const smsMessage = useMemo(() => {
-    return `Hi Adam! I ran the lead-leak teardown for ${cleanBusiness} in ${cleanCity} (${trade}). The report flagged our mobile bounce tax and missing Google Maps schema. Can we discuss fixing this with your $1,500 starter site?`;
-  }, [cleanBusiness, cleanCity, trade]);
+  const site = websiteUrl.trim();
+  const smsMessage = useMemo(
+    () =>
+      site
+        ? `Hi Adam! I ran the website check on ${site}. Can you tell me what you'd fix first?`
+        : `Hi Adam! I don't have a website yet${businessName.trim() ? ` for ${businessName.trim()}` : ""}. Can we talk about the $1,500 starter site?`,
+    [site, businessName]
+  );
 
   const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(smsMessage)}`;
 
   const runAudit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!businessName.trim()) {
-      setErrorMsg("Please enter your business name.");
-      return;
-    }
-
     setErrorMsg("");
     setLoading(true);
     setStreamingContent("");
@@ -47,12 +45,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
       const res = await fetch("/api/teardown", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessName: cleanBusiness,
-          city: cleanCity,
-          trade,
-          websiteUrl: websiteUrl.trim(),
-        }),
+        body: JSON.stringify({ businessName: businessName.trim(), city: city.trim(), trade, websiteUrl: site }),
       });
 
       if (!res.ok) {
@@ -83,15 +76,14 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
       setCompleted(true);
     } catch (err: any) {
-      console.error("Audit error:", err);
-      setErrorMsg(err.message || "Something went wrong running the audit. Please try again.");
+      setErrorMsg(err.message || "Something went wrong running the check. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(smsMessage).then(() => {
+    navigator.clipboard.writeText(streamingContent).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     });
@@ -107,11 +99,11 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <span className="relative inline-flex h-3 w-3 rounded-full bg-persimmon"></span>
           </span>
           <span className="font-mono text-[11px] uppercase tracking-[.18em] text-persimmon font-semibold">
-            Google Gemini 2.0 Engine · Central Valley Speed &amp; SEO Audit
+            Free website check
           </span>
         </div>
         <span className="rounded-full bg-leaf/10 px-3 py-1 font-mono text-[10px] font-semibold text-leaf">
-          Free · 60 Seconds
+          Free · about 30 seconds
         </span>
       </div>
 
@@ -120,18 +112,60 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           Where is your website <em className="wonk text-persimmon">leaking leads?</em>
         </h3>
         <p className="mt-2 text-sm text-ink/75 sm:text-base leading-relaxed">
-          Enter your trade and city below. Our diagnostic engine checks your local mobile latency hazard, your Google Maps 3-Pack justification gaps, and what it costs in lost calls every month.
+          Type your website below. The check loads it, runs Google's own mobile speed test, and looks for what gets you calls: a tap-to-call button, business details Google can read, a Spanish version. Then you get a plain-English list of what to fix first.
         </p>
       </div>
 
       {/* Input Form */}
       <form onSubmit={runAudit} className="mt-7 space-y-5">
-        {/* Trade Selector Chips */}
+        <label className="block" htmlFor={`${id}-url`}>
+          <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
+            <span>1. Your website</span>
+            <span className="text-ink/40">No site yet? Leave it blank</span>
+          </span>
+          <input
+            id={`${id}-url`}
+            type="text"
+            inputMode="url"
+            autoComplete="url"
+            value={websiteUrl}
+            onChange={(e) => setWebsiteUrl(e.target.value)}
+            placeholder="e.g. olsenroofing.com"
+            className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-mono text-[13.5px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
+          />
+        </label>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block" htmlFor={`${id}-business`}>
+            <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">2. Business name (optional)</span>
+            <input
+              id={`${id}-business`}
+              type="text"
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+              placeholder="e.g. Olsen Roofing & Solar"
+              className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-sans text-[15px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
+            />
+          </label>
+
+          <label className="block" htmlFor={`${id}-city`}>
+            <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">3. City</span>
+            <input
+              id={`${id}-city`}
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Clovis, CA (or Fresno, Madera)"
+              className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-sans text-[15px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
+            />
+          </label>
+        </div>
+
         <div>
-          <div id="audit-industry-label" className="block font-mono text-[10px] uppercase tracking-[.16em] text-ink/65 mb-2.5">
-            1. Select your industry
+          <div id={`${id}-trade`} className="block font-mono text-[10px] uppercase tracking-[.16em] text-ink/65 mb-2.5">
+            4. What you do
           </div>
-          <div role="group" aria-labelledby="audit-industry-label" className="flex flex-wrap gap-2">
+          <div role="group" aria-labelledby={`${id}-trade`} className="flex flex-wrap gap-2">
             {TRADES.map((t) => (
               <button
                 type="button"
@@ -150,54 +184,6 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           </div>
         </div>
 
-        {/* Business Name and City */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block" htmlFor="audit-business">
-            <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
-              2. Business name <span className="text-persimmon">*</span>
-            </span>
-            <input
-              id="audit-business"
-              type="text"
-              value={businessName}
-              onChange={(e) => setBusinessName(e.target.value)}
-              placeholder="e.g. Olsen Roofing & Solar"
-              required
-              className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-sans text-[15px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
-            />
-          </label>
-
-          <label className="block" htmlFor="audit-city">
-            <span className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
-              3. City / Service Area
-            </span>
-            <input
-              id="audit-city"
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="Clovis, CA (or Fresno, Madera)"
-              className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-sans text-[15px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
-            />
-          </label>
-        </div>
-
-        {/* Optional Website URL */}
-        <label className="block" htmlFor="audit-url">
-          <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[.16em] text-ink/65">
-            <span>4. Current website URL (Optional)</span>
-            <span className="text-ink/40">Leave blank if starting fresh</span>
-          </span>
-          <input
-            id="audit-url"
-            type="text"
-            value={websiteUrl}
-            onChange={(e) => setWebsiteUrl(e.target.value)}
-            placeholder="e.g. olsenroofing.com (or mybusiness.biz)"
-            className="mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 font-mono text-[13.5px] outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream"
-          />
-        </label>
-
         {errorMsg && (
           <div className="rounded-xl border border-persimmon/30 bg-persimmon/10 px-4 py-2.5 text-xs text-persimmon-deep">
             {errorMsg}
@@ -213,12 +199,11 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           {loading ? (
             <>
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-cream/30 border-t-cream" />
-              <span>Analyzing Central Valley signals…</span>
+              <span>Checking your site…</span>
             </>
           ) : (
             <>
-              <span>⚡</span>
-              <span>Run 60-Second Lead-Leak Teardown</span>
+              <span>Check my website</span>
             </>
           )}
         </button>
@@ -230,16 +215,16 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.18em] text-leaf font-semibold">
               <span className="h-2 w-2 rounded-full bg-leaf animate-pulse" />
-              Live Diagnostic Output
+              Your results
             </div>
             {loading && (
               <span className="font-mono text-[10px] text-ink/50 animate-pulse">
-                Streaming from Google Gemini…
+                Checking… up to 30 seconds
               </span>
             )}
             {completed && (
               <span className="font-mono text-[10px] text-leaf font-bold">
-                ✓ Analysis complete
+                ✓ Done
               </span>
             )}
           </div>
@@ -252,7 +237,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             {loading && !streamingContent && (
               <div className="flex items-center gap-3 py-6 text-ink/60 font-mono text-xs">
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-persimmon border-t-transparent" />
-                Connecting to Gemini edge endpoint and computing market bounce rates...
+                Starting the check…
               </div>
             )}
           </div>
@@ -264,14 +249,14 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 <span className="rounded-full bg-persimmon px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-cream">
                   Next Step · $1,500 Starter Site
                 </span>
-                <span className="font-mono text-xs text-ink/60">Live in 6 Days</span>
+                <span className="font-mono text-xs text-ink/60">Live in about a week</span>
               </div>
 
               <h4 className="font-display mt-3 text-2xl font-[420] text-ink">
-                Ready to plug these leaks for <em className="wonk text-persimmon">$1,500 flat?</em>
+                Want these fixed? One page, <em className="wonk text-persimmon">$1,500 flat.</em>
               </h4>
               <p className="mt-1.5 text-sm text-ink/80 leading-snug">
-                Text this diagnostic breakdown directly to Adam's cell. No sales pitch, no account rep — the person who answers builds your site.
+                Text my cell about it. No sales pitch, no account rep — the person who answers builds the site.
               </p>
 
               <div className="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -280,7 +265,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                   className="flex-1 flex items-center justify-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep hover:scale-[1.02]"
                 >
                   <span>💬</span>
-                  <span>Text Teardown to Adam ({PHONE_DISPLAY})</span>
+                  <span>Text Adam about it</span>
                 </a>
 
                 <button
@@ -288,13 +273,13 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                   onClick={copyToClipboard}
                   className="inline-flex items-center justify-center gap-1.5 rounded-full border border-ink/20 bg-cream/90 px-4 py-3 font-mono text-xs text-ink transition hover:border-ink/50 hover:bg-cream"
                 >
-                  {copied ? "✓ Copied to clipboard" : "📋 Copy Summary"}
+                  {copied ? "✓ Copied" : "📋 Copy results"}
                 </button>
               </div>
 
               <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-ink/60 pt-2 border-t border-ink/10">
                 <span>Direct cell: <a href={`tel:${PHONE_TEL}`} className="underline hover:text-persimmon">{PHONE_DISPLAY}</a></span>
-                <span>100% Client Code Ownership</span>
+                <span>You own the code and domain</span>
               </div>
             </div>
           )}

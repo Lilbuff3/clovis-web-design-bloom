@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node tests/verify-e2e.mjs"
+    "test": "node tests/site-check.test.mjs && node tests/verify-e2e.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.1",
