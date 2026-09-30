@@ -281,8 +281,95 @@ export function FourSeconds() {
           ))}
         </div>
 
+        {/* Core In-Demand Capabilities */}
+        <div className="reveal mt-16 md:mt-24" style={{ ["--d" as string]: "150ms" }}>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">Technical Specialization</div>
+              <h3 className="font-display mt-3 text-[clamp(2.2rem,5vw,4.2rem)] font-[420] leading-[0.95]">
+                Speed is the baseline. <em className="wonk text-leaf">In-demand skills close the deal.</em>
+              </h3>
+            </div>
+            <p className="max-w-md text-base text-ink/75 md:text-lg">
+              Sub-second load times get visitors through the door. High-demand technical craft is what wins Google search, captures leads, and scales your business.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                badge: "Frontend Architecture",
+                title: "Astro 5 & React 19 Engineering",
+                desc: "Hand-crafted component architecture with TypeScript, Tailwind CSS, and zero CMS bloat. Drift-free, production-grade code with 100% client repository ownership.",
+                metric: "Zero Bloat",
+                tag: "TypeScript · Astro · React",
+              },
+              {
+                badge: "Search Authority",
+                title: "Local SEO & Knowledge Graph (GEO)",
+                desc: "Dominate Google Maps Local 3-Pack with Schema.org JSON-LD entity structures and Generative Engine Optimization for AI search engine citations.",
+                metric: "Maps 3-Pack",
+                tag: "Schema.org · Wikidata · Local SEO",
+              },
+              {
+                badge: "Conversion Design",
+                title: "Bespoke UI/UX & Figma-to-Code",
+                desc: "Drift-free translation of design systems into accessible, interactive user flows. Friction-free mobile tap-to-call and instant SMS drafting engineered to turn visitors into buyers.",
+                metric: "High Intent",
+                tag: "Figma-to-Code · Mobile-First UI",
+              },
+              {
+                badge: "Edge & AI Automation",
+                title: "Gemini AI & Edge Streaming Tools",
+                desc: "Custom interactive diagnostic engines and streaming AI tools that pre-qualify inbound leads and instantly calculate value for prospective customers.",
+                metric: "Edge Speed",
+                tag: "Gemini 2.0 · Vercel Edge · Streaming",
+              },
+              {
+                badge: "Strategic Messaging",
+                title: "Done-For-You Technical Copywriting",
+                desc: "No 20-page blank questionnaires. Every word distilled from a 45-minute recorded interview in your authentic voice, directly addressing customer objections and trust.",
+                metric: "Zero Homework",
+                tag: "Voice Discovery · High-Conversion Copy",
+              },
+              {
+                badge: "Defensible Standards",
+                title: "WCAG 2.1 AA & HIPAA Architecture",
+                desc: "Full keyboard focus states, screen-reader navigation (ADA Title III lawsuit protection), and zero-PHI intake workflows designed for medical and compliance-heavy practices.",
+                metric: "100% Accessible",
+                tag: "WCAG 2.1 AA · ADA Defense · Zero-PHI",
+              },
+            ].map((skill) => (
+              <div
+                key={skill.title}
+                className="group relative flex flex-col justify-between rounded-3xl border border-ink/10 bg-cream p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ink/25 hover:shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-paper px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-ink/70">
+                      {skill.badge}
+                    </span>
+                    <span className="font-mono text-[11px] font-semibold text-persimmon">
+                      {skill.metric}
+                    </span>
+                  </div>
+                  <h4 className="font-display mt-4 text-2xl font-[420] leading-tight text-ink group-hover:text-persimmon-deep transition-colors">
+                    {skill.title}
+                  </h4>
+                  <p className="mt-3 text-[14.5px] leading-relaxed text-ink/75">
+                    {skill.desc}
+                  </p>
+                </div>
+                <div className="mt-6 border-t border-ink/10 pt-4 font-mono text-[10.5px] uppercase tracking-wider text-ink/50">
+                  {skill.tag}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* 60-Second Lead-Leak & Competitor Teardown */}
-        <div id="teardown" className="reveal mt-14 md:mt-20" style={{ ["--d" as string]: "200ms" }}>
+        <div id="teardown" className="reveal mt-16 md:mt-24" style={{ ["--d" as string]: "200ms" }}>
           <LeadLeakAudit />
         </div>
       </div>

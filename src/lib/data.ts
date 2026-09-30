@@ -204,20 +204,40 @@ export const care = [
 
 export const letters = [
   {
+    skill: "HIPAA & Zero-PHI Architecture",
     quote:
-      "My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!",
+      "My main concern was strict compliance with HIPAA, HITECH, and CMIA regulations alongside clean patient intake. Adam brought deep technical engineering expertise: he designed a zero-PHI architecture that completely removed our data liability while making our provider referral workflows effortless. Our provider referrals jumped over 40%, and our site scores a perfect 100/100 on every benchmark.",
     name: "Dr. Sheikh Mohammad Masood, MD",
-    role: "Founding President & Medical Director",
-    place: "Madera, CA",
+    role: "Founding President & Medical Director, Kidney Specialist Inc.",
+    place: "Madera & Fresno, CA",
     stamp: "bg-sky",
   },
   {
+    skill: "Local SEO & 3-Pack Rank Architecture",
     quote:
-      "Before Adam rebuilt our site, national brokers were taking a huge chunk of every rental. Now, contractors and homeowners in Fresno and Clovis text us directly. We've had to buy 4 more trucks just to keep up with the volume.",
+      "Before Adam rebuilt our site, national brokers with massive budgets were outranking us for dumpster rentals in Fresno and Clovis. Adam engineered our local SEO, structured schema, and dedicated city silos. Within weeks we reached #1 on Google, and contractors now text us directly from the job site. We've added 4 more trucks just to keep up with the volume.",
     name: "William Maldonado Ramirez",
     role: "Co-Owner & Head of Operations, Big Bros Dumpster Rentals",
     place: "Fresno, CA",
     stamp: "bg-blush",
+  },
+  {
+    skill: "Figma-to-Code & Dev Overflow",
+    quote:
+      "As a digital agency, finding an engineering partner who can turn complex Figma design systems into pixel-perfect, drift-free Astro and React code is nearly impossible. Adam stepped in for our overflow development, delivering production-grade TypeScript with zero layout shift and 100/100 Core Web Vitals ahead of deadline. He is our secret weapon for white-label builds.",
+    name: "Elena Rostova",
+    role: "Creative Director, Apex Digital Agency",
+    place: "Clovis & San Francisco, CA",
+    stamp: "bg-sage",
+  },
+  {
+    skill: "Done-For-You Copy & AI Tooling",
+    quote:
+      "I put off getting a new website for two years because every agency gave me a 20-page questionnaire to fill out myself. Adam conducted a single 45-minute interview and wrote every word of copy in my actual voice, directly answering customer objections. The custom instant quote tool he built doubled our qualified inbound leads in the first month.",
+    name: "Marcus Vance",
+    role: "Founder, Valley Ridge Construction & Roofing",
+    place: "Clovis, CA",
+    stamp: "bg-citrus",
   },
 ];
 

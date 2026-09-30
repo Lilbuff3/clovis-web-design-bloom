@@ -38,10 +38,11 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I build websites by hand from Clovis for businesses across Fresno and the Central
-              Valley. You get my cell number, and the person who answers is the person who wrote the code.
+              I'm <strong className="font-semibold">Adam Youssef</strong>. I am a full-stack web engineer and technical designer based in Clovis, CA. Instead of bloated WordPress themes or slow drag-and-drop builders, I hand-engineer production websites using modern Astro, React, and TypeScript.
             </p>
-            <p>So I listen before I design, I write before I build, and I hand you the keys at the end.</p>
+            <p>
+              Every build integrates four core in-demand disciplines: <strong className="font-semibold text-ink">bespoke UI/UX design</strong>, <strong className="font-semibold text-ink">done-for-you strategic copywriting</strong>, <strong className="font-semibold text-ink">local SEO &amp; knowledge graph engineering</strong>, and <strong className="font-semibold text-ink">accessible, sub-second code</strong>. You get my cell number, and the person who answers is the engineer writing the code.
+            </p>
           </div>
           <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-4 border-citrus pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
             “You don't rent your website from an agency. You own the code, the domain, and the keys.”
@@ -174,41 +175,48 @@ export function Letters() {
     <section id="letters" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <span id="reviews" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
-        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/70">07 — Client Reviews</div>
+        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">07 — Client Reviews &amp; Production Proof</div>
         <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-          <span className="line-mask"><span>Real owners.</span></span>
+          <span className="line-mask"><span>In-demand skills.</span></span>
           <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
             <span>
-              <em className="wonk text-persimmon">Measured ROI.</em>
+              <em className="wonk text-persimmon">Proven in production.</em>
             </span>
           </span>
         </h2>
-        <p className="reveal mt-4 text-lg text-ink/75">Central Valley business owners, in their own words, unedited.</p>
+        <p className="reveal mt-4 text-lg text-ink/75">From HIPAA compliance to Google 3-Pack rankings and white-label agency overflow — real outcomes, unedited.</p>
 
-        <div className="mt-16 grid gap-10 md:grid-cols-2">
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
           {letters.map((l, i) => (
             <figure
               key={l.name}
-              className={`reveal relative rounded-[10px] bg-cream p-7 shadow-[0_40px_60px_-40px_rgba(30,43,35,.55)] transition-transform duration-700 hover:rotate-0 md:p-10 ${
-                i === 0 ? "md:-rotate-2" : "md:mt-16 md:rotate-2"
+              className={`reveal relative flex flex-col justify-between rounded-2xl bg-cream p-7 shadow-[0_30px_50px_-35px_rgba(30,43,35,.5)] transition-transform duration-500 hover:shadow-xl md:p-9 ${
+                i % 2 === 0 ? "md:-rotate-1" : "md:rotate-1"
               }`}
-              style={{ ["--d" as string]: `${i * 120}ms` }}
+              style={{ ["--d" as string]: `${i * 100}ms` }}
             >
-              <div className="absolute right-6 top-6 flex items-start gap-3">
-                <div className="relative flex h-14 w-28 items-center justify-center rounded-full border border-ink/20 bg-paper/70 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-ink/70 shadow-sm backdrop-blur-sm">
-                  <span className="text-center font-medium">
-                    {l.place.split(",")[0]} · Verified
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink/10 pb-4">
+                  <span className="inline-block rounded-full bg-persimmon/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-persimmon-deep">
+                    {l.skill}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-ink/60">
+                    {l.place.split(",")[0]} · Verified Client
                   </span>
                 </div>
+                <div className="font-display wonk mt-4 text-5xl leading-none text-persimmon/70">“</div>
+                <blockquote className="font-display -mt-2 text-[18px] font-[380] leading-[1.45] md:text-[20px] text-ink/90">
+                  {l.quote}
+                </blockquote>
               </div>
-              <div className="font-display wonk text-7xl leading-none text-persimmon">“</div>
-              <blockquote className="font-display mt-2 text-[21px] font-[380] leading-[1.4] md:text-[23px]">{l.quote}</blockquote>
-              <figcaption className="mt-8 flex items-center gap-4 border-t border-dashed border-ink/25 pt-5">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ink font-display text-lg text-cream">{l.name.replace("Dr. ", "")[0]}</span>
-                <span>
-                  <span className="block font-medium">{l.name}</span>
-                  <span className="block text-sm text-ink/60">{l.role}</span>
+              <figcaption className="mt-8 flex items-center gap-4 border-t border-dashed border-ink/20 pt-5">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink font-display text-lg text-cream">
+                  {l.name.replace("Dr. ", "")[0]}
                 </span>
+                <div>
+                  <span className="block font-medium text-ink leading-tight">{l.name}</span>
+                  <span className="block text-xs text-ink/60 leading-tight mt-0.5">{l.role}</span>
+                </div>
               </figcaption>
             </figure>
           ))}
