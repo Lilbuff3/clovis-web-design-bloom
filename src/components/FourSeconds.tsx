@@ -10,7 +10,7 @@ function Phone({ children, label, tone }: { children: React.ReactNode; label: st
         <span className={`h-2 w-2 rounded-full ${tone === "fast" ? "bg-leaf" : "bg-ink/30"}`} />
         {label}
       </div>
-      <div className="relative w-[250px] rounded-[42px] bg-ink p-[9px] shadow-[0_40px_80px_-30px_rgba(30,43,35,.55)] sm:w-[270px]">
+      <div className="relative w-[250px] rounded-[42px] bg-ink p-[9px] shadow-[0_40px_80px_-30px_rgba(30,43,35,.55)] [zoom:.55] sm:w-[270px] sm:[zoom:1]">
         <div className="relative h-[500px] overflow-hidden rounded-[34px] bg-white sm:h-[540px]">
           <div className="absolute left-1/2 top-2 z-30 h-6 w-24 -translate-x-1/2 rounded-full bg-ink" />
           {children}
@@ -250,7 +250,7 @@ export function FourSeconds() {
           </div>
 
           <div ref={ref} className="lg:col-span-7" data-cursor={running ? "Racing" : "Race"} onClick={() => !running && run()}>
-            <div className="relative flex flex-col items-center justify-center gap-10 rounded-[40px] bg-sage/70 px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
+            <div className="relative flex items-start justify-center gap-3 rounded-[40px] bg-sage/70 px-2 py-10 sm:gap-6 sm:px-4 sm:py-12 md:gap-10">
               <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-citrus/70 blur-2xl" />
               <Phone label="Typical template" tone="slow">
                 <SlowSite t={t} />

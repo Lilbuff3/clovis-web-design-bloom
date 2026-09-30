@@ -81,15 +81,15 @@ export function Stand() {
           <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
         </div>
 
-        {/* wooden rail */}
+        {/* wooden rail on desktop; a swipe row of tags on phones */}
         <div className="relative mt-16">
-          <div className="absolute inset-x-0 top-0 h-3 rounded-full bg-[#b98a5a] shadow-[inset_0_-3px_0_rgba(0,0,0,.15)]" />
-          <div className="grid gap-10 pt-3 md:grid-cols-3 md:gap-6 lg:gap-10">
+          <div className="absolute inset-x-0 top-0 hidden h-3 rounded-full bg-[#b98a5a] shadow-[inset_0_-3px_0_rgba(0,0,0,.15)] md:block" />
+          <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-3 lg:gap-10">
             {plans.map((pl, i) => (
-              <div key={pl.code} className="group flex flex-col items-center" style={{ perspective: 800 }}>
-                <div className="h-10 w-[2px] bg-ink/50 md:h-14" />
+              <div key={pl.code} className="group flex w-[85%] shrink-0 snap-center flex-col items-center md:w-auto" style={{ perspective: 800 }}>
+                <div className="hidden h-14 w-[2px] bg-ink/50 md:block" />
                 <div
-                  className="w-full origin-top animate-sway transition-transform group-hover:[animation-play-state:paused]"
+                  className="w-full origin-top transition-transform group-hover:[animation-play-state:paused] md:animate-sway"
                   style={{ animationDelay: `${i * -1.4}s` }}
                 >
                   <div

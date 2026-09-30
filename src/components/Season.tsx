@@ -166,11 +166,17 @@ export function Season() {
             </div>
           </div>
 
-          <div className="space-y-6 lg:col-span-7 lg:space-y-12 lg:py-4">
+          {/* Swipe row below lg; `reveal` sits on the row so a card peeking in from the side isn't left invisible */}
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Process stages"
+            className="reveal -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:-mx-8 md:px-8 lg:col-span-7 lg:mx-0 lg:block lg:space-y-12 lg:overflow-visible lg:px-0 lg:py-4"
+          >
             {seasons.map((s, i) => (
               <div
                 key={s.key}
-                className={`reveal rounded-[32px] border p-7 transition-all duration-500 md:p-10 ${
+                className={`w-[85%] shrink-0 snap-center rounded-[32px] border p-7 transition-all duration-500 md:w-[60%] md:p-10 lg:w-auto ${
                   i === active ? "border-ink/15 bg-paper shadow-[0_30px_60px_-40px_rgba(30,43,35,.45)]" : "border-ink/10 bg-paper/50"
                 }`}
               >
