@@ -83,8 +83,8 @@ export function Contact() {
               </label>
             </div>
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you need</div>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div id="contact-needs-label" className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you need</div>
+              <div role="group" aria-labelledby="contact-needs-label" className="mt-3 flex flex-wrap gap-2">
                 {needs.map((n) => (
                   <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
                     {n}
@@ -93,8 +93,8 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">When</div>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div id="contact-whens-label" className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">When</div>
+              <div role="group" aria-labelledby="contact-whens-label" className="mt-3 flex flex-wrap gap-2">
                 {whens.map((w) => (
                   <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
                     {w}

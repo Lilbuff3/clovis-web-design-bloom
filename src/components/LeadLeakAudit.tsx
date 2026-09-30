@@ -128,10 +128,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
       <form onSubmit={runAudit} className="mt-7 space-y-5">
         {/* Trade Selector Chips */}
         <div>
-          <label className="block font-mono text-[10px] uppercase tracking-[.16em] text-ink/65 mb-2.5">
+          <div id="audit-industry-label" className="block font-mono text-[10px] uppercase tracking-[.16em] text-ink/65 mb-2.5">
             1. Select your industry
-          </label>
-          <div className="flex flex-wrap gap-2">
+          </div>
+          <div role="group" aria-labelledby="audit-industry-label" className="flex flex-wrap gap-2">
             {TRADES.map((t) => (
               <button
                 type="button"

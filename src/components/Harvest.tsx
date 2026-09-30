@@ -222,10 +222,11 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
   );
 }
 
-export function Harvest() {
+export function ClientWork() {
   useGlobalReveal();
   return (
     <section id="harvest" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
+      <span id="work" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
@@ -329,3 +330,5 @@ export function Harvest() {
     </section>
   );
 }
+
+export const Harvest = ClientWork;

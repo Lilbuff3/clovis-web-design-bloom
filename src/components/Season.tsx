@@ -129,6 +129,7 @@ export function Season() {
   const active = Math.min(3, Math.floor(p * 4));
   return (
     <section id="season" className="relative px-5 py-14 md:px-8 md:py-20">
+      <span id="process" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The Process</div>
@@ -254,3 +255,5 @@ export function Compare() {
     </section>
   );
 }
+
+export const Process = Season;
