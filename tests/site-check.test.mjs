@@ -2,6 +2,7 @@
 // Node 22.18+ imports the .ts file directly (type stripping).
 import assert from 'node:assert/strict';
 import { normalizeUrl } from '../api/teardown.ts';
+import { namedIn } from '../api/ask-gemini.ts';
 
 const ok = {
   'kidneyspecialistinc.com': 'https://kidneyspecialistinc.com/',
@@ -19,3 +20,14 @@ const blocked = [
 for (const input of blocked) assert.equal(normalizeUrl(input), null, input);
 
 console.log(`site-check URL filter: ${Object.keys(ok).length} allowed, ${blocked.length} blocked ✓`);
+
+// "✓ Gemini named you" / "✗ You weren't in Gemini's answer" rests on this match.
+const places = ['Olsen Roofing & Solar', 'Big Bros Dumpster Rentals', 'Joe’s Taquería'];
+assert.equal(namedIn(places, 'Olsen Roofing', ''), 'Olsen Roofing & Solar');
+assert.equal(namedIn(['Big Bros Dumpster Rental'], 'Big Bros Dumpster Rentals', ''), 'Big Bros Dumpster Rental');
+assert.equal(namedIn(places, '', 'https://www.bigbrosdumpster.com/'), 'Big Bros Dumpster Rentals');
+assert.equal(namedIn(places, "Joe's Taqueria", ''), 'Joe’s Taquería');
+assert.equal(namedIn(['Olson Roofing'], 'Olsen Roofing', ''), null);
+assert.equal(namedIn(places, '', ''), null);
+assert.equal(namedIn(places, 'The Company', 'abc.com'), null); // nothing distinctive to look for
+console.log('Gemini answer match: 7 cases ✓');

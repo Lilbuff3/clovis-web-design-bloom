@@ -7,13 +7,13 @@ export const config = {
 // plain English. Every line the visitor sees comes from a measurement; nothing is invented.
 
 const UA = 'Mozilla/5.0 (compatible; ClovisWebDesignSiteCheck/1.0; +https://cloviswebdesign.com)';
-const MODEL = 'gemini-3.5-flash-lite';
+export const MODEL = 'gemini-3.5-flash-lite';
 const PHONE = '(559) 575-3014';
 
 // ponytail: in-memory limiter is per edge instance, so it only slows casual abuse.
 // Use Vercel Firewall rate limiting if the endpoint ever gets hammered.
 const hits = new Map<string, { count: number; resetAt: number }>();
-function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
+export function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
   const now = Date.now();
   for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
   const rec = hits.get(ip);
@@ -322,9 +322,11 @@ export default async function handler(req: Request): Promise<Response> {
         say(`Running Google's mobile speed test (this part takes up to 30 seconds)…\n`);
         const speed = page.status < 400 ? await pageSpeed(facts.finalUrl) : null;
 
-        say(`\nWHAT THE CHECK FOUND\n${checklist(facts, speed)}\n`);
+        const found = checklist(facts, speed);
+        say(`\nWHAT THE CHECK FOUND\n${found}\n`);
         const who = [business && `Business: ${business}`, trade && `Trade: ${trade}`, city && `City: ${city}`].filter(Boolean).join(' · ');
-        const explained = await explain(facts, speed, who);
+        // With nothing failed, Gemini pads "What to fix first" with advice no check found; the rule-based line stays honest.
+        const explained = found.includes('✗') ? await explain(facts, speed, who) : null;
         say(explained ? `\n${explained}\n\nWritten by Gemini from the checks above.` : `\nWHAT TO FIX FIRST\n${fixesFromRules(facts, speed)}\n`);
       } catch (err) {
         console.error('Site check failed', err);

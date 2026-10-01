@@ -116,6 +116,10 @@ export function Hero() {
               See the work
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
+            <a href="#check" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+              Does Google's AI recommend you?
+              <span className="transition group-hover:translate-y-1">↓</span>
+            </a>
           </div>
         </div>
 
