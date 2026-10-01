@@ -182,15 +182,6 @@ export function Season() {
                 </div>
                 <h3 className="font-display mt-5 text-3xl font-[450] leading-tight md:text-4xl">{s.title}</h3>
                 <p className="mt-4 text-[17px] leading-relaxed text-ink/80">{s.body}</p>
-                <div className="mt-6 font-mono text-[10px] uppercase tracking-[.2em] text-ink/50">What you get</div>
-                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {s.gets.map((g) => (
-                    <li key={g} className="flex gap-2.5 rounded-2xl bg-cream p-3 text-[14.5px] leading-snug">
-                      <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-leaf" style={{ boxShadow: "inset 0 0 0 4px #DBE5CF" }} />
-                      {g}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>

@@ -69,12 +69,6 @@ export const seasons = [
     when: "Day 1",
     body:
       "Forty-five minutes on the phone or at your shop. What you do, who calls you, what they ask before they book, and what you keep explaining twice. I analyze who currently ranks for your trade across Clovis and Fresno — then tell you, in plain English, exactly what the site needs to convert. If one simple page is enough, that's what I'll recommend.",
-    gets: [
-      "A plain-English rundown of what the site needs and why",
-      "A clear audit of your top local competitors on Google",
-      "Fixed cost and timeline upfront, before you pay a dime",
-      "An honest answer on whether you need a new website yet",
-    ],
   },
   {
     key: "design",
@@ -83,12 +77,6 @@ export const seasons = [
     when: "Days 2–3",
     body:
       "I write every word of copy from the recording of our conversation — in your authentic voice, not generic marketing fluff — and lay out the mobile and desktop experience. Nobody hands you a blank 20-page document to fill in. We remove the writing bottleneck that stalls most projects for months.",
-    gets: [
-      "Done-for-you copy drawn directly from how you talk to clients",
-      "Interactive layout so you see exactly what's coming",
-      "Typography and contrast engineered for readability in bright sunlight",
-      "Full revision round included to fine-tune details",
-    ],
   },
   {
     key: "build",
@@ -97,12 +85,6 @@ export const seasons = [
     when: "Days 3–5",
     body:
       "No drag-and-drop page builders, no 40 bloated plugins, and nothing that slows down your mobile load time. Your phone and SMS buttons are positioned where thumbs naturally tap, and every page is structured so Google and AI search engines instantly recognize your trade and service radius.",
-    gets: [
-      "Clean code with no plugins to update",
-      "One tap to call or text from anywhere on the page",
-      "Local schema markup so Google reads your trade, city, and phone",
-      "Tested rigorously on real mobile devices under slow cell signal",
-    ],
   },
   {
     key: "launch",
@@ -111,11 +93,6 @@ export const seasons = [
     when: "Day 6 onward",
     body:
       "I connect your domain, deploy the high-speed code, and verify your presence in Google Search Console and Google Maps. For 90 days, any bugs or fixes are handled free — text me directly and it's resolved.",
-    gets: [
-      "Live site launched, domain configured, and Google index submitted",
-      "Full ownership of code, domain, and hosting handed to you",
-      "90 days of direct-text warranty support with the builder",
-    ],
   },
 ];
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cases, plans, SMS_LINK } from "../lib/data";
+import { cases, SMS_LINK } from "../lib/data";
 import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string; decimals?: number; display?: string };
@@ -258,32 +258,18 @@ export function ClientWork() {
           ))}
         </div>
 
-        {/* Project 03 — Modern Upcoming Project Specification */}
-        <div className="reveal relative mt-16 md:mt-20 overflow-hidden rounded-[40px] bg-leaf text-cream">
-          <div className="grid items-center md:grid-cols-2">
-            <div className="p-8 md:p-14">
+        {/* Project 03: the next spot. What it includes is on the price tags below. */}
+        <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div>
               <div className="font-mono text-[11px] uppercase tracking-[.2em] text-citrus">Project Nº 03 — Next in line</div>
               <h3 className="font-display mt-4 text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
                 This spot's <em className="wonk text-citrus">yours</em>, if you want it.
               </h3>
-              <a href={SMS_LINK} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
-                Claim a spot by text <span aria-hidden>→</span>
-              </a>
             </div>
-            
-            <div className="flex h-full flex-col justify-center border-t border-cream/10 bg-ink/95 p-8 md:border-l md:border-t-0 md:p-14">
-              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-cream/60">What {plans[0].price} gets you</div>
-              <ul className="mt-5 space-y-3 text-[16px] leading-snug text-cream/90">
-                {plans[0].items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="text-citrus" aria-hidden>
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
+              Claim a spot by text <span aria-hidden>→</span>
+            </a>
           </div>
         </div>
       </div>
