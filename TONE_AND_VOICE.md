@@ -107,7 +107,7 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | `#valley` | Valley Zoom Video | Highlighting that local customers browse on phones in trucks, shops, and job sites. |
 | `#test` | Four-Second Stopwatch | The tangible business cost of slow websites and the power of instant conversion. |
 | `#harvest` | Showcase Cards | Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with the client's own quote. Only real clients, only quotes they approved. |
-| `#check` | Free AI Check | Asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?" and shows whether the visitor was named, with every Maps source (`api/ask-gemini.ts`). Then loads their site, runs Google PageSpeed, checks tap-to-call, schema and Spanish; Gemini explains only those measured facts (`api/teardown.ts`). Each result drafts the visitor's text to Adam. Never imply a website alone gets someone into Gemini's answer. |
+| `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
 | `#season` | 4-Stage Process | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
 | `#grower` | Studio & Workbench | Adam Youssef bio, local roots, commitment to craft, 100% client code ownership. |

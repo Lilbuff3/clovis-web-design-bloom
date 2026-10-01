@@ -4,14 +4,14 @@ export const config = {
 
 // Asks Gemini, with live Google Maps data, the question a customer asks ("I need a roofer in
 // Clovis, CA. Who do you recommend?") and says whether the visitor's business was in the answer.
-// Only Maps-grounded answers go back: without Maps sources the card would be claiming a source it doesn't have.
-// No imports from teardown.ts: Vercel's edge bundler rejects `./teardown.ts`, and Node's test runner needs that extension.
+// Only Maps-grounded answers go back: without Maps sources the page would be claiming a source it doesn't have.
 
-const MODEL = 'gemini-3.5-flash-lite'; // same as teardown.ts
+const MODEL = 'gemini-3.5-flash-lite';
 
-// ponytail: in-memory limiter is per edge instance, so it only slows casual abuse (copy of teardown.ts's).
+// ponytail: in-memory limiter is per edge instance, so it only slows casual abuse.
+// 10 an hour leaves room for "Try another business". Use Vercel Firewall rate limiting if it gets hammered.
 const hits = new Map<string, { count: number; resetAt: number }>();
-function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
+function rateLimited(ip: string, limit = 10, windowMs = 3_600_000): boolean {
   const now = Date.now();
   for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
   const rec = hits.get(ip);
@@ -33,27 +33,11 @@ const words = (s: string) =>
     .map((w) => w.replace(/s$/, ''))
     .filter((w) => w && !FILLER.has(w));
 
-/** What to look for: the words of the business name, and the site's name before the first dot. */
-function lookFor(businessName: string, websiteUrl: string) {
-  const label = plain(websiteUrl.trim())
-    .replace(/^https?:\/\//, '')
-    .replace(/^www\./, '')
-    .split(/[./:?#]/)[0]
-    .replace(/[^a-z0-9]/g, '');
-  return { want: words(businessName), label: label.length >= 5 ? label : '' };
-}
-
-/** The place title that is the visitor's business, matched by name or website address; null if none. */
-export function namedIn(titles: string[], businessName: string, websiteUrl: string): string | null {
+/** The place title that is the visitor's business; null if none. */
+export function namedIn(titles: string[], businessName: string): string | null {
   // ponytail: word containment, not fuzzy matching. The visitor sees every place Gemini named, so a miss is visible to them.
-  const { want, label } = lookFor(businessName, websiteUrl);
-  return (
-    titles.find(
-      (t) =>
-        (want.length > 0 && want.every((w) => words(t).includes(w))) ||
-        (label !== '' && plain(t).replace(/[^a-z0-9]/g, '').includes(label))
-    ) ?? null
-  );
+  const want = words(businessName);
+  return (want.length > 0 && titles.find((t) => want.every((w) => words(t).includes(w)))) || null;
 }
 
 const an = (w: string) => (/^[aeiou]/i.test(w) ? 'an' : 'a');
@@ -88,7 +72,6 @@ export default async function handler(req: Request): Promise<Response> {
   const business = oneLine(body.businessName, 60);
   const city = oneLine(body.city, 50) || 'Clovis, CA';
   const trade = oneLine(body.trade, 50);
-  const site = oneLine(body.websiteUrl, 200);
   if (!trade) return Response.json({ error: 'Say what your business does' }, { status: 400 });
 
   const key = (process.env.GEMINI_API_KEY || process.env.gemini_key)?.trim(); // gemini_key is its name on Vercel
@@ -133,21 +116,24 @@ export default async function handler(req: Request): Promise<Response> {
           .map((r) => ({ title: r.title ?? '', uri: r.googleMapsUri })),
       ].filter(linkable)
     ).map((s) => ({ ...s, title: unsuffixed(s.title) || 'A review' }));
-    // The businesses named, in the answer's order: "Review of X" chunks count for X.
-    const places = [
-      ...new Set(chunks.map((c) => unsuffixed(c.maps?.title ?? '').replace(/^Review of\s+/i, '').replace(/\.$/, '')).filter(Boolean)),
-    ];
+    // The businesses named, in the answer's order, each with its first Maps link: "Review of X" counts for X.
+    const places: Link[] = [];
+    for (const c of chunks) {
+      const title = unsuffixed(c.maps?.title ?? '').replace(/^Review of\s+/i, '').replace(/\.$/, '');
+      const uri = c.maps?.uri ?? '';
+      if (title && uri.startsWith('https://') && !places.some((p) => p.title === title)) places.push({ title, uri });
+    }
     if (!answer || !places.length) return Response.json({ error: 'No Google Maps answer' }, { status: 502 });
 
-    const { want, label } = lookFor(business, site);
+    const titles = places.map((p) => p.title);
     return Response.json(
       {
         question,
         answer,
         places,
         sources,
-        named: namedIn(places, business, site),
-        lookedFor: want.length > 0 || label !== '',
+        named: namedIn(titles, business),
+        lookedFor: words(business).length > 0,
       },
       { headers: { 'Cache-Control': 'no-store' } }
     );
