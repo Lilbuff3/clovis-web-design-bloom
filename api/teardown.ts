@@ -156,7 +156,8 @@ type Facts = ReturnType<typeof readPage>;
 type Speed = { score: number; lcp: string | null };
 
 async function pageSpeed(url: string): Promise<Speed | null> {
-  const key = process.env.PAGESPEED_API_KEY;
+  // Vercel has the keys as page_speed / gemini_key (Sensitive variables can't be renamed there).
+  const key = process.env.PAGESPEED_API_KEY || process.env.page_speed;
   try {
     const res = await fetch(
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&url=${encodeURIComponent(url)}`,
@@ -229,7 +230,7 @@ Only list fixes for checks marked ✗ or a low speed score. If nothing failed, s
 Under 140 words total.`;
 
 async function explain(f: Facts, speed: Speed | null, who: string): Promise<string | null> {
-  const key = process.env.GEMINI_API_KEY;
+  const key = process.env.GEMINI_API_KEY || process.env.gemini_key;
   if (!key) return null;
   const facts = `<facts>\n${who}\nWebsite: ${f.finalUrl}\nPage title: ${f.title ?? 'missing'}\n${checklist(f, speed)}\n</facts>`;
   try {
