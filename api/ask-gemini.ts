@@ -1,5 +1,3 @@
-import { MODEL, rateLimited } from './teardown.ts';
-
 export const config = {
   runtime: 'edge',
 };
@@ -7,6 +5,23 @@ export const config = {
 // Asks Gemini, with live Google Maps data, the question a customer asks ("I need a roofer in
 // Clovis, CA. Who do you recommend?") and says whether the visitor's business was in the answer.
 // Only Maps-grounded answers go back: without Maps sources the card would be claiming a source it doesn't have.
+// No imports from teardown.ts: Vercel's edge bundler rejects `./teardown.ts`, and Node's test runner needs that extension.
+
+const MODEL = 'gemini-3.5-flash-lite'; // same as teardown.ts
+
+// ponytail: in-memory limiter is per edge instance, so it only slows casual abuse (copy of teardown.ts's).
+const hits = new Map<string, { count: number; resetAt: number }>();
+function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
+  const now = Date.now();
+  for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
+  const rec = hits.get(ip);
+  if (!rec) {
+    hits.set(ip, { count: 1, resetAt: now + windowMs });
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > limit;
+}
 
 type Link = { title: string; uri: string };
 

@@ -7,13 +7,13 @@ export const config = {
 // plain English. Every line the visitor sees comes from a measurement; nothing is invented.
 
 const UA = 'Mozilla/5.0 (compatible; ClovisWebDesignSiteCheck/1.0; +https://cloviswebdesign.com)';
-export const MODEL = 'gemini-3.5-flash-lite';
+const MODEL = 'gemini-3.5-flash-lite';
 const PHONE = '(559) 575-3014';
 
 // ponytail: in-memory limiter is per edge instance, so it only slows casual abuse.
 // Use Vercel Firewall rate limiting if the endpoint ever gets hammered.
 const hits = new Map<string, { count: number; resetAt: number }>();
-export function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
+function rateLimited(ip: string, limit = 5, windowMs = 3_600_000): boolean {
   const now = Date.now();
   for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
   const rec = hits.get(ip);
