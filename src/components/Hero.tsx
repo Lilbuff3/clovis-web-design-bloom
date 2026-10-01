@@ -112,7 +112,7 @@ export function Hero() {
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
               </span>
             </a>
-            <a href="#work" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+            <a href="#work" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-ink/30 decoration-1 underline-offset-4 transition-colors hover:decoration-persimmon">
               See the work
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
