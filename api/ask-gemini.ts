@@ -91,7 +91,7 @@ export default async function handler(req: Request): Promise<Response> {
   const site = oneLine(body.websiteUrl, 200);
   if (!trade) return Response.json({ error: 'Say what your business does' }, { status: 400 });
 
-  const key = process.env.GEMINI_API_KEY || process.env.gemini_key; // gemini_key is its name on Vercel
+  const key = (process.env.GEMINI_API_KEY || process.env.gemini_key)?.trim(); // gemini_key is its name on Vercel
   if (!key) return Response.json({ error: 'Gemini isn’t set up' }, { status: 503 });
 
   const question = `I need ${an(trade)} ${trade} in ${city}. Who do you recommend?`;

@@ -157,13 +157,18 @@ type Speed = { score: number; lcp: string | null };
 
 async function pageSpeed(url: string): Promise<Speed | null> {
   // Vercel has the keys as page_speed / gemini_key (Sensitive variables can't be renamed there).
-  const key = process.env.PAGESPEED_API_KEY || process.env.page_speed;
+  // Trimmed: a pasted newline makes the header invalid and the request throws.
+  const key = (process.env.PAGESPEED_API_KEY || process.env.page_speed)?.trim();
   try {
     const res = await fetch(
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&url=${encodeURIComponent(url)}`,
       { headers: key ? { 'x-goog-api-key': key } : {}, signal: AbortSignal.timeout(55_000) }
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      // 429 = no key or quota used up; 403/400 = key not allowed to use the PageSpeed Insights API.
+      console.warn('PageSpeed returned', res.status, key ? 'with key' : 'without key', (await res.text()).slice(0, 300));
+      return null;
+    }
     const lh = (await res.json())?.lighthouseResult;
     const score = lh?.categories?.performance?.score;
     if (typeof score !== 'number') return null;
@@ -171,7 +176,8 @@ async function pageSpeed(url: string): Promise<Speed | null> {
       score: Math.round(score * 100),
       lcp: lh.audits?.['largest-contentful-paint']?.displayValue ?? null,
     };
-  } catch {
+  } catch (err) {
+    console.warn('PageSpeed request failed', err);
     return null;
   }
 }
@@ -230,7 +236,7 @@ Only list fixes for checks marked ✗ or a low speed score. If nothing failed, s
 Under 140 words total.`;
 
 async function explain(f: Facts, speed: Speed | null, who: string): Promise<string | null> {
-  const key = process.env.GEMINI_API_KEY || process.env.gemini_key;
+  const key = (process.env.GEMINI_API_KEY || process.env.gemini_key)?.trim();
   if (!key) return null;
   const facts = `<facts>\n${who}\nWebsite: ${f.finalUrl}\nPage title: ${f.title ?? 'missing'}\n${checklist(f, speed)}\n</facts>`;
   try {

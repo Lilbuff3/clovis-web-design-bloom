@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useId } from "react";
+import { useState, useMemo, useId } from "react";
 import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 
 type Link = { title: string; uri: string };
@@ -14,6 +14,73 @@ const inputClass =
   "mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3 outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream";
 const labelClass = "font-mono text-[10px] uppercase tracking-[.16em] text-ink/65";
 
+// The check streams plain text (it's also what "Copy results" copies); this lays it out line by line.
+const PROGRESS = /^(Loading .+|Running Google.+)…$/;
+const ROW = /^([✓✗–]) ([^:]+): (.+)$/;
+const HEADING = /^(what the check found|what['’]s working|what to fix first):?$/i;
+const MARK = {
+  "✓": { label: "Passed", className: "bg-leaf/15 text-leaf" },
+  "✗": { label: "Missing", className: "bg-persimmon/15 text-persimmon-deep" },
+  "–": { label: "Note", className: "bg-ink/5 text-ink/50" },
+} as const;
+
+function Spinner({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 py-2 font-mono text-xs text-ink/60">
+      <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-persimmon border-t-transparent" />
+      {children}
+    </div>
+  );
+}
+
+function CheckResult({ text, loading }: { text: string; loading: boolean }) {
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  const last = lines[lines.length - 1];
+  let working = false; // bullets under "What's working" get a check, fixes an arrow
+  return (
+    <div className="mt-3 space-y-1.5 text-sm leading-relaxed text-ink/90">
+      {!lines.length && loading && <Spinner>Starting the check…</Spinner>}
+      {lines.map((line, i) => {
+        // Progress lines only while they're the latest news.
+        if (PROGRESS.test(line)) return loading && line === last ? <Spinner key={i}>{line}</Spinner> : null;
+        const row = line.match(ROW);
+        if (row) {
+          const mark = MARK[row[1] as keyof typeof MARK];
+          return (
+            <div key={i} className="flex items-start gap-3 border-b border-ink/10 py-2">
+              <span role="img" aria-label={mark.label} className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${mark.className}`}>
+                {row[1]}
+              </span>
+              <span className="min-w-0 flex-1 sm:flex sm:justify-between sm:gap-6">
+                <span className="block font-medium text-ink">{row[2]}</span>
+                <span className="block text-ink/65 sm:text-right">{row[3]}</span>
+              </span>
+            </div>
+          );
+        }
+        if (HEADING.test(line)) {
+          working = /working/i.test(line);
+          return (
+            <h5 key={i} className="font-display pt-4 text-xl text-ink first:pt-0">
+              {line[0] + line.slice(1).toLowerCase().replace(/:$/, "")}
+            </h5>
+          );
+        }
+        if (line.startsWith("- ")) {
+          return (
+            <p key={i} className="flex gap-2.5">
+              <span aria-hidden="true" className={working ? "text-leaf" : "text-persimmon"}>{working ? "✓" : "→"}</span>
+              <span>{line.slice(2)}</span>
+            </p>
+          );
+        }
+        if (line.startsWith("Written by Gemini")) return <p key={i} className="pt-2 font-mono text-[10px] text-ink/50">{line}</p>;
+        return <p key={i}>{line}</p>;
+      })}
+    </div>
+  );
+}
+
 export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [trade, setTrade] = useState("");
   const [city, setCity] = useState("Clovis, CA");
@@ -27,7 +94,6 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [copied, setCopied] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const resultsRef = useRef<HTMLDivElement>(null);
   const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
 
   const answer = typeof ai === "object" ? ai : null;
@@ -128,11 +194,6 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
         const text = decoder.decode(value, { stream: true });
         accumulated += text;
         setStreamingContent(accumulated);
-
-        // Smoothly scroll results into view on mobile
-        if (resultsRef.current && resultsRef.current.scrollHeight > 100) {
-          resultsRef.current.scrollTop = resultsRef.current.scrollHeight;
-        }
       }
 
       setCompleted(true);
@@ -333,17 +394,11 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           )}
 
           {(loading || streamingContent) && (
-            <div
-              ref={resultsRef}
-              className="max-h-[420px] overflow-y-auto rounded-2xl border border-ink/15 bg-paper p-5 sm:p-6 font-sans text-sm leading-relaxed text-ink/90 shadow-inner whitespace-pre-line"
-            >
-              {streamingContent}
-              {loading && !streamingContent && (
-                <div className="flex items-center gap-3 py-6 text-ink/60 font-mono text-xs">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-persimmon border-t-transparent" />
-                  Starting the check…
-                </div>
-              )}
+            <div className="rounded-2xl border border-ink/15 bg-cream p-5 sm:p-6">
+              <div className="font-mono text-[11px] uppercase tracking-[.18em] text-persimmon font-semibold">
+                Website check{sent.site && ` · ${sent.site.replace(/^https?:\/\//i, "").replace(/\/$/, "")}`}
+              </div>
+              <CheckResult text={streamingContent} loading={loading} />
             </div>
           )}
 
