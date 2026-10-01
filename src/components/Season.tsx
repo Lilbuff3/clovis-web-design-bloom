@@ -220,7 +220,7 @@ export function Compare() {
           </div>
           <button
             onClick={() => setMine((m) => !m)}
-            data-magnetic="0.15" className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium"
+            data-magnetic="0.15" className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             aria-pressed={mine}
           >
             <span
