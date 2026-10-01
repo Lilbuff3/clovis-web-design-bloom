@@ -266,9 +266,6 @@ export function ClientWork() {
               <h3 className="font-display mt-4 text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
                 This spot's <em className="wonk text-citrus">yours</em>, if you want it.
               </h3>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-cream/80">
-                One page, built by hand for your business, $1,500 flat. You own the code and the domain from day one.
-              </p>
               <a href={SMS_LINK} data-magnetic className="mt-8 inline-flex items-center gap-3 rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream">
                 Claim a spot by text <span aria-hidden>→</span>
               </a>

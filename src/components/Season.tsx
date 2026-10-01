@@ -21,15 +21,15 @@ const milestones = [
     step: "03",
     name: "Custom Build",
     when: "Days 3–5",
-    description: "Semantic hand-written code & 100/100 speed tuning",
-    badge: "Hand-written code",
+    description: "Clean code, tuned for speed",
+    badge: "No page builders",
   },
   {
     step: "04",
     name: "Launch",
     when: "Day 6+",
     description: "Domain live, Google index verified & keys handed over",
-    badge: "Yours on day one",
+    badge: "90 days of fixes",
   },
 ];
 

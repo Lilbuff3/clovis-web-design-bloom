@@ -141,18 +141,6 @@ export function Contact() {
               or just call {PHONE_DISPLAY}
             </a>
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-2 text-center">
-            {[
-              ["Cost to ask", "Nothing"],
-              ["Who answers", "Adam"],
-              ["Starter site", "$1,500"],
-            ].map(([k, v]) => (
-              <div key={k} className="rounded-2xl bg-cream/70 px-2 py-3">
-                <div className="font-mono text-[9px] uppercase tracking-[.14em] text-ink/55">{k}</div>
-                <div className="font-display mt-1 text-xl">{v}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -194,7 +182,7 @@ export function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
           <span>© {new Date().getFullYear()} Adam Youssef · Clovis Web Design</span>
-          <span>This page: custom-built · no templates · no tracking pixels</span>
+          <span>No tracking pixels on this page</span>
           <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>
       </div>

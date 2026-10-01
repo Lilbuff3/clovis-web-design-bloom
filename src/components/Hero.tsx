@@ -10,7 +10,7 @@ function RotatingBadge() {
           <path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
         </defs>
         <text className="font-mono" fontSize="15.5" letterSpacing="4.2" fill="#1E2B23">
-          <textPath href="#circ">BUILT BY HAND · FAST ON A PHONE · </textPath>
+          <textPath href="#circ">ONE PAGE · ONE PRICE · ONE WEEK · </textPath>
         </text>
       </svg>
       <div className="absolute inset-[30%] flex items-center justify-center rounded-full bg-persimmon text-cream shadow-lg">
@@ -72,7 +72,6 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 opacity-100">
           <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">WEB DESIGN · CLOVIS &amp; FRESNO</span>
-          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">

@@ -30,6 +30,18 @@ Our tone is **confident, clear, pragmatic, and respectful of the business owner'
 | **3. Anti-Agency Honesty** | Champion client autonomy, transparency, and independence. | "You own the domain, the code, and the keys on day one." | Monthly hosting retainers disguised as maintenance traps. |
 | **4. Central Valley Grounded** | Local, accountable, and built for real-world field conditions. | "Built for customers searching on a phone in a truck in 100° heat." | Silicon Valley tropes, sterile corporate templates, kitschy folk themes. |
 
+### Say It Once
+
+Each selling point has one home on the homepage. Don't repeat it in other sections.
+
+| Point | Its home |
+| :--- | :--- |
+| Built by hand | The hero headline |
+| Fast on a phone | `#test` (the four-second race) |
+| You own the code, domain and keys | `#compare` and the FAQ |
+| Texts go straight to Adam | The hero and `#compare` |
+| Words written from a 45-minute conversation | `#season` (the process) |
+
 ---
 
 ## 3. The Metaphor Ban (Why Farm/Orchard Tropes Are Out)
@@ -110,8 +122,8 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
 | `#season` | 4-Stage Process | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
-| `#grower` | Studio & Workbench | Adam Youssef bio, local roots, commitment to craft, 100% client code ownership. |
+| `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
 | `#rules` | Horizontal Gallery | Five transparent standards: No templates, upfront pricing, client owns keys, direct phone line, honest scope. |
 | `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
-| `#faq` | Accordion | Direct answers to questions about ownership, timelines, copy, and maintenance. |
+| `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
 | `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |

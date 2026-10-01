@@ -38,19 +38,15 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I build websites by hand in Clovis — no WordPress themes, no drag-and-drop builders. I write the code myself in Astro, React and TypeScript, which is why the sites load fast on a phone.
+              I'm <strong className="font-semibold">Adam Youssef</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
             </p>
             <p>
-              I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers. You get my cell number, and the person who answers is the one writing the code.
+              I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers.
             </p>
             <p className="text-[16px] text-ink/70">
               <strong className="font-semibold text-ink">Agencies and designers:</strong> I also build from your Figma files, under your name. Text me the project and the deadline.
             </p>
           </div>
-          <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-4 border-citrus pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
-            “You don't rent your website from an agency. You own the code, the domain, and the keys.”
-          </blockquote>
-
           <div className="mt-12">
             <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
               Text Adam directly →
@@ -164,7 +160,7 @@ export function Stand() {
             </div>
           </div>
           <p className="mt-8 border-t border-dashed border-ink/20 pt-6 text-center text-[15px] text-ink/75">
-            Cancel with one text. No contract, no exit fee, no “migration charge” — you already have the code, the domain and the logins.
+            Cancel with one text. No contract, no exit fee.
           </p>
         </div>
       </div>

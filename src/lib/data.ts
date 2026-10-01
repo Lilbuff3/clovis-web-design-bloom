@@ -93,12 +93,12 @@ export const seasons = [
   {
     key: "build",
     name: "Custom Build",
-    title: "Hand-coded build — zero bloat",
+    title: "Custom build — zero bloat",
     when: "Days 3–5",
     body:
       "No drag-and-drop page builders, no 40 bloated plugins, and nothing that slows down your mobile load time. Your phone and SMS buttons are positioned where thumbs naturally tap, and every page is structured so Google and AI search engines instantly recognize your trade and service radius.",
     gets: [
-      "Clean, hand-written code with zero CMS lock-in or login bloat",
+      "Clean code with no plugins to update",
       "One tap to call or text from anywhere on the page",
       "Local schema markup so Google reads your trade, city, and phone",
       "Tested rigorously on real mobile devices under slow cell signal",
@@ -110,12 +110,11 @@ export const seasons = [
     title: "Launch & 90-day guarantee",
     when: "Day 6 onward",
     body:
-      "I connect your domain, deploy the high-speed code, and verify your presence in Google Search Console and Google Maps. For 90 days, any bugs or fixes are handled free — text me directly and it's resolved. When we launch, you receive 100% of the code and credentials. The site is yours to keep forever.",
+      "I connect your domain, deploy the high-speed code, and verify your presence in Google Search Console and Google Maps. For 90 days, any bugs or fixes are handled free — text me directly and it's resolved.",
     gets: [
       "Live site launched, domain configured, and Google index submitted",
       "Full ownership of code, domain, and hosting handed to you",
       "90 days of direct-text warranty support with the builder",
-      "Optional maintenance plan — never a monthly hostage fee",
     ],
   },
 ];
@@ -158,11 +157,10 @@ export const plans = [
     color: "bg-citrus",
     hole: "bg-paper",
     items: [
-      "One page, hand-built, live in a week",
+      "One page, live in a week",
       "Your number everywhere — one tap to call or text",
       "Loads in under 1 second on mobile devices",
       "Set up so Google knows who & where you are",
-      "Yours on day one — code, domain, the lot",
       "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
@@ -180,7 +178,6 @@ export const plans = [
       "3–5 pages, each written from a recorded conversation",
       "A page for every town you serve, built for local Google searches",
       "A full Spanish version at /es/",
-      "Still yours on day one, still no lock-in",
     ],
     not: [],
     for: "Established businesses with more than one service — or who need Spanish alongside English.",
@@ -205,9 +202,9 @@ export const plans = [
 ];
 
 export const care = [
-  { name: "No plan", price: "$0", blurb: "Take full ownership and go. The site is 100% yours and keeps working without me." },
-  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and small changes handled. Cancel anytime — the site stays yours." },
-  { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content additions and local SEO tuning. Cancel anytime." },
+  { name: "No plan", price: "$0", blurb: "Pay nothing monthly. You're all set." },
+  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and small changes, handled." },
+  { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content and local SEO tuning." },
 ];
 
 
@@ -217,32 +214,8 @@ export const faqs = [
     a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them and walk.",
   },
   {
-    q: "What do I actually get for $1,500?",
-    a: "One page, built by hand, live in about a week. Your number sits at the top, the bottom, and on a bar that follows people down the page. It loads fast on a phone, Google understands who you are and where you work, and it's yours the day it goes live. It isn't a multi-page site, a blog or a logo — if you need those, I'll quote them properly.",
-  },
-  {
-    q: "Why $1,500 for one page?",
-    a: "Because it's built for your business, not dropped into a template. I write the words from a conversation with you, build it by hand, and set it up so Google knows who you are and where you work. Agencies often charge double that and keep the keys. Bigger builds cost more because they take longer. No trick.",
-  },
-  {
-    q: "Do I have to write all the words myself?",
-    a: "No. We talk for about forty-five minutes, I record it, and I write the site from what you actually said. The blank twenty-page questionnaire is what kills most website projects, so I skip it for you.",
-  },
-  {
-    q: "Do I have to sign up for anything monthly?",
-    a: "No. The $99 care plan covers hosting, backups, security updates and small changes if you want it — but the site is yours either way. Cancel any month, no notice period, no penalty.",
-  },
-  {
     q: "Can we keep our existing booking or ordering system?",
     a: "Usually, yes. If it gives you a link or an embed — most do — I can put it on the page without slowing things down. Tell me what you run and I'll confirm before you pay anything.",
-  },
-  {
-    q: "What happens if something breaks after launch?",
-    a: `You text me and I fix it — ${"(559) 575-3014"}, not a ticket queue. For the first ninety days anything genuinely broken is free. After that, small things I'll usually just do; real work gets a price before I start.`,
-  },
-  {
-    q: "We're a medical practice. How do you handle patient privacy?",
-    a: "By not collecting patient information on the website at all. The site routes people to a phone call or referral fax — channels your practice already handles correctly. Nothing sensitive is stored on the web server, because nothing sensitive is collected there.",
   },
 ];
 
