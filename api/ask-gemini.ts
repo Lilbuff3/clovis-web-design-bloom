@@ -78,6 +78,23 @@ export default async function handler(req: Request): Promise<Response> {
   if (!key) return Response.json({ error: 'Gemini isn’t set up' }, { status: 503 });
 
   const question = `I need ${an(trade)} ${trade} in ${city}. Who do you recommend?`;
+  // Now and then Gemini answers without looking anything up on Maps (about 1 in 10 on production); a second try covers it.
+  const result = (await askGemini(key, question)) ?? (await askGemini(key, question));
+  if (!result) return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
+
+  return Response.json(
+    {
+      question,
+      ...result,
+      named: namedIn(result.places.map((p) => p.title), business),
+      lookedFor: words(business).length > 0,
+    },
+    { headers: { 'Cache-Control': 'no-store' } }
+  );
+}
+
+/** One question to Gemini with Google Maps; null unless the answer came back with Maps sources. */
+async function askGemini(key: string, question: string): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
       method: 'POST',
@@ -88,12 +105,12 @@ export default async function handler(req: Request): Promise<Response> {
         tools: [{ googleMaps: {} }],
         generationConfig: { maxOutputTokens: 800 },
       }),
-      // Edge functions have to start answering within 25 seconds.
-      signal: AbortSignal.timeout(20_000),
+      // Two tries at 11s each stay inside the 25 seconds an edge function gets to start answering.
+      signal: AbortSignal.timeout(11_000),
     });
     if (!res.ok) {
       console.warn('Gemini returned', res.status, (await res.text()).slice(0, 300));
-      return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
+      return null;
     }
     const candidate = (await res.json())?.candidates?.[0];
     const parts: { text?: string; thought?: boolean }[] = candidate?.content?.parts ?? [];
@@ -123,22 +140,13 @@ export default async function handler(req: Request): Promise<Response> {
       const uri = c.maps?.uri ?? '';
       if (title && uri.startsWith('https://') && !places.some((p) => p.title === title)) places.push({ title, uri });
     }
-    if (!answer || !places.length) return Response.json({ error: 'No Google Maps answer' }, { status: 502 });
-
-    const titles = places.map((p) => p.title);
-    return Response.json(
-      {
-        question,
-        answer,
-        places,
-        sources,
-        named: namedIn(titles, business),
-        lookedFor: words(business).length > 0,
-      },
-      { headers: { 'Cache-Control': 'no-store' } }
-    );
+    if (!answer || !places.length) {
+      console.warn('Gemini answered without Google Maps sources');
+      return null;
+    }
+    return { answer, places, sources };
   } catch (err) {
     console.warn('Gemini request failed', err);
-    return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
+    return null;
   }
 }
