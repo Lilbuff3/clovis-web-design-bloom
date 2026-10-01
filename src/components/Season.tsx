@@ -147,7 +147,7 @@ export function Season() {
           </p>
         </div>
 
-        <div ref={ref} className="mt-16 grid gap-10 lg:grid-cols-12">
+        <div ref={ref} className="mt-10 grid gap-4 lg:mt-16 lg:grid-cols-12 lg:gap-10">
           <div className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-24 flex h-[calc(100vh-8rem)] flex-col">
               <div className="relative flex-1 overflow-hidden rounded-[40px] border border-ink/10 bg-cream p-7 shadow-xl">
@@ -165,6 +165,10 @@ export function Season() {
               </div>
             </div>
           </div>
+
+          <p aria-hidden="true" className="text-right font-mono text-[11px] uppercase tracking-[.2em] text-ink/60 lg:hidden">
+            Swipe for all {seasons.length} steps →
+          </p>
 
           {/* Swipe row below lg; `reveal` sits on the row so a card peeking in from the side isn't left invisible */}
           <div

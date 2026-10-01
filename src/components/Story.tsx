@@ -82,7 +82,10 @@ export function Stand() {
         </div>
 
         {/* wooden rail on desktop; a swipe row of tags on phones */}
-        <div className="relative mt-16">
+        <div className="relative mt-10 md:mt-16">
+          <p aria-hidden="true" className="mb-4 text-right font-mono text-[11px] uppercase tracking-[.2em] text-ink/60 md:hidden">
+            Swipe to compare all {plans.length} plans →
+          </p>
           <div className="absolute inset-x-0 top-0 hidden h-3 rounded-full bg-[#b98a5a] shadow-[inset_0_-3px_0_rgba(0,0,0,.15)] md:block" />
           <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-3 lg:gap-10">
             {plans.map((pl, i) => (
