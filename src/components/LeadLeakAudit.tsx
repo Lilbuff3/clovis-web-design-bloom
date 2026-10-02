@@ -97,7 +97,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
           <button
             type="submit"
-            className="mt-5 w-full rounded-full bg-persimmon py-5 font-display text-xl font-medium text-cream shadow-md transition hover:bg-persimmon-deep hover:shadow-lg"
+            className="mt-5 w-full rounded-full bg-persimmon py-5 font-display text-xl font-medium text-cream shadow-md transition hover:bg-persimmon-deep hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             Ask Google's AI
           </button>
@@ -195,7 +195,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <p className="mx-auto mt-6 max-w-lg font-mono text-[10px] leading-relaxed text-ink/50">
               One question, asked just now. Google's AI Mode, the Gemini app and other AI apps can answer differently, and answers change.
             </p>
-            <button type="button" onClick={() => setAi(null)} className="mt-4 text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon">
+            <button type="button" onClick={() => setAi(null)} className="mt-4 rounded text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 focus-visible:ring-offset-cream">
               Try another business
             </button>
           </div>
@@ -208,7 +208,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             </p>
             <p className="mt-3 text-ink/70">{ai === "limit" ? "Text Adam and he'll look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
-              <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream transition hover:bg-persimmon-deep">
+              <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream transition hover:bg-persimmon-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2 focus-visible:ring-offset-cream">
                 Try again
               </button>
               <a href={sms(`Hi Adam! Can you check whether Google's AI recommends ${sent.name} for ${asked}?`)} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
