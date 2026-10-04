@@ -6,3 +6,7 @@
 **Learning:** Discovered that custom selectable 'chips' (used in multi-step or quick-select forms like Contact and LeadLeakAudit) lacked `aria-pressed` states, semantic `role="group"` wrappers with `aria-labelledby`, and clear `focus-visible` outlines, making them difficult for screen reader and keyboard users to navigate and understand their selected state. Inputs also relied solely on nesting for labels rather than explicit `htmlFor` / `id` bindings.
 **Action:** Always add `aria-pressed` to toggleable buttons, semantic `role="group"` containers, explicit `focus-visible:ring-2` utility classes for clear keyboard focus indicators, and strict `htmlFor`/`id` bindings on all form inputs.
 
+
+## 2026-10-04 - Missing focus styles on mobile menu button
+**Learning:** Discovered the mobile menu button (hamburger menu) lacked a visible focus indicator for keyboard users.
+**Action:** Add explicit `focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2` utility classes to ensure it's easily navigable via keyboard.
