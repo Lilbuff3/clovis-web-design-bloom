@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { care, faqs, plans, SMS_LINK } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -171,6 +171,7 @@ export function Stand() {
 export function FAQ() {
   useGlobalReveal();
   const [open, setOpen] = useState<number | null>(0);
+  const baseId = useId();
   return (
     <section id="faq" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
@@ -193,7 +194,13 @@ export function FAQ() {
             const isOpen = open === i;
             return (
               <div key={f.q} className="border-b border-ink/15">
-                <button onClick={() => setOpen(isOpen ? null : i)} className="group flex w-full items-center justify-between gap-6 py-6 text-left" aria-expanded={isOpen}>
+                <button
+                  id={`faq-btn-${baseId}-${i}`}
+                  aria-controls={`faq-panel-${baseId}-${i}`}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="group flex w-full items-center justify-between gap-6 py-6 text-left rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf8f2]"
+                  aria-expanded={isOpen}
+                >
                   <span className={`font-display text-2xl leading-snug transition md:text-[28px] ${isOpen ? "text-persimmon" : "group-hover:translate-x-1"}`}>{f.q}</span>
                   <span
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink/20 text-2xl transition-all duration-500 ${
@@ -203,7 +210,13 @@ export function FAQ() {
                     +
                   </span>
                 </button>
-                <div className="grid transition-all duration-500 ease-out" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
+                <div
+                  id={`faq-panel-${baseId}-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${baseId}-${i}`}
+                  className="grid transition-all duration-500 ease-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
                   <div className="overflow-hidden">
                     <p className="max-w-2xl pb-7 text-[17px] leading-relaxed text-ink/80">{f.a}</p>
                   </div>
