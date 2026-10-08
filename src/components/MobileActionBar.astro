@@ -15,17 +15,17 @@ import { LeadLeakAudit } from './LeadLeakAudit';
     </div>
 
     <!-- Actions -->
-    <div class="ml-auto flex items-center gap-2 shrink-0">
+    <div class="flex flex-1 items-center gap-2">
       <a
         href={`tel:${PHONE_TEL}`}
-        class="inline-flex items-center gap-1 rounded-full bg-ink/10 px-3 py-1.5 font-mono text-[12px] font-semibold text-ink transition hover:bg-ink/20"
+        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-full bg-ink/10 px-4 py-3 font-mono text-[13px] font-semibold text-ink transition active:scale-95 hover:bg-ink/20"
         aria-label="Call Adam"
       >
         <span>📞</span> Call
       </a>
       <a
         href={`sms:${PHONE_TEL}`}
-        class="inline-flex items-center gap-1 rounded-full bg-persimmon px-3 py-1.5 font-mono text-[12px] font-semibold text-cream shadow transition hover:bg-persimmon-deep"
+        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-full bg-persimmon px-4 py-3 font-mono text-[13px] font-semibold text-cream shadow-md transition active:scale-95 hover:bg-persimmon-deep"
         aria-label="Text Adam"
       >
         <span>💬</span> Text
@@ -34,7 +34,7 @@ import { LeadLeakAudit } from './LeadLeakAudit';
         type="button"
         data-audit="true"
         id="audit-drawer-btn"
-        class="inline-flex items-center gap-1 rounded-full border border-ink/20 bg-cream px-3 py-1.5 font-mono text-[12px] font-medium text-ink transition hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2"
+        class="min-h-[48px] inline-flex items-center justify-center gap-1 rounded-full border border-ink/20 bg-cream px-3.5 py-3 font-mono text-[12px] font-medium text-ink transition active:scale-95 hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2"
       >
         AI check
       </button>
@@ -48,7 +48,7 @@ import { LeadLeakAudit } from './LeadLeakAudit';
     <div>
       <h3 class="font-display text-2xl font-semibold text-ink">Free AI check</h3>
     </div>
-    <button type="button" id="close-audit-modal" class="rounded-full p-2 text-ink/60 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2" aria-label="Close dialog">
+    <button type="button" id="close-audit-modal" class="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full text-ink/60 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2" aria-label="Close dialog">
       ✕
     </button>
   </div>
@@ -57,7 +57,7 @@ import { LeadLeakAudit } from './LeadLeakAudit';
   </div>
   <div class="mt-4 border-t border-ink/10 pt-3 text-center">
     <a
-      href={`sms:${PHONE_TEL}?&body=${encodeURIComponent("Hi Adam, could you take a quick look at my website?")}`}
+      href={`sms:${PHONE_TEL}?body=${encodeURIComponent("Hi Adam, could you take a quick look at my website?")}`}
       class="text-xs font-mono text-ink/60 underline hover:text-persimmon"
     >
       Or text Adam directly ({PHONE_DISPLAY})

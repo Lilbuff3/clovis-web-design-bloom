@@ -7,29 +7,29 @@ const milestones = [
     step: "01",
     name: "Discovery",
     when: "Day 1",
-    description: "45-minute interview & local Google Maps audit",
-    badge: "45-minute call",
+    description: "45-minute phone call to learn your business and trade",
+    badge: "Direct phone call",
   },
   {
     step: "02",
-    name: "Copy & Design",
+    name: "Words & Layout",
     when: "Days 2–3",
-    description: "Done-for-you copywriting & mobile layout proof",
-    badge: "No Blank Forms",
+    description: "I write every word and send you a link to test on your phone",
+    badge: "No blank questionnaires",
   },
   {
     step: "03",
-    name: "Custom Build",
+    name: "Hand-Coded Build",
     when: "Days 3–5",
-    description: "Clean code, tuned for speed",
-    badge: "No page builders",
+    description: "Hand-written code that loads instantly on cellular signal",
+    badge: "Sub-second load time",
   },
   {
     step: "04",
     name: "Launch",
     when: "Day 6+",
-    description: "Domain live, Google index verified & keys handed over",
-    badge: "90 days of fixes",
+    description: "Domain live, connected to Google, and keys handed to you",
+    badge: "Yours on day one",
   },
 ];
 
@@ -132,7 +132,7 @@ export function Season() {
       <span id="process" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">03 — The Process</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">03 — The Process</div>
           <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
             <span className="line-mask"><span>From discovery</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -216,7 +216,7 @@ export function Compare() {
           >
             <span
               className="absolute top-1.5 h-13 w-[calc(50%-6px)] rounded-full bg-citrus transition-all duration-500"
-              style={{ left: mine ? "calc(50% + 0px)" : "6px", height: "calc(100% - 12px)", transitionTimingFunction: "cubic-bezier(.6,-0.3,.3,1.4)" }}
+              style={{ left: mine ? "calc(50% + 0px)" : "6px", height: "calc(100% - 12px)", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
             />
             <span className={`relative z-10 flex-1 text-center transition ${!mine ? "text-ink" : "text-cream/70"}`}>Typical agency</span>
             <span className={`relative z-10 flex-1 text-center transition ${mine ? "text-ink" : "text-cream/70"}`}>With Adam</span>

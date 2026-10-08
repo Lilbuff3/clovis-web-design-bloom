@@ -37,21 +37,13 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           onPointerLeave={() => setTilt({ x: 0, y: 0 })}
           style={{ perspective: 1000 }}
         >
-          {/* Crate label sticker pinned cleanly above the browser frame */}
+          {/* Architectural project metadata stamp */}
           <div className={`mb-3.5 flex ${flip ? "justify-start pl-2 sm:pl-4" : "justify-end pr-2 sm:pr-4"}`}>
-            <div
-              className={`w-44 rounded-2xl border-2 border-ink bg-cream p-3 shadow-lg transition-transform duration-300 hover:rotate-0 ${
-                flip ? "-rotate-2" : "rotate-2"
-              }`}
-            >
-              <div className="flex items-center justify-between border-b border-dashed border-ink/40 pb-1.5 font-mono text-[9px] uppercase tracking-[.2em]">
-                <span>Project</span>
-                <span>Nº {c.no}</span>
-              </div>
-              <div className="font-display wonk mt-1 text-base italic leading-tight text-ink">{c.client}</div>
-              <div className="mt-1 font-mono text-[9px] uppercase tracking-[.15em] text-ink/60">
-                Built {c.year} · Central Valley
-              </div>
+            <div className="flex items-center gap-3 rounded-full border border-ink/15 bg-cream/95 px-4 py-1.5 shadow-sm">
+              <span className="font-mono text-[10px] uppercase tracking-[.2em] text-persimmon-deep font-semibold">Project Nº {c.no}</span>
+              <span className="h-3 w-px bg-ink/15" />
+              <span className="font-sans text-xs font-semibold text-ink">{c.client}</span>
+              <span className="hidden sm:inline font-mono text-[10px] text-ink/50 uppercase tracking-wider">Built {c.year}</span>
             </div>
           </div>
 
@@ -187,7 +179,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 
         <div className="reveal mt-8 grid gap-6 sm:grid-cols-2" style={{ ["--d" as string]: "160ms" }}>
           <div className="rounded-3xl bg-cream p-5">
-            <div className="font-mono text-[10px] uppercase tracking-[.2em] text-persimmon">The Challenge</div>
+            <div className="font-mono text-[10px] uppercase tracking-[.2em] text-persimmon-deep">The Challenge</div>
             <p className="mt-2 text-[15px] leading-relaxed text-ink/85">{c.problem}</p>
           </div>
           <div className="rounded-3xl bg-cream p-5">
@@ -237,7 +229,7 @@ export function ClientWork() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">02 — Client Work</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">02 — Client Work</div>
             <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
               <span className="line-mask"><span>Real businesses.</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>

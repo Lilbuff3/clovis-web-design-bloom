@@ -27,7 +27,7 @@ export function Grower() {
         </div>
 
         <div className="lg:col-span-7 lg:pl-6">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">05 — About the Builder</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">05 — About the Builder</div>
           <h2 className="font-display mt-5 text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
             <span className="line-mask"><span>One person.</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -47,6 +47,9 @@ export function Grower() {
               <strong className="font-semibold text-ink">Agencies and designers:</strong> I also build from your Figma files, under your name. Text me the project and the deadline.
             </p>
           </div>
+          <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-2 border-citrus/60 pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
+            “You don't rent your website from an agency. You own the code, the domain, and the keys.”
+          </blockquote>
           <div className="mt-12">
             <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
               Text Adam directly →
@@ -65,7 +68,7 @@ export function Stand() {
       <span id="pricing" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">06 — Transparent Pricing</div>
+          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">06 — Transparent Pricing</div>
           <h2 className="font-display mx-auto mt-5 max-w-4xl text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
             <span className="line-mask"><span>Prices on the tag,</span></span>
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -77,56 +80,47 @@ export function Stand() {
           <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
         </div>
 
-        {/* wooden rail */}
-        <div className="relative mt-16">
-          <div className="absolute inset-x-0 top-0 h-3 rounded-full bg-[#b98a5a] shadow-[inset_0_-3px_0_rgba(0,0,0,.15)]" />
-          <div className="grid gap-10 pt-3 md:grid-cols-3 md:gap-6 lg:gap-10">
-            {plans.map((pl, i) => (
-              <div key={pl.code} className="group flex flex-col items-center" style={{ perspective: 800 }}>
-                <div className="h-10 w-[2px] bg-ink/50 md:h-14" />
+        {/* Pricing Cards */}
+        <div className="mt-16">
+          <div className="grid gap-8 md:grid-cols-3 lg:gap-8">
+            {plans.map((pl) => (
+              <div key={pl.code} className="flex flex-col">
                 <div
-                  className="w-full origin-top animate-sway transition-transform group-hover:[animation-play-state:paused]"
-                  style={{ animationDelay: `${i * -1.4}s` }}
+                  className={`relative flex flex-1 flex-col ${pl.color} rounded-[28px] border border-ink/10 p-7 shadow-[0_20px_50px_-25px_rgba(30,43,35,.2)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)]`}
                 >
-                  <div
-                    className={`relative ${pl.color} px-7 pb-8 pt-14 shadow-[0_30px_60px_-30px_rgba(30,43,35,.5)] transition-transform duration-500 group-hover:-translate-y-2`}
-                    style={{ clipPath: "polygon(56px 0, calc(100% - 56px) 0, 100% 44px, 100% 100%, 0 100%, 0 44px)", borderRadius: 22 }}
-                  >
-                    <span className="tag-hole absolute left-1/2 top-5 h-5 w-5 -translate-x-1/2 rounded-full bg-[#f3e9d6] ring-2 ring-ink/10" />
-                    <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[.18em]">
-                      <span>Nº {pl.code}</span>
-                      <span>{pl.time}</span>
-                    </div>
-                    <div className="font-display wonk mt-4 text-5xl italic">{pl.name}</div>
-                    <div className="mt-1 text-[15px] text-ink/70">{pl.kind}</div>
-                    <div className="mt-6 flex items-end gap-3">
-                      <span className="font-display text-7xl font-[400] leading-none">{pl.price}</span>
-                      {pl.was && <span className="mb-2 font-display text-2xl text-ink/45 line-through decoration-persimmon decoration-2">{pl.was}</span>}
-                    </div>
-                    <div className="mt-2 font-mono text-[10px] uppercase tracking-[.16em] text-ink/60">{pl.note ?? "one-off · no subscription"}</div>
-                    <div className="dotted-rule mt-6 text-ink/30" />
-                    <ul className="mt-5 space-y-2.5 text-[15px]">
-                      {pl.items.map((it) => (
-                        <li key={it} className="flex gap-2.5">
-                          <span className="mt-[3px] text-leaf">✓</span>
-                          {it}
-                        </li>
-                      ))}
-                      {pl.not.map((it) => (
-                        <li key={it} className="flex gap-2.5 text-ink/50">
-                          <span className="mt-[3px]">–</span>
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-6 rounded-2xl bg-cream/60 p-3.5 text-[13.5px] leading-snug text-ink/75">
-                      <span className="font-semibold text-ink">Best for: </span>
-                      {pl.for}
-                    </p>
-                    <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon">
-                      Pick {pl.name} →
-                    </a>
+                  <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[.18em]">
+                    <span className="rounded-full bg-ink/5 px-2.5 py-0.5 font-semibold text-persimmon-deep">Plan Nº {pl.code}</span>
+                    <span className="text-ink/60">{pl.time}</span>
                   </div>
+                  <div className="font-display wonk mt-4 text-4xl italic text-ink">{pl.name}</div>
+                  <div className="mt-1 text-[15px] text-ink/70">{pl.kind}</div>
+                  <div className="mt-6 flex items-end gap-3">
+                    <span className="font-display text-6xl font-[400] leading-none text-ink">{pl.price}</span>
+                    {pl.was && <span className="mb-2 font-display text-2xl text-ink/45 line-through decoration-persimmon decoration-2">{pl.was}</span>}
+                  </div>
+                  <div className="mt-2 font-mono text-[10px] uppercase tracking-[.16em] text-ink/60">{pl.note ?? "one-off · no subscription"}</div>
+                  <div className="dotted-rule mt-6 text-ink/30" />
+                  <ul className="mt-5 space-y-2.5 text-[15px]">
+                    {pl.items.map((it) => (
+                      <li key={it} className="flex gap-2.5">
+                        <span className="mt-[3px] text-leaf">✓</span>
+                        {it}
+                      </li>
+                    ))}
+                    {pl.not.map((it) => (
+                      <li key={it} className="flex gap-2.5 text-ink/50">
+                        <span className="mt-[3px]">–</span>
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 rounded-2xl bg-cream/70 p-3.5 text-[13.5px] leading-snug text-ink/75">
+                    <span className="font-semibold text-ink">Best for: </span>
+                    {pl.for}
+                  </p>
+                  <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon font-medium">
+                    Ask about {pl.name} →
+                  </a>
                 </div>
               </div>
             ))}
@@ -176,7 +170,7 @@ export function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">07 — Frequently Asked Questions</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">07 — Frequently Asked Questions</div>
             <h2 className="font-display mt-5 text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
               <span className="line-mask"><span>What people ask</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>

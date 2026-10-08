@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, SMS_LINK } from "../lib/data";
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from "../lib/data";
 
 function RotatingBadge() {
   return (
@@ -52,26 +52,28 @@ export function Hero() {
       >
         <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
           <img src="/images/hero.webp" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
+          {/* Living Hero HTML5 Video Overlay (Auto-plays if hero-sunrise.mp4 is generated) */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/hero.webp"
+            className="absolute inset-0 h-full w-full object-cover object-[30%_bottom] opacity-90 transition-opacity duration-1000 md:object-bottom"
+            onError={(e) => {
+              (e.currentTarget as HTMLElement).style.display = "none";
+            }}
+          >
+            <source src="/videos/hero-sunrise.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
-      {/* Halo for the painted sun */}
-      <div
-        className="pointer-events-none absolute hidden rounded-full md:block"
-        style={{
-          left: "18.6%",
-          top: "calc(100% - 42%)",
-          width: "22vw",
-          height: "22vw",
-          transform: `translate(-50%,-50%) translateY(${par * 0.1}px)`,
-          background: "radial-gradient(circle, rgba(255,180,59,.45), rgba(255,180,59,0) 65%)",
-          animation: "float 9s ease-in-out infinite",
-        }}
-      />
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/70 opacity-100">
-          <span className="rounded-full border border-ink/20 bg-cream/60 px-3 py-1.5 backdrop-blur">WEB DESIGN · CLOVIS &amp; FRESNO</span>
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/80 opacity-100">
+          <span className="rounded-full border border-ink/20 bg-cream/80 px-3 py-1.5 font-semibold">CLOVIS, CA · (559) 575-3014</span>
+          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
@@ -95,14 +97,14 @@ export function Hero() {
         </h1>
 
         <div className="mt-6 grid max-w-3xl gap-6 opacity-100 md:grid-cols-[1.3fr_1fr]">
-          {/* Frosted backing: on laptop-height screens this paragraph lands on the painted orchard */}
-          <p className="-mx-4 rounded-2xl bg-cream/70 px-4 py-3 text-lg leading-relaxed text-ink/85 backdrop-blur-sm md:text-xl">
-            Websites for Central Valley businesses that load fast on a phone and make it easy to call you. No templates, no monthly lock-in, from $1,500. You get my cell number, not a ticket queue.
+          <p className="max-w-xl text-lg leading-relaxed text-ink/90 md:text-xl">
+            Custom websites for Central Valley businesses that load fast on phones and turn local searches into direct calls. No templates, no monthly retainers. You talk directly with the engineer.
           </p>
           <div className="flex flex-col items-start gap-3">
-            <a href={SMS_LINK} data-magnetic="0.3" className="group flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-colors hover:bg-persimmon">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-all duration-300 hover:bg-persimmon hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
+              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
+                <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
+                <svg viewBox="0 0 24 24" className="relative z-10 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
                 </svg>
               </span>
@@ -111,8 +113,8 @@ export function Hero() {
                 <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
               </span>
             </a>
-            <a href="#work" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
-              See the work
+            <a href="#harvest" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+              See client results
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
             <a href="#check" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">

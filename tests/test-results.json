@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-30T12:29:32.646Z",
+  "timestamp": "2026-10-08T01:34:58.845Z",
   "total": 32,
   "passed": 32,
   "failed": 0,
@@ -84,7 +84,7 @@
           "title": "Core business identity (name, telephone: +15595753014, priceRange)",
           "status": "PASS",
           "error": null,
-          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"$500 - $5,000\""
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"$1,500 - $5,000\""
         },
         {
           "id": "T2.4",
@@ -97,10 +97,10 @@
         {
           "id": "T2.5",
           "tier": 2,
-          "title": "areaServed contains Wikidata URIs (Q949704, Q43048, Q271014)",
+          "title": "areaServed names Clovis and Fresno, with no wrong Wikidata IDs",
           "status": "PASS",
           "error": null,
-          "details": "All 3 required Wikidata entities (Q949704, Q43048, Q271014) present in areaServed"
+          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA"
         },
         {
           "id": "T2.6",
@@ -113,18 +113,18 @@
         {
           "id": "T2.7",
           "tier": 2,
-          "title": "Top-level sameAs contains only verified official agency profiles",
+          "title": "Top-level sameAs (if any) lists only profile sites, only ones Adam confirmed",
           "status": "PASS",
           "error": null,
-          "details": "Top-level sameAs contains 2 verified official agency profiles"
+          "details": "sameAs has 0 confirmed profile(s)"
         },
         {
           "id": "T2.8",
           "tier": 2,
-          "title": "hasOfferCatalog with Starter ($500) and Growth ($2,500) services",
+          "title": "hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services",
           "status": "PASS",
           "error": null,
-          "details": "hasOfferCatalog successfully configured with Starter ($500) and Growth ($2,500) offerings"
+          "details": "hasOfferCatalog successfully configured with Starter ($1,500) and Growth ($2,500) offerings"
         }
       ]
     },
@@ -150,10 +150,10 @@
         {
           "id": "T3.3",
           "tier": 3,
-          "title": "Hero section displays headline, $500 pricing anchor, and primary CTA for mobile fold compliance",
+          "title": "Hero section displays headline, $1,500 pricing anchor, and primary CTA for mobile fold compliance",
           "status": "PASS",
           "error": null,
-          "details": "Hero section contains headline, $500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
+          "details": "Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
         }
       ]
     },
@@ -224,7 +224,7 @@
           "title": "Medical practice web design silo pre-rendered static HTML with deep semantic volume",
           "status": "PASS",
           "error": null,
-          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 12173 chars)"
+          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 18217 chars)"
         },
         {
           "id": "T6.2",
@@ -285,10 +285,10 @@
         {
           "id": "T6.9",
           "tier": 6,
-          "title": "Schema.org JSON-LD hasOfferCatalog includes Medical Practice offering and knowsAbout grounding",
+          "title": "Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)",
           "status": "PASS",
           "error": null,
-          "details": "Schema.org JSON-LD verified: Medical offering in hasOfferCatalog, knowsAbout populated with HIPAA, ADA, and EHR topics"
+          "details": "knowsAbout: Web design, Local SEO, Website speed, Web accessibility (WCAG 2.1 AA), Websites for medical practices, HIPAA-aware web design, Bilingual English and Spanish websites"
         }
       ]
     }

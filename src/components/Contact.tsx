@@ -36,7 +36,7 @@ export function Contact() {
     return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
   }, [name, trade, need, when]);
 
-  const smsHref = `sms:${PHONE_TEL}?&body=${encodeURIComponent(message)}`;
+  const smsHref = `sms:${PHONE_TEL}?body=${encodeURIComponent(message)}`;
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-14 md:rounded-b-[72px] md:px-8 md:py-20">
@@ -118,7 +118,7 @@ export function Contact() {
                   <div
                     key={message}
                     className="max-w-[90%] self-end rounded-3xl rounded-br-md bg-persimmon px-4 py-3 text-[14px] leading-snug text-white shadow-md"
-                    style={{ animation: "pop .35s cubic-bezier(.3,1.4,.5,1)" }}
+                    style={{ animation: "pop .35s cubic-bezier(0.16, 1, 0.3, 1)" }}
                   >
                     {message}
                   </div>

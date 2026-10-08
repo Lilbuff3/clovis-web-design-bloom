@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, SMS_LINK } from "../lib/data";
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from "../lib/data";
 
 export function SunMark({ className = "", progress = 1 }: { className?: string; progress?: number }) {
   const c = 2 * Math.PI * 21;
@@ -68,9 +68,9 @@ export function Nav() {
         >
           <a href="/#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
             <SunMark className="h-9 w-9 transition-transform duration-700 group-hover:rotate-[360deg]" progress={p} />
-            <span className="leading-none">
-              <span className="font-display block text-[1.15rem] font-semibold">Clovis Web Design</span>
-              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">Web Studio · Clovis, CA</span>
+            <span className="leading-tight">
+              <span className="font-display block text-[1.2rem] font-bold tracking-tight text-ink">Clovis Web Design</span>
+              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">Web Studio · Clovis &amp; Fresno, CA</span>
             </span>
           </a>
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
