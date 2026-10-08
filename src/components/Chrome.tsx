@@ -26,7 +26,8 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 }
 
 const links = [
-  { href: "/#test", label: "Speed Test" },
+  { href: "/services/medical-web-design/", label: "Medical Offices" },
+  { href: "/services/contractor-websites/", label: "Contractors" },
   { href: "/#harvest", label: "Client Work" },
   { href: "/#season", label: "Process" },
   { href: "/#stand", label: "Pricing" },
@@ -67,18 +68,18 @@ export function Nav() {
           }`}
         >
           <a href="/#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
-            <SunMark className="h-9 w-9 transition-transform duration-700 group-hover:rotate-[360deg]" progress={p} />
+            <SunMark className="h-11 w-11 transition-transform duration-700 group-hover:rotate-[360deg] md:h-12 md:w-12" progress={p} />
             <span className="leading-tight">
-              <span className="font-display block text-[1.2rem] font-bold tracking-tight text-ink">Clovis Web Design</span>
-              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">Web Studio · Clovis &amp; Fresno, CA</span>
+              <span className="font-display block text-[1.5rem] font-bold tracking-tight text-ink md:text-[1.8rem]">Clovis Web Design</span>
+              <span className="font-mono block text-[11px] uppercase tracking-[.04em] text-ink-soft md:text-xs md:tracking-[.16em]">Web Studio · Clovis &amp; Fresno, CA</span>
             </span>
           </a>
-          <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
+          <div className="relative hidden items-center gap-0.5 rounded-full p-1 xl:flex">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="relative rounded-full px-3.5 py-2 text-[15px] text-ink/75 transition-all duration-300 hover:bg-ink/5 hover:text-ink"
+                className="relative whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] text-ink/75 transition-all duration-300 hover:bg-ink/5 hover:text-ink"
               >
                 {l.label}
               </a>
@@ -88,7 +89,7 @@ export function Nav() {
             <a
               href={SMS_LINK}
               data-magnetic="0.25"
-              className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon sm:flex"
+              className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon-deep sm:flex"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-citrus opacity-75" />
@@ -96,7 +97,7 @@ export function Nav() {
               </span>
               Text Adam
             </a>
-            <button onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 lg:hidden" aria-label="Menu" aria-expanded={open}>
+            <button onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open}>
               <span className="relative block h-3 w-5">
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
@@ -108,7 +109,7 @@ export function Nav() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-40 flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}
       >
         <div className="flex flex-col">
@@ -121,7 +122,6 @@ export function Nav() {
               style={{ transitionDelay: open ? `${200 + i * 60}ms` : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(30px)" }}
             >
               {l.label}
-              <span className="font-mono text-xs not-italic text-ink/50">0{i + 1}</span>
             </a>
           ))}
         </div>

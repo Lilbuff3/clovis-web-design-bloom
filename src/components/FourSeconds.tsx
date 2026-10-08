@@ -95,9 +95,9 @@ function SlowSite({ t }: { t: number }) {
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-paper/85 px-6 text-center backdrop-blur-[2px]" style={{ animation: "pop .5s ease" }}>
           <div className="text-5xl" style={{ animation: "wiggle 1s ease 2" }}>🚶</div>
           <div className="font-display wonk mt-3 text-3xl italic leading-tight">They left.</div>
-          <div className="mt-2 font-mono text-[11px] uppercase tracking-widest text-ink/60">gave up at 4.0s</div>
+          <div className="mt-2 font-mono text-[11px] uppercase tracking-widest text-ink-soft">gave up at 4.0s</div>
           <div className="mt-4 text-[13px] leading-snug text-ink/70">…and called the next roofer on the list.</div>
-          {done && <div className="mt-4 rounded-full border border-ink/20 px-3 py-1 font-mono text-[10px] text-ink/60">page finally loaded · 6.8s</div>}
+          {done && <div className="mt-4 rounded-full border border-ink/20 px-3 py-1 font-mono text-[11px] text-ink-soft">page finally loaded · 6.8s</div>}
         </div>
       )}
     </div>
@@ -129,7 +129,7 @@ function FastSite({ t }: { t: number }) {
           )}
           {c && (
             <>
-              <div className={`mt-5 flex items-center justify-center gap-2 rounded-2xl py-3.5 text-[14px] font-semibold text-white transition ${tapped ? "scale-95 bg-leaf" : "bg-persimmon"}`}>
+              <div className={`mt-5 flex items-center justify-center gap-2 rounded-2xl py-3.5 text-[14px] font-semibold text-white transition ${tapped ? "scale-95 bg-leaf" : "bg-persimmon-deep"}`}>
                 📞 Call now — free estimate
               </div>
               <div className="mt-2 flex items-center justify-center rounded-2xl border border-ink/15 py-3 text-[13px] font-medium">💬 Or send a text</div>
@@ -200,39 +200,44 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="test" className="relative px-5 py-14 md:px-8 md:py-20">
+    <section id="speed" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">01 — The four-second rule</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">Why speed gets you calls</div>
             <h2 className="font-display mt-5 text-[clamp(2.6rem,5.6vw,5rem)] font-[420] leading-[0.95]">
-              <span className="line-mask"><span>Forty feet away.</span></span>
-              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Phone in one hand.</span></span>
+              <span className="line-mask"><span>Forty feet away.</span></span>{" "}
+              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Phone in one hand.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "240ms" }}>
                 <span><em className="wonk text-persimmon">Four seconds.</em></span>
               </span>
             </h2>
             <p className="reveal mt-6 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "200ms" }}>
-              A local business doesn't need a “brand platform.” It needs to be found by someone standing on the sidewalk with two bars of signal —
-              and understood before their thumb gives up. Everything I build is for those four seconds.
+              Your next customer is forty feet away, with four seconds of attention and two bars left on their phone. If your site isn't up in time, they go back and call the next business on the list. I build websites for this exact moment.
+            </p>
+            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "230ms" }}>
+              <span className="font-medium text-ink">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
+            </p>
+            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "260ms" }}>
+              Your site will be easy for your customers to use — whether they're on a phone, tablet, or desktop.
             </p>
 
             <div className="reveal mt-10 rounded-3xl border border-ink/10 bg-cream p-6" style={{ ["--d" as string]: "300ms" }}>
               <div className="flex items-baseline justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink/60">Stopwatch</span>
-                <span className={`font-mono text-[11px] uppercase tracking-[.18em] ${t > 4000 ? "text-persimmon" : "text-leaf"}`}>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Stopwatch</span>
+                <span className={`font-mono text-[11px] uppercase tracking-[.18em] ${t > 4000 ? "text-persimmon-deep" : "text-leaf"}`}>
                   {t === 0 ? "ready" : t < 4000 ? "within patience" : "patience expired"}
                 </span>
               </div>
               <div className="font-display mt-2 text-7xl font-[380] tabular-nums md:text-8xl">
                 {(t / 1000).toFixed(2)}
-                <span className="text-4xl text-ink/40">s</span>
+                <span className="text-4xl text-ink-soft">s</span>
               </div>
               <div className="relative mt-4 h-2 overflow-hidden rounded-full bg-ink/10">
                 <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-leaf via-citrus to-persimmon" style={{ width: `${pct * 100}%` }} />
                 <div className="absolute inset-y-[-4px] w-[2px] bg-ink" style={{ left: `${(4000 / END) * 100}%` }} />
               </div>
-              <div className="relative mt-1.5 h-4 font-mono text-[10px] text-ink/50">
+              <div className="relative mt-1.5 h-4 font-mono text-[11px] text-ink-soft">
                 <span className="absolute left-0">0s</span>
                 <span className="absolute whitespace-nowrap" style={{ left: `${(4000 / END) * 100}%`, transform: "translateX(-50%)" }}>
                   ↑ 4s: most people bail
@@ -242,7 +247,7 @@ export function FourSeconds() {
               <button
                 onClick={run}
                 disabled={running}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-ink py-4 text-cream transition hover:bg-persimmon disabled:opacity-50"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-ink py-4 text-cream transition hover:bg-persimmon-deep disabled:opacity-50"
               >
                 {running ? "Racing…" : ran ? "↻ Run the race again" : "▶ Start the race"}
               </button>
@@ -259,21 +264,25 @@ export function FourSeconds() {
                 <FastSite t={t} />
               </Phone>
             </div>
-            <p className="mt-4 text-center font-mono text-[11px] text-ink/50">
-              Simulation on a mid-range phone, two bars of LTE. Try it for real: open either client site below on your phone.
+            <p className="mt-4 text-center font-mono text-[11px] text-ink-soft">
+              Simulation on a mid-range phone, two bars of LTE. Try it for real: turn off your Wi-Fi and open{" "}
+              <a href="https://bigbrosdumpster.com" target="_blank" rel="noopener noreferrer" className="underline decoration-persimmon underline-offset-2 hover:text-ink">
+                bigbrosdumpster.com
+              </a>{" "}
+              on your phone.
             </p>
           </div>
         </div>
 
         <div className="mt-14 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
           {[
-            ["Largest Contentful Paint", "< 1.0s", "Google calls anything under 2.5s good."],
-            ["Cumulative Layout Shift", "0.0", "Nothing jumps around while it loads."],
-            ["Interaction to Next Paint", "< 50ms", "Buttons answer the moment you tap."],
-            ["First page to live", "1 wk", "For a one-page site, start to finish."],
+            ["Page shows up in", "< 1.0s", "On two bars of signal. Google calls anything under 2.5s good."],
+            ["Things that jump around", "0", "Buttons stay put while the page loads, so nobody taps the wrong one."],
+            ["Buttons answer in", "< 50ms", "The moment you tap."],
+            ["First page live in", "1 wk", "For a one-page site, start to finish."],
           ].map(([k, v, d], i) => (
             <div key={k} className="reveal group bg-cream p-6 transition hover:bg-citrus md:p-8" style={{ ["--d" as string]: `${i * 90}ms` }}>
-              <div className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/60">{k}</div>
+              <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink-soft">{k}</div>
               <div className="font-display mt-4 text-5xl font-[400] md:text-6xl">{v}</div>
               <div className="mt-3 text-sm text-ink/70">{d}</div>
             </div>

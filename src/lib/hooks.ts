@@ -31,38 +31,6 @@ export function useGlobalReveal() {
   }, []);
 }
 
-/** Progress (0..1) of an element passing through the viewport. */
-export function useSectionProgress<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [p, setP] = useState(0);
-  useEffect(() => {
-    let raf = 0;
-    const tick = () => {
-      const el = ref.current;
-      if (el) {
-        const r = el.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const total = r.height - vh * 0.4;
-        const passed = vh * 0.6 - r.top;
-        setP(Math.min(1, Math.max(0, passed / Math.max(1, total))));
-      }
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(tick);
-    };
-    tick();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-  return [ref, p] as const;
-}
-
 export function usePageScroll() {
   const [y, setY] = useState(0);
   const [p, setP] = useState(0);

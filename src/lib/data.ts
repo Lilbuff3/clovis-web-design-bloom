@@ -18,17 +18,16 @@ export const cases = [
     headline: "A medical site that never touches patient data — and scores a perfect 100.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
-    stack: ["Astro", "English + Español", "WCAG 2.1 AA", "No-PHI design"],
+    stack: ["English + Español"],
     quote: {
       text: "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%.",
       name: "Dr. Sheikh Mohammad Masood, MD",
       role: "Founding President & Medical Director",
     },
+    // Two numbers per case: the business result, then the one that explains the headline.
     yields: [
-      { value: 100, suffix: "/100", label: "Google PageSpeed" },
       { value: 40, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
-      { value: 0, suffix: "", label: "Online forms collecting patient data (Zero PHI risk)" },
-      { value: 12.6, suffix: ":1", label: "Text contrast ratio (WCAG 2.1 AA)", decimals: 1 },
+      { value: 100, suffix: "/100", label: "Google PageSpeed" },
     ],
   },
   {
@@ -46,7 +45,7 @@ export const cases = [
     headline: "Number one on Google for “dumpster rental Fresno.”",
     problem: "National brokers were outranking the company that actually owns the trucks.",
     planted: ["Dedicated service area pages for Fresno & Clovis", "Upfront flat pricing on the page", "Driveway protection highlighted for trust"],
-    stack: ["Local SEO", "English + Español", "Text-to-book", "PageSpeed 100"],
+    stack: ["English + Español", "Text-to-book"],
     quote: {
       text: "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up.",
       name: "William Maldonado Ramirez",
@@ -55,44 +54,31 @@ export const cases = [
     yields: [
       { value: 1, prefix: "#", suffix: "", label: "On Google for “dumpster rental Fresno”" },
       { value: 4, prefix: "+", suffix: "", label: "Trucks added to keep up with demand" },
-      { value: 100, suffix: "/100", label: "Google PageSpeed" },
-      { value: 1.5, suffix: "", label: "Avg. position on high-intent searches (1–2)", decimals: 1, display: "1–2" },
     ],
   },
 ];
 
-export const seasons = [
+// Condensed from the longer step copy; same facts, one sentence or two each.
+export const steps = [
   {
-    key: "discovery",
     name: "Discovery",
-    title: "Discovery — we talk strategy",
     when: "Day 1",
-    body:
-      "Forty-five minutes on the phone or at your shop. What you do, who calls you, what they ask before they book, and what you keep explaining twice. I analyze who currently ranks for your trade across Clovis and Fresno — then tell you, in plain English, exactly what the site needs to convert. If one simple page is enough, that's what I'll recommend.",
+    body: "A 45-minute call about what you do, who calls you, and what they ask before they book. If one simple page is enough, I'll say so.",
   },
   {
-    key: "design",
-    name: "Design & Copy",
-    title: "Design direction — see it before it's built",
+    name: "Words & layout",
     when: "Days 2–3",
-    body:
-      "I write every word of copy from the recording of our conversation — in your authentic voice, not generic marketing fluff — and lay out the mobile and desktop experience. Nobody hands you a blank 20-page document to fill in. We remove the writing bottleneck that stalls most projects for months.",
+    body: "I write every word from that call and send you a link to try on your phone. No blank questionnaire to fill in.",
   },
   {
-    key: "build",
-    name: "Custom Build",
-    title: "Custom build — zero bloat",
+    name: "Build",
     when: "Days 3–5",
-    body:
-      "No drag-and-drop page builders, no 40 bloated plugins, and nothing that slows down your mobile load time. Your phone and SMS buttons are positioned where thumbs naturally tap, and every page is structured so Google and AI search engines instantly recognize your trade and service radius.",
+    body: "No page builders or plugins. Your call and text buttons go right where thumbs land.",
   },
   {
-    key: "launch",
     name: "Launch",
-    title: "Launch & 90-day guarantee",
-    when: "Day 6 onward",
-    body:
-      "I connect your domain, deploy the high-speed code, and verify your presence in Google Search Console and Google Maps. For 90 days, any bugs or fixes are handled free — text me directly and it's resolved.",
+    when: "Day 6+",
+    body: "Your site goes live and gets connected to Google Search and Maps. Fixes in the first 90 days are free.",
   },
 ];
 
@@ -110,7 +96,7 @@ export const compare = [
   {
     q: "How does it behave on a phone?",
     them: ["People leave first", "A heavy template with dozens of plugins. Out in the field, it loads long enough for people to give up."],
-    me: ["It's there before they wait", "Nothing in it that doesn't need to be. Fast on real signal, not office wifi."],
+    me: ["It's there before they wait", "Nothing in it that doesn't need to be, so it's up before anyone thinks about leaving."],
   },
   {
     q: "Who writes the words?",

@@ -1,24 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from "../lib/data";
-
-function RotatingBadge() {
-  return (
-    <div className="relative h-32 w-32 md:h-40 md:w-40">
-      <svg viewBox="0 0 200 200" className="absolute inset-0 animate-spin-slow">
-        <defs>
-          <path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <text className="font-mono" fontSize="15.5" letterSpacing="4.2" fill="#1E2B23">
-          <textPath href="#circ">ONE PAGE · ONE PRICE · ONE WEEK · </textPath>
-        </text>
-      </svg>
-      <div className="absolute inset-[30%] flex items-center justify-center rounded-full bg-persimmon text-cream shadow-lg">
-        <span className="font-display wonk text-base italic md:text-xl">$1,500</span>
-      </div>
-    </div>
-  );
-}
+import { PHONE_DISPLAY, SMS_LINK } from "../lib/data";
 
 function ClovisClock() {
   // Set after mount: the page is built once, so a build-time clock never matches the browser's and breaks hydration.
@@ -43,8 +25,9 @@ export function Hero() {
   const { y } = usePageScroll();
   const par = Math.min(y, 900);
 
+  // 62rem floor: the painting scales with the section's height, and any shorter the orchard trees rise behind the intro text.
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-[#f8e6b8]">
+    <section id="top" className="relative min-h-[max(100svh,62rem)] overflow-hidden bg-[#f8e6b8]">
       {/* Illustration */}
       <div
         className="absolute inset-0 transition-transform duration-[2400ms] ease-[cubic-bezier(.2,.7,.1,1)]"
@@ -52,91 +35,72 @@ export function Hero() {
       >
         <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
           <img src="/images/hero.webp" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
-          {/* Living Hero HTML5 Video Overlay (Auto-plays if hero-sunrise.mp4 is generated) */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/hero.webp"
-            className="absolute inset-0 h-full w-full object-cover object-[30%_bottom] opacity-90 transition-opacity duration-1000 md:object-bottom"
-            onError={(e) => {
-              (e.currentTarget as HTMLElement).style.display = "none";
-            }}
-          >
-            <source src="/videos/hero-sunrise.mp4" type="video/mp4" />
-          </video>
         </div>
       </div>
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/80 opacity-100">
-          <span className="rounded-full border border-ink/20 bg-cream/80 px-3 py-1.5 font-semibold">CLOVIS, CA · (559) 575-3014</span>
-          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
+      <div className="relative z-10 mx-auto flex min-h-[max(100svh,62rem)] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-[.12em] text-ink opacity-100 md:text-sm">
+          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">$1,500 STARTER</span>
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
+          {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
             <span>Websites,</span>
-          </span>
+          </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
-            <span className="flex items-center gap-[0.18em]">
-              <em className="wonk font-[380] text-persimmon">built</em>
-              <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle">
-                <img src="/images/hero.webp" alt="Clovis orchard rows at sunrise" className="h-full w-full object-cover" width="120" height="50" loading="eager" decoding="async" />
-              </span>
-              <span>by</span>
+            {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
+            <span>
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> by hand
             </span>
-          </span>
+          </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "320ms" }}>
             <span>
-              hand <em className="wonk font-[380]">in</em> Clovis.
+              <em className="wonk font-[380]">in</em> Clovis.
             </span>
           </span>
         </h1>
 
-        <div className="mt-6 grid max-w-3xl gap-6 opacity-100 md:grid-cols-[1.3fr_1fr]">
-          <p className="max-w-xl text-lg leading-relaxed text-ink/90 md:text-xl">
-            Custom websites for Central Valley businesses that load fast on phones and turn local searches into direct calls. No templates, no monthly retainers. You talk directly with the engineer.
+        <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
+          <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
+            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me.
           </p>
-          <div className="flex flex-col items-start gap-3">
-            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-all duration-300 hover:bg-persimmon hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
+          <div className="flex flex-col items-start gap-5">
+            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
+              <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
                 <svg viewBox="0 0 24 24" className="relative z-10 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
                 </svg>
               </span>
               <span className="leading-tight">
-                <span className="block text-[15px] font-medium">Text {PHONE_DISPLAY}</span>
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
+                <span className="block text-[15px] text-cream/85">Tell me about your business:</span>
+                <span className="block text-lg font-semibold">{PHONE_DISPLAY}</span>
+                <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-widest text-cream/70">text me directly</span>
               </span>
             </a>
-            <a href="#harvest" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+            <a href="#harvest" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
               See client results
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
-            <a href="#check" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+            <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
               Can AI find you?
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
           </div>
         </div>
 
-        <div className="mt-auto flex items-end justify-between gap-6 pt-8">
-          <div className="hidden rounded-2xl border border-cream/40 bg-cream/75 px-4 py-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/80 backdrop-blur-md md:block">
+        <div className="mt-auto hidden items-end gap-6 pt-8 md:flex">
+          <div className="rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md">
             <ClovisClock />
           </div>
-          <a href="#test" className="group absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[.25em] text-ink/70 opacity-100 md:flex">
+          <a href="#harvest" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
             Scroll
             <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
               <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />
             </span>
           </a>
-          <div className="ml-auto animate-float">
-            <RotatingBadge />
-          </div>
         </div>
       </div>
     </section>

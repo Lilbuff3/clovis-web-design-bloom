@@ -46,9 +46,8 @@ export function Contact() {
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">08 — Start a Project</div>
-          <h2 className="font-display mt-5 text-[clamp(3rem,8vw,7.5rem)] font-[420] leading-[0.9]">
-            <span className="line-mask"><span>Start with</span></span>
+          <h2 className="font-display text-[clamp(3rem,8vw,7.5rem)] font-[420] leading-[0.9]">
+            <span className="line-mask"><span>Start with</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
               <span>
                 <em className="wonk text-persimmon">a text.</em>
@@ -62,28 +61,28 @@ export function Contact() {
           <div className="reveal mt-10 space-y-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block" htmlFor="contact-name">
-                <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">Your name</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name</span>
                 <input
                   id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Maria"
-                  className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink/30 focus:border-persimmon"
+                  className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you do</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do</span>
                 <input
                   id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
                   placeholder="a taquería in Old Town"
-                  className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink/30 focus:border-persimmon"
+                  className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
             </div>
             <div>
-              <div id="contact-needs-label" className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">What you need</div>
+              <div id="contact-needs-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you need</div>
               <div role="group" aria-labelledby="contact-needs-label" className="mt-3 flex flex-wrap gap-2">
                 {needs.map((n) => (
                   <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
@@ -93,7 +92,7 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <div id="contact-whens-label" className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">When</div>
+              <div id="contact-whens-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">When</div>
               <div role="group" aria-labelledby="contact-whens-label" className="mt-3 flex flex-wrap gap-2">
                 {whens.map((w) => (
                   <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
@@ -112,21 +111,21 @@ export function Contact() {
                 <div className="flex flex-col items-center border-b border-ink/10 bg-cream/80 px-4 pb-3 pt-8">
                   <SunMark className="h-12 w-12" />
                   <div className="mt-1 text-[13px] font-semibold">Adam · Clovis Web Design</div>
-                  <div className="font-mono text-[10px] text-ink/50">{PHONE_DISPLAY}</div>
+                  <div className="font-mono text-[11px] text-ink-soft">{PHONE_DISPLAY}</div>
                 </div>
                 <div className="flex min-h-[260px] flex-col justify-end gap-2 px-4 py-5">
                   <div
                     key={message}
-                    className="max-w-[90%] self-end rounded-3xl rounded-br-md bg-persimmon px-4 py-3 text-[14px] leading-snug text-white shadow-md"
+                    className="max-w-[90%] self-end rounded-3xl rounded-br-md bg-persimmon-deep px-4 py-3 text-[14px] leading-snug text-cream shadow-md"
                     style={{ animation: "pop .35s cubic-bezier(0.16, 1, 0.3, 1)" }}
                   >
                     {message}
                   </div>
-                  <div className="self-end font-mono text-[9px] text-ink/40">Preview · ready to send</div>
+                  <div className="self-end font-mono text-[11px] text-ink-soft">Preview · ready to send</div>
                 </div>
                 <div className="flex items-center gap-2 border-t border-ink/10 px-3 py-3">
-                  <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink/40">iMessage</div>
-                  <a href={smsHref} className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon text-white transition hover:scale-110" aria-label="Send text">
+                  <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink-soft">iMessage</div>
+                  <a href={smsHref} className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110" aria-label="Send text">
                     ↑
                   </a>
                 </div>
@@ -134,7 +133,7 @@ export function Contact() {
             </div>
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon">
+            <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
               Send this to Adam →
             </a>
             <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
@@ -147,30 +146,32 @@ export function Contact() {
   );
 }
 
+const footerTitle = "font-display wonk text-lg normal-case italic tracking-normal text-ink";
+
 export function Footer() {
   return (
-    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
+    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon/85 px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
             <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className="text-ink/60">Services</div>
+            <div className={footerTitle}>Services</div>
             <a href="/services/web-design-clovis/" className="block hover:underline">Clovis Web Design</a>
             <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
             <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
             <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className="text-ink/60">Visit</div>
-            <a href="/#test" className="block hover:underline">Speed Test</a>
+            <div className={footerTitle}>Visit</div>
             <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#check" className="block hover:underline">Can AI Find You?</a>
             <a href="/#season" className="block hover:underline">Process</a>
             <a href="/#stand" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className="text-ink/60">Reach</div>
+            <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
             <span className="block">Clovis, California</span>

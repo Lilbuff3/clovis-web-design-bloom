@@ -12,9 +12,9 @@ const pop = (delayMs: number) => ({ animation: `pop .5s cubic-bezier(.3,1.4,.5,1
 const MAPS_CREDIT = { fontFamily: "Roboto, sans-serif", fontWeight: 400, fontSize: 12, color: "#5e5e5e", whiteSpace: "nowrap" } as const;
 
 const inputClass =
-  "mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3.5 font-sans text-base outline-none transition placeholder:text-ink/35 focus:border-persimmon focus:bg-cream";
-const labelClass = "font-mono text-[10px] uppercase tracking-[.16em] text-ink/65";
-const smallLabel = "font-mono text-[11px] uppercase tracking-[.18em] text-ink/60";
+  "mt-1.5 w-full rounded-2xl border border-ink/20 bg-paper/80 px-4 py-3.5 font-sans text-base outline-none transition placeholder:text-ink-soft focus:border-persimmon focus:bg-cream";
+const labelClass = "font-mono text-[11px] uppercase tracking-[.16em] text-ink-soft";
+const smallLabel = "font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft";
 
 export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [name, setName] = useState("");
@@ -66,9 +66,9 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-persimmon opacity-75"></span>
             <span className="relative inline-flex h-3 w-3 rounded-full bg-persimmon"></span>
           </span>
-          <span className="font-mono text-[11px] uppercase tracking-[.18em] text-persimmon font-semibold">Free AI check</span>
+          <span className="font-mono text-[11px] uppercase tracking-[.18em] text-persimmon-deep font-semibold">Free AI check</span>
         </div>
-        <span className="rounded-full bg-leaf/10 px-3 py-1 font-mono text-[10px] font-semibold text-leaf">Takes a few seconds</span>
+        <span className="rounded-full bg-leaf/10 px-3 py-1 font-mono text-[11px] font-semibold text-leaf">Takes a few seconds</span>
       </div>
 
       {ai === null && (
@@ -97,7 +97,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
           <button
             type="submit"
-            className="mt-5 w-full rounded-full bg-persimmon py-5 font-display text-xl font-medium text-cream shadow-md transition hover:bg-persimmon-deep hover:shadow-lg"
+            className="mt-5 w-full rounded-full bg-persimmon-deep py-5 font-display text-xl font-medium text-cream shadow-md transition hover:bg-ink hover:shadow-lg"
           >
             Ask Google's AI
           </button>
@@ -139,7 +139,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                   style={pop(350 + i * 150)}
                   className={`flex items-center gap-4 rounded-2xl border px-5 py-4 ${p.title === named ? "border-leaf bg-leaf/10" : "border-ink/10 bg-paper"}`}
                 >
-                  <span className="font-mono text-sm text-ink/45">{i + 1}</span>
+                  <span className="font-mono text-sm text-ink-soft">{i + 1}</span>
                   <span className="min-w-0 flex-1">
                     <a href={p.uri} target="_blank" rel="noopener noreferrer" className={`font-display block leading-tight text-ink hover:text-persimmon ${compact ? "text-xl" : "text-2xl sm:text-3xl"}`}>
                       {p.title}
@@ -148,7 +148,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                       Google Maps
                     </span>
                   </span>
-                  {p.title === named && <span className="rounded-full bg-leaf px-2.5 py-1 font-mono text-[10px] font-bold uppercase text-cream">You</span>}
+                  {p.title === named && <span className="rounded-full bg-leaf px-2.5 py-1 font-mono text-[11px] font-bold uppercase text-cream">You</span>}
                 </li>
               ))}
             </ol>
@@ -156,12 +156,14 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <div className="mx-auto mt-10 max-w-lg" style={pop(350 + shown.length * 150)}>
               <a
                 href={sms(text)}
-                className="flex items-center justify-center gap-2 rounded-full bg-persimmon px-6 py-5 font-display text-xl font-medium text-cream shadow-md transition hover:scale-[1.02] hover:bg-persimmon-deep"
+                className="flex items-center justify-center gap-2 rounded-full bg-persimmon-deep px-6 py-5 font-display text-xl font-medium text-cream shadow-md transition hover:scale-[1.02] hover:bg-ink"
               >
-                <span aria-hidden="true">💬</span>
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
+                </svg>
                 {named ? "Ask Adam if your site's ready for them" : "Ask Adam why AI picks them"}
               </a>
-              <p className="mt-3 text-sm text-ink/60">Opens a text to Adam's cell, already written · {PHONE_DISPLAY}</p>
+              <p className="mt-3 text-sm text-ink-soft">Opens a text to Adam's cell, already written · {PHONE_DISPLAY}</p>
               {!named && (
                 <a href={sms(recheck)} className="mt-2 inline-block text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon">
                   Not ready? Ask me to re-check next month
@@ -171,7 +173,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
             {/* Google's terms: the generated answer, then every Maps source right after it (collapsing is allowed). */}
             <details className="mx-auto mt-10 max-w-lg text-left">
-              <summary className="cursor-pointer font-mono text-[11px] text-ink/60 hover:text-ink">
+              <summary className="cursor-pointer font-mono text-[11px] text-ink-soft hover:text-ink">
                 What Gemini said, with sources from{" "}
                 <span translate="no" style={MAPS_CREDIT}>
                   Google Maps
@@ -192,7 +194,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 ))}
               </ul>
             </details>
-            <p className="mx-auto mt-6 max-w-lg font-mono text-[10px] leading-relaxed text-ink/50">
+            <p className="mx-auto mt-6 max-w-lg font-mono text-[11px] leading-relaxed text-ink-soft">
               One question, asked just now. Google's AI Mode, the Gemini app and other AI apps can answer differently, and answers change.
             </p>
             <button type="button" onClick={() => setAi(null)} className="mt-4 text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon">
@@ -208,7 +210,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             </p>
             <p className="mt-3 text-ink/70">{ai === "limit" ? "Text Adam and he'll look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
-              <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream transition hover:bg-persimmon-deep">
+              <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">
                 Try again
               </button>
               <a href={sms(`Hi Adam! Can you check whether Google's AI recommends ${sent.name} for ${asked}?`)} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
