@@ -234,13 +234,13 @@ export function ClientWork() {
               <span className="line-mask"><span>Real businesses.</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
                 <span>
-                  <em className="wonk text-leaf">Measured results.</em>
+                  <em className="wonk text-leaf">Measurable results.</em>
                 </span>
               </span>
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            Two businesses, both live. Don't take my word for the speed — open either site on your phone, out in the parking lot, and time it yourself.
+            Two businesses, both live. You can open these sites anywhere, on any device, and the speed will be the same. Try it for yourself.
           </p>
         </div>
 

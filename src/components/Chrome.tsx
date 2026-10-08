@@ -67,10 +67,10 @@ export function Nav() {
           }`}
         >
           <a href="/#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
-            <SunMark className="h-9 w-9 transition-transform duration-700 group-hover:rotate-[360deg]" progress={p} />
+            <SunMark className="h-11 w-11 transition-transform duration-700 group-hover:rotate-[360deg] md:h-12 md:w-12" progress={p} />
             <span className="leading-tight">
-              <span className="font-display block text-[1.2rem] font-bold tracking-tight text-ink">Clovis Web Design</span>
-              <span className="font-mono block text-[10px] uppercase tracking-[.18em] text-ink-soft">Web Studio · Clovis &amp; Fresno, CA</span>
+              <span className="font-display block text-[1.5rem] font-bold tracking-tight text-ink md:text-[1.8rem]">Clovis Web Design</span>
+              <span className="font-mono block text-[11px] uppercase tracking-[.04em] text-ink-soft md:text-xs md:tracking-[.16em]">Web Studio · Clovis &amp; Fresno, CA</span>
             </span>
           </a>
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">

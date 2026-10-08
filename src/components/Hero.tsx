@@ -4,12 +4,13 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from "../lib/data";
 
 function RotatingBadge() {
   return (
-    <div className="relative h-32 w-32 md:h-40 md:w-40">
+    <div className="relative h-36 w-36 md:h-44 md:w-44">
       <svg viewBox="0 0 200 200" className="absolute inset-0 animate-spin-slow">
         <defs>
           <path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
         </defs>
-        <text className="font-mono" fontSize="15.5" letterSpacing="4.2" fill="#1E2B23">
+        <circle cx="100" cy="100" r="99" fill="#FCF8F0" fillOpacity=".9" />
+        <text className="font-mono" fontSize="16.5" fontWeight="500" letterSpacing="3.4" fill="#1E2B23">
           <textPath href="#circ">ONE PAGE · ONE PRICE · ONE WEEK · </textPath>
         </text>
       </svg>
@@ -71,9 +72,9 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[.2em] text-ink/80 opacity-100">
-          <span className="rounded-full border border-ink/20 bg-cream/80 px-3 py-1.5 font-semibold">CLOVIS, CA · (559) 575-3014</span>
-          <span className="rounded-full border border-persimmon/30 bg-persimmon/10 px-3 py-1.5 font-bold text-persimmon-deep sm:inline">$1,500 STARTER</span>
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-[.12em] text-ink opacity-100 md:text-sm">
+          <span className="rounded-full border border-ink/20 bg-cream/90 px-3.5 py-2 font-semibold">CLOVIS, CA · (559) 575-3014</span>
+          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">$1,500 STARTER</span>
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
@@ -96,28 +97,29 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="mt-6 grid max-w-3xl gap-6 opacity-100 md:grid-cols-[1.3fr_1fr]">
-          <p className="max-w-xl text-lg leading-relaxed text-ink/90 md:text-xl">
-            Custom websites for Central Valley businesses that load fast on phones and turn local searches into direct calls. No templates, no monthly retainers. You talk directly with the engineer.
+        <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
+          <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
+            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me.
           </p>
-          <div className="flex flex-col items-start gap-3">
-            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-6 text-cream transition-all duration-300 hover:bg-persimmon hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
+          <div className="flex flex-col items-start gap-5">
+            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
+              <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
                 <svg viewBox="0 0 24 24" className="relative z-10 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
                 </svg>
               </span>
               <span className="leading-tight">
-                <span className="block text-[15px] font-medium">Text {PHONE_DISPLAY}</span>
-                <span className="block font-mono text-[10px] uppercase tracking-widest text-cream/60">the builder answers</span>
+                <span className="block text-[15px] text-cream/85">Tell me about your business:</span>
+                <span className="block text-lg font-semibold">{PHONE_DISPLAY}</span>
+                <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-widest text-cream/70">text me directly</span>
               </span>
             </a>
-            <a href="#harvest" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+            <a href="#harvest" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
               See client results
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
-            <a href="#check" className="group ml-2 flex items-center gap-2 text-[15px] font-medium underline decoration-persimmon decoration-2 underline-offset-4">
+            <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
               Can AI find you?
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
@@ -125,7 +127,7 @@ export function Hero() {
         </div>
 
         <div className="mt-auto flex items-end justify-between gap-6 pt-8">
-          <div className="hidden rounded-2xl border border-cream/40 bg-cream/75 px-4 py-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/80 backdrop-blur-md md:block">
+          <div className="hidden rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md md:block">
             <ClovisClock />
           </div>
           <a href="#test" className="group absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[.25em] text-ink/70 opacity-100 md:flex">
