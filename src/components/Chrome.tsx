@@ -89,7 +89,7 @@ export function Nav() {
             <a
               href={SMS_LINK}
               data-magnetic="0.25"
-              className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon sm:flex"
+              className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon-deep sm:flex"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-citrus opacity-75" />
@@ -122,7 +122,6 @@ export function Nav() {
               style={{ transitionDelay: open ? `${200 + i * 60}ms` : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(30px)" }}
             >
               {l.label}
-              <span className="font-mono text-xs not-italic text-ink/50">0{i + 1}</span>
             </a>
           ))}
         </div>

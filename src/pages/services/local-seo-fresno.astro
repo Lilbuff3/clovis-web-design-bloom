@@ -2,6 +2,7 @@
 import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
+import Icon from '../../components/Icon.astro';
 import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 ---
 
@@ -27,15 +28,15 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
     <div class="mt-8 flex flex-wrap gap-4 items-center">
       <a 
         href={SMS_LINK}
-        class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+        class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
       >
-        <span>💬</span> Text Adam at {PHONE_DISPLAY}
+        <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
       </a>
       <a 
         href={`tel:${PHONE_TEL}`}
         class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
       >
-        <span>📞</span> Call {PHONE_DISPLAY}
+        <Icon name="phone" /> Call {PHONE_DISPLAY}
       </a>
     </div>
 

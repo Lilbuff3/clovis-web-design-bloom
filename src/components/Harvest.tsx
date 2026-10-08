@@ -2,11 +2,11 @@ import { useState } from "react";
 import { cases, SMS_LINK } from "../lib/data";
 import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
-type Y = { value: number; prefix?: string; suffix?: string; label: string; decimals?: number; display?: string };
+type Y = { value: number; prefix?: string; suffix?: string; label: string };
 
 function Yield({ y, i }: { y: Y; i: number }) {
   const [ref, v] = useCountUp(y.value, 1500 + i * 150);
-  const shown = y.display && v >= y.value * 0.999 ? y.display : v.toFixed(y.decimals ?? 0);
+  const shown = v.toFixed(0);
   return (
     <div className="border-t border-ink/15 pt-4">
       <div className="font-display text-4xl font-[400] tabular-nums sm:text-5xl md:text-6xl">
@@ -37,14 +37,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           onPointerLeave={() => setTilt({ x: 0, y: 0 })}
           style={{ perspective: 1000 }}
         >
-          {/* Architectural project metadata stamp */}
           <div className={`mb-3.5 flex ${flip ? "justify-start pl-2 sm:pl-4" : "justify-end pr-2 sm:pr-4"}`}>
-            <div className="flex items-center gap-3 rounded-full border border-ink/15 bg-cream/95 px-4 py-1.5 shadow-sm">
-              <span className="font-mono text-[10px] uppercase tracking-[.2em] text-persimmon-deep font-semibold">Project Nº {c.no}</span>
-              <span className="h-3 w-px bg-ink/15" />
-              <span className="font-sans text-xs font-semibold text-ink">{c.client}</span>
-              <span className="hidden sm:inline font-mono text-[10px] text-ink/50 uppercase tracking-wider">Built {c.year}</span>
-            </div>
+            <span className="rounded-full border border-ink/15 bg-cream/95 px-4 py-1.5 font-sans text-xs font-semibold text-ink shadow-sm">{c.client}</span>
           </div>
 
           {/* Hand-Grown Browser Showcase Window */}
@@ -61,23 +55,12 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
               </div>
 
               {/* Address bar pill */}
-              <div className="mx-2 flex flex-1 max-w-[280px] items-center justify-between rounded-full border border-ink/15 bg-paper/80 px-3 py-1 font-mono text-[11px] text-ink/80 shadow-inner">
-                <span className="truncate flex items-center gap-1">
-                  <span className="text-[10px] opacity-60">🔒</span>
-                  <span>{c.urlDisplay}</span>
-                </span>
-                <a
-                  href={c.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-1.5 text-[10px] font-semibold text-persimmon hover:underline flex-shrink-0"
-                >
-                  Live ↗
-                </a>
+              <div className="mx-2 max-w-[280px] flex-1 truncate rounded-full border border-ink/15 bg-paper/80 px-3 py-1 font-mono text-[11px] text-ink/80 shadow-inner">
+                {c.urlDisplay}
               </div>
 
               {/* PageSpeed 100 pill */}
-              <div className="flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 font-mono text-[10px] font-bold text-leaf">
+              <div className="flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-leaf">
                 <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
                 <span>100</span>
               </div>
@@ -142,10 +125,10 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                   className={`rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "web"
                       ? "bg-ink font-medium text-cream shadow-sm"
-                      : "text-ink/65 hover:text-ink"
+                      : "text-ink-soft hover:text-ink"
                   }`}
                 >
-                  🖥️ Live Website
+                  Live website
                 </button>
                 <button
                   type="button"
@@ -155,13 +138,13 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                   className={`rounded-full px-3 py-1 text-xs transition ${
                     viewMode === "photo"
                       ? "bg-ink font-medium text-cream shadow-sm"
-                      : "text-ink/65 hover:text-ink"
+                      : "text-ink-soft hover:text-ink"
                   }`}
                 >
-                  📸 On-Site Photo
+                  On-site photo
                 </button>
               </div>
-              <span className="hidden sm:inline-block font-mono text-[10px] text-ink/50 uppercase tracking-wider">
+              <span className="hidden sm:inline-block font-mono text-[11px] text-ink-soft uppercase tracking-wider">
                 {c.place}
               </span>
             </div>
@@ -170,7 +153,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
       </div>
 
       <div className={`lg:col-span-6 ${flip ? "lg:order-1" : ""}`}>
-        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink/60">
+        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink-soft">
           {c.trade} · {c.year}
         </div>
         <h3 className="reveal font-display mt-3 text-[clamp(2rem,3.6vw,3.3rem)] font-[420] leading-[1.02]" style={{ ["--d" as string]: "80ms" }}>
@@ -179,15 +162,15 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 
         <div className="reveal mt-8 grid gap-6 sm:grid-cols-2" style={{ ["--d" as string]: "160ms" }}>
           <div className="rounded-3xl bg-cream p-5">
-            <div className="font-mono text-[10px] uppercase tracking-[.2em] text-persimmon-deep">The Challenge</div>
+            <div className="font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">The Challenge</div>
             <p className="mt-2 text-[15px] leading-relaxed text-ink/85">{c.problem}</p>
           </div>
           <div className="rounded-3xl bg-cream p-5">
-            <div className="font-mono text-[10px] uppercase tracking-[.2em] text-leaf">What Was Built</div>
+            <div className="font-mono text-[11px] uppercase tracking-[.2em] text-leaf">What Was Built</div>
             <ol className="mt-2 space-y-1.5 text-[15px]">
               {c.planted.map((p, i) => (
                 <li key={p} className="flex gap-2">
-                  <span className="font-mono text-xs text-ink/40">0{i + 1}</span>
+                  <span className="font-mono text-xs text-ink-soft">0{i + 1}</span>
                   {p}
                 </li>
               ))}
@@ -195,7 +178,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           </div>
         </div>
 
-        <div className="mt-8 font-mono text-[10px] uppercase tracking-[.2em] text-ink/60">Key Results</div>
+        <div className="mt-8 font-mono text-[11px] uppercase tracking-[.2em] text-ink-soft">Key Results</div>
         <div className="mt-3 grid grid-cols-2 gap-x-8 gap-y-6">
           {c.yields.map((y, i) => (
             <Yield key={y.label} y={y} i={i} />
@@ -229,9 +212,8 @@ export function ClientWork() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">01 — Client Work</div>
-            <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-              <span className="line-mask"><span>Real businesses.</span></span>
+            <h2 className="font-display text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
+              <span className="line-mask"><span>Real businesses.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
                 <span>
                   <em className="wonk text-leaf">Measurable results.</em>
@@ -250,15 +232,12 @@ export function ClientWork() {
           ))}
         </div>
 
-        {/* Project 03: the next spot. What it includes is on the price tags below. */}
+        {/* The next spot. What it includes is on the price tags below. */}
         <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-citrus">Project Nº 03 — Next in line</div>
-              <h3 className="font-display mt-4 text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
-                This spot's <em className="wonk text-citrus">yours</em>, if you want it.
-              </h3>
-            </div>
+            <h3 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
+              This spot's <em className="wonk text-citrus">yours</em>, if you want it.
+            </h3>
             <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
               Claim a spot by text <span aria-hidden>→</span>
             </a>
