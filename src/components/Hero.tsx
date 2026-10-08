@@ -78,23 +78,19 @@ export function Hero() {
         </div>
 
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
+          {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
             <span>Websites,</span>
-          </span>
+          </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
-            {/* .line-mask > span is inline-block (unlayered CSS beats Tailwind's flex), so spacing comes from real spaces.
-                pr-[0.07em]: the italic "t" leans past its box and would run into the pill. */}
+            {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
             <span>
-              <em className="wonk pr-[0.07em] font-[380] text-persimmon">built</em>{" "}
-              <span className="relative inline-block h-[0.72em] w-[1.7em] overflow-hidden rounded-full border-[3px] border-cream shadow-[0_12px_30px_-12px_rgba(30,43,35,.5)] align-middle">
-                <img src="/images/hero.webp" alt="" className="h-full w-full object-cover" width="120" height="50" loading="eager" decoding="async" />
-              </span>{" "}
-              <span>by</span>
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon">built</em> by hand
             </span>
-          </span>
+          </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "320ms" }}>
             <span>
-              hand <em className="wonk font-[380]">in</em> Clovis.
+              <em className="wonk font-[380]">in</em> Clovis.
             </span>
           </span>
         </h1>
