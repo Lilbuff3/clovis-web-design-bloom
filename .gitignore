@@ -31,3 +31,6 @@ dist-ssr
 .vercel
 .astro
 .agents
+.claude
+.impeccable
+.codex
