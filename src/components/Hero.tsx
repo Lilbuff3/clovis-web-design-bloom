@@ -130,7 +130,7 @@ export function Hero() {
           <div className="hidden rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md md:block">
             <ClovisClock />
           </div>
-          <a href="#test" className="group absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[.25em] text-ink/70 opacity-100 md:flex">
+          <a href="#harvest" className="group absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[.25em] text-ink/70 opacity-100 md:flex">
             Scroll
             <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
               <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />

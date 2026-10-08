@@ -164,8 +164,8 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className="text-ink/60">Visit</div>
-            <a href="/#test" className="block hover:underline">Speed Test</a>
             <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#check" className="block hover:underline">Can AI Find You?</a>
             <a href="/#season" className="block hover:underline">Process</a>
             <a href="/#stand" className="block hover:underline">Pricing</a>
           </div>

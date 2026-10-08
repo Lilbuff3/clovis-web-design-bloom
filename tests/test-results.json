@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-08T01:34:58.845Z",
-  "total": 32,
-  "passed": 32,
+  "timestamp": "2026-10-08T20:59:38.990Z",
+  "total": 33,
+  "passed": 33,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -142,10 +142,18 @@
         {
           "id": "T3.2",
           "tier": 3,
-          "title": "Lead & Latency Visualizer relocated to FourSeconds (#test) and NOT in hero (#top)",
+          "title": "Four-second race lives on the contractor page (#speed), not the homepage",
           "status": "PASS",
           "error": null,
-          "details": "Lead & Latency Visualizer verified inside FourSeconds section (#test) and confirmed absent from Hero (#top)"
+          "details": "Race is on /services/contractor-websites/#speed in plain words; the homepage has no stopwatch or #test link"
+        },
+        {
+          "id": "T3.4",
+          "tier": 3,
+          "title": "Homepage leads hero → client results → the two topic pages",
+          "status": "PASS",
+          "error": null,
+          "details": "Homepage order: #top → #harvest → #who → #check; #who links to both topic pages"
         },
         {
           "id": "T3.3",
@@ -224,7 +232,7 @@
           "title": "Medical practice web design silo pre-rendered static HTML with deep semantic volume",
           "status": "PASS",
           "error": null,
-          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 18217 chars)"
+          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 18198 chars)"
         },
         {
           "id": "T6.2",

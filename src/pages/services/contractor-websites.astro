@@ -2,6 +2,7 @@
 import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
+import { FourSeconds } from '../../components/FourSeconds';
 import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 ---
 
@@ -11,88 +12,80 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 >
   <Nav client:load />
 
-  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
-    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">
-      Trade Contractor Web Systems · Clovis &amp; Fresno, CA
-    </div>
-    
-    <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Contractor &amp; Trade Websites
-    </h1>
-
-    <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      High-converting websites engineered specifically for trades: roofers, HVAC technicians, plumbers, electricians, landscapers, and dumpster rental operators. Fast, clean, and built for customers calling from a job site.
-    </p>
-
-    <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a 
-        href={SMS_LINK}
-        class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
-      >
-        <span>💬</span> Text Adam at {PHONE_DISPLAY}
-      </a>
-      <a 
-        href={`tel:${PHONE_TEL}`}
-        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
-      >
-        <span>📞</span> Call {PHONE_DISPLAY}
-      </a>
-    </div>
-
-    <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Engineered for the Four-Second Mobile Window
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        When a homeowner has a burst pipe, broken air conditioner during a 105-degree Fresno heatwave, or needs a 20-yard roll-off dumpster delivered by morning, they do not read marketing fluff. They glance at your reviews, check your service area, and tap the call button.
-      </p>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Our contractor web systems strip away unnecessary animations, sliders, and heavy stock scripts. Everything is organized around intent-termination UX: instant telephone links, straightforward pricing, and verifiable proof of work across the Central Valley.
-      </p>
-    </section>
-
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Proven Local Results: Big Bros Dumpster Rentals
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        For Big Bros Dumpster Rentals in Fresno &amp; Clovis, we deployed a custom bilingual platform that achieves a 100/100 Google PageSpeed score. The result: direct SMS booking requests increased within weeks, and their business captured high-intent commercial and residential contracts without paying thousands per month in PPC ad spend.
-      </p>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img 
-              src="/images/bigbros-truck.webp" 
-              alt="Big Bros Dumpster Rentals commercial roll-off delivery truck in Fresno, CA" 
-              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <figcaption class="p-4 border-t border-ink/10">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-persimmon font-semibold">Commercial Fleet Operations</div>
-            <p class="mt-1 text-sm text-ink/80">Big Bros roll-off trucks dispatched daily across Fresno, Clovis, and Central Valley job sites.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img 
-              src="/images/bigbros-family.webp" 
-              alt="William Maldonado Ramirez and the Big Bros family team in Fresno, California" 
-              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <figcaption class="p-4 border-t border-ink/10">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-leaf font-semibold">Family-Owned &amp; Operated</div>
-            <p class="mt-1 text-sm text-ink/80">William Maldonado Ramirez and the Big Bros team — direct local service with zero middleman broker fees.</p>
-          </figcaption>
-        </figure>
+  <main class="relative z-10 pt-32 pb-24 md:pt-40">
+    <div class="mx-auto max-w-5xl px-5 md:px-8">
+      <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">
+        Trade Contractor Web Systems · Clovis &amp; Fresno, CA
       </div>
-    </section>
+      
+      <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
+        Contractor &amp; Trade Websites
+      </h1>
+
+      <p class="mt-6 text-xl leading-relaxed text-ink/85">
+        High-converting websites engineered specifically for trades: roofers, HVAC technicians, plumbers, electricians, landscapers, and dumpster rental operators. Fast, clean, and built for customers calling from a job site.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4 items-center">
+        <a 
+          href={SMS_LINK}
+          class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+        >
+          <span>💬</span> Text Adam at {PHONE_DISPLAY}
+        </a>
+        <a 
+          href={`tel:${PHONE_TEL}`}
+          class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
+        >
+          <span>📞</span> Call {PHONE_DISPLAY}
+        </a>
+      </div>
+
+      <section class="mt-16 border-t border-ink/10 pt-12">
+        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+          Proven Local Results: Big Bros Dumpster Rentals
+        </h2>
+        <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+          For Big Bros Dumpster Rentals in Fresno &amp; Clovis, we deployed a custom bilingual platform that achieves a 100/100 Google PageSpeed score. The result: direct SMS booking requests increased within weeks, and their business captured high-intent commercial and residential contracts without paying thousands per month in PPC ad spend.
+        </p>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img 
+                src="/images/bigbros-truck.webp" 
+                alt="Big Bros Dumpster Rentals commercial roll-off delivery truck in Fresno, CA" 
+                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="p-4 border-t border-ink/10">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-persimmon font-semibold">Commercial Fleet Operations</div>
+              <p class="mt-1 text-sm text-ink/80">Big Bros roll-off trucks dispatched daily across Fresno, Clovis, and Central Valley job sites.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img 
+                src="/images/bigbros-family.webp" 
+                alt="William Maldonado Ramirez and the Big Bros family team in Fresno, California" 
+                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="p-4 border-t border-ink/10">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-leaf font-semibold">Family-Owned &amp; Operated</div>
+              <p class="mt-1 text-sm text-ink/80">William Maldonado Ramirez and the Big Bros team — direct local service with zero middleman broker fees.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <FourSeconds client:visible />
   </main>
 
   <Footer client:visible />

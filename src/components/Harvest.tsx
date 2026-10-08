@@ -229,7 +229,7 @@ export function ClientWork() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">02 — Client Work</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">01 — Client Work</div>
             <h2 className="font-display mt-5 text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
               <span className="line-mask"><span>Real businesses.</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
@@ -240,7 +240,7 @@ export function ClientWork() {
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            Two businesses, both live. You can open these sites anywhere, on any device, and the speed will be the same. Try it for yourself.
+            Two businesses, both live. One reason they get calls: each site shows up fast for a new customer on two bars of signal. Owners rarely see their own site that way. They check it at home on <span className="whitespace-nowrap">Wi-Fi</span>, with a copy already saved on their phone.
           </p>
         </div>
 

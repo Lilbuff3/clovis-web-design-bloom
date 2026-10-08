@@ -200,11 +200,11 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="test" className="relative px-5 py-14 md:px-8 md:py-20">
+    <section id="speed" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">01 — The four-second rule</div>
+            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">Why speed gets you calls</div>
             <h2 className="font-display mt-5 text-[clamp(2.6rem,5.6vw,5rem)] font-[420] leading-[0.95]">
               <span className="line-mask"><span>Forty feet away.</span></span>
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Phone in one hand.</span></span>
@@ -265,17 +265,21 @@ export function FourSeconds() {
               </Phone>
             </div>
             <p className="mt-4 text-center font-mono text-[11px] text-ink/50">
-              Simulation on a mid-range phone, two bars of LTE. Try it for real: open either client site below on your phone.
+              Simulation on a mid-range phone, two bars of LTE. Try it for real: turn off your Wi-Fi and open{" "}
+              <a href="https://bigbrosdumpster.com" target="_blank" rel="noopener noreferrer" className="underline decoration-persimmon underline-offset-2 hover:text-ink">
+                bigbrosdumpster.com
+              </a>{" "}
+              on your phone.
             </p>
           </div>
         </div>
 
         <div className="mt-14 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
           {[
-            ["Largest Contentful Paint", "< 1.0s", "Google calls anything under 2.5s good."],
-            ["Cumulative Layout Shift", "0.0", "Nothing jumps around while it loads."],
-            ["Interaction to Next Paint", "< 50ms", "Buttons answer the moment you tap."],
-            ["First page to live", "1 wk", "For a one-page site, start to finish."],
+            ["Page shows up in", "< 1.0s", "On two bars of signal. Google calls anything under 2.5s good."],
+            ["Things that jump around", "0", "Buttons stay put while the page loads, so nobody taps the wrong one."],
+            ["Buttons answer in", "< 50ms", "The moment you tap."],
+            ["First page live in", "1 wk", "For a one-page site, start to finish."],
           ].map(([k, v, d], i) => (
             <div key={k} className="reveal group bg-cream p-6 transition hover:bg-citrus md:p-8" style={{ ["--d" as string]: `${i * 90}ms` }}>
               <div className="font-mono text-[10px] uppercase tracking-[.16em] text-ink/60">{k}</div>

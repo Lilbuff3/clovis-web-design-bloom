@@ -634,44 +634,46 @@ assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availabi
   return `Mobile Action Bar verified with tap-to-call, tap-to-text, availability status, and audit trigger`;
 });
 
-assertTest(3, 'T3.2', 'Lead & Latency Visualizer relocated to FourSeconds (#test) and NOT in hero (#top)', () => {
+assertTest(3, 'T3.2', 'Four-second race lives on the contractor page (#speed), not the homepage', () => {
+  const indexPath = path.join(DIST_DIR, 'index.html');
+  const contractorPath = path.join(DIST_DIR, 'services', 'contractor-websites', 'index.html');
+  if (!fs.existsSync(indexPath) || !fs.existsSync(contractorPath)) throw new Error(`Run "npm run build" first.`);
+
+  // The homepage leads with results; a stopwatch there pulls attention from the proof.
+  const home = fs.readFileSync(indexPath, 'utf-8');
+  if (/id=["']test["']|Start the race|Stopwatch/i.test(home)) {
+    throw new Error(`The four-second race is still on the homepage.`);
+  }
+  if (/href=["']\/?#test["']/i.test(home)) throw new Error(`The homepage still links to #test.`);
+
+  const race = fs.readFileSync(contractorPath, 'utf-8').match(/<section[^>]*id=["']speed["'][^>]*>([\s\S]*?)<\/section>/i);
+  if (!race) throw new Error(`No #speed section on /services/contractor-websites/.`);
+  if (!/Start the race/i.test(race[1]) || !/Wi-Fi/i.test(race[1])) {
+    throw new Error(`#speed on the contractor page is missing the race or the home Wi-Fi paragraph.`);
+  }
+  // Plain words only: no Core Web Vitals names in front of roofers.
+  const jargon = /Largest Contentful Paint|Cumulative Layout Shift|Interaction to Next Paint/i.exec(race[1]);
+  if (jargon) throw new Error(`#speed still shows "${jargon[0]}".`);
+
+  return `Race is on /services/contractor-websites/#speed in plain words; the homepage has no stopwatch or #test link`;
+});
+
+assertTest(3, 'T3.4', 'Homepage leads hero → client results → the two topic pages', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
-
   const html = fs.readFileSync(indexPath, 'utf-8');
 
-  // Look for sections #top / #hero and #test / #speed
-  const topMatch = html.match(/<section[^>]*id=["'](?:top|hero)["'][^>]*>([\s\S]*?)<\/section>/i) ||
-                   html.match(/<(?:header|div)[^>]*id=["'](?:top|hero)["'][^>]*>([\s\S]*?)<\/(?:header|div)>/i);
-  const testMatch = html.match(/<section[^>]*id=["'](?:test|speed)["'][^>]*>([\s\S]*?)<\/section>/i) ||
-                    html.match(/<div[^>]*id=["'](?:test|speed)["'][^>]*>([\s\S]*?)<\/div>/i);
+  const order = ['top', 'harvest', 'who', 'check'];
+  const at = order.map((id) => html.search(new RegExp(`<section[^>]*id=["']${id}["']`, 'i')));
+  const missing = order.filter((_, i) => at[i] < 0);
+  if (missing.length) throw new Error(`Missing homepage sections: ${missing.map((id) => `#${id}`).join(', ')}`);
+  if (at.some((pos, i) => i > 0 && pos < at[i - 1])) throw new Error(`Homepage order is not ${order.map((id) => `#${id}`).join(' → ')}`);
 
-  if (topMatch) {
-    const heroContent = topMatch[1];
-    // Hero must NOT contain the latency visualizer stopwatch / phone race simulator
-    const hasVisualizerInHero =
-      /Stopwatch/i.test(heroContent) &&
-      /Typical template|patience expired|Running race|Start the race/i.test(heroContent);
-    if (hasVisualizerInHero) {
-      throw new Error(`Lead & Latency Visualizer is improperly located inside the Hero section! Must be relocated.`);
-    }
-  }
+  const who = html.slice(at[2], at[3]);
+  const pages = ['/services/medical-web-design/', '/services/contractor-websites/'].filter((href) => !who.includes(`href="${href}"`));
+  if (pages.length) throw new Error(`#who doesn't link to: ${pages.join(', ')}`);
 
-  if (!testMatch) {
-    // If no distinct section id="test" or "speed", check whether speed comparison contains the visualizer
-    const hasSpeedSection = /id=["'](?:test|speed)["']/i.test(html) || /four-second/i.test(html);
-    if (!hasSpeedSection) {
-      throw new Error(`Speed comparison section (#test or #speed) not found in dist/index.html`);
-    }
-  } else {
-    const testContent = testMatch[1];
-    const hasVisualizerInTest = /four seconds|stopwatch|race|simulation|mid-range phone/i.test(testContent);
-    if (!hasVisualizerInTest) {
-      throw new Error(`FourSeconds section (#test / #speed) does not contain the speed visualizer / race.`);
-    }
-  }
-
-  return `Lead & Latency Visualizer verified inside FourSeconds section (#test) and confirmed absent from Hero (#top)`;
+  return `Homepage order: ${order.map((id) => `#${id}`).join(' → ')}; #who links to both topic pages`;
 });
 
 

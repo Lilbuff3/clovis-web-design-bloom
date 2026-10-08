@@ -110,7 +110,7 @@ export const compare = [
   {
     q: "How does it behave on a phone?",
     them: ["People leave first", "A heavy template with dozens of plugins. Out in the field, it loads long enough for people to give up."],
-    me: ["It's there before they wait", "Nothing in it that doesn't need to be. Fast on real signal, not office wifi."],
+    me: ["It's there before they wait", "Nothing in it that doesn't need to be, so it's up before anyone thinks about leaving."],
   },
   {
     q: "Who writes the words?",

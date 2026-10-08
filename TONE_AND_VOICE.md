@@ -37,10 +37,14 @@ Each selling point has one home on the homepage. Don't repeat it in other sectio
 | Point | Its home |
 | :--- | :--- |
 | Built by hand | The hero headline |
-| Fast on a phone | `#test` (the four-second race) |
+| Real results (referrals up 40%, #1 for "dumpster rental Fresno", 4 trucks added) | `#harvest` |
+| Who it's for | `#who`: two links, to the medical page and the contractor page |
+| Fast on a phone | One line in the `#harvest` intro: one reason these sites get calls, plus the home Wi-Fi point. The full four-second race lives on `/services/contractor-websites/` (`#speed`), not the homepage |
 | You own the code, domain and keys | `#compare` and the FAQ |
 | Texts go straight to Adam | The hero and `#compare` |
 | Words written from a 45-minute conversation | `#season` (the process) |
+
+The homepage leads with results and sends visitors on to a focused page for their kind of business, the same way client sites do. Depth (the race, HIPAA detail, trade examples) belongs on those pages.
 
 ---
 
@@ -79,6 +83,8 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 ### A. Speed as a Sales Tool (Not Just a Vanity Metric)
 * **The Message:** Speed is about conversion rate, not geeky benchmarks. If a website takes 4 seconds to load on LTE, half of the potential customers tap the "Back" button and call the next competitor on Google.
 * **Key Stats:** < 1.0s Largest Contentful Paint (LCP), 0.0 Layout Shift (CLS), 100/100 Google PageSpeed score.
+* **On the page, say them in plain words:** "Page shows up in < 1.0s", "Things that jump around: 0". Never show the metric names (LCP, CLS, INP) to a business owner.
+* **Why owners don't notice:** they check their own site at home on Wi-Fi, with a copy already saved on their phone. A first-time customer on two bars sees something else.
 
 ### B. Done-For-You Copywriting
 * **The Message:** Most website projects stall for months because agencies hand the business owner a 20-page blank document and tell them to write their own content.
@@ -112,18 +118,25 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 
 ## 6. Website Component Mapping
 
+Homepage sections, top to bottom. Numbered eyebrows ("01 — …") run from `#harvest` to `#contact`; the hero and `#check` have none.
+
 | Section ID | Visual Concept | Voice & Messaging Purpose |
 | :--- | :--- | :--- |
-| `#top` | Hero + Sunrise | Clear value proposition, local studio identity, 100/100 speed promise, direct SMS CTA. |
-| `#manifesto` | Kinetic Typography | The philosophy of hand-crafted, lightweight code vs. bloated agency templates. |
-| `#valley` | Valley Zoom Video | Highlighting that local customers browse on phones in trucks, shops, and job sites. |
-| `#test` | Four-Second Stopwatch | The tangible business cost of slow websites and the power of instant conversion. |
-| `#harvest` | Showcase Cards | Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with the client's own quote. Only real clients, only quotes they approved. |
+| `#top` | Hero + Sunrise | "Websites, built by hand in Clovis." Adam, first person: websites that bring in customers, no templates, no monthly fees, no support tickets. $1,500 Starter, direct SMS CTA. |
+| `#harvest` | Showcase Cards (01) | Proof right after the promise. Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with the client's own quote. Only real clients, only quotes they approved. The intro carries the one homepage line about speed. |
+| `#who` | Two Link Cards (02) | "Pick your kind of business." Medical & professional offices → `/services/medical-web-design/`; Local businesses & contractors → `/services/contractor-websites/`. Short: a title and one line each. |
 | `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
-| `#season` | 4-Stage Process | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
-| `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
-| `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
-| `#rules` | Horizontal Gallery | Five transparent standards: No templates, upfront pricing, client owns keys, direct phone line, honest scope. |
-| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
-| `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
-| `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
+| `#season` | 4-Stage Process (03) | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
+| `#compare` | Toggle Matrix (04) | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
+| `#grower` | Studio & Workbench (05) | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
+| `#stand` | Hanging Price Tags (06) | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
+| `#faq` | Accordion (07) | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
+| `#contact` | Interactive SMS Generator (08) | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
+
+Topic pages under `/services/`, linked from the nav, `#who` and the footer:
+
+| Page | What lives there |
+| :--- | :--- |
+| `/services/contractor-websites/` | Big Bros results, then `#speed`: the four-second race (Olsen Roofing on two phones, the stopwatch, the home Wi-Fi paragraph) with a plain-words numbers row. |
+| `/services/medical-web-design/` | Medical & professional offices, the lead niche. |
+| `/services/web-design-clovis/`, `/services/local-seo-fresno/` | Location and local SEO pages, footer-linked. |
