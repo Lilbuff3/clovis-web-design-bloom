@@ -213,7 +213,10 @@ export function FourSeconds() {
               </span>
             </h2>
             <p className="reveal mt-6 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "200ms" }}>
-              Your next customer is forty feet away, with four seconds of attention and two bars left on their phone. I build websites for this exact moment.
+              Your next customer is forty feet away, with four seconds of attention and two bars left on their phone. If your site isn't up in time, they go back and call the next business on the list. I build websites for this exact moment.
+            </p>
+            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "230ms" }}>
+              <span className="font-medium text-ink">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
             </p>
             <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "260ms" }}>
               Your site will be easy for your customers to use — whether they're on a phone, tablet, or desktop.
