@@ -18,19 +18,13 @@
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
 
-  --animate-spin-slow: spin 22s linear infinite;
   --animate-marquee: marquee 38s linear infinite;
-  --animate-float: float 7s ease-in-out infinite;
   --animate-sway: sway 5s ease-in-out infinite;
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(2deg); }
 }
 @keyframes sway {
   0%, 100% { transform: rotate(-2.2deg); }
@@ -144,6 +138,14 @@ body {
 ::selection {
   background: var(--color-citrus);
   color: var(--color-ink);
+}
+/* Keyboard focus: an ink ring set off the element, so it shows on dark buttons, paper, citrus and the orange footer.
+   In the base layer so a component's own focus style (inputs, chips) still wins. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
 }
 
 .font-display {

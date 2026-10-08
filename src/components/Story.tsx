@@ -15,10 +15,10 @@ export function Grower() {
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-ink/60">Based in</div>
+              <div className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Based in</div>
               <div className="font-display text-lg">Clovis, California</div>
             </div>
-            <div className="text-right font-mono text-[10px] leading-relaxed text-ink/60">
+            <div className="text-right font-mono text-[11px] leading-relaxed text-ink-soft">
               36.82° N
               <br />
               119.70° W
@@ -27,9 +27,8 @@ export function Grower() {
         </div>
 
         <div className="lg:col-span-7 lg:pl-6">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">05 — About the Builder</div>
-          <h2 className="font-display mt-5 text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
-            <span className="line-mask"><span>One person.</span></span>
+          <h2 className="font-display text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
+            <span className="line-mask"><span>One person.</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
               <span>
                 <em className="wonk text-persimmon">One town</em> at a time.
@@ -51,7 +50,7 @@ export function Grower() {
             “You don't rent your website from an agency. You own the code, the domain, and the keys.”
           </blockquote>
           <div className="mt-12">
-            <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon">
+            <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
               Text Adam directly →
             </a>
           </div>
@@ -68,9 +67,8 @@ export function Stand() {
       <span id="pricing" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">06 — Transparent Pricing</div>
-          <h2 className="font-display mx-auto mt-5 max-w-4xl text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-            <span className="line-mask"><span>Prices on the tag,</span></span>
+          <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
+            <span className="line-mask"><span>Prices on the tag,</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
               <span>
                 <em className="wonk text-persimmon">not in a drawer.</em>
@@ -88,17 +86,11 @@ export function Stand() {
                 <div
                   className={`relative flex flex-1 flex-col ${pl.color} rounded-[28px] border border-ink/10 p-7 shadow-[0_20px_50px_-25px_rgba(30,43,35,.2)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)]`}
                 >
-                  <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[.18em]">
-                    <span className="rounded-full bg-ink/5 px-2.5 py-0.5 font-semibold text-persimmon-deep">Plan Nº {pl.code}</span>
-                    <span className="text-ink/60">{pl.time}</span>
-                  </div>
-                  <div className="font-display wonk mt-4 text-4xl italic text-ink">{pl.name}</div>
-                  <div className="mt-1 text-[15px] text-ink/70">{pl.kind}</div>
-                  <div className="mt-6 flex items-end gap-3">
-                    <span className="font-display text-6xl font-[400] leading-none text-ink">{pl.price}</span>
-                    {pl.was && <span className="mb-2 font-display text-2xl text-ink/45 line-through decoration-persimmon decoration-2">{pl.was}</span>}
-                  </div>
-                  <div className="mt-2 font-mono text-[10px] uppercase tracking-[.16em] text-ink/60">{pl.note ?? "one-off · no subscription"}</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[.18em] text-ink/80">{pl.time}</div>
+                  <div className="font-display wonk mt-3 text-4xl italic text-ink">{pl.name}</div>
+                  <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
+                  <div className="mt-6 font-display text-6xl font-[400] leading-none text-ink">{pl.price}</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">one-off · no subscription</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -108,7 +100,7 @@ export function Stand() {
                       </li>
                     ))}
                     {pl.not.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-ink/50">
+                      <li key={it} className="flex gap-2.5 text-ink/80">
                         <span className="mt-[3px]">–</span>
                         {it}
                       </li>
@@ -118,7 +110,7 @@ export function Stand() {
                     <span className="font-semibold text-ink">Best for: </span>
                     {pl.for}
                   </p>
-                  <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon font-medium">
+                  <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon-deep font-medium">
                     Ask about {pl.name} →
                   </a>
                 </div>
@@ -143,10 +135,10 @@ export function Stand() {
             <div className="grid gap-4 sm:grid-cols-3 lg:col-span-8">
               {care.map((c, i) => (
                 <div key={c.name} className={`rounded-3xl p-6 transition hover:-translate-y-1 ${i === 1 ? "bg-citrus" : "bg-paper"}`}>
-                  <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink/60">{c.name}</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{c.name}</div>
                   <div className="font-display mt-3 text-5xl">
                     {c.price}
-                    <span className="text-xl text-ink/50">/mo</span>
+                    <span className="text-xl text-ink/80">/mo</span>
                   </div>
                   <p className="mt-3 text-[14.5px] leading-snug text-ink/75">{c.blurb}</p>
                 </div>
@@ -170,9 +162,8 @@ export function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">07 — Frequently Asked Questions</div>
-            <h2 className="font-display mt-5 text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
-              <span className="line-mask"><span>What people ask</span></span>
+            <h2 className="font-display text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
+              <span className="line-mask"><span>What people ask</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
                 <span>
                   <em className="wonk text-leaf">before they text.</em>
@@ -191,7 +182,7 @@ export function FAQ() {
                   <span className={`font-display text-2xl leading-snug transition md:text-[28px] ${isOpen ? "text-persimmon" : "group-hover:translate-x-1"}`}>{f.q}</span>
                   <span
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink/20 text-2xl transition-all duration-500 ${
-                      isOpen ? "rotate-45 border-persimmon bg-persimmon text-cream" : "group-hover:bg-citrus"
+                      isOpen ? "rotate-45 border-persimmon-deep bg-persimmon-deep text-cream" : "group-hover:bg-citrus"
                     }`}
                   >
                     +

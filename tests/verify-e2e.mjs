@@ -696,6 +696,25 @@ assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, an
   return `Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)`;
 });
 
+assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no small text on bright persimmon, no faded ink, no numbered section labels', () => {
+  const indexPath = path.join(DIST_DIR, 'index.html');
+  if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
+  const html = fs.readFileSync(indexPath, 'utf-8');
+  const classLists = [...html.matchAll(/class="([^"]*)"/g)].map((m) => m[1].split(/\s+/));
+  const faded = (k) => /^text-ink\/[1-6]\d$/.test(k);
+
+  const problems = [];
+  if (classLists.some((c) => c.includes('text-[9px]') || c.includes('text-[10px]'))) problems.push('text below 11px');
+  // Cream or white on bright persimmon is 3.2:1; filled buttons use bg-persimmon-deep (4.6:1).
+  if (classLists.some((c) => c.includes('bg-persimmon') && (c.includes('text-cream') || c.includes('text-white')))) problems.push('cream/white text on bg-persimmon');
+  const fadedList = classLists.find((c) => !c.includes('dotted-rule') && c.some(faded));
+  if (fadedList) problems.push(`text faded below 70% (${fadedList.find(faded)}); use text-ink-soft`);
+  if (/>\s*0[1-9] — /.test(html)) problems.push('numbered label ("0X — …") above a section heading');
+
+  if (problems.length) throw new Error(problems.join('\n - '));
+  return 'No sub-11px text, no small text on bright persimmon, no faded ink text, no numbered section labels';
+});
+
 // ============================================================================
 // TIER 4: Multi-Page Route Silos & Inter-linkage
 // ============================================================================

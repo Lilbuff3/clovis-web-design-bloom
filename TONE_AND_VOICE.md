@@ -118,20 +118,20 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 
 ## 6. Website Component Mapping
 
-Homepage sections, top to bottom. Numbered eyebrows ("01 — …") run from `#harvest` to `#contact`; the hero and `#check` have none.
+Homepage sections, top to bottom. Each heading stands alone: no numbered labels above section headings (see DESIGN.md).
 
 | Section ID | Visual Concept | Voice & Messaging Purpose |
 | :--- | :--- | :--- |
 | `#top` | Hero + Sunrise | "Websites, built by hand in Clovis." Adam, first person: websites that bring in customers, no templates, no monthly fees, no support tickets. $1,500 Starter, direct SMS CTA. |
-| `#harvest` | Showcase Cards (01) | Proof right after the promise. Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with the client's own quote. Only real clients, only quotes they approved. The intro carries the one homepage line about speed. |
-| `#who` | Two Link Cards (02) | "Pick your kind of business." Medical & professional offices → `/services/medical-web-design/`; Local businesses & contractors → `/services/contractor-websites/`. Short: a title and one line each. |
+| `#harvest` | Showcase Cards | Proof right after the promise. Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with two numbers (the business result, and the one that explains the headline) and the client's own quote. Only real clients, only quotes they approved. The intro carries the one homepage line about speed. |
+| `#who` | Two Link Cards | "Pick your kind of business." Medical & professional offices → `/services/medical-web-design/`; Local businesses & contractors → `/services/contractor-websites/`. Short: a title and one line each. |
 | `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
-| `#season` | 4-Stage Process (03) | Step-by-step roadmap: Discovery, Content & Design, Custom Build, Launch & Guarantee. |
-| `#compare` | Toggle Matrix (04) | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
-| `#grower` | Studio & Workbench (05) | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
-| `#stand` | Hanging Price Tags (06) | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
-| `#faq` | Accordion (07) | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
-| `#contact` | Interactive SMS Generator (08) | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
+| `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
+| `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
+| `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
+| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
+| `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
+| `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
 
 Topic pages under `/services/`, linked from the nav, `#who` and the footer:
 
