@@ -7,9 +7,11 @@ import { Season } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
 import { Contact, Footer } from '../components/Contact';
 
-// The one statistic on the page. Kyruus 2017 Patient Access Journey Report: 1,000 U.S. adults, Wakefield Research.
+// The page's only statistics, both from one survey: Doctor.com "Customer Experience Trends in Healthcare 2020",
+// 1,600+ U.S. adults, Q4 2019. 88%: read reviews of a provider even after being referred (p. 6).
+// 49.3%: incomplete listing information would stop them booking (p. 17).
 // Don't add a number without a named source (TONE_AND_VOICE.md, "Claims we can prove").
-const KYRUUS_SOURCE = 'https://www.healthcareittoday.com/2017/11/07/consumerism-is-changing-how-patients-find-providers-according-to-new-patient-access-research/';
+const SURVEY_SOURCE = 'https://cms.doctor.com/wp-content/uploads/2020/03/cxtrends2020-report-final.pdf';
 
 const checks = [
   { what: 'Insurance and location', ask: 'Do you take my plan? Where exactly are you?' },
@@ -63,11 +65,14 @@ const never = ['No forms that ask about health', 'No ad trackers', 'No patient l
         </h2>
         <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div class="reveal lg:col-span-5">
-            <p class="font-display text-[clamp(4.5rem,10vw,8rem)] font-[400] leading-none">9 in 10</p>
-            <p class="mt-4 max-w-sm text-xl leading-relaxed text-ink">patients still research a doctor before they book, even after a referral.</p>
+            <p class="font-display text-[clamp(4.5rem,10vw,8rem)] font-[400] leading-none">88%</p>
+            <p class="mt-4 max-w-sm text-xl leading-relaxed text-ink">of patients read reviews about a doctor even after they’ve been referred.</p>
+            <p class="mt-6 max-w-sm border-t border-ink/15 pt-5 text-xl leading-relaxed text-ink">
+              <span class="font-display text-3xl">Nearly half</span> would decide not to book if the doctor’s information online is incomplete.
+            </p>
             <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
-              Kyruus, 2017 Patient Access Journey Report: a survey of 1,000 U.S. adults who said “always” or “sometimes.”
-              <a href={KYRUUS_SOURCE} target="_blank" rel="noopener noreferrer" class="underline decoration-ink/30 underline-offset-2 hover:text-persimmon-deep">Source</a>
+              Doctor.com, Customer Experience Trends in Healthcare 2020: a survey of 1,600+ U.S. adults.
+              <a href={SURVEY_SOURCE} target="_blank" rel="noopener noreferrer" class="underline decoration-ink/30 underline-offset-2 hover:text-persimmon-deep">Source (PDF)</a>
             </p>
           </div>
           <div class="reveal lg:col-span-7" style="--d: 120ms">
