@@ -96,14 +96,9 @@ const never = ['No forms that ask about health', 'No ad trackers', 'No patient l
 
     <section id="front-desk" class="px-5 py-14 md:px-8 md:py-20">
       <div class="mx-auto max-w-7xl">
-        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <h2 class="font-display text-[clamp(2.4rem,5.5vw,5rem)] font-[420] leading-[0.95]">
-            <span class="line-mask"><span>Answers before</span></span>
-            <span class="line-mask" style="--d: 120ms"><span><em class="wonk text-leaf">the phone rings.</em></span></span>
-          </h2>
-          <p class="reveal max-w-sm text-lg leading-relaxed text-ink/80">What goes on a practice site I build. Each one is a call your front desk takes today.</p>
-        </div>
-        <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- No visible heading: the cards lead. Screen readers still get one so the cards don't read as part of #referrals. -->
+        <h2 class="sr-only">What a practice site answers</h2>
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {answers.map((a, i) => (
             <li class="reveal rounded-[28px] border border-ink/10 bg-cream p-6 md:p-7" style={`--d: ${(i % 3) * 90}ms`}>
               <h3 class="font-display text-2xl font-[450] leading-tight">{a.title}</h3>

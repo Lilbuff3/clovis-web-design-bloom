@@ -140,7 +140,7 @@ Homepage sections, top to bottom. Each heading stands alone: no numbered labels 
 | :--- | :--- | :--- |
 | `#top` | Hero + Sunrise | "Your referred patients look you up before they call." Adam, first person: practice sites that answer the front desk's daily questions and never collect patient information. "Practice sites from $1,500", direct SMS CTA, links to a live practice site and to `/our-story/`. |
 | `#referrals` | Stat + Four Checks | "A referral isn't a booking." The two Doctor.com numbers with the source linked, the blank-directory line from Adam's family, and the four things patients check. |
-| `#front-desk` | Six Cards + Dark Strip | "Answers before the phone rings." Insurance by plan type, referral steps, referring offices, getting there, paperwork, English + Spanish. Then "What it never does". |
+| `#front-desk` | Six Cards + Dark Strip | No visible heading (Adam's call); the cards lead, with a screen-reader-only heading. Insurance by plan type, referral steps, referring offices, getting there, paperwork, English + Spanish. Then "What it never does". |
 | `#harvest` | Showcase Card | "A practice site, live now." Kidney Specialist Inc. only: the problem, what was built, two provable numbers, the live link. No quote until Dr. Masood approves exact words. |
 | `#grower` | Studio & Workbench | "Why I build for doctors." The short version of Adam's story, then a link to `/our-story/`. Keeps the one-line agency/Figma note. |
 | `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
