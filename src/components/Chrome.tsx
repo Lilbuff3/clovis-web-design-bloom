@@ -108,7 +108,7 @@ export function Nav() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-citrus opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-citrus" />
               </span>
-              Text Adam
+              Text me
             </a>
             <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open}>
               <span className="relative block h-3 w-5">

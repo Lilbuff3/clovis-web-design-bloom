@@ -47,7 +47,7 @@ export function Grower() {
           </blockquote>
           <div className="mt-12">
             <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
-              Text Adam directly →
+              Text me directly →
             </a>
           </div>
         </div>

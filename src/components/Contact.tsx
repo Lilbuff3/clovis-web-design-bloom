@@ -134,7 +134,7 @@ export function Contact() {
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
             <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
-              Send this to Adam →
+              Send this text →
             </a>
             <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
               or just call {PHONE_DISPLAY}

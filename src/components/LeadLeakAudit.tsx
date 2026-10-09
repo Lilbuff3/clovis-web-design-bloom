@@ -150,10 +150,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
                 </svg>
-                {named ? "Ask Adam if your site's ready for them" : "Ask Adam why AI picks them"}
+                {named ? "Ask me if your site's ready for them" : "Ask me why AI picks them"}
               </a>
               <p className="mt-3 text-sm text-ink-soft">
-                Opens a text to Adam's cell, already written{" "}· <span className="whitespace-nowrap">{PHONE_DISPLAY}</span>
+                Opens a text to my cell, already written{" "}· <span className="whitespace-nowrap">{PHONE_DISPLAY}</span>
               </p>
               {!named && (
                 <a href={sms(recheck)} className="inline-flex min-h-12 items-center px-2 text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
@@ -199,13 +199,13 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <p className={`font-display leading-tight ${compact ? "text-3xl" : "text-4xl sm:text-5xl"}`}>
               {ai === "limit" ? "That's 10 checks this hour." : "Google's AI didn't answer this time."}
             </p>
-            <p className="mt-3 text-ink/70">{ai === "limit" ? "Text Adam and he'll look it up for you." : "Give it another try in a minute."}</p>
+            <p className="mt-3 text-ink/70">{ai === "limit" ? "Text me and I'll look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
               <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">
                 Try again
               </button>
               <a href={sms(`Hi Adam! Can you check whether Google's AI recommends ${sent.name} for ${asked}?`)} className="inline-flex min-h-12 items-center px-2 text-[15px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
-                Or text Adam
+                Or text me
               </a>
             </div>
           </div>

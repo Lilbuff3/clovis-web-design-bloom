@@ -13,7 +13,7 @@ function ClovisClock() {
   if (!now) return <span>Clovis, California</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
-  const status = hour >= 7 && hour < 19 ? "Adam's working" : hour >= 19 && hour < 23 ? "Adam's winding down — text anyway" : "Adam's asleep — he'll text back at sunrise";
+  const status = hour >= 7 && hour < 19 ? "I'm working" : hour >= 19 && hour < 23 ? "I'm winding down — text anyway" : "I'm asleep — I'll text back at sunrise";
   return (
     <span>
       {time} in Clovis · {status}
