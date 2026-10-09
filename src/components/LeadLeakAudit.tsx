@@ -62,9 +62,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
     <div className={`w-full overflow-hidden rounded-[32px] border border-ink/15 bg-cream/95 text-ink shadow-[0_30px_70px_-25px_rgba(30,43,35,0.2)] ${compact ? "p-5 sm:p-6" : "p-6 sm:p-12"}`}>
       {ai === null && (
         <form onSubmit={ask}>
-          <h3 className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "text-[clamp(2.75rem,7vw,5.25rem)]"}`}>
-            Can AI <em className="wonk text-persimmon">find you?</em>
-          </h3>
+          <h3 className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "h-section"}`}>Can AI find you?</h3>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
             Customers ask Google's AI who to call. Type your business and see whether it names you.
           </p>

@@ -27,13 +27,9 @@ export function Grower() {
         </div>
 
         <div className="lg:col-span-7 lg:pl-6">
-          <h2 className="font-display text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
+          <h2 className="font-display h-section">
             <span className="line-mask"><span>One person.</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-              <span>
-                <em className="wonk text-persimmon">One town</em> at a time.
-              </span>
-            </span>
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>One town at a time.</span></span>
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
@@ -67,13 +63,9 @@ export function Stand() {
       <span id="pricing" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
+          <h2 className="font-display h-section mx-auto max-w-4xl">
             <span className="line-mask"><span>Prices on the tag,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-              <span>
-                <em className="wonk text-persimmon">not in a drawer.</em>
-              </span>
-            </span>
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>not in a drawer.</span></span>
           </h2>
           <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
         </div>
@@ -86,11 +78,10 @@ export function Stand() {
                 <div
                   className={`relative flex flex-1 flex-col ${pl.color} rounded-[28px] border border-ink/10 p-7 shadow-[0_20px_50px_-25px_rgba(30,43,35,.2)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)]`}
                 >
-                  <div className="font-mono text-[11px] uppercase tracking-[.18em] text-ink/80">{pl.time}</div>
-                  <div className="font-display wonk mt-3 text-4xl italic text-ink">{pl.name}</div>
+                  <div className="font-display wonk text-4xl italic text-ink">{pl.name}</div>
                   <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
                   <div className="mt-6 font-display text-6xl font-[400] leading-none text-ink">{pl.price}</div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">one-off · no subscription</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · one-off · no subscription</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -106,7 +97,8 @@ export function Stand() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 rounded-2xl bg-cream/70 p-3.5 text-[13.5px] leading-snug text-ink/75">
+                  {/* mt-auto: "Best for" and the button sit at the card's foot, level across all three plans. */}
+                  <p className="mt-auto pt-6 text-[13.5px] leading-snug text-ink/75">
                     <span className="font-semibold text-ink">Best for: </span>
                     {pl.for}
                   </p>
@@ -120,13 +112,10 @@ export function Stand() {
         </div>
 
         {/* Care */}
-        <div className="reveal mt-24 rounded-[36px] border border-ink/10 bg-cream p-6 md:p-10">
+        <div className="reveal mt-24">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <div className="font-mono text-[11px] uppercase tracking-[.2em] text-leaf">After Launch</div>
-              <h3 className="font-display mt-3 text-4xl font-[420] leading-tight">
-                Ongoing care is <em className="wonk">optional</em>. I mean it.
-              </h3>
+              <h3 className="font-display text-4xl font-[420] leading-tight text-balance">Ongoing care is optional. I mean it.</h3>
               <p className="mt-4 text-[15.5px] leading-relaxed text-ink/75">
                 Your site runs fine without me. Plain files — no plugins to update, nothing that breaks at 2 a.m. These are for people who'd rather send one text than
                 think about their website.
@@ -134,7 +123,7 @@ export function Stand() {
             </div>
             <div className="grid gap-4 sm:grid-cols-3 lg:col-span-8">
               {care.map((c, i) => (
-                <div key={c.name} className={`rounded-3xl p-6 transition hover:-translate-y-1 ${i === 1 ? "bg-citrus" : "bg-paper"}`}>
+                <div key={c.name} className={`rounded-3xl border border-ink/10 p-6 ${i === 1 ? "bg-citrus" : "bg-cream"}`}>
                   <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{c.name}</div>
                   <div className="font-display mt-3 text-5xl">
                     {c.price}
@@ -161,20 +150,16 @@ export function FAQ() {
   return (
     <section id="faq" className="relative px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <h2 className="font-display text-[clamp(2.6rem,5vw,4.5rem)] font-[420] leading-[0.95]">
+            <h2 className="font-display h-section">
               <span className="line-mask"><span>What people ask</span></span>{" "}
-              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-                <span>
-                  <em className="wonk text-leaf">before they text.</em>
-                </span>
-              </span>
+              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>before they text.</span></span>
             </h2>
             <p className="reveal mt-6 text-lg text-ink/75">Didn't see your question? Text it. You'll get a straight answer, even if it's “you don't need a new website yet.”</p>
           </div>
         </div>
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-7">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             const btnId = `${id}-q${i}`;

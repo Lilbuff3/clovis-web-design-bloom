@@ -40,10 +40,6 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-[max(100svh,62rem)] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-[.12em] text-ink opacity-100 md:text-sm">
-          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">$1,500 STARTER</span>
-        </div>
-
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
           {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
@@ -64,7 +60,8 @@ export function Hero() {
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me.
+            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me. Sites start at{" "}
+            <strong className="font-semibold">$1,500</strong>.
           </p>
           <div className="flex flex-col items-start gap-5">
             <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">

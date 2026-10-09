@@ -156,6 +156,14 @@ body {
 .wonk {
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
 }
+/* Section heading role: one size for every section between the hero and the closing "Start with a text.",
+   so the hero and the close stay the only display-size moments. */
+.h-section {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 420;
+  line-height: 0.95;
+  text-wrap: balance;
+}
 
 /* Paper grain overlay */
 .grain::after {
