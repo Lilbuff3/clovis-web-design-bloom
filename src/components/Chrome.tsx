@@ -40,6 +40,8 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuBtn = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const d = y - lastY.current;
@@ -50,15 +52,26 @@ export function Nav() {
   }, [y]);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.classList.toggle("overflow-hidden", open);
-    }
+    document.documentElement.classList.toggle("overflow-hidden", open);
+    // The open menu covers the page: nothing behind it may take focus, and Escape closes it.
+    for (const el of document.body.children) if (!el.contains(headerRef.current)) el.toggleAttribute("inert", open);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      menuBtn.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   const scrolled = y > 40;
   return (
     <>
+      {/* Tabbing into the header brings it back, so keyboard focus never sits on links scrolled out of view. */}
       <header
+        ref={headerRef}
+        onFocus={() => setHidden(false)}
         className="fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-transform duration-500 ease-[cubic-bezier(.7,0,.2,1)] md:px-6 md:pt-4"
         style={{ transform: hidden && !open ? "translateY(-130%)" : "none" }}
       >
@@ -97,7 +110,7 @@ export function Nav() {
               </span>
               Text Adam
             </a>
-            <button onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open}>
+            <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open}>
               <span className="relative block h-3 w-5">
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
@@ -107,9 +120,10 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu: above the phone action bar (z-40), below the header that holds its close button. Inert while closed so its links aren't invisible tab stops. */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
+        inert={!open}
+        className={`fixed inset-0 z-[45] flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}
       >
         <div className="flex flex-col">
