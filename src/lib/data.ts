@@ -15,15 +15,16 @@ export const cases = [
     previewImg: "/images/kidney-preview.webp",
     photoImg: "/images/kidney.jpg",
     tint: "bg-sky",
-    headline: "A medical site that never touches patient data — and scores a perfect 100.",
+    headline: "A medical site that never touches patient data — and scores 100 for accessibility.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
     stack: ["English + Español"],
     // No quote: neither version on file was Dr. Masood's exact words.
     // Two numbers per case: the business result, then the one that explains the headline.
+    // PageSpeed, mobile, Oct 8 2026: Performance 97, Accessibility 100. Re-check before changing either number.
     yields: [
       { value: 0, label: "Forms that ask patients for health information" },
-      { value: 100, suffix: "/100", label: "Google PageSpeed" },
+      { value: 100, suffix: "/100", label: "Accessibility, on Google's PageSpeed test" },
     ],
   },
 ];

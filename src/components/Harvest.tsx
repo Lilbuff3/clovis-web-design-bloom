@@ -59,7 +59,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 {c.urlDisplay}
               </div>
 
-              {/* PageSpeed 100 pill */}
+              {/* Score pill: the case's 100 (accessibility; see the yields in data.ts) */}
               <div className="flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-leaf">
                 <span className="h-1.5 w-1.5 rounded-full bg-leaf animate-pulse" />
                 <span>100</span>
