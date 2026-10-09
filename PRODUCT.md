@@ -31,7 +31,7 @@ High-converting, hand-coded digital storefronts built directly by the engineer (
 - **Stack**: Astro 5 (SSG/SSR), React 19, Tailwind CSS v4, TypeScript, deployed to Vercel.
 - **Performance Targets**: Under 1.0s Largest Contentful Paint (LCP), 0.0 Cumulative Layout Shift (CLS), 100/100 Google PageSpeed Mobile score.
 - **Conversion Features**: Tap-to-call, direct SMS triggers, location-based landing pages, LocalBusiness schema structured data.
-- **Metaphor Guardrail**: Strictly ban kitschy agricultural/orchard metaphors ("hand-grown", "harvest", "two crates ripe", "seedling plan", "watering/pruning"). Use clear, authoritative commercial language ("Custom-built", "Proven Results", "The Starter", "From Discovery to Launch").
+- **Plain language**: Say what the thing is. No figures of speech in headlines or buttons ("built by hand", "hold the keys", "prices on the tag" were removed for being unclear). **Metaphor Guardrail**: Strictly ban kitschy agricultural/orchard metaphors ("hand-grown", "harvest", "two crates ripe", "seedling plan", "watering/pruning"). Use clear, authoritative commercial language ("Custom-built", "Proven Results", "The Starter", "From Discovery to Launch").
 - **Client Terms**: True ownership—clients receive full GitHub repository access, source code, and independent hosting configuration.
 
 ## Brand Commitments

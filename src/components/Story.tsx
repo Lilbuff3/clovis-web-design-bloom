@@ -29,7 +29,7 @@ export function Grower() {
         <div className="lg:col-span-7 lg:pl-6">
           <h2 className="font-display h-section">
             <span className="line-mask"><span>One person.</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>One town at a time.</span></span>
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Start to finish.</span></span>
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
@@ -43,7 +43,7 @@ export function Grower() {
             </p>
           </div>
           <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-2 border-citrus/60 pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
-            “You don't rent your website from an agency. You own the code, the domain, and the keys.”
+            “You don't rent your website from an agency. You own the code, the domain and the hosting account.”
           </blockquote>
           <div className="mt-12">
             <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
@@ -64,8 +64,8 @@ export function Stand() {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <h2 className="font-display h-section mx-auto max-w-4xl">
-            <span className="line-mask"><span>Prices on the tag,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>not in a drawer.</span></span>
+            <span className="line-mask"><span>Every price,</span></span>{" "}
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>published up front.</span></span>
           </h2>
           <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
         </div>

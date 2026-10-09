@@ -55,7 +55,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No forms to wade through, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
+            No forms to fill out, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -154,7 +154,7 @@ export function Footer() {
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
+            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Websites that bring in customers for Central Valley businesses.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>

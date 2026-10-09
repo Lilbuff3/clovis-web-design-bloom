@@ -77,7 +77,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
               >
                 <img
                   src={c.previewImg}
-                  alt={`${c.client} hand-built website`}
+                  alt={`${c.client} website`}
                   className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                   decoding="async"
@@ -232,10 +232,10 @@ export function ClientWork() {
         <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <h3 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
-              This spot's yours, if you want it.
+              Your business could be next.
             </h3>
             <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
-              Claim a spot by text <span aria-hidden>→</span>
+              Text me to get started <span aria-hidden>→</span>
             </a>
           </div>
         </div>

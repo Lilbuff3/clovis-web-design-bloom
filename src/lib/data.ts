@@ -89,14 +89,14 @@ export const compare = [
     me: ["Me. Start to finish.", "I design it, build it and put it live. When you call, the person who wrote the code picks up."],
   },
   {
-    q: "Who owns it when you walk away?",
-    them: ["They hold the keys", "It lives on their system. Stop paying and it goes dark — design and content included."],
-    me: ["You hold the keys", "Code and domain are in your name from day one. Move it anywhere, no permission needed."],
+    q: "Who owns it?",
+    them: ["They do", "It lives on their system. Stop paying and it goes dark — design and content included."],
+    me: ["You do", "Code and domain are in your name from day one. Move it anywhere, no permission needed."],
   },
   {
     q: "How does it behave on a phone?",
     them: ["People leave first", "A heavy template with dozens of plugins. Out in the field, it loads long enough for people to give up."],
-    me: ["It's there before they wait", "Nothing in it that doesn't need to be, so it's up before anyone thinks about leaving."],
+    me: ["It loads in under a second", "No extra code slowing it down, so it opens before anyone gives up."],
   },
   {
     q: "Who writes the words?",
@@ -127,12 +127,12 @@ export const plans = [
       "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
-    for: "Contractors, shops, and one-person trades who need high conversion today.",
+    for: "Contractors, shops, and one-person trades who need more calls now.",
   },
   {
     code: "02",
     name: "Growth",
-    kind: "Local authority",
+    kind: "Multi-page site",
     time: "3–4 weeks",
     price: "$2,500",
     color: "bg-sage",
@@ -174,7 +174,7 @@ export const care = [
 export const faqs = [
   {
     q: "Who owns the website and the domain once it's live?",
-    a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them and walk.",
+    a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them.",
   },
   {
     q: "Can we keep our existing booking or ordering system?",
@@ -204,7 +204,7 @@ export const hasOfferCatalog = {
       "name": "Starter",
       "price": "1500",
       "priceCurrency": "USD",
-      "description": "A one-page website, built by hand and live in about a week. You own the code and the domain.",
+      "description": "A custom one-page website, live in about a week. You own the code and the domain.",
     },
     {
       "@type": "Offer",

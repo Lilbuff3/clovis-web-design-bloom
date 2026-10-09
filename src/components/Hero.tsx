@@ -43,17 +43,12 @@ export function Hero() {
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
           {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
-            <span>Websites,</span>
+            <span>Custom websites,</span>
           </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
             {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
             <span>
-              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> by hand
-            </span>
-          </span>{" "}
-          <span className="line-mask in" style={{ ["--d" as string]: "320ms" }}>
-            <span>
-              <em className="wonk font-[380]">in</em> Clovis.
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> in Clovis.
             </span>
           </span>
         </h1>
