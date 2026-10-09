@@ -470,7 +470,7 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, pr
   return `Verified name: "${biz.name}", telephone: "${biz.telephone}", priceRange: "${biz.priceRange}"`;
 });
 
-assertTest(2, 'T2.4', 'Founder Person node for Adam Youssef', () => {
+assertTest(2, 'T2.4', 'Founder Person node for Adam', () => {
   const jsonLd = getRootJsonLd();
   const graph = jsonLd['@graph'];
   const biz = findBusinessNode(jsonLd);
@@ -482,15 +482,15 @@ assertTest(2, 'T2.4', 'Founder Person node for Adam Youssef', () => {
     if (resolved) founder = resolved;
   }
   if (!founder) {
-    founder = graph.find(n => n['@type'] === 'Person' && n.name === 'Adam Youssef');
+    founder = graph.find(n => n['@type'] === 'Person' && n.name === 'Adam');
   }
 
   if (!founder) {
-    throw new Error(`No founder Person node found in Schema.org @graph for "Adam Youssef".`);
+    throw new Error(`No founder Person node found in Schema.org @graph for "Adam".`);
   }
 
-  if (founder.name !== 'Adam Youssef') {
-    throw new Error(`Founder name is "${founder.name}", expected "Adam Youssef".`);
+  if (founder.name !== 'Adam') {
+    throw new Error(`Founder name is "${founder.name}", expected "Adam".`);
   }
 
   return `Verified founder Person node: ${founder.name}`;

@@ -33,7 +33,7 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
+              I'm <strong className="font-semibold">Adam</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
             </p>
             <p>
               I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers.

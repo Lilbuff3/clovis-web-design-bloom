@@ -257,7 +257,7 @@ export const schemaGraph = {
       "founder": {
         "@type": "Person",
         "@id": "https://cloviswebdesign.com/#adam",
-        "name": "Adam Youssef",
+        "name": "Adam",
         "jobTitle": "Founder & Lead Developer",
         "knowsAbout": knowsAbout,
       },

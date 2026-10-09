@@ -37,7 +37,7 @@ High-converting, hand-coded digital storefronts built directly by the engineer (
 ## Brand Commitments
 
 - **Name**: Clovis Web Design
-- **Operator**: Adam Youssef
+- **Operator**: Adam Youssef (internal only). The site never shows his full name, in visible copy or metadata; it says "Adam" at most.
 - **Geographic Focus**: Clovis, Fresno, Madera, and the broader California Central Valley.
 - **Tone**: Pragmatic, direct, respectful of time, anti-agency honesty, Central Valley grounded.
 
