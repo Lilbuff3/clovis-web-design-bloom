@@ -10,3 +10,7 @@
 ## 2026-10-04 - Missing focus styles on mobile menu button
 **Learning:** Discovered the mobile menu button (hamburger menu) lacked a visible focus indicator for keyboard users.
 **Action:** Add explicit `focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2` utility classes to ensure it's easily navigable via keyboard.
+
+## 2026-10-09 - Redundant focus-visible utility classes
+**Learning:** Discovered that `src/index.css` already provides a global, consistent keyboard focus ring for all elements via `:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px }`.
+**Action:** Do not manually add Tailwind `focus-visible` classes to individual elements, as it overrides the global design system and creates inconsistent focus rings.
