@@ -3,10 +3,50 @@ import RootLayout from '../layouts/RootLayout.astro';
 import { Nav } from '../components/Chrome';
 import { Hero } from '../components/Hero';
 import { Harvest } from '../components/Harvest';
-import { Season, Compare } from '../components/Season';
+import { Season } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
-import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
+
+// The one statistic on the page. Kyruus 2017 Patient Access Journey Report: 1,000 U.S. adults, Wakefield Research.
+// Don't add a number without a named source (TONE_AND_VOICE.md, "Claims we can prove").
+const KYRUUS_SOURCE = 'https://www.healthcareittoday.com/2017/11/07/consumerism-is-changing-how-patients-find-providers-according-to-new-patient-access-research/';
+
+const checks = [
+  { what: 'Insurance and location', ask: 'Do you take my plan? Where exactly are you?' },
+  { what: 'Training and focus', ask: 'Is this the right doctor for my problem?' },
+  { what: 'What other patients say', ask: 'How were the doctor and the staff?' },
+  { what: 'How to get in', ask: 'What happens after the referral, and who calls whom?' },
+];
+
+// Each one is a call the front desk takes today.
+const answers = [
+  {
+    title: 'Insurance, by plan type',
+    body: 'Which plans you take, and what each one needs first. A PPO patient can just call; an HMO patient needs a referral authorization from their medical group. It’s also why specialist sites don’t get open online booking.',
+  },
+  {
+    title: '“I was referred. Now what?”',
+    body: 'The steps after a referral, in order: what you need from the referring office, how long review takes, and who calls whom. Fewer “did you get my referral?” calls.',
+  },
+  {
+    title: 'For referring offices',
+    body: 'Your fax number and NPI, one tap to copy, and what to send with a referral: recent visit notes, labs, imaging.',
+  },
+  {
+    title: 'Getting there',
+    body: 'The building, the suite and where to park, with buttons that open Apple Maps or Google Maps. Fewer patients at the wrong door.',
+  },
+  {
+    title: 'Paperwork before the visit',
+    body: 'New-patient forms as printable PDFs to fill out at home. Nothing gets typed into the website.',
+  },
+  {
+    title: 'English and Spanish',
+    body: 'Every page in both, so patients and the family members who help them can read it in the language they’re comfortable with.',
+  },
+];
+
+const never = ['No forms that ask about health', 'No ad trackers', 'No patient logins', 'Booking stays a phone call, or your patient portal'];
 ---
 
 <RootLayout>
@@ -14,15 +54,72 @@ import { Contact, Footer } from '../components/Contact';
 
   <main class="relative z-10 rounded-b-[40px] shadow-[0_40px_60px_-30px_rgba(30,43,35,.35)] md:rounded-b-[72px] bg-paper">
     <Hero client:load />
-    <Harvest client:visible />
-    <section id="check" class="px-5 pb-14 md:px-8 md:pb-20">
+
+    <section id="referrals" class="px-5 py-14 md:px-8 md:py-20">
       <div class="mx-auto max-w-7xl">
-        <LeadLeakAudit client:visible />
+        <h2 class="font-display text-[clamp(2.4rem,5.5vw,5rem)] font-[420] leading-[0.95]">
+          <span class="line-mask"><span>A referral</span></span>
+          <span class="line-mask" style="--d: 120ms"><span><em class="wonk text-persimmon">isn’t a booking.</em></span></span>
+        </h2>
+        <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div class="reveal lg:col-span-5">
+            <p class="font-display text-[clamp(4.5rem,10vw,8rem)] font-[400] leading-none">9 in 10</p>
+            <p class="mt-4 max-w-sm text-xl leading-relaxed text-ink">patients still research a doctor before they book, even after a referral.</p>
+            <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
+              Kyruus, 2017 Patient Access Journey Report: a survey of 1,000 U.S. adults who said “always” or “sometimes.”
+              <a href={KYRUUS_SOURCE} target="_blank" rel="noopener noreferrer" class="underline decoration-ink/30 underline-offset-2 hover:text-persimmon-deep">Source</a>
+            </p>
+          </div>
+          <div class="reveal lg:col-span-7" style="--d: 120ms">
+            <p class="text-lg leading-relaxed text-ink/85 md:text-xl">
+              What they often find is a name on a hospital directory: no photo, no insurance list, a switchboard number. My family read that as “not taking patients,” or “only sees people in the hospital.”
+              <a href="/our-story/" class="underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">Here’s what it cost us.</a>
+            </p>
+            <h3 class="mt-10 font-mono text-[12px] uppercase tracking-[.16em] text-ink-soft">What patients check</h3>
+            <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+              {checks.map((c) => (
+                <li class="rounded-2xl bg-cream p-5">
+                  <span class="font-display block text-xl leading-tight">{c.what}</span>
+                  <span class="mt-1.5 block text-[15px] leading-snug text-ink/80">“{c.ask}”</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-    <Season client:visible />
-    <Compare client:visible />
+
+    <section id="front-desk" class="px-5 py-14 md:px-8 md:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <h2 class="font-display text-[clamp(2.4rem,5.5vw,5rem)] font-[420] leading-[0.95]">
+            <span class="line-mask"><span>Answers before</span></span>
+            <span class="line-mask" style="--d: 120ms"><span><em class="wonk text-leaf">the phone rings.</em></span></span>
+          </h2>
+          <p class="reveal max-w-sm text-lg leading-relaxed text-ink/80">What goes on a practice site I build. Each one is a call your front desk takes today.</p>
+        </div>
+        <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {answers.map((a, i) => (
+            <li class="reveal rounded-[28px] border border-ink/10 bg-cream p-6 md:p-7" style={`--d: ${(i % 3) * 90}ms`}>
+              <h3 class="font-display text-2xl font-[450] leading-tight">{a.title}</h3>
+              <p class="mt-3 text-[16px] leading-relaxed text-ink/80">{a.body}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="reveal mt-8 grid gap-6 rounded-[28px] bg-ink p-7 text-cream md:grid-cols-12 md:items-center md:p-10">
+          <h3 class="font-display text-3xl font-[420] leading-tight md:col-span-4">What it never does</h3>
+          <ul class="grid gap-3 text-[17px] sm:grid-cols-2 md:col-span-8">
+            {never.map((n) => (
+              <li class="flex gap-2.5"><span aria-hidden="true" class="text-citrus">–</span>{n}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <Harvest client:visible />
     <Grower client:visible />
+    <Season client:visible />
     <Stand client:visible />
     <FAQ client:visible />
     <Contact client:visible />

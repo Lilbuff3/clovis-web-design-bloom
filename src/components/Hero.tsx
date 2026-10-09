@@ -41,30 +41,28 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[max(100svh,62rem)] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
         <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-[.12em] text-ink opacity-100 md:text-sm">
-          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">$1,500 STARTER</span>
+          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">Practice sites from $1,500</span>
         </div>
 
-        <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
+        <h1 className="font-display in mt-4 text-[clamp(2.3rem,7vw,5.75rem)] font-[420] leading-[0.95] text-ink">
           {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
-            <span>Websites,</span>
+            <span>Your referred patients</span>
           </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
-            {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
+            {/* pr-[0.07em]: italic correction; the last letter leans past its box. */}
             <span>
-              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> by hand
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">look you up</em>
             </span>
           </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "320ms" }}>
-            <span>
-              <em className="wonk font-[380]">in</em> Clovis.
-            </span>
+            <span>before they call.</span>
           </span>
         </h1>
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me.
+            I build websites for independent practices in Fresno, Clovis and Madera. They answer what patients and referring offices ask your front desk all day (your plans, your fax number, your suite), and they never collect patient information.
           </p>
           <div className="flex flex-col items-start gap-5">
             <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
@@ -75,18 +73,18 @@ export function Hero() {
                 </svg>
               </span>
               <span className="leading-tight">
-                <span className="block text-[15px] text-cream/85">Tell me about your business:</span>
+                <span className="block text-[15px] text-cream/85">Tell me about your practice:</span>
                 <span className="block text-lg font-semibold">{PHONE_DISPLAY}</span>
                 <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-widest text-cream/70">text me directly</span>
               </span>
             </a>
             <a href="#harvest" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              See client results
+              See a practice site I built
               <span className="transition group-hover:translate-y-1">↓</span>
             </a>
-            <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              Can AI find you?
-              <span className="transition group-hover:translate-y-1">↓</span>
+            <a href="/our-story/" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+              Why I build for doctors
+              <span className="transition group-hover:translate-x-1">→</span>
             </a>
           </div>
         </div>

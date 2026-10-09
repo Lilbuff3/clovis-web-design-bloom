@@ -657,12 +657,12 @@ assertTest(3, 'T3.2', 'Four-second race lives on the contractor page (#speed), n
   return `Race is on /services/contractor-websites/#speed in plain words; the homepage has no stopwatch or #test link`;
 });
 
-assertTest(3, 'T3.4', 'Homepage leads hero → client results → AI check', () => {
+assertTest(3, 'T3.4', 'Homepage leads hero → referrals → front desk → client results', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
   const html = fs.readFileSync(indexPath, 'utf-8');
 
-  const order = ['top', 'harvest', 'check'];
+  const order = ['top', 'referrals', 'front-desk', 'harvest'];
   const at = order.map((id) => html.search(new RegExp(`<section[^>]*id=["']${id}["']`, 'i')));
   const missing = order.filter((_, i) => at[i] < 0);
   if (missing.length) throw new Error(`Missing homepage sections: ${missing.map((id) => `#${id}`).join(', ')}`);
