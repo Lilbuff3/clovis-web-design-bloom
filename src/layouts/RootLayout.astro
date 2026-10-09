@@ -60,8 +60,10 @@ const {
           });
         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
+        // React islands reveal their own content (useGlobalReveal) once hydrated; stamping their
+        // server HTML before React hydrates it makes the attributes mismatch.
         document.querySelectorAll('.reveal, .line-mask, .clip-reveal, [data-reveal]').forEach((el) => {
-          observer.observe(el);
+          if (!el.closest('astro-island')) observer.observe(el);
         });
       }
     </script>

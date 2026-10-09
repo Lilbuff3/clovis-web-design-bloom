@@ -31,9 +31,8 @@
   50% { transform: rotate(2.2deg); }
 }
 @keyframes pop {
-  0% { transform: scale(0); opacity: 0; }
-  70% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+  from { transform: scale(.92); opacity: 0; }
+  to { transform: none; opacity: 1; }
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(14px); }

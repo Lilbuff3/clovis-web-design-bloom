@@ -60,20 +60,8 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={`w-full overflow-hidden rounded-[32px] border border-ink/15 bg-cream/95 text-ink shadow-[0_30px_70px_-25px_rgba(30,43,35,0.2)] ${compact ? "p-5 sm:p-6" : "p-6 sm:p-12"}`}>
-      {/* The phone drawer has its own "Free AI check" title. */}
-      <div className={`flex-wrap items-center justify-between gap-3 ${compact ? "hidden" : "flex"}`}>
-        <div className="flex items-center gap-2.5">
-          <span className="relative flex h-3 w-3">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-persimmon opacity-75"></span>
-            <span className="relative inline-flex h-3 w-3 rounded-full bg-persimmon"></span>
-          </span>
-          <span className="font-mono text-[11px] uppercase tracking-[.18em] text-persimmon-deep font-semibold">Free AI check</span>
-        </div>
-        <span className="rounded-full bg-leaf/10 px-3 py-1 font-mono text-[11px] font-semibold text-leaf">Takes a few seconds</span>
-      </div>
-
       {ai === null && (
-        <form onSubmit={ask} className={compact ? "mt-1" : "mt-8"}>
+        <form onSubmit={ask}>
           <h3 className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "text-[clamp(2.75rem,7vw,5.25rem)]"}`}>
             Can AI <em className="wonk text-persimmon">find you?</em>
           </h3>
@@ -102,6 +90,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           >
             Ask Google's AI
           </button>
+          <p className="mt-3 text-center text-sm text-ink-soft">Free. Takes a few seconds.</p>
         </form>
       )}
 
@@ -121,7 +110,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
         )}
 
         {answer && (
-          <div ref={resultRef} tabIndex={-1} className="mt-8 text-center outline-none">
+          <div ref={resultRef} tabIndex={-1} className="text-center outline-none">
             <p className={smallLabel}>We asked Google's AI</p>
             <p className="mt-2 text-base text-ink/75 sm:text-lg">“{answer.question}”</p>
 
