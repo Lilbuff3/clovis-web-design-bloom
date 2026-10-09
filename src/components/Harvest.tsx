@@ -122,7 +122,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                   role="tab"
                   aria-selected={viewMode === "web"}
                   onClick={() => setViewMode("web")}
-                  className={`rounded-full px-3 py-1 text-xs transition ${
+                  className={`rounded-full px-3 py-1 text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 ${
                     viewMode === "web"
                       ? "bg-ink font-medium text-cream shadow-sm"
                       : "text-ink-soft hover:text-ink"
@@ -135,7 +135,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                   role="tab"
                   aria-selected={viewMode === "photo"}
                   onClick={() => setViewMode("photo")}
-                  className={`rounded-full px-3 py-1 text-xs transition ${
+                  className={`rounded-full px-3 py-1 text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 ${
                     viewMode === "photo"
                       ? "bg-ink font-medium text-cream shadow-sm"
                       : "text-ink-soft hover:text-ink"
