@@ -3,10 +3,10 @@
 ## 1. Brand Positioning & Core Promise
 
 ### Who We Are
-Clovis Web Design is a specialized web design and development studio operated by **Adam Youssef** in Clovis, California. We design and hand-code high-performance, high-converting digital storefronts for local businesses across Clovis, Fresno, Madera, and the Central Valley.
+Clovis Web Design is a web design and development studio operated by **Adam Youssef** in Clovis, California. The homepage speaks to independent medical practices in Clovis, Fresno and Madera. Contractors and local businesses are served from `/services/contractor-websites/`.
 
 ### The Value Proposition
-> **"High-converting, custom websites built to win Google search and turn mobile visitors into paying customers — with zero agency retainers and 100% client ownership."**
+> **"Your referred patients look you up before they call. I build practice websites that answer what patients and referring offices ask your front desk, and never collect patient information."**
 
 ### Why Clients Hire Us Instead of an Agency
 1. **Direct Access to the Builder:** No account managers, junior interns, or ticket queues. When clients call or text, the person who writes the code answers.
@@ -36,15 +36,29 @@ Each selling point has one home on the homepage. Don't repeat it in other sectio
 
 | Point | Its home |
 | :--- | :--- |
-| Built by hand | The hero headline |
-| Real results (referrals up 40%, #1 for "dumpster rental Fresno", 4 trucks added) | `#harvest` |
-| Who it's for | `#who`: two links, to the medical page and the contractor page |
-| Fast on a phone | One line in the `#harvest` intro: one reason these sites get calls, plus the home Wi-Fi point. The full four-second race lives on `/services/contractor-websites/` (`#speed`), not the homepage |
-| You own the code, domain and keys | `#compare` and the FAQ |
-| Texts go straight to Adam | The hero and `#compare` |
+| Referred patients look you up first | The hero headline |
+| The research (88% read reviews after a referral; nearly half won't book over incomplete info) | `#referrals`, with the source named and linked |
+| What a practice site answers | `#front-desk`: six cards, then "What it never does" |
+| No patient data, no trackers, no logins | The `#front-desk` strip and the HIPAA FAQ |
+| Proof | `#harvest`: Kidney Specialist only, facts and the live link |
+| Adam's story | Short version in `#grower`; the whole thing on `/our-story/` |
+| You own the code, domain and keys | The FAQ |
+| Texts go straight to Adam | The hero and the phone action bar |
 | Words written from a 45-minute conversation | `#season` (the process) |
 
-The homepage leads with results and sends visitors on to a focused page for their kind of business, the same way client sites do. Depth (the race, HIPAA detail, trade examples) belongs on those pages.
+Trades depth (the four-second race, Big Bros, the "Can AI find you?" check) lives on `/services/contractor-websites/`, not the homepage.
+
+## 2b. Claims We Can Prove
+
+Doctors check sources. One unprovable line costs more trust than the rest of the page earns.
+
+- **No legal conclusions.** Never "HIPAA compliant", "regulatory immunity", "lawsuit-proof", "legal indemnity". Say the fact instead: "collects no patient information", "no ad trackers", "your patient portal stays where it is". Adam studied health law; the site is not legal advice.
+- **No number without a named source on the page.** Approved: Doctor.com, *Customer Experience Trends in Healthcare 2020* (1,600+ U.S. adults): 88% read reviews of a provider even after a referral; 49.3% would not book over incomplete information online.
+- **Banned (unsourced, from AI drafts):** "1 in 3 patients drop the referral", "70–80% research the specialist", "+140% referrals", "50–100 calls a day", "4–7 minutes per call", "60% of calls deflected".
+- **Quotation marks only around a client's exact, approved words.** No paraphrased "testimonials".
+- **llms.txt and "AI search optimization" are not selling points.** No major AI engine has said it reads llms.txt.
+
+`tests/verify-e2e.mjs` Tier 6 fails the build on the banned phrases, on trackers, and on forms on the practice pages.
 
 ---
 
@@ -102,6 +116,8 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 
 ## 5. Audience Archetypes & Tailored Copy
 
+The homepage is for #2, the practices. #1 and #3 get their own pages.
+
 ### 1. The Home Services Contractor (Roofers, HVAC, Plumbers, Dumpsters)
 * **Pains:** Tired of paying Angi/Yelp for shared leads; burned by slow agency retainers; needs the phone ringing now.
 * **Winning Copy Angle:** Tap-to-call, text-to-book, fast quotes, top rankings for service + city ("roof repair Clovis").
@@ -122,21 +138,21 @@ Homepage sections, top to bottom. Each heading stands alone: no numbered labels 
 
 | Section ID | Visual Concept | Voice & Messaging Purpose |
 | :--- | :--- | :--- |
-| `#top` | Hero + Sunrise | "Websites, built by hand in Clovis." Adam, first person: websites that bring in customers, no templates, no monthly fees, no support tickets. $1,500 Starter, direct SMS CTA. |
-| `#harvest` | Showcase Cards | Proof right after the promise. Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with two numbers (the business result, and the one that explains the headline) and the client's own quote. Only real clients, only quotes they approved. The intro carries the one homepage line about speed. |
-| `#who` | Two Link Cards | "Pick your kind of business." Medical & professional offices → `/services/medical-web-design/`; Local businesses & contractors → `/services/contractor-websites/`. Short: a title and one line each. |
-| `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
+| `#top` | Hero + Sunrise | "Your referred patients look you up before they call." Adam, first person: practice sites that answer the front desk's daily questions and never collect patient information. "Practice sites from $1,500", direct SMS CTA, links to a live practice site and to `/our-story/`. |
+| `#referrals` | Stat + Four Checks | "A referral isn't a booking." The two Doctor.com numbers with the source linked, the blank-directory line from Adam's family, and the four things patients check. |
+| `#front-desk` | Six Cards + Dark Strip | "Answers before the phone rings." Insurance by plan type, referral steps, referring offices, getting there, paperwork, English + Spanish. Then "What it never does". |
+| `#harvest` | Showcase Card | "A practice site, live now." Kidney Specialist Inc. only: the problem, what was built, two provable numbers, the live link. No quote until Dr. Masood approves exact words. |
+| `#grower` | Studio & Workbench | "Why I build for doctors." The short version of Adam's story, then a link to `/our-story/`. Keeps the one-line agency/Figma note. |
 | `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
-| `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
-| `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
-| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
-| `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
-| `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
+| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter for a solo practice, $2,500 Growth, $5,000 Flagship). Optional care plans; the $99 plan covers routine changes (hours, providers, insurance plans), not open-ended work. |
+| `#faq` | Accordion | Four questions: is it HIPAA-compliant (facts, not a legal conclusion), why bother when booked out, who owns it, can we keep our portal. |
+| `#contact` | Interactive SMS Generator | Drafts a text to Adam's phone. No form: nothing is submitted anywhere. |
 
-Topic pages under `/services/`, linked from the nav, `#who` and the footer:
+Other pages:
 
 | Page | What lives there |
 | :--- | :--- |
-| `/services/contractor-websites/` | Big Bros results, then `#speed`: the four-second race (Olsen Roofing on two phones, the stopwatch, the home Wi-Fi paragraph) with a plain-words numbers row. |
-| `/services/medical-web-design/` | Medical & professional offices, the lead niche. |
+| `/our-story/` | Adam's whole story in his own words, the Doctor.com numbers, and what he builds now. He approves every sentence. |
+| `/services/contractor-websites/` | Big Bros results, `#check` ("Can AI find you?", `api/ask-gemini.ts`; never imply a website alone gets someone into Gemini's answer), then `#speed`: the four-second race. Footer-linked. |
 | `/services/web-design-clovis/`, `/services/local-seo-fresno/` | Location and local SEO pages, footer-linked. |
+| `/services/medical-web-design/` | Retired: a permanent redirect to `/` in `vercel.json`. |

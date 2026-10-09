@@ -26,11 +26,10 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 }
 
 const links = [
-  { href: "/services/contractor-websites/", label: "Contractors" },
+  { href: "/#front-desk", label: "How It Works" },
   { href: "/#harvest", label: "Client Work" },
-  { href: "/#season", label: "Process" },
   { href: "/#stand", label: "Pricing" },
-  { href: "/#grower", label: "About" },
+  { href: "/our-story/", label: "Our Story" },
   { href: "/#faq", label: "FAQ" },
 ];
 

@@ -28,30 +28,36 @@ export function Grower() {
 
         <div className="lg:col-span-7 lg:pl-6">
           <h2 className="font-display text-[clamp(2.8rem,6.5vw,6rem)] font-[420] leading-[0.92]">
-            <span className="line-mask"><span>One person.</span></span>{" "}
+            <span className="line-mask"><span>Why I build</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
               <span>
-                <em className="wonk text-persimmon">One town</em> at a time.
+                <em className="wonk text-persimmon">for doctors.</em>
               </span>
             </span>
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
+              I grew up in Clovis. When I had my first seizure at nine, every local specialist my parents found online was a grey silhouette on a hospital network’s website, so we made the long drive to UCSF instead.
             </p>
             <p>
-              I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers.
+              Years later, after my dad was diagnosed with lung cancer, he saw specialists as far away as New York. In the end, the best doctors we found for both of us were right here in Fresno and Clovis, close to home.
+            </p>
+            <p>
+              I'm <strong className="font-semibold">Adam Youssef</strong>. I studied health law at UC Davis, and I write every site myself, the code and the words. When you text, I answer.
             </p>
             <p className="text-[16px] text-ink/70">
               <strong className="font-semibold text-ink">Agencies and designers:</strong> I also build from your Figma files, under your name. Text me the project and the deadline.
             </p>
           </div>
-          <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-2 border-citrus/60 pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
-            “You don't rent your website from an agency. You own the code, the domain, and the keys.”
-          </blockquote>
-          <div className="mt-12">
-            <a href={SMS_LINK} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
-              Text Adam directly →
+          <p className="reveal font-display wonk relative mt-10 max-w-2xl border-l-2 border-citrus/60 pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
+            I build websites so the next family finds them sooner.
+          </p>
+          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a href="/our-story/" className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
+              Read the whole story →
+            </a>
+            <a href={SMS_LINK} className="text-[17px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
+              or text Adam directly
             </a>
           </div>
         </div>

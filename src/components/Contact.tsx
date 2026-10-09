@@ -3,7 +3,7 @@ import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
-const needs = ["A one-page site ($1,500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
+const needs = ["A one-page practice site ($1,500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
 const whens = ["ASAP", "This month", "Just looking"];
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -30,7 +30,7 @@ export function Contact() {
 
   const message = useMemo(() => {
     const who = name.trim() ? `Hi, Adam! It's ${name.trim()}` : "Hi, Adam!";
-    const what = trade.trim() ? ` — I run ${trade.trim()}` : "";
+    const what = trade.trim() ? ` — I'm with ${trade.trim()}` : "";
     const n = need === "Not sure yet" ? "I'm not sure what I need yet" : `I'm interested in ${need.replace(/ \(.*\)/, "").replace(/^A /, "a ")}`;
     const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "just looking for now";
     return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
@@ -66,17 +66,17 @@ export function Contact() {
                   id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Maria"
+                  placeholder="Dr. Patel"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your practice</span>
                 <input
                   id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="a taquería in Old Town"
+                  placeholder="a cardiology practice on Herndon"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -154,7 +154,7 @@ export function Footer() {
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
+            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Clear, private websites for the independent practices of the Central Valley.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
@@ -164,8 +164,9 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Visit</div>
+            <a href="/our-story/" className="block hover:underline">Our Story</a>
+            <a href="/#front-desk" className="block hover:underline">How It Works</a>
             <a href="/#harvest" className="block hover:underline">Client Work</a>
-            <a href="/#check" className="block hover:underline">Can AI Find You?</a>
             <a href="/#season" className="block hover:underline">Process</a>
             <a href="/#stand" className="block hover:underline">Pricing</a>
           </div>

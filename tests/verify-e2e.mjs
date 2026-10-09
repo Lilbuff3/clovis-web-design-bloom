@@ -177,6 +177,7 @@ const REQUIRED_ROUTES = [
   { path: path.join('services', 'web-design-clovis', 'index.html'), route: '/services/web-design-clovis/' },
   { path: path.join('services', 'local-seo-fresno', 'index.html'), route: '/services/local-seo-fresno/' },
   { path: path.join('services', 'contractor-websites', 'index.html'), route: '/services/contractor-websites/' },
+  { path: path.join('our-story', 'index.html'), route: '/our-story/' },
 ];
 
 // ============================================================================
@@ -600,7 +601,7 @@ assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500)
 // TIER 3: Mobile Performance & UX Elements
 // ============================================================================
 
-assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availability status, and audit trigger', () => {
+assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text and availability status; AI check on the contractor page', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
 
@@ -624,13 +625,15 @@ assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availabi
     throw new Error(`Missing live builder availability status indicator`);
   }
 
-  // Check audit drawer trigger
-  const hasAuditTrigger = /audit|instant audit|quote drawer|audit-drawer|data-audit/i.test(html);
-  if (!hasAuditTrigger) {
-    throw new Error(`Missing instant audit drawer trigger in mobile action bar`);
+  // The Gemini check is for trades; it lives on the contractor page, not in the bar on every page.
+  const contractorPath = path.join(DIST_DIR, 'services', 'contractor-websites', 'index.html');
+  if (!fs.existsSync(contractorPath)) throw new Error(`Run "npm run build" first.`);
+  if (!/<section[^>]*id=["']check["']/i.test(fs.readFileSync(contractorPath, 'utf-8'))) {
+    throw new Error(`No #check section (the AI check) on /services/contractor-websites/`);
   }
+  if (/id=["']audit-drawer-btn["']/i.test(html)) throw new Error(`The AI check drawer is still in the homepage action bar`);
 
-  return `Mobile Action Bar verified with tap-to-call, tap-to-text, availability status, and audit trigger`;
+  return `Mobile Action Bar verified with tap-to-call, tap-to-text and availability status; AI check is on the contractor page`;
 });
 
 assertTest(3, 'T3.2', 'Four-second race lives on the contractor page (#speed), not the homepage', () => {
@@ -680,7 +683,7 @@ assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, an
   const heroSectionMatch = html.match(/<section[^>]*id=["'](?:top|hero)["'][^>]*>([\s\S]*?)<\/section>/i);
   const heroHtml = heroSectionMatch ? heroSectionMatch[1] : html.substring(0, 3000);
 
-  const hasHeadline = /Websites,?\s*(?:built\s*by\s*hand\s*in\s*Clovis|built\s*in\s*Clovis)/i.test(heroHtml) || /<h1/i.test(heroHtml);
+  const hasHeadline = /<h1/i.test(heroHtml);
   const has500Anchor = /\$1,500/i.test(heroHtml);
   const hasCta = /sms:\+?1?5595753014|tel:\+?1?5595753014/i.test(heroHtml);
 
@@ -893,6 +896,17 @@ assertTest(6, 'T6.2', "No claims Adam can't prove (legal conclusions, unsourced 
   }
   if (hits.length) throw new Error(`Banned claims found:\n - ${hits.join('\n - ')}`);
   return `None of ${banned.length} banned claims appear on any built page`;
+});
+
+assertTest(6, 'T6.4', 'No <form> on the practice pages (the pitch: the site never collects patient information)', () => {
+  const pages = ['index.html', path.join('our-story', 'index.html')];
+  const withForms = pages.filter((p) => {
+    const full = path.join(DIST_DIR, p);
+    if (!fs.existsSync(full)) throw new Error(`dist/${p} not found. Run "npm run build" first.`);
+    return /<form[\s>]/i.test(fs.readFileSync(full, 'utf-8'));
+  });
+  if (withForms.length) throw new Error(`Forms found on: ${withForms.join(', ')}`);
+  return `No forms on ${pages.length} practice pages`;
 });
 
 assertTest(6, 'T6.3', 'Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)', () => {

@@ -193,14 +193,6 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           ))}
         </div>
 
-        {c.quote && (
-          <figure className="mt-8 border-l-2 border-persimmon/60 pl-5">
-            <blockquote className="font-display text-[19px] font-[380] leading-[1.45] text-ink/90 md:text-[21px]">“{c.quote.text}”</blockquote>
-            <figcaption className="mt-3 text-sm text-ink/70">
-              <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
-            </figcaption>
-          </figure>
-        )}
       </div>
     </article>
   );
@@ -215,16 +207,16 @@ export function ClientWork() {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
             <h2 className="font-display text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
-              <span className="line-mask"><span>Real businesses.</span></span>{" "}
+              <span className="line-mask"><span>A practice site,</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
                 <span>
-                  <em className="wonk text-leaf">Measurable results.</em>
+                  <em className="wonk text-leaf">live now.</em>
                 </span>
               </span>
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            Two businesses, both live. One reason they get calls: each site shows up fast for a new customer on two bars of signal. Owners rarely see their own site that way. They check it at home on <span className="whitespace-nowrap">Wi-Fi</span>, with a copy already saved on their phone.
+            A nephrology practice in Fresno and Madera. Open it on your phone and look for what your own patients would look for.
           </p>
         </div>
 

@@ -8,17 +8,17 @@ web
 
 ## Users
 
-1. **Local Business Owners & Contractors** (Roofing, HVAC, Plumbing, Dumpster Rental, Tree Service, Landscaping): Needs urgent customer calls, local Google Maps 3-Pack rankings, and mobile quote requests; tired of shared Angi/Yelp leads or agency retainers.
-2. **Professional & Healthcare Practices** (Private clinics, physicians, nephrologists, legal, CPA/accounting): Needs trustworthy, pristine, compliant web presences that load immediately and convert patient/client referrals.
-3. **Digital Marketing & Creative Agency Partners**: Needs reliable, drift-free Figma-to-code frontend engineering and dev overflow under white-label terms with strict turnaround SLAs.
+1. **Independent Medical Practices** (the homepage audience): physician owners and practice managers in Fresno, Clovis and Madera. Referred patients look them up before booking, and the front desk answers the same questions all day (plans, referrals, records, which suite). They usually meet Adam through an in-person demo drop-off, then check this site for about 20 seconds: is he real, local, and has he built a practice site before?
+2. **Local Business Owners & Contractors** (Roofing, HVAC, Plumbing, Dumpster Rental): served from `/services/contractor-websites/`, off the homepage. Needs calls, Google Maps rankings and mobile quote requests.
+3. **Digital Marketing & Creative Agency Partners**: Figma-to-code builds and dev overflow under white-label terms. Reached by outbound email (`outreach/`), not the homepage.
 
 ## Product Purpose
 
-Clovis Web Design provides custom-coded, high-performance web storefronts engineered to win local Google search, achieve 100/100 Core Web Vitals, and turn mobile visitors into paying customers—with zero monthly agency retainers and 100% client code ownership.
+Clovis Web Design builds websites for independent medical practices in the Central Valley. They answer what patients and referring offices ask the front desk (insurance by plan type, referral steps, where to fax records, which suite, where to park) and never collect patient information. Clients own the code and domain.
 
 ## Positioning
 
-High-converting, hand-coded digital storefronts built directly by the engineer (Adam Youssef) with zero agency middlemen, sub-second mobile load times, done-for-you interview-driven copywriting, and complete client asset ownership.
+The practice's plain-facts front door, built and written by Adam Youssef: a Clovis native who studied health law and whose family drove out of town for care that turned out to be close to home. No forms that collect patient information, no ad trackers, no account managers.
 
 ## Operating Context
 
@@ -30,7 +30,8 @@ High-converting, hand-coded digital storefronts built directly by the engineer (
 
 - **Stack**: Astro 5 (SSG/SSR), React 19, Tailwind CSS v4, TypeScript, deployed to Vercel.
 - **Performance Targets**: Under 1.0s Largest Contentful Paint (LCP), 0.0 Cumulative Layout Shift (CLS), 100/100 Google PageSpeed Mobile score.
-- **Conversion Features**: Tap-to-call, direct SMS triggers, location-based landing pages, LocalBusiness schema structured data.
+- **Practice Features**: Insurance by plan type (and what each needs before booking; specialist sites get no open online booking), referral steps, referring-office fax/NPI/what to send, arrival directions, printable new-patient paperwork, English + Spanish. Tap-to-call and direct SMS to Adam.
+- **Never**: Forms that collect patient information, ad trackers or pixels, patient logins. Anything with patient details stays in the practice's own portal.
 - **Metaphor Guardrail**: Strictly ban kitschy agricultural/orchard metaphors ("hand-grown", "harvest", "two crates ripe", "seedling plan", "watering/pruning"). Use clear, authoritative commercial language ("Custom-built", "Proven Results", "The Starter", "From Discovery to Launch").
 - **Client Terms**: True ownership—clients receive full GitHub repository access, source code, and independent hosting configuration.
 
@@ -43,13 +44,15 @@ High-converting, hand-coded digital storefronts built directly by the engineer (
 
 ## Evidence on Hand
 
-- Verified case studies and client projects: Big Bros Dumpster Rental, Kidney Specialist Inc (Dr. Masood), Clovis local service pages.
+- Kidney Specialist Inc. (homepage case): facts only. There is no client quote on file in Dr. Masood's exact words, and the +40% referral figure stays off the site until he has confirmed it.
+- Big Bros Dumpster Rental: contractor page only.
+- Patient research: Doctor.com "Customer Experience Trends in Healthcare 2020" (1,600+ U.S. adults): 88% read reviews of a provider even after a referral; 49.3% would not book over incomplete information online.
 - Comprehensive brand standards in `TONE_AND_VOICE.md`.
 - Agency partner positioning in `CONTEXT.md`.
 
 ## Product Principles
 
-1. **Speed is a Sales Tool**: Performance benchmarks exist to capture calls and prevent bounce drops, not for vanity.
+1. **Patient Clarity and Front-Desk Relief First**: Sell what the site answers and what it never collects. Speed stays true but invisible; doctors don't buy PageSpeed scores.
 2. **Done-For-You Reality**: Remove business owner friction through interview-driven copy rather than demanding homework.
 3. **Transparent Independence**: No hostage monthly fees, no vendor lock-in, client owns 100% of their digital assets.
 4. **Pragmatic Craftsmanship**: Clean semantic code, clear visual hierarchy, accessible contrast, and zero AI template tells.

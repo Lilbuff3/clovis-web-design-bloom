@@ -1,0 +1,95 @@
+---
+import RootLayout from '../layouts/RootLayout.astro';
+import { Nav } from '../components/Chrome';
+import { Footer } from '../components/Contact';
+import Icon from '../components/Icon.astro';
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../lib/data';
+
+// Adam's own account, from his words. Every sentence here is his to approve; don't add details he didn't give.
+// Same survey as the homepage: Doctor.com "Customer Experience Trends in Healthcare 2020", 1,600+ U.S. adults.
+const SURVEY_SOURCE = 'https://cms.doctor.com/wp-content/uploads/2020/03/cxtrends2020-report-final.pdf';
+---
+
+<RootLayout
+  title="Our Story · Why I Build Websites for Doctors · Clovis Web Design"
+  description="Why a Clovis native who studied health law builds websites for Central Valley medical practices: the doctors my family needed were close to home, and we couldn't tell."
+>
+  <Nav client:load />
+
+  <main class="relative z-10 pt-32 pb-24 md:pt-40">
+    <article class="mx-auto max-w-3xl px-5 md:px-8">
+      <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-ink-soft">Our story · Clovis, California</div>
+
+      <h1 class="font-display text-4xl text-ink md:text-6xl font-[420] leading-[0.98]">
+        Why I build websites for doctors
+      </h1>
+
+      <div class="mt-8 space-y-6 text-lg leading-relaxed text-ink/85 md:text-xl">
+        <p>
+          I was born and raised in Clovis and Fresno. My mom taught kindergarten for Clovis Unified, and my dad was a network systems engineer for the District Attorney’s office. I was a happy kid who loved school and sports, until I had a grand mal seizure at nine.
+        </p>
+      </div>
+
+      <h2 class="mt-14 font-display text-2xl text-ink md:text-4xl font-[420]">A grey silhouette and a long drive</h2>
+      <div class="mt-5 space-y-6 text-lg leading-relaxed text-ink/85 md:text-xl">
+        <p>
+          My parents went looking for the best care they could find. Online, the local specialists were a name and a blank grey photo on a big hospital network’s website. To my parents, that read like the doctor had stopped practicing, or that you had to be admitted to the hospital to be seen.
+        </p>
+        <p>
+          So we went to UCSF. It was a long, hard process, and it delayed my care.
+        </p>
+      </div>
+
+      <h2 class="mt-14 font-display text-2xl text-ink md:text-4xl font-[420]">Close to home the whole time</h2>
+      <div class="mt-5 space-y-6 text-lg leading-relaxed text-ink/85 md:text-xl">
+        <p>
+          Years later I was accepted to UC Davis School of Law to study health law. I planned ahead, but for a year and a half my doctors at home and the doctors in Davis couldn’t manage to get each other what was needed for me to get my medication there. I took a break from school until I could.
+        </p>
+        <p>
+          During that break, my dad was diagnosed with lung cancer. He was an amazing father who always made sure I got the best care, and we wanted the same for him. He saw specialists in New York, Orange County and San Francisco.
+        </p>
+        <p>
+          In the end, I found an amazing neurologist in Fresno who specializes in epilepsy. My dad found an oncologist who was just as good. We both had PPO coverage, and the care we wanted for each other was in Fresno and Clovis, close to home. We’d never known, because those doctors were blank faces on a hospital network’s website.
+        </p>
+      </div>
+
+      <h2 class="mt-14 font-display text-2xl text-ink md:text-4xl font-[420]">It isn’t just my family</h2>
+      <div class="mt-5 space-y-6 text-lg leading-relaxed text-ink/85 md:text-xl">
+        <p>
+          In a survey of more than 1,600 U.S. adults, 88% said they read reviews about a doctor even after being referred, and nearly half said incomplete information online would stop them from booking.
+        </p>
+        <p class="text-sm text-ink-soft md:text-base">
+          Doctor.com, Customer Experience Trends in Healthcare 2020.
+          <a href={SURVEY_SOURCE} target="_blank" rel="noopener noreferrer" class="underline decoration-ink/30 underline-offset-2 hover:text-persimmon-deep">Source (PDF)</a>
+        </p>
+        <p>
+          A blank profile doesn’t just look unfinished. It sends families out of town for care that’s already here.
+        </p>
+      </div>
+
+      <h2 class="mt-14 font-display text-2xl text-ink md:text-4xl font-[420]">What I build now</h2>
+      <div class="mt-5 space-y-6 text-lg leading-relaxed text-ink/85 md:text-xl">
+        <p>
+          I understand why practices hold back. The Valley is short on doctors, front desks are stretched thin, and California’s rules can make a public website feel like more liability than it’s worth.
+        </p>
+        <p>
+          So I build practice websites that say the plain facts: who you are, which plans you take, how referrals reach you, where to park. They never collect patient information. No family in the Valley should have to leave town for care that’s already down the street.
+        </p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center gap-4">
+        <a href={SMS_LINK} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+          <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
+        </a>
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep">
+          <Icon name="phone" /> Call {PHONE_DISPLAY}
+        </a>
+      </div>
+      <p class="mt-6 text-[17px]">
+        <a href="/#front-desk" class="underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">See what goes on a practice site →</a>
+      </p>
+    </article>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

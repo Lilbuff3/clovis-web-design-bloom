@@ -26,32 +26,6 @@ export const cases = [
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
     ],
   },
-  {
-    no: "02",
-    client: "Big Bros Dumpster Rentals",
-    url: "https://bigbrosdumpster.com",
-    urlDisplay: "bigbrosdumpster.com",
-    trade: "Roll-off dumpster rental",
-    place: "Fresno & Clovis, CA",
-    year: "2025",
-    img: "/images/bigbros.jpg",
-    previewImg: "/images/big-bros-preview.webp",
-    photoImg: "/images/bigbros.jpg",
-    tint: "bg-blush",
-    headline: "Number one on Google for “dumpster rental Fresno.”",
-    problem: "National brokers were outranking the company that actually owns the trucks.",
-    planted: ["Dedicated service area pages for Fresno & Clovis", "Upfront flat pricing on the page", "Driveway protection highlighted for trust"],
-    stack: ["English + Español", "Text-to-book"],
-    quote: {
-      text: "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up.",
-      name: "William Maldonado Ramirez",
-      role: "Co-Owner & Head of Operations",
-    },
-    yields: [
-      { value: 1, prefix: "#", suffix: "", label: "On Google for “dumpster rental Fresno”" },
-      { value: 4, prefix: "+", suffix: "", label: "Trucks added to keep up with demand" },
-    ],
-  },
 ];
 
 // Condensed from the longer step copy; same facts, one sentence or two each.
@@ -59,7 +33,7 @@ export const steps = [
   {
     name: "Discovery",
     when: "Day 1",
-    body: "A 45-minute call about what you do, who calls you, and what they ask before they book. If one simple page is enough, I'll say so.",
+    body: "A 45-minute call about your practice: who refers to you, and what patients and referring offices ask before they book. If one simple page is enough, I'll say so.",
   },
   {
     name: "Words & layout",
@@ -78,34 +52,6 @@ export const steps = [
   },
 ];
 
-export const compare = [
-  {
-    q: "Who actually builds it?",
-    them: ["An account manager", "You meet the senior people once, at the pitch. Then your site goes to whoever's free that week."],
-    me: ["Me. Start to finish.", "I design it, build it and put it live. When you call, the person who wrote the code picks up."],
-  },
-  {
-    q: "Who owns it when you walk away?",
-    them: ["They hold the keys", "It lives on their system. Stop paying and it goes dark — design and content included."],
-    me: ["You hold the keys", "Code and domain are in your name from day one. Move it anywhere, no permission needed."],
-  },
-  {
-    q: "How does it behave on a phone?",
-    them: ["People leave first", "A heavy template with dozens of plugins. Out in the field, it loads long enough for people to give up."],
-    me: ["It's there before they wait", "Nothing in it that doesn't need to be, so it's up before anyone thinks about leaving."],
-  },
-  {
-    q: "Who writes the words?",
-    them: ["You do, somehow", "A blank questionnaire and a deadline — or machine-written copy that sounds like everyone else."],
-    me: ["I do", "We talk for 45 minutes, I record it, and write the site from what you said about your own trade."],
-  },
-  {
-    q: "When you need a change?",
-    them: ["A ticket and a wait", "Submit a request, wait for a change order, get invoiced for a paragraph."],
-    me: ["A text message", "Small things I just do. Big things, I tell you before I start — not after."],
-  },
-];
-
 export const plans = [
   {
     code: "01",
@@ -117,7 +63,7 @@ export const plans = [
     hole: "bg-paper",
     items: [
       "One page, live in a week",
-      "Your number everywhere — one tap to call or text",
+      "Insurance, referral steps, fax and directions, each one tap away",
       "Loads in under 1 second on mobile devices",
       "Set up so Google knows who & where you are",
       "One full round of revisions included",
@@ -135,7 +81,7 @@ export const plans = [
     hole: "bg-paper",
     items: [
       "3–5 pages, each written from a recorded conversation",
-      "A page for every town you serve, built for local Google searches",
+      "A page for each provider and location",
       "A full Spanish version at /es/",
     ],
     not: [],
@@ -151,8 +97,8 @@ export const plans = [
     hole: "bg-paper",
     items: [
       "Custom design built around your brand",
-      "Booking, quoting — whatever your customers need",
-      "Built to your industry's accessibility & privacy rules",
+      "Links into your patient portal or scheduler",
+      "Built to WCAG 2.1 AA, with nothing that collects patient information",
       "I stay on it for 90 days after launch",
     ],
     not: [],
@@ -162,19 +108,27 @@ export const plans = [
 
 export const care = [
   { name: "No plan", price: "$0", blurb: "Pay nothing monthly. You're all set." },
-  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and small changes, handled." },
+  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and routine changes: hours, providers, insurance plans." },
   { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content and local SEO tuning." },
 ];
 
 
 export const faqs = [
   {
+    q: "Is the website HIPAA-compliant?",
+    a: "It doesn't collect patient information, so there's no patient data on it to protect: no forms, no ad trackers, no logins. Anything that needs patient details, like intake forms or messages, stays in the system you already use for it, such as your patient portal. This isn't legal advice: your compliance person has the final word, and I'm glad to walk them through it.",
+  },
+  {
+    q: "We're booked out for months. Why would we need this?",
+    a: "It isn't about more patients. It's about the right ones arriving prepared: on a plan you take, with the referral and records you need, at the right suite. And fewer calls asking where records go or whether a referral came through.",
+  },
+  {
     q: "Who owns the website and the domain once it's live?",
     a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them and walk.",
   },
   {
-    q: "Can we keep our existing booking or ordering system?",
-    a: "Usually, yes. If it gives you a link or an embed — most do — I can put it on the page without slowing things down. Tell me what you run and I'll confirm before you pay anything.",
+    q: "Can we keep our patient portal or scheduler?",
+    a: "Yes. If it gives you a link, and most do, it goes on the page without slowing anything down. Tell me what you use and I'll confirm before you pay anything.",
   },
 ];
 
@@ -207,14 +161,14 @@ export const hasOfferCatalog = {
       "name": "Growth",
       "price": "2500",
       "priceCurrency": "USD",
-      "description": "3–5 pages written from a recorded conversation, a page for every town you serve, and a full Spanish version.",
+      "description": "3–5 pages written from a recorded conversation, a page for each provider and location, and a full Spanish version.",
     },
     {
       "@type": "Offer",
       "name": "Flagship",
       "price": "5000",
       "priceCurrency": "USD",
-      "description": "A custom design with booking or quoting, built to your industry's accessibility and privacy rules, with 90 days of support after launch.",
+      "description": "A custom design with links into your patient portal or scheduler, built to WCAG 2.1 AA, with 90 days of support after launch.",
     },
   ],
 };

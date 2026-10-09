@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { compare, steps } from "../lib/data";
+import { steps } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Season() {
@@ -34,59 +33,6 @@ export function Season() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-export function Compare() {
-  useGlobalReveal();
-  const [mine, setMine] = useState(true);
-  return (
-    <section id="compare" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-          <h2 className="font-display text-[clamp(2.4rem,5.5vw,5rem)] font-[420] leading-[0.95]">
-            <span className="line-mask"><span>Traditional agency,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-              <span>
-                or <em className="wonk text-leaf">dedicated builder?</em>
-              </span>
-            </span>
-          </h2>
-          <button
-            onClick={() => setMine((m) => !m)}
-            data-magnetic="0.15" className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium"
-            aria-pressed={mine}
-          >
-            <span
-              className="absolute top-1.5 h-13 w-[calc(50%-6px)] rounded-full bg-citrus transition-all duration-500"
-              style={{ left: mine ? "calc(50% + 0px)" : "6px", height: "calc(100% - 12px)", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            />
-            <span className={`relative z-10 flex-1 text-center transition ${!mine ? "text-ink" : "text-cream/70"}`}>Typical agency</span>
-            <span className={`relative z-10 flex-1 text-center transition ${mine ? "text-ink" : "text-cream/70"}`}>With Adam</span>
-          </button>
-        </div>
-
-        <div className="mt-14 divide-y divide-ink/15 border-y border-ink/15">
-          {compare.map((row, i) => {
-            const [head, body] = mine ? row.me : row.them;
-            return (
-              <div key={row.q} className="grid gap-4 py-7 md:grid-cols-12 md:gap-8">
-                <div className="flex items-baseline gap-4 md:col-span-4">
-                  <span className="font-mono text-xs text-ink-soft">0{i + 1}</span>
-                  <span className="text-lg font-medium">{row.q}</span>
-                </div>
-                <div key={String(mine)} className="md:col-span-8" style={{ animation: `rise .6s cubic-bezier(.2,.8,.2,1) ${i * 70}ms both` }}>
-                  <div className={`font-display wonk text-3xl italic md:text-4xl ${mine ? "text-leaf" : "text-ink/60 line-through decoration-persimmon/60 decoration-2"}`}>
-                    {head}
-                  </div>
-                  <p className={`mt-2 max-w-2xl text-[16px] leading-relaxed ${mine ? "text-ink/85" : "text-ink-soft"}`}>{body}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
