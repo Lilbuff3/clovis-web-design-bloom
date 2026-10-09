@@ -19,14 +19,10 @@ export const cases = [
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
     stack: ["English + Español"],
-    quote: {
-      text: "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%.",
-      name: "Dr. Sheikh Mohammad Masood, MD",
-      role: "Founding President & Medical Director",
-    },
+    // No quote: neither version on file was Dr. Masood's exact words.
     // Two numbers per case: the business result, then the one that explains the headline.
     yields: [
-      { value: 40, prefix: "+", suffix: "%", label: "Provider referrals, by Dr. Masood's count" },
+      { value: 0, label: "Forms that ask patients for health information" },
       { value: 100, suffix: "/100", label: "Google PageSpeed" },
     ],
   },
@@ -127,7 +123,7 @@ export const plans = [
       "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
-    for: "Contractors, shops, and one-person trades who need high conversion today.",
+    for: "Solo practices and small offices that need one clear page: insurance, referrals, directions.",
   },
   {
     code: "02",
@@ -143,7 +139,7 @@ export const plans = [
       "A full Spanish version at /es/",
     ],
     not: [],
-    for: "Established businesses with more than one service — or who need Spanish alongside English.",
+    for: "Practices with several providers or locations, or patients who need Spanish.",
   },
   {
     code: "03",
@@ -160,7 +156,7 @@ export const plans = [
       "I stay on it for 90 days after launch",
     ],
     not: [],
-    for: "Medical practices, multi-location operators, anyone with compliance to satisfy.",
+    for: "Groups that need a custom design, or links into a patient portal or scheduler.",
   },
 ];
 

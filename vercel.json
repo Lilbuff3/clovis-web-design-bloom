@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/services/medical-web-design/", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/images/(.*)",

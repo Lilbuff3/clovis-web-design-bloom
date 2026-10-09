@@ -34,3 +34,6 @@ dist-ssr
 .claude
 .impeccable
 .codex
+
+# Written by tests/verify-e2e.mjs on every run
+tests/test-results.json

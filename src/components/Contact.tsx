@@ -161,7 +161,6 @@ export function Footer() {
             <a href="/services/web-design-clovis/" className="block hover:underline">Clovis Web Design</a>
             <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
             <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
-            <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Visit</div>

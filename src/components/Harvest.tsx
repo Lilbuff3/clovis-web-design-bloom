@@ -193,12 +193,14 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
           ))}
         </div>
 
-        <figure className="mt-8 border-l-2 border-persimmon/60 pl-5">
-          <blockquote className="font-display text-[19px] font-[380] leading-[1.45] text-ink/90 md:text-[21px]">“{c.quote.text}”</blockquote>
-          <figcaption className="mt-3 text-sm text-ink/70">
-            <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
-          </figcaption>
-        </figure>
+        {c.quote && (
+          <figure className="mt-8 border-l-2 border-persimmon/60 pl-5">
+            <blockquote className="font-display text-[19px] font-[380] leading-[1.45] text-ink/90 md:text-[21px]">“{c.quote.text}”</blockquote>
+            <figcaption className="mt-3 text-sm text-ink/70">
+              <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
+            </figcaption>
+          </figure>
+        )}
       </div>
     </article>
   );
