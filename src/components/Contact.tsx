@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -141,9 +141,9 @@ export function Contact() {
               <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
                 call {PHONE_DISPLAY}
               </a>{" "}
-              ·{" "}
+              <span className="hidden sm:inline" aria-hidden="true">·{" "}</span>
               <a href={mailLink(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
-                email it instead
+                email {EMAIL}
               </a>
             </p>
           </div>
@@ -181,7 +181,7 @@ export function Footer() {
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
-            <a href={mailLink("Website question")} className="block hover:underline">Email me</a>
+            <a href={mailLink("Website question")} className="block normal-case tracking-normal hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

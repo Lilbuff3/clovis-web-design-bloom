@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 
 type Link = { title: string; uri: string };
 type Answer = { question: string; answer: string; places: Link[]; sources: Link[]; named: string | null; lookedFor: boolean };
@@ -156,7 +156,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 Opens a text to my cell, already written{" "}· <span className="whitespace-nowrap">{PHONE_DISPLAY}</span>
               </p>
               <a href={mailLink(`Google AI check: ${sent.name}`, text)} className="inline-flex min-h-12 items-center px-2 text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon-deep">
-                On a computer? Email it instead
+                On a computer? Email it to <span className="whitespace-nowrap">{EMAIL}</span>
               </a>
               {!named && (
                 <a href={sms(recheck)} className="inline-flex min-h-12 items-center px-2 text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
