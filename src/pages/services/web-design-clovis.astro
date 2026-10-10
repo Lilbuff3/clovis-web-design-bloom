@@ -6,33 +6,29 @@ import Icon from '../../components/Icon.astro';
 import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 ---
 
-<RootLayout 
+<RootLayout
   title="Clovis Web Design — Custom Websites for Clovis Businesses"
-  description="Custom, fast websites for Clovis, CA local businesses. $1,500 starter site, 100/100 Google PageSpeed, live in 1 week. Direct with the builder."
+  description="Custom, fast websites for Clovis, CA businesses. $1,500 for a one-page site, live in about a week. You own the code and the domain."
 >
   <Nav client:load />
 
   <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
-    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">
-      GBP Primary Category: Website Designer · Clovis, California
-    </div>
-    
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
       Web Design in Clovis, California
     </h1>
 
     <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      Custom, fast websites built by an independent Clovis website designer for local small businesses, trades, and professional practices. No bloated WordPress templates, no monthly agency hostage retainers, and 100% client-owned code.
+      I build custom websites for Clovis businesses, trades and practices. No WordPress templates, no monthly fees you can't get out of, and you own the code.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a 
+      <a
         href={SMS_LINK}
         class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
       >
         <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
-      <a 
+      <a
         href={`tel:${PHONE_TEL}`}
         class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
       >
@@ -42,33 +38,31 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 
     <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Why Speed and Simplicity Outperform Bloated Agency Templates
+        Why a fast site gets more calls
       </h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Most agency websites take 5 to 8 seconds to load on mobile phones connected to cell networks in Old Town Clovis or along Herndon Avenue. By the time the template scripts finish downloading, the prospective client has already backed out and phoned your competitor.
+        Template sites carry a lot of extra code, so on a phone with two bars of signal they can take several seconds to open. Most people won't wait. They go back and call the next business on the list.
       </p>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Every website I build scores a verifiable 100/100 on Google PageSpeed Insights. That speed translates directly into higher conversion rates, lower bounce rates, and immediate trust for customers looking to hire a reliable local service.
+        My sites score 100/100 on Google PageSpeed, so they open right away, even on a weak signal.
       </p>
     </section>
 
     <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Verified Local Case Studies & Proven Results
+        Results for local businesses
       </h2>
       <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Local SEO Authority</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">Big Bros Dumpster Rentals</h3>
+          <h3 class="font-display text-xl text-ink font-medium">Big Bros Dumpster Rentals</h3>
           <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Achieved #1 Google ranking in Clovis and Fresno for high-intent roll-off dumpster queries with an ultra-fast bilingual landing page architecture and 100/100 PageSpeed score.
+            Number one on Google for “dumpster rental Fresno.” Customers now text them directly instead of going through national brokers, and they bought 4 more trucks to keep up.
           </p>
         </div>
         <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Healthcare Practice</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">Kidney Specialist Inc.</h3>
+          <h3 class="font-display text-xl text-ink font-medium">Kidney Specialist Inc.</h3>
           <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Generated +40% patient referral growth across Central Valley clinics via accessible WCAG 2.1 AA typography, zero-PHI architecture, and instant sub-second mobile performance.
+            A medical site that collects no patient data and scores 100/100 on Google PageSpeed. Referrals from other doctors are up more than 40%, by Dr. Masood's count.
           </p>
         </div>
       </div>
@@ -76,10 +70,10 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 
     <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        $1,500 Flat-Rate Starter Site
+        $1,500 for a one-page site
       </h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Get an authentic, custom-designed landing page delivered in 7 days for a flat $1,500 fee. Includes domain setup, high-performance hosting deployment, tap-to-call integration, and local Google Maps grounding. You own all logins, code, and content from day one.
+        A custom one-page site, live in about a week, for a flat $1,500. I set up the domain, the hosting, tap-to-call and texting, and your Google Maps listing. You own every login, the code and the words from day one.
       </p>
     </section>
   </main>
