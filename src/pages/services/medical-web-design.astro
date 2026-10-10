@@ -2,476 +2,150 @@
 import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
-import MedicalComparisonTable from '../../components/MedicalComparisonTable.astro';
+import Icon from '../../components/Icon.astro';
 import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+
+const faqs = [
+  {
+    q: 'Does our website need a BAA?',
+    a: "A BAA (Business Associate Agreement) is for companies that handle patient information. Because your website never collects any, the site itself doesn't touch patient data. The tools that do, like your patient portal or scheduling system, are where BAAs belong. Your compliance officer or attorney should confirm what applies to your practice.",
+  },
+  {
+    q: 'Can patients book through the system we already use?',
+    a: 'Yes, if it gives you a booking link. Zocdoc, NexHealth, athenahealth and most patient portals do. I put that link where patients look for it.',
+  },
+  {
+    q: 'Do you use accessibility widgets?',
+    a: "No. Those add-on widgets don't fix the page underneath. I build the site to work with screen readers and keyboards from the start, so there's nothing to bolt on.",
+  },
+  {
+    q: 'How long does it take, and what does it cost?',
+    a: 'Most practice sites are the Flagship plan: $5,000, paid once, in about 4 to 6 weeks. You own the code and the domain from day one.',
+  },
+];
 ---
 
-<RootLayout 
-  title="Medical Clinic Web Design & Practice Engineering — Fresno & Clovis, CA"
-  description="HIPAA-compliant, zero-PHI web design for medical clinics and doctors in Fresno, Clovis, and Madera. ADA Title III defense, front-desk triage, and EHR integration."
+<RootLayout
+  title="Websites for Medical Practices — Fresno & Clovis, CA"
+  description="Websites for clinics and private practices in Fresno, Clovis and Madera. They never collect patient data, work with your existing booking tools, and are easy for every patient to read."
 >
   <Nav client:load />
 
   <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
-    <!-- Hero / Eyebrow Header -->
-    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon font-semibold">
-      GBP Primary Category: Medical Clinic · Fresno &amp; Central Valley, CA
-    </div>
-    
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Medical Practice Web Design
+      Websites for medical practices
     </h1>
 
-    <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
-      Zero-PHI web design for medical clinics, private practices, and healthcare specialists in Fresno, Clovis, and Madera. 100% HIPAA compliance by architectural design, WCAG 2.1 AA accessibility, and perfect 100/100 performance scores.
+    <p class="mt-6 text-xl leading-relaxed text-ink/85">
+      I build websites for clinics and private practices in Fresno, Clovis and Madera. They load fast, they're easy to read for every patient, and they never collect patient health information.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a 
+      <a
         href={SMS_LINK}
-        class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+        class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
       >
-        <span>💬</span> Text me at {PHONE_DISPLAY}
+        <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
-      <a 
+      <a
         href={`tel:${PHONE_TEL}`}
         class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
       >
-        <span>📞</span> Call {PHONE_DISPLAY}
+        <Icon name="phone" /> Call {PHONE_DISPLAY}
       </a>
     </div>
 
-    <!-- Section 1: Priority 1 & GEO Unit 1 (GBP: "Medical clinic") -->
     <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Medical Clinic Web Design: Why HIPAA Compliance Overrules Traditional Lead Generation
+        No patient data on your website
       </h2>
-      
-      <p class="geo-unit mt-4 text-lg text-ink/80 leading-relaxed font-sans" data-geo-unit="true">
-        Medical clinic web design in Fresno and Clovis requires a fundamentally different architecture than standard business websites because federal HIPAA regulations strictly govern Protected Health Information (PHI). While trade contractors route unencrypted form submissions directly to cell phones, healthcare practices that transmit patient names, symptoms, or appointment inquiries over regular SMS or unencrypted personal Google Sheets violate 45 CFR § 164.312 and face civil monetary penalties exceeding $50,000 per incident. Our healthcare web engineering platform eliminates PHI exposure through architectural zero-collection design. When prospective patients request appointments online, staff receive a generic HIPAA-compliant SMS notification: "New appointment request received for [Clinic Name]. Log into secure portal to review." Personnel then access BAA-secured intake workflows via Jotform HIPAA, FormDr, Spruce Health, or EHR direct links. Operating across the Central Valley from Madera to Fresno, our high-speed Astro static infrastructure ensures complete regulatory immunity, zero browser data leakage, and total patient privacy protection.
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        A typical contact form sends whatever a patient types, symptoms included, to an ordinary email inbox. That's how health information ends up where it shouldn't be.
       </p>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="rounded-2xl border border-persimmon/20 bg-persimmon/5 p-6">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Regulatory Risk Alert</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">The Non-Compliant Web Trap</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Generic agency templates install standard contact forms, unencrypted web hooks, and marketing pixels that funnel patient symptoms into unsecured email inboxes and personal Google Sheets. Transmitting or storing unencrypted SMS messages with health identifiers breaches 45 CFR § 164.312, exposing clinical providers to severe OCR investigations and federal civil monetary penalties.
-          </p>
-        </div>
-        <div class="rounded-2xl border border-leaf/20 bg-leaf/5 p-6">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Zero-PHI Architecture</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">BAA-Secured Intake Workflows</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            We isolate your public web server from patient medical records. Our architecture utilizes signed Business Associate Agreements (BAA) with certified intake providers including Jotform HIPAA, FormDr, and Spruce Health, alongside direct links to certified EHR patient portals. Staff receive generic SMS notification alerts with zero clinical identifiers.
-          </p>
-        </div>
-      </div>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Your site won't have a form like that. When patients need to send details or book a visit, the button takes them to the tools you already use for that, like your patient portal or scheduling system.
+      </p>
+      <p class="mt-4 text-[15px] text-ink-soft leading-relaxed">
+        This keeps patient information off your website. It isn't legal advice; your compliance officer or attorney has the final word.
+      </p>
     </section>
 
-    <!-- Section 2: Priority 2 & GEO Unit 2 (GBP: "Doctor") -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
+    <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Doctor and Specialist Credentialing: Deflecting Front-Desk Phone Calls with Self-Serve Triage
+        Answers patients want before they call
       </h2>
-
-      <p class="geo-unit mt-4 text-lg text-ink/80 leading-relaxed font-sans" data-geo-unit="true">
-        Central Valley doctors and medical practices in Fresno and Madera spend dozens of staff hours each week handling repetitive phone inquiries regarding insurance participation, new patient onboarding, and scheduling availability. Our healthcare website engineering deflects over sixty percent of routine telephone friction by deploying a self-serve patient triage architecture directly on the clinic homepage. Prospective patients can instantly search an authoritative insurance directory covering Medicare Part B, Medi-Cal, Blue Shield of California, Anthem Blue Cross, Kaiser Permanente, and regional HMO networks like Santé Community Physicians before dialing the clinic. Clear status indicators confirm whether each physician is currently accepting new patients, while downloadable intake packets allow patients to complete mandatory registration documents in advance. For confirmed appointments, direct API linkages to certified scheduling engines including Zocdoc, NexHealth, Kareo, and AthenaHealth enable qualified patients to reserve clinical consultations without placing front-desk personnel on hold during peak morning hours.
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Most calls to the front desk ask the same few things. Do you take my insurance? Are you taking new patients? How do I book? I put those answers on your homepage, with your intake forms ready to download, so fewer people need to call just to ask.
       </p>
-
-      <!-- Front-Desk Triage UI Block: Deflecting the 3 Big Questions -->
-      <div class="mt-10 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
-          <div>
-            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Interactive Patient Triage</div>
-            <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Self-Serve Front-Desk Resolution</h3>
-          </div>
-          <span class="inline-flex items-center gap-1.5 rounded-full bg-leaf/10 px-3.5 py-1.5 font-mono text-xs text-leaf font-semibold">
-            ● Currently Accepting New Patients · Madera &amp; Fresno Clinics
-          </span>
-        </div>
-
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Question 1: Insurance -->
-          <div class="flex flex-col justify-between rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div>
-              <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 01</div>
-              <h4 class="font-display text-lg font-medium text-ink mt-1">Do you take my insurance?</h4>
-              <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                We accept major government and commercial health plans throughout Fresno, Clovis, and Madera:
-              </p>
-              <ul class="mt-3 space-y-1.5 text-xs font-mono text-ink/80">
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Medicare (Part B &amp; Supplemental)</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Medi-Cal &amp; CalViva Health</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Blue Shield of California (PPO &amp; HMO)</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Anthem Blue Cross</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Kaiser Permanente (with authorization)</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Santé Community Physicians</li>
-                <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Aetna, Cigna, UnitedHealthcare</li>
-              </ul>
-            </div>
-            <div class="mt-4 pt-3 border-t border-ink/10 text-[11px] text-ink/60">
-              Copays, deductibles, and secondary coverage verified prior to check-in.
-            </div>
-          </div>
-
-          <!-- Question 2: New Patients & Intake -->
-          <div class="flex flex-col justify-between rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div>
-              <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 02</div>
-              <h4 class="font-display text-lg font-medium text-ink mt-1">Are you accepting new patients?</h4>
-              <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                Yes. Both our Fresno and Madera clinical facilities welcome new patients. Self-referrals welcome for PPO plans; HMO/Medi-Cal patients require primary doctor referrals.
-              </p>
-              <div class="mt-4 rounded-xl bg-ink/5 p-3.5 text-xs text-ink/85">
-                <div class="font-semibold text-ink">Save 15–20 Minutes at Check-In:</div>
-                <p class="mt-1 text-ink/70">
-                  Download our registration packet to fill out medical history, privacy acknowledgments, and pharmacy preferences at home.
-                </p>
-              </div>
-            </div>
-            <div class="mt-4">
-              <a 
-                href="#intake-packet" 
-                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-xs font-medium text-cream shadow transition hover:bg-ink/80"
-              >
-                <span>📄</span> Download New-Patient Intake Packet (PDF)
-              </a>
-            </div>
-          </div>
-
-          <!-- Question 3: Scheduling Portals & Emergency Notice -->
-          <div class="flex flex-col justify-between rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div>
-              <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 03</div>
-              <h4 class="font-display text-lg font-medium text-ink mt-1">Can I book for next Tuesday?</h4>
-              <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                Reserve your consultation online without waiting on hold via certified clinical scheduling portals:
-              </p>
-              <div class="mt-3 grid grid-cols-2 gap-2 text-xs font-medium">
-                <a href="https://www.zocdoc.com" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-ink/15 bg-paper p-2 text-center text-ink hover:border-persimmon transition">Zocdoc</a>
-                <a href="https://www.nexhealth.com" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-ink/15 bg-paper p-2 text-center text-ink hover:border-persimmon transition">NexHealth</a>
-                <a href="https://www.kareo.com" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-ink/15 bg-paper p-2 text-center text-ink hover:border-persimmon transition">Kareo</a>
-                <a href="https://www.athenahealth.com" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-ink/15 bg-paper p-2 text-center text-ink hover:border-persimmon transition">AthenaHealth</a>
-              </div>
-            </div>
-            <div class="mt-4 rounded-xl border border-persimmon/30 bg-persimmon/5 p-3 text-[11px] text-ink/80 leading-snug">
-              <span class="font-bold text-persimmon uppercase tracking-wide">Emergency Notice:</span> If you are experiencing chest pain, acute distress, or an urgent medical emergency, call 911 or visit the nearest emergency room (such as Community Regional Medical Center in Fresno or Clovis Community Medical Center) immediately.
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Section 3: Contractor vs. Medical Clinic Comparative Matrix (R2) -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
+    <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Contractor vs. Medical Clinic Web Design: Operational Comparison Matrix
+        Easy to read for every patient
       </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Medical practices and home trade contractors operate under vastly different technical, legal, and operational constraints. While trade websites prioritize instantaneous lead routing directly to personal phones, healthcare platforms require strict adherence to federal privacy statutes, patient triage deflecting front-desk congestion, and zero-PHI data segregation.
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Large, high-contrast text for older patients. Pages that work with screen readers and without a mouse. I build this in from the start instead of adding a widget at the end.
       </p>
-
-      <div class="mt-8">
-        <MedicalComparisonTable />
-      </div>
     </section>
 
-    <!-- Section 4: Priority 3 Provider Trust, Credentials & Visual Proof -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
+    <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Doctor Credentials, Clinical Philosophy &amp; Facility Comfort
+        Kidney Specialist Inc.
       </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Patients selecting a doctor or specialist in the Central Valley demand verifiable board certifications, authentic hospital admitting privileges, and photographic proof of modern, sterile treatment environments. We present clinical expertise with dignity and precision.
-      </p>
-
-      <!-- Provider Bio & Credentials Card -->
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm items-center">
-        <div class="md:col-span-4 flex justify-center">
-          <img 
-            src="/images/dr-masood.jpg" 
-            alt="Dr. Sheikh Mohammad Masood, MD - Board-Certified Nephrologist in Fresno & Madera" 
-            class="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover shadow-md border border-ink/10" 
-            width="224" 
-            height="224" 
-            loading="lazy" 
-          />
-        </div>
-        <div class="md:col-span-8">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Featured Clinical Provider</div>
-          <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Dr. Sheikh Mohammad Masood, MD</h3>
-          <p class="font-mono text-xs text-ink/60 mt-0.5">Founding President &amp; Medical Director · Kidney Specialist Inc.</p>
-          
-          <div class="mt-4 space-y-3 text-sm text-ink/85 leading-relaxed">
-            <p>
-              <strong class="text-ink">Board Certifications:</strong> American Board of Internal Medicine (ABIM) Board Certified in Internal Medicine and Nephrology.
-            </p>
-            <p>
-              <strong class="text-ink">Hospital Admitting Privileges:</strong> Community Regional Medical Center (CRMC Fresno), Clovis Community Medical Center, Saint Agnes Medical Center, and Madera Community Hospital.
-            </p>
-            <p>
-              <strong class="text-ink">Clinical Philosophy:</strong> Providing compassionate, evidence-based preventive nephrology care with full bilingual (English + Español) patient education, empowering patients to manage chronic kidney disease before progression.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Facility & Clinic Interior Photography -->
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm items-center">
-        <div class="md:col-span-7">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Facility Comfort &amp; Hygiene</div>
-          <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Sanitized Clinical Consultation Suites</h3>
-          <p class="mt-3 text-sm md:text-base text-ink/80 leading-relaxed">
-            Professional clinic interior photography reassures prospective patients regarding clinical hygiene, accessibility, and comfort before their arrival. Our facility showcases emphasize ADA-compliant wheelchair access, private check-in counters protecting verbal privacy under HIPAA, and modernized diagnostic examination rooms throughout Fresno and Clovis.
-          </p>
-          <ul class="mt-4 space-y-2 text-xs font-mono text-ink/80">
-            <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Fully ADA Title III Wheelchair Accessible Consultation Rooms</li>
-            <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Acoustic Privacy Partitioning at Patient Reception</li>
-            <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Verified HEPA Air Filtration &amp; Sanitization Protocols</li>
-          </ul>
-        </div>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
         <div class="md:col-span-5">
-          <img 
-            src="/images/fresno-clinic.jpg" 
-            alt="Modern sanitized examination room and clinic interior photography in Fresno" 
-            class="w-full h-60 md:h-72 rounded-2xl object-cover shadow-md border border-ink/10" 
-            width="600" 
-            height="400" 
-            loading="lazy" 
+          <img
+            src="/images/kidney-preview.webp"
+            alt="The Kidney Specialist Inc. website"
+            class="rounded-2xl border border-ink/10 shadow-md w-full object-cover"
+            width="600"
+            height="380"
+            loading="lazy"
           />
         </div>
+        <figure class="md:col-span-7">
+          <blockquote class="font-display text-lg md:text-xl text-ink/90 leading-relaxed">
+            “My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!”
+          </blockquote>
+          <figcaption class="mt-4 text-sm text-ink/70">
+            <span class="font-medium text-ink">Dr. Sheikh Mohammad Masood, MD</span> · Founding President &amp; Medical Director, Kidney Specialist Inc.
+          </figcaption>
+        </figure>
       </div>
-
-      <!-- Compliant Before/After Gallery Framework -->
-      <div class="mt-8 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm">
-        <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Elective Practices Architecture</div>
-        <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">
-          Compliant Before-and-After Galleries: Cosmetic Dentistry, Medspas &amp; Dermatology
-        </h3>
-        <p class="mt-3 text-sm md:text-base text-ink/80 leading-relaxed">
-          For cash-pay and elective specialties such as cosmetic dentistry, medspas, and aesthetic dermatology, before-and-after visual outcomes represent the single highest converting asset. However, improper visual publication triggers severe HIPAA privacy fines and FTC enforcement actions. We implement a rigorous three-pillar clinical gallery framework:
-        </p>
-
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div class="font-mono text-xs text-leaf font-bold">Pillar 01</div>
-            <h4 class="font-display text-lg font-medium text-ink mt-1">Written HIPAA Media Release</h4>
-            <p class="mt-2 text-xs text-ink/75 leading-relaxed">
-              Every displayed image requires an executed, legally valid HIPAA digital media authorization form explicitly waiving confidentiality for online marketing, revocable at any time by the patient.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div class="font-mono text-xs text-leaf font-bold">Pillar 02</div>
-            <h4 class="font-display text-lg font-medium text-ink mt-1">Biometric De-Identification</h4>
-            <p class="mt-2 text-xs text-ink/75 leading-relaxed">
-              Strict anatomical cropping isolates treatment sites while stripping recognizable facial geometry, birthmarks, distinctive tattoos, and identifying jewelry to eliminate any biometric re-identification risk.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-ink/10 bg-cream/40 p-5">
-            <div class="font-mono text-xs text-leaf font-bold">Pillar 03</div>
-            <h4 class="font-display text-lg font-medium text-ink mt-1">Standardized 5500K Lighting</h4>
-            <p class="mt-2 text-xs text-ink/75 leading-relaxed">
-              Photographs adhere to uniform clinical studio lighting (calibrated 5500K daylight), identical 1:1 camera angles, and unretouched neutral backgrounds to satisfy FTC anti-deception guidelines.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ul class="mt-8 grid gap-4 sm:grid-cols-3 text-ink/80">
+        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">+40%</span> Referrals from other doctors, by Dr. Masood's count</li>
+        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">100/100</span> Google PageSpeed</li>
+        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">0</span> Patient details collected online</li>
+      </ul>
     </section>
 
-    <!-- Section 5: Priority 4 & GEO Unit 3 (GBP: "Website designer") -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
+    <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Website Designer Standards for ADA Title III Compliance and FTC-Compliant Practice Reputation
+        Questions practices ask
       </h2>
-
-      <p class="geo-unit mt-4 text-lg text-ink/80 leading-relaxed font-sans" data-geo-unit="true">
-        Hiring a specialized healthcare website designer in Clovis protects private medical practices from predatory California Unruh Civil Rights Act (Civil Code § 51) drive-by lawsuits and federal ADA Title III regulatory enforcement. Unlike generic commercial templates that rely on ineffective third-party accessibility overlay widgets, we hand-code clean semantic HTML5 with native keyboard navigation, visible focus states, ARIA landmarks, and 12.6:1 contrast ratios exceeding WCAG 2.1 AA benchmarks. Furthermore, our patient review acquisition framework strictly complies with both HIPAA privacy standards and FTC 16 CFR Part 465 regulations prohibiting deceptive endorsements or review gating. Because physicians are legally barred from acknowledging patient identity in public forums—even when addressing critical online feedback—our automated post-consultation workflows direct patients to neutral Google Maps and Healthgrades review channels without violating medical confidentiality. Central Valley healthcare providers receive bulletproof legal protection, complete code ownership, and sub-second Core Web Vitals performance across desktop and mobile devices.
-      </p>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Litigation Defense</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">California Unruh Act (§ 51) Defense</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Predatory plaintiff firms frequently target California healthcare providers with automated accessibility scrapers, filing drive-by lawsuits alleging ADA Title III violations under California Civil Code § 51. Courts have repeatedly ruled that third-party "accessibility overlay widgets" fail legal scrutiny. Hand-coded semantic HTML5 with native screen-reader navigation provides genuine, auditable compliance.
-          </p>
-        </div>
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Accessibility Engineering</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">WCAG 2.1 AA &amp; 12.6:1 Contrast</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Our medical designs exceed standard 4.5:1 ratios, delivering 12.6:1 high-contrast typography engineered specifically for elderly patients, visually impaired visitors, and patients recovering from clinical procedures. Complete screen-reader navigation and keyboard accessibility are verified on every template release.
-          </p>
-        </div>
-      </div>
+      <dl class="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+        {faqs.map((f) => (
+          <div class="py-6">
+            <dt class="font-display text-xl text-ink">{f.q}</dt>
+            <dd class="mt-2 max-w-3xl text-[17px] leading-relaxed text-ink/80">{f.a}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
 
-    <!-- Section 6: Priority 5 Compliant Reputation & Review Management -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
+    <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Compliant Reputation Management: HIPAA Safe Harbor &amp; FTC 16 CFR Part 465
+        Talk to the person who builds it
       </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Managing physician reputation online is a legal minefield. While ordinary businesses can offer discounts or publicly debate negative customer feedback, healthcare providers must navigate the intersection of FTC truth-in-advertising mandates and federal HIPAA privacy rules.
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        Text or call me. You'll talk to the person who writes your site, not an account manager.
       </p>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- FTC Rules -->
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">FTC Regulatory Mandate</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">FTC 16 CFR Part 465 Anti-Deception</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            The Federal Trade Commission strictly enforces 16 CFR Part 465, making review gating illegal. Practices cannot route satisfied patients to Google while diverting critical feedback to private internal forms. Furthermore, offering financial incentives, copay discounts, or complimentary skincare treatments in exchange for reviews violates federal consumer protection statutes.
-          </p>
-        </div>
-
-        <!-- HIPAA Safe Harbor Response -->
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Privacy Safe Harbor</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">Zero Public Acknowledgment of Patient Identity</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Under HIPAA, a doctor cannot publicly acknowledge, confirm, or deny that any reviewer is or was a patient of the practice—even if the reviewer posts defamatory claims. Any public statement stating "You were never seen in our clinic" or "You missed your appointment" constitutes an unlawful PHI disclosure subject to OCR enforcement.
-          </p>
-        </div>
-      </div>
-
-      <!-- Safe Harbor Template Box -->
-      <div class="mt-6 rounded-2xl border border-leaf/30 bg-leaf/5 p-6 md:p-8">
-        <div class="font-mono text-xs uppercase tracking-wider text-leaf font-bold">Approved Clinical Script</div>
-        <h3 class="font-display text-xl text-ink font-medium mt-1">HIPAA Safe Harbor Review Response Template</h3>
-        <blockquote class="mt-3 border-l-2 border-leaf pl-4 italic text-sm md:text-base text-ink/90 leading-relaxed font-sans">
-          "Due to federal patient privacy regulations (HIPAA), our clinic cannot publicly verify or discuss whether any individual is or has been a patient of our practice. We hold our clinical care and patient service to the highest standards. We encourage anyone with questions or concerns regarding our practice to contact our Practice Administrator directly at {PHONE_DISPLAY} so we may assist you privately."
-        </blockquote>
-      </div>
-    </section>
-
-    <!-- Section 7: Clinical Case Study: Kidney Specialist Inc. -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Clinical Case Study: Kidney Specialist Inc. (Fresno &amp; Madera)
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Kidney Specialist Inc. is a leading nephrology and hypertension practice led by Dr. Sheikh Mohammad Masood, MD, serving chronic kidney disease patients throughout Fresno and Madera counties.
-      </p>
-
-      <div class="mt-8 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-b border-ink/10 pb-8">
-          <div>
-            <div class="font-display text-4xl md:text-5xl font-semibold text-persimmon">100/100</div>
-            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">Google PageSpeed</div>
-          </div>
-          <div>
-            <div class="font-display text-4xl md:text-5xl font-semibold text-leaf">+40%</div>
-            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">Provider Referrals</div>
-          </div>
-          <div>
-            <div class="font-display text-4xl md:text-5xl font-semibold text-ink">0 Forms</div>
-            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">Zero PHI Online Risk</div>
-          </div>
-          <div>
-            <div class="font-display text-4xl md:text-5xl font-semibold text-ink">12.6:1</div>
-            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">WCAG Contrast Ratio</div>
-          </div>
-        </div>
-
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div class="md:col-span-5">
-            <img 
-              src="/images/kidney-preview.webp" 
-              alt="Kidney Specialist Inc. medical website preview" 
-              class="rounded-2xl border border-ink/10 shadow-md w-full object-cover" 
-              width="600" 
-              height="380" 
-              loading="lazy" 
-            />
-          </div>
-          <div class="md:col-span-7">
-            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Verified Clinical Testimonial</div>
-            <blockquote class="mt-2 text-base md:text-lg text-ink/90 italic leading-relaxed">
-              "My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!"
-            </blockquote>
-            <div class="mt-4 font-display font-medium text-ink text-base">
-              Dr. Sheikh Mohammad Masood, MD
-            </div>
-            <div class="font-mono text-xs text-ink/60">
-              Founding President &amp; Medical Director · Kidney Specialist Inc.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 8: Medical FAQs Accordion -->
-    <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Frequently Asked Questions About Healthcare Web Design
-      </h2>
-      <div class="mt-8 space-y-4">
-        <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-display text-lg font-medium text-ink">
-            <span>Do we need a Business Associate Agreement (BAA) for our clinic website?</span>
-            <span class="transition group-open:rotate-180">▾</span>
-          </summary>
-          <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            By implementing our architectural zero-PHI model, your public website never collects or stores patient electronic protected health information, eliminating the need for a web host BAA for your public marketing pages. When online intake or appointment scheduling is required, we connect your site directly to certified HIPAA-compliant third-party systems (such as Jotform HIPAA, FormDr, or your certified EHR system) where signed BAAs are strictly executed.
-          </p>
-        </details>
-
-        <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-display text-lg font-medium text-ink">
-            <span>Can prospective patients book directly into our AthenaHealth, Kareo, or Epic portal?</span>
-            <span class="transition group-open:rotate-180">▾</span>
-          </summary>
-          <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            Yes. We integrate direct scheduling links and patient portal bridges into your front-desk triage workflow. Whether your practice utilizes AthenaHealth, Kareo, NexHealth, or Zocdoc, patients can transition seamlessly into your certified scheduling portal without storing clinical health details on your marketing site.
-          </p>
-        </details>
-
-        <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-display text-lg font-medium text-ink">
-            <span>How does your code protect against California Unruh Act digital accessibility lawsuits?</span>
-            <span class="transition group-open:rotate-180">▾</span>
-          </summary>
-          <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            We hand-code pure semantic HTML5 with native keyboard navigation, visible focus indicators, screen-reader ARIA landmarks, and 12.6:1 contrast ratios exceeding WCAG 2.1 AA benchmarks. Rather than utilizing third-party overlay widgets—which California courts consistently reject—we build authentic compliance into the foundational document structure.
-          </p>
-        </details>
-
-        <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-display text-lg font-medium text-ink">
-            <span>What is the turnaround time and flat-rate investment for a medical clinic website?</span>
-            <span class="transition group-open:rotate-180">▾</span>
-          </summary>
-          <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            Our comprehensive Healthcare Web Engineering Flagship system is delivered for a flat fee of $5,000 with typical delivery in 2 to 3 weeks. This includes custom copy development, full HIPAA and ADA compliance architecture, front-desk triage integration, Google Maps entity grounding, and complete client ownership of code and domain from day one.
-          </p>
-        </details>
-      </div>
-    </section>
-
-    <!-- Section 9: Consultation & Action CTA -->
-    <section class="mt-16 border-t border-ink/10 pt-12 text-center">
-      <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Direct Engineering Support</div>
-      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420] mt-2">
-        Upgrade Your Practice Web Architecture
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
-        Speak directly with Adam to review your practice's HIPAA compliance, front-desk telephone triage, and Google Maps ranking. No junior account managers, no automated phone trees.
-      </p>
-
-      <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-        <a 
+      <div class="mt-6 flex flex-wrap gap-4 items-center">
+        <a
           href={SMS_LINK}
-          class="inline-flex items-center gap-2 rounded-full bg-persimmon px-8 py-4 font-medium text-cream shadow transition hover:bg-persimmon-deep text-base"
+          class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
         >
-          <span>💬</span> Text me at {PHONE_DISPLAY}
-        </a>
-        <a 
-          href={`tel:${PHONE_TEL}`}
-          class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base"
-        >
-          <span>📞</span> Call {PHONE_DISPLAY}
+          <Icon name="text" /> Text me at {PHONE_DISPLAY}
         </a>
       </div>
     </section>
