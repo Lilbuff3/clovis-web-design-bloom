@@ -31,9 +31,8 @@
   50% { transform: rotate(2.2deg); }
 }
 @keyframes pop {
-  0% { transform: scale(0); opacity: 0; }
-  70% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+  from { transform: scale(.92); opacity: 0; }
+  to { transform: none; opacity: 1; }
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(14px); }
@@ -156,6 +155,14 @@ body {
 .font-display.wonk,
 .wonk {
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+}
+/* Section heading role: one size for every section between the hero and the closing "Start with a text.",
+   so the hero and the close stay the only display-size moments. */
+.h-section {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 420;
+  line-height: 0.95;
+  text-wrap: balance;
 }
 
 /* Paper grain overlay */

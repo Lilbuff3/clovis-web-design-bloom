@@ -31,3 +31,17 @@ cloviswebdesign.com.
 | [DESIGN.md](DESIGN.md) | Colours, type, layout, components, do's and don'ts |
 | [TONE_AND_VOICE.md](TONE_AND_VOICE.md) | Voice, messaging pillars, the metaphor ban |
 | [CONTEXT.md](CONTEXT.md) | Agency and white-label vocabulary — use these terms |
+
+## House rules (from Adam)
+
+- Never show Adam's full name on the site, in copy or metadata. "Adam" at most.
+- Write in first person: "Text me", not "Text Adam".
+- Plain language. No metaphors or figures of speech in headlines and buttons.
+- No small labels above headings, no cards inside cards.
+- No legal promises, and no numbers or client facts that can't be backed up.
+
+## Working alongside other agents
+
+- Claude Code and Antigravity both work in this repo. Each works on its own branch; never
+  edit files another agent has uncommitted changes in.
+- Never commit or push to `main` directly. Open a PR and let Adam merge.

@@ -46,6 +46,7 @@ const {
     <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)}></script>
   </head>
   <body class="grain">
+    <a href="#main" class="fixed left-3 top-3 z-[60] -translate-y-[200%] rounded-full bg-ink px-5 py-3 font-medium text-cream transition-transform focus:translate-y-0">Skip to content</a>
     <slot />
     <MobileActionBar />
 
@@ -60,8 +61,10 @@ const {
           });
         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
+        // React islands reveal their own content (useGlobalReveal) once hydrated; stamping their
+        // server HTML before React hydrates it makes the attributes mismatch.
         document.querySelectorAll('.reveal, .line-mask, .clip-reveal, [data-reveal]').forEach((el) => {
-          observer.observe(el);
+          if (!el.closest('astro-island')) observer.observe(el);
         });
       }
     </script>

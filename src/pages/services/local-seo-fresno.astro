@@ -6,33 +6,29 @@ import Icon from '../../components/Icon.astro';
 import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 ---
 
-<RootLayout 
-  title="Fresno Local SEO & Google Maps 3-Pack Optimization"
-  description="Dominate local search in Fresno and Clovis. Schema.org entity grounding, localized keyword silos, and high-converting landing pages. Direct with Adam."
+<RootLayout
+  title="Fresno Local SEO — Show Up in Google Maps"
+  description="Local SEO for Fresno and Clovis businesses: show up when nearby customers search on Google and Google Maps. Fast sites that turn searches into calls."
 >
   <Nav client:load />
 
-  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
-    <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-leaf">
-      GBP Secondary Category: Internet Marketing Service · Fresno, CA
-    </div>
-    
+  <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Fresno Local SEO &amp; Google Maps 3-Pack
+      Local SEO in Fresno
     </h1>
 
     <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      Win the top 3 spots in Google Maps across Fresno, Clovis, Madera, and the broader Central Valley. As a specialized Fresno internet marketing service, we combine deep Schema.org entity architecture, localized service silos, and mobile sites that convert searchers into immediate phone calls.
+      When someone in Fresno, Clovis or Madera searches for what you do, Google shows three businesses on a map. I set up your website and your Google listing so you have the best shot at being one of them, and so the people who find you can call or text in one tap.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a 
+      <a
         href={SMS_LINK}
         class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
       >
-        <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
+        <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
-      <a 
+      <a
         href={`tel:${PHONE_TEL}`}
         class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
       >
@@ -42,33 +38,31 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 
     <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Knowledge Graph Entity Grounding for Central Valley Businesses
+        How Google decides who to show
       </h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Google's search algorithms no longer rely on simple keyword stuffing. Modern local SEO requires authoritative Schema.org JSON-LD linked directly to authoritative Wikidata entities such as Q949704 (Clovis), Q43048 (Fresno), and Q271014 (Central Valley).
+        Google has to be sure what your business does and where you work. Stuffing a page with keywords doesn't do that anymore.
       </p>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        By connecting your Google Business Profile categories directly with machine-readable structured data in your website's source code, your company establishes undeniable geographic relevance and ranking authority across the entire Fresno metropolitan area.
+        I give each service and each town its own page, add the behind-the-scenes details Google reads to understand a business, and make sure your website and your Google Business Profile say the same thing.
       </p>
     </section>
 
     <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Verified Central Valley Case Studies
+        Results in the Central Valley
       </h2>
       <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Trade Contractor SEO</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">Big Bros Dumpster Rentals</h3>
+          <h3 class="font-display text-xl text-ink font-medium">Big Bros Dumpster Rentals</h3>
           <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Captured #1 Google ranking in Clovis and Fresno commercial waste search through structured Wikidata entity grounding and sub-second mobile page loads.
+            Number one on Google for “dumpster rental Fresno,” ahead of the national brokers that used to take those calls.
           </p>
         </div>
         <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Clinical Authority</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">Kidney Specialist Inc.</h3>
+          <h3 class="font-display text-xl text-ink font-medium">Kidney Specialist Inc.</h3>
           <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Secured +40% patient referral growth and dominant regional search presence across Fresno and Madera with HIPAA-compliant, zero-PHI web design.
+            Referrals from other doctors are up more than 40%, by Dr. Masood's count, with a site that collects no patient data.
           </p>
         </div>
       </div>
@@ -76,33 +70,31 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
           <div class="aspect-[16/10] overflow-hidden">
-            <img 
-              src="/images/bigbros-truck.webp" 
-              alt="Big Bros commercial delivery truck operating across Fresno and Clovis" 
+            <img
+              src="/images/bigbros-truck.webp"
+              alt="A Big Bros roll-off dumpster in a Fresno driveway"
               class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
               loading="lazy"
               decoding="async"
             />
           </div>
           <figcaption class="p-4 border-t border-ink/10">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-leaf font-semibold">Local SEO Fleet Growth</div>
-            <p class="mt-1 text-sm text-ink/80">Google Maps 3-Pack rankings drove direct contractor calls, fueling fleet expansion across Fresno County.</p>
+            <p class="text-sm text-ink/80">More calls from Google meant Big Bros needed 4 more trucks.</p>
           </figcaption>
         </figure>
 
         <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
           <div class="aspect-[16/10] overflow-hidden">
-            <img 
-              src="/images/bigbros-family.webp" 
-              alt="William Maldonado Ramirez and the Big Bros family team in Fresno, California" 
+            <img
+              src="/images/bigbros-family.webp"
+              alt="William Maldonado Ramirez and the Big Bros team in Fresno, California"
               class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
               loading="lazy"
               decoding="async"
             />
           </div>
           <figcaption class="p-4 border-t border-ink/10">
-            <div class="font-mono text-[10px] uppercase tracking-wider text-persimmon font-semibold">Real Fresno Business Owners</div>
-            <p class="mt-1 text-sm text-ink/80">Direct client relationship with William Maldonado Ramirez — turning local searchers into loyal repeat customers.</p>
+            <p class="text-sm text-ink/80">William and the Big Bros team, a family business in Fresno.</p>
           </figcaption>
         </figure>
       </div>
@@ -110,10 +102,10 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 
     <section class="mt-12 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Conversion-Focused Architecture That Turns Clicks into Jobs
+        A fast site turns searches into calls
       </h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Ranking number one in Google Maps is useless if your site fails to capture the lead. Every page we build features instant tap-to-call, text-to-book integrations, and sub-second load times designed for trade contractors and service providers.
+        Being first on Google doesn't help if your site is slow or hard to use. Every site I build opens fast on a phone and has call and text buttons right where thumbs land.
       </p>
     </section>
   </main>

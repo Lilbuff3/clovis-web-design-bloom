@@ -204,8 +204,7 @@ export function FourSeconds() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">Why speed gets you calls</div>
-            <h2 className="font-display mt-5 text-[clamp(2.6rem,5.6vw,5rem)] font-[420] leading-[0.95]">
+            <h2 className="font-display text-[clamp(2.6rem,5.6vw,5rem)] font-[420] leading-[0.95]">
               <span className="line-mask"><span>Forty feet away.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Phone in one hand.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "240ms" }}>

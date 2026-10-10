@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -55,7 +55,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No forms to wade through, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
+            No forms to fill out, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -134,11 +134,18 @@ export function Contact() {
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
             <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
-              Send this to Adam →
+              Send this text →
             </a>
-            <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
-              or just call {PHONE_DISPLAY}
-            </a>
+            <p className="text-[15px] text-ink-soft">
+              or{" "}
+              <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+                call {PHONE_DISPLAY}
+              </a>{" "}
+              <span className="hidden sm:inline" aria-hidden="true">·{" "}</span>
+              <a href={mailLink(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+                email {EMAIL}
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -154,7 +161,7 @@ export function Footer() {
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">High-converting websites for the businesses that keep the Valley running.</p>
+            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Websites that bring in customers for Central Valley businesses.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
@@ -165,15 +172,16 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Visit</div>
-            <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#work" className="block hover:underline">Client Work</a>
             <a href="/#check" className="block hover:underline">Can AI Find You?</a>
-            <a href="/#season" className="block hover:underline">Process</a>
-            <a href="/#stand" className="block hover:underline">Pricing</a>
+            <a href="/#process" className="block hover:underline">Process</a>
+            <a href="/#pricing" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
+            <a href={mailLink("Website question")} className="block normal-case tracking-normal hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>
@@ -182,7 +190,7 @@ export function Footer() {
           Clovis<span className="not-italic">·</span>web
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
-          <span>© {new Date().getFullYear()} Adam Youssef · Clovis Web Design</span>
+          <span>© {new Date().getFullYear()} Clovis Web Design</span>
           <span>No tracking pixels on this page</span>
           <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>
