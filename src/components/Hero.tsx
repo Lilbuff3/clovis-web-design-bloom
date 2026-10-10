@@ -58,7 +58,7 @@ export function Hero() {
             I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me. Sites start at{" "}
             <strong className="font-semibold">$1,500</strong>.
           </p>
-          <div className="flex flex-col items-start gap-5">
+          <div className="flex flex-col items-start gap-4">
             <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
@@ -72,14 +72,16 @@ export function Hero() {
                 <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-widest text-cream/70">text me directly</span>
               </span>
             </a>
-            <a href="#harvest" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              See client results
-              <span className="transition group-hover:translate-y-1">↓</span>
-            </a>
-            <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              Can AI find you?
-              <span className="transition group-hover:translate-y-1">↓</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href="#work" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+                See client results
+                <span className="transition group-hover:translate-y-1">↓</span>
+              </a>
+              <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+                Can AI find you?
+                <span className="transition group-hover:translate-y-1">↓</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -87,7 +89,7 @@ export function Hero() {
           <div className="rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md">
             <ClovisClock />
           </div>
-          <a href="#harvest" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
+          <a href="#work" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
             Scroll
             <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
               <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />

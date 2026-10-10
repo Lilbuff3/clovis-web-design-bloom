@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -136,9 +136,16 @@ export function Contact() {
             <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
               Send this text →
             </a>
-            <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
-              or just call {PHONE_DISPLAY}
-            </a>
+            <p className="text-[15px] text-ink-soft">
+              or{" "}
+              <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+                call {PHONE_DISPLAY}
+              </a>{" "}
+              ·{" "}
+              <a href={mailLink(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+                email it instead
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -165,15 +172,16 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Visit</div>
-            <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#work" className="block hover:underline">Client Work</a>
             <a href="/#check" className="block hover:underline">Can AI Find You?</a>
-            <a href="/#season" className="block hover:underline">Process</a>
-            <a href="/#stand" className="block hover:underline">Pricing</a>
+            <a href="/#process" className="block hover:underline">Process</a>
+            <a href="/#pricing" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
+            <a href={mailLink("Website question")} className="block hover:underline">Email me</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

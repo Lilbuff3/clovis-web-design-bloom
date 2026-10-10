@@ -1,6 +1,10 @@
 export const PHONE_DISPLAY = "(559) 575-3014";
 export const PHONE_TEL = "+15595753014";
 export const SMS_LINK = `sms:${PHONE_TEL}`;
+// Text links do nothing on most computers, so every pre-written text also offers email.
+export const EMAIL = "adam@cloviswebdesign.com";
+export const mailLink = (subject: string, body = "") =>
+  `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`;
 
 export const cases = [
   {

@@ -28,10 +28,10 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 const links = [
   { href: "/services/medical-web-design/", label: "Medical Offices" },
   { href: "/services/contractor-websites/", label: "Contractors" },
-  { href: "/#harvest", label: "Client Work" },
-  { href: "/#season", label: "Process" },
-  { href: "/#stand", label: "Pricing" },
-  { href: "/#grower", label: "About" },
+  { href: "/#work", label: "Client Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
 

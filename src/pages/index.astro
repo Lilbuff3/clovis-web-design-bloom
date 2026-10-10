@@ -7,6 +7,9 @@ import { Season, Compare } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
 import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
+import { PHONE_TEL } from '../lib/data';
+
+const agencyText = `sms:${PHONE_TEL}?&body=${encodeURIComponent("Hi Adam! I'm with an agency and have a Figma project for you.")}`;
 
 const audiences = [
   {
@@ -56,6 +59,10 @@ const audiences = [
             </a>
           ))}
         </div>
+        <p class="reveal mt-6 text-[17px] leading-relaxed text-ink/80">
+          Agency or designer? I also build from your Figma files, under your name.
+          <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
+        </p>
       </div>
     </section>
     <section id="check" class="px-5 pb-14 md:px-8 md:pb-20">
