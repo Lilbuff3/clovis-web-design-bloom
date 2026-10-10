@@ -10,3 +10,7 @@
 **Learning:** Discovered that custom selectable 'chips' (used in multi-step or quick-select forms like Contact and LeadLeakAudit) lacked `aria-pressed` states, semantic `role="group"` wrappers with `aria-labelledby`, and clear `focus-visible` outlines, making them difficult for screen reader and keyboard users to navigate and understand their selected state. Inputs also relied solely on nesting for labels rather than explicit `htmlFor` / `id` bindings.
 **Action:** Always add `aria-pressed` to toggleable buttons, semantic `role="group"` containers, and strict `htmlFor`/`id` bindings on all form inputs. Focus rings come from the global `:focus-visible` style (see 2026-10-09); chips keep their own.
 
+
+## 2026-10-10 - Mobile Menu ARIA Controls
+**Learning:** The mobile hamburger menu button used `aria-expanded` but lacked an `aria-controls` attribute linking it to the menu container, which reduces context for screen reader users.
+**Action:** Always pair `aria-expanded` on toggle buttons with an `aria-controls` attribute pointing to the ID of the expanded container to maintain semantic relationships.
