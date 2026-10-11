@@ -164,26 +164,17 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                   </svg>
                   {named ? "Text Adam if your site's ready for them" : "Text Adam why AI picks them"}
                 </a>
-                <a
-                  href={`mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent(
-                    `Google AI check: ${sent.name || sent.trade}`
-                  )}&body=${encodeURIComponent(text)}`}
-                  className="flex items-center justify-center gap-2 rounded-full border border-ink/20 bg-cream/90 py-3.5 text-[15px] font-medium text-ink transition hover:border-ink/50 hover:bg-cream"
-                >
-                  Or email Adam this question →
-                </a>
-                <div className="flex flex-col items-center gap-1 pt-1 font-mono text-[11px] uppercase tracking-wider text-ink-soft">
-                  <div className="flex items-center gap-2">
-                    <a href={`tel:${PHONE_TEL}`} className="hover:text-ink hover:underline">
-                      Call {PHONE_DISPLAY}
-                    </a>
-                    <span>·</span>
-                    <a href={sms(text)} className="hover:text-ink hover:underline">
-                      Text {PHONE_DISPLAY}
-                    </a>
-                  </div>
-                  <a href={`mailto:${EMAIL_CONTACT}`} className="lowercase tracking-normal hover:text-ink hover:underline">
-                    {EMAIL_CONTACT}
+                <p className="font-mono text-[11px] uppercase tracking-wider text-ink-soft">
+                  Opens a text to Adam's cell, already written · {PHONE_DISPLAY}
+                </p>
+                <div>
+                  <a
+                    href={`mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent(
+                      `Google AI check: ${sent.name || sent.trade}`
+                    )}&body=${encodeURIComponent(text)}`}
+                    className="text-[13px] text-ink-soft underline decoration-ink/30 underline-offset-4 transition hover:text-ink"
+                  >
+                    Or email Adam this question instead ({EMAIL_CONTACT}) →
                   </a>
                 </div>
               </div>

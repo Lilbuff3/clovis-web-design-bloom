@@ -6,7 +6,7 @@ export function Season() {
   useGlobalReveal();
   return (
     <section id="season" className="relative px-5 py-14 md:px-8 md:py-20">
-      <span id="process" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
+      <span id="process" className="absolute top-0 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <h2 className="font-display text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">

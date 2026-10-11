@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { EMAIL_CONTACT, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
@@ -137,7 +137,10 @@ export function Contact() {
                     aria-label="Send via email"
                     title="Send via email"
                   >
-                    ✉
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
                   </a>
                   <a
                     href={smsHref}
@@ -191,7 +194,7 @@ const footerTitle = "font-display wonk text-lg normal-case italic tracking-norma
 
 export function Footer() {
   return (
-    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon/85 px-5 pb-28 pt-[120px] text-ink sm:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
+    <footer className="relative z-0 -mt-[40px] overflow-hidden bg-gradient-to-b from-citrus to-persimmon/85 px-5 pb-28 pt-[120px] text-ink md:pb-8 md:-mt-[72px] md:px-8 md:pt-[160px]">
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">

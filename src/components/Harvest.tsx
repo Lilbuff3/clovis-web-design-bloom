@@ -208,7 +208,7 @@ export function ClientWork() {
   useGlobalReveal();
   return (
     <section id="harvest" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
-      <span id="work" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
+      <span id="work" className="absolute top-0 pointer-events-none" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>

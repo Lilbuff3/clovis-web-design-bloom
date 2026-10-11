@@ -138,12 +138,6 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  padding-bottom: 5rem;
-}
-@media (min-width: 768px) {
-  body {
-    padding-bottom: 0;
-  }
 }
 ::selection {
   background: var(--color-citrus);
