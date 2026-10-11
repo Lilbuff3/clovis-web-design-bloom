@@ -128,12 +128,22 @@ html {
   }
 }
 
+html {
+  scroll-padding-top: 6rem;
+}
+
 main { transition: background-color .9s cubic-bezier(.4, 0, .2, 1); }
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  padding-bottom: 5rem;
+}
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0;
+  }
 }
 ::selection {
   background: var(--color-citrus);
@@ -237,6 +247,3 @@ body {
   .clip-reveal { clip-path: none; }
 }
 
-@media (pointer: fine) {
-  .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
-}

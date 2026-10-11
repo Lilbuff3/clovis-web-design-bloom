@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { useEffect, useMemo, useState } from "react";
+import { EMAIL_CONTACT, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -37,6 +37,10 @@ export function Contact() {
   }, [name, trade, need, when]);
 
   const smsHref = `sms:${PHONE_TEL}?body=${encodeURIComponent(message)}`;
+  const emailHref = useMemo(() => {
+    const subject = encodeURIComponent(`Website inquiry: ${name.trim() || trade.trim() || "New Project"}`);
+    return `mailto:${EMAIL_CONTACT}?subject=${subject}&body=${encodeURIComponent(message)}`;
+  }, [name, trade, message]);
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-14 md:rounded-b-[72px] md:px-8 md:py-20">
@@ -124,8 +128,23 @@ export function Contact() {
                   <div className="self-end font-mono text-[11px] text-ink-soft">Preview · ready to send</div>
                 </div>
                 <div className="flex items-center gap-2 border-t border-ink/10 px-3 py-3">
-                  <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink-soft">iMessage</div>
-                  <a href={smsHref} className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110" aria-label="Send text">
+                  <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink-soft">
+                    Text or Email
+                  </div>
+                  <a
+                    href={emailHref}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110"
+                    aria-label="Send via email"
+                    title="Send via email"
+                  >
+                    ✉
+                  </a>
+                  <a
+                    href={smsHref}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-cream transition hover:scale-110"
+                    aria-label="Send text"
+                    title="Send text"
+                  >
                     ↑
                   </a>
                 </div>
@@ -133,12 +152,34 @@ export function Contact() {
             </div>
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
-              Send this to Adam →
-            </a>
-            <a href={`tel:${PHONE_TEL}`} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
-              or just call {PHONE_DISPLAY}
-            </a>
+            <div className="flex w-full max-w-[360px] flex-col gap-3">
+              <a
+                href={smsHref}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg font-medium text-cream transition-colors hover:bg-persimmon-deep"
+              >
+                Send this to Adam via text →
+              </a>
+              <a
+                href={emailHref}
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-ink/20 bg-cream/90 py-3.5 text-[15px] font-medium text-ink transition hover:border-ink/50 hover:bg-cream"
+              >
+                Or email this to Adam →
+              </a>
+              <div className="flex flex-col items-center gap-1 pt-1 font-mono text-[11px] uppercase tracking-wider text-ink-soft">
+                <div className="flex items-center gap-2">
+                  <a href={`tel:${PHONE_TEL}`} className="hover:text-ink hover:underline">
+                    Call {PHONE_DISPLAY}
+                  </a>
+                  <span>·</span>
+                  <a href={smsHref} className="hover:text-ink hover:underline">
+                    Text {PHONE_DISPLAY}
+                  </a>
+                </div>
+                <a href={`mailto:${EMAIL_CONTACT}`} className="lowercase tracking-normal hover:text-ink hover:underline">
+                  {EMAIL_CONTACT}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,15 +206,16 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Visit</div>
-            <a href="/#harvest" className="block hover:underline">Client Work</a>
+            <a href="/#work" className="block hover:underline">Client Work</a>
             <a href="/#check" className="block hover:underline">Can AI Find You?</a>
-            <a href="/#season" className="block hover:underline">Process</a>
-            <a href="/#stand" className="block hover:underline">Pricing</a>
+            <a href="/#process" className="block hover:underline">Process</a>
+            <a href="/#pricing" className="block hover:underline">Pricing</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
+            <a href={`mailto:${EMAIL_CONTACT}`} className="block hover:underline">Email Adam</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

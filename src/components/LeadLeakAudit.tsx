@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL_CONTACT, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 
 type Link = { title: string; uri: string };
 type Answer = { question: string; answer: string; places: Link[]; sources: Link[]; named: string | null; lookedFor: boolean };
@@ -154,18 +154,44 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             </ol>
 
             <div className="mx-auto mt-10 max-w-lg" style={pop(350 + shown.length * 150)}>
-              <a
-                href={sms(text)}
-                className="flex items-center justify-center gap-2 rounded-full bg-persimmon-deep px-6 py-5 font-display text-xl font-medium text-cream shadow-md transition hover:scale-[1.02] hover:bg-ink"
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                  <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
-                </svg>
-                {named ? "Ask Adam if your site's ready for them" : "Ask Adam why AI picks them"}
-              </a>
-              <p className="mt-3 text-sm text-ink-soft">Opens a text to Adam's cell, already written · {PHONE_DISPLAY}</p>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={sms(text)}
+                  className="flex items-center justify-center gap-2 rounded-full bg-persimmon-deep px-6 py-4 font-display text-lg font-medium text-cream shadow-md transition hover:bg-ink"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                    <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
+                  </svg>
+                  {named ? "Text Adam if your site's ready for them" : "Text Adam why AI picks them"}
+                </a>
+                <a
+                  href={`mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent(
+                    `Google AI check: ${sent.name || sent.trade}`
+                  )}&body=${encodeURIComponent(text)}`}
+                  className="flex items-center justify-center gap-2 rounded-full border border-ink/20 bg-cream/90 py-3.5 text-[15px] font-medium text-ink transition hover:border-ink/50 hover:bg-cream"
+                >
+                  Or email Adam this question →
+                </a>
+                <div className="flex flex-col items-center gap-1 pt-1 font-mono text-[11px] uppercase tracking-wider text-ink-soft">
+                  <div className="flex items-center gap-2">
+                    <a href={`tel:${PHONE_TEL}`} className="hover:text-ink hover:underline">
+                      Call {PHONE_DISPLAY}
+                    </a>
+                    <span>·</span>
+                    <a href={sms(text)} className="hover:text-ink hover:underline">
+                      Text {PHONE_DISPLAY}
+                    </a>
+                  </div>
+                  <a href={`mailto:${EMAIL_CONTACT}`} className="lowercase tracking-normal hover:text-ink hover:underline">
+                    {EMAIL_CONTACT}
+                  </a>
+                </div>
+              </div>
               {!named && (
-                <a href={sms(recheck)} className="mt-2 inline-block text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon">
+                <a
+                  href={sms(recheck)}
+                  className="mt-3 inline-block text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon"
+                >
                   Not ready? Ask me to re-check next month
                 </a>
               )}

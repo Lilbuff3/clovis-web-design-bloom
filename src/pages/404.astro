@@ -1,0 +1,44 @@
+---
+import RootLayout from '../layouts/RootLayout.astro';
+import { Nav } from '../components/Chrome';
+import { Footer } from '../components/Contact';
+import { PHONE_DISPLAY, SMS_LINK } from '../lib/data';
+---
+
+<RootLayout 
+  title="Page Not Found — Clovis Web Design"
+  description="The page you're looking for doesn't exist or has moved. Return to the homepage or text Adam directly."
+>
+  <Nav client:load />
+
+  <main id="main" class="relative z-10 mx-auto flex min-h-[70vh] max-w-3xl flex-col items-center justify-center px-5 pt-36 pb-24 text-center md:px-8">
+    <div class="mb-3 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon font-semibold">
+      404 · Page Not Found
+    </div>
+    
+    <h1 class="font-display text-4xl text-ink md:text-6xl font-[420] leading-tight">
+      This page isn't here.
+    </h1>
+
+    <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+      The link you followed doesn't exist or was moved. Head back to the homepage, or reach out to Adam directly.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a 
+        href="/"
+        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
+      >
+        Back to Homepage <span aria-hidden="true">→</span>
+      </a>
+      <a 
+        href={SMS_LINK}
+        class="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-cream/90 px-6 py-3.5 font-medium text-ink shadow-sm transition hover:bg-cream"
+      >
+        Text Adam at {PHONE_DISPLAY}
+      </a>
+    </div>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

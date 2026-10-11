@@ -3,19 +3,20 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import MedicalComparisonTable from '../../components/MedicalComparisonTable.astro';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+import Icon from '../../components/Icon.astro';
+import { cases, PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
 ---
 
 <RootLayout 
-  title="Medical Clinic Web Design & Practice Engineering — Fresno & Clovis, CA"
-  description="HIPAA-compliant, zero-PHI web design for medical clinics and doctors in Fresno, Clovis, and Madera. ADA Title III defense, front-desk triage, and EHR integration."
+  title="Medical Practice Web Design — Fresno, Clovis & Madera, CA"
+  description="Zero-PHI web design for medical clinics and doctors in Fresno, Clovis, and Madera. Built for patient trust, front-desk triage, WCAG 2.1 AA accessibility, and fast load times."
 >
   <Nav client:load />
 
-  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
-    <!-- Hero / Eyebrow Header -->
+  <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <!-- Eyebrow Header -->
     <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon font-semibold">
-      GBP Primary Category: Medical Clinic · Fresno &amp; Central Valley, CA
+      Healthcare Web Design · Fresno, Clovis &amp; Central Valley, CA
     </div>
     
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
@@ -23,7 +24,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
     </h1>
 
     <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
-      Zero-PHI web design for medical clinics, private practices, and healthcare specialists in Fresno, Clovis, and Madera. 100% HIPAA compliance by architectural design, WCAG 2.1 AA accessibility, and perfect 100/100 performance scores.
+      Zero-PHI web design for medical clinics, private practices, and healthcare specialists in Fresno, Clovis, and Madera. Built for patient trust, front-desk triage, WCAG 2.1 AA accessibility, and sub-second load times.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
@@ -31,13 +32,13 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
         href={SMS_LINK}
         class="inline-flex items-center gap-2 rounded-full bg-persimmon px-6 py-3.5 font-medium text-cream shadow transition hover:bg-persimmon-deep"
       >
-        <span>💬</span> Text Adam at {PHONE_DISPLAY}
+        <Icon name="text" class="h-4 w-4" /> Text Adam at {PHONE_DISPLAY}
       </a>
       <a 
         href={`tel:${PHONE_TEL}`}
         class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
       >
-        <span>📞</span> Call {PHONE_DISPLAY}
+        <Icon name="phone" class="h-4 w-4" /> Call {PHONE_DISPLAY}
       </a>
     </div>
 
@@ -48,7 +49,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
       </h2>
       
       <p class="geo-unit mt-4 text-lg text-ink/80 leading-relaxed font-sans" data-geo-unit="true">
-        Medical clinic web design in Fresno and Clovis requires a fundamentally different architecture than standard business websites because federal HIPAA regulations strictly govern Protected Health Information (PHI). While trade contractors route unencrypted form submissions directly to cell phones, healthcare practices that transmit patient names, symptoms, or appointment inquiries over regular SMS or unencrypted personal Google Sheets violate 45 CFR § 164.312 and face civil monetary penalties exceeding $50,000 per incident. Our healthcare web engineering platform eliminates PHI exposure through architectural zero-collection design. When prospective patients request appointments online, staff receive a generic HIPAA-compliant SMS notification: "New appointment request received for [Clinic Name]. Log into secure portal to review." Personnel then access BAA-secured intake workflows via Jotform HIPAA, FormDr, Spruce Health, or EHR direct links. Operating across the Central Valley from Madera to Fresno, our high-speed Astro static infrastructure ensures complete regulatory immunity, zero browser data leakage, and total patient privacy protection.
+        Medical clinic web design in Fresno and Clovis requires a fundamentally different architecture than standard business websites because federal HIPAA regulations strictly govern Protected Health Information (PHI). While trade contractors route unencrypted form submissions directly to cell phones, healthcare practices that transmit patient names, symptoms, or appointment inquiries over regular SMS or unencrypted personal Google Sheets violate 45 CFR § 164.312 and face civil monetary penalties exceeding $50,000 per incident. Our healthcare web engineering platform eliminates PHI exposure through architectural zero-collection design. When prospective patients request appointments online, staff receive a generic HIPAA-compliant SMS notification: "New appointment request received for [Clinic Name]. Log into secure portal to review." Personnel then access BAA-secured intake workflows via Jotform HIPAA, FormDr, Spruce Health, or EHR direct links. Operating across the Central Valley from Madera to Fresno, our high-speed Astro static infrastructure isolates public marketing pages from patient medical records, preventing public web servers from handling sensitive clinical intake.
       </p>
 
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -83,11 +84,11 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
       <div class="mt-10 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm">
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
           <div>
-            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Interactive Patient Triage</div>
-            <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Self-Serve Front-Desk Resolution</h3>
+            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Case Study Architecture · Kidney Specialist Inc.</div>
+            <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Self-Serve Front-Desk Telephone Triage</h3>
           </div>
           <span class="inline-flex items-center gap-1.5 rounded-full bg-leaf/10 px-3.5 py-1.5 font-mono text-xs text-leaf font-semibold">
-            ● Currently Accepting New Patients · Madera &amp; Fresno Clinics
+            ● Deflecting 60%+ of Routine Phone Calls
           </span>
         </div>
 
@@ -98,7 +99,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
               <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 01</div>
               <h4 class="font-display text-lg font-medium text-ink mt-1">Do you take my insurance?</h4>
               <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                We accept major government and commercial health plans throughout Fresno, Clovis, and Madera:
+                Clear insurance directories deflect dozens of daily phone inquiries. In Dr. Masood's practice, we organized major Central Valley plans:
               </p>
               <ul class="mt-3 space-y-1.5 text-xs font-mono text-ink/80">
                 <li class="flex items-center gap-1.5"><span class="text-leaf">✓</span> Medicare (Part B &amp; Supplemental)</li>
@@ -121,12 +122,12 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
               <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 02</div>
               <h4 class="font-display text-lg font-medium text-ink mt-1">Are you accepting new patients?</h4>
               <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                Yes. Both our Fresno and Madera clinical facilities welcome new patients. Self-referrals welcome for PPO plans; HMO/Medi-Cal patients require primary doctor referrals.
+                Clear new-patient status and referral guidelines answer patient questions upfront. For Kidney Specialist Inc., the site clarifies insurance requirements and provides instant registration packet downloads:
               </p>
               <div class="mt-4 rounded-xl bg-ink/5 p-3.5 text-xs text-ink/85">
                 <div class="font-semibold text-ink">Save 15–20 Minutes at Check-In:</div>
                 <p class="mt-1 text-ink/70">
-                  Download our registration packet to fill out medical history, privacy acknowledgments, and pharmacy preferences at home.
+                  Download the practice registration packet to fill out medical history, privacy acknowledgments, and pharmacy preferences at home.
                 </p>
               </div>
             </div>
@@ -146,7 +147,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
               <div class="font-mono text-xs text-ink/50 uppercase tracking-wider">Question 03</div>
               <h4 class="font-display text-lg font-medium text-ink mt-1">Can I book for next Tuesday?</h4>
               <p class="mt-2 text-sm text-ink/75 leading-relaxed">
-                Reserve your consultation online without waiting on hold via certified clinical scheduling portals:
+                Direct API linkages to certified clinical scheduling engines allow patients to reserve appointments online:
               </p>
               <div class="mt-3 grid grid-cols-2 gap-2 text-xs font-medium">
                 <a href="https://www.zocdoc.com" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-ink/15 bg-paper p-2 text-center text-ink hover:border-persimmon transition">Zocdoc</a>
@@ -199,11 +200,14 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
           />
         </div>
         <div class="md:col-span-8">
-          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Featured Clinical Provider</div>
+          <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Featured Case Study Provider · Kidney Specialist Inc.</div>
           <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Dr. Sheikh Mohammad Masood, MD</h3>
-          <p class="font-mono text-xs text-ink/60 mt-0.5">Founding President &amp; Medical Director · Kidney Specialist Inc.</p>
+          <p class="font-mono text-xs text-ink/60 mt-0.5">Client &amp; Medical Director · Kidney Specialist Inc. (Fresno &amp; Madera)</p>
           
           <div class="mt-4 space-y-3 text-sm text-ink/85 leading-relaxed">
+            <p>
+              When I built the web presence for Kidney Specialist Inc., presenting Dr. Masood's verified credentials and clinical philosophy was essential for establishing trust with referring physicians and prospective patients across the Central Valley.
+            </p>
             <p>
               <strong class="text-ink">Board Certifications:</strong> American Board of Internal Medicine (ABIM) Board Certified in Internal Medicine and Nephrology.
             </p>
@@ -220,15 +224,15 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
       <!-- Facility & Clinic Interior Photography -->
       <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8 shadow-sm items-center">
         <div class="md:col-span-7">
-          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Facility Comfort &amp; Hygiene</div>
-          <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Sanitized Clinical Consultation Suites</h3>
+          <div class="font-mono text-xs uppercase tracking-wider text-persimmon font-semibold">Facility Comfort &amp; Accessibility</div>
+          <h3 class="font-display text-2xl md:text-3xl text-ink font-[420] mt-1">Highlighting Clean, Modern Healthcare Environments</h3>
           <p class="mt-3 text-sm md:text-base text-ink/80 leading-relaxed">
-            Professional clinic interior photography reassures prospective patients regarding clinical hygiene, accessibility, and comfort before their arrival. Our facility showcases emphasize ADA-compliant wheelchair access, private check-in counters protecting verbal privacy under HIPAA, and modernized diagnostic examination rooms throughout Fresno and Clovis.
+            Professional clinic interior photography reassures prospective patients regarding clinical hygiene, accessibility, and comfort before their arrival. In medical web design projects, we showcase ADA-compliant access, reception privacy, and sanitized exam suites across Fresno, Clovis, and Madera.
           </p>
           <ul class="mt-4 space-y-2 text-xs font-mono text-ink/80">
             <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Fully ADA Title III Wheelchair Accessible Consultation Rooms</li>
             <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Acoustic Privacy Partitioning at Patient Reception</li>
-            <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Verified HEPA Air Filtration &amp; Sanitization Protocols</li>
+            <li class="flex items-center gap-2"><span class="text-leaf">✓</span> Clean Facility Standards &amp; Sanitization Protocols</li>
           </ul>
         </div>
         <div class="md:col-span-5">
@@ -286,7 +290,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
       </h2>
 
       <p class="geo-unit mt-4 text-lg text-ink/80 leading-relaxed font-sans" data-geo-unit="true">
-        Hiring a specialized healthcare website designer in Clovis protects private medical practices from predatory California Unruh Civil Rights Act (Civil Code § 51) drive-by lawsuits and federal ADA Title III regulatory enforcement. Unlike generic commercial templates that rely on ineffective third-party accessibility overlay widgets, we hand-code clean semantic HTML5 with native keyboard navigation, visible focus states, ARIA landmarks, and 12.6:1 contrast ratios exceeding WCAG 2.1 AA benchmarks. Furthermore, our patient review acquisition framework strictly complies with both HIPAA privacy standards and FTC 16 CFR Part 465 regulations prohibiting deceptive endorsements or review gating. Because physicians are legally barred from acknowledging patient identity in public forums—even when addressing critical online feedback—our automated post-consultation workflows direct patients to neutral Google Maps and Healthgrades review channels without violating medical confidentiality. Central Valley healthcare providers receive bulletproof legal protection, complete code ownership, and sub-second Core Web Vitals performance across desktop and mobile devices.
+        Hiring a specialized healthcare website designer in Clovis protects private medical practices from predatory California Unruh Civil Rights Act (Civil Code § 51) drive-by lawsuits and federal ADA Title III regulatory enforcement. Unlike generic commercial templates that rely on ineffective third-party accessibility overlay widgets, we hand-code clean semantic HTML5 with native keyboard navigation, visible focus states, ARIA landmarks, and high contrast ratios exceeding WCAG 2.1 AA benchmarks. Furthermore, our patient review acquisition framework strictly complies with both HIPAA privacy standards and FTC 16 CFR Part 465 regulations prohibiting deceptive endorsements or review gating. Because physicians are legally barred from acknowledging patient identity in public forums—even when addressing critical online feedback—our automated post-consultation workflows direct patients to neutral Google Maps and Healthgrades review channels without violating medical confidentiality. Central Valley healthcare providers receive auditable code compliance, complete code ownership, and sub-second Core Web Vitals performance across desktop and mobile devices.
       </p>
 
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -299,9 +303,9 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
         </div>
         <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
           <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Accessibility Engineering</div>
-          <h3 class="font-display text-xl text-ink font-medium mt-1">WCAG 2.1 AA &amp; 12.6:1 Contrast</h3>
+          <h3 class="font-display text-xl text-ink font-medium mt-1">WCAG 2.1 AA &amp; High Contrast</h3>
           <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Our medical designs exceed standard 4.5:1 ratios, delivering 12.6:1 high-contrast typography engineered specifically for elderly patients, visually impaired visitors, and patients recovering from clinical procedures. Complete screen-reader navigation and keyboard accessibility are verified on every template release.
+            Our medical designs deliver high-contrast typography exceeding standard WCAG 2.1 AA benchmarks, engineered specifically for elderly patients, visually impaired visitors, and patients recovering from clinical procedures. Complete screen-reader navigation and keyboard accessibility are verified on every release.
           </p>
         </div>
       </div>
@@ -370,8 +374,8 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
             <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">Zero PHI Online Risk</div>
           </div>
           <div>
-            <div class="font-display text-4xl md:text-5xl font-semibold text-ink">12.6:1</div>
-            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">WCAG Contrast Ratio</div>
+            <div class="font-display text-4xl md:text-5xl font-semibold text-ink">High Contrast</div>
+            <div class="font-mono text-xs text-ink/60 uppercase tracking-wider mt-1">WCAG 2.1 AA Standard</div>
           </div>
         </div>
 
@@ -387,15 +391,15 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
             />
           </div>
           <div class="md:col-span-7">
-            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Verified Clinical Testimonial</div>
+            <div class="font-mono text-xs uppercase tracking-wider text-leaf font-semibold">Client Feedback · Kidney Specialist Inc.</div>
             <blockquote class="mt-2 text-base md:text-lg text-ink/90 italic leading-relaxed">
-              "My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!"
+              "{cases[0].quote.text}"
             </blockquote>
             <div class="mt-4 font-display font-medium text-ink text-base">
-              Dr. Sheikh Mohammad Masood, MD
+              {cases[0].quote.name}
             </div>
             <div class="font-mono text-xs text-ink/60">
-              Founding President &amp; Medical Director · Kidney Specialist Inc.
+              {cases[0].quote.role} · Kidney Specialist Inc.
             </div>
           </div>
         </div>
@@ -414,7 +418,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
             <span class="transition group-open:rotate-180">▾</span>
           </summary>
           <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            By implementing our architectural zero-PHI model, your public website never collects or stores patient electronic protected health information, eliminating the need for a web host BAA for your public marketing pages. When online intake or appointment scheduling is required, we connect your site directly to certified HIPAA-compliant third-party systems (such as Jotform HIPAA, FormDr, or your certified EHR system) where signed BAAs are strictly executed.
+            By keeping your public website completely free of patient intake forms or health identifiers, marketing pages remain isolated from clinical data. When patients schedule appointments or submit intake forms, they transition directly to certified, BAA-secured HIPAA platforms (such as Jotform HIPAA, FormDr, or your certified EHR system).
           </p>
         </details>
 
@@ -434,7 +438,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
             <span class="transition group-open:rotate-180">▾</span>
           </summary>
           <p class="mt-3 text-sm text-ink/80 leading-relaxed">
-            We hand-code pure semantic HTML5 with native keyboard navigation, visible focus indicators, screen-reader ARIA landmarks, and 12.6:1 contrast ratios exceeding WCAG 2.1 AA benchmarks. Rather than utilizing third-party overlay widgets—which California courts consistently reject—we build authentic compliance into the foundational document structure.
+            We hand-code pure semantic HTML5 with native keyboard navigation, visible focus indicators, screen-reader ARIA landmarks, and high-contrast typography exceeding WCAG 2.1 AA benchmarks. Rather than utilizing third-party overlay widgets—which California courts consistently reject—we build authentic compliance into the foundational document structure.
           </p>
         </details>
 
@@ -457,7 +461,7 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
         Upgrade Your Practice Web Architecture
       </h2>
       <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
-        Speak directly with Adam Youssef to review your practice's HIPAA compliance, front-desk telephone triage, and Google Maps ranking. No junior account managers, no automated phone trees.
+        Speak directly with Adam about your practice's website, HIPAA-isolated architecture, and front-desk phone triage. No junior account managers, no automated phone trees.
       </p>
 
       <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
@@ -465,13 +469,13 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
           href={SMS_LINK}
           class="inline-flex items-center gap-2 rounded-full bg-persimmon px-8 py-4 font-medium text-cream shadow transition hover:bg-persimmon-deep text-base"
         >
-          <span>💬</span> Text Adam at {PHONE_DISPLAY}
+          <Icon name="text" class="h-4 w-4" /> Text Adam at {PHONE_DISPLAY}
         </a>
         <a 
           href={`tel:${PHONE_TEL}`}
           class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base"
         >
-          <span>📞</span> Call {PHONE_DISPLAY}
+          <Icon name="phone" class="h-4 w-4" /> Call {PHONE_DISPLAY}
         </a>
       </div>
     </section>

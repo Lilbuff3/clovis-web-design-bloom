@@ -28,10 +28,10 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 const links = [
   { href: "/services/medical-web-design/", label: "Medical Offices" },
   { href: "/services/contractor-websites/", label: "Contractors" },
-  { href: "/#harvest", label: "Client Work" },
-  { href: "/#season", label: "Process" },
-  { href: "/#stand", label: "Pricing" },
-  { href: "/#grower", label: "About" },
+  { href: "/#work", label: "Client Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
 
@@ -52,7 +52,19 @@ export function Nav() {
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.documentElement.classList.toggle("overflow-hidden", open);
+      return () => {
+        document.documentElement.classList.remove("overflow-hidden");
+      };
     }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   const scrolled = y > 40;
@@ -88,7 +100,6 @@ export function Nav() {
           <div className="flex items-center gap-2">
             <a
               href={SMS_LINK}
-              data-magnetic="0.25"
               className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon-deep sm:flex"
             >
               <span className="relative flex h-2 w-2">
@@ -111,6 +122,7 @@ export function Nav() {
       <div
         className={`fixed inset-0 z-40 flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}
+        inert={!open ? true : undefined}
       >
         <div className="flex flex-col">
           {links.map((l, i) => (

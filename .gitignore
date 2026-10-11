@@ -34,3 +34,7 @@ dist-ssr
 .claude
 .impeccable
 .codex
+
+# Test artifacts and scrapers
+tests/test-results.json
+running_site_*.html
