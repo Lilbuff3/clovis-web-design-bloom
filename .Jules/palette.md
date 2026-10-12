@@ -10,3 +10,7 @@
 **Learning:** Discovered that custom selectable 'chips' (used in multi-step or quick-select forms like Contact and LeadLeakAudit) lacked `aria-pressed` states, semantic `role="group"` wrappers with `aria-labelledby`, and clear `focus-visible` outlines, making them difficult for screen reader and keyboard users to navigate and understand their selected state. Inputs also relied solely on nesting for labels rather than explicit `htmlFor` / `id` bindings.
 **Action:** Always add `aria-pressed` to toggleable buttons, semantic `role="group"` containers, and strict `htmlFor`/`id` bindings on all form inputs. Focus rings come from the global `:focus-visible` style (see 2026-10-09); chips keep their own.
 
+
+## 2026-10-12 - Visually hidden menus need the `inert` attribute
+**Learning:** Found a case where a mobile menu was visually hidden (using `clip-path` and `pointer-events-none`) when closed, but it still existed in the DOM. This causes a focus trap for screen readers and keyboard users as they can tab to hidden interactive elements.
+**Action:** Always add the `inert` attribute (e.g. `inert={!open ? true : undefined}`) to menus, dialogs, or other containers when they are visually hidden to completely remove them from the accessibility tree and keyboard tab order.
