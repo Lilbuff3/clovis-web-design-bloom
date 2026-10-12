@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -174,6 +174,7 @@ export function Footer() {
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
+            <a href={`mailto:${EMAIL}`} className="block normal-case tracking-normal [overflow-wrap:anywhere] hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

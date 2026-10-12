@@ -1,6 +1,7 @@
 export const PHONE_DISPLAY = "(559) 575-3014";
 export const PHONE_TEL = "+15595753014";
 export const SMS_LINK = `sms:${PHONE_TEL}`;
+export const EMAIL = "adam@cloviswebdesign.com";
 
 export const cases = [
   {
@@ -232,6 +233,7 @@ export const schemaGraph = {
       "name": "Clovis Web Design",
       "url": "https://cloviswebdesign.com",
       "telephone": "+15595753014",
+      "email": EMAIL,
       "priceRange": "$1,500 - $5,000",
       "image": "https://cloviswebdesign.com/images/hero.jpg",
       "address": {
