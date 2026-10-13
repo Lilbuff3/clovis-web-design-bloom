@@ -66,7 +66,7 @@ export function Contact() {
                   id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Maria"
+                  placeholder="Sarah"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -76,7 +76,7 @@ export function Contact() {
                   id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="a taquería in Old Town"
+                  placeholder="a family dental office"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
