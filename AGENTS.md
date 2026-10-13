@@ -23,6 +23,11 @@ Adam Youssef's web design studio site. This repo is the live site; the old Astro
 Vercel project `clovis-web-design-bloom`. A push to `main` is a production deploy of
 cloviswebdesign.com.
 
+## Adam's name
+
+On the site Adam is just "Adam": never his last name, in copy, meta tags or schema.
+`tests/verify-e2e.mjs` T4.5 checks the built site.
+
 ## SEO: one search per page
 
 Each URL owns one set of searches. Don't add a page that competes with another for them.
