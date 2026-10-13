@@ -75,7 +75,7 @@ export function Stand() {
               </span>
             </span>
           </h2>
-          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
+          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what a site costs: Starter and Growth are priced right here, and Flagship is priced to what your business needs. Every site is 100% yours to keep.</p>
         </div>
 
         {/* Pricing Cards */}
@@ -90,7 +90,7 @@ export function Stand() {
                   <div className="font-display wonk mt-3 text-4xl italic text-ink">{pl.name}</div>
                   <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
                   <div className="mt-6 font-display text-6xl font-[400] leading-none text-ink">{pl.price}</div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">one-off · no subscription</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.terms ?? "one-off · no subscription"}</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -111,7 +111,7 @@ export function Stand() {
                     {pl.for}
                   </p>
                   <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon-deep font-medium">
-                    Ask about {pl.name} →
+                    {pl.cta ?? `Ask about ${pl.name}`} →
                   </a>
                 </div>
               </div>
