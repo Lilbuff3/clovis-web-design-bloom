@@ -3,12 +3,15 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK, cases, plans, offer, pageSchema, type Faq } from '../../lib/data';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, plans, offer, pageSchema, smsTo, type Faq } from '../../lib/data';
 
 // Everything here is about the website Adam builds for a practice. Clinic-voice copy
 // (insurance lists, "accepting new patients", provider bios) belongs on the client's own site.
+// Written for a practice owner or manager, often at a desk where sms: links don't open: email is offered too.
 const kidney = cases[0];
 const flagship = plans.find((p) => p.name === 'Flagship')!;
+const textAdam = smsTo("Hi Adam, I manage a medical practice and I'd like to talk about our website.");
+const emailAdam = `mailto:${EMAIL}?subject=${encodeURIComponent("Our practice's website")}`;
 
 const faqs: Faq[] = [
   {
@@ -51,22 +54,28 @@ const schema = pageSchema('/services/medical-web-design/', {
     </h1>
 
     <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
-      I design and build websites for medical and dental practices in Fresno, Clovis and Madera. Your site answers what patients call to ask, never collects their health information, and works for people using screen readers.
+      I design and build websites for medical and dental practices in Fresno, Clovis and Madera. Your site answers the questions your front desk gets all day, makes it easy for other doctors to refer to you, and never holds patient information, so there's nothing on it to breach.
+    </p>
+    <p class="mt-4 text-lg text-ink">
+      <strong>{flagship.price}, flat.</strong> Live in {flagship.time}. You own the site and the domain.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a href={SMS_LINK} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
-        <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
+      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+        <Icon name="phone" /> Call Adam: {PHONE_DISPLAY}
       </a>
-      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
-        <Icon name="phone" /> Call {PHONE_DISPLAY}
+      <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
+        <Icon name="text" /> Text
       </a>
     </div>
+    <p class="mt-3 text-sm text-ink-soft">
+      I answer 7 a.m. to 7 p.m., Monday to Saturday. Prefer email? <a href={emailAdam} class="underline hover:text-persimmon-deep">{EMAIL}</a>
+    </p>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">A website that never holds patient data</h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Most practice websites get into HIPAA trouble through a contact form. A patient types their symptoms into it, and the message lands in an ordinary inbox or spreadsheet. The sites I build have no forms that ask about health. Patients call or text the office, or use the intake and booking tools your practice already runs.
+        Most practice websites get into HIPAA trouble through a contact form. A patient types their symptoms into it, and the message lands in an ordinary inbox or spreadsheet. The sites I build have no forms that ask about health. Patients call or text the office, or use the intake and booking tools your practice already runs. If the website never receives patient information, a hacked or misconfigured website has none to expose.
       </p>
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="rounded-2xl border border-ink/10 bg-paper p-6">
@@ -87,7 +96,7 @@ const schema = pageSchema('/services/medical-web-design/', {
     <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Answers to the calls your front desk gets most</h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Most calls to a practice ask the same three things. I put each answer on the site in plain words, so fewer of those calls reach your front desk.
+        Most calls to a practice ask the same three things. I put each answer on the site in plain words, so fewer of those calls reach your front desk and your staff spend that time on the patients in front of them.
       </p>
       <ul class="mt-6 space-y-3 text-lg text-ink/85 leading-relaxed max-w-3xl">
         <li><strong class="text-ink">Insurance:</strong> the plans you take, by name, and what to do if a plan isn't listed.</li>
@@ -97,9 +106,16 @@ const schema = pageSchema('/services/medical-web-design/', {
     </section>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Make it easy for other doctors to refer to you</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        A referring office wants to know where to send a referral, what to include, and whether you take the patient's plan. I build a page just for them that answers all three, with printable forms, so their staff don't have to call yours to ask. Dr. Masood says referrals from other doctors are up more than 40% since his new site went live.
+      </p>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Accessible to every patient</h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
-        Many patients are older, have low vision, or use a screen reader. I hand-code every page to WCAG 2.1 AA: it works with a keyboard alone, shows clearly where you are on the page, and keeps text dark enough to read in bright light. Website accessibility lawsuits are common in California. I don't use accessibility overlay widgets; they sit on top of a page and leave the code underneath unchanged.
+        Many patients are older, have low vision, or use a screen reader. I build every page to WCAG 2.1 AA, so they can read it without zooming, use it with a keyboard alone, and find the phone number without help. That matters for your liability too: website accessibility lawsuits are common in California, and the overlay widgets some sites add don't fix the page underneath. I fix the page itself.
       </p>
     </section>
 
@@ -163,16 +179,17 @@ const schema = pageSchema('/services/medical-web-design/', {
     <section class="mt-16 border-t border-ink/10 pt-12 text-center">
       <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Talk to Adam about your practice's website</h2>
       <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
-        Text or call me directly. You'll talk to the person who builds the site, not an account manager.
+        You'll talk to the person who builds the site, not an account manager. Tell me what your front desk gets asked most and I'll tell you what I'd put on the site.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-        <a href={SMS_LINK} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
-          <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <Icon name="phone" /> Call Adam: {PHONE_DISPLAY}
         </a>
-        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
-          <Icon name="phone" /> Call {PHONE_DISPLAY}
+        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <Icon name="text" /> Text
         </a>
       </div>
+      <p class="mt-4 text-sm text-ink-soft">Or email <a href={emailAdam} class="underline hover:text-persimmon-deep">{EMAIL}</a></p>
     </section>
   </main>
 

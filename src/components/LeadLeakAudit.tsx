@@ -1,12 +1,11 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { PHONE_DISPLAY, smsTo as sms } from "../lib/data";
 
 type Link = { title: string; uri: string };
 type Answer = { question: string; answer: string; places: Link[]; sources: Link[]; named: string | null; lookedFor: boolean };
 
 const an = (w: string) => (/^[aeiou]/i.test(w) ? "an" : "a");
 const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
-const sms = (body: string) => `sms:${PHONE_TEL}?&body=${encodeURIComponent(body)}`;
 const pop = (delayMs: number) => ({ animation: `pop .5s cubic-bezier(.3,1.4,.5,1) ${delayMs}ms both` });
 // Google Maps attribution as Google specifies it: exact text, 12–16px, gray, never wrapped or translated.
 const MAPS_CREDIT = { fontFamily: "Roboto, sans-serif", fontWeight: 400, fontSize: 12, color: "#5e5e5e", whiteSpace: "nowrap" } as const;
