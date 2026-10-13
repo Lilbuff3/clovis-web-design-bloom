@@ -1,18 +1,20 @@
 ---
 import '../index.css';
 import MobileActionBar from '../components/MobileActionBar.astro';
-import { schemaGraph } from '../lib/data';
+import { business } from '../lib/data';
 
 interface Props {
   title?: string;
   description?: string;
   canonicalURL?: string;
+  schema?: object;
 }
 
 const {
   title = "Clovis Web Design — High-Converting Custom Websites · Clovis & Fresno, CA",
   description = "Fast, custom-built websites for Clovis, Fresno & Central Valley businesses. 100/100 Google PageSpeed, built to win Google Maps, 100% client-owned. Start with a text.",
   canonicalURL = Astro.url.href,
+  schema = { "@context": "https://schema.org", "@graph": [business] },
 } = Astro.props;
 ---
 
@@ -43,7 +45,7 @@ const {
     <link rel="preload" href="/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
     <!-- Schema.org JSON-LD @graph -->
-    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   </head>
   <body class="grain">
     <slot />

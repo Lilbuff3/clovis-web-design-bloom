@@ -65,7 +65,7 @@ const results = {
     3: { name: 'Mobile Performance, Action Bar & Above-the-Fold UX', tests: [] },
     4: { name: 'Multi-Page Route Silos & Inter-linkage', tests: [] },
     5: { name: 'Binary Integrity, Adversarial & Robustness Verification', tests: [] },
-    6: { name: 'Medical Engineering, HIPAA Compliance & GEO Verification', tests: [] },
+    6: { name: 'Medical Page, Entity Hygiene & Per-Page Schema', tests: [] },
   },
 };
 
@@ -174,7 +174,6 @@ function countWords(htmlOrText) {
 // ============================================================================
 const REQUIRED_ROUTES = [
   { path: 'index.html', route: '/' },
-  { path: path.join('services', 'web-design-clovis', 'index.html'), route: '/services/web-design-clovis/' },
   { path: path.join('services', 'local-seo-fresno', 'index.html'), route: '/services/local-seo-fresno/' },
   { path: path.join('services', 'contractor-websites', 'index.html'), route: '/services/contractor-websites/' },
   { path: path.join('services', 'medical-web-design', 'index.html'), route: '/services/medical-web-design/' },
@@ -184,7 +183,7 @@ const REQUIRED_ROUTES = [
 // TIER 1: Build & Static Pre-rendering Architecture
 // ============================================================================
 
-assertTest(1, 'T1.1', 'Static HTML file generation for all 5 required route silos', () => {
+assertTest(1, 'T1.1', 'Static HTML file generation for every route', () => {
   if (!fs.existsSync(DIST_DIR)) {
     throw new Error(`Output directory dist/ does not exist. Run "npm run build" first.`);
   }
@@ -201,10 +200,10 @@ assertTest(1, 'T1.1', 'Static HTML file generation for all 5 required route silo
     throw new Error(`Missing static pre-rendered routes in dist/:\n - ${missingRoutes.join('\n - ')}`);
   }
 
-  return `All 5 route silos exist as static pre-rendered HTML files in dist/`;
+  return `All ${REQUIRED_ROUTES.length} route silos exist as static pre-rendered HTML files in dist/`;
 });
 
-assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across all 5 routes', () => {
+assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across every route', () => {
   const missingCopy = [];
 
   for (const r of REQUIRED_ROUTES) {
@@ -240,7 +239,7 @@ assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across all 5 ro
     throw new Error(`Semantic first-byte content deficiencies:\n - ${missingCopy.join('\n - ')}`);
   }
 
-  return `All 5 routes contain rich semantic copy on first byte (verified h1, h2, and p elements)`;
+  return `All ${REQUIRED_ROUTES.length} routes contain rich semantic copy on first byte (verified h1, h2, and p elements)`;
 });
 
 assertTest(1, 'T1.3', 'Zero empty client-side mounting shells (<div id="root"></div>) in dist/', () => {
@@ -719,7 +718,7 @@ assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no s
 // TIER 4: Multi-Page Route Silos & Inter-linkage
 // ============================================================================
 
-assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present across all 5 route silos', () => {
+assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present on every route', () => {
   const missingContact = [];
 
   for (const r of REQUIRED_ROUTES) {
@@ -737,7 +736,7 @@ assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present across a
     throw new Error(`Routes missing direct founder contact links:\n - ${missingContact.join('\n - ')}`);
   }
 
-  return `All 5 route silos contain direct founder phone or SMS contact access`;
+  return `All ${REQUIRED_ROUTES.length} route silos contain direct founder phone or SMS contact access`;
 });
 
 assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', () => {
@@ -746,7 +745,6 @@ assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', 
 
   const html = fs.readFileSync(indexPath, 'utf-8');
   const serviceSilos = [
-    '/services/web-design-clovis/',
     '/services/local-seo-fresno/',
     '/services/contractor-websites/',
     '/services/medical-web-design/',
@@ -764,7 +762,7 @@ assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', 
     throw new Error(`Root navigation missing direct links to service silos:\n - ${unlinked.join('\n - ')}`);
   }
 
-  return `Root layout links directly to all 4 specialized service silos`;
+  return `Root layout links directly to all ${serviceSilos.length} service pages`;
 });
 
 assertTest(4, 'T4.3', 'Valid HTML5 document structure across all routes (doctype, charset, viewport meta)', () => {
@@ -789,7 +787,22 @@ assertTest(4, 'T4.3', 'Valid HTML5 document structure across all routes (doctype
     throw new Error(`HTML5 structure non-conformance in routes:\n - ${invalidRoutes.join('\n - ')}`);
   }
 
-  return `All 5 routes conform to valid HTML5 boilerplate with charset, viewport, and title`;
+  return `All ${REQUIRED_ROUTES.length} routes conform to valid HTML5 boilerplate with charset, viewport, and title`;
+});
+
+// The Clovis page competed with the homepage for the same searches; it now 301s there.
+assertTest(4, 'T4.4', '/services/web-design-clovis/ is gone and 301s to the homepage', () => {
+  const vercel = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, 'vercel.json'), 'utf-8'));
+  const r = (vercel.redirects ?? []).find((x) => x.source === '/services/web-design-clovis/');
+  if (!r || r.destination !== '/' || r.statusCode !== 301) {
+    throw new Error(`vercel.json needs a 301 from /services/web-design-clovis/ to /. Got: ${JSON.stringify(r)}`);
+  }
+  if (fs.existsSync(path.join(DIST_DIR, 'services', 'web-design-clovis'))) {
+    throw new Error(`dist/ still builds /services/web-design-clovis/`);
+  }
+  const linking = getAllFiles(DIST_DIR, ['.html']).filter((f) => fs.readFileSync(f, 'utf-8').includes('/services/web-design-clovis/'));
+  if (linking.length) throw new Error(`Still linked from: ${linking.map((f) => path.relative(DIST_DIR, f)).join(', ')}`);
+  return `301 /services/web-design-clovis/ → /, no page or links left`;
 });
 
 // ============================================================================
@@ -908,230 +921,48 @@ assertTest(6, 'T6.1', 'Medical practice web design silo pre-rendered static HTML
   return `Medical landing page pre-rendered with rich semantic hierarchy (${h1s.length} h1, ${h2s.length} h2s, ${ps.length} ps, ${combinedLength} chars)`;
 });
 
-assertTest(6, 'T6.2', 'HIPAA compliance architecture, unencrypted SMS/Sheets risks, and generic SMS alert copy', () => {
-  const html = getMedicalHtml();
-
-  // 1. Unencrypted SMS and personal Google Sheets HIPAA violation risks
-  const hasRiskCopy = /(?:unencrypted\s+SMS|personal\s+Google\s+Sheets|Sheets).*(?:violat|breach|HIPAA|PHI)/i.test(html) ||
-                      (html.includes('HIPAA') && html.includes('Google Sheets') && /unencrypted/i.test(html));
-  if (!hasRiskCopy) {
-    throw new Error(`Missing copy detailing why unencrypted SMS and personal Google Sheets violate federal HIPAA rules when handling PHI.`);
-  }
-
-  // 2. Compliant generic SMS notification alert
-  const hasGenericSms = /New appointment request received for\s+(?:\[Clinic Name\]|[A-Za-z0-9\s]+)\.\s*Log into secure portal to review/i.test(html) ||
-                        (/New appointment request received/i.test(html) && /Log into secure portal to review/i.test(html));
-  if (!hasGenericSms) {
-    throw new Error(`Missing compliant generic SMS alert copy ("New appointment request received for [Clinic Name]. Log into secure portal to review").`);
-  }
-
-  // 3. BAA-secured intake workflows & supported tool direct links
-  const hasBaa = /BAA|Business Associate Agreement/i.test(html);
-  const hasTools = /(?:Jotform HIPAA|FormDr|Spruce Health|EHR direct)/i.test(html);
-  if (!hasBaa || !hasTools) {
-    throw new Error(`Missing BAA-secured intake workflows or tool references (Jotform HIPAA, FormDr, Spruce Health, EHR direct links).`);
-  }
-
-  return `HIPAA compliance architecture verified: unencrypted risk analysis, compliant generic SMS copy, and BAA intake workflows present`;
+// Mock clinic copy (insurance lists, "accepting new patients", a doctor's bio) made the page read as a clinic.
+assertTest(6, 'T6.2', 'Medical page sells web design to practices and never speaks as a clinic', () => {
+  const text = getMedicalHtml().replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ');
+  const clinicVoice = [/do you take my insurance/i, /accepting new patients/i, /\bMedi-Cal\b/i, /\bMedicare\b/i, /admitting privileges/i, /board[\s-]certif/i, /call 911/i, /intake packet/i, /\bour clinic\b/i, /clinical philosophy/i];
+  const hits = clinicVoice.filter((r) => r.test(text));
+  if (hits.length) throw new Error(`Clinic-voice copy on the medical page: ${hits.join(', ')}`);
+  if (!/Business Associate Agreement/i.test(text)) throw new Error(`Missing where patient data goes instead (the intake vendor's BAA).`);
+  return `No clinic-voice copy; online intake goes to BAA-covered tools`;
 });
 
-assertTest(6, 'T6.3', 'Front-desk triage: Deflecting the 3 Big Questions, insurance carrier list, and scheduling portals', () => {
-  const html = getMedicalHtml();
-
-  // Deflect the 3 Big Questions
-  const q1 = /Do you take my insurance\??/i.test(html);
-  const q2 = /Are you accepting new patients\??/i.test(html);
-  const q3 = /Can I book for next Tuesday\??/i.test(html);
-
-  const missingQuestions = [];
-  if (!q1) missingQuestions.push('"Do you take my insurance?"');
-  if (!q2) missingQuestions.push('"Are you accepting new patients?"');
-  if (!q3) missingQuestions.push('"Can I book for next Tuesday?"');
-
-  if (missingQuestions.length > 0) {
-    throw new Error(`Front-desk triage missing deflection copy for questions: ${missingQuestions.join(', ')}`);
+assertTest(6, 'T6.3', 'No SEO working notes in visible copy on any route', () => {
+  const leaks = [/GBP/, /Primary Category/i, /Secondary Category/i, /geo-unit/i, /wikidata/i, /\bQ\d{4,}\b/, /entity grounding/i, /Knowledge Graph/i];
+  const found = [];
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '');
+    for (const re of leaks) if (re.test(html)) found.push(`${r.route}: ${re}`);
   }
-
-  // Insurance carrier list (minimum 4 recognized carriers)
-  const carriers = ['Blue Shield', 'Anthem', 'Medicare', 'Medi-Cal', 'CalViva', 'UnitedHealthcare', 'Aetna', 'Cigna', 'Kaiser'];
-  const foundCarriers = carriers.filter(c => new RegExp(`\\b${c}\\b`, 'i').test(html));
-  if (foundCarriers.length < 4) {
-    throw new Error(`Insufficient insurance carrier list: found ${foundCarriers.length} (${foundCarriers.join(', ')}), expected at least 4.`);
-  }
-
-  // Scheduling portal integrations (minimum 2 recognized portals)
-  const portals = ['Zocdoc', 'NexHealth', 'Kareo', 'AthenaHealth'];
-  const foundPortals = portals.filter(p => new RegExp(`\\b${p}\\b`, 'i').test(html));
-  if (foundPortals.length < 2) {
-    throw new Error(`Insufficient scheduling portal integrations: found ${foundPortals.length} (${foundPortals.join(', ')}), expected at least 2.`);
-  }
-
-  // Downloadable new-patient intake packet
-  const hasIntakePacket = /(?:downloadable|printable|PDF)\s+(?:new-patient|patient|registration|intake)\s+(?:intake\s+packet|packet|forms?|documents?)/i.test(html) ||
-                          /intake packet/i.test(html);
-  if (!hasIntakePacket) {
-    throw new Error(`Missing downloadable new-patient intake packet reference or download action.`);
-  }
-
-  return `Front-desk triage verified: 3 Big Questions deflected, ${foundCarriers.length} insurance carriers listed, ${foundPortals.length} scheduling portals referenced, intake packet available`;
+  if (found.length) throw new Error(`SEO notes showing on the page:\n - ${found.join('\n - ')}`);
+  return `No GBP categories, Wikidata IDs or GEO markers in page copy`;
 });
 
-assertTest(6, 'T6.4', 'ADA Title III drive-by lawsuit defense and FTC 16 CFR Part 465 compliant review management', () => {
-  const html = getMedicalHtml();
-
-  // ADA Title III defense
-  const hasAda = /ADA Title III/i.test(html) && /drive-by/i.test(html);
-  const hasWcag = /WCAG 2\.1 AA/i.test(html) && /screen-reader/i.test(html);
-  if (!hasAda || !hasWcag) {
-    throw new Error(`Missing ADA Title III drive-by lawsuit defense, WCAG 2.1 AA text contrast, or screen-reader navigation copy.`);
-  }
-
-  // Compliant Review Management under FTC 16 CFR Part 465
-  const hasFtc = /16 CFR Part 465|FTC 16 CFR/i.test(html);
-  if (!hasFtc) {
-    throw new Error(`Missing explicit reference to FTC 16 CFR Part 465 regulations for compliant review acquisition.`);
-  }
-
-  // Zero public acknowledgment of patient identity in review responses
-  const hasZeroPhiReview = /(?:zero public acknowledgment|never confirm or deny|zero public PHI|without acknowledging patient)/i.test(html);
-  if (!hasZeroPhiReview) {
-    throw new Error(`Missing HIPAA review constraint: strictly prohibiting public acknowledgment or confirmation of patient identity in review replies.`);
-  }
-
-  return `ADA Title III defense (WCAG 2.1 AA, drive-by protection) and FTC 16 CFR Part 465 review compliance (zero public PHI) verified`;
-});
-
-assertTest(6, 'T6.5', 'Provider credentials, clinical philosophy, compliant before/after galleries & clinic photography', () => {
-  const html = getMedicalHtml();
-
-  // Provider credentials & clinical philosophy
-  const hasBoardCert = /board[\s-]certif/i.test(html);
-  const hasPhilosophy = /clinical philosoph/i.test(html);
-  if (!hasBoardCert || !hasPhilosophy) {
-    throw new Error(`Missing provider credentialing copy (board certifications and clinical philosophy).`);
-  }
-
-  // Compliant before-and-after galleries for elective/cash-pay practices
-  const hasGallery = /(?:before-and-after|before\s+and\s+after)/i.test(html);
-  const hasSpecialties = /(?:cosmetic dentistry|medspa|dermatology|elective)/i.test(html);
-  if (!hasGallery || !hasSpecialties) {
-    throw new Error(`Missing compliant before-and-after gallery architecture for elective/cash-pay practices (cosmetic dentistry, medspas, dermatology).`);
-  }
-
-  // Clinic interior photography
-  const hasClinicPhotos = /clinic interior|facility photograph/i.test(html);
-  if (!hasClinicPhotos) {
-    throw new Error(`Missing presentation of clinic interior photography and facility comfort.`);
-  }
-
-  return `Provider credentials (board certifications, clinical philosophy), compliant elective galleries, and clinic photography verified`;
-});
-
-assertTest(6, 'T6.6', 'Contractor vs. Medical Clinic comparative matrix rendered as semantic HTML table', () => {
-  const html = getMedicalHtml();
-
-  const tableMatch = html.match(/<table[^>]*>([\s\S]*?)<\/table>/i);
-  if (!tableMatch) {
-    throw new Error(`Missing semantic <table> element for Contractor vs. Medical Clinic comparison matrix.`);
-  }
-
-  const tableHtml = tableMatch[1];
-
-  // Header column checks
-  const hasContractorTh = /<th[^>]*>[\s\S]*?(?:Contractor|Home Services)[\s\S]*?<\/th>/i.test(tableHtml);
-  const hasMedicalTh = /<th[^>]*>[\s\S]*?(?:Medical Clinic|Healthcare)[\s\S]*?<\/th>/i.test(tableHtml);
-  if (!hasContractorTh || !hasMedicalTh) {
-    throw new Error(`Comparison table <th> headers must clearly contrast "Contractor / Home Services" with "Medical Clinic / Healthcare".`);
-  }
-
-  // 5 required comparative dimensions
-  const dims = [
-    { name: 'Primary Goal', test: /(?:Primary Goal|Goal)/i.test(tableHtml) && /(?:phone ring|paying leads)/i.test(tableHtml) && /(?:front-desk|friction|qualified appointments)/i.test(tableHtml) },
-    { name: 'Speed-to-Lead', test: /(?:Speed-to-Lead|Speed to Lead)/i.test(tableHtml) && /(?:<60s|60s|raw lead)/i.test(tableHtml) && /(?:Generic alert|secure portal|HIPAA-compliant portal)/i.test(tableHtml) },
-    { name: 'Data Storage', test: /(?:Data Storage|Storage)/i.test(tableHtml) && /(?:Google Sheets|Airtable|CRM)/i.test(tableHtml) && /(?:EHR|EMR|BAA|encrypted storage)/i.test(tableHtml) },
-    { name: 'Top Decision Factor', test: /(?:Decision Factor|Top Factor)/i.test(tableHtml) && /(?:Cost|speed|lead volume)/i.test(tableHtml) && /(?:Compliance|HIPAA|ADA|reputation|booking ease)/i.test(tableHtml) },
-    { name: 'Price Sensitivity', test: /(?:Price Sensitivity|Budget)/i.test(tableHtml) && /(?:Moderate|ROI)/i.test(tableHtml) && /(?:Low price sensitivity|substantial practice budgets|practice budgets)/i.test(tableHtml) },
-  ];
-
-  const missingDims = dims.filter(d => !d.test).map(d => d.name);
-  if (missingDims.length > 0) {
-    throw new Error(`Comparison matrix table missing required dimensions: ${missingDims.join(', ')}`);
-  }
-
-  return `Semantic comparison table verified across all 5 operational dimensions (Goal, Speed, Storage, Decision, Price)`;
-});
-
-assertTest(6, 'T6.7', 'Primary <h2> headings aligned with Google Business Profile categories for Maps justifications', () => {
-  const html = getMedicalHtml();
-  const h2s = extractTextBetweenTags(html, 'h2');
-
-  const hasMedicalClinic = h2s.some(t => /medical clinic/i.test(t));
-  const hasDoctor = h2s.some(t => /\bdoctor\b/i.test(t));
-  const hasWebDesigner = h2s.some(t => /website designer/i.test(t));
-
-  const missingGbp = [];
-  if (!hasMedicalClinic) missingGbp.push('"Medical clinic"');
-  if (!hasDoctor) missingGbp.push('"Doctor"');
-  if (!hasWebDesigner) missingGbp.push('"Website designer"');
-
-  if (missingGbp.length > 0) {
-    throw new Error(`Missing required Google Business Profile category alignment in <h2> headings: ${missingGbp.join(', ')}. Headings found: ${h2s.join(' | ')}`);
-  }
-
-  return `Primary <h2> headings verified matching GBP categories ("Medical clinic", "Doctor", "Website designer") for Google Maps justifications`;
-});
-
-assertTest(6, 'T6.8', 'Generative Engine Optimization: Primary <h2> answer blocks are atomic 134–167 word semantic units', () => {
-  const html = getMedicalHtml();
-
-  // Search for explicit semantic units marked with data-geo-unit="true" or class="geo-unit"
-  const geoUnitRegex = /<(?:div|p|section)[^>]*(?:data-geo-unit=["']true["']|class=["'][^"']*geo-unit[^"']*["'])[^>]*>([\s\S]*?)<\/(?:div|p|section)>/gi;
-  let units = [];
-  let match;
-
-  while ((match = geoUnitRegex.exec(html)) !== null) {
-    units.push(match[1]);
-  }
-
-  // If no explicit data attributes, extract paragraphs immediately following the 3 GBP category <h2> headings
-  if (units.length === 0) {
-    const sectionRegex = /<h2[^>]*>([\s\S]*?)<\/h2>[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/gi;
-    let sMatch;
-    while ((sMatch = sectionRegex.exec(html)) !== null) {
-      const heading = sMatch[1].replace(/<[^>]+>/g, '').trim();
-      if (/medical clinic|doctor|website designer/i.test(heading)) {
-        units.push(sMatch[2]);
-      }
+assertTest(6, 'T6.4', 'Each route has its own Service node, and FAQPage only lists questions shown on the page', () => {
+  const seen = new Set();
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8');
+    const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
+    const biz = graph.find((n) => n['@id'] === 'https://cloviswebdesign.com/#business');
+    const services = graph.filter((n) => n['@type'] === 'Service');
+    if (!biz) throw new Error(`${r.route}: no business node`);
+    if (services.length !== 1) throw new Error(`${r.route}: expected 1 Service node, found ${services.length}`);
+    const [svc] = services;
+    if (svc.provider?.['@id'] !== biz['@id']) throw new Error(`${r.route}: Service.provider doesn't point at the business`);
+    if (svc.url !== `https://cloviswebdesign.com${r.route}`) throw new Error(`${r.route}: Service.url is ${svc.url}`);
+    const key = `${svc.name} | ${svc.audience?.audienceType}`;
+    if (seen.has(key)) throw new Error(`Two routes describe the same Service: ${key}`);
+    seen.add(key);
+    const visible = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&');
+    for (const q of graph.find((n) => n['@type'] === 'FAQPage')?.mainEntity ?? []) {
+      if (!visible.includes(q.name)) throw new Error(`${r.route}: FAQPage question isn't on the page: "${q.name}"`);
     }
   }
-
-  if (units.length === 0) {
-    throw new Error(`Zero GEO semantic answer units detected. Annotate primary <h2> answer blocks with data-geo-unit="true" or follow GBP headings with an atomic <p class="geo-unit">.`);
-  }
-
-  const lengthErrors = [];
-  const anchorErrors = [];
-
-  units.forEach((unitHtml, idx) => {
-    const wordCount = countWords(unitHtml);
-    const cleanText = unitHtml.replace(/<[^>]+>/g, ' ').trim();
-
-    if (wordCount < 134 || wordCount > 167) {
-      lengthErrors.push(`Unit ${idx + 1}: ${wordCount} words (must be strictly 134–167 words). Text snippet: "${cleanText.slice(0, 60)}..."`);
-    }
-
-    const hasLocalAnchor = /Fresno|Clovis|Madera|Central Valley/i.test(cleanText);
-    if (!hasLocalAnchor) {
-      anchorErrors.push(`Unit ${idx + 1} missing local entity anchor (Fresno, Clovis, Madera, or Central Valley).`);
-    }
-  });
-
-  if (lengthErrors.length > 0 || anchorErrors.length > 0) {
-    const issues = [...lengthErrors, ...anchorErrors].join('\n - ');
-    throw new Error(`GEO semantic unit violations:\n - ${issues}`);
-  }
-
-  return `Verified ${units.length} atomic GEO semantic units strictly conforming to 134–167 words with local entity anchors`;
+  return `${seen.size} distinct Services: ${[...seen].join('; ')}`;
 });
 
 assertTest(6, 'T6.9', 'Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)', () => {
