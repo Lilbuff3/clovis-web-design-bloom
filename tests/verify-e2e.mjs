@@ -459,7 +459,7 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, pr
   }
 
   if (!biz.priceRange || !biz.priceRange.includes('$1,500')) {
-    errors.push(`priceRange must include "$1,500 - $5,000", got: "${biz.priceRange}"`);
+    errors.push(`priceRange must include "$1,500", got: "${biz.priceRange}"`);
   }
 
   if (errors.length > 0) {

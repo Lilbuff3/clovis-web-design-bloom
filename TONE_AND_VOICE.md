@@ -63,7 +63,7 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | Harvest / Two crates still ripe | Client Work / Proven Results / Measured Case Studies |
 | Seedling ($1,500 plan) | The Starter / The Landing Page / Core Launchpad |
 | Grove ($2,500 plan) | Growth / Local Authority / Multi-Page System |
-| Orchard ($5,000 plan) | Flagship / Custom System / Bespoke Enterprise |
+| Orchard (top plan) | Flagship / Custom System / Bespoke Enterprise |
 | The growing season | The Process / From Discovery to Launch |
 | Seed / Sprout / Grow / Harvest | Discovery / Design & Strategy / Custom Build / Launch & Support |
 | The farm stand | Transparent Pricing / Published Rates |
@@ -129,7 +129,7 @@ Homepage sections, top to bottom. Each heading stands alone: no numbered labels 
 | `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
 | `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
-| `#stand` | Hanging Price Tags | Upfront package pricing ($1,500 Starter, $2,500 Growth, $5,000 Flagship). Optional care plans. |
+| `#stand` | Hanging Price Tags | Upfront package pricing: $1,500 Starter, $2,500 Growth. Flagship shows "Custom", priced to what the business needs, with a "Let's talk" button. Optional care plans. |
 | `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
 | `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
 

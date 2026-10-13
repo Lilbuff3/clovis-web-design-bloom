@@ -156,7 +156,10 @@ export const plans = [
     name: "Flagship",
     kind: "Custom system",
     time: "4–6 weeks",
-    price: "$5,000",
+    // No fixed price: Flagship is scoped to what the business needs.
+    price: "Custom",
+    terms: "priced to what you need",
+    cta: "Let's talk",
     color: "bg-sky",
     hole: "bg-paper",
     items: [
@@ -222,8 +225,6 @@ export const hasOfferCatalog = {
     {
       "@type": "Offer",
       "name": "Flagship",
-      "price": "5000",
-      "priceCurrency": "USD",
       "description": "A custom design with booking or quoting, built to your industry's accessibility and privacy rules, with 90 days of support after launch.",
     },
   ],
@@ -236,7 +237,7 @@ export const business = {
   "url": "https://cloviswebdesign.com",
   "telephone": "+15595753014",
   "email": EMAIL,
-  "priceRange": "$1,500 - $5,000",
+  "priceRange": "From $1,500",
   "image": "https://cloviswebdesign.com/images/hero.jpg",
   "address": {
     "@type": "PostalAddress",
