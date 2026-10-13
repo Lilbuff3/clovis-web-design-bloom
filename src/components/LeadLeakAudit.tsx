@@ -1,11 +1,15 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { PHONE_DISPLAY, smsTo as sms } from "../lib/data";
+import { PHONE_DISPLAY, mailTo, smsTo } from "../lib/data";
 
 type Link = { title: string; uri: string };
 type Answer = { question: string; answer: string; places: Link[]; sources: Link[]; named: string | null; lookedFor: boolean };
 
 const an = (w: string) => (/^[aeiou]/i.test(w) ? "an" : "a");
 const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
+// Results only render after a click, so this never runs on the server.
+// Phones get a text to Adam; computers, which mostly can't open sms: links, get an email.
+const onPhone = () => window.matchMedia("(pointer: coarse)").matches;
+const reach = (body: string) => (onPhone() ? smsTo(body) : mailTo("Free AI check", body));
 const pop = (delayMs: number) => ({ animation: `pop .5s cubic-bezier(.3,1.4,.5,1) ${delayMs}ms both` });
 // Google Maps attribution as Google specifies it: exact text, 12–16px, gray, never wrapped or translated.
 const MAPS_CREDIT = { fontFamily: "Roboto, sans-serif", fontWeight: 400, fontSize: 12, color: "#5e5e5e", whiteSpace: "nowrap" } as const;
@@ -55,6 +59,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const text = named
     ? `Hi Adam! Gemini named ${named} when I asked for ${asked}. Is our website ready for the people it sends?`
     : `Hi Adam! I asked Gemini for ${asked}. It named ${names}${missing ? `, not ${sent.name}` : ""}. Why does AI pick them, and what would it take to get on that list?`;
+  const askAdam = `Hi Adam! Can you check whether Google's AI recommends ${sent.name} for ${asked}?`;
   const recheck = `Hi Adam! Could you re-ask Gemini for ${asked} next month and text me whether ${sent.name} shows up?`;
 
   return (
@@ -132,12 +137,32 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
               {named ? "Yes. It found you." : missing ? "No. It doesn't." : "Here's who it picks."}
             </p>
 
+            <div className="mx-auto mt-8 max-w-lg" style={pop(250)}>
+              <a
+                href={reach(text)}
+                className="flex items-center justify-center gap-2 rounded-full bg-persimmon-deep px-6 py-5 font-display text-xl font-medium text-cream shadow-md transition hover:scale-[1.02] hover:bg-ink"
+              >
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
+                </svg>
+                {named ? "Ask Adam if your site's ready for them" : "Ask Adam why AI picks them"}
+              </a>
+              <p className="mt-3 text-sm text-ink-soft">
+                {onPhone() ? `Opens a text to Adam's cell, already written · ${PHONE_DISPLAY}` : `Opens an email to Adam, already written · or call ${PHONE_DISPLAY}`}
+              </p>
+              {!named && (
+                <a href={reach(recheck)} className="mt-2 inline-block text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon">
+                  Not ready? Ask me to re-check next month
+                </a>
+              )}
+            </div>
+
             <p className={`mt-10 ${smallLabel}`}>{missing ? "It sends your customers to" : "Gemini recommends"}</p>
             <ol className="mx-auto mt-4 max-w-lg space-y-3 text-left">
               {shown.map((p, i) => (
                 <li
                   key={p.uri}
-                  style={pop(350 + i * 150)}
+                  style={pop(450 + i * 150)}
                   className={`flex items-center gap-4 rounded-2xl border px-5 py-4 ${p.title === named ? "border-leaf bg-leaf/10" : "border-ink/10 bg-paper"}`}
                 >
                   <span className="font-mono text-sm text-ink-soft">{i + 1}</span>
@@ -153,24 +178,6 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 </li>
               ))}
             </ol>
-
-            <div className="mx-auto mt-10 max-w-lg" style={pop(350 + shown.length * 150)}>
-              <a
-                href={sms(text)}
-                className="flex items-center justify-center gap-2 rounded-full bg-persimmon-deep px-6 py-5 font-display text-xl font-medium text-cream shadow-md transition hover:scale-[1.02] hover:bg-ink"
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                  <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
-                </svg>
-                {named ? "Ask Adam if your site's ready for them" : "Ask Adam why AI picks them"}
-              </a>
-              <p className="mt-3 text-sm text-ink-soft">Opens a text to Adam's cell, already written · {PHONE_DISPLAY}</p>
-              {!named && (
-                <a href={sms(recheck)} className="mt-2 inline-block text-[13px] underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon">
-                  Not ready? Ask me to re-check next month
-                </a>
-              )}
-            </div>
 
             {/* Google's terms: the generated answer, then every Maps source right after it (collapsing is allowed). */}
             <details className="mx-auto mt-10 max-w-lg text-left">
@@ -209,14 +216,22 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <p className={`font-display leading-tight ${compact ? "text-3xl" : "text-4xl sm:text-5xl"}`}>
               {ai === "limit" ? "That's 10 checks this hour." : "Google's AI didn't answer this time."}
             </p>
-            <p className="mt-3 text-ink/70">{ai === "limit" ? "Text Adam and he'll look it up for you." : "Give it another try in a minute."}</p>
+            <p className="mt-3 text-ink/70">{ai === "limit" ? "Adam will look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
-              <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">
-                Try again
-              </button>
-              <a href={sms(`Hi Adam! Can you check whether Google's AI recommends ${sent.name} for ${asked}?`)} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
-                Or text Adam
-              </a>
+              {ai === "limit" ? (
+                <a href={reach(askAdam)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">
+                  Ask Adam to check for you
+                </a>
+              ) : (
+                <>
+                  <button type="button" onClick={() => setAi(null)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">
+                    Try again
+                  </button>
+                  <a href={reach(askAdam)} className="text-[15px] underline decoration-persimmon decoration-2 underline-offset-4">
+                    Or ask Adam
+                  </a>
+                </>
+              )}
             </div>
           </div>
         )}

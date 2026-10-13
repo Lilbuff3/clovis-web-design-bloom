@@ -3,7 +3,7 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, plans, offer, pageSchema, smsTo, type Faq } from '../../lib/data';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, mailTo, plans, offer, pageSchema, smsTo, type Faq } from '../../lib/data';
 
 // Everything here is about the website Adam builds for a practice. Clinic-voice copy
 // (insurance lists, "accepting new patients", provider bios) belongs on the client's own site.
@@ -11,7 +11,7 @@ import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, plans, offer, pageSchema, smsTo
 const kidney = cases[0];
 const flagship = plans.find((p) => p.name === 'Flagship')!;
 const textAdam = smsTo("Hi Adam, I manage a medical practice and I'd like to talk about our website.");
-const emailAdam = `mailto:${EMAIL}?subject=${encodeURIComponent("Our practice's website")}`;
+const emailAdam = mailTo("Our practice's website");
 
 const faqs: Faq[] = [
   {

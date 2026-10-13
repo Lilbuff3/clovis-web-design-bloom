@@ -4,6 +4,7 @@ import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
 import { FourSeconds } from '../../components/FourSeconds';
+import { LeadLeakAudit } from '../../components/LeadLeakAudit';
 import { PHONE_DISPLAY, PHONE_TEL, cases, offer, pageSchema, plans, smsTo, type Faq } from '../../lib/data';
 
 // Written for an owner reading on a phone between jobs: short lines, prices up front, one tap to text.
@@ -121,6 +122,11 @@ const gets = [
         <ul class="mt-6 space-y-4 text-lg text-ink/85 leading-relaxed max-w-3xl">
           {gets.map(([lead, rest]) => <li><strong class="text-ink">{lead}</strong> {rest}</li>)}
         </ul>
+      </section>
+
+      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+      <section class="mt-16">
+        <LeadLeakAudit client:visible />
       </section>
     </div>
 
