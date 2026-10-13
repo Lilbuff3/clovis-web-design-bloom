@@ -4,9 +4,13 @@ import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
 import { FourSeconds } from '../../components/FourSeconds';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK, offer, pageSchema, plans, type Faq } from '../../lib/data';
+import { LeadLeakAudit } from '../../components/LeadLeakAudit';
+import { PHONE_DISPLAY, PHONE_TEL, cases, offer, pageSchema, plans, smsTo, type Faq } from '../../lib/data';
 
+// Written for an owner reading on a phone between jobs: short lines, prices up front, one tap to text.
 const [starter, growth] = plans;
+const bigBros = cases[1];
+const textAdam = smsTo("Hi Adam, I run a contracting business and I'd like a website that gets calls. Can we talk?");
 
 const faqs: Faq[] = [
   {
@@ -17,6 +21,10 @@ const faqs: Faq[] = [
     q: 'Can customers text me from the site?',
     a: 'Yes. Every page has tap-to-call and tap-to-text buttons that go straight to your phone, with no form or call center in between.',
   },
+  {
+    q: "I'm on job sites all day. How much of my time does this take?",
+    a: 'About an hour. A 45-minute call about your work, then a few minutes to check a link on your phone and tell me what to change. I write every word.',
+  },
 ];
 
 const schema = pageSchema('/services/contractor-websites/', {
@@ -26,104 +34,135 @@ const schema = pageSchema('/services/contractor-websites/', {
   description: 'Websites for roofers, HVAC companies, plumbers and other trades in Clovis and Fresno, with tap-to-call and tap-to-text on every page.',
   offers: [offer('Starter'), offer('Growth')],
 }, faqs);
+
+const gets = [
+  ['Call and text buttons on every screen.', "A customer who's ready never has to scroll for your number. Calls and texts come straight to your phone, and nobody resells the lead."],
+  ['It loads on two bars of signal.', 'People looking for a roofer are on a phone, often standing outside. If your page is slow, they call the next name on the list.'],
+  ['Your prices and service area on the page.', "Fewer calls asking whether you come out to Sanger, more calls asking when you can start."],
+  [`A page for every town you serve (${growth.name}, ${growth.price}).`, 'So Google has a page to show someone searching "roofer Clovis" and someone searching "roofer Fresno."'],
+  [`A full Spanish version (${growth.name}).`, 'Spanish-speaking customers can read the whole site, not just a "se habla español" line.'],
+  ['Nothing to update.', "Plain hand-written files: no WordPress, no plugins to patch, nothing that breaks while you're on a roof."],
+  ["You don't write anything.", 'We talk for 45 minutes. I write every word and send you a link to check on your phone.'],
+];
 ---
 
-<RootLayout 
+<RootLayout
   title="Contractor & Trade Websites — Clovis & Fresno, CA"
-  description="High-converting websites for roofers, HVAC, plumbers, and dumpster rentals in Fresno & Clovis. Tap-to-call, text-to-book, 100/100 speed. Built by Adam."
+  description="Websites for roofers, HVAC, plumbers and other trades in Clovis and Fresno. One page from $1,500, live in a week, with call and text buttons on every screen. Built by Adam."
   schema={schema}
 >
   <Nav client:load />
 
   <main class="relative z-10 pt-32 pb-24 md:pt-40">
     <div class="mx-auto max-w-5xl px-5 md:px-8">
-      <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon">
-        Trade Contractor Web Systems · Clovis &amp; Fresno, CA
+      <div class="mb-4 font-mono text-[11px] uppercase tracking-[.2em] text-persimmon-deep">
+        Roofers · HVAC · Plumbers · Every trade · Clovis &amp; Fresno
       </div>
-      
+
       <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-        Contractor &amp; Trade Websites
+        Contractor websites built to get you calls.
       </h1>
 
-      <p class="mt-6 text-xl leading-relaxed text-ink/85">
-        High-converting websites engineered specifically for trades: roofers, HVAC technicians, plumbers, electricians, landscapers, and dumpster rental operators. Fast, clean, and built for customers calling from a job site.
+      <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
+        Call and text buttons where a thumb lands, on a page that loads on two bars of signal. The customer in the driveway calls you, not the next name on the list.
+      </p>
+      <p class="mt-4 text-lg text-ink">
+        <strong>{starter.price}, live in a week.</strong> I build it and write it. You text me when you need a change.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-4 items-center">
-        <a 
-          href={SMS_LINK}
-          class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
-        >
-          <Icon name="text" /> Text Adam at {PHONE_DISPLAY}
+        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+          <Icon name="text" /> Text Adam: {PHONE_DISPLAY}
         </a>
-        <a 
-          href={`tel:${PHONE_TEL}`}
-          class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
-        >
-          <Icon name="phone" /> Call {PHONE_DISPLAY}
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
+          <Icon name="phone" /> Call
         </a>
       </div>
+      <p class="mt-3 text-sm text-ink-soft">Texts go to my cell. I answer 7 a.m. to 7 p.m., Monday to Saturday.</p>
 
       <section class="mt-16 border-t border-ink/10 pt-12">
         <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-          Proven Local Results: Big Bros Dumpster Rentals
+          Big Bros bought 4 more trucks to keep up with the calls
         </h2>
-        <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-          For Big Bros Dumpster Rentals in Fresno &amp; Clovis, we deployed a custom bilingual platform that achieves a 100/100 Google PageSpeed score. The result: direct SMS booking requests increased within weeks, and their business captured high-intent commercial and residential contracts without paying thousands per month in PPC ad spend.
+        <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+          {bigBros.client} owns its trucks, but national brokers were outranking them and taking a cut of every rental. Now Big Bros is #1 on Google for “dumpster rental Fresno,” and contractors and homeowners text them directly.
         </p>
+        <p class="mt-4 text-lg text-ink/80 leading-relaxed"><strong class="text-ink">What I built:</strong></p>
+        <ul class="mt-2 space-y-1.5 text-lg text-ink/85">
+          {bigBros.planted.map((p) => <li>{p}</li>)}
+          <li>{bigBros.stack.join(' · ')}</li>
+        </ul>
+
+        <figure class="mt-8 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8">
+          <blockquote class="text-lg text-ink/90 italic leading-relaxed">“{bigBros.quote.text}”</blockquote>
+          <figcaption class="mt-4 text-ink">
+            <span class="font-display font-medium">{bigBros.quote.name}</span>
+            <span class="block font-mono text-xs text-ink-soft">{bigBros.quote.role}, {bigBros.client} · <a href={bigBros.url} class="underline hover:text-persimmon-deep">{bigBros.urlDisplay}</a></span>
+          </figcaption>
+        </figure>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
             <div class="aspect-[16/10] overflow-hidden">
-              <img 
-                src="/images/bigbros-truck.webp" 
-                alt="Big Bros Dumpster Rentals commercial roll-off delivery truck in Fresno, CA" 
-                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-                decoding="async"
-              />
+              <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-ink/10">
-              <div class="font-mono text-[10px] uppercase tracking-wider text-persimmon font-semibold">Commercial Fleet Operations</div>
-              <p class="mt-1 text-sm text-ink/80">Big Bros roll-off trucks dispatched daily across Fresno, Clovis, and Central Valley job sites.</p>
-            </figcaption>
+            <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">One of the Big Bros trucks in Fresno.</figcaption>
           </figure>
-
           <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
             <div class="aspect-[16/10] overflow-hidden">
-              <img 
-                src="/images/bigbros-family.webp" 
-                alt="William Maldonado Ramirez and the Big Bros family team in Fresno, California" 
-                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-                decoding="async"
-              />
+              <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-ink/10">
-              <div class="font-mono text-[10px] uppercase tracking-wider text-leaf font-semibold">Family-Owned &amp; Operated</div>
-              <p class="mt-1 text-sm text-ink/80">William Maldonado Ramirez and the Big Bros team — direct local service with zero middleman broker fees.</p>
-            </figcaption>
+            <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
           </figure>
         </div>
+      </section>
+
+      <section class="mt-16 border-t border-ink/10 pt-12">
+        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">What the site does for your business</h2>
+        <ul class="mt-6 space-y-4 text-lg text-ink/85 leading-relaxed max-w-3xl">
+          {gets.map(([lead, rest]) => <li><strong class="text-ink">{lead}</strong> {rest}</li>)}
+        </ul>
+      </section>
+
+      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+      <section class="mt-16">
+        <LeadLeakAudit client:visible />
       </section>
     </div>
 
     <FourSeconds client:visible />
 
-    <section class="mx-auto max-w-5xl px-5 md:px-8">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
-      <div class="mt-8 space-y-4">
-        {faqs.map((f) => (
-          <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
-              <span>{f.q}</span>
-              <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
-            </summary>
-            <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
+    <div class="mx-auto max-w-5xl px-5 md:px-8">
+      <section>
+        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
+        <div class="mt-8 space-y-4">
+          {faqs.map((f) => (
+            <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
+                <span>{f.q}</span>
+                <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
+              </summary>
+              <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="mt-16 border-t border-ink/10 pt-12 text-center">
+        <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Text me your trade and your town.</h2>
+        <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
+          I'll tell you what I'd build and what it costs. If one page is enough, I'll say so.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
+          <a href={smsTo("Hi Adam, I'm a contractor looking for a website that gets calls. What would you build for me, and what would it cost?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+            <Icon name="text" /> Text Adam: {PHONE_DISPLAY}
+          </a>
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+            <Icon name="phone" /> Call
+          </a>
+        </div>
+      </section>
+    </div>
   </main>
 
   <Footer client:visible />

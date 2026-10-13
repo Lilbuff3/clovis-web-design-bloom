@@ -1,7 +1,12 @@
 export const PHONE_DISPLAY = "(559) 575-3014";
 export const PHONE_TEL = "+15595753014";
 export const SMS_LINK = `sms:${PHONE_TEL}`;
+// A text with the first message already written. "?&body=" works on both iOS and Android.
+export const smsTo = (body: string) => `sms:${PHONE_TEL}?&body=${encodeURIComponent(body)}`;
 export const EMAIL = "adam@cloviswebdesign.com";
+// The desktop stand-in for smsTo: most computers can't open an sms: link.
+export const mailTo = (subject: string, body = "") =>
+  `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}${body && `&body=${encodeURIComponent(body)}`}`;
 
 export const cases = [
   {
