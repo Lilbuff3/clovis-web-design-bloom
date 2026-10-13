@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from "react";
  *  An attribute, not a class: React rewrites `className` when a card's classes change, which would hide it again. */
 export function useGlobalReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]"));
+    // Skip islands React hasn't hydrated yet: stamping their server HTML makes hydration mismatch.
+    // Each of those islands calls this hook itself once it hydrates.
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]")).filter(
+      (el) => !el.closest("astro-island[ssr]")
+    );
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {

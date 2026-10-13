@@ -13,7 +13,7 @@ function ClovisClock() {
   if (!now) return <span>Clovis, California</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
-  const status = hour >= 7 && hour < 19 ? "Adam's working" : hour >= 19 && hour < 23 ? "Adam's winding down — text anyway" : "Adam's asleep — he'll text back at sunrise";
+  const status = hour >= 7 && hour < 19 ? "I'm working" : hour >= 19 && hour < 23 ? "I'm winding down — text anyway" : "I'm asleep — I'll text back at sunrise";
   return (
     <span>
       {time} in Clovis · {status}
@@ -40,33 +40,25 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-[max(100svh,62rem)] max-w-7xl flex-col px-5 pb-10 pt-24 md:px-8 md:pt-36" style={{ transform: `translateY(${-par * 0.18}px)`, opacity: Math.max(0, 1 - par / 750) }}>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-[.12em] text-ink opacity-100 md:text-sm">
-          <span className="rounded-full border border-persimmon/30 bg-cream/90 px-3.5 py-2 font-bold text-persimmon-deep">$1,500 STARTER</span>
-        </div>
-
         <h1 className="font-display in mt-4 text-[clamp(2.6rem,8.5vw,7.5rem)] font-[420] leading-[0.92] text-ink">
           {/* The {" "} between lines keeps the heading readable as one sentence for screen readers; block lines don't render it. */}
           <span className="line-mask in" style={{ ["--d" as string]: "80ms" }}>
-            <span>Websites,</span>
+            <span>Custom websites,</span>
           </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
             {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
             <span>
-              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> by hand
-            </span>
-          </span>{" "}
-          <span className="line-mask in" style={{ ["--d" as string]: "320ms" }}>
-            <span>
-              <em className="wonk font-[380]">in</em> Clovis.
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> in Clovis.
             </span>
           </span>
         </h1>
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me.
+            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me. Sites start at{" "}
+            <strong className="font-semibold">$1,500</strong>.
           </p>
-          <div className="flex flex-col items-start gap-5">
+          <div className="flex flex-col items-start gap-4">
             <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
@@ -80,14 +72,16 @@ export function Hero() {
                 <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-widest text-cream/70">text me directly</span>
               </span>
             </a>
-            <a href="#harvest" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              See client results
-              <span className="transition group-hover:translate-y-1">↓</span>
-            </a>
-            <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-              Can AI find you?
-              <span className="transition group-hover:translate-y-1">↓</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href="#work" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+                See client results
+                <span className="transition group-hover:translate-y-1">↓</span>
+              </a>
+              <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+                Can AI find you?
+                <span className="transition group-hover:translate-y-1">↓</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -95,7 +89,7 @@ export function Hero() {
           <div className="rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md">
             <ClovisClock />
           </div>
-          <a href="#harvest" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
+          <a href="#work" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
             Scroll
             <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
               <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />

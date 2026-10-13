@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-08T20:59:38.990Z",
-  "total": 33,
-  "passed": 33,
+  "timestamp": "2026-10-10T02:29:35.669Z",
+  "total": 30,
+  "passed": 30,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -89,10 +89,10 @@
         {
           "id": "T2.4",
           "tier": 2,
-          "title": "Founder Person node for Adam Youssef",
+          "title": "Founder Person node for Adam",
           "status": "PASS",
           "error": null,
-          "details": "Verified founder Person node: Adam Youssef"
+          "details": "Verified founder Person node: Adam"
         },
         {
           "id": "T2.5",
@@ -162,6 +162,14 @@
           "status": "PASS",
           "error": null,
           "details": "Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
+        },
+        {
+          "id": "T3.5",
+          "tier": 3,
+          "title": "Homepage follows DESIGN.md text rules: 11px minimum, no small text on bright persimmon, no faded ink, no numbered section labels",
+          "status": "PASS",
+          "error": null,
+          "details": "No sub-11px text, no small text on bright persimmon, no faded ink text, no numbered section labels"
         }
       ]
     },
@@ -229,66 +237,34 @@
         {
           "id": "T6.1",
           "tier": 6,
-          "title": "Medical practice web design silo pre-rendered static HTML with deep semantic volume",
+          "title": "Medical page is pre-rendered with an h1 and its sections",
           "status": "PASS",
           "error": null,
-          "details": "Medical landing page pre-rendered with rich semantic hierarchy (1 h1, 9 h2s, 34 ps, 18198 chars)"
+          "details": "Medical page pre-rendered (1 h1, 6 h2s)"
         },
         {
           "id": "T6.2",
           "tier": 6,
-          "title": "HIPAA compliance architecture, unencrypted SMS/Sheets risks, and generic SMS alert copy",
+          "title": "Medical page explains that the site never collects patient data, without giving legal advice",
           "status": "PASS",
           "error": null,
-          "details": "HIPAA compliance architecture verified: unencrypted risk analysis, compliant generic SMS copy, and BAA intake workflows present"
+          "details": "Patient-data approach stated plainly, with a legal-advice disclaimer"
         },
         {
           "id": "T6.3",
           "tier": 6,
-          "title": "Front-desk triage: Deflecting the 3 Big Questions, insurance carrier list, and scheduling portals",
+          "title": "No unbacked legal promises, invented stats or internal SEO labels in visible copy",
           "status": "PASS",
           "error": null,
-          "details": "Front-desk triage verified: 3 Big Questions deflected, 9 insurance carriers listed, 4 scheduling portals referenced, intake packet available"
+          "details": "No banned claims across 5 routes"
         },
         {
           "id": "T6.4",
           "tier": 6,
-          "title": "ADA Title III drive-by lawsuit defense and FTC 16 CFR Part 465 compliant review management",
+          "title": "Kidney Specialist case study carries the attributed quote and results",
           "status": "PASS",
           "error": null,
-          "details": "ADA Title III defense (WCAG 2.1 AA, drive-by protection) and FTC 16 CFR Part 465 review compliance (zero public PHI) verified"
-        },
-        {
-          "id": "T6.5",
-          "tier": 6,
-          "title": "Provider credentials, clinical philosophy, compliant before/after galleries & clinic photography",
-          "status": "PASS",
-          "error": null,
-          "details": "Provider credentials (board certifications, clinical philosophy), compliant elective galleries, and clinic photography verified"
-        },
-        {
-          "id": "T6.6",
-          "tier": 6,
-          "title": "Contractor vs. Medical Clinic comparative matrix rendered as semantic HTML table",
-          "status": "PASS",
-          "error": null,
-          "details": "Semantic comparison table verified across all 5 operational dimensions (Goal, Speed, Storage, Decision, Price)"
-        },
-        {
-          "id": "T6.7",
-          "tier": 6,
-          "title": "Primary <h2> headings aligned with Google Business Profile categories for Maps justifications",
-          "status": "PASS",
-          "error": null,
-          "details": "Primary <h2> headings verified matching GBP categories (\"Medical clinic\", \"Doctor\", \"Website designer\") for Google Maps justifications"
-        },
-        {
-          "id": "T6.8",
-          "tier": 6,
-          "title": "Generative Engine Optimization: Primary <h2> answer blocks are atomic 134–167 word semantic units",
-          "status": "PASS",
-          "error": null,
-          "details": "Verified 3 atomic GEO semantic units strictly conforming to 134–167 words with local entity anchors"
+          "details": "Case study, quote and results present"
         },
         {
           "id": "T6.9",

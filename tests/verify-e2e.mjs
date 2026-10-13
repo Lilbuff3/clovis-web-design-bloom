@@ -904,28 +904,13 @@ function getMedicalHtml() {
   return fs.readFileSync(MEDICAL_HTML_PATH, 'utf-8');
 }
 
-assertTest(6, 'T6.1', 'Medical practice web design silo pre-rendered static HTML with deep semantic volume', () => {
+assertTest(6, 'T6.1', 'Medical page is pre-rendered with an h1 and its sections', () => {
   const html = getMedicalHtml();
-  const stat = fs.statSync(MEDICAL_HTML_PATH);
-
-  if (stat.size < 5000) {
-    throw new Error(`Medical landing page HTML is unexpectedly small (${stat.size} bytes, expected >= 5KB)`);
-  }
-
   const h1s = extractTextBetweenTags(html, 'h1');
   const h2s = extractTextBetweenTags(html, 'h2');
-  const ps = extractTextBetweenTags(html, 'p');
-
   if (h1s.length < 1) throw new Error(`Missing <h1> heading on medical landing page.`);
-  if (h2s.length < 5) throw new Error(`Found only ${h2s.length} <h2> headings (expected at least 5 deep sections).`);
-  if (ps.length < 10) throw new Error(`Found only ${ps.length} <p> paragraphs (expected at least 10).`);
-
-  const combinedLength = [...h1s, ...h2s, ...ps].join(' ').length;
-  if (combinedLength < 2500) {
-    throw new Error(`Semantic text volume too low (${combinedLength} chars, expected >= 2,500 chars).`);
-  }
-
-  return `Medical landing page pre-rendered with rich semantic hierarchy (${h1s.length} h1, ${h2s.length} h2s, ${ps.length} ps, ${combinedLength} chars)`;
+  if (h2s.length < 4) throw new Error(`Found only ${h2s.length} <h2> headings (expected at least 4 sections).`);
+  return `Medical page pre-rendered (${h1s.length} h1, ${h2s.length} h2s)`;
 });
 
 // Mock clinic copy (insurance lists, "accepting new patients", a doctor's bio) made the page read as a clinic.
@@ -935,11 +920,14 @@ assertTest(6, 'T6.2', 'Medical page sells web design to practices and never spea
   const hits = clinicVoice.filter((r) => r.test(text));
   if (hits.length) throw new Error(`Clinic-voice copy on the medical page: ${hits.join(', ')}`);
   if (!/Business Associate Agreement/i.test(text)) throw new Error(`Missing where patient data goes instead (the intake vendor's BAA).`);
-  return `No clinic-voice copy; online intake goes to BAA-covered tools`;
+  if (!/not legal advice/i.test(text)) throw new Error(`Missing the "not legal advice" note next to the privacy section.`);
+  return `No clinic-voice copy; online intake goes to BAA-covered tools; legal-advice note present`;
 });
 
-assertTest(6, 'T6.3', 'No SEO working notes in visible copy on any route', () => {
-  const leaks = [/GBP/, /Primary Category/i, /Secondary Category/i, /geo-unit/i, /wikidata/i, /\bQ\d{4,}\b/, /entity grounding/i, /Knowledge Graph/i];
+assertTest(6, 'T6.3', 'No SEO working notes, legal promises or unbacked numbers in visible copy on any route', () => {
+  const leaks = [/GBP/, /Primary Category/i, /Secondary Category/i, /geo-unit/i, /wikidata/i, /\bQ\d{4,}\b/, /entity grounding/i, /Knowledge Graph/i,
+    // Legal promises and numbers nobody could back up (from the old medical copy).
+    /100% HIPAA/i, /regulatory immunity/i, /bulletproof/i, /sixty percent/i, /Board Certified/i, /HEPA/i];
   const found = [];
   for (const r of REQUIRED_ROUTES) {
     const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '');
@@ -970,6 +958,14 @@ assertTest(6, 'T6.4', 'Each route has its own Service node, and FAQPage only lis
     }
   }
   return `${seen.size} distinct Services: ${[...seen].join('; ')}`;
+});
+
+assertTest(6, 'T6.5', 'Kidney Specialist case study carries the attributed quote and results', () => {
+  const text = getMedicalHtml().replace(/<[^>]+>/g, ' ');
+  if (!/Kidney Specialist Inc/.test(text)) throw new Error(`Missing the Kidney Specialist Inc. case study.`);
+  if (!/up more than 40%/i.test(text)) throw new Error(`Missing Dr. Masood's quote with the referral result.`);
+  if (!/100\/100/.test(text)) throw new Error(`Missing the 100/100 PageSpeed result.`);
+  return `Case study, quote and results present`;
 });
 
 assertTest(6, 'T6.9', 'Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)', () => {

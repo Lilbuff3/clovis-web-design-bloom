@@ -77,7 +77,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
               >
                 <img
                   src={c.previewImg}
-                  alt={`${c.client} hand-built website`}
+                  alt={`${c.client} website`}
                   className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                   decoding="async"
@@ -153,12 +153,12 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
       </div>
 
       <div className={`lg:col-span-6 ${flip ? "lg:order-1" : ""}`}>
-        <div className="reveal font-mono text-[11px] uppercase tracking-[.2em] text-ink-soft">
-          {c.trade} · {c.year}
-        </div>
-        <h3 className="reveal font-display mt-3 text-[clamp(2rem,3.6vw,3.3rem)] font-[420] leading-[1.02]" style={{ ["--d" as string]: "80ms" }}>
+        <h3 className="reveal font-display text-[clamp(2rem,3.6vw,3.3rem)] font-[420] leading-[1.02]" style={{ ["--d" as string]: "80ms" }}>
           {c.headline}
         </h3>
+        <p className="reveal mt-3 text-[15px] text-ink-soft" style={{ ["--d" as string]: "80ms" }}>
+          {c.trade} · {c.year}
+        </p>
 
         <div className="reveal mt-8 grid gap-6 sm:grid-cols-2" style={{ ["--d" as string]: "160ms" }}>
           <div className="rounded-3xl bg-cream p-5">
@@ -212,13 +212,9 @@ export function ClientWork() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <h2 className="font-display text-[clamp(2.8rem,7vw,6.5rem)] font-[420] leading-[0.92]">
+            <h2 className="font-display h-section">
               <span className="line-mask"><span>Real businesses.</span></span>{" "}
-              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-                <span>
-                  <em className="wonk text-leaf">Measurable results.</em>
-                </span>
-              </span>
+              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Measurable results.</span></span>
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
@@ -236,10 +232,10 @@ export function ClientWork() {
         <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <h3 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
-              This spot's <em className="wonk text-citrus">yours</em>, if you want it.
+              Your business could be next.
             </h3>
             <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
-              Claim a spot by text <span aria-hidden>→</span>
+              Text me to get started <span aria-hidden>→</span>
             </a>
           </div>
         </div>
