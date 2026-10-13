@@ -24,6 +24,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [ai, setAi] = useState<Answer | "asking" | "failed" | "limit" | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
+  const Title = compact ? "h3" : "h2";
 
   // The form goes away while it asks, so focus moves to whatever comes back.
   useEffect(() => {
@@ -73,9 +74,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
       {ai === null && (
         <form onSubmit={ask} className={compact ? "mt-1" : "mt-8"}>
-          <h3 className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "text-[clamp(2.75rem,7vw,5.25rem)]"}`}>
+          {/* h2 as the #check section's own heading; h3 under the drawer's "Free AI check" h2. */}
+          <Title className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "text-[clamp(2.75rem,7vw,5.25rem)]"}`}>
             Can AI <em className="wonk text-persimmon">find you?</em>
-          </h3>
+          </Title>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
             Customers ask Google's AI who to call. Type your business and see whether it names you.
           </p>

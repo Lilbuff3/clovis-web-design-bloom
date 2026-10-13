@@ -4,12 +4,34 @@ import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
 import { FourSeconds } from '../../components/FourSeconds';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK, offer, pageSchema, plans, type Faq } from '../../lib/data';
+
+const [starter, growth] = plans;
+
+const faqs: Faq[] = [
+  {
+    q: 'How much does a contractor website cost?',
+    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}.`,
+  },
+  {
+    q: 'Can customers text me from the site?',
+    a: 'Yes. Every page has tap-to-call and tap-to-text buttons that go straight to your phone, with no form or call center in between.',
+  },
+];
+
+const schema = pageSchema('/services/contractor-websites/', {
+  name: 'Contractor website design',
+  serviceType: 'Web design',
+  audience: 'Contractors and trade businesses',
+  description: 'Websites for roofers, HVAC companies, plumbers and other trades in Clovis and Fresno, with tap-to-call and tap-to-text on every page.',
+  offers: [offer('Starter'), offer('Growth')],
+}, faqs);
 ---
 
 <RootLayout 
   title="Contractor & Trade Websites — Clovis & Fresno, CA"
   description="High-converting websites for roofers, HVAC, plumbers, and dumpster rentals in Fresno & Clovis. Tap-to-call, text-to-book, 100/100 speed. Built by Adam."
+  schema={schema}
 >
   <Nav client:load />
 
@@ -87,6 +109,21 @@ import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
     </div>
 
     <FourSeconds client:visible />
+
+    <section class="mx-auto max-w-5xl px-5 md:px-8">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
+              <span>{f.q}</span>
+              <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
+            </summary>
+            <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
   </main>
 
   <Footer client:visible />

@@ -224,55 +224,86 @@ export const hasOfferCatalog = {
   ],
 };
 
-export const schemaGraph = {
-  "@context": "https://schema.org",
-  "@graph": [
+export const business = {
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://cloviswebdesign.com/#business",
+  "name": "Clovis Web Design",
+  "url": "https://cloviswebdesign.com",
+  "telephone": "+15595753014",
+  "email": EMAIL,
+  "priceRange": "$1,500 - $5,000",
+  "image": "https://cloviswebdesign.com/images/hero.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Clovis",
+    "addressRegion": "CA",
+    "postalCode": "93612",
+    "addressCountry": "US",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.8252,
+    "longitude": -119.7029,
+  },
+  "openingHoursSpecification": [
     {
-      "@type": ["LocalBusiness", "ProfessionalService"],
-      "@id": "https://cloviswebdesign.com/#business",
-      "name": "Clovis Web Design",
-      "url": "https://cloviswebdesign.com",
-      "telephone": "+15595753014",
-      "email": EMAIL,
-      "priceRange": "$1,500 - $5,000",
-      "image": "https://cloviswebdesign.com/images/hero.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Clovis",
-        "addressRegion": "CA",
-        "postalCode": "93612",
-        "addressCountry": "US",
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 36.8252,
-        "longitude": -119.7029,
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "07:00",
-          "closes": "19:00",
-        },
-      ],
-      "founder": {
-        "@type": "Person",
-        "@id": "https://cloviswebdesign.com/#adam",
-        "name": "Adam Youssef",
-        "jobTitle": "Founder & Lead Developer",
-        "knowsAbout": knowsAbout,
-      },
-      // No Wikidata links: the old IDs pointed at Rhodes, Greece and a district of St. Petersburg.
-      // No sameAs: only add profiles Adam has confirmed are his.
-      "areaServed": [
-        { "@type": "City", "name": "Clovis, CA" },
-        { "@type": "City", "name": "Fresno, CA" },
-        { "@type": "City", "name": "Madera, CA" },
-      ],
-      "knowsAbout": knowsAbout,
-      "hasOfferCatalog": hasOfferCatalog,
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "07:00",
+      "closes": "19:00",
     },
   ],
+  "founder": {
+    "@type": "Person",
+    "@id": "https://cloviswebdesign.com/#adam",
+    "name": "Adam Youssef",
+    "jobTitle": "Founder & Lead Developer",
+    "knowsAbout": knowsAbout,
+  },
+  // No Wikidata links: the old IDs pointed at Rhodes, Greece and a district of St. Petersburg.
+  // No sameAs: only add profiles Adam has confirmed are his.
+  "areaServed": [
+    { "@type": "City", "name": "Clovis, CA" },
+    { "@type": "City", "name": "Fresno, CA" },
+    { "@type": "City", "name": "Madera, CA" },
+  ],
+  "knowsAbout": knowsAbout,
+  "hasOfferCatalog": hasOfferCatalog,
 };
+
+export const offer = (name: string) => hasOfferCatalog.itemListElement.find((o) => o.name === name)!;
+
+export type Faq = { q: string; a: string };
+
+// One Service per URL, each with its own audience, so no two pages claim the same thing.
+// FAQPage only from questions the page shows; Google drops markup that isn't visible.
+export function pageSchema(path: string, service: { name: string; serviceType: string; audience: string; description: string; offers?: object[] }, pageFaqs: Faq[] = []) {
+  const url = `https://cloviswebdesign.com${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      business,
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        "url": url,
+        "name": service.name,
+        "serviceType": service.serviceType,
+        "description": service.description,
+        "provider": { "@id": business["@id"] },
+        "areaServed": business.areaServed,
+        "audience": { "@type": "BusinessAudience", "audienceType": service.audience },
+        ...(service.offers && { "offers": service.offers }),
+      },
+      ...(pageFaqs.length
+        ? [{
+            "@type": "FAQPage",
+            "@id": `${url}#faq`,
+            "url": url,
+            "mainEntity": pageFaqs.map((f) => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } })),
+          }]
+        : []),
+    ],
+  };
+}
 

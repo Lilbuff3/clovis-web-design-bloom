@@ -23,6 +23,27 @@ Adam Youssef's web design studio site. This repo is the live site; the old Astro
 Vercel project `clovis-web-design-bloom`. A push to `main` is a production deploy of
 cloviswebdesign.com.
 
+## SEO: one search per page
+
+Each URL owns one set of searches. Don't add a page that competes with another for them.
+
+| URL | Owns |
+| --- | --- |
+| `/` | Clovis web design / web designer, the brand name; Fresno web design as a secondary |
+| `/services/medical-web-design/` | Medical, dental and healthcare practice web design |
+| `/services/contractor-websites/` | Contractor and trade website design |
+| `/services/local-seo-fresno/` | Fresno local SEO, Google Maps rankings |
+
+`/services/web-design-clovis/` competed with `/` and now 301s there (`vercel.json`).
+
+- No SEO working notes in visible copy: no "GBP Primary Category" labels, Wikidata IDs,
+  "entity grounding" or GEO-unit markers. `tests/verify-e2e.mjs` T6.3 checks.
+- Pages describe the website work Adam does. A client's own voice (insurance lists, "accepting
+  new patients", a doctor's credentials) stays on the client's site, or Google reads the page as
+  that business.
+- Schema comes from `pageSchema()` in `src/lib/data.ts`: the business, one `Service`, and a
+  `FAQPage` built from the same array the page renders, so the markup always matches what shows.
+
 ## Read before changing copy or design
 
 | Doc | Covers |

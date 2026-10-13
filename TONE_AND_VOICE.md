@@ -139,4 +139,4 @@ Topic pages under `/services/`, linked from the nav, `#who` and the footer:
 | :--- | :--- |
 | `/services/contractor-websites/` | Big Bros results, then `#speed`: the four-second race (Olsen Roofing on two phones, the stopwatch, the home Wi-Fi paragraph) with a plain-words numbers row. |
 | `/services/medical-web-design/` | Medical & professional offices, the lead niche. |
-| `/services/web-design-clovis/`, `/services/local-seo-fresno/` | Location and local SEO pages, footer-linked. |
+| `/services/local-seo-fresno/` | Local SEO: Google Business Profile, business schema, town pages; the Big Bros ranking. Footer-linked. |
