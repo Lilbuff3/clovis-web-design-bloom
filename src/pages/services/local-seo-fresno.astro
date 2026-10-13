@@ -3,110 +3,98 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK, care, cases, pageSchema, type Faq } from '../../lib/data';
+
+const bigBros = cases[1];
+const carePlus = care.find((c) => c.name === 'Care Plus')!;
+
+const faqs: Faq[] = [
+  {
+    q: 'Can you guarantee a top-3 spot on Google Maps?',
+    a: "No, and be careful with anyone who does. Google decides, and how close the searcher is to your business counts for a lot. What I can control is whether Google finds the same clear facts about your business everywhere it looks.",
+  },
+  {
+    q: 'What does local SEO cost?',
+    a: `Every site I build launches connected to Google Search and Maps at no extra charge. Ongoing local SEO is the ${carePlus.name} plan: ${carePlus.price} a month, cancel with one text.`,
+  },
+];
+
+const schema = pageSchema('/services/local-seo-fresno/', {
+  name: 'Local SEO in Fresno, CA',
+  serviceType: 'Local search engine optimization',
+  audience: 'Local service businesses',
+  description: 'Google Business Profile setup, business schema and location pages for businesses in Fresno, Clovis and Madera.',
+  offers: [{
+    '@type': 'Offer',
+    name: carePlus.name,
+    priceCurrency: 'USD',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: carePlus.price.replace('$', ''), priceCurrency: 'USD', unitText: 'MONTH' },
+    description: carePlus.blurb,
+  }],
+}, faqs);
 ---
 
 <RootLayout
-  title="Fresno Local SEO — Show Up in Google Maps"
-  description="Local SEO for Fresno and Clovis businesses: show up when nearby customers search on Google and Google Maps. Fast sites that turn searches into calls."
+  title="Fresno Local SEO & Google Maps 3-Pack Optimization"
+  description="Local SEO for Fresno and Clovis businesses: Google Business Profile, business schema and town pages, so Google knows who you are and where you work. $249/month."
+  schema={schema}
 >
   <Nav client:load />
 
-  <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Local SEO in Fresno
+      Fresno Local SEO &amp; Google Maps 3-Pack
     </h1>
 
     <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      When someone in Fresno, Clovis or Madera searches for what you do, Google shows three businesses on a map. I set up your website and your Google listing so you have the best shot at being one of them, and so the people who find you can call or text in one tap.
+      When someone in Fresno searches for what you do, Google shows three businesses on a map before anything else. I set up your website and your Google Business Profile so Google knows exactly who you are, what you do and where you work, which is what it uses to pick those three.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a
-        href={SMS_LINK}
-        class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
-      >
+      <a href={SMS_LINK} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
         <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
-      <a
-        href={`tel:${PHONE_TEL}`}
-        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
-      >
+      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
         <Icon name="phone" /> Call {PHONE_DISPLAY}
       </a>
     </div>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        How Google decides who to show
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Google has to be sure what your business does and where you work. Stuffing a page with keywords doesn't do that anymore.
-      </p>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        I give each service and each town its own page, add the behind-the-scenes details Google reads to understand a business, and make sure your website and your Google Business Profile say the same thing.
-      </p>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">What local SEO covers</h2>
+      <ul class="mt-6 space-y-3 text-lg text-ink/85 leading-relaxed">
+        <li><strong class="text-ink">Google Business Profile:</strong> the right categories, services, hours and photos, matching your website word for word.</li>
+        <li><strong class="text-ink">Business schema:</strong> code on your site that gives Google your name, phone, address and service area in a format it reads directly.</li>
+        <li><strong class="text-ink">Town pages:</strong> a page for each town you serve, written about the work you do there, not one page with the town name swapped.</li>
+        <li><strong class="text-ink">Fast mobile pages:</strong> so a visit from Google turns into a call instead of a back-button tap.</li>
+      </ul>
     </section>
 
     <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Results in the Central Valley
-      </h2>
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <h3 class="font-display text-xl text-ink font-medium">Big Bros Dumpster Rentals</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Number one on Google for “dumpster rental Fresno,” ahead of the national brokers that used to take those calls.
-          </p>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">How {bigBros.client} reached #1 for “dumpster rental Fresno”</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
+        {bigBros.problem} Big Bros now ranks first on Google for “dumpster rental Fresno,” and added 4 trucks to keep up with the calls.
+      </p>
+      <figure class="mt-8 overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm md:max-w-xl">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="/images/bigbros-truck.webp" alt="Big Bros roll-off dumpster truck in Fresno" class="h-full w-full object-cover" loading="lazy" decoding="async" />
         </div>
-        <div class="rounded-2xl border border-ink/10 bg-paper p-6 shadow-sm">
-          <h3 class="font-display text-xl text-ink font-medium">Kidney Specialist Inc.</h3>
-          <p class="mt-2 text-ink/80 text-sm leading-relaxed">
-            Referrals from other doctors are up more than 40%, by Dr. Masood's count, with a site that collects no patient data.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img
-              src="/images/bigbros-truck.webp"
-              alt="A Big Bros roll-off dumpster in a Fresno driveway"
-              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <figcaption class="p-4 border-t border-ink/10">
-            <p class="text-sm text-ink/80">More calls from Google meant Big Bros needed 4 more trucks.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img
-              src="/images/bigbros-family.webp"
-              alt="William Maldonado Ramirez and the Big Bros team in Fresno, California"
-              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <figcaption class="p-4 border-t border-ink/10">
-            <p class="text-sm text-ink/80">William and the Big Bros team, a family business in Fresno.</p>
-          </figcaption>
-        </figure>
-      </div>
+        <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">{bigBros.client}, {bigBros.place}</figcaption>
+      </figure>
     </section>
 
     <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        A fast site turns searches into calls
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Being first on Google doesn't help if your site is slow or hard to use. Every site I build opens fast on a phone and has call and text buttons right where thumbs land.
-      </p>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Questions about local SEO</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
+              <span>{f.q}</span>
+              <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
+            </summary>
+            <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
     </section>
   </main>
 

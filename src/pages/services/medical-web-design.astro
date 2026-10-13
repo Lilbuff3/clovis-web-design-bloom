@@ -3,151 +3,188 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from '../../lib/data';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, mailTo, pageSchema, smsTo, type Faq } from '../../lib/data';
 
-const faqs = [
+// Everything here is about the website Adam builds for a practice. Clinic-voice copy
+// (insurance lists, "accepting new patients", provider bios) belongs on the client's own site.
+// Written for a practice owner or manager, often at a desk where sms: links don't open: email is offered too.
+const kidney = cases[0];
+const textAdam = smsTo("Hi Adam, I manage a medical practice and I'd like to talk about our website.");
+const emailAdam = mailTo("Our practice's website");
+
+const faqs: Faq[] = [
   {
-    q: 'Does our website need a BAA?',
-    a: "A BAA (Business Associate Agreement) is for companies that handle patient information. Because your website never collects any, the site itself doesn't touch patient data. The tools that do, like your patient portal or scheduling system, are where BAAs belong. Your compliance officer or attorney should confirm what applies to your practice.",
+    q: 'Does our practice need a BAA with its web designer?',
+    a: "Usually not for a site built this way, because it never receives patient information. The Business Associate Agreement belongs with the service that does: your online intake form or patient portal.",
   },
   {
-    q: 'Can patients book through the system we already use?',
-    a: 'Yes, if it gives you a booking link. Zocdoc, NexHealth, athenahealth and most patient portals do. I put that link where patients look for it.',
+    q: 'Can patients book through the scheduling system we already use?',
+    a: "Yes, if it gives you a booking link or an embed, as Zocdoc, NexHealth and most patient portals do. I put it on the site. I don't build custom EHR integrations.",
   },
   {
-    q: 'Do you use accessibility widgets?',
-    a: "No. Those add-on widgets don't fix the page underneath. I build the site to work with screen readers and keyboards from the start, so there's nothing to bolt on.",
-  },
-  {
-    q: 'How long does it take, and what does it cost?',
-    a: 'Most practice sites are the Flagship plan: $5,000, paid once, in about 4 to 6 weeks. You own the code and the domain from day one.',
+    q: 'What does a medical practice website cost?',
+    a: "It depends on what your practice needs. A few clear pages for patients and referring offices cost far less than a site with online booking and a Spanish version. Tell me what you need and I'll give you a price that works for your practice before you commit to anything. You own the code and the domain from day one.",
   },
 ];
+
+const schema = pageSchema('/services/medical-web-design/', {
+  name: 'Medical practice web design',
+  serviceType: 'Web design',
+  audience: 'Medical and dental practices',
+  description: 'Websites for medical and dental practices in Fresno, Clovis and Madera that collect no patient information online and meet WCAG 2.1 AA.',
+}, faqs);
 ---
 
 <RootLayout
-  title="Websites for Medical Practices — Fresno & Clovis, CA"
-  description="Websites for clinics and private practices in Fresno, Clovis and Madera. They never collect patient data, work with your existing booking tools, and are easy for every patient to read."
+  title="Medical Practice Web Design — Fresno & Clovis, CA"
+  description="Websites for medical and dental practices in Fresno, Clovis and Madera. No patient data collected online, built to WCAG 2.1 AA. Tell me what your practice needs."
+  schema={schema}
 >
   <Nav client:load />
 
-  <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Websites for medical practices
+      Medical Practice Web Design
     </h1>
 
-    <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      I build websites for clinics and private practices in Fresno, Clovis and Madera. They load fast, they're easy to read for every patient, and they never collect patient health information.
+    <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
+      I design and build websites for medical and dental practices in Fresno, Clovis and Madera. Your site answers the questions your front desk gets all day, makes it easy for other doctors to refer to you, and never holds patient information, so there's nothing on it to breach.
+    </p>
+    <p class="mt-4 text-lg text-ink">
+      <strong>Every practice needs something different, so let's talk.</strong> Tell me what you need and I'll make the price work, so the site earns back what it costs. You own the site and the domain.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a
-        href={SMS_LINK}
-        class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
-      >
-        <Icon name="text" /> Text me at {PHONE_DISPLAY}
+      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+        <Icon name="phone" /> Call me: {PHONE_DISPLAY}
       </a>
-      <a
-        href={`tel:${PHONE_TEL}`}
-        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80"
-      >
-        <Icon name="phone" /> Call {PHONE_DISPLAY}
+      <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
+        <Icon name="text" /> Text
       </a>
     </div>
+    <p class="mt-3 text-sm text-ink-soft">
+      I answer 7 a.m. to 7 p.m., Monday to Saturday. Prefer email? <a href={emailAdam} class="underline hover:text-persimmon-deep">{EMAIL}</a>
+    </p>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        No patient data on your website
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        A typical contact form sends whatever a patient types, symptoms included, to an ordinary email inbox. That's how health information ends up where it shouldn't be.
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">A website that never holds patient data</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        Most practice websites get into HIPAA trouble through a contact form. A patient types their symptoms into it, and the message lands in an ordinary inbox or spreadsheet. The sites I build have no forms that ask about health. Patients call or text the office, or use the intake and booking tools your practice already runs. If the website never receives patient information, a hacked or misconfigured website has none to expose.
       </p>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Your site won't have a form like that. When patients need to send details or book a visit, the button takes them to the tools you already use for that, like your patient portal or scheduling system.
-      </p>
-      <p class="mt-4 text-[15px] text-ink-soft leading-relaxed">
-        This keeps patient information off your website. It isn't legal advice; your compliance officer or attorney has the final word.
-      </p>
-    </section>
-
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Answers patients want before they call
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Most calls to the front desk ask the same few things. Do you take my insurance? Are you taking new patients? How do I book? I put those answers on your homepage, with your intake forms ready to download, so fewer people need to call just to ask.
-      </p>
-    </section>
-
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Easy to read for every patient
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Large, high-contrast text for older patients. Pages that work with screen readers and without a mouse. I build this in from the start instead of adding a widget at the end.
-      </p>
-    </section>
-
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Kidney Specialist Inc.
-      </h2>
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <div class="md:col-span-5">
-          <img
-            src="/images/kidney-preview.webp"
-            alt="The Kidney Specialist Inc. website"
-            class="rounded-2xl border border-ink/10 shadow-md w-full object-cover"
-            width="600"
-            height="380"
-            loading="lazy"
-          />
+      <p class="mt-3 text-sm text-ink-soft max-w-3xl">This is how I build sites, not legal advice. Your compliance lead or attorney has the final say.</p>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <h3 class="font-display text-xl text-ink font-medium">Where online intake and booking go</h3>
+          <p class="mt-2 text-ink/80 leading-relaxed">
+            If you take intake forms or appointments online, the site links to the HIPAA-compliant service you already use, such as Jotform HIPAA, FormDr or your EHR's patient portal. That vendor signs the Business Associate Agreement with you, and patient information stays on its system.
+          </p>
         </div>
-        <figure class="md:col-span-7">
-          <blockquote class="font-display text-lg md:text-xl text-ink/90 leading-relaxed">
-            “My main concern was compliance with HIPAA, HITECH and CMIA regulations. Adam was very knowledgeable and experienced with handling these regulations. He made a professional-grade website that looked stunning while protecting the rights of my patients and protecting my practice. And our provider referrals are up over 40%!”
-          </blockquote>
-          <figcaption class="mt-4 text-sm text-ink/70">
-            <span class="font-medium text-ink">Dr. Sheikh Mohammad Masood, MD</span> · Founding President &amp; Medical Director, Kidney Specialist Inc.
-          </figcaption>
-        </figure>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <h3 class="font-display text-xl text-ink font-medium">No ad-tracking pixels</h3>
+          <p class="mt-2 text-ink/80 leading-relaxed">
+            Ad pixels can pass what a visitor looked at on your site to Facebook or Google. On a practice's site, that can include which condition they read about. The medical sites I build don't have them.
+          </p>
+        </div>
       </div>
-      <ul class="mt-8 grid gap-4 sm:grid-cols-3 text-ink/80">
-        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">+40%</span> Referrals from other doctors, by Dr. Masood's count</li>
-        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">100/100</span> Google PageSpeed</li>
-        <li class="border-t border-ink/15 pt-3"><span class="block font-display text-3xl text-ink">0</span> Patient details collected online</li>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Answers to the calls your front desk gets most</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        Most calls to a practice ask the same three things. I put each answer on the site in plain words, so fewer of those calls reach your front desk and your staff spend that time on the patients in front of them.
+      </p>
+      <ul class="mt-6 space-y-3 text-lg text-ink/85 leading-relaxed max-w-3xl">
+        <li><strong class="text-ink">Insurance:</strong> the plans you take, by name, and what to do if a plan isn't listed.</li>
+        <li><strong class="text-ink">New patients:</strong> whether you're taking them, and whether they need a referral first.</li>
+        <li><strong class="text-ink">Booking:</strong> your booking link or phone number, plus registration forms patients can print and fill in at home.</li>
       </ul>
     </section>
 
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Questions practices ask
-      </h2>
-      <dl class="mt-6 divide-y divide-ink/10 border-y border-ink/10">
-        {faqs.map((f) => (
-          <div class="py-6">
-            <dt class="font-display text-xl text-ink">{f.q}</dt>
-            <dd class="mt-2 max-w-3xl text-[17px] leading-relaxed text-ink/80">{f.a}</dd>
-          </div>
-        ))}
-      </dl>
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Make it easy for other doctors to refer to you</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        A referring office wants to know where to send a referral, what to include, and whether you take the patient's plan. I build a page just for them that answers all three, with printable forms, so their staff don't have to call yours to ask. Dr. Masood says referrals from other doctors are up more than 40% since his new site went live.
+      </p>
     </section>
 
-    <section class="mt-12 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
-        Talk to the person who builds it
-      </h2>
-      <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        Text or call me. You'll talk to the person who writes your site, not an account manager.
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Accessible to every patient</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        Many patients are older, have low vision, or use a screen reader. I build every page to WCAG 2.1 AA, so they can read it without zooming, use it with a keyboard alone, and find the phone number without help. That matters for your liability too: website accessibility lawsuits are common in California, and the overlay widgets some sites add don't fix the page underneath. I fix the page itself.
       </p>
-      <div class="mt-6 flex flex-wrap gap-4 items-center">
-        <a
-          href={SMS_LINK}
-          class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink"
-        >
-          <Icon name="text" /> Text me at {PHONE_DISPLAY}
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Patient reviews, within HIPAA and FTC rules</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        The review request I set up goes to every patient after a visit, not only the happy ones. Asking only patients you expect to be pleased is review gating, which the FTC treats as deceptive. Replies are the other risk: confirming that a reviewer is your patient discloses health information, and HHS has fined practices for it. Every practice gets a reply template that never confirms or denies who is a patient.
+      </p>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Case study: {kidney.client}</h2>
+      <p class="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink-soft">{kidney.trade} · {kidney.place} · {kidney.year}</p>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-5">
+          <img src={kidney.previewImg} alt={`${kidney.client} website on a desktop screen`} class="rounded-2xl border border-ink/10 shadow-md w-full object-cover" width="600" height="380" loading="lazy" />
+        </div>
+        <div class="md:col-span-7">
+          <p class="text-lg text-ink/80 leading-relaxed"><strong class="text-ink">The problem:</strong> {kidney.problem}</p>
+          <p class="mt-4 text-lg text-ink/80 leading-relaxed"><strong class="text-ink">What I built:</strong></p>
+          <ul class="mt-2 space-y-1.5 text-lg text-ink/85">
+            {kidney.planted.map((p) => <li>{p}</li>)}
+            <li>{kidney.stack.join(', ')}</li>
+          </ul>
+          <dl class="mt-6 grid grid-cols-2 gap-6">
+            {kidney.yields.map((y) => (
+              <div class="border-t border-ink/15 pt-3">
+                <dt class="text-sm text-ink-soft">{y.label}</dt>
+                <dd class="font-display text-4xl text-ink">{y.prefix}{y.value}{y.suffix}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      <figure class="mt-8 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8">
+        <blockquote class="text-lg text-ink/90 italic leading-relaxed">“{kidney.quote.text}”</blockquote>
+        <figcaption class="mt-4 text-ink">
+          <span class="font-display font-medium">{kidney.quote.name}</span>
+          <span class="block font-mono text-xs text-ink-soft">{kidney.quote.role}, {kidney.client} · <a href={kidney.url} class="underline hover:text-persimmon-deep">{kidney.urlDisplay}</a></span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Questions practices ask</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
+              <span>{f.q}</span>
+              <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
+            </summary>
+            <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12 text-center">
+      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Let's talk about your practice's website</h2>
+      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
+        You'll talk to the person who builds the site, not an account manager. Tell me what your front desk gets asked most and I'll tell you what I'd put on the site.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <Icon name="phone" /> Call me: {PHONE_DISPLAY}
+        </a>
+        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <Icon name="text" /> Text
         </a>
       </div>
+      <p class="mt-4 text-sm text-ink-soft">Or email <a href={emailAdam} class="underline hover:text-persimmon-deep">{EMAIL}</a></p>
     </section>
   </main>
 

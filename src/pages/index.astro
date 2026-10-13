@@ -7,9 +7,17 @@ import { Season, Compare } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
 import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
-import { PHONE_TEL } from '../lib/data';
+import { faqs, hasOfferCatalog, pageSchema, smsTo } from '../lib/data';
 
-const agencyText = `sms:${PHONE_TEL}?&body=${encodeURIComponent("Hi Adam! I'm with an agency and have a Figma project for you.")}`;
+const agencyText = smsTo("Hi Adam! I'm with an agency and have a Figma project for you.");
+
+const schema = pageSchema('/', {
+  name: 'Custom website design in Clovis, CA',
+  serviceType: 'Web design',
+  audience: 'Local businesses',
+  description: 'Hand-coded websites for businesses in Clovis, Fresno and the Central Valley, designed, written and built by Adam.',
+  offers: hasOfferCatalog.itemListElement,
+}, faqs);
 
 const audiences = [
   {
@@ -31,7 +39,7 @@ const audiences = [
 ];
 ---
 
-<RootLayout>
+<RootLayout schema={schema}>
   <Nav client:load />
 
   <main id="main" class="relative z-10 rounded-b-[40px] shadow-[0_40px_60px_-30px_rgba(30,43,35,.35)] md:rounded-b-[72px] bg-paper">

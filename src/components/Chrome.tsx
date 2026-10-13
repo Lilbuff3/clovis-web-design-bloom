@@ -110,7 +110,7 @@ export function Nav() {
               </span>
               Text me
             </a>
-            <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open}>
+            <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu">
               <span className="relative block h-3 w-5">
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
@@ -122,6 +122,7 @@ export function Nav() {
 
       {/* Mobile menu: above the phone action bar (z-40), below the header that holds its close button. Inert while closed so its links aren't invisible tab stops. */}
       <div
+        id="mobile-menu"
         inert={!open}
         className={`fixed inset-0 z-[45] flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}

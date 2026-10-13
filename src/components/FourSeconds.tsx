@@ -217,9 +217,6 @@ export function FourSeconds() {
             <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "230ms" }}>
               <span className="font-medium text-ink">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
             </p>
-            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "260ms" }}>
-              Your site will be easy for your customers to use — whether they're on a phone, tablet, or desktop.
-            </p>
 
             <div className="reveal mt-10 rounded-3xl border border-ink/10 bg-cream p-6" style={{ ["--d" as string]: "300ms" }}>
               <div className="flex items-baseline justify-between">
@@ -274,10 +271,11 @@ export function FourSeconds() {
         </div>
 
         <div className="mt-14 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
+          {/* Only numbers a visitor can check: no load-time figure until PageSpeed backs it up on a real build. */}
           {[
-            ["Page shows up in", "< 1.0s", "On two bars of signal. Google calls anything under 2.5s good."],
             ["Things that jump around", "0", "Buttons stay put while the page loads, so nobody taps the wrong one."],
-            ["Buttons answer in", "< 50ms", "The moment you tap."],
+            ["Plugins to update", "0", "Plain hand-written files. Nothing to patch, nothing that breaks on its own."],
+            ["Middlemen on your leads", "0", "Calls and texts go straight to your phone."],
             ["First page live in", "1 wk", "For a one-page site, start to finish."],
           ].map(([k, v, d], i) => (
             <div key={k} className="reveal group bg-cream p-6 transition hover:bg-citrus md:p-8" style={{ ["--d" as string]: `${i * 90}ms` }}>

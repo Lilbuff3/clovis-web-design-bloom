@@ -1,16 +1,35 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { care, faqs, plans, SMS_LINK } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
   useGlobalReveal();
+  const video = useRef<HTMLVideoElement>(null);
+  // This island hydrates as the section scrolls into view, so the video only downloads then.
+  // It plays once (about 3s, under WCAG's 5s limit for motion without a pause button) and holds on the
+  // last frame. Visitors who ask for reduced motion keep the still.
+  useEffect(() => {
+    const v = video.current;
+    if (!v || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  }, []);
   return (
     <section id="grower" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <span id="about" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
-      <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12 lg:items-center">
         <div className="reveal relative lg:col-span-5">
-          <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush shadow-xl">
-            <img src="/images/studio.jpg" alt="A sunlit desk with a laptop, a sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+          <div className="clip-reveal relative aspect-video overflow-hidden rounded-[40px] bg-blush shadow-xl">
+            <video
+              ref={video}
+              src="/images/studio-desk.mp4"
+              poster="/images/studio-desk.webp"
+              muted
+              playsInline
+              preload="none"
+              aria-label="Animation: an empty desk fills up with code and website plans on two screens"
+              className="h-full w-full object-cover"
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-persimmon/10 mix-blend-multiply" aria-hidden="true" />
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
@@ -64,10 +83,11 @@ export function Stand() {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <h2 className="font-display h-section mx-auto max-w-4xl">
-            <span className="line-mask"><span>Every price,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>published up front.</span></span>
+            {/* Not "every price": Flagship is priced per project. */}
+            <span className="line-mask"><span>What it costs,</span></span>{" "}
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>and what you get.</span></span>
           </h2>
-          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what it costs. Every price is published right here, and every site is 100% yours to keep.</p>
+          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what a site costs: Starter and Growth are priced right here, and Flagship is priced to what your business needs. Every site is 100% yours to keep.</p>
         </div>
 
         {/* Pricing Cards */}
@@ -81,7 +101,7 @@ export function Stand() {
                   <div className="font-display wonk text-4xl italic text-ink">{pl.name}</div>
                   <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
                   <div className="mt-6 font-display text-6xl font-[400] leading-none text-ink">{pl.price}</div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · one-off · no subscription</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · {pl.terms ?? "one-off · no subscription"}</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -103,7 +123,7 @@ export function Stand() {
                     {pl.for}
                   </p>
                   <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon-deep font-medium">
-                    Ask about {pl.name} →
+                    {pl.cta ?? `Ask about ${pl.name}`} →
                   </a>
                 </div>
               </div>

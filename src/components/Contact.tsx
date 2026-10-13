@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { EMAIL, mailLink, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -66,7 +66,7 @@ export function Contact() {
                   id="contact-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Maria"
+                  placeholder="Sarah"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -76,7 +76,7 @@ export function Contact() {
                   id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="a taquería in Old Town"
+                  placeholder="a family dental office"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -142,7 +142,7 @@ export function Contact() {
                 call {PHONE_DISPLAY}
               </a>{" "}
               <span className="hidden sm:inline" aria-hidden="true">·{" "}</span>
-              <a href={mailLink(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+              <a href={mailTo(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
                 email {EMAIL}
               </a>
             </p>
@@ -165,7 +165,6 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
-            <a href="/services/web-design-clovis/" className="block hover:underline">Clovis Web Design</a>
             <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
             <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
             <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
@@ -181,7 +180,7 @@ export function Footer() {
             <div className={footerTitle}>Reach</div>
             <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
-            <a href={mailLink("Website question")} className="block normal-case tracking-normal hover:underline">{EMAIL}</a>
+            <a href={mailTo("Website question")} className="block normal-case tracking-normal [overflow-wrap:anywhere] hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
             <span className="block">Fresno &amp; the Central Valley</span>
           </div>

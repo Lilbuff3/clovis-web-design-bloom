@@ -1,6 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/services/web-design-clovis/",
+      "destination": "/",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/images/(.*)",

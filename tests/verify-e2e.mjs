@@ -65,7 +65,7 @@ const results = {
     3: { name: 'Mobile Performance, Action Bar & Above-the-Fold UX', tests: [] },
     4: { name: 'Multi-Page Route Silos & Inter-linkage', tests: [] },
     5: { name: 'Binary Integrity, Adversarial & Robustness Verification', tests: [] },
-    6: { name: 'Medical Engineering, HIPAA Compliance & GEO Verification', tests: [] },
+    6: { name: 'Medical Page, Entity Hygiene & Per-Page Schema', tests: [] },
   },
 };
 
@@ -174,7 +174,6 @@ function countWords(htmlOrText) {
 // ============================================================================
 const REQUIRED_ROUTES = [
   { path: 'index.html', route: '/' },
-  { path: path.join('services', 'web-design-clovis', 'index.html'), route: '/services/web-design-clovis/' },
   { path: path.join('services', 'local-seo-fresno', 'index.html'), route: '/services/local-seo-fresno/' },
   { path: path.join('services', 'contractor-websites', 'index.html'), route: '/services/contractor-websites/' },
   { path: path.join('services', 'medical-web-design', 'index.html'), route: '/services/medical-web-design/' },
@@ -184,7 +183,7 @@ const REQUIRED_ROUTES = [
 // TIER 1: Build & Static Pre-rendering Architecture
 // ============================================================================
 
-assertTest(1, 'T1.1', 'Static HTML file generation for all 5 required route silos', () => {
+assertTest(1, 'T1.1', 'Static HTML file generation for every route', () => {
   if (!fs.existsSync(DIST_DIR)) {
     throw new Error(`Output directory dist/ does not exist. Run "npm run build" first.`);
   }
@@ -201,10 +200,10 @@ assertTest(1, 'T1.1', 'Static HTML file generation for all 5 required route silo
     throw new Error(`Missing static pre-rendered routes in dist/:\n - ${missingRoutes.join('\n - ')}`);
   }
 
-  return `All 5 route silos exist as static pre-rendered HTML files in dist/`;
+  return `All ${REQUIRED_ROUTES.length} route silos exist as static pre-rendered HTML files in dist/`;
 });
 
-assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across all 5 routes', () => {
+assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across every route', () => {
   const missingCopy = [];
 
   for (const r of REQUIRED_ROUTES) {
@@ -240,7 +239,7 @@ assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across all 5 ro
     throw new Error(`Semantic first-byte content deficiencies:\n - ${missingCopy.join('\n - ')}`);
   }
 
-  return `All 5 routes contain rich semantic copy on first byte (verified h1, h2, and p elements)`;
+  return `All ${REQUIRED_ROUTES.length} routes contain rich semantic copy on first byte (verified h1, h2, and p elements)`;
 });
 
 assertTest(1, 'T1.3', 'Zero empty client-side mounting shells (<div id="root"></div>) in dist/', () => {
@@ -460,7 +459,7 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, pr
   }
 
   if (!biz.priceRange || !biz.priceRange.includes('$1,500')) {
-    errors.push(`priceRange must include "$1,500 - $5,000", got: "${biz.priceRange}"`);
+    errors.push(`priceRange must include "$1,500", got: "${biz.priceRange}"`);
   }
 
   if (errors.length > 0) {
@@ -719,7 +718,7 @@ assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no s
 // TIER 4: Multi-Page Route Silos & Inter-linkage
 // ============================================================================
 
-assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present across all 5 route silos', () => {
+assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present on every route', () => {
   const missingContact = [];
 
   for (const r of REQUIRED_ROUTES) {
@@ -737,7 +736,7 @@ assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present across a
     throw new Error(`Routes missing direct founder contact links:\n - ${missingContact.join('\n - ')}`);
   }
 
-  return `All 5 route silos contain direct founder phone or SMS contact access`;
+  return `All ${REQUIRED_ROUTES.length} route silos contain direct founder phone or SMS contact access`;
 });
 
 assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', () => {
@@ -746,7 +745,6 @@ assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', 
 
   const html = fs.readFileSync(indexPath, 'utf-8');
   const serviceSilos = [
-    '/services/web-design-clovis/',
     '/services/local-seo-fresno/',
     '/services/contractor-websites/',
     '/services/medical-web-design/',
@@ -764,7 +762,7 @@ assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', 
     throw new Error(`Root navigation missing direct links to service silos:\n - ${unlinked.join('\n - ')}`);
   }
 
-  return `Root layout links directly to all 4 specialized service silos`;
+  return `Root layout links directly to all ${serviceSilos.length} service pages`;
 });
 
 assertTest(4, 'T4.3', 'Valid HTML5 document structure across all routes (doctype, charset, viewport meta)', () => {
@@ -789,7 +787,29 @@ assertTest(4, 'T4.3', 'Valid HTML5 document structure across all routes (doctype
     throw new Error(`HTML5 structure non-conformance in routes:\n - ${invalidRoutes.join('\n - ')}`);
   }
 
-  return `All 5 routes conform to valid HTML5 boilerplate with charset, viewport, and title`;
+  return `All ${REQUIRED_ROUTES.length} routes conform to valid HTML5 boilerplate with charset, viewport, and title`;
+});
+
+// Adam goes by his first name only on the site: copy, meta tags and schema.
+assertTest(4, 'T4.5', "Adam's last name appears nowhere in the built site", () => {
+  const hits = getAllFiles(DIST_DIR, ['.html', '.js']).filter((f) => /youssef/i.test(fs.readFileSync(f, 'utf-8')));
+  if (hits.length) throw new Error(`Last name found in: ${hits.map((f) => path.relative(DIST_DIR, f)).join(', ')}`);
+  return `First name only across ${getAllFiles(DIST_DIR, ['.html']).length} pages`;
+});
+
+// The Clovis page competed with the homepage for the same searches; it now 301s there.
+assertTest(4, 'T4.4', '/services/web-design-clovis/ is gone and 301s to the homepage', () => {
+  const vercel = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, 'vercel.json'), 'utf-8'));
+  const r = (vercel.redirects ?? []).find((x) => x.source === '/services/web-design-clovis/');
+  if (!r || r.destination !== '/' || r.statusCode !== 301) {
+    throw new Error(`vercel.json needs a 301 from /services/web-design-clovis/ to /. Got: ${JSON.stringify(r)}`);
+  }
+  if (fs.existsSync(path.join(DIST_DIR, 'services', 'web-design-clovis'))) {
+    throw new Error(`dist/ still builds /services/web-design-clovis/`);
+  }
+  const linking = getAllFiles(DIST_DIR, ['.html']).filter((f) => fs.readFileSync(f, 'utf-8').includes('/services/web-design-clovis/'));
+  if (linking.length) throw new Error(`Still linked from: ${linking.map((f) => path.relative(DIST_DIR, f)).join(', ')}`);
+  return `301 /services/web-design-clovis/ → /, no page or links left`;
 });
 
 // ============================================================================
@@ -893,35 +913,57 @@ assertTest(6, 'T6.1', 'Medical page is pre-rendered with an h1 and its sections'
   return `Medical page pre-rendered (${h1s.length} h1, ${h2s.length} h2s)`;
 });
 
-assertTest(6, 'T6.2', 'Medical page explains that the site never collects patient data, without giving legal advice', () => {
-  const text = getMedicalHtml().replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ');
-  if (!/never collect patient/i.test(text)) throw new Error(`Missing the plain statement that the site never collects patient information.`);
-  if (!/patient portal|scheduling system/i.test(text)) throw new Error(`Missing where patient details go instead (portal / scheduling tools).`);
-  if (!/isn.t legal advice/i.test(text)) throw new Error(`Missing the "isn't legal advice" note next to the privacy section.`);
-  return `Patient-data approach stated plainly, with a legal-advice disclaimer`;
+// Mock clinic copy (insurance lists, "accepting new patients", a doctor's bio) made the page read as a clinic.
+assertTest(6, 'T6.2', 'Medical page sells web design to practices and never speaks as a clinic', () => {
+  const text = getMedicalHtml().replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ');
+  const clinicVoice = [/do you take my insurance/i, /accepting new patients/i, /\bMedi-Cal\b/i, /\bMedicare\b/i, /admitting privileges/i, /board[\s-]certif/i, /call 911/i, /intake packet/i, /\bour clinic\b/i, /clinical philosophy/i];
+  const hits = clinicVoice.filter((r) => r.test(text));
+  if (hits.length) throw new Error(`Clinic-voice copy on the medical page: ${hits.join(', ')}`);
+  if (!/Business Associate Agreement/i.test(text)) throw new Error(`Missing where patient data goes instead (the intake vendor's BAA).`);
+  if (!/not legal advice/i.test(text)) throw new Error(`Missing the "not legal advice" note next to the privacy section.`);
+  return `No clinic-voice copy; online intake goes to BAA-covered tools; legal-advice note present`;
 });
 
-// The old medical copy promised legal outcomes and quoted numbers nobody could back up. Keep them out of every page.
-assertTest(6, 'T6.3', 'No unbacked legal promises, invented stats or internal SEO labels in visible copy', () => {
-  const banned = [
-    /100% HIPAA/i, /regulatory immunity/i, /bulletproof/i, /sixty percent/i,
-    /GBP (Primary|Secondary) Category/i, /Board Certified/i, /HEPA/i, /entity grounding/i,
-  ];
-  const hits = [];
-  for (const page of REQUIRED_ROUTES) {
-    const file = path.join(DIST_DIR, page.path);
-    if (!fs.existsSync(file)) continue;
-    const text = fs.readFileSync(file, 'utf-8').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ');
-    for (const re of banned) if (re.test(text)) hits.push(`${page.route}: ${re}`);
+assertTest(6, 'T6.3', 'No SEO working notes, legal promises or unbacked numbers in visible copy on any route', () => {
+  const leaks = [/GBP/, /Primary Category/i, /Secondary Category/i, /geo-unit/i, /wikidata/i, /\bQ\d{4,}\b/, /entity grounding/i, /Knowledge Graph/i,
+    // Legal promises and numbers nobody could back up (from the old medical copy).
+    /100% HIPAA/i, /regulatory immunity/i, /bulletproof/i, /sixty percent/i, /Board Certified/i, /HEPA/i];
+  const found = [];
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '');
+    for (const re of leaks) if (re.test(html)) found.push(`${r.route}: ${re}`);
   }
-  if (hits.length) throw new Error(`Found banned claims:\n - ${hits.join('\n - ')}`);
-  return `No banned claims across ${REQUIRED_ROUTES.length} routes`;
+  if (found.length) throw new Error(`SEO notes showing on the page:\n - ${found.join('\n - ')}`);
+  return `No GBP categories, Wikidata IDs or GEO markers in page copy`;
 });
 
-assertTest(6, 'T6.4', 'Kidney Specialist case study carries the attributed quote and results', () => {
+assertTest(6, 'T6.4', 'Each route has its own Service node, and FAQPage only lists questions shown on the page', () => {
+  const seen = new Set();
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8');
+    const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
+    const biz = graph.find((n) => n['@id'] === 'https://cloviswebdesign.com/#business');
+    const services = graph.filter((n) => n['@type'] === 'Service');
+    if (!biz) throw new Error(`${r.route}: no business node`);
+    if (services.length !== 1) throw new Error(`${r.route}: expected 1 Service node, found ${services.length}`);
+    const [svc] = services;
+    if (svc.provider?.['@id'] !== biz['@id']) throw new Error(`${r.route}: Service.provider doesn't point at the business`);
+    if (svc.url !== `https://cloviswebdesign.com${r.route}`) throw new Error(`${r.route}: Service.url is ${svc.url}`);
+    const key = `${svc.name} | ${svc.audience?.audienceType}`;
+    if (seen.has(key)) throw new Error(`Two routes describe the same Service: ${key}`);
+    seen.add(key);
+    const visible = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&');
+    for (const q of graph.find((n) => n['@type'] === 'FAQPage')?.mainEntity ?? []) {
+      if (!visible.includes(q.name)) throw new Error(`${r.route}: FAQPage question isn't on the page: "${q.name}"`);
+    }
+  }
+  return `${seen.size} distinct Services: ${[...seen].join('; ')}`;
+});
+
+assertTest(6, 'T6.5', 'Kidney Specialist case study carries the attributed quote and results', () => {
   const text = getMedicalHtml().replace(/<[^>]+>/g, ' ');
   if (!/Kidney Specialist Inc/.test(text)) throw new Error(`Missing the Kidney Specialist Inc. case study.`);
-  if (!/referrals are up over 40%/i.test(text)) throw new Error(`Missing Dr. Masood's quote with the referral result.`);
+  if (!/up more than 40%/i.test(text)) throw new Error(`Missing Dr. Masood's quote with the referral result.`);
   if (!/100\/100/.test(text)) throw new Error(`Missing the 100/100 PageSpeed result.`);
   return `Case study, quote and results present`;
 });
