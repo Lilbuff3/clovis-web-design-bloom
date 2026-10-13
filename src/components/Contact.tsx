@@ -182,7 +182,7 @@ export function Footer() {
           Clovis<span className="not-italic">·</span>web
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
-          <span>© {new Date().getFullYear()} Adam Youssef · Clovis Web Design</span>
+          <span>© {new Date().getFullYear()} Clovis Web Design</span>
           <span>No tracking pixels on this page</span>
           <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>

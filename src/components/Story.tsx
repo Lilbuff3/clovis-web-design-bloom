@@ -1,16 +1,35 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { care, faqs, plans, SMS_LINK } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
   useGlobalReveal();
+  const video = useRef<HTMLVideoElement>(null);
+  // This island hydrates as the section scrolls into view, so the video only downloads then.
+  // It plays once (about 3s, under WCAG's 5s limit for motion without a pause button) and holds on the
+  // last frame. Visitors who ask for reduced motion keep the still.
+  useEffect(() => {
+    const v = video.current;
+    if (!v || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  }, []);
   return (
     <section id="grower" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <span id="about" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
-      <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-7xl items-start gap-14 lg:grid-cols-12 lg:items-center">
         <div className="reveal relative lg:col-span-5">
-          <div className="clip-reveal relative aspect-[4/5] overflow-hidden rounded-[40px] bg-blush shadow-xl">
-            <img src="/images/studio.jpg" alt="A sunlit desk with a laptop, a sketchbook and a bowl of mandarins" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+          <div className="clip-reveal relative aspect-video overflow-hidden rounded-[40px] bg-blush shadow-xl">
+            <video
+              ref={video}
+              src="/images/studio-desk.mp4"
+              poster="/images/studio-desk.webp"
+              muted
+              playsInline
+              preload="none"
+              aria-label="Animation: an empty desk fills up with code and website plans on two screens"
+              className="h-full w-full object-cover"
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-persimmon/10 mix-blend-multiply" aria-hidden="true" />
           </div>
           <div data-speed="0.25" className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-cream/95 px-5 py-4 shadow-xl backdrop-blur md:left-auto md:right-[-24px] md:w-72">
@@ -37,7 +56,7 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam Youssef</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
+              I'm <strong className="font-semibold">Adam</strong>. I write every site's code myself, in Astro, React and TypeScript — no WordPress themes, no drag-and-drop builders.
             </p>
             <p>
               I also write the words, set the site up so Google knows who you are and where you work, and make sure it works for everyone, including people using screen readers.

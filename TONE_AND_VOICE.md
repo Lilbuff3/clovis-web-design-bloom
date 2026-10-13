@@ -67,7 +67,7 @@ Business owners are investing hundreds or thousands of dollars to solve urgent c
 | The growing season | The Process / From Discovery to Launch |
 | Seed / Sprout / Grow / Harvest | Discovery / Design & Strategy / Custom Build / Launch & Support |
 | The farm stand | Transparent Pricing / Published Rates |
-| The grower / At the workbench | About the Builder / Adam Youssef |
+| The grower / At the workbench | About the Builder / Adam |
 | Rules of the orchard / Nailed to the barn door | Our Standards / How We Work / Five Commitments |
 | Letters from the valley | Client Reviews / What Business Owners Say |
 | Porch questions | Frequently Asked Questions |
@@ -128,7 +128,7 @@ Homepage sections, top to bottom. Each heading stands alone: no numbered labels 
 | `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
 | `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
-| `#grower` | Studio & Workbench | Adam Youssef bio: he writes the code and the words; builds from agencies' Figma files too. |
+| `#grower` | Studio & Workbench | "I'm Adam" bio (first name only, never the surname): he writes the code and the words; builds from agencies' Figma files too. |
 | `#stand` | Hanging Price Tags | Upfront package pricing: $1,500 Starter, $2,500 Growth. Flagship shows "Custom", priced to what the business needs, with a "Let's talk" button. Optional care plans. |
 | `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
 | `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |

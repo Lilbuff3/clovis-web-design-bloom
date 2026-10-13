@@ -262,7 +262,8 @@ export const business = {
   "founder": {
     "@type": "Person",
     "@id": "https://cloviswebdesign.com/#adam",
-    "name": "Adam Youssef",
+    // First name only, everywhere on the site.
+    "name": "Adam",
     "jobTitle": "Founder & Lead Developer",
     "knowsAbout": knowsAbout,
   },
