@@ -3,13 +3,12 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, mailTo, plans, offer, pageSchema, smsTo, type Faq } from '../../lib/data';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, mailTo, pageSchema, smsTo, type Faq } from '../../lib/data';
 
 // Everything here is about the website Adam builds for a practice. Clinic-voice copy
 // (insurance lists, "accepting new patients", provider bios) belongs on the client's own site.
 // Written for a practice owner or manager, often at a desk where sms: links don't open: email is offered too.
 const kidney = cases[0];
-const flagship = plans.find((p) => p.name === 'Flagship')!;
 const textAdam = smsTo("Hi Adam, I manage a medical practice and I'd like to talk about our website.");
 const emailAdam = mailTo("Our practice's website");
 
@@ -23,8 +22,8 @@ const faqs: Faq[] = [
     a: "Yes, if it gives you a booking link or an embed, as Zocdoc, NexHealth and most patient portals do. I put it on the site. I don't build custom EHR integrations.",
   },
   {
-    q: 'What does a medical practice website cost, and how long does it take?',
-    a: `${flagship.price}, flat, and ${flagship.time} from the first call to launch. That covers the design, the writing, accessibility to WCAG 2.1 AA, and 90 days of fixes after launch. You own the code and the domain from day one.`,
+    q: 'What does a medical practice website cost?',
+    a: "It depends on what your practice needs. A few clear pages for patients and referring offices cost far less than a site with online booking and a Spanish version. Tell me what you need and I'll give you a price that works for your practice before you commit to anything. You own the code and the domain from day one.",
   },
 ];
 
@@ -33,13 +32,12 @@ const schema = pageSchema('/services/medical-web-design/', {
   serviceType: 'Web design',
   audience: 'Medical and dental practices',
   description: 'Websites for medical and dental practices in Fresno, Clovis and Madera that collect no patient information online and meet WCAG 2.1 AA.',
-  offers: [offer('Flagship')],
 }, faqs);
 ---
 
 <RootLayout
   title="Medical Practice Web Design — Fresno & Clovis, CA"
-  description="Websites for medical and dental practices in Fresno, Clovis and Madera. No patient data collected online, built to WCAG 2.1 AA, $5,000 flat. Built by Adam Youssef."
+  description="Websites for medical and dental practices in Fresno, Clovis and Madera. No patient data collected online, built to WCAG 2.1 AA. Tell Adam what your practice needs."
   schema={schema}
 >
   <Nav client:load />
@@ -57,7 +55,7 @@ const schema = pageSchema('/services/medical-web-design/', {
       I design and build websites for medical and dental practices in Fresno, Clovis and Madera. Your site answers the questions your front desk gets all day, makes it easy for other doctors to refer to you, and never holds patient information, so there's nothing on it to breach.
     </p>
     <p class="mt-4 text-lg text-ink">
-      <strong>{flagship.price}, flat.</strong> Live in {flagship.time}. You own the site and the domain.
+      <strong>Every practice needs something different, so let's talk.</strong> Tell me what you need and I'll make the price work, so the site earns back what it costs. You own the site and the domain.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
