@@ -75,15 +75,15 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
           <div className={`mt-8 grid gap-4 ${compact ? "" : "sm:grid-cols-3"}`}>
             <label className="block" htmlFor={`${id}-name`}>
-              <span className={labelClass}>Your business</span>
+              <span className={labelClass}>Your business <span className="text-persimmon" aria-hidden="true">*</span></span>
               <input id={`${id}-name`} type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Olsen Roofing" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-trade`}>
-              <span className={labelClass}>What you do</span>
+              <span className={labelClass}>What you do <span className="text-persimmon" aria-hidden="true">*</span></span>
               <input id={`${id}-trade`} type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. roofer, dentist" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-city`}>
-              <span className={labelClass}>Your town</span>
+              <span className={labelClass}>Your town <span className="text-ink-soft/70 lowercase tracking-normal">(optional)</span></span>
               <input id={`${id}-city`} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
             </label>
           </div>
@@ -169,12 +169,15 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             </ol>
 
             {/* Google's terms: the generated answer, then every Maps source right after it (collapsing is allowed). */}
-            <details className="mx-auto mt-6 max-w-lg text-left">
-              <summary className="cursor-pointer py-4 font-mono text-[11px] text-ink-soft hover:text-ink">
-                What Gemini said, with sources from{" "}
-                <span translate="no" style={MAPS_CREDIT}>
-                  Google Maps
+            <details className="group mx-auto mt-6 max-w-lg text-left">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 py-4 font-mono text-[11px] text-ink-soft hover:text-ink">
+                <span>
+                  What Gemini said, with sources from{" "}
+                  <span translate="no" style={MAPS_CREDIT}>
+                    Google Maps
+                  </span>
                 </span>
+                <span aria-hidden="true" className="transition group-open:rotate-180">▾</span>
               </summary>
               <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-ink/85">{answer.answer}</p>
               <ul className="mt-3 space-y-1.5 border-t border-ink/10 pt-3 text-[13px]">
