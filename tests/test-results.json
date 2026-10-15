@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-10T02:29:35.669Z",
-  "total": 30,
-  "passed": 30,
+  "timestamp": "2026-10-15T03:13:36.859Z",
+  "total": 33,
+  "passed": 33,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -12,18 +12,18 @@
         {
           "id": "T1.1",
           "tier": 1,
-          "title": "Static HTML file generation for all 5 required route silos",
+          "title": "Static HTML file generation for every route",
           "status": "PASS",
           "error": null,
-          "details": "All 5 route silos exist as static pre-rendered HTML files in dist/"
+          "details": "All 4 route silos exist as static pre-rendered HTML files in dist/"
         },
         {
           "id": "T1.2",
           "tier": 1,
-          "title": "Pure semantic first-byte copy (h1, h2, p) across all 5 routes",
+          "title": "Pure semantic first-byte copy (h1, h2, p) across every route",
           "status": "PASS",
           "error": null,
-          "details": "All 5 routes contain rich semantic copy on first byte (verified h1, h2, and p elements)"
+          "details": "All 4 routes contain rich semantic copy on first byte (verified h1, h2, and p elements)"
         },
         {
           "id": "T1.3",
@@ -31,7 +31,7 @@
           "title": "Zero empty client-side mounting shells (<div id=\"root\"></div>) in dist/",
           "status": "PASS",
           "error": null,
-          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 5 HTML files"
+          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 4 HTML files"
         },
         {
           "id": "T1.4",
@@ -68,7 +68,7 @@
           "title": "Valid Schema.org JSON-LD <script> with @graph in root layout",
           "status": "PASS",
           "error": null,
-          "details": "Valid JSON-LD @graph found with 1 entity nodes"
+          "details": "Valid JSON-LD @graph found with 3 entity nodes"
         },
         {
           "id": "T2.2",
@@ -84,7 +84,7 @@
           "title": "Core business identity (name, telephone: +15595753014, priceRange)",
           "status": "PASS",
           "error": null,
-          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"$1,500 - $5,000\""
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"From $1,500\""
         },
         {
           "id": "T2.4",
@@ -179,10 +179,10 @@
         {
           "id": "T4.1",
           "tier": 4,
-          "title": "Direct founder phone / SMS contact links present across all 5 route silos",
+          "title": "Direct founder phone / SMS contact links present on every route",
           "status": "PASS",
           "error": null,
-          "details": "All 5 route silos contain direct founder phone or SMS contact access"
+          "details": "All 4 route silos contain direct founder phone or SMS contact access"
         },
         {
           "id": "T4.2",
@@ -190,7 +190,7 @@
           "title": "Inter-silo navigation linkage across all service silos",
           "status": "PASS",
           "error": null,
-          "details": "Root layout links directly to all 4 specialized service silos"
+          "details": "Root layout links directly to all 3 service pages"
         },
         {
           "id": "T4.3",
@@ -198,7 +198,23 @@
           "title": "Valid HTML5 document structure across all routes (doctype, charset, viewport meta)",
           "status": "PASS",
           "error": null,
-          "details": "All 5 routes conform to valid HTML5 boilerplate with charset, viewport, and title"
+          "details": "All 4 routes conform to valid HTML5 boilerplate with charset, viewport, and title"
+        },
+        {
+          "id": "T4.5",
+          "tier": 4,
+          "title": "Adam's last name appears nowhere in the built site",
+          "status": "PASS",
+          "error": null,
+          "details": "First name only across 4 pages"
+        },
+        {
+          "id": "T4.4",
+          "tier": 4,
+          "title": "/services/web-design-clovis/ is gone and 301s to the homepage",
+          "status": "PASS",
+          "error": null,
+          "details": "301 /services/web-design-clovis/ → /, no page or links left"
         }
       ]
     },
@@ -232,7 +248,7 @@
       ]
     },
     "6": {
-      "name": "Medical Engineering, HIPAA Compliance & GEO Verification",
+      "name": "Medical Page, Entity Hygiene & Per-Page Schema",
       "tests": [
         {
           "id": "T6.1",
@@ -240,26 +256,34 @@
           "title": "Medical page is pre-rendered with an h1 and its sections",
           "status": "PASS",
           "error": null,
-          "details": "Medical page pre-rendered (1 h1, 6 h2s)"
+          "details": "Medical page pre-rendered (1 h1, 9 h2s)"
         },
         {
           "id": "T6.2",
           "tier": 6,
-          "title": "Medical page explains that the site never collects patient data, without giving legal advice",
+          "title": "Medical page sells web design to practices and never speaks as a clinic",
           "status": "PASS",
           "error": null,
-          "details": "Patient-data approach stated plainly, with a legal-advice disclaimer"
+          "details": "No clinic-voice copy; online intake goes to BAA-covered tools; legal-advice note present"
         },
         {
           "id": "T6.3",
           "tier": 6,
-          "title": "No unbacked legal promises, invented stats or internal SEO labels in visible copy",
+          "title": "No SEO working notes, legal promises or unbacked numbers in visible copy on any route",
           "status": "PASS",
           "error": null,
-          "details": "No banned claims across 5 routes"
+          "details": "No GBP categories, Wikidata IDs or GEO markers in page copy"
         },
         {
           "id": "T6.4",
+          "tier": 6,
+          "title": "Each route has its own Service node, and FAQPage only lists questions shown on the page",
+          "status": "PASS",
+          "error": null,
+          "details": "4 distinct Services: Custom website design in Clovis, CA | Local businesses; Local SEO in Fresno, CA | Local service businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
+        },
+        {
+          "id": "T6.5",
           "tier": 6,
           "title": "Kidney Specialist case study carries the attributed quote and results",
           "status": "PASS",
