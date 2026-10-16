@@ -44,5 +44,44 @@ res = await ask('two-misses');
 assert.equal(res.status, 502);
 assert.equal(calls, 2);
 
+// When LEAD_ALERT_WEBHOOK_URL is configured, a completed audit sends a lead notification.
+let webhookHit = null;
+process.env.LEAD_ALERT_WEBHOOK_URL = 'https://ntfy.sh/test-topic';
+globalThis.fetch = async (url, init) => {
+  if (String(url).includes('ntfy.sh')) {
+    webhookHit = { url: String(url), body: init?.body };
+    return new Response('ok', { status: 200 });
+  }
+  return Response.json(grounded);
+};
+res = await ask('webhook-check');
+assert.equal(res.status, 200);
+assert.ok(webhookHit, 'Expected LEAD_ALERT_WEBHOOK_URL to be called');
+assert.ok(String(webhookHit.body).includes('A Roofing'), 'Expected lead business name in webhook payload');
+delete process.env.LEAD_ALERT_WEBHOOK_URL;
+
 console.warn = realWarn;
-console.log('Gemini retry: 2 cases ✓');
+console.log('Gemini retry & lead webhook: 3 cases ✓');
+
+// Verify personalized outreach audit link generator and sitemap/robots discovery files.
+import fs from 'node:fs';
+import { buildAuditUrl } from '../scripts/outreach-links.mjs';
+
+const auditUrl = buildAuditUrl('Olsen Roofing', 'roofer', 'Clovis, CA');
+assert.equal(auditUrl, 'https://cloviswebdesign.com/?biz=Olsen+Roofing&trade=roofer&city=Clovis%2C+CA&autorun=1#check');
+
+const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
+assert.ok(robots.includes('Sitemap: https://cloviswebdesign.com/sitemap.xml'));
+
+const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
+for (const canonical of [
+  'https://cloviswebdesign.com/',
+  'https://cloviswebdesign.com/services/medical-web-design/',
+  'https://cloviswebdesign.com/services/contractor-websites/',
+  'https://cloviswebdesign.com/services/local-seo-fresno/',
+]) {
+  assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `Missing ${canonical} in sitemap.xml`);
+}
+assert.ok(!sitemap.includes('/services/web-design-clovis/'), 'Retired route must not appear in sitemap.xml');
+console.log('Outreach URLs & SEO discovery files: 3 cases ✓');
+

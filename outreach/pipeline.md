@@ -3,7 +3,7 @@
 ## Target Profile:
 - **Agency Size:** 2–15 employees (Boutique branding, UI/UX, design-forward studios)
 - **Target Contact:** Founder, Creative Director, or Head of Production
-- **Our Offer:** US-based Frontend Engineering Partner (Figma to Astro/React, guaranteed 100/100 Core Web Vitals, 4–5 day delivery, flat $1,500–$2,000/site).
+- **Our Offer:** US-based Frontend Engineering Partner (Figma to Astro/React, fast on phones (my latest client site scores 100 on Google PageSpeed), 4–5 day delivery, flat $1,500–$2,000/site).
 
 ---
 
@@ -35,7 +35,7 @@ Hi there,
 
 I’ve followed Iron Creative’s work on boutique digital experiences and startup UX—the visual polish and identity design are top tier.
 
-I’m a US-based frontend performance engineer specializing in taking Figma files and converting them into clean, high-performance Astro and React builds (guaranteed 100/100 Core Web Vitals on mobile).
+I’m a US-based frontend performance engineer specializing in taking Figma files and converting them into clean, high-performance Astro and React builds (fast on phones (my latest client site scores 100 on Google PageSpeed) on mobile).
 
 Here is a recent production build:
 - kidneyspecialistinc.com (100/100 PageSpeed, sub-1s load, zero template bloat, full WCAG 2.1 AA accessibility)
@@ -85,7 +85,7 @@ Hi Launch Brigade team,
 
 I’ve seen your emphasis on end-to-end modular web builds and brand systems—really respect the attention to craft.
 
-I work as a dedicated white-label frontend engineer for California studios. I take approved Figma designs and build clean, hand-coded Astro and React production sites that score a verified 100/100 on Google PageSpeed with zero layout shift.
+I work as a dedicated white-label frontend engineer for California studios. I take approved Figma designs and build clean, hand-coded Astro and React production sites that scores 100 on Google PageSpeed with zero layout shift.
 
 Live build sample:
 - kidneyspecialistinc.com (100/100 Google Core Web Vitals, sub-1s load)
@@ -112,7 +112,7 @@ I’ve been admiring Pill Creative’s branding and visual design work—the art
 
 I know how frustrating it is when a studio spends 40 hours perfecting subtle typography and layout in Figma, only for a development team to deliver clunky, slow code that doesn't match the design.
 
-I’m a California-based frontend performance engineer. I take your Figma designs and code pixel-perfect, sub-second Astro/React production sites (guaranteed 100/100 Core Web Vitals).
+I’m a California-based frontend performance engineer. I take your Figma designs and code pixel-perfect, sub-second Astro/React production sites (fast on phones (my latest client site scores 100 on Google PageSpeed)).
 
 Sample live build:
 - kidneyspecialistinc.com (100/100 PageSpeed, clean responsive breakpoints)
@@ -212,7 +212,7 @@ Hi Fifty & Fifty team,
 
 Your purpose-driven digital craftsmanship and attention to typography and storytelling stand out.
 
-I’m a California frontend performance engineer specializing in clean, accessible, sub-second Astro and React web applications (guaranteed 100/100 Core Web Vitals and strict WCAG 2.1 AA accessibility).
+I’m a California frontend performance engineer specializing in clean, accessible, sub-second Astro and React web applications (fast on phones (my latest client site scores 100 on Google PageSpeed) and strict WCAG 2.1 AA accessibility).
 
 Recent live build:
 - kidneyspecialistinc.com (100/100 PageSpeed, full WCAG 2.1 AA contrast compliance, zero-PHI architecture)
@@ -262,7 +262,7 @@ Hi Blumoo team,
 
 Saw your agency’s accolades on Clutch for web design and branding in Sacramento—solid portfolio.
 
-I’m an independent frontend developer based in California. I specialize in white-label engineering for marketing and design agencies: taking your Figma files and building production Astro/React sites that score a verified 100/100 on Google PageSpeed with zero layout shift.
+I’m an independent frontend developer based in California. I specialize in white-label engineering for marketing and design agencies: taking your Figma files and building production Astro/React sites that scores 100 on Google PageSpeed with zero layout shift.
 
 Live production proof:
 - kidneyspecialistinc.com (100/100 Core Web Vitals, sub-1s load)

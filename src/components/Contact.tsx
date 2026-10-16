@@ -1,10 +1,16 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
 const needs = ["A one-page site ($1,500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
 const whens = ["ASAP", "This month", "Just looking"];
+
+const planToNeed: Record<string, string> = {
+  starter: needs[0],
+  growth: needs[1],
+  flagship: needs[2],
+};
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
@@ -27,6 +33,25 @@ export function Contact() {
   const [trade, setTrade] = useState("");
   const [need, setNeed] = useState(needs[0]);
   const [when, setWhen] = useState(whens[0]);
+  const [copied, setCopied] = useState(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const qPlan = params.get("plan")?.toLowerCase().trim() || "";
+    const qTrade = params.get("trade")?.trim() || "";
+    if (qPlan && planToNeed[qPlan]) setNeed(planToNeed[qPlan]);
+    if (qTrade) setTrade((prev) => prev || qTrade);
+
+    const onSelectPlan = (e: Event) => {
+      const planName = String((e as CustomEvent).detail || "").toLowerCase();
+      if (planToNeed[planName]) setNeed(planToNeed[planName]);
+      setTimeout(() => nameInputRef.current?.focus({ preventScroll: true }), 350);
+    };
+    window.addEventListener("cwd:select-plan", onSelectPlan);
+    return () => window.removeEventListener("cwd:select-plan", onSelectPlan);
+  }, []);
 
   const message = useMemo(() => {
     const who = name.trim() ? `Hi, Adam! It's ${name.trim()}` : "Hi, Adam!";
@@ -37,6 +62,7 @@ export function Contact() {
   }, [name, trade, need, when]);
 
   const smsHref = `sms:${PHONE_TEL}?body=${encodeURIComponent(message)}`;
+  const emailHref = mailTo(`Website: ${trade.trim() || name.trim() || "new project"}`, message);
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-14 md:rounded-b-[72px] md:px-8 md:py-20">
@@ -64,6 +90,7 @@ export function Contact() {
                 <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name</span>
                 <input
                   id="contact-name"
+                  ref={nameInputRef}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Sarah"
@@ -136,15 +163,27 @@ export function Contact() {
             <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
               Send this text →
             </a>
-            <p className="text-[15px] text-ink-soft">
+            <p className="text-center text-[15px] text-ink-soft">
               or{" "}
               <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
                 call {PHONE_DISPLAY}
               </a>{" "}
-              <span className="hidden sm:inline" aria-hidden="true">·{" "}</span>
-              <a href={mailTo(`Website: ${trade.trim() || name.trim() || "new project"}`, message)} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
+              <span aria-hidden="true">·{" "}</span>
+              <a href={emailHref} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
                 email {EMAIL}
-              </a>
+              </a>{" "}
+              <span aria-hidden="true">·{" "}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard?.writeText(message);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+                className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4"
+              >
+                {copied ? "copied!" : "copy message"}
+              </button>
             </p>
           </div>
         </div>

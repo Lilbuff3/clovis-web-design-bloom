@@ -1,0 +1,57 @@
+---
+import RootLayout from '../layouts/RootLayout.astro';
+import { Nav } from '../components/Chrome';
+import { Footer } from '../components/Contact';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, mailTo, smsTo } from '../lib/data';
+
+const textAdam = smsTo("Hi Adam, I was looking for a page on cloviswebdesign.com.");
+---
+
+<RootLayout
+  title="Page Not Found — Clovis Web Design"
+  description="That page isn't here. Go back to Clovis Web Design or text Adam at (559) 575-3014."
+>
+  <Nav client:load />
+
+  <main id="main" class="relative z-10 mx-auto max-w-4xl px-5 pt-36 pb-24 md:px-8 md:pt-44">
+    <p class="font-mono text-xs uppercase tracking-[.18em] text-ink-soft">404 · Page not found</p>
+    <h1 class="font-display mt-3 text-4xl font-[420] leading-[0.95] text-ink md:text-6xl">
+      That page isn't here.
+    </h1>
+    <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+      If you followed an old link, here are the pages on the site — or text me directly at {PHONE_DISPLAY}.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream transition hover:bg-persimmon-deep">
+        Back to homepage →
+      </a>
+      <a href={textAdam} class="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-cream px-6 py-3.5 font-medium text-ink transition hover:bg-citrus">
+        Text {PHONE_DISPLAY}
+      </a>
+      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-cream px-6 py-3.5 font-medium text-ink transition hover:bg-citrus">
+        Call
+      </a>
+      <a href={mailTo("Website question")} class="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-cream px-6 py-3.5 font-medium text-ink transition hover:bg-citrus">
+        Email {EMAIL}
+      </a>
+    </div>
+
+    <div class="mt-14 grid gap-4 border-t border-ink/15 pt-10 sm:grid-cols-3">
+      <a href="/services/medical-web-design/" class="rounded-2xl border border-ink/10 bg-sky p-5 transition hover:-translate-y-1">
+        <div class="font-display text-xl font-medium text-ink">Medical &amp; dental sites</div>
+        <p class="mt-1 text-sm text-ink/80">Websites for practices in Fresno, Clovis and Madera.</p>
+      </a>
+      <a href="/services/contractor-websites/" class="rounded-2xl border border-ink/10 bg-blush p-5 transition hover:-translate-y-1">
+        <div class="font-display text-xl font-medium text-ink">Contractor websites</div>
+        <p class="mt-1 text-sm text-ink/80">Fast mobile pages with tap-to-call and tap-to-text.</p>
+      </a>
+      <a href="/services/local-seo-fresno/" class="rounded-2xl border border-ink/10 bg-citrus p-5 transition hover:-translate-y-1">
+        <div class="font-display text-xl font-medium text-ink">Fresno Local SEO</div>
+        <p class="mt-1 text-sm text-ink/80">Google Business Profile, business schema and town pages.</p>
+      </a>
+    </div>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

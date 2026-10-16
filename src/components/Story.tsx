@@ -122,7 +122,13 @@ export function Stand() {
                     <span className="font-semibold text-ink">Best for: </span>
                     {pl.for}
                   </p>
-                  <a href={SMS_LINK} className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 text-cream transition hover:bg-persimmon-deep font-medium">
+                  <a
+                    href="#contact"
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent("cwd:select-plan", { detail: pl.name }));
+                    }}
+                    className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-3.5 font-medium text-cream transition hover:bg-persimmon-deep"
+                  >
                     {pl.cta ?? `Ask about ${pl.name}`} →
                   </a>
                 </div>

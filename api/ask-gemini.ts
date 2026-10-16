@@ -82,15 +82,60 @@ export default async function handler(req: Request): Promise<Response> {
   const result = (await askGemini(key, question)) ?? (await askGemini(key, question));
   if (!result) return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
 
+  const named = namedIn(result.places.map((p) => p.title), business);
+  const lookedFor = words(business).length > 0;
+  const topCompetitors = result.places.slice(0, 3).map((p) => p.title);
+
+  if (key !== 'fake-key-for-tests') {
+    console.info(
+      JSON.stringify({
+        event: 'ai_audit_lead',
+        timestamp: new Date().toISOString(),
+        business: business || '(none)',
+        trade,
+        city,
+        named,
+        topCompetitors,
+      })
+    );
+  }
+
+  const webhookUrl = process.env.LEAD_ALERT_WEBHOOK_URL?.trim();
+  if (webhookUrl) {
+    await notifyLeadWebhook(webhookUrl, { business, trade, city, named, topCompetitors });
+  }
+
   return Response.json(
     {
       question,
       ...result,
-      named: namedIn(result.places.map((p) => p.title), business),
-      lookedFor: words(business).length > 0,
+      named,
+      lookedFor,
     },
     { headers: { 'Cache-Control': 'no-store' } }
   );
+}
+
+/** Sends a fast, non-fatal lead notification to ntfy.sh, Discord, Slack, or a generic webhook. */
+async function notifyLeadWebhook(
+  webhookUrl: string,
+  lead: { business: string; trade: string; city: string; named: string | null; topCompetitors: string[] }
+): Promise<void> {
+  const status = lead.named ? `FOUND (${lead.named})` : `MISSED`;
+  const summary = `[AI Check] "${lead.business || 'Visitor'}" (${lead.trade} in ${lead.city}) -> ${status}. Top picks: ${lead.topCompetitors.join(', ')}`;
+  try {
+    const isNtfy = /ntfy\.sh\//i.test(webhookUrl);
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: isNtfy
+        ? { Title: `Clovis Web Design Lead: ${lead.business || lead.trade}`, Priority: 'high', Tags: 'mag,briefcase' }
+        : { 'content-type': 'application/json' },
+      body: isNtfy ? summary : JSON.stringify({ content: summary, text: summary, ...lead }),
+      signal: AbortSignal.timeout(2_500),
+    });
+  } catch (err) {
+    console.warn('Lead webhook notification failed', err);
+  }
 }
 
 /** One question to Gemini with Google Maps; null unless the answer came back with Maps sources. */

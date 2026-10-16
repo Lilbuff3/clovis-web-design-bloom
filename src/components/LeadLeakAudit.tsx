@@ -30,14 +30,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
   const Title = compact ? "h3" : "h2";
 
-  // The form goes away while it asks, so focus moves to whatever comes back.
-  useEffect(() => {
-    if (ai && ai !== "asking") resultRef.current?.focus();
-  }, [ai]);
-
-  const ask = (e: React.FormEvent) => {
-    e.preventDefault();
-    const now = { name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" };
+  const runCheck = (now: { name: string; trade: string; city: string }) => {
     setSent(now);
     setAi("asking");
     fetch("/api/ask-gemini", {
@@ -48,6 +41,35 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((a: Answer) => setAi(a))
       .catch((status) => setAi(status === 429 ? "limit" : "failed"));
+  };
+
+  // Support personalized outreach links: /?biz=Olsen+Roofing&trade=roofer&city=Clovis,+CA&autorun=1#check
+  useEffect(() => {
+    if (compact || typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const qBiz = params.get("biz")?.trim() || params.get("business")?.trim() || "";
+    const qTrade = params.get("trade")?.trim() || "";
+    const qCity = params.get("city")?.trim() || "Clovis, CA";
+    const autorun = params.get("autorun") === "1" || params.get("autorun") === "true";
+
+    if (qBiz) setName(qBiz);
+    if (qTrade) setTrade(qTrade);
+    if (params.has("city") && qCity) setCity(qCity);
+
+    if (qTrade && (autorun || (qBiz && window.location.hash === "#check"))) {
+      document.getElementById("check")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      runCheck({ name: qBiz, trade: qTrade, city: qCity });
+    }
+  }, [compact]);
+
+  // The form goes away while it asks, so focus moves to whatever comes back.
+  useEffect(() => {
+    if (ai && ai !== "asking") resultRef.current?.focus();
+  }, [ai]);
+
+  const ask = (e: React.FormEvent) => {
+    e.preventDefault();
+    runCheck({ name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" });
   };
 
   const asked = `${an(sent.trade)} ${sent.trade} in ${sent.city}`;
