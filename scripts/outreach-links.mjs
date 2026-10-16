@@ -18,15 +18,20 @@ export function buildAuditUrl(business, trade, city = 'Clovis, CA') {
   return `https://cloviswebdesign.com/?${params.toString()}#check`;
 }
 
-export function buildOutreachCopy(business, trade, city = 'Clovis, CA') {
+export function buildOutreachCopy(business, trade, city = 'Clovis, CA', competitors = '') {
   const url = buildAuditUrl(business, trade, city);
-  const sms = `Hi — I ran a quick check to see who Google's AI recommends when someone asks for a ${trade} in ${city}. Here's the live result for ${business}: ${url} — Adam in Clovis, (559) 575-3014`;
-  const emailSubject = `Who Google's AI recommends for a ${trade} in ${city}`;
+  const compClean = competitors.trim();
+  const sms = compClean
+    ? `Hi — I asked Google's AI for a ${trade} in ${city} and noticed it recommended ${compClean} instead of ${business}. Here's the live check I ran for you: ${url} — Adam in Clovis, (559) 575-3014`
+    : `Hi — I ran a quick check to see who Google's AI recommends when someone asks for a ${trade} in ${city}. Here's the live result for ${business}: ${url} — Adam in Clovis, (559) 575-3014`;
+  const emailSubject = compClean
+    ? `Google's AI recommended ${compClean} for a ${trade} in ${city}`
+    : `Who Google's AI recommends for a ${trade} in ${city}`;
   const emailBody = `Hi ${business} team,
 
 More customers in ${city} are asking Google's AI who to call instead of scrolling through ten links.
 
-I built a tool on my site that asks Google's AI (backed by live Google Maps data) for a ${trade} in ${city} and checks whether ${business} shows up.
+${compClean ? `I asked Google's AI (backed by live Google Maps data) for a ${trade} in ${city}, and it named ${compClean} ahead of ${business}.` : `I built a tool on my site that asks Google's AI (backed by live Google Maps data) for a ${trade} in ${city} and checks whether ${business} shows up.`}
 
 You can run the live check for ${business} with one click here:
 ${url}
@@ -43,20 +48,22 @@ Clovis Web Design · (559) 575-3014`;
 }
 
 const DEFAULT_PROSPECTS = [
-  { business: 'Olsen Roofing', trade: 'roofer', city: 'Clovis, CA' },
-  { business: 'Clovis Plumbing Services', trade: 'plumber', city: 'Clovis, CA' },
-  { business: 'Allbritten Plumbing Heating & Air', trade: 'HVAC contractor', city: 'Fresno, CA' },
-  { business: 'Valley Concrete & Landscaping', trade: 'concrete contractor', city: 'Clovis, CA' },
-  { business: 'Cut Right Tree Service', trade: 'tree service', city: 'Fresno, CA' },
-  { business: 'Clovis Family Dental', trade: 'dentist', city: 'Clovis, CA' },
+  { business: 'Olsen Roofing', trade: 'roofer', city: 'Clovis, CA', competitors: '' },
+  { business: 'Clovis Plumbing Services', trade: 'plumber', city: 'Clovis, CA', competitors: '' },
+  { business: 'Allbritten Plumbing Heating & Air', trade: 'HVAC contractor', city: 'Fresno, CA', competitors: '' },
+  { business: 'Valley Concrete & Landscaping', trade: 'concrete contractor', city: 'Clovis, CA', competitors: '' },
+  { business: 'Cut Right Tree Service', trade: 'tree service', city: 'Fresno, CA', competitors: '' },
+  { business: 'Clovis Family Dental', trade: 'dentist', city: 'Clovis, CA', competitors: '' },
 ];
 
-if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}`) {
-  const [biz, trade, city] = process.argv.slice(2);
-  const list = biz && trade ? [{ business: biz, trade, city: city || 'Clovis, CA' }] : DEFAULT_PROSPECTS;
+import { pathToFileURL } from 'node:url';
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const [biz, trade, city, competitors] = process.argv.slice(2);
+  const list = biz && trade ? [{ business: biz, trade, city: city || 'Clovis, CA', competitors: competitors || '' }] : DEFAULT_PROSPECTS;
 
   for (const item of list) {
-    const out = buildOutreachCopy(item.business, item.trade, item.city);
+    const out = buildOutreachCopy(item.business, item.trade, item.city, item.competitors);
     console.log('='.repeat(72));
     console.log(`${item.business} (${item.trade} · ${item.city})`);
     console.log(`1-Click Audit URL: ${out.url}`);

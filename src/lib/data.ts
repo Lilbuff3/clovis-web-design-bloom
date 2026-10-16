@@ -290,6 +290,16 @@ export function pageSchema(path: string, service: { name: string; serviceType: s
     "@context": "https://schema.org",
     "@graph": [
       business,
+      ...(path === "/"
+        ? [{
+            "@type": "WebSite",
+            "@id": "https://cloviswebdesign.com/#website",
+            "url": "https://cloviswebdesign.com/",
+            "name": "Clovis Web Design",
+            "publisher": { "@id": business["@id"] },
+            "inLanguage": "en-US",
+          }]
+        : []),
       {
         "@type": "Service",
         "@id": `${url}#service`,

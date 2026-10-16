@@ -26,12 +26,14 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [city, setCity] = useState("Clovis, CA");
   const [sent, setSent] = useState({ name: "", trade: "", city: "" });
   const [ai, setAi] = useState<Answer | "asking" | "failed" | "limit" | null>(null);
+  const [copiedReport, setCopiedReport] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
   const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
   const Title = compact ? "h3" : "h2";
 
   const runCheck = (now: { name: string; trade: string; city: string }) => {
     setSent(now);
+    setCopiedReport(false);
     setAi("asking");
     fetch("/api/ask-gemini", {
       method: "POST",
@@ -70,6 +72,22 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const ask = (e: React.FormEvent) => {
     e.preventDefault();
     runCheck({ name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" });
+  };
+
+  const copyReportLink = () => {
+    const params = new URLSearchParams({
+      biz: sent.name,
+      trade: sent.trade,
+      city: sent.city,
+      autorun: "1",
+    });
+    const shareUrl = `https://cloviswebdesign.com/?${params.toString()}#check`;
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        setCopiedReport(true);
+        setTimeout(() => setCopiedReport(false), 2500);
+      });
+    }
   };
 
   const asked = `${an(sent.trade)} ${sent.trade} in ${sent.city}`;
@@ -216,9 +234,15 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <p className="mx-auto mt-6 max-w-lg font-mono text-[11px] leading-relaxed text-ink-soft">
               One question, asked just now. Google's AI Mode, the Gemini app and other AI apps can answer differently, and answers change.
             </p>
-            <button type="button" onClick={() => setAi(null)} className="mt-1 min-h-12 px-2 text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon-deep">
-              Try another business
-            </button>
+            <div className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+              <button type="button" onClick={copyReportLink} className="min-h-12 px-2 text-[13px] font-medium underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
+                {copiedReport ? "Report link copied ✓" : "Copy link to this report"}
+              </button>
+              <span aria-hidden="true" className="text-ink-soft">·</span>
+              <button type="button" onClick={() => setAi(null)} className="min-h-12 px-2 text-[13px] underline decoration-ink/30 underline-offset-4 hover:text-persimmon-deep">
+                Try another business
+              </button>
+            </div>
           </div>
         )}
 

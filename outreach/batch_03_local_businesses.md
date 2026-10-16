@@ -2,10 +2,17 @@
 
 These prospects use your live **1-Click AI Check** link (`?biz=...&trade=...&city=...&autorun=1#check`). When they tap the link in your text or email, `cloviswebdesign.com` automatically scrolls to `#check` and runs the live Google Maps + Gemini lookup for their business.
 
-To generate a link and copy for any new business on the fly:
+To generate a link and competitor-named SMS/email script on the fly:
 ```powershell
-node scripts/outreach-links.mjs "Business Name" "roofer" "Clovis, CA"
+node scripts/outreach-links.mjs "Valley Roofing" "roofer" "Clovis, CA" "Olsen Roofing and Cen-Cal Roofing"
 ```
+
+### The 5-Platform Local & AI Citation Loop (Do Once — Takes 20 Mins)
+1. **Google Business Profile (`business.google.com`):** Service-Area Business (`Clovis Web Design`, `(559) 575-3014`, Primary Category: `Website designer`, Areas: `Clovis, CA`, `Fresno, CA`, `Madera, CA`). Ask Big Bros and Kidney Specialist Inc. for 1 review each.
+2. **Bing Places (`bingplaces.com`):** Click **"Import from Google Business Profile"** — verifies in 60 seconds and feeds **ChatGPT Search** and Microsoft Copilot directly.
+3. **Apple Business Connect (`businessconnect.apple.com`):** Feeds Apple Maps & Siri voice lookups.
+4. **Nextdoor Business Page (`business.nextdoor.com`):** Free local Clovis business page + post the interactive thread below.
+5. **Yelp for Business (`biz.yelp.com`):** Feeds ChatGPT and Apple Maps local entity resolution.
 
 ---
 

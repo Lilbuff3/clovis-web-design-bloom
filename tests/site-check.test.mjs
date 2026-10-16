@@ -65,10 +65,14 @@ console.log('Gemini retry & lead webhook: 3 cases ✓');
 
 // Verify personalized outreach audit link generator and sitemap/robots discovery files.
 import fs from 'node:fs';
-import { buildAuditUrl } from '../scripts/outreach-links.mjs';
+import { buildAuditUrl, buildOutreachCopy } from '../scripts/outreach-links.mjs';
 
 const auditUrl = buildAuditUrl('Olsen Roofing', 'roofer', 'Clovis, CA');
 assert.equal(auditUrl, 'https://cloviswebdesign.com/?biz=Olsen+Roofing&trade=roofer&city=Clovis%2C+CA&autorun=1#check');
+
+const rivalCopy = buildOutreachCopy('Valley Roofing', 'roofer', 'Clovis, CA', 'Olsen Roofing and Cen-Cal Roofing');
+assert.ok(rivalCopy.sms.includes('Olsen Roofing and Cen-Cal Roofing instead of Valley Roofing'));
+assert.ok(rivalCopy.emailSubject.includes('Olsen Roofing and Cen-Cal Roofing'));
 
 const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
 assert.ok(robots.includes('Sitemap: https://cloviswebdesign.com/sitemap.xml'));
