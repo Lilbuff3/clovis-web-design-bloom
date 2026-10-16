@@ -87,7 +87,7 @@ export function Contact() {
           <div className="reveal mt-10 space-y-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block" htmlFor="contact-name">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name <span className="normal-case tracking-normal">(optional)</span></span>
                 <input
                   id="contact-name"
                   ref={nameInputRef}
@@ -98,7 +98,7 @@ export function Contact() {
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do <span className="normal-case tracking-normal">(optional)</span></span>
                 <input
                   id="contact-trade"
                   value={trade}
