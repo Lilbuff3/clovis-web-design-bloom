@@ -29,7 +29,9 @@ export async function pingIndexNow(fetchImpl = globalThis.fetch) {
   return { status: res.status, ok: res.ok || res.status === 202 };
 }
 
-if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}`) {
+import { pathToFileURL } from 'node:url';
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const result = await pingIndexNow();
   console.log(`IndexNow submission status: ${result.status} (ok=${result.ok})`);
   for (const u of CANONICAL_URLS) console.log(`  → ${u}`);
