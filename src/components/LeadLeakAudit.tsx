@@ -35,7 +35,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
     setSent(now);
     setCopiedReport(false);
     setAi("asking");
-    fetch("/api/ask-gemini", {
+    fetch("/api/ask-gemini/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ businessName: now.name, trade: now.trade, city: now.city }),

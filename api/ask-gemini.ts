@@ -47,13 +47,17 @@ const unique = (links: Link[]) => links.filter((l, i) => links.findIndex((m) => 
 const unsuffixed = (title: string) => title.replace(/\s+[-–—]\s+Google Maps$/i, '').trim();
 
 const SYSTEM = `Answer the way you would for someone choosing a local business.
-Plain text, no markdown, no emoji. Name up to 5 businesses, one line each with a short reason. Under 120 words.`;
+Plain text, no markdown, no emoji. Name up to 5 businesses, one line each in the format "Business Name: short reason". Under 120 words.`;
 
 type Chunk = {
   maps?: {
     title?: string;
     uri?: string;
     placeAnswerSources?: { reviewSnippets?: { title?: string; googleMapsUri?: string }[] };
+  };
+  web?: {
+    title?: string;
+    uri?: string;
   };
 };
 
@@ -79,7 +83,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   const question = `I need ${an(trade)} ${trade} in ${city}. Who do you recommend?`;
   // Now and then Gemini answers without looking anything up on Maps (about 1 in 10 on production); a second try covers it.
-  const result = (await askGemini(key, question)) ?? (await askGemini(key, question));
+  const result = (await askGemini(key, question, city)) ?? (await askGemini(key, question, city));
   if (!result) return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
 
   const named = namedIn(result.places.map((p) => p.title), business);
@@ -138,8 +142,8 @@ async function notifyLeadWebhook(
   }
 }
 
-/** One question to Gemini with Google Maps; null unless the answer came back with Maps sources. */
-async function askGemini(key: string, question: string): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
+/** One question to Gemini with Google Maps; falls back to gemini-2.5-flash + googleSearch if Maps quota returns 429. */
+async function askGemini(key: string, question: string, city = 'Clovis, CA'): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
       method: 'POST',
@@ -153,6 +157,9 @@ async function askGemini(key: string, question: string): Promise<{ answer: strin
       // Two tries at 11s each stay inside the 25 seconds an edge function gets to start answering.
       signal: AbortSignal.timeout(11_000),
     });
+    if (res.status === 429) {
+      return await askGeminiSearchFallback(key, question, city);
+    }
     if (!res.ok) {
       console.warn('Gemini returned', res.status, (await res.text()).slice(0, 300));
       return null;
@@ -192,6 +199,53 @@ async function askGemini(key: string, question: string): Promise<{ answer: strin
     return { answer, places, sources };
   } catch (err) {
     console.warn('Gemini request failed', err);
+    return null;
+  }
+}
+
+/** Fallback when Maps grounding returns 429: uses gemini-2.5-flash with live Google Search grounding. */
+async function askGeminiSearchFallback(key: string, question: string, city: string): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
+  try {
+    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: SYSTEM }] },
+        contents: [{ role: 'user', parts: [{ text: question }] }],
+        tools: [{ googleSearch: {} }],
+        generationConfig: { maxOutputTokens: 800 },
+      }),
+      signal: AbortSignal.timeout(11_000),
+    });
+    if (!res.ok) return null;
+    const candidate = (await res.json())?.candidates?.[0];
+    const parts: { text?: string; thought?: boolean }[] = candidate?.content?.parts ?? [];
+    const answer = parts
+      .filter((p) => !p.thought)
+      .map((p) => p.text ?? '')
+      .join('')
+      .replace(/[*#`_]/g, '')
+      .trim();
+    if (!answer) return null;
+
+    const places: Link[] = [];
+    for (const line of answer.split(/\r?\n/)) {
+      const m = line.match(/^(?:\d+[\.\)]\s*)?([A-Z0-9][^:—–\-]{2,55}?)\s*[:—–\-]\s+.+/);
+      if (!m) continue;
+      const title = m[1].trim();
+      if (/^(here are|for |some |in |if you)/i.test(title)) continue;
+      const uri = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${title} ${city}`)}`;
+      if (!places.some((p) => p.title === title)) places.push({ title, uri });
+    }
+
+    const chunks: Chunk[] = candidate?.groundingMetadata?.groundingChunks ?? [];
+    const webSources = unique(
+      chunks.map((c) => ({ title: c.web?.title ?? '', uri: c.web?.uri })).filter(linkable)
+    );
+    const sources = webSources.length ? webSources : places;
+    if (!places.length) return null;
+    return { answer, places: places.slice(0, 5), sources };
+  } catch {
     return null;
   }
 }
