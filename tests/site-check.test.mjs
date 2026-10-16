@@ -83,5 +83,18 @@ for (const canonical of [
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `Missing ${canonical} in sitemap.xml`);
 }
 assert.ok(!sitemap.includes('/services/web-design-clovis/'), 'Retired route must not appear in sitemap.xml');
-console.log('Outreach URLs & SEO discovery files: 3 cases ✓');
+
+const rootLayout = fs.readFileSync(new URL('../src/layouts/RootLayout.astro', import.meta.url), 'utf8');
+assert.ok(rootLayout.includes('/_vercel/insights/script.js'), 'Expected Vercel Web Analytics script in RootLayout.astro');
+assert.ok(rootLayout.includes('google-site-verification'), 'Expected Google Search Console verification tag in RootLayout.astro');
+
+import { CANONICAL_URLS, pingIndexNow } from '../scripts/ping-search-engines.mjs';
+let indexNowPayload = null;
+const pingRes = await pingIndexNow(async (url, init) => {
+  indexNowPayload = JSON.parse(init.body);
+  return new Response('', { status: 202 });
+});
+assert.equal(pingRes.ok, true);
+assert.deepEqual(indexNowPayload.urlList, CANONICAL_URLS);
+console.log('Outreach URLs, Analytics & SEO discovery files: 5 cases ✓');
 

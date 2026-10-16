@@ -6,6 +6,21 @@
       "source": "/services/web-design-clovis/",
       "destination": "/",
       "statusCode": 301
+    },
+    {
+      "source": "/work/kidney-specialist-inc/",
+      "destination": "/#work",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/big-bros-dumpster/",
+      "destination": "/#work",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/",
+      "destination": "/#work",
+      "statusCode": 301
     }
   ],
   "headers": [

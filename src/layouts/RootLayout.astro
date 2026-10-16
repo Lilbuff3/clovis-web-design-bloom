@@ -25,12 +25,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="google-site-verification" content="2epFpYs14Tg9K6RcEv6Q-ovYH84rhd0_VwGEoncOWJM" />
+    <meta name="google-site-verification" content="o3GJhf1cxHaDi2kwMGuH8lXb-iQllnntRh3pru_cPmM" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta name="theme-color" content="#F7F0E3" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23EE5A2F'/%3E%3Cpath d='M32 4c4 8 10 10 16 8-2 6-8 10-16 8' fill='%232E6A4C'/%3E%3C/svg%3E" />
     
     <!-- Open Graph & Twitter Social Image Cards -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Clovis Web Design" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
@@ -70,8 +76,10 @@ const {
         });
       }
     </script>
-    <!-- Vercel Speed Insights: the plain-HTML install, no package needed. -->
+    <!-- Vercel Speed Insights & Web Analytics: plain-HTML install, no package needed. -->
     <script is:inline>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
     <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

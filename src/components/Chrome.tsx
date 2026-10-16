@@ -28,6 +28,7 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 const links = [
   { href: "/services/medical-web-design/", label: "Medical Offices" },
   { href: "/services/contractor-websites/", label: "Contractors" },
+  { href: "/services/local-seo-fresno/", label: "Local SEO" },
   { href: "/#work", label: "Client Work" },
   { href: "/#process", label: "Process" },
   { href: "/#pricing", label: "Pricing" },

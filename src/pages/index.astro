@@ -67,10 +67,16 @@ const audiences = [
             </a>
           ))}
         </div>
-        <p class="reveal mt-6 text-[17px] leading-relaxed text-ink/80">
-          Agency or designer? I also build from your Figma files, under your name.
-          <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
-        </p>
+        <div class="reveal mt-6 flex flex-col gap-2 text-[17px] leading-relaxed text-ink/80 md:flex-row md:flex-wrap md:items-center md:justify-between">
+          <p>
+            Already have a site that isn't showing up on Google Maps?
+            <a href="/services/local-seo-fresno/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">See Fresno &amp; Clovis local SEO</a>
+          </p>
+          <p>
+            Agency or designer? I also build from your Figma files, under your name.
+            <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
+          </p>
+        </div>
       </div>
     </section>
     <section id="check" class="px-5 pb-14 md:px-8 md:pb-20">
