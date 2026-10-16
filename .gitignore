@@ -34,3 +34,10 @@ dist-ssr
 .claude
 .impeccable
 .codex
+
+# Local test artifacts and scratch prototypes
+tests/test-results.json
+running_site_*.html
+prototype.html
+public/prototype.html
+

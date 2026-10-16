@@ -6,7 +6,7 @@ Adam Youssef's web design studio site. This repo is the live site; the old Astro
 ## Stack
 
 - Astro (static output) with React islands (`@astrojs/react`) and Tailwind CSS v4 via
-  `@tailwindcss/vite`. The README's "React + Vite" line is out of date.
+  `@tailwindcss/vite`.
 - `trailingSlash: 'always'`, directory build format, stylesheets inlined for PageSpeed.
 - `@/` imports resolve to `src/`.
 - `api/ask-gemini.ts` is a Vercel Edge function (Maps-grounded Gemini lookup for the lead

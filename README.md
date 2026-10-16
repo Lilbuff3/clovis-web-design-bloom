@@ -1,18 +1,16 @@
 # Clovis Web Design
 
-> Hand-grown websites for Fresno & the Central Valley by Adam Youssef. $1,500 landing pages, live in a week.
+> Custom websites and local SEO for Fresno, Clovis, and the Central Valley ([cloviswebdesign.com](https://cloviswebdesign.com)).
 
 ## Tech Stack
-- React 19 + TypeScript
-- Vite 7 + Tailwind CSS v4
+- Astro 5 (static output) + React 19 islands (`@astrojs/react`)
+- Tailwind CSS v4 (`@tailwindcss/vite`) + TypeScript
+- Vercel Edge Function (`api/ask-gemini.ts`)
 
-## Getting Started
+## Commands
 ```bash
 npm install
-npm run dev
-```
-
-## Build
-```bash
-npm run build
+npm run dev      # Dev server on :4321
+npm run build    # Static build into dist/
+npm test         # Run site-check and verify-e2e suites
 ```
