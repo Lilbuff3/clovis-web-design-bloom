@@ -144,7 +144,7 @@ export function Stand() {
           <div>
             <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">See the preview before you pay.</h3>
             <p className="mt-3 text-[16px] leading-relaxed text-ink/80">
-              After our 45-minute call, I write the words and build a working preview you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
+              After our 15-minute call, I write the words and build a working preview you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
             </p>
           </div>
           <div>

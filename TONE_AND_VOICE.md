@@ -12,7 +12,7 @@ Clovis Web Design is a specialized web design and development studio operated by
 1. **Direct Access to the Builder:** No account managers, junior interns, or ticket queues. When clients call or text, the person who writes the code answers.
 2. **Speed & Mobile Conversion:** Sites load in under 1 second on mobile devices with two bars of cellular signal. Instant tap-to-call, direct SMS, and zero layout shift.
 3. **Local SEO & Discovery:** Engineered with schema markup, location targeting, and semantic HTML to rank on Google Maps (Local 3-Pack) and AI search engines.
-4. **Stress-Free Delivery:** Done-for-you copywriting based on a 45-minute discovery interview. No 20-page blank questionnaires.
+4. **Stress-Free Delivery:** Done-for-you copywriting based on a 15-minute discovery interview. No 20-page blank questionnaires.
 5. **True Ownership:** Clients own their domain, code, and hosting from day one. No monthly hostage fees or proprietary lock-in.
 
 ---

@@ -69,7 +69,7 @@ export const steps = [
   {
     name: "Discovery",
     when: "Day 1",
-    body: "A 45-minute call about what you do, who calls you, and what a new customer is worth to you. If a new site won't clearly pay for itself, I'll tell you right there.",
+    body: "A quick 15-minute call about what you do, who calls you, and what a new customer is worth to you. If a new site won't clearly pay for itself, I'll tell you right there.",
   },
   {
     name: "Words & layout",
@@ -107,7 +107,7 @@ export const compare = [
   {
     q: "Who writes the words?",
     them: ["You do, somehow", "A blank questionnaire and a deadline — or machine-written copy that sounds like everyone else."],
-    me: ["I do", "We talk for 45 minutes, I record it, and write the site from what you said about your own trade."],
+    me: ["I do", "We talk for 15 minutes, I record it, and write the site from what you said about your own trade."],
   },
   {
     q: "When you need a change?",
@@ -183,7 +183,7 @@ export const care = [
 export const faqs = [
   {
     q: "How does payment work? What if I don't like the design?",
-    a: "You don't pay a deposit just to see what I'd build. First we talk for 45 minutes, and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing. And if it looks to me like a new site won't clearly earn back what it costs for your business, I'll tell you that on our first call.",
+    a: "You don't pay a deposit just to see what I'd build. First we talk for 15 minutes, and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing. And if it looks to me like a new site won't clearly earn back what it costs for your business, I'll tell you that on our first call.",
   },
   {
     q: "Who owns the website and the domain once it's live?",
