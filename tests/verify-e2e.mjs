@@ -986,6 +986,41 @@ assertTest(6, 'T6.9', 'Schema knowsAbout covers medical work honestly (no unback
   return `knowsAbout: ${knowsAbout.join(', ')}`;
 });
 
+assertTest(6, 'T6.10', 'Google CWV & SERP Breadcrumbs: explicit image dimensions, LCP fetchpriority, and BreadcrumbList schema', () => {
+  const indexHtml = fs.readFileSync(path.join(DIST_DIR, 'index.html'), 'utf-8');
+  if (!/rel=["']preload["'][^>]*href=["']\/images\/hero\.webp["'][^>]*fetchpriority=["']high["']/i.test(indexHtml)) {
+    throw new Error('Missing <link rel="preload" href="/images/hero.webp" fetchpriority="high"> in index.html <head>.');
+  }
+  if (!/font-size-adjust:\s*from-font/i.test(indexHtml)) {
+    throw new Error('Missing font-size-adjust: from-font in inlined styles for zero-CLS font fallback.');
+  }
+
+  const missingDims = [];
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8');
+    const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
+    for (const tag of imgs) {
+      if (!/\bwidth=/i.test(tag) || !/\bheight=/i.test(tag)) {
+        missingDims.push(`${r.route}: ${tag}`);
+      }
+    }
+    if (r.route !== '/') {
+      const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
+      const bc = graph.find((n) => n['@type'] === 'BreadcrumbList');
+      if (!bc || !Array.isArray(bc.itemListElement) || bc.itemListElement.length < 2) {
+        throw new Error(`${r.route}: missing BreadcrumbList in JSON-LD @graph.`);
+      }
+      if (!/<nav[^>]*aria-label=["']Breadcrumb["']/i.test(html)) {
+        throw new Error(`${r.route}: missing visible <nav aria-label="Breadcrumb">.`);
+      }
+    }
+  }
+  if (missingDims.length) {
+    throw new Error(`Images missing explicit width/height attributes:\n - ${missingDims.join('\n - ')}`);
+  }
+  return 'All images carry explicit width/height, hero LCP image is preloaded with fetchpriority="high", and all service pages emit BreadcrumbList';
+});
+
 // ============================================================================
 // Output & Reporting Engine
 // ============================================================================

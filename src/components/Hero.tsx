@@ -34,7 +34,15 @@ export function Hero() {
         style={{ transform: "scale(1)" }}
       >
         <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
-          <img src="/images/hero.webp" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
+          <img
+            src="/images/hero.webp"
+            alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise"
+            width={1693}
+            height={929}
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover object-[30%_bottom] md:object-bottom"
+          />
         </div>
       </div>
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />

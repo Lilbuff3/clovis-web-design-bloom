@@ -78,6 +78,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <img
                   src={c.previewImg}
                   alt={`${c.client} website`}
+                  width={1280}
+                  height={720}
                   className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                   decoding="async"
@@ -104,6 +106,9 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <img
                   src={c.photoImg}
                   alt={`${c.client} on-site photography`}
+                  width={c.photoWidth}
+                  height={c.photoHeight}
+                  fetchPriority="low"
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"
                   decoding="async"

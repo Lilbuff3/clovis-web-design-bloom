@@ -40,18 +40,28 @@ export function usePageScroll() {
   const [p, setP] = useState(0);
   useEffect(() => {
     let raf = 0;
+    let max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const measure = () => {
+      max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    };
     const on = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        setY(window.scrollY);
-        setP(max > 0 ? window.scrollY / max : 0);
+        const sy = window.scrollY;
+        setY(sy);
+        setP(max > 0 ? Math.min(1, sy / max) : 0);
       });
     };
+    measure();
     on();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    ro?.observe(document.documentElement);
+    window.addEventListener("resize", measure, { passive: true });
     window.addEventListener("scroll", on, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      ro?.disconnect();
+      window.removeEventListener("resize", measure);
       window.removeEventListener("scroll", on);
     };
   }, []);

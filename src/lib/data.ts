@@ -20,6 +20,8 @@ export const cases = [
     img: "/images/kidney.jpg",
     previewImg: "/images/kidney-preview.webp",
     photoImg: "/images/kidney.jpg",
+    photoWidth: 1600,
+    photoHeight: 995,
     tint: "bg-sky",
     headline: "A medical site that never touches patient data — and scores a perfect 100.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
@@ -44,9 +46,11 @@ export const cases = [
     trade: "Roll-off dumpster rental",
     place: "Fresno & Clovis, CA",
     year: "2025",
-    img: "/images/bigbros.jpg",
+    img: "/images/bigbros-truck.webp",
     previewImg: "/images/big-bros-preview.webp",
-    photoImg: "/images/bigbros.jpg",
+    photoImg: "/images/bigbros-truck.webp",
+    photoWidth: 1067,
+    photoHeight: 730,
     tint: "bg-blush",
     headline: "Number one on Google for “dumpster rental Fresno.”",
     problem: "National brokers were outranking the company that actually owns the trucks.",
@@ -303,7 +307,24 @@ export function pageSchema(path: string, service: { name: string; serviceType: s
             "publisher": { "@id": business["@id"] },
             "inLanguage": "en-US",
           }]
-        : []),
+        : [{
+            "@type": "BreadcrumbList",
+            "@id": `${url}#breadcrumb`,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Clovis Web Design",
+                "item": "https://cloviswebdesign.com/",
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": service.name,
+                "item": url,
+              },
+            ],
+          }]),
       {
         "@type": "Service",
         "@id": `${url}#service`,

@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-17T16:00:37.958Z",
-  "total": 33,
-  "passed": 33,
+  "timestamp": "2026-10-17T20:47:54.393Z",
+  "total": 34,
+  "passed": 34,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -297,6 +297,14 @@
           "status": "PASS",
           "error": null,
           "details": "knowsAbout: Web design, Local SEO, Website speed, Web accessibility (WCAG 2.1 AA), Websites for medical practices, HIPAA-aware web design, Bilingual English and Spanish websites"
+        },
+        {
+          "id": "T6.10",
+          "tier": 6,
+          "title": "Google CWV & SERP Breadcrumbs: explicit image dimensions, LCP fetchpriority, and BreadcrumbList schema",
+          "status": "PASS",
+          "error": null,
+          "details": "All images carry explicit width/height, hero LCP image is preloaded with fetchpriority=\"high\", and all service pages emit BreadcrumbList"
         }
       ]
     }
