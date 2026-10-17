@@ -14,3 +14,7 @@
 ## 2026-10-11 - Invisible elements must be inert
 **Learning:** Found a closed mobile menu that was visually hidden using `clip-path` but not removed from the accessibility tree, allowing keyboard users to tab into invisible links.
 **Action:** Use the `inert` attribute to completely remove visually hidden interactive containers from the focus order and screen reader view.
+
+## 2024-10-18 - Visual Indicators for Required/Optional Form Fields
+**Learning:** The HTML `required` attribute correctly informs screen readers about required inputs, but provides no visual indicator to sighted users, leading to cognitive load when determining which fields must be filled.
+**Action:** Always add explicit visual indicators to form labels: an accessible asterisk (`<span aria-hidden="true">*</span>`) for required fields, and `(optional)` text for non-required fields. Use `aria-hidden="true"` on the asterisk to prevent redundant announcements by screen readers.
