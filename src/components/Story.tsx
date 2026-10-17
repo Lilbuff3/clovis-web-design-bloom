@@ -87,7 +87,9 @@ export function Stand() {
             <span className="line-mask"><span>What it costs,</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>and what you get.</span></span>
           </h2>
-          <p className="reveal mx-auto mt-6 max-w-xl text-lg text-ink/80">No sales call to find out what a site costs: Starter and Growth are priced right here, and Flagship is priced to what your business needs. Every site is 100% yours to keep.</p>
+          <p className="reveal mx-auto mt-6 max-w-2xl text-lg text-ink/80">
+            No sales call to find out what a site costs, and no deposit to see how yours will look. I build a working preview after our first call — if you don't like it, you don't pay. Every site is 100% yours to keep.
+          </p>
         </div>
 
         {/* Pricing Cards */}
@@ -101,7 +103,7 @@ export function Stand() {
                   <div className="font-display wonk text-4xl italic text-ink">{pl.name}</div>
                   <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
                   <div className="mt-6 font-display text-6xl font-[400] leading-none text-ink">{pl.price}</div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · {pl.terms ?? "one-off · no subscription"}</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · {pl.terms ?? "one-off · $0 until you like the preview"}</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -137,8 +139,24 @@ export function Stand() {
           </div>
         </div>
 
+        {/* Risk-Reversal & ROI Guarantee */}
+        <div className="reveal mt-16 grid gap-8 border-y border-ink/15 py-10 md:grid-cols-2 md:gap-12">
+          <div>
+            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">See the preview before you pay.</h3>
+            <p className="mt-3 text-[16px] leading-relaxed text-ink/80">
+              After our 45-minute call, I write the words and build a working preview you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">It has to pay for itself.</h3>
+            <p className="mt-3 text-[16px] leading-relaxed text-ink/80">
+              For most businesses, a handful of new jobs or referrals covers the entire build — and with no required monthly fee, you never pay rent on your website again. If I don't see a clear way for a new site to earn back its cost for your business, I'll tell you upfront on our first call.
+            </p>
+          </div>
+        </div>
+
         {/* Care */}
-        <div className="reveal mt-24">
+        <div className="reveal mt-20">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <h3 className="font-display text-4xl font-[420] leading-tight text-balance">Ongoing care is optional. I mean it.</h3>

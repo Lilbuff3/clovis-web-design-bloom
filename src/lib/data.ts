@@ -69,17 +69,17 @@ export const steps = [
   {
     name: "Discovery",
     when: "Day 1",
-    body: "A 45-minute call about what you do, who calls you, and what they ask before they book. If one simple page is enough, I'll say so.",
+    body: "A 45-minute call about what you do, who calls you, and what a new customer is worth to you. If a new site won't clearly pay for itself, I'll tell you right there.",
   },
   {
     name: "Words & layout",
     when: "Days 2–3",
-    body: "I write every word from that call and send you a link to try on your phone. No blank questionnaire to fill in.",
+    body: "I write every word from that call and send you a working preview to try on your phone. If you don't like it, you don't pay.",
   },
   {
     name: "Build",
     when: "Days 3–5",
-    body: "No page builders or plugins. Your call and text buttons go right where thumbs land.",
+    body: "No page builders or plugins. Your call and text buttons go right where thumbs land, and pages open in under a second.",
   },
   {
     name: "Launch",
@@ -133,7 +133,7 @@ export const plans = [
       "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
-    for: "Contractors, shops, and one-person trades who need more calls now.",
+    for: "Local shops, restaurants, trades, and new businesses that want more calls now.",
   },
   {
     code: "02",
@@ -149,7 +149,7 @@ export const plans = [
       "A full Spanish version at /es/",
     ],
     not: [],
-    for: "Established businesses with more than one service — or who need Spanish alongside English.",
+    for: "Growing businesses with multiple services, locations, or Spanish-speaking customers.",
   },
   {
     code: "03",
@@ -169,7 +169,7 @@ export const plans = [
       "I stay on it for 90 days after launch",
     ],
     not: [],
-    for: "Medical practices, multi-location operators, anyone with compliance to satisfy.",
+    for: "Medical practices, multi-location companies, or any business needing custom booking or compliance.",
   },
 ];
 
@@ -181,6 +181,10 @@ export const care = [
 
 
 export const faqs = [
+  {
+    q: "How does payment work? What if I don't like the design?",
+    a: "You don't pay a deposit just to see what I'd build. First we talk for 45 minutes, and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing. And if it looks to me like a new site won't clearly earn back what it costs for your business, I'll tell you that on our first call.",
+  },
   {
     q: "Who owns the website and the domain once it's live?",
     a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them.",

@@ -21,20 +21,28 @@ const schema = pageSchema('/', {
 
 const audiences = [
   {
-    href: '/services/medical-web-design/',
-    who: 'Doctors · Dentists · Clinics · Law & accounting',
-    title: 'Medical & professional offices',
-    line: 'What I build for practices where trust, privacy and referrals matter most.',
-    tint: 'bg-sky',
-    cta: 'See medical sites',
+    href: '/#pricing',
+    who: 'Shops · Restaurants · Auto & repair · Salons · Law & accounting · New businesses',
+    title: 'Local businesses & shops',
+    line: 'A custom site with your services, hours, photos and phone number — built to bring in local customers.',
+    tint: 'bg-sage',
+    cta: 'See packages & pricing',
   },
   {
     href: '/services/contractor-websites/',
-    who: 'Roofers · HVAC · Plumbers · Dumpster rentals',
-    title: 'Local businesses & contractors',
-    line: 'What I build for businesses that need more calls.',
+    who: 'Roofers · HVAC · Plumbers · Dumpster rentals · Landscaping',
+    title: 'Contractors & home services',
+    line: 'Call and text buttons on every screen, built to load fast on two bars of signal and win local searches.',
     tint: 'bg-blush',
     cta: 'See contractor sites',
+  },
+  {
+    href: '/services/medical-web-design/',
+    who: 'Doctors · Dentists · Private clinics · Specialists',
+    title: 'Medical & dental practices',
+    line: 'What I build for practices where patient trust, privacy, accessibility and referrals matter most.',
+    tint: 'bg-sky',
+    cta: 'See medical sites',
   },
 ];
 ---
@@ -48,20 +56,20 @@ const audiences = [
     <section id="who" class="px-5 py-14 md:px-8 md:py-20">
       <div class="mx-auto max-w-7xl">
         <h2 class="font-display h-section">
-          <span class="line-mask"><span>Pick your kind</span></span>
-          <span class="line-mask" style="--d: 120ms"><span>of business.</span></span>
+          <span class="line-mask"><span>Built for whatever</span></span>
+          <span class="line-mask" style="--d: 120ms"><span>business you run.</span></span>
         </h2>
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
           {audiences.map((a, i) => (
             <a
               href={a.href}
-              class={`reveal group flex flex-col rounded-[28px] border border-ink/10 ${a.tint} p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)] md:p-9`}
+              class={`reveal group flex flex-col rounded-[28px] border border-ink/10 ${a.tint} p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)] md:p-8`}
               style={`--d: ${i * 90}ms`}
             >
-              <span class="font-display text-[clamp(1.9rem,3.2vw,2.8rem)] font-[420] leading-[1.02] text-ink">{a.title}</span>
+              <span class="font-display text-[clamp(1.75rem,2.6vw,2.4rem)] font-[420] leading-[1.04] text-ink">{a.title}</span>
               <span class="mt-2 text-[15px] text-ink-soft">{a.who}</span>
-              <span class="mt-4 max-w-md text-[17px] leading-relaxed text-ink/80">{a.line}</span>
-              <span class="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-3 font-medium text-cream transition-colors group-hover:bg-persimmon-deep">
+              <span class="mt-4 max-w-md text-[16.5px] leading-relaxed text-ink/80">{a.line}</span>
+              <span class="mt-auto pt-8 inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-3 font-medium text-cream transition-colors group-hover:bg-persimmon-deep">
                 {a.cta} <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
               </span>
             </a>

@@ -15,7 +15,7 @@ const textAdam = smsTo("Hi Adam, I run a contracting business and I'd like a web
 const faqs: Faq[] = [
   {
     q: 'How much does a contractor website cost?',
-    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}.`,
+    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}. Either way, I build a working preview after our first call — if you don't like it, you don't pay.`,
   },
   {
     q: 'Can customers text me from the site?',
@@ -63,7 +63,7 @@ const gets = [
         Call and text buttons where a thumb lands, on a page that loads on two bars of signal. The customer in the driveway calls you, not the next name on the list.
       </p>
       <p class="mt-4 text-lg text-ink">
-        <strong>{starter.price}, live in a week.</strong> I build it and write it. You text me when you need a change.
+        <strong>{starter.price}, live in a week — and you see a preview on your phone before you pay.</strong> One or two extra jobs covers the whole site, with no monthly fee after.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-4 items-center">
@@ -119,16 +119,16 @@ const gets = [
           {gets.map(([lead, rest]) => <li><strong class="text-ink">{lead}</strong> {rest}</li>)}
         </ul>
       </section>
-
-      {/* Desktop visitors never see the phone drawer's copy of this check. */}
-      <section class="mt-16">
-        <LeadLeakAudit client:visible />
-      </section>
     </div>
 
     <FourSeconds client:visible />
 
     <div class="mx-auto max-w-5xl px-5 md:px-8">
+      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+      <section class="mb-16">
+        <LeadLeakAudit client:visible />
+      </section>
+
       <section>
         <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
         <div class="mt-8 space-y-4">
