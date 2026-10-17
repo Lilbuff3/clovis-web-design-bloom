@@ -20,6 +20,8 @@ export const cases = [
     img: "/images/kidney.jpg",
     previewImg: "/images/kidney-preview.webp",
     photoImg: "/images/kidney.jpg",
+    photoWidth: 1600,
+    photoHeight: 995,
     tint: "bg-sky",
     headline: "A medical site that never touches patient data — and scores a perfect 100.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
@@ -44,9 +46,11 @@ export const cases = [
     trade: "Roll-off dumpster rental",
     place: "Fresno & Clovis, CA",
     year: "2025",
-    img: "/images/bigbros.jpg",
+    img: "/images/bigbros-truck.webp",
     previewImg: "/images/big-bros-preview.webp",
-    photoImg: "/images/bigbros.jpg",
+    photoImg: "/images/bigbros-truck.webp",
+    photoWidth: 1067,
+    photoHeight: 730,
     tint: "bg-blush",
     headline: "Number one on Google for “dumpster rental Fresno.”",
     problem: "National brokers were outranking the company that actually owns the trucks.",
@@ -69,17 +73,17 @@ export const steps = [
   {
     name: "Discovery",
     when: "Day 1",
-    body: "A 45-minute call about what you do, who calls you, and what they ask before they book. If one simple page is enough, I'll say so.",
+    body: "A quick 15-minute call about what you do, who calls you, and what a new customer is worth to you. If a new site won't clearly pay for itself, I'll tell you right there.",
   },
   {
     name: "Words & layout",
     when: "Days 2–3",
-    body: "I write every word from that call and send you a link to try on your phone. No blank questionnaire to fill in.",
+    body: "I write every word from that call and send you a working preview to try on your phone. If you don't like it, you don't pay.",
   },
   {
     name: "Build",
     when: "Days 3–5",
-    body: "No page builders or plugins. Your call and text buttons go right where thumbs land.",
+    body: "No page builders or plugins. Your call and text buttons go right where thumbs land, and pages open in under a second.",
   },
   {
     name: "Launch",
@@ -107,7 +111,7 @@ export const compare = [
   {
     q: "Who writes the words?",
     them: ["You do, somehow", "A blank questionnaire and a deadline — or machine-written copy that sounds like everyone else."],
-    me: ["I do", "We talk for 45 minutes, I record it, and write the site from what you said about your own trade."],
+    me: ["I do", "We talk for 15 minutes, I record it, and write the site from what you said about your own trade."],
   },
   {
     q: "When you need a change?",
@@ -133,7 +137,7 @@ export const plans = [
       "One full round of revisions included",
     ],
     not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
-    for: "Contractors, shops, and one-person trades who need more calls now.",
+    for: "Local shops, restaurants, trades, and new businesses that want more calls now.",
   },
   {
     code: "02",
@@ -149,7 +153,7 @@ export const plans = [
       "A full Spanish version at /es/",
     ],
     not: [],
-    for: "Established businesses with more than one service — or who need Spanish alongside English.",
+    for: "Growing businesses with multiple services, locations, or Spanish-speaking customers.",
   },
   {
     code: "03",
@@ -169,7 +173,7 @@ export const plans = [
       "I stay on it for 90 days after launch",
     ],
     not: [],
-    for: "Medical practices, multi-location operators, anyone with compliance to satisfy.",
+    for: "Medical practices, multi-location companies, or any business needing custom booking or compliance.",
   },
 ];
 
@@ -181,6 +185,10 @@ export const care = [
 
 
 export const faqs = [
+  {
+    q: "How does payment work? What if I don't like the design?",
+    a: "You don't pay a deposit just to see what I'd build. First we talk for 15 minutes, and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing. And if it looks to me like a new site won't clearly earn back what it costs for your business, I'll tell you that on our first call.",
+  },
   {
     q: "Who owns the website and the domain once it's live?",
     a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them.",
@@ -299,7 +307,24 @@ export function pageSchema(path: string, service: { name: string; serviceType: s
             "publisher": { "@id": business["@id"] },
             "inLanguage": "en-US",
           }]
-        : []),
+        : [{
+            "@type": "BreadcrumbList",
+            "@id": `${url}#breadcrumb`,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Clovis Web Design",
+                "item": "https://cloviswebdesign.com/",
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": service.name,
+                "item": url,
+              },
+            ],
+          }]),
       {
         "@type": "Service",
         "@id": `${url}#service`,

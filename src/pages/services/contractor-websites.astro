@@ -15,7 +15,7 @@ const textAdam = smsTo("Hi Adam, I run a contracting business and I'd like a web
 const faqs: Faq[] = [
   {
     q: 'How much does a contractor website cost?',
-    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}.`,
+    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}. Either way, I build a working preview after our first call — if you don't like it, you don't pay.`,
   },
   {
     q: 'Can customers text me from the site?',
@@ -23,7 +23,7 @@ const faqs: Faq[] = [
   },
   {
     q: "I'm on job sites all day. How much of my time does this take?",
-    a: 'About an hour. A 45-minute call about your work, then a few minutes to check a link on your phone and tell me what to change. I write every word.',
+    a: 'About 20 minutes total. A 15-minute call about your work, then 5 minutes to check a link on your phone and tell me what to change. I write every word.',
   },
 ];
 
@@ -42,7 +42,7 @@ const gets = [
   [`A page for every town you serve (${growth.name}, ${growth.price}).`, 'So Google has a page to show someone searching "roofer Clovis" and someone searching "roofer Fresno."'],
   [`A full Spanish version (${growth.name}).`, 'Spanish-speaking customers can read the whole site, not just a "se habla español" line.'],
   ['Nothing to update.', "Plain hand-written files: no WordPress, no plugins to patch, nothing that breaks while you're on a roof."],
-  ["You don't write anything.", 'We talk for 45 minutes. I write every word and send you a link to check on your phone.'],
+  ["You don't write anything.", 'We talk for 15 minutes. I write every word and send you a link to check on your phone.'],
 ];
 ---
 
@@ -55,6 +55,11 @@ const gets = [
 
   <main class="relative z-10 pt-32 pb-24 md:pt-40">
     <div class="mx-auto max-w-5xl px-5 md:px-8">
+      <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
+        <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
+        <span aria-hidden="true" class="mx-2">/</span>
+        <span class="text-ink" aria-current="page">Contractor website design</span>
+      </nav>
       <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
         Contractor websites built to get you calls.
       </h1>
@@ -63,7 +68,7 @@ const gets = [
         Call and text buttons where a thumb lands, on a page that loads on two bars of signal. The customer in the driveway calls you, not the next name on the list.
       </p>
       <p class="mt-4 text-lg text-ink">
-        <strong>{starter.price}, live in a week.</strong> I build it and write it. You text me when you need a change.
+        <strong>{starter.price}, live in a week — and you see a preview on your phone before you pay.</strong> One or two extra jobs covers the whole site, with no monthly fee after.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-4 items-center">
@@ -100,13 +105,13 @@ const gets = [
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
             <div class="aspect-[16/10] overflow-hidden">
-              <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+              <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
             <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">One of the Big Bros trucks in Fresno.</figcaption>
           </figure>
           <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
             <div class="aspect-[16/10] overflow-hidden">
-              <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+              <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" width="600" height="600" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
             <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
           </figure>
@@ -119,16 +124,16 @@ const gets = [
           {gets.map(([lead, rest]) => <li><strong class="text-ink">{lead}</strong> {rest}</li>)}
         </ul>
       </section>
-
-      {/* Desktop visitors never see the phone drawer's copy of this check. */}
-      <section class="mt-16">
-        <LeadLeakAudit client:visible />
-      </section>
     </div>
 
     <FourSeconds client:visible />
 
     <div class="mx-auto max-w-5xl px-5 md:px-8">
+      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+      <section class="mb-16">
+        <LeadLeakAudit client:visible />
+      </section>
+
       <section>
         <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
         <div class="mt-8 space-y-4">

@@ -78,6 +78,8 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <img
                   src={c.previewImg}
                   alt={`${c.client} website`}
+                  width={1280}
+                  height={720}
                   className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                   decoding="async"
@@ -104,6 +106,9 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
                 <img
                   src={c.photoImg}
                   alt={`${c.client} on-site photography`}
+                  width={c.photoWidth}
+                  height={c.photoHeight}
+                  fetchPriority="low"
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"
                   decoding="async"
@@ -218,7 +223,7 @@ export function ClientWork() {
             </h2>
           </div>
           <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            Two businesses, both live. One reason they get calls: each site shows up fast for a new customer on two bars of signal. Owners rarely see their own site that way. They check it at home on <span className="whitespace-nowrap">Wi-Fi</span>, with a copy already saved on their phone.
+            I build for all kinds of Central Valley businesses — here are two very different ones. One reason they get calls: each site shows up fast for a new customer on two bars of signal. Owners rarely see their own site that way. They check it at home on <span className="whitespace-nowrap">Wi-Fi</span>, with a copy already saved on their phone.
           </p>
         </div>
 
@@ -231,9 +236,14 @@ export function ClientWork() {
         {/* The next spot. What it includes is on the price tags below. */}
         <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <h3 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
-              Your business could be next.
-            </h3>
+            <div>
+              <h3 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-[400] leading-[0.95]">
+                Your business could be next.
+              </h3>
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-cream/90">
+                You see a working preview on your phone before you pay anything — and if I don't think a new site will clearly pay for itself, I'll tell you on our first call.
+              </p>
+            </div>
             <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
               Text me to get started <span aria-hidden>→</span>
             </a>

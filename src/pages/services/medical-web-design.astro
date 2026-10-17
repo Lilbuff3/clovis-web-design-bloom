@@ -23,7 +23,7 @@ const faqs: Faq[] = [
   },
   {
     q: 'What does a medical practice website cost?',
-    a: "It depends on what your practice needs. A few clear pages for patients and referring offices cost far less than a site with online booking and a Spanish version. Tell me what you need and I'll give you a price that works for your practice before you commit to anything. You own the code and the domain from day one.",
+    a: "Most single-location practices need a 3–5 page site with a Spanish version, which starts at $2,500. Larger multi-location or custom builds are priced to what your practice needs. Either way, I build a working preview after our first call — if you don't like it, you don't pay. You own the code and the domain from day one.",
   },
 ];
 
@@ -43,6 +43,11 @@ const schema = pageSchema('/services/medical-web-design/', {
   <Nav client:load />
 
   <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
+      <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-ink" aria-current="page">Medical practice web design</span>
+    </nav>
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
       Medical Practice Web Design
     </h1>
@@ -51,7 +56,7 @@ const schema = pageSchema('/services/medical-web-design/', {
       I design and build websites for medical and dental practices in Fresno, Clovis and Madera. Your site answers the questions your front desk gets all day, makes it easy for other doctors to refer to you, and never holds patient information, so there's nothing on it to breach.
     </p>
     <p class="mt-4 text-lg text-ink">
-      <strong>Every practice needs something different, so let's talk.</strong> Tell me what you need and I'll make the price work, so the site earns back what it costs. You own the site and the domain.
+      <strong>You see a working preview before you pay anything.</strong> Tell me what your practice needs and I'll give you a straight price upfront — if a new site won't clearly earn back what it costs, I'll tell you on our first call. You own the site and the domain.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
@@ -127,7 +132,7 @@ const schema = pageSchema('/services/medical-web-design/', {
 
       <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         <div class="md:col-span-5">
-          <img src={kidney.previewImg} alt={`${kidney.client} website on a desktop screen`} class="rounded-2xl border border-ink/10 shadow-md w-full object-cover" width="600" height="380" loading="lazy" />
+          <img src={kidney.previewImg} alt={`${kidney.client} website on a desktop screen`} class="rounded-2xl border border-ink/10 shadow-md w-full object-cover" width="1280" height="720" loading="lazy" decoding="async" />
         </div>
         <div class="md:col-span-7">
           <p class="text-lg text-ink/80 leading-relaxed"><strong class="text-ink">The problem:</strong> {kidney.problem}</p>

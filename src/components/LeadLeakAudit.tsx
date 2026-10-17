@@ -110,7 +110,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           {/* h2 as the #check section's own heading; h3 under the drawer's "Free AI check" h2. */}
           <Title className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "h-section"}`}>Can AI find you?</Title>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
-            Customers ask Google's AI who to call. Type your business and see whether it names you.
+            Customers ask Google Maps and AI who to call. Type your business and see whether it names you.
           </p>
 
           <div className={`mt-8 grid gap-4 ${compact ? "" : "sm:grid-cols-3"}`}>
@@ -120,7 +120,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             </label>
             <label className="block" htmlFor={`${id}-trade`}>
               <span className={labelClass}>What you do</span>
-              <input id={`${id}-trade`} type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. roofer, dentist" className={inputClass} />
+              <input id={`${id}-trade`} type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. bakery, auto shop, roofer, dentist" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-city`}>
               <span className={labelClass}>Your town</span>

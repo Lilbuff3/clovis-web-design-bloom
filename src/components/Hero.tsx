@@ -34,7 +34,15 @@ export function Hero() {
         style={{ transform: "scale(1)" }}
       >
         <div className="absolute inset-0" style={{ transform: `translateY(${par * 0.25}px) scale(${1.04 + par * 0.00012})` }}>
-          <img src="/images/hero.webp" alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise" className="h-full w-full object-cover object-[30%_bottom] md:object-bottom" />
+          <img
+            src="/images/hero.webp"
+            alt="Hand-painted citrus orchard rows leading to the Sierra Nevada foothills at sunrise"
+            width={1693}
+            height={929}
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover object-[30%_bottom] md:object-bottom"
+          />
         </div>
       </div>
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper/80 to-transparent" />
@@ -55,8 +63,8 @@ export function Hero() {
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            I build websites for Central Valley businesses that bring in customers. No templates. No monthly fees. No support tickets. An easy process, and my cell number when you need me. Sites start at{" "}
-            <strong className="font-semibold">$1,500</strong>.
+            I build websites for Central Valley businesses that bring in customers. No templates, no monthly fees, and my cell number when you need me. Sites start at{" "}
+            <strong className="font-semibold">$1,500</strong> — and you see a working preview on your phone before you pay a dollar.
           </p>
           <div className="flex flex-col items-start gap-4">
             <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">

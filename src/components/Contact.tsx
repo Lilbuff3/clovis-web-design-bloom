@@ -81,7 +81,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No forms to fill out, no sales call you didn't ask for. Tap a few options below and I'll draft the first message for you.
+            No forms to fill out, no sales call you didn't ask for, and no deposit to see a preview. Tap a few options below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -103,7 +103,7 @@ export function Contact() {
                   id="contact-trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="a family dental office"
+                  placeholder="an auto shop, bakery, or roofing company"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -204,6 +204,7 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
+            <a href="/#who" className="block hover:underline">All Local Businesses</a>
             <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
             <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
             <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>

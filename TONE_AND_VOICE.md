@@ -12,7 +12,7 @@ Clovis Web Design is a specialized web design and development studio operated by
 1. **Direct Access to the Builder:** No account managers, junior interns, or ticket queues. When clients call or text, the person who writes the code answers.
 2. **Speed & Mobile Conversion:** Sites load in under 1 second on mobile devices with two bars of cellular signal. Instant tap-to-call, direct SMS, and zero layout shift.
 3. **Local SEO & Discovery:** Engineered with schema markup, location targeting, and semantic HTML to rank on Google Maps (Local 3-Pack) and AI search engines.
-4. **Stress-Free Delivery:** Done-for-you copywriting based on a 45-minute discovery interview. No 20-page blank questionnaires.
+4. **Stress-Free Delivery:** Done-for-you copywriting based on a 15-minute discovery interview. No 20-page blank questionnaires.
 5. **True Ownership:** Clients own their domain, code, and hosting from day one. No monthly hostage fees or proprietary lock-in.
 
 ---
@@ -124,13 +124,13 @@ Homepage sections, top to bottom. Each heading stands alone: no numbered labels 
 | :--- | :--- | :--- |
 | `#top` | Hero + Sunrise | "Websites, built by hand in Clovis." Adam, first person: websites that bring in customers, no templates, no monthly fees, no support tickets. $1,500 Starter, direct SMS CTA. |
 | `#harvest` | Showcase Cards | Proof right after the promise. Client case studies (Kidney Specialist Inc. & Big Bros Dumpster), each with two numbers (the business result, and the one that explains the headline) and the client's own quote. Only real clients, only quotes they approved. The intro carries the one homepage line about speed. |
-| `#who` | Two Link Cards | "Pick your kind of business." Medical & professional offices → `/services/medical-web-design/`; Local businesses & contractors → `/services/contractor-websites/`. Short: a title and one line each. |
+| `#who` | Three Link Cards | "Built for whatever business you run." Local businesses & shops → `/#pricing`; Contractors & home services → `/services/contractor-websites/`; Medical & dental practices → `/services/medical-web-design/`. |
 | `#check` | Can AI Find You? | One big question: asks Gemini, grounded in Google Maps, "I need a [trade] in [town]. Who do you recommend?", shows a thinking animation, then a big "Yes. It found you." / "No. It doesn't." and the businesses it recommends, each linked to Google Maps (`api/ask-gemini.ts`). The button opens a drafted text asking Adam why AI picks them. Never imply a website alone gets someone into Gemini's answer. |
-| `#season` | Four-Step Timeline | One row: Discovery (Day 1), Words & layout (Days 2–3), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
+| `#season` | Four-Step Timeline | One row: Discovery (Day 1, honest ROI check), Words & layout (Days 2–3, working preview before you pay), Build (Days 3–5), Launch (Day 6+, fixes free for 90 days). |
 | `#compare` | Toggle Matrix | Side-by-side comparison: Bloated agency vs. Direct with Adam. |
 | `#grower` | Studio & Workbench | "I'm Adam" bio (first name only, never the surname): he writes the code and the words; builds from agencies' Figma files too. |
-| `#stand` | Hanging Price Tags | Upfront package pricing: $1,500 Starter, $2,500 Growth. Flagship shows "Custom", priced to what the business needs, with a "Let's talk" button. Optional care plans. |
-| `#faq` | Accordion | Two questions: who owns the site and domain, and whether an existing booking system can stay. |
+| `#stand` | Hanging Price Tags | Upfront package pricing: $1,500 Starter, $2,500 Growth, Custom Flagship, plus the two promises ("See the preview before you pay" & "It has to pay for itself") and optional care plans. |
+| `#faq` | Accordion | Three questions: how payment and the preview guarantee work, who owns the site and domain, and whether an existing booking system can stay. |
 | `#contact` | Interactive SMS Generator | Friction-free lead capture that drafts a customized text directly to Adam's personal phone. |
 
 Topic pages under `/services/`, linked from the nav, `#who` and the footer:

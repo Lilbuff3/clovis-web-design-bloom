@@ -42,6 +42,11 @@ const schema = pageSchema('/services/local-seo-fresno/', {
   <Nav client:load />
 
   <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
+      <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-ink" aria-current="page">Local SEO in Fresno, CA</span>
+    </nav>
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
       Fresno Local SEO &amp; Google Maps 3-Pack
     </h1>
@@ -76,7 +81,7 @@ const schema = pageSchema('/services/local-seo-fresno/', {
       </p>
       <figure class="mt-8 overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm md:max-w-xl">
         <div class="aspect-[16/10] overflow-hidden">
-          <img src="/images/bigbros-truck.webp" alt="Big Bros roll-off dumpster truck in Fresno" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+          <img src="/images/bigbros-truck.webp" alt="Big Bros roll-off dumpster truck in Fresno" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
         </div>
         <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">{bigBros.client}, {bigBros.place}</figcaption>
       </figure>
