@@ -3,7 +3,8 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK, care, cases, pageSchema, type Faq } from '../../lib/data';
+import { LeadLeakAudit } from '../../components/LeadLeakAudit';
+import { PHONE_DISPLAY, PHONE_TEL, smsTo, care, cases, pageSchema, type Faq } from '../../lib/data';
 
 const bigBros = cases[1];
 const carePlus = care.find((c) => c.name === 'Care Plus')!;
@@ -56,7 +57,7 @@ const schema = pageSchema('/services/local-seo-fresno/', {
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a href={SMS_LINK} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+      <a href={smsTo("Hi Adam, I'm interested in local SEO and ranking higher on Google Maps in Fresno. Can we talk?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
         <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
       <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
@@ -74,10 +75,39 @@ const schema = pageSchema('/services/local-seo-fresno/', {
       </ul>
     </section>
 
-    <section class="mt-12 border-t border-ink/10 pt-12">
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Foundational setup vs. ongoing monthly growth</h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <h3 class="font-display text-xl text-ink font-medium">Foundational Local SEO</h3>
+          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-leaf font-semibold">Included with every build ($0)</p>
+          <p class="mt-3 text-ink/80 leading-relaxed">
+            Every website I build launches connected to Google Search and Google Maps at no extra charge. I set up your Google Business Profile categories, verify your name, address, and phone consistency, configure semantic LocalBusiness structured data, and optimize page speed so mobile visitors convert immediately.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <h3 class="font-display text-xl text-ink font-medium">{carePlus.name}</h3>
+          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-persimmon-deep font-semibold">Optional ongoing growth ({carePlus.price}/mo)</p>
+          <p class="mt-3 text-ink/80 leading-relaxed">
+            For businesses looking to expand into neighboring towns or outrank entrenched competitors. Includes everything in Care, plus new dedicated town and service pages each month, citation monitoring, Google Maps ranking audits, and ongoing AI search visibility tuning. Cancel anytime with one text.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <LeadLeakAudit client:visible />
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">How {bigBros.client} reached #1 for “dumpster rental Fresno”</h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
         {bigBros.problem} Big Bros now ranks first on Google for “dumpster rental Fresno,” and added 4 trucks to keep up with the calls.
+      </p>
+      <p class="mt-3">
+        <a href="/case-studies/dumpster-rental-fresno/" class="inline-flex items-center gap-1.5 font-mono text-sm text-persimmon-deep hover:underline">
+          Read the full Big Bros case study →
+        </a>
       </p>
       <figure class="mt-8 overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm md:max-w-xl">
         <div class="aspect-[16/10] overflow-hidden">
@@ -87,7 +117,7 @@ const schema = pageSchema('/services/local-seo-fresno/', {
       </figure>
     </section>
 
-    <section class="mt-12 border-t border-ink/10 pt-12">
+    <section class="mt-16 border-t border-ink/10 pt-12">
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Questions about local SEO</h2>
       <div class="mt-8 space-y-4">
         {faqs.map((f) => (
@@ -99,6 +129,21 @@ const schema = pageSchema('/services/local-seo-fresno/', {
             <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
           </details>
         ))}
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-ink/10 pt-12 text-center">
+      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Let's get your business found on Google Maps</h2>
+      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
+        Text me your business name and town. I'll inspect your current Google Business Profile and search visibility, and tell you what's holding you back.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
+        <a href={smsTo("Hi Adam, I'm interested in local SEO and ranking higher on Google Maps in Fresno. Can we talk?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <Icon name="text" /> Text me: {PHONE_DISPLAY}
+        </a>
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <Icon name="phone" /> Call {PHONE_DISPLAY}
+        </a>
       </div>
     </section>
   </main>

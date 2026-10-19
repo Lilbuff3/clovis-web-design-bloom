@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL } from "../lib/data";
+import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL, smsTo } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -30,11 +30,27 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 export function Contact() {
   useGlobalReveal();
   const [name, setName] = useState("");
+  const [reach, setReach] = useState("");
   const [trade, setTrade] = useState("");
   const [need, setNeed] = useState(needs[0]);
   const [when, setWhen] = useState(whens[0]);
   const [copied, setCopied] = useState(false);
+  const [needReach, setNeedReach] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "fallback">("idle");
+  const [isTouch, setIsTouch] = useState(true);
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const reachInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkTouch = () => {
+      setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+    };
+    checkTouch();
+    const mq = window.matchMedia("(pointer: coarse)");
+    mq.addEventListener?.("change", checkTouch);
+    return () => mq.removeEventListener?.("change", checkTouch);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -58,11 +74,62 @@ export function Contact() {
     const what = trade.trim() ? ` — I run ${trade.trim()}` : "";
     const n = need === "Not sure yet" ? "I'm not sure what I need yet" : `I'm interested in ${need.replace(/ \(.*\)/, "").replace(/^A /, "a ")}`;
     const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "just looking for now";
-    return `${who}${what ? what + "." : ""} ${n}, ${w}. Can we talk?`;
-  }, [name, trade, need, when]);
+    const how = reach.trim() ? ` Reach me at ${reach.trim()}.` : "";
+    return `${who}${what ? what + "." : ""} ${n}, ${w}.${how} Can we talk?`;
+  }, [name, trade, need, when, reach]);
 
-  const smsHref = `sms:${PHONE_TEL}?body=${encodeURIComponent(message)}`;
+  const smsHref = smsTo(message);
   const emailHref = mailTo(`Website: ${trade.trim() || name.trim() || "new project"}`, message);
+
+  function triggerFallback() {
+    setStatus("fallback");
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(message).then(() => setCopied(true)).catch(() => {});
+    }
+    window.location.href = emailHref;
+  }
+
+  async function handleSubmit(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    if (status === "submitting") return;
+
+    if (isTouch) {
+      window.location.href = smsHref;
+      return;
+    }
+
+    if (!reach.trim()) {
+      setNeedReach(true);
+      reachInputRef.current?.focus();
+      return;
+    }
+
+    setNeedReach(false);
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          trade: trade.trim(),
+          reach: reach.trim(),
+          need,
+          when,
+          message,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        triggerFallback();
+      }
+    } catch {
+      triggerFallback();
+    }
+  }
 
   return (
     <section id="contact" className="relative overflow-hidden rounded-b-[40px] px-5 py-14 md:rounded-b-[72px] md:px-8 md:py-20">
@@ -81,7 +148,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No forms to fill out, no sales call you didn't ask for, and no deposit to see a preview. Tap a few options below and I'll draft the first message for you.
+            No 20-page questionnaires, no sales pressure, and no deposit to see a preview. Tap a few options below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -90,10 +157,12 @@ export function Contact() {
                 <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name</span>
                 <input
                   id="contact-name"
+                  name="name"
                   ref={nameInputRef}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Sarah"
+                  autoComplete="name"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -101,11 +170,37 @@ export function Contact() {
                 <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do</span>
                 <input
                   id="contact-trade"
+                  name="trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
                   placeholder="an auto shop, bakery, or roofing company"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
+              </label>
+              <label className="block sm:col-span-2" htmlFor="contact-reach">
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your phone or email</span>
+                <input
+                  id="contact-reach"
+                  name="reach"
+                  ref={reachInputRef}
+                  value={reach}
+                  onChange={(e) => {
+                    setReach(e.target.value);
+                    if (needReach && e.target.value.trim()) setNeedReach(false);
+                  }}
+                  placeholder="(559) 555-0123 or sarah@example.com"
+                  autoComplete="email tel"
+                  aria-invalid={needReach ? "true" : undefined}
+                  aria-describedby={needReach ? "contact-reach-hint" : undefined}
+                  className={`mt-2 w-full border-b-2 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon ${
+                    needReach ? "border-persimmon" : "border-ink/25"
+                  }`}
+                />
+                {needReach && (
+                  <span id="contact-reach-hint" role="alert" className="mt-1.5 block text-sm font-medium text-persimmon-deep">
+                    Add your phone or email above so I know where to reply — or click email below.
+                  </span>
+                )}
               </label>
             </div>
             <div>
@@ -152,17 +247,61 @@ export function Contact() {
                 </div>
                 <div className="flex items-center gap-2 border-t border-ink/10 px-3 py-3">
                   <div className="flex-1 truncate rounded-full border border-ink/15 px-4 py-2 text-[13px] text-ink-soft">iMessage</div>
-                  <a href={smsHref} className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110" aria-label="Send text">
-                    ↑
-                  </a>
+                  {isTouch ? (
+                    <a href={smsHref} className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110" aria-label="Send text">
+                      ↑
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleSubmit()}
+                      disabled={status === "submitting"}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110 disabled:opacity-70"
+                      aria-label="Send message"
+                    >
+                      ↑
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
-              Send this text →
-            </a>
+            {status === "success" ? (
+              <div className="w-full max-w-[360px] rounded-3xl border border-leaf/30 bg-leaf/10 p-5 text-center">
+                <div className="font-display text-lg font-medium text-ink">Message sent!</div>
+                <p className="mt-1 text-sm text-ink/80 leading-relaxed">
+                  I received your note and will get back to you shortly. You can also call or text me directly at{" "}
+                  <a href={`tel:${PHONE_TEL}`} className="font-semibold underline decoration-persimmon underline-offset-2">
+                    {PHONE_DISPLAY}
+                  </a>.
+                </p>
+              </div>
+            ) : status === "fallback" ? (
+              <div className="w-full max-w-[360px] rounded-3xl border border-persimmon/30 bg-persimmon/10 p-5 text-center">
+                <div className="font-display text-lg font-medium text-ink">Opening email draft...</div>
+                <p className="mt-1 text-sm text-ink/80 leading-relaxed">
+                  {copied ? "Your message has been copied to your clipboard." : "Your email app is opening with your message drafted."} You can also call or text me directly at{" "}
+                  <a href={`tel:${PHONE_TEL}`} className="font-semibold underline decoration-persimmon underline-offset-2">
+                    {PHONE_DISPLAY}
+                  </a>.
+                </p>
+              </div>
+            ) : isTouch ? (
+              <a href={smsHref} data-magnetic="0.2" className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep">
+                Send this text →
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={() => handleSubmit()}
+                disabled={status === "submitting"}
+                data-magnetic="0.2"
+                className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep disabled:opacity-70"
+              >
+                {status === "submitting" ? "Sending..." : "Send this message →"}
+              </button>
+            )}
             <p className="text-center text-[15px] text-ink-soft">
               or{" "}
               <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4">
@@ -176,9 +315,10 @@ export function Contact() {
               <button
                 type="button"
                 onClick={() => {
-                  navigator.clipboard?.writeText(message);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
+                  navigator.clipboard?.writeText(message).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }).catch(() => {});
                 }}
                 className="inline-flex min-h-12 items-center text-ink underline decoration-persimmon decoration-2 underline-offset-4"
               >
@@ -218,7 +358,7 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Reach</div>
-            <a href={`sms:${PHONE_TEL}`} className="block hover:underline">Text {PHONE_DISPLAY}</a>
+            <a href={smsTo("Hi Adam, I'm visiting your website and have a question.")} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
             <a href={mailTo("Website question")} className="block normal-case tracking-normal [overflow-wrap:anywhere] hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
@@ -230,7 +370,7 @@ export function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
           <span>© {new Date().getFullYear()} Clovis Web Design</span>
-          <span>No tracking pixels on this page</span>
+          <span>Built in Clovis, CA · Serving Fresno &amp; the Central Valley</span>
           <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>
       </div>

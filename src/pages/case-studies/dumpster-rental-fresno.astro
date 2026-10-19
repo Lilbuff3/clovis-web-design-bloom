@@ -1,0 +1,124 @@
+---
+import RootLayout from '../../layouts/RootLayout.astro';
+import { Nav } from '../../components/Chrome';
+import { Footer } from '../../components/Contact';
+import Icon from '../../components/Icon.astro';
+import { PHONE_DISPLAY, PHONE_TEL, cases, caseStudySchema, smsTo } from '../../lib/data';
+
+const c = cases.find((x) => x.caseStudyPath === '/case-studies/dumpster-rental-fresno/')!;
+const textAdam = smsTo("Hi Adam, I saw the Big Bros Dumpster Rentals case study and I'd like to talk about ranking on Google Maps.");
+
+const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
+  title: 'Case Study: Big Bros Dumpster Rentals — #1 on Google in Fresno',
+  description: "How Big Bros Dumpster Rentals reached #1 on Google for 'dumpster rental Fresno' and added 4 trucks to keep up with calls.",
+  client: c.client,
+  trade: c.trade,
+});
+---
+
+<RootLayout
+  title="Case Study: Big Bros Dumpster Rentals — #1 on Google in Fresno"
+  description="How Big Bros Dumpster Rentals reached #1 on Google for 'dumpster rental Fresno' and added 4 trucks to keep up with demand. Hand-coded by Adam."
+  schema={schema}
+>
+  <Nav client:load />
+
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
+      <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <a href="/#harvest" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Case Studies</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-ink" aria-current="page">{c.client}</span>
+    </nav>
+
+    <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
+      {c.headline}
+    </h1>
+
+    <p class="mt-3 font-mono text-xs uppercase tracking-[.18em] text-persimmon-deep font-semibold">
+      {c.trade} · {c.place} · {c.year}
+    </p>
+
+    <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
+      National brokers were taking orders online, taking a cut of every rental, and outranking the local company that actually owned the trucks and dropped off the dumpsters.
+    </p>
+
+    <!-- Key Metrics Grid -->
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 border-y border-ink/15 py-8">
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-ink">#1</div>
+        <div class="mt-1 text-sm text-ink-soft">On Google for “dumpster rental Fresno”</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-persimmon">+4</div>
+        <div class="mt-1 text-sm text-ink-soft">Trucks added to keep up with demand</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-leaf">&lt;1.0s</div>
+        <div class="mt-1 text-sm text-ink-soft">Mobile load time on field cellular</div>
+      </div>
+    </div>
+
+    <!-- Verified Client Quote -->
+    <figure class="mt-12 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8">
+      <blockquote class="text-lg md:text-xl text-ink/90 italic leading-relaxed">
+        “{c.quote.text}”
+      </blockquote>
+      <figcaption class="mt-4 text-ink">
+        <span class="font-display font-medium text-base">{c.quote.name}</span>
+        <span class="block font-mono text-xs text-ink-soft">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline hover:text-persimmon-deep">{c.urlDisplay} ↗</a></span>
+      </figcaption>
+    </figure>
+
+    <!-- Photo Gallery -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">Roll-off dumpster delivery truck in Fresno, CA.</figcaption>
+      </figure>
+      <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" width="600" height="600" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
+      </figure>
+    </div>
+
+    <!-- The Problem & What Was Built -->
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">The Challenge</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        When homeowners or contractors needed a roll-off dumpster in Fresno or Clovis, third-party lead brokers dominated search results. These brokers don't own trucks or dumpsters—they capture the lead, charge a middleman fee, and subcontract the delivery. Big Bros had the trucks, the friendly local crew, and driveway-protection boards, but their old site was buried on Google.
+      </p>
+
+      <h2 class="mt-12 font-display text-2xl md:text-4xl text-ink font-[420]">What Was Built</h2>
+      <ul class="mt-6 space-y-4 text-lg text-ink/85 leading-relaxed max-w-3xl">
+        <li><strong class="text-ink">Dedicated service area pages:</strong> Individual pages for Fresno, Clovis, Madera, and Sanger, giving Google an exact geographic match for searchers.</li>
+        <li><strong class="text-ink">Upfront flat-rate pricing:</strong> Transparent dimensions, weight limits, and rental periods right on the screen so customers can order without phone tag.</li>
+        <li><strong class="text-ink">Driveway protection highlighted:</strong> Clearly communicates that wood planks protect customer concrete, removing the primary hesitation homeowners have with roll-off bins.</li>
+        <li><strong class="text-ink">Text-to-book &amp; bilingual copy:</strong> Instant SMS dispatch buttons and a complete Spanish version so bilingual contractors can book directly from job sites.</li>
+      </ul>
+    </section>
+
+    <!-- Closing CTA Section -->
+    <section class="mt-16 border-t border-ink/10 pt-12 text-center">
+      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Need rankings and calls like this?</h2>
+      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
+        I build custom contractor sites that rank in the Google Maps 3-Pack and turn mobile clicks into direct phone calls and text inquiries.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
+        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <Icon name="text" /> Text me: {PHONE_DISPLAY}
+        </a>
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <Icon name="phone" /> Call {PHONE_DISPLAY}
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

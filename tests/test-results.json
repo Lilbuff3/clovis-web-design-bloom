@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-17T20:47:54.393Z",
-  "total": 34,
-  "passed": 34,
+  "timestamp": "2026-10-19T05:22:14.725Z",
+  "total": 37,
+  "passed": 37,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -31,7 +31,7 @@
           "title": "Zero empty client-side mounting shells (<div id=\"root\"></div>) in dist/",
           "status": "PASS",
           "error": null,
-          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 5 HTML files"
+          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 7 HTML files"
         },
         {
           "id": "T1.4",
@@ -116,7 +116,7 @@
           "title": "Top-level sameAs (if any) lists only profile sites, only ones Adam confirmed",
           "status": "PASS",
           "error": null,
-          "details": "sameAs has 0 confirmed profile(s)"
+          "details": "sameAs has 1 confirmed profile(s) and hasMap links GBP"
         },
         {
           "id": "T2.8",
@@ -206,7 +206,7 @@
           "title": "Adam's last name appears nowhere in the built site",
           "status": "PASS",
           "error": null,
-          "details": "First name only across 5 pages"
+          "details": "First name only across 7 pages"
         },
         {
           "id": "T4.4",
@@ -256,7 +256,7 @@
           "title": "Medical page is pre-rendered with an h1 and its sections",
           "status": "PASS",
           "error": null,
-          "details": "Medical page pre-rendered (1 h1, 9 h2s)"
+          "details": "Medical page pre-rendered (1 h1, 10 h2s)"
         },
         {
           "id": "T6.2",
@@ -305,6 +305,30 @@
           "status": "PASS",
           "error": null,
           "details": "All images carry explicit width/height, hero LCP image is preloaded with fetchpriority=\"high\", and all service pages emit BreadcrumbList"
+        },
+        {
+          "id": "T6.11",
+          "tier": 6,
+          "title": "Conversion tracking, AI referrers & privacy-safe client analytics",
+          "status": "PASS",
+          "error": null,
+          "details": "All routes contain lightweight event tracking; zero tracking pixel claims; medical page reframed cleanly"
+        },
+        {
+          "id": "T6.12",
+          "tier": 6,
+          "title": "Dedicated case study routes pre-rendered with breadcrumbs, Article schema, and explicit image dimensions",
+          "status": "PASS",
+          "error": null,
+          "details": "All 2 case study routes verified with Breadcrumbs, Article schema, and explicit image dimensions"
+        },
+        {
+          "id": "T6.13",
+          "tier": 6,
+          "title": "Public discoverability: llms.txt and robots.txt AI search bot allowances",
+          "status": "PASS",
+          "error": null,
+          "details": "llms.txt and robots.txt verified for all 8 AI crawlers with zero surname leaks"
         }
       ]
     }

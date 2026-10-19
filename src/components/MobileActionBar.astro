@@ -1,5 +1,5 @@
 ---
-import { PHONE_DISPLAY, PHONE_TEL } from '../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, smsTo } from '../lib/data';
 import { LeadLeakAudit } from './LeadLeakAudit';
 import Icon from './Icon.astro';
 ---
@@ -25,7 +25,7 @@ import Icon from './Icon.astro';
         <Icon name="phone" /> Call
       </a>
       <a
-        href={`sms:${PHONE_TEL}`}
+        href={smsTo("Hi Adam, I'm on your website and have a quick question about getting a site built.")}
         class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-full bg-persimmon-deep px-4 py-3 font-mono text-[13px] font-semibold text-cream shadow-md transition active:scale-95 hover:bg-ink"
         aria-label="Text Adam"
       >
@@ -58,7 +58,7 @@ import Icon from './Icon.astro';
   </div>
   <div class="mt-4 border-t border-ink/10 pt-3 text-center">
     <a
-      href={`sms:${PHONE_TEL}?body=${encodeURIComponent("Hi Adam, could you take a quick look at my website?")}`}
+      href={smsTo("Hi Adam, could you take a quick look at my website?")}
       class="text-xs font-mono text-ink-soft underline hover:text-persimmon-deep"
     >
       Or text me directly at {PHONE_DISPLAY}

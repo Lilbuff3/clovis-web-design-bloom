@@ -1,0 +1,127 @@
+---
+import RootLayout from '../../layouts/RootLayout.astro';
+import { Nav } from '../../components/Chrome';
+import { Footer } from '../../components/Contact';
+import Icon from '../../components/Icon.astro';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, cases, caseStudySchema, mailTo, smsTo } from '../../lib/data';
+
+const c = cases.find((x) => x.caseStudyPath === '/case-studies/kidney-specialist-fresno/')!;
+const textAdam = smsTo("Hi Adam, I saw the Kidney Specialist Inc. case study and I'd like to discuss a compliant website for our practice.");
+const emailAdam = mailTo("Practice website inquiry");
+
+const schema = caseStudySchema('/case-studies/kidney-specialist-fresno/', {
+  title: 'Case Study: Kidney Specialist Inc. — HIPAA-Safe Practice Web Design',
+  description: "How Kidney Specialist Inc. boosted provider referrals 40% with zero patient data collected online and 100/100 PageSpeed.",
+  client: c.client,
+  trade: c.trade,
+});
+---
+
+<RootLayout
+  title="Case Study: Kidney Specialist Inc. — HIPAA-Safe Practice Web Design"
+  description="How Kidney Specialist Inc. boosted provider referrals 40% with zero patient data collected online and 100/100 PageSpeed. Hand-coded by Adam."
+  schema={schema}
+>
+  <Nav client:load />
+
+  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
+      <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <a href="/#harvest" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Case Studies</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-ink" aria-current="page">{c.client}</span>
+    </nav>
+
+    <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
+      {c.headline}
+    </h1>
+
+    <p class="mt-3 font-mono text-xs uppercase tracking-[.18em] text-persimmon-deep font-semibold">
+      {c.trade} · {c.place} · {c.year}
+    </p>
+
+    <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
+      Medical practices cannot afford data breaches or contact forms that harvest sensitive health details into unsecured email inboxes. I built a site that holds zero patient data online.
+    </p>
+
+    <!-- Key Metrics Grid -->
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 border-y border-ink/15 py-8">
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-persimmon">+40%</div>
+        <div class="mt-1 text-sm text-ink-soft">Provider referrals, by Dr. Masood's count</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-leaf">100/100</div>
+        <div class="mt-1 text-sm text-ink-soft">Google PageSpeed Mobile score</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl sm:text-5xl text-ink">0</div>
+        <div class="mt-1 text-sm text-ink-soft">Patient health records stored online</div>
+      </div>
+    </div>
+
+    <!-- Verified Client Quote -->
+    <figure class="mt-12 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8">
+      <blockquote class="text-lg md:text-xl text-ink/90 italic leading-relaxed">
+        “{c.quote.text}”
+      </blockquote>
+      <figcaption class="mt-4 text-ink">
+        <span class="font-display font-medium text-base">{c.quote.name}</span>
+        <span class="block font-mono text-xs text-ink-soft">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline hover:text-persimmon-deep">{c.urlDisplay} ↗</a></span>
+      </figcaption>
+    </figure>
+
+    <!-- Visual Showcase -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-6">
+        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+          <img src={c.previewImg} alt={`${c.client} website interface on desktop`} width="1280" height="720" class="w-full object-cover" loading="lazy" decoding="async" />
+          <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">{c.client} custom web application.</figcaption>
+        </figure>
+      </div>
+      <div class="md:col-span-6">
+        <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+          <img src={c.photoImg} alt={`${c.client} clinic photography in Madera and Fresno`} width={c.photoWidth} height={c.photoHeight} class="w-full object-cover" loading="lazy" decoding="async" />
+          <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">Clinical facilities serving Madera &amp; Fresno, CA.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- The Problem & What Was Built -->
+    <section class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">The Challenge</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        The practice's old website used generic web forms that prompted visitors for symptoms and personal health information. Under HIPAA, transmitting and storing electronic Protected Health Information through standard web hosting exposes physicians to severe federal penalties and breach disclosures. Additionally, referring physicians had no fast way to download intake forms or verify accepted insurance plans.
+      </p>
+
+      <h2 class="mt-12 font-display text-2xl md:text-4xl text-ink font-[420]">What Was Built</h2>
+      <ul class="mt-6 space-y-4 text-lg text-ink/85 leading-relaxed max-w-3xl">
+        <li><strong class="text-ink">Zero patient data architecture:</strong> The website collects no patient health data online. Any digital booking or intake links directly to third-party HIPAA-compliant portals holding their own Business Associate Agreements (BAAs).</li>
+        <li><strong class="text-ink">Doctor referral portal:</strong> A dedicated page for referring physicians providing downloadable registration packets, direct fax routing, and accepted insurance lists.</li>
+        <li><strong class="text-ink">WCAG 2.1 AA accessibility:</strong> Engineered for older and low-vision kidney care patients with high contrast, legible typography, and full keyboard navigation.</li>
+        <li><strong class="text-ink">Bilingual English &amp; Español:</strong> Complete mirrored Spanish language version ensuring accessible healthcare information across the Central Valley.</li>
+      </ul>
+      <p class="mt-4 text-sm text-ink-soft max-w-3xl">This describes how I build websites, not legal advice. Your compliance lead or healthcare attorney has the final say.</p>
+    </section>
+
+    <!-- Closing CTA Section -->
+    <section class="mt-16 border-t border-ink/10 pt-12 text-center">
+      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Let's talk about your practice's website</h2>
+      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
+        You'll talk directly to the developer who codes your site. Tell me what your front desk gets asked most and I'll tell you how I'd build it.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
+        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <Icon name="phone" /> Call me: {PHONE_DISPLAY}
+        </a>
+        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <Icon name="text" /> Text
+        </a>
+      </div>
+      <p class="mt-4 text-sm text-ink-soft">Or email <a href={emailAdam} class="underline hover:text-persimmon-deep">{EMAIL}</a></p>
+    </section>
+  </main>
+
+  <Footer client:visible />
+</RootLayout>

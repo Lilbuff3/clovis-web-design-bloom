@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cases, SMS_LINK } from "../lib/data";
+import { cases, smsTo } from "../lib/data";
 import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string };
@@ -204,6 +204,17 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
             <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
           </figcaption>
         </figure>
+
+        {c.caseStudyPath && (
+          <div className="mt-6">
+            <a
+              href={c.caseStudyPath}
+              className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-cream px-5 py-2.5 font-mono text-xs font-medium text-ink shadow-sm transition hover:border-persimmon hover:bg-paper hover:text-persimmon-deep"
+            >
+              Read full case study →
+            </a>
+          </div>
+        )}
       </div>
     </article>
   );
@@ -244,7 +255,7 @@ export function ClientWork() {
                 You see a working preview on your phone before you pay anything — and if I don't think a new site will clearly pay for itself, I'll tell you on our first call.
               </p>
             </div>
-            <a href={SMS_LINK} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
+            <a href={smsTo("Hi Adam, I saw your client results and I'd like to see a working preview for my business.")} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
               Text me to get started <span aria-hidden>→</span>
             </a>
           </div>

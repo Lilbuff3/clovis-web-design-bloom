@@ -1,8 +1,8 @@
 export const PHONE_DISPLAY = "(559) 575-3014";
 export const PHONE_TEL = "+15595753014";
-export const SMS_LINK = `sms:${PHONE_TEL}`;
 // A text with the first message already written. "?&body=" works on both iOS and Android.
 export const smsTo = (body: string) => `sms:${PHONE_TEL}?&body=${encodeURIComponent(body)}`;
+export const SMS_LINK = smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?");
 export const EMAIL = "adam@cloviswebdesign.com";
 // The desktop stand-in for smsTo: most computers can't open an sms: link.
 export const mailTo = (subject: string, body = "") =>
@@ -17,6 +17,7 @@ export const cases = [
     trade: "Nephrology practice",
     place: "Madera & Fresno, CA",
     year: "2025",
+    caseStudyPath: "/case-studies/kidney-specialist-fresno/",
     img: "/images/kidney.jpg",
     previewImg: "/images/kidney-preview.webp",
     photoImg: "/images/kidney.jpg",
@@ -46,6 +47,7 @@ export const cases = [
     trade: "Roll-off dumpster rental",
     place: "Fresno & Clovis, CA",
     year: "2025",
+    caseStudyPath: "/case-studies/dumpster-rental-fresno/",
     img: "/images/bigbros-truck.webp",
     previewImg: "/images/big-bros-preview.webp",
     photoImg: "/images/bigbros-truck.webp",
@@ -130,13 +132,14 @@ export const plans = [
     color: "bg-citrus",
     hole: "bg-paper",
     items: [
-      "One page, live in a week",
-      "Your number everywhere — one tap to call or text",
-      "Loads in under 1 second on mobile devices",
-      "Set up so Google knows who & where you are",
-      "One full round of revisions included",
+      "One-page custom design, live in about a week",
+      "Working phone preview before you pay",
+      "Done-for-you words from a 15-minute call",
+      "Tap-to-call, direct text & Google Search tracking",
+      "90 days of free fixes after launch",
+      "You own the code, domain, and keys on day one",
     ],
-    not: ["No multi-page site or blog", "No logo or brand design", "No ongoing SEO — that's the care plan"],
+    not: [],
     for: "Local shops, restaurants, trades, and new businesses that want more calls now.",
   },
   {
@@ -148,9 +151,13 @@ export const plans = [
     color: "bg-sage",
     hole: "bg-paper",
     items: [
-      "3–5 pages, each written from a recorded conversation",
-      "A page for every town you serve, built for local Google searches",
-      "A full Spanish version at /es/",
+      "3–5 pages with dedicated service & town areas",
+      "Working phone preview before you pay",
+      "Done-for-you words from a 15-minute call",
+      "Call, text & Google Search tracking",
+      "Full Spanish version at /es/",
+      "90 days of free fixes after launch",
+      "You own the code, domain, and keys on day one",
     ],
     not: [],
     for: "Growing businesses with multiple services, locations, or Spanish-speaking customers.",
@@ -160,17 +167,19 @@ export const plans = [
     name: "Flagship",
     kind: "Custom system",
     time: "4–6 weeks",
-    // No fixed price: Flagship is scoped to what the business needs.
-    price: "Custom",
-    terms: "priced to what you need",
-    cta: "Let's talk",
+    price: "From $3,500",
+    terms: "scoped to your needs · $0 preview",
+    cta: "Ask about Flagship",
     color: "bg-sky",
     hole: "bg-paper",
     items: [
-      "Custom design built around your brand",
-      "Booking, quoting — whatever your customers need",
-      "Built to your industry's accessibility & privacy rules",
-      "I stay on it for 90 days after launch",
+      "Custom multi-page or multi-location design",
+      "Working phone preview before you pay",
+      "Done-for-you words from a 15-minute call",
+      "Call, form & Google Search tracking",
+      "Custom booking, intake, or HIPAA/privacy compliance",
+      "90 days of free fixes after launch",
+      "You own the code, domain, and keys on day one",
     ],
     not: [],
     for: "Medical practices, multi-location companies, or any business needing custom booking or compliance.",
@@ -178,9 +187,16 @@ export const plans = [
 ];
 
 export const care = [
-  { name: "No plan", price: "$0", blurb: "Pay nothing monthly. You're all set." },
-  { name: "Care Plan", price: "$99", blurb: "Hosting, security updates and small changes, handled." },
-  { name: "Care Plus", price: "$249", blurb: "Everything in Care, plus new content and local SEO tuning." },
+  {
+    name: "Care Plan",
+    price: "$99",
+    blurb: "Same-day text-me updates (new photos, hours, prices, seasonal promos), fast hosting, and a monthly call & search check-in.",
+  },
+  {
+    name: "Care Plus",
+    price: "$249",
+    blurb: "Everything in Care, plus new town and service pages and monthly Google Maps & AI visibility tuning.",
+  },
 ];
 
 
@@ -221,19 +237,27 @@ export const hasOfferCatalog = {
       "name": "Starter",
       "price": "1500",
       "priceCurrency": "USD",
-      "description": "A custom one-page website, live in about a week. You own the code and the domain.",
+      "description": "A custom one-page website, live in about a week. Includes working phone preview before payment, done-for-you words, call & search tracking, 90 days of free fixes, and full ownership.",
     },
     {
       "@type": "Offer",
       "name": "Growth",
       "price": "2500",
       "priceCurrency": "USD",
-      "description": "3–5 pages written from a recorded conversation, a page for every town you serve, and a full Spanish version.",
+      "description": "3–5 pages with dedicated town and service pages and full Spanish version. Includes working phone preview, done-for-you words, call & search tracking, 90 days of free fixes, and full ownership.",
     },
     {
       "@type": "Offer",
       "name": "Flagship",
-      "description": "A custom design with booking or quoting, built to your industry's accessibility and privacy rules, with 90 days of support after launch.",
+      "price": "3500",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "3500",
+        "priceCurrency": "USD",
+        "minPrice": "3500",
+      },
+      "description": "Custom multi-page or multi-location design with booking or intake, built to accessibility and privacy rules, with working phone preview, call & search tracking, and 90 days of free fixes.",
     },
   ],
 };
@@ -275,8 +299,8 @@ export const business = {
     "jobTitle": "Founder & Lead Developer",
     "knowsAbout": knowsAbout,
   },
-  // No Wikidata links: the old IDs pointed at Rhodes, Greece and a district of St. Petersburg.
-  // No sameAs: only add profiles Adam has confirmed are his.
+  "hasMap": "https://maps.google.com/?cid=5133720235419656762",
+  "sameAs": ["https://maps.google.com/?cid=5133720235419656762"],
   "areaServed": [
     { "@type": "City", "name": "Clovis, CA" },
     { "@type": "City", "name": "Fresno, CA" },
@@ -348,4 +372,54 @@ export function pageSchema(path: string, service: { name: string; serviceType: s
     ],
   };
 }
+
+export function caseStudySchema(path: string, cs: {
+  title: string;
+  description: string;
+  client: string;
+  trade: string;
+}) {
+  const url = `https://cloviswebdesign.com${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      business,
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Clovis Web Design",
+            "item": "https://cloviswebdesign.com/",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://cloviswebdesign.com/#harvest",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": cs.title,
+            "item": url,
+          },
+        ],
+      },
+      {
+        "@type": "Article",
+        "@id": `${url}#article`,
+        "url": url,
+        "headline": cs.title,
+        "description": cs.description,
+        "author": { "@id": business.founder["@id"] },
+        "publisher": { "@id": business["@id"] },
+        "about": { "@id": business["@id"] },
+      },
+    ],
+  };
+}
+
 

@@ -62,7 +62,7 @@ type Chunk = {
 };
 
 export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'POST') return Response.json({ error: 'Method not allowed' }, { status: 405 });
+  if (req.method !== 'POST') return Response.json({ error: 'Method not allowed' }, { status: 405, headers: { Allow: 'POST' } });
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'anonymous';
   if (rateLimited(ip)) return Response.json({ error: 'Too many checks this hour' }, { status: 429 });
@@ -70,6 +70,9 @@ export default async function handler(req: Request): Promise<Response> {
   let body: Record<string, unknown>;
   try {
     body = await req.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return Response.json({ error: 'Invalid request' }, { status: 400 });
+    }
   } catch {
     return Response.json({ error: 'Invalid request' }, { status: 400 });
   }
@@ -77,6 +80,8 @@ export default async function handler(req: Request): Promise<Response> {
   const city = oneLine(body.city, 50) || 'Clovis, CA';
   const trade = oneLine(body.trade, 50);
   if (!trade) return Response.json({ error: 'Say what your business does' }, { status: 400 });
+
+  const source: 'outreach' | 'organic' = body.source === 'outreach' ? 'outreach' : 'organic';
 
   const key = (process.env.GEMINI_API_KEY || process.env.gemini_key)?.trim(); // gemini_key is its name on Vercel
   if (!key) return Response.json({ error: 'Gemini isn’t set up' }, { status: 503 });
@@ -98,6 +103,7 @@ export default async function handler(req: Request): Promise<Response> {
         business: business || '(none)',
         trade,
         city,
+        source,
         named,
         topCompetitors,
       })
@@ -106,7 +112,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   const webhookUrl = process.env.LEAD_ALERT_WEBHOOK_URL?.trim();
   if (webhookUrl) {
-    await notifyLeadWebhook(webhookUrl, { business, trade, city, named, topCompetitors });
+    await notifyLeadWebhook(webhookUrl, { business, trade, city, source, named, topCompetitors });
   }
 
   return Response.json(
@@ -123,16 +129,26 @@ export default async function handler(req: Request): Promise<Response> {
 /** Sends a fast, non-fatal lead notification to ntfy.sh, Discord, Slack, or a generic webhook. */
 async function notifyLeadWebhook(
   webhookUrl: string,
-  lead: { business: string; trade: string; city: string; named: string | null; topCompetitors: string[] }
+  lead: {
+    business: string;
+    trade: string;
+    city: string;
+    source: 'outreach' | 'organic';
+    named: string | null;
+    topCompetitors: string[];
+  }
 ): Promise<void> {
   const status = lead.named ? `FOUND (${lead.named})` : `MISSED`;
-  const summary = `[AI Check] "${lead.business || 'Visitor'}" (${lead.trade} in ${lead.city}) -> ${status}. Top picks: ${lead.topCompetitors.join(', ')}`;
+  const tag = lead.source === 'outreach' ? '[OUTREACH LINK]' : '[ORGANIC CHECK]';
+  const summary = `${tag} "${lead.business || 'Visitor'}" (${lead.trade} in ${lead.city}) -> ${status}. Top picks: ${lead.topCompetitors.join(', ')}`;
   try {
     const isNtfy = /ntfy\.sh\//i.test(webhookUrl);
+    const rawTitle = `Clovis Web Design Lead: ${lead.business || lead.trade}`;
+    const safeTitle = rawTitle.replace(/[^\x20-\x7E]/g, '').trim() || 'Clovis Web Design Lead';
     await fetch(webhookUrl, {
       method: 'POST',
       headers: isNtfy
-        ? { Title: `Clovis Web Design Lead: ${lead.business || lead.trade}`, Priority: 'high', Tags: 'mag,briefcase' }
+        ? { Title: safeTitle, Priority: 'high', Tags: 'mag,briefcase' }
         : { 'content-type': 'application/json' },
       body: isNtfy ? summary : JSON.stringify({ content: summary, text: summary, ...lead }),
       signal: AbortSignal.timeout(2_500),

@@ -14,7 +14,7 @@
 | **AG-01** | **Iron Creative** | San Francisco, CA | `ironcreative.com` | Creative Director / Founder | UX/UI to sub-second production code | `[ ] Not Sent` |
 | **AG-02** | **Kingdom Web Design** | San Francisco, CA | `kingdomwebdesign.com` | Founder / Principal | Healthcare & professional overflow | `[ ] Not Sent` |
 | **AG-03** | **Launch Brigade** | Santa Cruz / SF, CA | `launchbrigade.com` | Head of Production / Founder | Fast modular web dev from Figma | `[ ] Not Sent` |
-| **AG-04** | **Pill Creative Studio** | Los Angeles, CA | `pillcreative.com` | Creative Director | High-end Figma designs to 100/100 speed | `[ ] Not Sent` |
+| **AG-04** | **Pill Creative Studio** | Los Angeles, CA | `pillcreative.com` | Creative Director | High-end Figma designs to 100 PageSpeed | `[ ] Not Sent` |
 | **AG-05** | **Italic Studio** | Los Angeles, CA | `italicstudio.com` | Partner / Creative Director | Brand-first layouts to clean Astro/React | `[ ] Not Sent` |
 | **AG-06** | **Mad Mind Studios** | Los Angeles, CA | `madmindstudios.com` | Founder / Director | Custom client builds without offshore lag | `[ ] Not Sent` |
 | **AG-07** | **Polar** | San Diego, CA | `polardesign.com` | Studio Principal / Creative Lead | Small-team dev capacity expansion | `[ ] Not Sent` |
@@ -38,7 +38,7 @@ I’ve followed Iron Creative’s work on boutique digital experiences and start
 I’m a US-based frontend performance engineer specializing in taking Figma files and converting them into clean, high-performance Astro and React builds (fast on phones (my latest client site scores 100 on Google PageSpeed) on mobile).
 
 Here is a recent production build:
-- kidneyspecialistinc.com (100/100 PageSpeed, sub-1s load, zero template bloat, full WCAG 2.1 AA accessibility)
+- kidneyspecialistinc.com (100 on Google PageSpeed, sub-1s load, zero template bloat, built to WCAG 2.1 AA)
 
 I partner with design studios on a flat white-label fee per project ($1,500–$2,000) with 4-to-5-day delivery. No offshore time zone lag, no bloated WordPress templates.
 
@@ -53,17 +53,17 @@ Clovis, CA · (559) 575-3014
 
 ### AG-02: Kingdom Web Design (San Francisco)
 - **To:** Leadership at Kingdom Web Design
-- **Subject:** Frontend overflow / 100/100 PageSpeed engineering
+- **Subject:** Frontend overflow / 100 on Google PageSpeed
 - **Body:**
 ```text
 Hi team,
 
 I noticed Kingdom’s focus on clean custom web solutions across healthcare and professional services.
 
-I’m an independent frontend engineer based in California. I specialize in building custom, high-speed Astro/React platforms specifically engineered for medical and professional compliance (zero-PHI architecture, WCAG 2.1 AA contrast defense, and sub-1-second mobile load times).
+I’m an independent frontend engineer based in California. I specialize in building custom, high-speed Astro/React platforms specifically engineered for medical and professional compliance (zero-PHI architecture, WCAG 2.1 AA accessibility, and sub-1-second mobile load times).
 
 Recent live production proof:
-- kidneyspecialistinc.com (100/100 PageSpeed, bilingual English/Spanish, zero template bloat)
+- kidneyspecialistinc.com (100 on Google PageSpeed, bilingual English/Spanish, zero template bloat)
 
 If you ever experience engineering bottlenecks or need reliable US-based overflow support to turn Figma or design specs into production code in 5 days, I’d love to connect.
 
@@ -88,7 +88,7 @@ I’ve seen your emphasis on end-to-end modular web builds and brand systems—r
 I work as a dedicated white-label frontend engineer for California studios. I take approved Figma designs and build clean, hand-coded Astro and React production sites that scores 100 on Google PageSpeed with zero layout shift.
 
 Live build sample:
-- kidneyspecialistinc.com (100/100 Google Core Web Vitals, sub-1s load)
+- kidneyspecialistinc.com (100 on Google PageSpeed, sub-1s load)
 
 I deliver full custom builds in 4–5 days for a predictable flat project fee ($1,500–$2,000), freeing up your internal team to focus on design and client strategy.
 
@@ -115,7 +115,7 @@ I know how frustrating it is when a studio spends 40 hours perfecting subtle typ
 I’m a California-based frontend performance engineer. I take your Figma designs and code pixel-perfect, sub-second Astro/React production sites (fast on phones (my latest client site scores 100 on Google PageSpeed)).
 
 Sample live build:
-- kidneyspecialistinc.com (100/100 PageSpeed, clean responsive breakpoints)
+- kidneyspecialistinc.com (100 on Google PageSpeed, clean responsive breakpoints)
 
 I work on a flat white-label fee ($1,500–$2,000 per build) with 4-day turnarounds. Same California timezone, direct Slack/cell communication.
 
@@ -137,10 +137,10 @@ Hi Italic Studio team,
 
 Really appreciate your multidisciplinary approach to building brands from the ground up—your aesthetic standards are unmistakable.
 
-I’m an independent frontend developer based in California. I specialize in engineering high-fidelity Figma designs into blazing-fast Astro and React production sites that score a perfect 100/100 on Google PageSpeed.
+I’m an independent frontend developer based in California. I specialize in engineering high-fidelity Figma designs into blazing-fast Astro and React production sites that score 100 on Google PageSpeed.
 
 Recent production build:
-- kidneyspecialistinc.com (100/100 Core Web Vitals, zero template bloat)
+- kidneyspecialistinc.com (100 on Google PageSpeed, zero template bloat)
 
 I handle frontend code on a flat white-label basis ($1,500–$2,000/site) with 5-day delivery. Your team owns the creative and client relationship; I make sure the code executes at the highest possible performance standard.
 
@@ -162,10 +162,10 @@ Hi Mad Mind team,
 
 Saw your branding and web portfolio in LA—great balance of modern layout and commercial conversion focus.
 
-I work as a white-label frontend engineering partner for California agencies. I convert Figma designs into hand-coded, sub-second Astro and React sites that score a verified 100/100 on Google Core Web Vitals on mobile.
+I work as a white-label frontend engineering partner for California agencies. I convert Figma designs into hand-coded, sub-second Astro and React sites that score 100 on Google PageSpeed on mobile.
 
 Recent live client build:
-- kidneyspecialistinc.com (100/100 PageSpeed, sub-1s LCP, zero layout shifts)
+- kidneyspecialistinc.com (100 on Google PageSpeed, sub-1s load, zero layout shifts)
 
 I provide fixed-price turnarounds ($1,500–$2,000 per build) in 4–5 days, operating in PST with daily communication. No payroll overhead or offshore QA headaches.
 
@@ -187,10 +187,10 @@ Hi Polar team,
 
 I love seeing small, focused creative studios that punch above their weight in design craftsmanship.
 
-I’m a California-based frontend engineer. I partner with boutique design studios as their reliable white-label developer—taking your Figma files and delivering production-ready, sub-second Astro/React code that scores 100/100 on PageSpeed.
+I’m a California-based frontend engineer. I partner with boutique design studios as their reliable white-label developer—taking your Figma files and delivering production-ready, sub-second Astro/React code that scores 100 on Google PageSpeed.
 
 Live production proof:
-- kidneyspecialistinc.com (100/100 Google PageSpeed, responsive mobile UX)
+- kidneyspecialistinc.com (100 on Google PageSpeed, responsive mobile UX)
 
 I work on a flat project rate ($1,500–$2,000) with 4-to-5-day turnaround, giving you instant dev bandwidth whenever client volume spikes without adding full-time payroll.
 
@@ -212,10 +212,10 @@ Hi Fifty & Fifty team,
 
 Your purpose-driven digital craftsmanship and attention to typography and storytelling stand out.
 
-I’m a California frontend performance engineer specializing in clean, accessible, sub-second Astro and React web applications (fast on phones (my latest client site scores 100 on Google PageSpeed) and strict WCAG 2.1 AA accessibility).
+I’m a California frontend performance engineer specializing in clean, accessible, sub-second Astro and React web applications (fast on phones: my latest client site scores 100 on Google PageSpeed, built to WCAG 2.1 AA).
 
 Recent live build:
-- kidneyspecialistinc.com (100/100 PageSpeed, full WCAG 2.1 AA contrast compliance, zero-PHI architecture)
+- kidneyspecialistinc.com (100 on Google PageSpeed, built to WCAG 2.1 AA, zero-PHI architecture)
 
 I white-label for design-forward studios on a flat project fee ($1,500–$2,000) with 5-day delivery. If your in-house team is ever backed up or needs an extra engineer who respects design details, I’d love to be on your bench.
 
@@ -230,17 +230,17 @@ Clovis, CA · (559) 575-3014
 
 ### AG-09: Scribe Creative (Sacramento)
 - **To:** Creative Director at Scribe Creative
-- **Subject:** Northern CA frontend engineering partner (100/100 speed)
+- **Subject:** Northern CA frontend engineering partner (fast on mobile)
 - **Body:**
 ```text
 Hi Scribe team,
 
 I’ve followed your branding and web work in the Sacramento area—great visual storytelling and local focus.
 
-I run a specialized frontend engineering studio down in Clovis/Central Valley. I partner with Northern California creative agencies to turn Figma designs into custom, blazing-fast Astro and React sites (100/100 PageSpeed, sub-1-second mobile load).
+I run a specialized frontend engineering studio down in Clovis/Central Valley. I partner with Northern California creative agencies to turn Figma designs into custom, blazing-fast Astro and React sites (100 on Google PageSpeed, sub-1-second mobile load).
 
 Recent client production build:
-- kidneyspecialistinc.com (100/100 PageSpeed, clean responsive layout)
+- kidneyspecialistinc.com (100 on Google PageSpeed, clean responsive layout)
 
 I deliver full client builds in 4–5 days for a flat white-label fee ($1,500–$2,000). You handle the branding and client relationship; I handle the technical build.
 
@@ -265,7 +265,7 @@ Saw your agency’s accolades on Clutch for web design and branding in Sacrament
 I’m an independent frontend developer based in California. I specialize in white-label engineering for marketing and design agencies: taking your Figma files and building production Astro/React sites that scores 100 on Google PageSpeed with zero layout shift.
 
 Live production proof:
-- kidneyspecialistinc.com (100/100 Core Web Vitals, sub-1s load)
+- kidneyspecialistinc.com (100 on Google PageSpeed, sub-1s load)
 
 I work on flat-rate project fees ($1,500–$2,000) with 4-to-5-day delivery. Same California timezone, clear daily updates, zero hand-holding required.
 

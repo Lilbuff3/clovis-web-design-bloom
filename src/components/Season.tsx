@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { compare, steps } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
@@ -37,47 +36,61 @@ export function Season() {
 
 export function Compare() {
   useGlobalReveal();
-  const [mine, setMine] = useState(true);
   return (
     <section id="compare" className="relative overflow-hidden px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+        <div className="max-w-3xl">
           <h2 className="font-display h-section">
             <span className="line-mask"><span>Traditional agency,</span></span>{" "}
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>or dedicated builder?</span></span>
           </h2>
-          <button
-            onClick={() => setMine((m) => !m)}
-            data-magnetic="0.15" className="reveal group relative flex h-16 w-[300px] items-center rounded-full bg-ink p-1.5 text-[15px] font-medium"
-            aria-pressed={mine}
-          >
-            <span
-              className="absolute top-1.5 h-13 w-[calc(50%-6px)] rounded-full bg-citrus transition-all duration-500"
-              style={{ left: mine ? "calc(50% + 0px)" : "6px", height: "calc(100% - 12px)", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            />
-            <span className={`relative z-10 flex-1 text-center transition ${!mine ? "text-ink" : "text-cream/70"}`}>Typical agency</span>
-            <span className={`relative z-10 flex-1 text-center transition ${mine ? "text-ink" : "text-cream/70"}`}>With me</span>
-          </button>
+          <p className="reveal mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
+            Compare what it's like working with a bloated agency against working directly with me from discovery to launch.
+          </p>
         </div>
 
-        <div className="mt-14 divide-y divide-ink/15 border-y border-ink/15">
-          {compare.map((row, i) => {
-            const [head, body] = mine ? row.me : row.them;
-            return (
-              <div key={row.q} className="grid gap-4 py-7 md:grid-cols-12 md:gap-8">
-                <div className="flex items-baseline gap-4 md:col-span-4">
-                  <span className="font-mono text-xs text-ink-soft">0{i + 1}</span>
-                  <span className="text-lg font-medium">{row.q}</span>
-                </div>
-                <div key={String(mine)} className="md:col-span-8" style={{ animation: `rise .6s cubic-bezier(.2,.8,.2,1) ${i * 70}ms both` }}>
-                  <div className={`font-display wonk text-3xl italic md:text-4xl ${mine ? "text-leaf" : "text-ink/60 line-through decoration-persimmon/60 decoration-2"}`}>
-                    {head}
-                  </div>
-                  <p className={`mt-2 max-w-2xl text-[16px] leading-relaxed ${mine ? "text-ink/85" : "text-ink-soft"}`}>{body}</p>
-                </div>
-              </div>
-            );
-          })}
+        {/* Semantic HTML Table rendered for humans, crawlers, and screen readers; stacks cleanly on mobile */}
+        <div className="reveal mt-12">
+          <table className="block w-full border-collapse text-left md:table">
+            <caption className="sr-only">Side-by-side comparison between typical agencies and working with Adam</caption>
+            <thead className="sr-only md:not-sr-only md:table-header-group">
+              <tr className="border-b-2 border-ink/20 md:table-row">
+                <th scope="col" className="w-[28%] pb-4 pt-2 font-mono text-xs uppercase tracking-[.16em] text-ink-soft md:table-cell">
+                  The Question
+                </th>
+                <th scope="col" className="w-[36%] pb-4 pt-2 font-mono text-xs uppercase tracking-[.16em] text-ink-soft md:table-cell">
+                  Typical agency
+                </th>
+                <th scope="col" className="w-[36%] pb-4 pt-2 font-mono text-xs uppercase tracking-[.16em] text-leaf md:table-cell">
+                  With me (Adam)
+                </th>
+              </tr>
+            </thead>
+            <tbody className="block divide-y divide-ink/15 md:table-row-group">
+              {compare.map((row, i) => (
+                <tr key={row.q} className="block py-6 align-top transition-colors hover:bg-cream/40 md:table-row md:py-0">
+                  <th scope="row" className="block pb-3 font-medium md:table-cell md:py-7 md:pr-6">
+                    <span className="font-mono text-xs text-ink-soft mr-2">0{i + 1}</span>
+                    <span className="text-base font-semibold text-ink md:text-lg">{row.q}</span>
+                  </th>
+                  <td className="block py-3 md:table-cell md:py-7 md:pr-6">
+                    <div className="mb-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink-soft md:hidden">Typical agency</div>
+                    <div className="font-display wonk text-2xl italic text-ink-soft line-through decoration-persimmon/60 decoration-2 md:text-3xl">
+                      {row.them[0]}
+                    </div>
+                    <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{row.them[1]}</p>
+                  </td>
+                  <td className="block rounded-xl bg-sage/20 p-4 md:table-cell md:bg-transparent md:py-7 md:pl-4 md:pr-0">
+                    <div className="mb-1 font-mono text-[11px] uppercase tracking-[.14em] text-leaf md:hidden">With me (Adam)</div>
+                    <div className="font-display wonk text-2xl italic text-leaf md:text-3xl">
+                      {row.me[0]}
+                    </div>
+                    <p className="mt-2 text-[15px] leading-relaxed text-ink/85">{row.me[1]}</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

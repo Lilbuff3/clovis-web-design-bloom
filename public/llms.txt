@@ -1,0 +1,65 @@
+# Clovis Web Design
+
+> High-performance, custom-built websites for local businesses in Clovis, Fresno, Madera, and California's Central Valley. Built by Adam.
+
+## Overview
+Clovis Web Design is an independent web design and development studio operated by Adam in Clovis, California. Sites are hand-coded with modern web standards (Astro, React, Tailwind CSS) for sub-second mobile loading, Google Maps 3-Pack visibility, and high conversion. No WordPress templates, no page builders, zero monthly hostage fees, and 100% client asset ownership from day one.
+
+## Contact Information
+- Location: Clovis, CA (serving Fresno, Clovis, Madera, and the Central Valley)
+- Phone / Text: (559) 575-3014
+- Email: adam@cloviswebdesign.com
+- Hours: Monday – Saturday, 7:00 AM – 7:00 PM PT
+- Website: https://cloviswebdesign.com/
+- Google Maps Profile: https://maps.google.com/?cid=5133720235419656762
+
+## Core Services
+- Contractor & Trade Websites: https://cloviswebdesign.com/services/contractor-websites/
+  - Built for roofers, HVAC, plumbers, dumpster rentals, and trades. Tap-to-call and tap-to-text on every screen, loads on two bars of cellular signal.
+- Medical & Healthcare Practice Web Design: https://cloviswebdesign.com/services/medical-web-design/
+  - Websites for medical clinics, physicians, and dental practices that collect zero patient health information online (so no patient health records sit on the website), built to WCAG 2.1 AA accessibility standards.
+- Fresno Local SEO & Google Maps 3-Pack: https://cloviswebdesign.com/services/local-seo-fresno/
+  - Google Business Profile optimization, semantic LocalBusiness schema markup, and dedicated location landing pages.
+
+## Packages & Published Pricing
+- Starter ($1,500):
+  - One-page custom website, live in about a week.
+  - Working phone preview before you pay anything.
+  - Done-for-you copywriting from a 15-minute discovery call.
+  - Tap-to-call, direct SMS, and Google Search tracking.
+  - 90 days of free fixes after launch.
+  - 100% client ownership of code, domain, and hosting.
+- Growth ($2,500):
+  - 3–5 pages with dedicated service and town areas.
+  - Full Spanish version at /es/.
+  - Working phone preview before you pay.
+  - Done-for-you copywriting from a 15-minute call.
+  - Call, text, and Google Search tracking.
+  - 90 days of free fixes after launch.
+  - 100% client ownership of code, domain, and hosting.
+- Flagship (From $3,500):
+  - Custom multi-page or multi-location system.
+  - Custom booking, clinical intake routing, or HIPAA/privacy compliance.
+  - Working phone preview before you pay.
+  - Done-for-you copywriting from a 15-minute call.
+  - 90 days of free fixes after launch.
+  - 100% client ownership of code, domain, and hosting.
+
+## Optional Ongoing Care Plans
+- Care Plan ($99/mo): Same-day text-me updates (new photos, hours, prices, seasonal promos), fast hosting, and a monthly call & search check-in.
+- Care Plus ($249/mo): Everything in Care, plus new town and service pages and monthly Google Maps & AI visibility tuning. Cancel anytime with one text.
+
+## Verified Case Studies
+- Big Bros Dumpster Rentals: https://cloviswebdesign.com/case-studies/dumpster-rental-fresno/
+  - Trade: Roll-off dumpster rental in Fresno & Clovis, CA.
+  - Result: Ranked #1 on Google for "dumpster rental Fresno", added 4 trucks to keep up with calls.
+  - Verified Quote: "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up." — William Maldonado Ramirez, Co-Owner & Head of Operations.
+- Kidney Specialist Inc.: https://cloviswebdesign.com/case-studies/kidney-specialist-fresno/
+  - Trade: Nephrology medical practice in Madera & Fresno, CA.
+  - Result: Zero patient data collected online, 100/100 Google PageSpeed, doctor referrals up 40% by Dr. Masood's count.
+  - Verified Quote: "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%." — Dr. Sheikh Mohammad Masood, MD, Founding President & Medical Director.
+
+## Core Guarantees & Principles
+1. Phone Preview Guarantee: Adam builds a working preview on your phone before you pay a dollar. If you don't love it, you pay $0.
+2. Done-For-You Copy: No blank questionnaires or homework; copy is drafted from a 15-minute phone conversation.
+3. Complete Independence: Clients own the domain, source code, and hosting from day one. Zero agency hostage fees.

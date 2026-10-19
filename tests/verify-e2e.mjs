@@ -179,6 +179,11 @@ const REQUIRED_ROUTES = [
   { path: path.join('services', 'medical-web-design', 'index.html'), route: '/services/medical-web-design/' },
 ];
 
+const CASE_STUDY_ROUTES = [
+  { path: path.join('case-studies', 'dumpster-rental-fresno', 'index.html'), route: '/case-studies/dumpster-rental-fresno/' },
+  { path: path.join('case-studies', 'kidney-specialist-fresno', 'index.html'), route: '/case-studies/kidney-specialist-fresno/' },
+];
+
 // ============================================================================
 // TIER 1: Build & Static Pre-rendering Architecture
 // ============================================================================
@@ -556,6 +561,10 @@ assertTest(2, 'T2.7', 'Top-level sameAs (if any) lists only profile sites, only 
   const biz = findBusinessNode(jsonLd);
   if (!biz) throw new Error(`Business node not found.`);
 
+  if (!biz.hasMap || !biz.hasMap.includes('5133720235419656762')) {
+    throw new Error(`Business node missing hasMap pointing to verified Google Business Profile.`);
+  }
+
   // Optional: only add profiles Adam has confirmed are his.
   const sameAs = Array.isArray(biz.sameAs) ? biz.sameAs : biz.sameAs ? [biz.sameAs] : [];
   const validProfileDomains = ['linkedin.com', 'twitter.com', 'x.com', 'facebook.com', 'github.com', 'instagram.com', 'google.com'];
@@ -566,7 +575,11 @@ assertTest(2, 'T2.7', 'Top-level sameAs (if any) lists only profile sites, only 
   bad.push(...notAdams.filter((u) => founderSameAs.includes(u)));
   if (bad.length > 0) throw new Error(`sameAs lists profiles that aren't Adam's or aren't profiles:\n - ${bad.join('\n - ')}`);
 
-  return `sameAs has ${sameAs.length} confirmed profile(s)`;
+  if (!sameAs.some((u) => u.includes('5133720235419656762'))) {
+    throw new Error(`sameAs must include verified Google Business Profile CID.`);
+  }
+
+  return `sameAs has ${sameAs.length} confirmed profile(s) and hasMap links GBP`;
 });
 
 assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services', () => {
@@ -613,7 +626,7 @@ assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availabi
   }
 
   // Check tap-to-text
-  const hasText = /href=["']sms:\+?1?[\-\.]?559[\-\.]?575[\-\.]?3014["']/i.test(html);
+  const hasText = /href=["']sms:\+?1?[\-\.]?559[\-\.]?575[\-\.]?3014(?:\?[^"']*)?["']/i.test(html);
   if (!hasText) {
     throw new Error(`Missing tap-to-text link with href="sms:+15595753014"`);
   }
@@ -726,7 +739,7 @@ assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present on every
     if (!fs.existsSync(fullPath)) continue;
 
     const html = fs.readFileSync(fullPath, 'utf-8');
-    const hasPhone = /href=["'](?:tel|sms):\+?1?5595753014["']/i.test(html) || /559[\.\-\s]?575[\.\-\s]?3014/.test(html);
+    const hasPhone = /href=["'](?:tel|sms):\+?1?5595753014(?:\?[^"']*)?["']/i.test(html) || /559[\.\-\s]?575[\.\-\s]?3014/.test(html);
     if (!hasPhone) {
       missingContact.push(r.route);
     }
@@ -952,6 +965,15 @@ assertTest(6, 'T6.4', 'Each route has its own Service node, and FAQPage only lis
     const key = `${svc.name} | ${svc.audience?.audienceType}`;
     if (seen.has(key)) throw new Error(`Two routes describe the same Service: ${key}`);
     seen.add(key);
+    if (r.route === '/services/medical-web-design/') {
+      if (!Array.isArray(svc.offers) || svc.offers.length < 2) {
+        throw new Error(`Medical Service node must include offers array with at least 2 packages.`);
+      }
+      const offerNames = svc.offers.map((o) => o.name);
+      if (!offerNames.includes('Growth') || !offerNames.includes('Flagship')) {
+        throw new Error(`Medical Service offers must include Growth and Flagship packages.`);
+      }
+    }
     const visible = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&');
     for (const q of graph.find((n) => n['@type'] === 'FAQPage')?.mainEntity ?? []) {
       if (!visible.includes(q.name)) throw new Error(`${r.route}: FAQPage question isn't on the page: "${q.name}"`);
@@ -1019,6 +1041,77 @@ assertTest(6, 'T6.10', 'Google CWV & SERP Breadcrumbs: explicit image dimensions
     throw new Error(`Images missing explicit width/height attributes:\n - ${missingDims.join('\n - ')}`);
   }
   return 'All images carry explicit width/height, hero LCP image is preloaded with fetchpriority="high", and all service pages emit BreadcrumbList';
+});
+
+assertTest(6, 'T6.11', 'Conversion tracking, AI referrers & privacy-safe client analytics', () => {
+  for (const r of REQUIRED_ROUTES) {
+    const html = fs.readFileSync(path.join(DIST_DIR, r.path), 'utf-8');
+    if (html.includes('No tracking pixels on this page')) {
+      throw new Error(`${r.route}: contains obsolete "No tracking pixels on this page" in footer`);
+    }
+    if (html.includes('No ad-tracking pixels')) {
+      throw new Error(`${r.route}: contains obsolete "No ad-tracking pixels"`);
+    }
+    for (const token of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open']) {
+      if (!html.includes(token)) {
+        throw new Error(`${r.route}: missing conversion tracking token "${token}"`);
+      }
+    }
+  }
+  const medicalHtml = getMedicalHtml();
+  if (!medicalHtml.includes('Privacy-safe call &amp; referral tracking') && !medicalHtml.includes('Privacy-safe call & referral tracking')) {
+    throw new Error('Medical page missing "Privacy-safe call & referral tracking"');
+  }
+  return 'All routes contain lightweight event tracking; zero tracking pixel claims; medical page reframed cleanly';
+});
+
+assertTest(6, 'T6.12', 'Dedicated case study routes pre-rendered with breadcrumbs, Article schema, and explicit image dimensions', () => {
+  for (const cs of CASE_STUDY_ROUTES) {
+    const fullPath = path.join(DIST_DIR, cs.path);
+    if (!fs.existsSync(fullPath)) {
+      throw new Error(`Missing static case study file: ${cs.path}`);
+    }
+    const html = fs.readFileSync(fullPath, 'utf-8');
+    if (!/<nav[^>]*aria-label=["']Breadcrumb["']/i.test(html)) {
+      throw new Error(`${cs.route}: missing visible <nav aria-label="Breadcrumb">`);
+    }
+    const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
+    const article = graph.find((n) => n['@type'] === 'Article');
+    if (!article) throw new Error(`${cs.route}: missing Article in JSON-LD @graph`);
+    const breadcrumb = graph.find((n) => n['@type'] === 'BreadcrumbList');
+    if (!breadcrumb || !Array.isArray(breadcrumb.itemListElement) || breadcrumb.itemListElement.length < 3) {
+      throw new Error(`${cs.route}: missing 3-item BreadcrumbList in JSON-LD @graph`);
+    }
+    const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
+    for (const tag of imgs) {
+      if (!/\bwidth=/i.test(tag) || !/\bheight=/i.test(tag)) {
+        throw new Error(`${cs.route}: img missing width/height: ${tag}`);
+      }
+    }
+  }
+  return `All ${CASE_STUDY_ROUTES.length} case study routes verified with Breadcrumbs, Article schema, and explicit image dimensions`;
+});
+
+assertTest(6, 'T6.13', 'Public discoverability: llms.txt and robots.txt AI search bot allowances', () => {
+  const llmsPath = path.join(PROJECT_ROOT, 'public', 'llms.txt');
+  if (!fs.existsSync(llmsPath)) throw new Error('Missing public/llms.txt');
+  const llms = fs.readFileSync(llmsPath, 'utf-8');
+  if (!llms.includes('# Clovis Web Design')) throw new Error('llms.txt missing headline');
+  if (!llms.includes('$1,500') || !llms.includes('$2,500') || !llms.includes('From $3,500')) {
+    throw new Error('llms.txt missing accurate package pricing');
+  }
+  if (!llms.includes('$99/mo') || !llms.includes('$249/mo')) {
+    throw new Error('llms.txt missing care plan pricing');
+  }
+  if (/youssef/i.test(llms)) throw new Error('llms.txt must never contain Adam\'s last name');
+
+  const robotsPath = path.join(PROJECT_ROOT, 'public', 'robots.txt');
+  const robots = fs.readFileSync(robotsPath, 'utf-8');
+  const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'];
+  for (const b of bots) {
+    if (!robots.includes(`User-agent: ${b}`)) throw new Error(`robots.txt missing User-agent: ${b}`);
+  }
+  return `llms.txt and robots.txt verified for all 8 AI crawlers with zero surname leaks`;
 });
 
 // ============================================================================

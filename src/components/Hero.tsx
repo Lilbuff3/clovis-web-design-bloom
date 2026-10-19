@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, SMS_LINK } from "../lib/data";
+import { PHONE_DISPLAY, smsTo } from "../lib/data";
 
 function ClovisClock() {
   // Set after mount: the page is built once, so a build-time clock never matches the browser's and breaks hydration.
@@ -67,7 +67,7 @@ export function Hero() {
             <strong className="font-semibold">$1,500</strong> — and you see a working preview on your phone before you pay a dollar.
           </p>
           <div className="flex flex-col items-start gap-4">
-            <a href={SMS_LINK} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
+            <a href={smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?")} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
                 <svg viewBox="0 0 24 24" className="relative z-10 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">

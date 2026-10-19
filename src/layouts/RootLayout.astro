@@ -18,6 +18,8 @@ const {
   schema = { "@context": "https://schema.org", "@graph": [business] },
   preloadImage,
 } = Astro.props;
+
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -58,6 +60,18 @@ const {
 
     <!-- Schema.org JSON-LD @graph -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+
+    {gaMeasurementId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gaMeasurementId}');
+        `}></script>
+      </>
+    )}
   </head>
   <body class="grain">
     <a href="#main" class="fixed left-3 top-3 z-[60] -translate-y-[200%] rounded-full bg-ink px-5 py-3 font-medium text-cream transition-transform focus:translate-y-0">Skip to content</a>
@@ -87,5 +101,82 @@ const {
     <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
     <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script is:inline defer src="/_vercel/insights/script.js"></script>
+
+    <!-- Lightweight Conversion & AI Referrer Event Tracking -->
+    <script is:inline>
+      (function() {
+        function track(name, data) {
+          try {
+            window.va?.('event', { name: name, ...(data || {}) });
+            window.gtag?.('event', name, data || {});
+          } catch (e) {}
+        }
+        window.cwTrackEvent = track;
+
+        // 1. Delegated click listener on tel:, sms:, mailto: links
+        document.addEventListener('click', function(e) {
+          var el = e.target && e.target.closest ? e.target.closest('a') : null;
+          if (!el || !el.href) return;
+          var href = el.getAttribute('href') || el.href;
+          if (href.indexOf('tel:') === 0) {
+            track('lead_call_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          } else if (href.indexOf('sms:') === 0) {
+            track('lead_sms_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          } else if (href.indexOf('mailto:') === 0) {
+            track('lead_email_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          }
+        }, { capture: true });
+
+        // 2. Custom event listener for ai_audit_run (from LeadLeakAudit)
+        window.addEventListener('ai_audit_run', function(e) {
+          track('ai_audit_run', e && e.detail ? e.detail : {});
+        });
+
+        // 3. Personalized outreach link opens (?biz= or autorun=1)
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var isOutreach = params.has('biz') || params.has('business') || params.get('autorun') === '1' || params.get('autorun') === 'true';
+          if (isOutreach) {
+            var biz = params.get('biz') || params.get('business') || '';
+            var trade = params.get('trade') || '';
+            var city = params.get('city') || '';
+            var sessionKey = 'cw_outreach_' + biz + '_' + trade;
+            if (!sessionStorage.getItem(sessionKey)) {
+              sessionStorage.setItem(sessionKey, '1');
+              track('outreach_link_open', { biz: biz, trade: trade, city: city });
+            }
+          }
+        } catch (e) {}
+
+        // 4. Initial visits from AI search engines
+        try {
+          var ref = document.referrer;
+          if (ref) {
+            var refHost = new URL(ref).hostname.toLowerCase();
+            var aiEngines = [
+              'chatgpt.com',
+              'perplexity.ai',
+              'gemini.google.com',
+              'claude.ai',
+              'copilot.microsoft.com',
+              'you.com'
+            ];
+            var matched = null;
+            for (var i = 0; i < aiEngines.length; i++) {
+              if (refHost === aiEngines[i] || refHost.endsWith('.' + aiEngines[i])) {
+                matched = aiEngines[i];
+                break;
+              }
+            }
+            if (matched) {
+              if (!sessionStorage.getItem('cw_ai_ref_tracked')) {
+                sessionStorage.setItem('cw_ai_ref_tracked', matched);
+                track('ai_referrer_visit', { engine: matched, referrer: ref });
+              }
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>

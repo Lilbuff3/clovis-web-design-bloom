@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, PHONE_TEL, SMS_LINK } from "../lib/data";
+import { PHONE_DISPLAY, PHONE_TEL, smsTo } from "../lib/data";
 
 export function SunMark({ className = "", progress = 1 }: { className?: string; progress?: number }) {
   const c = 2 * Math.PI * 21;
@@ -87,12 +87,12 @@ export function Nav() {
               <span className="font-mono block text-[11px] uppercase tracking-[.04em] text-ink-soft md:text-xs md:tracking-[.16em]">Web Studio · Clovis &amp; Fresno, CA</span>
             </span>
           </a>
-          <div className="relative hidden items-center gap-0.5 rounded-full p-1 xl:flex">
+          <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="relative whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] text-ink/75 transition-all duration-300 hover:bg-ink/5 hover:text-ink"
+                className="relative whitespace-nowrap rounded-full px-3 py-2 text-[14px] text-ink/75 transition-all duration-300 hover:bg-ink/5 hover:text-ink xl:px-3.5 xl:text-[15px]"
               >
                 {l.label}
               </a>
@@ -100,7 +100,7 @@ export function Nav() {
           </div>
           <div className="flex items-center gap-2">
             <a
-              href={SMS_LINK}
+              href={smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?")}
               data-magnetic="0.25"
               className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon-deep sm:flex"
             >
@@ -110,7 +110,7 @@ export function Nav() {
               </span>
               Text me
             </a>
-            <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 xl:hidden" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu">
+            <button ref={menuBtn} onClick={() => setOpen((o) => !o)} className="flex h-11 w-11 items-center justify-center rounded-full bg-ink/5 lg:hidden" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu">
               <span className="relative block h-3 w-5">
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
                 <span className={`absolute left-0 h-[2px] w-5 bg-ink transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
@@ -124,7 +124,7 @@ export function Nav() {
       <div
         id="mobile-menu"
         inert={!open}
-        className={`fixed inset-0 z-[45] flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 xl:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-[45] flex flex-col justify-end bg-citrus px-6 pb-10 pt-28 lg:hidden ${open ? "" : "pointer-events-none"}`}
         style={{ clipPath: open ? "circle(150% at 92% 4%)" : "circle(0% at 92% 4%)", transition: "clip-path .8s cubic-bezier(.7,0,.2,1)" }}
       >
         <div className="flex flex-col">
@@ -140,7 +140,7 @@ export function Nav() {
             </a>
           ))}
         </div>
-        <a href={SMS_LINK} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
+        <a href={smsTo("Hi Adam, I was looking through your site and wanted to ask about getting a website built.")} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
           Text {PHONE_DISPLAY}
         </a>
       </div>

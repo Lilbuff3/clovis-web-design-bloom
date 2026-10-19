@@ -31,14 +31,28 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const id = useId(); // this form renders twice (page + phone drawer), so ids must be unique
   const Title = compact ? "h3" : "h2";
 
-  const runCheck = (now: { name: string; trade: string; city: string }) => {
+  const runCheck = (
+    now: { name: string; trade: string; city: string },
+    source: "outreach" | "organic" = "organic"
+  ) => {
     setSent(now);
     setCopiedReport(false);
     setAi("asking");
+    if (typeof window !== "undefined") {
+      const detail = { business: now.name, trade: now.trade, city: now.city, source };
+      window.dispatchEvent(new CustomEvent("ai_audit_run", { detail }));
+      (window as any).va?.("event", { name: "ai_audit_run", ...detail });
+      (window as any).gtag?.("event", "ai_audit_run", detail);
+    }
     fetch("/api/ask-gemini/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ businessName: now.name, trade: now.trade, city: now.city }),
+      body: JSON.stringify({
+        businessName: now.name,
+        trade: now.trade,
+        city: now.city,
+        source,
+      }),
     })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((a: Answer) => setAi(a))
@@ -60,7 +74,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
     if (qTrade && (autorun || (qBiz && window.location.hash === "#check"))) {
       document.getElementById("check")?.scrollIntoView({ behavior: "smooth", block: "center" });
-      runCheck({ name: qBiz, trade: qTrade, city: qCity });
+      runCheck(
+        { name: qBiz, trade: qTrade, city: qCity },
+        autorun ? "outreach" : "organic"
+      );
     }
   }, [compact]);
 
@@ -71,7 +88,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
   const ask = (e: React.FormEvent) => {
     e.preventDefault();
-    runCheck({ name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" });
+    runCheck(
+      { name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" },
+      "organic"
+    );
   };
 
   const copyReportLink = () => {

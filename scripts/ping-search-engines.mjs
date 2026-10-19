@@ -13,6 +13,8 @@ export const CANONICAL_URLS = [
   `https://${HOST}/services/medical-web-design/`,
   `https://${HOST}/services/contractor-websites/`,
   `https://${HOST}/services/local-seo-fresno/`,
+  `https://${HOST}/case-studies/dumpster-rental-fresno/`,
+  `https://${HOST}/case-studies/kidney-specialist-fresno/`,
 ];
 
 export async function pingIndexNow(fetchImpl = globalThis.fetch) {
