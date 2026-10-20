@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-19T05:22:14.725Z",
+  "timestamp": "2026-10-20T10:14:54.334Z",
   "total": 37,
   "passed": 37,
   "failed": 0,
@@ -81,10 +81,10 @@
         {
           "id": "T2.3",
           "tier": 2,
-          "title": "Core business identity (name, telephone: +15595753014, priceRange)",
+          "title": "Core business identity (name, telephone: +15596280142, priceRange)",
           "status": "PASS",
           "error": null,
-          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"From $1,500\""
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15596280142\", priceRange: \"From $1,500\""
         },
         {
           "id": "T2.4",
