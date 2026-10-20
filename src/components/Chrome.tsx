@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
-import { PHONE_DISPLAY, PHONE_TEL, smsTo } from "../lib/data";
+import { PHONE_DISPLAY, smsTo } from "../lib/data";
 
 export function SunMark({ className = "", progress = 1 }: { className?: string; progress?: number }) {
   const c = 2 * Math.PI * 21;
@@ -26,11 +26,11 @@ export function SunMark({ className = "", progress = 1 }: { className?: string; 
 }
 
 const links = [
-  { href: "/#work", label: "Client Work" },
   { href: "/#who", label: "Services" },
-  { href: "/services/local-seo-fresno/", label: "Local SEO" },
+  { href: "/services/local-seo-fresno/", label: "Search & AI" },
+  { href: "/#work", label: "Client Work" },
   { href: "/#process", label: "Process" },
-  { href: "/#pricing", label: "Pricing" },
+  { href: "/#pricing", label: "How We Work" },
   { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
@@ -84,7 +84,7 @@ export function Nav() {
             <SunMark className="h-11 w-11 transition-transform duration-700 group-hover:rotate-[360deg] md:h-12 md:w-12" progress={p} />
             <span className="leading-tight">
               <span className="font-display block text-[1.5rem] font-bold tracking-tight text-ink md:text-[1.8rem]">Clovis Web Design</span>
-              <span className="font-mono block text-[11px] uppercase tracking-[.04em] text-ink-soft md:text-xs md:tracking-[.16em]">Web Studio · Clovis &amp; Fresno, CA</span>
+              <span className="font-mono block text-[11px] uppercase tracking-[.04em] text-ink-soft md:text-xs md:tracking-[.16em]">Websites · Search &amp; AI · Clovis, CA</span>
             </span>
           </a>
           <div className="relative hidden items-center gap-0.5 rounded-full p-1 lg:flex">
@@ -100,7 +100,7 @@ export function Nav() {
           </div>
           <div className="flex items-center gap-2">
             <a
-              href={smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?")}
+              href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")}
               data-magnetic="0.25"
               className="group hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-persimmon-deep sm:flex"
             >
@@ -140,7 +140,7 @@ export function Nav() {
             </a>
           ))}
         </div>
-        <a href={smsTo("Hi Adam, I was looking through your site and wanted to ask about getting a website built.")} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
+        <a href={smsTo("Hi Adam, I was looking through your site and wanted to talk about growing my business online.")} className="mt-8 rounded-full bg-ink px-6 py-4 text-center text-lg text-cream">
           Text {PHONE_DISPLAY}
         </a>
       </div>

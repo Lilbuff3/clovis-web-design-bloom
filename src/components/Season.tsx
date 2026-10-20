@@ -10,11 +10,10 @@ export function Season() {
         <div className="max-w-3xl">
           <h2 className="font-display h-section">
             <span className="line-mask"><span>From discovery</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>to launch in six days.</span></span>
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>to measurable growth.</span></span>
           </h2>
           <p className="reveal mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
-            Every site goes through the same four stages in the same order, so nothing gets made up on the day it should've been decided. Day counts are for the
-            one-page build; multi-page sites run three to four weeks, and anything with booking or compliance runs longer.
+            Every engagement goes through the same four stages in the same order, whether you hire me for a custom website build, a Search &amp; AI visibility overhaul, or both. Focused one-page builds launch in about a week; multi-page systems and search campaigns run two to four weeks.
           </p>
         </div>
 
@@ -45,7 +44,7 @@ export function Compare() {
             <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>or dedicated builder?</span></span>
           </h2>
           <p className="reveal mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
-            Compare what it's like working with a bloated agency against working directly with me from discovery to launch.
+            Compare what it's like working with a traditional marketing agency against working directly with me from discovery to launch.
           </p>
         </div>
 

@@ -54,20 +54,21 @@ export function Hero() {
             <span>Custom websites,</span>
           </span>{" "}
           <span className="line-mask in" style={{ ["--d" as string]: "200ms" }}>
-            {/* pr-[0.07em]: italic correction; the "t" leans past its box and crowds the next word. */}
+            {/* pr-[0.07em]: italic correction; the "h" leans past its box and crowds the next word. */}
             <span>
-              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">built</em> in Clovis.
+              <em className="wonk pr-[0.07em] font-[380] text-persimmon-deep">search</em> &amp; AI.
             </span>
           </span>
         </h1>
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            I build websites for Central Valley businesses that bring in customers. No templates, no monthly fees, and my cell number when you need me. Sites start at{" "}
-            <strong className="font-semibold">$1,500</strong> — and you see a working preview on your phone before you pay a dollar.
+            Based in Clovis, California, I build{" "}
+            <strong className="font-semibold">sub-second custom websites</strong> and run{" "}
+            <strong className="font-semibold">Google Maps &amp; AI search marketing</strong> for businesses that want more calls, leads, and revenue. Hire me for a single service or the full system — and for websites, you see a working preview on your phone before you pay a dollar.
           </p>
           <div className="flex flex-col items-start gap-4">
-            <a href={smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?")} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
+            <a href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-persimmon transition group-hover:bg-ink">
                 <span className="absolute inset-0 rounded-full animate-[pulse-ring_2.4s_cubic-bezier(0.45,0,0.55,1)_infinite]" />
                 <svg viewBox="0 0 24 24" className="relative z-10 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -81,8 +82,8 @@ export function Hero() {
               </span>
             </a>
             <div className="flex flex-wrap items-center gap-3">
-              <a href="#work" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
-                See client results
+              <a href="#who" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
+                Explore services
                 <span className="transition group-hover:translate-y-1">↓</span>
               </a>
               <a href="#check" className="group flex items-center gap-2 rounded-full border border-ink/15 bg-cream/90 px-5 py-3 text-[17px] font-semibold text-ink transition hover:bg-cream">
@@ -97,7 +98,7 @@ export function Hero() {
           <div className="rounded-2xl border border-ink/10 bg-cream/90 px-5 py-3.5 font-mono text-sm uppercase tracking-[.1em] text-ink backdrop-blur-md">
             <ClovisClock />
           </div>
-          <a href="#work" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
+          <a href="#who" className="group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-[.25em] text-ink/70 opacity-100">
             Scroll
             <span className="relative block h-12 w-px overflow-hidden bg-ink/20">
               <span className="absolute inset-x-0 top-0 h-1/2 bg-persimmon" style={{ animation: "scrollhint 1.8s cubic-bezier(.7,0,.3,1) infinite" }} />

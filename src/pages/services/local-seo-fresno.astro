@@ -4,40 +4,64 @@ import { Nav } from '../../components/Chrome';
 import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
 import { LeadLeakAudit } from '../../components/LeadLeakAudit';
-import { PHONE_DISPLAY, PHONE_TEL, smsTo, care, cases, pageSchema, type Faq } from '../../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, smsTo, cases, offer, pageSchema, type Faq } from '../../lib/data';
 
 const bigBros = cases[1];
-const carePlus = care.find((c) => c.name === 'Care Plus')!;
 
 const faqs: Faq[] = [
   {
-    q: 'Can you guarantee a top-3 spot on Google Maps?',
-    a: "No, and be careful with anyone who does. Google decides, and how close the searcher is to your business counts for a lot. What I can control is whether Google finds the same clear facts about your business everywhere it looks.",
+    q: 'Why does my business show up on Google Maps, but ChatGPT or Claude recommends my competitors?',
+    a: 'Each AI assistant checks a different directory before naming a business. Google Gemini and AI Overviews read your Google Business Profile, but ChatGPT relies heavily on Bing Places, Yelp, and Foursquare, while Siri checks Apple Business Connect. If your profiles only exist on Google, other AI engines skip you.',
   },
   {
-    q: 'What does local SEO cost?',
-    a: `Every site I build launches connected to Google Search and Maps at no extra charge. Ongoing local SEO is the ${carePlus.name} plan: ${carePlus.price} a month, cancel with one text.`,
+    q: 'Can you optimize my existing website for Google Maps and AI search without rebuilding it?',
+    a: 'Yes, if your current website loads quickly on mobile and allows custom code edits. We can run a standalone Search & AI Visibility Setup to align your Google, Bing, Apple Maps, and Yelp profiles, install connected business and FAQ structured data, and wire GA4 AI lead tracking.',
+  },
+  {
+    q: 'Why does website speed affect whether AI search engines recommend a business?',
+    a: 'When a buyer asks ChatGPT, Perplexity, or Claude a live question, the AI crawler fetches candidate websites under a strict 1 to 3 second timeout. Slow WordPress templates loaded with heavy plugins frequently time out before the bot reads your page, and half of human mobile visitors leave after three seconds.',
+  },
+  {
+    q: 'Can you guarantee a top-3 spot on Google Maps or AI answers?',
+    a: 'No, and be careful with any agency that claims they can. Search engines and AI models weigh the searcher’s exact location, review history, and live competition. What I guarantee is that every directory, schema graph, and answer block they check presents clear, consistent facts about your business.',
   },
 ];
 
 const schema = pageSchema('/services/local-seo-fresno/', {
-  name: 'Local SEO in Fresno, CA',
-  serviceType: 'Local search engine optimization',
-  audience: 'Local service businesses',
-  description: 'Google Business Profile setup, business schema and location pages for businesses in Fresno, Clovis and Madera.',
-  offers: [{
-    '@type': 'Offer',
-    name: carePlus.name,
-    priceCurrency: 'USD',
-    priceSpecification: { '@type': 'UnitPriceSpecification', price: carePlus.price.replace('$', ''), priceCurrency: 'USD', unitText: 'MONTH' },
-    description: carePlus.blurb,
-  }],
+  name: 'Search Engine, Google Maps & AI Search Marketing (SEO & GEO)',
+  serviceType: 'Search engine and AI optimization',
+  audience: 'Growth-minded businesses',
+  description: 'Google Maps 3-Pack SEO, four-directory AI entity alignment (Google, Bing, Apple Maps, Yelp), business schema, and GA4 AI referral attribution.',
+  offers: [offer('Search & AI Visibility Setup'), offer('Ongoing Search & AI Growth')],
 }, faqs);
+
+const aiEngines = [
+  {
+    engine: 'Google Search, AI Overviews & Gemini',
+    directory: 'Google Business Profile & Google Maps',
+    websiteSignals: 'Matching name, address, phone, and hours, dedicated service and market pages, and active review responses.',
+  },
+  {
+    engine: 'ChatGPT & Perplexity',
+    directory: 'Bing Places, Yelp & Foursquare',
+    websiteSignals: 'Sub-second static HTML (<0.4s so live bots do not time out), semantic comparison tables, and clear service/pricing facts.',
+  },
+  {
+    engine: 'Claude (Anthropic)',
+    directory: 'Brave Search & Open Web Citations',
+    websiteSignals: 'Direct question-and-answer sections, verified customer quotes, and consistent facts across independent directories.',
+  },
+  {
+    engine: 'Apple Maps & Siri',
+    directory: 'Apple Business Connect & Yelp',
+    websiteSignals: 'Verified street address or service area, operating hours, direct tap-to-call routing, and strong Yelp ratings.',
+  },
+];
 ---
 
 <RootLayout
-  title="Fresno Local SEO & Google Maps 3-Pack Optimization"
-  description="Local SEO for Fresno and Clovis businesses: Google Business Profile, business schema and town pages, so Google knows who you are and where you work. $249/month."
+  title="Search, Google Maps & AI Search Marketing (SEO & GEO) — Fresno & Clovis"
+  description="Rank in the Google Maps 3-Pack and get recommended by ChatGPT, Google Gemini, Claude, Perplexity, and Siri. Four-directory alignment, business schema, and AI lead tracking."
   schema={schema}
 >
   <Nav client:load />
@@ -46,18 +70,18 @@ const schema = pageSchema('/services/local-seo-fresno/', {
     <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
       <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
       <span aria-hidden="true" class="mx-2">/</span>
-      <span class="text-ink" aria-current="page">Local SEO in Fresno, CA</span>
+      <span class="text-ink" aria-current="page">Search, Google Maps &amp; AI Marketing</span>
     </nav>
     <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-      Fresno Local SEO &amp; Google Maps 3-Pack
+      Search, Google Maps &amp; AI Marketing
     </h1>
 
-    <p class="mt-6 text-xl leading-relaxed text-ink/85">
-      When someone in Fresno searches for what you do, Google shows three businesses on a map before anything else. I set up your website and your Google Business Profile so Google knows exactly who you are, what you do and where you work, which is what it uses to pick those three.
+    <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
+      When a customer searches for what you do, Google shows three businesses on a map before anything else — and millions of buyers now ask ChatGPT, Google Gemini, Claude, Perplexity, or Siri who to hire. I engineer your website and align your business profiles across every directory they check so both search engines and AI assistants recommend you.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-4 items-center">
-      <a href={smsTo("Hi Adam, I'm interested in local SEO and ranking higher on Google Maps in Fresno. Can we talk?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
+      <a href={smsTo("Hi Adam, I'm interested in Search, Google Maps, and AI marketing for my business. Can we talk?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
         <Icon name="text" /> Text me at {PHONE_DISPLAY}
       </a>
       <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
@@ -65,13 +89,58 @@ const schema = pageSchema('/services/local-seo-fresno/', {
       </a>
     </div>
 
+    <section id="ai-search" class="mt-16 border-t border-ink/10 pt-12">
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Why AI and Google pick different businesses</h2>
+      <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        Traditional search shows ten links and lets the customer compare. AI assistants only name one to three businesses — and each AI checks a different directory before trusting a company enough to recommend it. If you only set up Google, you remain invisible when buyers ask ChatGPT, Claude, or Siri.
+      </p>
+
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-ink/15 bg-paper">
+        <table class="w-full border-collapse text-left">
+          <caption class="sr-only">How Google, ChatGPT, Claude, and Siri verify and recommend businesses</caption>
+          <thead>
+            <tr class="border-b border-ink/15 bg-cream/70">
+              <th scope="col" class="p-4 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">Search / AI Engine</th>
+              <th scope="col" class="p-4 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">Primary Directory Checked</th>
+              <th scope="col" class="p-4 font-mono text-xs uppercase tracking-[.14em] text-leaf">What It Reads on Your Website</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink/10 text-[15.5px] leading-relaxed">
+            {aiEngines.map((row) => (
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-display text-lg font-medium text-ink">{row.engine}</th>
+                <td class="p-4 font-medium text-ink/85">{row.directory}</td>
+                <td class="p-4 text-ink/80">{row.websiteSignals}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">What local SEO covers</h2>
-      <ul class="mt-6 space-y-3 text-lg text-ink/85 leading-relaxed">
-        <li><strong class="text-ink">Google Business Profile:</strong> the right categories, services, hours and photos, matching your website word for word.</li>
-        <li><strong class="text-ink">Business schema:</strong> code on your site that gives Google your name, phone, address and service area in a format it reads directly.</li>
-        <li><strong class="text-ink">Town pages:</strong> a page for each town you serve, written about the work you do there, not one page with the town name swapped.</li>
-        <li><strong class="text-ink">Fast mobile pages:</strong> so a visit from Google turns into a call instead of a back-button tap.</li>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">What Search &amp; AI Optimization covers — and why it matters</h2>
+      <ul class="mt-6 space-y-5 text-lg text-ink/85 leading-relaxed">
+        <li>
+          <strong class="text-ink">Four-Directory Profile Alignment (Google, Bing, Apple Maps &amp; Yelp):</strong> Your business categories, services, hours, and phone number matched word-for-word across all four ecosystems.
+          <span class="block mt-1 text-[16px] text-ink/75"><strong class="text-ink">Why it matters:</strong> When directories conflict on your hours, address, or services, AI models drop your business from their answer to avoid giving the user bad information.</span>
+        </li>
+        <li>
+          <strong class="text-ink">Connected Business, Service &amp; FAQ Schema:</strong> Structured code on your site that feeds search engines your exact identity, service areas, offers, and common answers in a format machines read directly.
+          <span class="block mt-1 text-[16px] text-ink/75"><strong class="text-ink">Why it matters:</strong> Eliminates guesswork so Google Search and AI crawlers immediately verify what you sell, who you serve, and where you operate.</span>
+        </li>
+        <li>
+          <strong class="text-ink">Fact-Dense Service Pages &amp; Direct Answer Blocks:</strong> Dedicated pages for each core service and market you serve, structured with question-based headings and concise 40–60 word answers.
+          <span class="block mt-1 text-[16px] text-ink/75"><strong class="text-ink">Why it matters:</strong> AI assistants quote specific facts, tables, and direct answers. Generic marketing slogans get skipped.</span>
+        </li>
+        <li>
+          <strong class="text-ink">Sub-Second Mobile Speed (&lt;0.4s) &amp; AI Discovery Files:</strong> Hand-coded static pages paired with a machine-readable <code class="font-mono text-sm bg-cream px-1.5 py-0.5 rounded">/llms.txt</code> index and AI agent discovery catalog.
+          <span class="block mt-1 text-[16px] text-ink/75"><strong class="text-ink">Why it matters:</strong> Live AI crawlers time out after 1–3 seconds on heavy WordPress templates, and human visitors tap the back button when a mobile page takes 4 seconds to open.</span>
+        </li>
+        <li>
+          <strong class="text-ink">AI &amp; Search Lead Attribution (GA4):</strong> Custom analytics tracking that separates visits from ChatGPT, Gemini, Claude, and Perplexity from standard search traffic, alongside every phone call, text, and form lead.
+          <span class="block mt-1 text-[16px] text-ink/75"><strong class="text-ink">Why it matters:</strong> Shows you the exact return on your marketing investment instead of hiding AI referrals inside generic traffic reports.</span>
+        </li>
       </ul>
     </section>
 
@@ -79,17 +148,17 @@ const schema = pageSchema('/services/local-seo-fresno/', {
       <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Foundational setup vs. ongoing monthly growth</h2>
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="rounded-2xl border border-ink/10 bg-paper p-6">
-          <h3 class="font-display text-xl text-ink font-medium">Foundational Local SEO</h3>
-          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-leaf font-semibold">Included with every build ($0)</p>
+          <h3 class="font-display text-2xl text-ink font-medium">Search &amp; AI Visibility Setup</h3>
+          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-leaf font-semibold">One-time overhaul · Standalone or paired with a build</p>
           <p class="mt-3 text-ink/80 leading-relaxed">
-            Every website I build launches connected to Google Search and Google Maps at no extra charge. I set up your Google Business Profile categories, verify your name, address, and phone consistency, configure semantic LocalBusiness structured data, and optimize page speed so mobile visitors convert immediately.
+            Ideal if you already have a fast website (or are building a new one with me) and need the technical foundation done right. I align your Google Business Profile, Bing Places, Apple Business Connect, and Yelp listings, install connected business and FAQ structured data, publish your <code class="font-mono text-xs">/llms.txt</code> index, and configure GA4 call, text, and AI referral tracking.
           </p>
         </div>
         <div class="rounded-2xl border border-ink/10 bg-paper p-6">
-          <h3 class="font-display text-xl text-ink font-medium">{carePlus.name}</h3>
-          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-persimmon-deep font-semibold">Optional ongoing growth ({carePlus.price}/mo)</p>
+          <h3 class="font-display text-2xl text-ink font-medium">Ongoing Search &amp; AI Growth</h3>
+          <p class="mt-1 font-mono text-xs uppercase tracking-[.14em] text-persimmon-deep font-semibold">Monthly partnership · Scoped to your market &amp; ROI</p>
           <p class="mt-3 text-ink/80 leading-relaxed">
-            For businesses looking to expand into neighboring towns or outrank entrenched competitors. Includes everything in Care, plus new dedicated town and service pages each month, citation monitoring, Google Maps ranking audits, and ongoing AI search visibility tuning. Cancel anytime with one text.
+            For businesses expanding into new markets or competing against entrenched rivals. Includes new high-intent service and city pages each month, review generation systems, ongoing citation building across industry directories, monthly Google Maps and AI citation audits, and same-day website updates. Strictly month-to-month — cancel anytime with one text.
           </p>
         </div>
       </div>
@@ -100,9 +169,9 @@ const schema = pageSchema('/services/local-seo-fresno/', {
     </section>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">How {bigBros.client} reached #1 for “dumpster rental Fresno”</h2>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Case Study: How {bigBros.client} reached #1 on Google</h2>
       <p class="mt-4 text-lg text-ink/80 leading-relaxed">
-        {bigBros.problem} Big Bros now ranks first on Google for “dumpster rental Fresno,” and added 4 trucks to keep up with the calls.
+        {bigBros.problem} After rebuilding their site for sub-second mobile speed, dedicated market pages, and aligned Google Maps signals, Big Bros ranks #1 on Google for “dumpster rental Fresno” and added 4 trucks to keep up with incoming calls and texts.
       </p>
       <p class="mt-3">
         <a href="/case-studies/dumpster-rental-fresno/" class="inline-flex items-center gap-1.5 font-mono text-sm text-persimmon-deep hover:underline">
@@ -118,7 +187,7 @@ const schema = pageSchema('/services/local-seo-fresno/', {
     </section>
 
     <section class="mt-16 border-t border-ink/10 pt-12">
-      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Questions about local SEO</h2>
+      <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Questions about Search, Google Maps &amp; AI Marketing</h2>
       <div class="mt-8 space-y-4">
         {faqs.map((f) => (
           <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
@@ -133,12 +202,12 @@ const schema = pageSchema('/services/local-seo-fresno/', {
     </section>
 
     <section class="mt-16 border-t border-ink/10 pt-12 text-center">
-      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Let's get your business found on Google Maps</h2>
+      <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Let's see how your business shows up across Google and AI</h2>
       <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
-        Text me your business name and town. I'll inspect your current Google Business Profile and search visibility, and tell you what's holding you back.
+        Text me your business name and city. I'll check your visibility across Google Maps, ChatGPT, Gemini, and Claude, and tell you plainly what will move the needle.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-        <a href={smsTo("Hi Adam, I'm interested in local SEO and ranking higher on Google Maps in Fresno. Can we talk?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+        <a href={smsTo("Hi Adam, I'd like you to check how my business shows up on Google Maps and AI search.")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
           <Icon name="text" /> Text me: {PHONE_DISPLAY}
         </a>
         <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">

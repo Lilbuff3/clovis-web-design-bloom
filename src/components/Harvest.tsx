@@ -16,7 +16,7 @@ function Yield({ y, i }: { y: Y; i: number }) {
         </span>
         <span className="text-persimmon">{y.suffix}</span>
       </div>
-      <div className="mt-2 text-sm leading-snug text-ink/70">{y.label}</div>
+      <div className="mt-2 text-sm leading-snug text-ink/75">{y.label}</div>
     </div>
   );
 }
@@ -200,7 +200,7 @@ function CaseSpread({ c, flip }: { c: (typeof cases)[number]; flip: boolean }) {
 
         <figure className="mt-8 border-l-2 border-persimmon/60 pl-5">
           <blockquote className="font-display text-[19px] font-[380] leading-[1.45] text-ink/90 md:text-[21px]">“{c.quote.text}”</blockquote>
-          <figcaption className="mt-3 text-sm text-ink/70">
+          <figcaption className="mt-3 text-sm text-ink/75">
             <span className="font-medium text-ink">{c.quote.name}</span> · {c.quote.role}
           </figcaption>
         </figure>
@@ -233,8 +233,8 @@ export function ClientWork() {
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Measurable results.</span></span>
             </h2>
           </div>
-          <p className="reveal max-w-sm text-lg leading-relaxed text-ink/80">
-            I build for all kinds of Central Valley businesses — here are two very different ones. One reason they get calls: each site shows up fast for a new customer on two bars of signal. Owners rarely see their own site that way. They check it at home on <span className="whitespace-nowrap">Wi-Fi</span>, with a copy already saved on their phone.
+          <p className="reveal max-w-md text-lg leading-relaxed text-ink/80">
+            I work with businesses across industries — here are two very different examples of what happens when sub-second web engineering meets Google Maps and AI search optimization. Every page loads fast for a first-time visitor on cellular data and gives search engines the exact facts they cite.
           </p>
         </div>
 
@@ -244,7 +244,7 @@ export function ClientWork() {
           ))}
         </div>
 
-        {/* The next spot. What it includes is on the price tags below. */}
+        {/* Next spot CTA */}
         <div className="reveal relative mt-16 overflow-hidden rounded-[40px] bg-leaf p-8 text-cream md:mt-20 md:p-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div>
@@ -252,10 +252,10 @@ export function ClientWork() {
                 Your business could be next.
               </h3>
               <p className="mt-4 max-w-xl text-lg leading-relaxed text-cream/90">
-                You see a working preview on your phone before you pay anything — and if I don't think a new site will clearly pay for itself, I'll tell you on our first call.
+                Whether you need a custom website, stronger rankings on Google Maps and AI, or both — if I don't see a clear way for our work to pay for itself, I'll tell you on our first call.
               </p>
             </div>
-            <a href={smsTo("Hi Adam, I saw your client results and I'd like to see a working preview for my business.")} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
+            <a href={smsTo("Hi Adam, I saw your client results and I'd like to talk about growing my business online.")} data-magnetic className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-citrus px-6 py-4 font-medium text-ink transition hover:bg-cream md:self-auto">
               Text me to get started <span aria-hidden>→</span>
             </a>
           </div>

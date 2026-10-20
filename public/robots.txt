@@ -27,3 +27,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://cloviswebdesign.com/sitemap.xml
+Agentmap: https://cloviswebdesign.com/.well-known/ai-catalog.json

@@ -1,0 +1,41 @@
+# Clovis Web Design — Full Technical & Service Reference
+
+> Custom web design, Google Maps SEO, AI search optimization (GEO), and GA4 AI lead attribution for growth-minded businesses. Built and operated by Adam in Clovis, California.
+
+## 1. Studio Identity & Contact
+- Studio Name: Clovis Web Design
+- Founder & Lead Developer: Adam
+- Headquarters: Clovis, CA 93612 (36.8252° N, 119.7029° W)
+- Service Area: Clovis, Fresno, Madera, California's Central Valley, and businesses nationwide across the United States
+- Phone / Direct SMS: (559) 628-0142 (+15596280142)
+- Email: adam@cloviswebdesign.com
+- Hours: Monday – Saturday, 7:00 AM – 7:00 PM PT
+- Website: https://cloviswebdesign.com/
+- Google Maps CID: https://maps.google.com/?cid=5133720235419656762
+
+## 2. How Modern Search & AI Discovery Works (The Four Directories)
+Each major search and AI answer engine verifies businesses against a different primary directory before recommending them:
+- Google Search, AI Overviews & Google Gemini: Grounded in Google Business Profile and Google Maps, cross-checked against website NAP consistency, service pages, and review responses.
+- ChatGPT & Perplexity: Grounded in Bing Web Search, Bing Places, Yelp, and Foursquare, requiring sub-second static HTML (<0.4s so live RAG crawlers do not time out), semantic tables, and specific service/pricing facts.
+- Claude (Anthropic): Grounded in Brave Search and independent web citations, favoring direct question-and-answer blocks and verified customer quotes.
+- Apple Maps & Siri: Grounded in Apple Business Connect and Yelp, verifying operating hours, address/service area, and tap-to-call routing.
+
+## 3. Four Core Services (Unbundled or Combined)
+1. Custom Web Design & Engineering
+   - Stack: Astro static output, React islands, Tailwind CSS, self-hosted WOFF2 typography, inlined critical CSS.
+   - Performance: Under 0.4s mobile load, 100/100 Google PageSpeed, WCAG 2.1 AA accessibility, zero plugins, 100% client code and domain ownership.
+2. Search Engine & Google Maps SEO
+   - Deliverables: Google Business Profile optimization, dedicated high-intent service and market pages, semantic internal linking, and review velocity workflows.
+3. AI Search & Answer Optimization (GEO)
+   - Deliverables: Four-directory profile alignment (Google, Bing, Apple Maps, Yelp), connected JSON-LD @graph (LocalBusiness + Service + FAQPage), fact-dense answer architecture (40–60 word direct answers + HTML tables), /llms.txt, and /.well-known/ai-catalog.json.
+4. AI & Search Lead Attribution
+   - Deliverables: Custom GA4 channel group isolating referrals from ChatGPT, Gemini, Claude, Perplexity, Copilot, DeepSeek, Grok, and Meta AI, paired with phone call, SMS, and form conversion tracking.
+
+## 4. Engagement Models
+- Custom Website Build: One-time custom website project with working phone preview before payment, done-for-you copywriting from a 15-minute interview, 90 days of free post-launch fixes, and 100% ownership.
+- Search & AI Visibility Setup: Standalone one-time overhaul for an existing site or paired with a new build. Includes four-directory sync, JSON-LD @graph, AI answer blocks, /llms.txt, and GA4 AI lead tracking.
+- Ongoing Search & AI Growth: Month-to-month retainer scoped to market competition and ROI. Includes monthly service/market page expansion, citation and review velocity, monthly Google Maps and AI visibility audits, and same-day text-me updates.
+
+## 5. Verified Case Studies
+- Big Bros Dumpster Rentals (https://cloviswebdesign.com/case-studies/dumpster-rental-fresno/): Ranked #1 on Google for "dumpster rental Fresno" and added 4 roll-off trucks to keep up with demand.
+- Kidney Specialist Inc. (https://cloviswebdesign.com/case-studies/kidney-specialist-fresno/): Zero patient health information collected online, 100/100 Google PageSpeed, and +40% provider referrals by Dr. Sheikh Mohammad Masood's count.

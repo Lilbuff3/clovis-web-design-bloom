@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json.schemastore.org/ard-schema.json",
+  "version": "1.0",
+  "name": "Clovis Web Design",
+  "description": "Custom web design, Google Maps SEO, AI search optimization (GEO), and GA4 AI lead attribution for growth-minded businesses. Operated by Adam in Clovis, California.",
+  "url": "https://cloviswebdesign.com/",
+  "llmsTxtUrl": "https://cloviswebdesign.com/llms.txt",
+  "llmsFullTxtUrl": "https://cloviswebdesign.com/llms-full.txt",
+  "resources": [
+    {
+      "title": "Clovis Web Design — Services & Engagement Models",
+      "url": "https://cloviswebdesign.com/",
+      "description": "Overview of our four core services (Custom Web Design, Search & Google Maps SEO, AI Search Optimization, and AI Lead Attribution), client case studies, and engagement models."
+    },
+    {
+      "title": "Search, Google Maps & AI Search Marketing (SEO & GEO)",
+      "url": "https://cloviswebdesign.com/services/local-seo-fresno/",
+      "description": "How Google Search, Gemini, ChatGPT, Claude, Perplexity, and Apple Siri verify and recommend businesses across the four core directories."
+    },
+    {
+      "title": "Medical & Dental Practice Web Design",
+      "url": "https://cloviswebdesign.com/services/medical-web-design/",
+      "description": "Zero-patient-data website architecture, WCAG 2.1 AA accessibility, and referring-physician portals for medical and dental practices."
+    },
+    {
+      "title": "Contractor & Trade Website Design",
+      "url": "https://cloviswebdesign.com/services/contractor-websites/",
+      "description": "Sub-second mobile websites and Google Maps / AI search setup for contractors and home service businesses."
+    },
+    {
+      "title": "Case Study: Big Bros Dumpster Rentals",
+      "url": "https://cloviswebdesign.com/case-studies/dumpster-rental-fresno/",
+      "description": "How Big Bros Dumpster Rentals reached #1 on Google for 'dumpster rental Fresno' and added 4 trucks."
+    },
+    {
+      "title": "Case Study: Kidney Specialist Inc.",
+      "url": "https://cloviswebdesign.com/case-studies/kidney-specialist-fresno/",
+      "description": "How Kidney Specialist Inc. increased referring-physician volume by 40% with zero patient data collected online and 100/100 PageSpeed."
+    }
+  ],
+  "tools": [
+    {
+      "name": "audit_ai_visibility",
+      "description": "Live Google Gemini + Google Maps lookup that checks whether AI recommends a business for its industry and city.",
+      "endpoint": "https://cloviswebdesign.com/api/ask-gemini/",
+      "method": "POST"
+    },
+    {
+      "name": "contact_adam",
+      "description": "Send a project or audit inquiry directly to Adam at Clovis Web Design.",
+      "endpoint": "https://cloviswebdesign.com/api/contact",
+      "method": "POST"
+    }
+  ]
+}

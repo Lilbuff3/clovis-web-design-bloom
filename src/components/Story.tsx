@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { care, faqs, plans, smsTo } from "../lib/data";
+import { faqs, plans, smsTo } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
@@ -52,20 +52,20 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam</strong>. I live in Clovis and build every site myself — start to finish. When you call or text, you talk straight to the person who designed your pages and wrote the code. Need a price, hour, or photo changed later? Just text me.
+              I'm <strong className="font-semibold">Adam</strong>. Based in Clovis, California, I work with businesses across California and the US — and I do the work myself from start to finish. When you call or text, you talk straight to the person who designed your pages, wrote the code, and configured your search and AI visibility.
             </p>
             <p>
-              I also write every word from our 15-minute call, connect your site to Google Search and Maps so nearby customers find you, and make sure pages open in under a second on phones.
+              I write every word from our 15-minute call, align your business across Google Search, Google Maps, Bing, Apple Maps, and Yelp so both search engines and AI assistants recommend you, and wire your analytics so you see every call, text, and lead.
             </p>
-            <p className="text-[16px] text-ink/70">
+            <p className="text-[16px] text-ink/75">
               <strong className="font-semibold text-ink">Agencies and designers:</strong> I also build from your Figma files in Astro, React and TypeScript, under your name. Text me the project and the deadline.
             </p>
           </div>
           <blockquote className="reveal font-display wonk relative mt-10 max-w-2xl border-l-2 border-citrus/60 pl-6 text-[clamp(1.7rem,3vw,2.5rem)] italic leading-[1.15]">
-            “You don't rent your website from an agency. You own the code, the domain and the hosting account.”
+            “You don't rent your website from an agency. You own the code, the domain, and your marketing accounts.”
           </blockquote>
           <div className="mt-12">
-            <a href={smsTo("Hi Adam, I read about how you work and I'd like to talk to you directly about a website project.")} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
+            <a href={smsTo("Hi Adam, I read about how you work and I'd like to talk to you directly about my business.")} data-magnetic className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-cream transition-colors hover:bg-persimmon-deep">
               Text me directly →
             </a>
           </div>
@@ -83,16 +83,15 @@ export function Stand() {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <h2 className="font-display h-section mx-auto max-w-4xl">
-            {/* Not "every price": Flagship is priced per project. */}
-            <span className="line-mask"><span>What it costs,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>and what you get.</span></span>
+            <span className="line-mask"><span>How we can work</span></span>{" "}
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>together.</span></span>
           </h2>
           <p className="reveal mx-auto mt-6 max-w-2xl text-lg text-ink/80">
-            No sales call to find out what a site costs, and no deposit to see how yours will look. I build a working preview after our first call — if you don't like it, you don't pay. Every site is 100% yours to keep.
+            Every engagement is scoped to your goals, your market competition, and the return it can generate for your business. Hire me for a custom website build, a standalone Search &amp; AI overhaul, or an ongoing monthly growth partnership.
           </p>
         </div>
 
-        {/* Pricing Cards */}
+        {/* Scoped Engagement Cards */}
         <div className="mt-16">
           <div className="grid gap-8 md:grid-cols-3 lg:gap-8">
             {plans.map((pl) => (
@@ -100,19 +99,12 @@ export function Stand() {
                 <div
                   className={`relative flex flex-1 flex-col ${pl.color} rounded-[28px] border border-ink/10 p-7 shadow-[0_20px_50px_-25px_rgba(30,43,35,.2)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)]`}
                 >
-                  <div className="font-display wonk text-4xl italic text-ink">{pl.name}</div>
-                  <div className="mt-1 text-[15px] text-ink/80">{pl.kind}</div>
-                  <div className="mt-6 font-display text-5xl font-[400] leading-none text-ink lg:text-6xl" aria-label={pl.price}>
-                    {pl.price.startsWith("From ") ? (
-                      <span title={pl.price}>
-                        <span className="text-3xl font-normal text-ink-soft lg:text-4xl">From </span>
-                        {pl.price.replace("From ", "")}
-                      </span>
-                    ) : (
-                      pl.price
-                    )}
+                  <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.kind}</div>
+                  <div className="mt-2 font-display wonk text-3xl italic leading-tight text-ink lg:text-4xl">{pl.name}</div>
+                  <div className="mt-5 font-display text-2xl font-[420] leading-tight text-ink lg:text-3xl">
+                    {pl.price}
                   </div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{pl.time} · {pl.terms ?? "one-off · $0 until you like the preview"}</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[.14em] text-ink/80">{pl.time} · {pl.terms}</div>
                   <div className="dotted-rule mt-6 text-ink/30" />
                   <ul className="mt-5 space-y-2.5 text-[15px]">
                     {pl.items.map((it) => (
@@ -121,14 +113,8 @@ export function Stand() {
                         {it}
                       </li>
                     ))}
-                    {pl.not.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-ink/80">
-                        <span className="mt-[3px]">–</span>
-                        {it}
-                      </li>
-                    ))}
                   </ul>
-                  {/* mt-auto: "Best for" and the button sit at the card's foot, level across all three plans. */}
+                  {/* mt-auto: "Best for" and the button sit at the card's foot, level across all three models. */}
                   <p className="mt-auto pt-6 text-[13.5px] leading-snug text-ink/75">
                     <span className="font-semibold text-ink">Best for: </span>
                     {pl.for}
@@ -151,46 +137,22 @@ export function Stand() {
         {/* Risk-Reversal & ROI Guarantee */}
         <div className="reveal mt-16 grid gap-8 border-y border-ink/15 py-10 md:grid-cols-2 md:gap-12">
           <div>
-            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">See the preview before you pay.</h3>
+            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">See the website preview before you pay.</h3>
             <p className="mt-3 text-[16px] leading-relaxed text-ink/80">
-              After our 15-minute call, I write the words and build a working preview you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
+              For website builds, we talk for 15 minutes and I build a working preview with your real copy that you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
             </p>
           </div>
           <div>
-            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">It has to pay for itself.</h3>
+            <h3 className="font-display text-2xl font-[420] text-ink md:text-3xl">Scoped to pay for itself.</h3>
             <p className="mt-3 text-[16px] leading-relaxed text-ink/80">
-              For most businesses, a handful of new jobs or referrals covers the entire build — and with no required monthly fee, you never pay rent on your website again. If I don't see a clear way for a new site to earn back its cost for your business, I'll tell you upfront on our first call.
+              Your scope is tied directly to what a new customer is worth to you and what it takes to win in your market. If I don't see a clear way for a new site or search campaign to earn back its cost, I'll tell you upfront on our first call.
             </p>
           </div>
         </div>
 
-        {/* Care */}
-        <div className="reveal mt-20">
-          <div className="grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <h3 className="font-display text-4xl font-[420] leading-tight text-balance">Ongoing care is optional. I mean it.</h3>
-              <p className="mt-4 text-[15.5px] leading-relaxed text-ink/75">
-                Your site runs fine without me. Plain files — no plugins to update, nothing that breaks at 2 a.m. These are for people who'd rather send one text than
-                think about their website.
-              </p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
-              {care.map((c, i) => (
-                <div key={c.name} className={`rounded-3xl border border-ink/10 p-6 ${i === 1 ? "bg-citrus shadow-md" : "bg-cream"}`}>
-                  <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink/80">{c.name}</div>
-                  <div className="font-display mt-3 text-5xl">
-                    {c.price}
-                    <span className="text-xl text-ink/80">/mo</span>
-                  </div>
-                  <p className="mt-3 text-[14.5px] leading-snug text-ink/75">{c.blurb}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <p className="mt-8 border-t border-dashed border-ink/20 pt-6 text-center text-[15px] text-ink/75">
-            Cancel with one text. No contract, no exit fee.
-          </p>
-        </div>
+        <p className="mt-8 text-center text-[15px] text-ink/75">
+          100% client ownership from day one. Ongoing monthly marketing is strictly month-to-month — pause or cancel anytime with one text.
+        </p>
       </div>
     </section>
   );
@@ -259,4 +221,3 @@ export function FAQ() {
 
 export const About = Grower;
 export const Pricing = Stand;
-

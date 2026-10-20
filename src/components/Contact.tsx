@@ -3,13 +3,16 @@ import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL, smsTo } from "../lib/data";
 import { SunMark } from "./Chrome";
 import { useGlobalReveal } from "../lib/hooks";
 
-const needs = ["A one-page site ($1,500)", "A few pages + Spanish", "Something bigger", "Not sure yet"];
+const needs = ["Custom Website", "Search & AI Marketing", "Website + Marketing", "Free Visibility Audit"];
 const whens = ["ASAP", "This month", "Just looking"];
 
 const planToNeed: Record<string, string> = {
+  "custom website build": needs[0],
   starter: needs[0],
-  growth: needs[1],
+  growth: needs[0],
   flagship: needs[2],
+  "search & ai visibility setup": needs[1],
+  "ongoing search & ai growth": needs[2],
 };
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -72,14 +75,14 @@ export function Contact() {
   const message = useMemo(() => {
     const who = name.trim() ? `Hi, Adam! It's ${name.trim()}` : "Hi, Adam!";
     const what = trade.trim() ? ` — I run ${trade.trim()}` : "";
-    const n = need === "Not sure yet" ? "I'm not sure what I need yet" : `I'm interested in ${need.replace(/ \(.*\)/, "").replace(/^A /, "a ")}`;
-    const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "just looking for now";
+    const n = `I'm interested in ${need}`;
+    const w = when === "ASAP" ? "hoping to get going ASAP" : when === "This month" ? "looking to start this month" : "exploring options right now";
     const how = reach.trim() ? ` Reach me at ${reach.trim()}.` : "";
     return `${who}${what ? what + "." : ""} ${n}, ${w}.${how} Can we talk?`;
   }, [name, trade, need, when, reach]);
 
   const smsHref = smsTo(message);
-  const emailHref = mailTo(`Website: ${trade.trim() || name.trim() || "new project"}`, message);
+  const emailHref = mailTo(`Project inquiry: ${trade.trim() || name.trim() || need}`, message);
 
   function triggerFallback() {
     setStatus("fallback");
@@ -137,7 +140,14 @@ export function Contact() {
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-persimmon/[0.04] to-paper" 
         aria-hidden="true"
       />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
+      <form
+        onSubmit={handleSubmit}
+        {...({
+          toolname: "contact_adam",
+          tooldescription: "Send a project inquiry to Adam at Clovis Web Design for custom web design, Google Maps SEO, or AI search optimization.",
+        } as Record<string, string>)}
+        className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12"
+      >
         <div className="lg:col-span-7">
           <h2 className="font-display text-[clamp(3rem,8vw,7.5rem)] font-[420] leading-[0.9]">
             <span className="line-mask"><span>Start with</span></span>{" "}
@@ -148,7 +158,7 @@ export function Contact() {
             </span>
           </h2>
           <p className="reveal mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-            No 20-page questionnaires, no sales pressure, and no deposit to see a preview. Tap a few options below and I'll draft the first message for you.
+            No 20-page questionnaires, no sales pressure, and no deposit to see a website preview. Pick what you need below and I'll draft the first message for you.
           </p>
 
           <div className="reveal mt-10 space-y-7">
@@ -173,7 +183,7 @@ export function Contact() {
                   name="trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="an auto shop, bakery, or roofing company"
+                  placeholder="a law firm, medspa, shop, or clinic"
                   className="mt-2 w-full border-b-2 border-ink/25 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon"
                 />
               </label>
@@ -205,6 +215,7 @@ export function Contact() {
             </div>
             <div>
               <div id="contact-needs-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you need</div>
+              <input type="hidden" name="need" value={need} />
               <div role="group" aria-labelledby="contact-needs-label" className="mt-3 flex flex-wrap gap-2">
                 {needs.map((n) => (
                   <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
@@ -215,6 +226,7 @@ export function Contact() {
             </div>
             <div>
               <div id="contact-whens-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">When</div>
+              <input type="hidden" name="when" value={when} />
               <div role="group" aria-labelledby="contact-whens-label" className="mt-3 flex flex-wrap gap-2">
                 {whens.map((w) => (
                   <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
@@ -253,8 +265,7 @@ export function Contact() {
                     </a>
                   ) : (
                     <button
-                      type="button"
-                      onClick={() => handleSubmit()}
+                      type="submit"
                       disabled={status === "submitting"}
                       className="flex h-10 w-10 items-center justify-center rounded-full bg-persimmon-deep text-cream transition hover:scale-110 disabled:opacity-70"
                       aria-label="Send message"
@@ -293,8 +304,7 @@ export function Contact() {
               </a>
             ) : (
               <button
-                type="button"
-                onClick={() => handleSubmit()}
+                type="submit"
                 disabled={status === "submitting"}
                 data-magnetic="0.2"
                 className="flex w-full max-w-[360px] items-center justify-center gap-2 rounded-full bg-ink py-4 text-lg text-cream transition-colors hover:bg-persimmon-deep disabled:opacity-70"
@@ -327,7 +337,7 @@ export function Contact() {
             </p>
           </div>
         </div>
-      </div>
+      </form>
     </section>
   );
 }
@@ -340,29 +350,29 @@ export function Footer() {
       <div data-footer-inner className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
-            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Websites that bring in customers for Central Valley businesses.</p>
+            <p className="font-display wonk max-w-md text-3xl italic leading-tight">Custom websites, search &amp; AI marketing that bring in customers.</p>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
-            <a href="/#who" className="block hover:underline">All Local Businesses</a>
-            <a href="/services/local-seo-fresno/" className="block hover:underline">Fresno Local SEO</a>
-            <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
+            <a href="/#who" className="block hover:underline">All 4 Services</a>
+            <a href="/services/local-seo-fresno/" className="block hover:underline">Search, Maps &amp; AI</a>
             <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
+            <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
-            <div className={footerTitle}>Visit</div>
-            <a href="/#work" className="block hover:underline">Client Work</a>
+            <div className={footerTitle}>Explore</div>
             <a href="/#check" className="block hover:underline">Can AI Find You?</a>
+            <a href="/#work" className="block hover:underline">Client Results</a>
             <a href="/#process" className="block hover:underline">Process</a>
-            <a href="/#pricing" className="block hover:underline">Pricing</a>
+            <a href="/#pricing" className="block hover:underline">How We Work</a>
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Reach</div>
             <a href={smsTo("Hi Adam, I'm visiting your website and have a question.")} className="block hover:underline">Text {PHONE_DISPLAY}</a>
             <a href={`tel:${PHONE_TEL}`} className="block hover:underline">Call {PHONE_DISPLAY}</a>
-            <a href={mailTo("Website question")} className="block normal-case tracking-normal [overflow-wrap:anywhere] hover:underline">{EMAIL}</a>
+            <a href={mailTo("Website & marketing question")} className="block normal-case tracking-normal [overflow-wrap:anywhere] hover:underline">{EMAIL}</a>
             <span className="block">Clovis, California</span>
-            <span className="block">Fresno &amp; the Central Valley</span>
+            <span className="block">Serving CA &amp; the US</span>
           </div>
         </div>
         <div className="font-display wonk mt-16 select-none text-center text-[clamp(3.5rem,15.5vw,15rem)] font-[450] italic leading-[0.8] tracking-[-0.04em]">
@@ -370,7 +380,7 @@ export function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-ink/20 pt-6 font-mono text-[11px] uppercase tracking-[.14em] md:flex-row">
           <span>© {new Date().getFullYear()} Clovis Web Design</span>
-          <span>Built in Clovis, CA · Serving Fresno &amp; the Central Valley</span>
+          <span>Built in Clovis, CA · Serving Fresno, the Central Valley &amp; the US</span>
           <a href="#top" className="hover:underline">Back to top ↑</a>
         </div>
       </div>

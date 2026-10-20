@@ -2,11 +2,54 @@ export const PHONE_DISPLAY = "(559) 628-0142";
 export const PHONE_TEL = "+15596280142";
 // A text with the first message already written. "?&body=" works on both iOS and Android.
 export const smsTo = (body: string) => `sms:${PHONE_TEL}?&body=${encodeURIComponent(body)}`;
-export const SMS_LINK = smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?");
+export const SMS_LINK = smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?");
 export const EMAIL = "adam@cloviswebdesign.com";
 // The desktop stand-in for smsTo: most computers can't open an sms: link.
 export const mailTo = (subject: string, body = "") =>
   `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}${body && `&body=${encodeURIComponent(body)}`}`;
+
+export const services = [
+  {
+    code: "01",
+    title: "Custom Web Design & Engineering",
+    who: "Any business · Multi-page · Bilingual /es/ · Booking & intake",
+    what: "Hand-coded websites that open in under 0.4 seconds on mobile, score 100/100 on Google PageSpeed, and put tap-to-call, text, and booking right where thumbs land.",
+    whyItMatters: "Over half of mobile visitors leave a page that takes 3–4 seconds to open, and AI search crawlers time out on slow WordPress templates before reading a single word.",
+    href: "/#pricing",
+    cta: "See website builds",
+    tint: "bg-citrus",
+  },
+  {
+    code: "02",
+    title: "Search Engine & Google Maps SEO",
+    who: "Google Maps 3-Pack · High-intent service & market pages · Authority",
+    what: "Google Business Profile optimization, dedicated service and market pages, and review systems that put your business at the top of Google Search and the Maps 3-Pack.",
+    whyItMatters: "When a customer searches for what you do, Google shows three map results before anything else — capturing ready-to-buy leads without paying per click.",
+    href: "/services/local-seo-fresno/",
+    cta: "See Search & Maps SEO",
+    tint: "bg-sage",
+  },
+  {
+    code: "03",
+    title: "AI Search & Answer Optimization",
+    who: "ChatGPT · Google Gemini · Claude · Perplexity · Apple Siri",
+    what: "Four-directory profile alignment across Google, Bing, Apple Maps, and Yelp, connected business schema, and fact-dense answer sections built for AI citation.",
+    whyItMatters: "Millions of buyers now ask AI who to hire. Unlike Google's ten blue links, AI assistants name only 1 to 3 businesses — and each AI checks a different directory.",
+    href: "/services/local-seo-fresno/#ai-search",
+    cta: "How AI picks businesses",
+    tint: "bg-sky",
+  },
+  {
+    code: "04",
+    title: "AI & Search Lead Attribution",
+    who: "Custom GA4 AI channel · Call, text & form tracking · Live audits",
+    what: "Privacy-safe analytics that separate AI search referrals (ChatGPT, Gemini, Claude, Perplexity) from regular traffic and track every phone call, text, and form lead.",
+    whyItMatters: "Default analytics buries AI referrals inside generic traffic. Clear attribution proves exactly which pages, searches, and AI answers generate your revenue.",
+    href: "/#check",
+    cta: "Run a live AI check",
+    tint: "bg-blush",
+  },
+];
 
 export const cases = [
   {
@@ -73,191 +116,174 @@ export const cases = [
 // Condensed from the longer step copy; same facts, one sentence or two each.
 export const steps = [
   {
-    name: "Discovery",
+    name: "Discovery & Audit",
     when: "Day 1",
-    body: "A quick 15-minute call about what you do, who calls you, and what a new customer is worth to you. If a new site won't clearly pay for itself, I'll tell you right there.",
+    body: "A 15-minute call about your business, your market, and what a new customer is worth to you — plus a live check of how you show up on Google Maps, ChatGPT, Gemini, and Claude. If I don't see a clear return on investment, I'll tell you right there.",
   },
   {
-    name: "Words & layout",
-    when: "Days 2–3",
-    body: "I write every word from that call and send you a working preview to try on your phone. If you don't like it, you don't pay.",
+    name: "Words & Preview",
+    when: "Days 2–4",
+    body: "I write every word from our call and build a working preview you can try on your phone. For website builds, you see and approve the preview before you pay a dollar.",
   },
   {
-    name: "Build",
-    when: "Days 3–5",
-    body: "No page builders or plugins. Your call and text buttons go right where thumbs land, and pages open in under a second.",
+    name: "Engineering & Sync",
+    when: "Weeks 1–3",
+    body: "Hand-coded pages that open in under 0.4 seconds on mobile, paired with connected business schema and aligned profiles across Google, Bing, Apple Maps, and Yelp.",
   },
   {
-    name: "Launch",
-    when: "Day 6+",
-    body: "Your site goes live and gets connected to Google Search and Maps. Fixes in the first 90 days are free.",
+    name: "Launch & Attribution",
+    when: "Launch + 90 Days",
+    body: "Your site and search setup go live with phone call, text, form, and AI referral tracking in Google Analytics 4. Fixes in the first 90 days are included.",
   },
 ];
 
 export const compare = [
   {
-    q: "Who actually builds it?",
-    them: ["An account manager", "You meet the senior people once, at the pitch. Then your site goes to whoever's free that week."],
-    me: ["Me. Start to finish.", "I design it, build it and put it live. When you call, the person who wrote the code picks up."],
+    q: "Who actually does the work?",
+    them: ["An account manager", "You meet the senior strategist on the sales call. Then your website and SEO get handed off to a junior coordinator or template shop."],
+    me: ["Me. Start to finish.", "I design the pages, write the code, configure the search schema, and wire the analytics myself. When you call or text, the person doing the work picks up."],
   },
   {
-    q: "Who owns it?",
-    them: ["They do", "It lives on their system. Stop paying and it goes dark — design and content included."],
-    me: ["You do", "Code and domain are in your name from day one. Move it anywhere, no permission needed."],
+    q: "Who owns the website and accounts?",
+    them: ["They do", "Your site lives on their proprietary system. Stop paying their monthly fee and your website, content, and search rankings disappear."],
+    me: ["You do", "Your code, domain, hosting, and analytics accounts are in your name from day one. You never pay rent just to keep your website online."],
   },
   {
-    q: "How does it behave on a phone?",
-    them: ["People leave first", "A heavy template with dozens of plugins. Out in the field, it loads long enough for people to give up."],
-    me: ["It opens fast", "No extra code slowing it down, so it opens before anyone gives up."],
+    q: "How does it perform for Google and AI?",
+    them: ["Slow plugins & guesswork", "A heavy template with dozens of plugins that takes 4–5 seconds to load on mobile, times out when AI bots crawl it, and ignores Bing, Apple Maps, and Yelp."],
+    me: ["Engineered for search & AI", "Pages open in under 0.4 seconds, score 100/100 on Google PageSpeed, and sync your business facts across the exact directories Google, ChatGPT, Gemini, Claude, and Siri check."],
   },
   {
-    q: "Who writes the words?",
-    them: ["You do, somehow", "A blank questionnaire and a deadline — or machine-written copy that sounds like everyone else."],
-    me: ["I do", "We talk for 15 minutes, I record it, and write the site from what you said about your own trade."],
+    q: "Who writes the copy?",
+    them: ["You do, somehow", "A blank questionnaire and a deadline — or generic machine-written filler that sounds like every other company in your industry."],
+    me: ["I do", "We talk for 15 minutes. I write clear, specific copy that answers real buyer questions and gives search engines and AI assistants the exact facts they cite."],
   },
   {
-    q: "When you need a change?",
-    them: ["A ticket and a wait", "Submit a request, wait for a change order, get invoiced for a paragraph."],
-    me: ["A text message", "Small things I just do. Big things, I tell you before I start — not after."],
+    q: "How do you know if it's working?",
+    them: ["A vague PDF report", "Monthly charts full of impressions that never tell you which searches or AI recommendations actually turned into paying customers."],
+    me: ["Real lead attribution", "Every phone call, text message, form submission, and referral from ChatGPT, Gemini, Claude, or Google Maps is tracked cleanly so you see your actual return."],
   },
 ];
 
 export const plans = [
   {
     code: "01",
-    name: "Starter",
-    kind: "Landing page",
-    time: "1 week",
-    price: "$1,500",
+    name: "Custom Website Build",
+    kind: "Design & Engineering",
+    time: "1–4 weeks",
+    price: "Custom Scoped",
+    terms: "one-time build · $0 until you approve the preview",
+    cta: "Scope a website build",
     color: "bg-citrus",
     hole: "bg-paper",
     items: [
-      "One-page custom design, live in about a week",
+      "Custom hand-coded site (<0.4s mobile load, 100/100 PageSpeed)",
       "Working phone preview before you pay",
       "Done-for-you words from a 15-minute call",
-      "Tap-to-call, direct text & Google Search tracking",
+      "Tap-to-call, text, form & Google Search tracking",
+      "Optional full Spanish version (/es/) or compliant intake routing",
       "90 days of free fixes after launch",
       "You own the code, domain, and keys on day one",
     ],
     not: [],
-    for: "Local shops, restaurants, trades, and new businesses that want more calls now.",
+    for: "Any business needing a fast, high-converting website they own outright — with zero monthly hostage fees.",
   },
   {
     code: "02",
-    name: "Growth",
-    kind: "Multi-page site",
-    time: "3–4 weeks",
-    price: "$2,500",
+    name: "Search & AI Visibility Setup",
+    kind: "SEO & AI Optimization",
+    time: "2–3 weeks",
+    price: "Standalone or Add-On",
+    terms: "one-time overhaul · works with your existing site or a new build",
+    cta: "Request a visibility audit",
     color: "bg-sage",
     hole: "bg-paper",
     items: [
-      "3–5 pages with dedicated service & town areas",
-      "Working phone preview before you pay",
-      "Done-for-you words from a 15-minute call",
-      "Call, text & Google Search tracking",
-      "Full Spanish version at /es/",
-      "90 days of free fixes after launch",
-      "You own the code, domain, and keys on day one",
+      "Four-directory sync across Google Maps, Bing, Apple Maps & Yelp",
+      "Connected business, service & FAQ structured data",
+      "Fact-dense answer sections written for ChatGPT, Gemini & Claude",
+      "Machine-readable /llms.txt & AI agent discovery files",
+      "Custom GA4 dashboard tracking AI referrals, calls & texts",
+      "Before-and-after live AI & Google Maps citation audit",
     ],
     not: [],
-    for: "Growing businesses with multiple services, locations, or Spanish-speaking customers.",
+    for: "Businesses with an existing website (or pairing with a new build) that want to rank on Google Maps and get recommended by AI.",
   },
   {
     code: "03",
-    name: "Flagship",
-    kind: "Custom system",
-    time: "4–6 weeks",
-    price: "From $3,500",
-    terms: "scoped to your needs · $0 preview",
-    cta: "Ask about Flagship",
+    name: "Ongoing Search & AI Growth",
+    kind: "Monthly Marketing Partnership",
+    time: "Monthly · No lock-in",
+    price: "Monthly Retainer",
+    terms: "scoped to your market & ROI · cancel with one text",
+    cta: "Discuss growth retainer",
     color: "bg-sky",
     hole: "bg-paper",
     items: [
-      "Custom multi-page or multi-location design",
-      "Working phone preview before you pay",
-      "Done-for-you words from a 15-minute call",
-      "Call, form & Google Search tracking",
-      "Custom booking, intake, or HIPAA/privacy compliance",
-      "90 days of free fixes after launch",
-      "You own the code, domain, and keys on day one",
+      "New high-intent service, product, and market pages each month",
+      "Ongoing Google Maps, ChatGPT, Gemini & Claude citation growth",
+      "Review generation & reputation velocity systems",
+      "Monthly lead attribution & ROI report (calls, texts, AI referrals)",
+      "Same-day text-me updates for hours, promos, photos, or copy",
+      "Priority engineering support & continuous conversion tuning",
     ],
     not: [],
-    for: "Medical practices, multi-location companies, or any business needing custom booking or compliance.",
+    for: "Growth-focused companies in competitive markets that want compounding search traffic, AI recommendations, and measurable monthly ROI.",
   },
 ];
-
-export const care = [
-  {
-    name: "Care Plan",
-    price: "$99",
-    blurb: "Same-day text-me updates (new photos, hours, prices, seasonal promos), fast hosting, and a monthly call & search check-in.",
-  },
-  {
-    name: "Care Plus",
-    price: "$249",
-    blurb: "Everything in Care, plus new town and service pages and monthly Google Maps & AI visibility tuning.",
-  },
-];
-
 
 export const faqs = [
   {
-    q: "How does payment work? What if I don't like the design?",
-    a: "You don't pay a deposit just to see what I'd build. First we talk for 15 minutes, and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing. And if it looks to me like a new site won't clearly earn back what it costs for your business, I'll tell you that on our first call.",
+    q: "Can I hire you just for SEO and AI search visibility if I already have a website?",
+    a: "Yes. All four services are available individually or together. If your current website converts well and loads fast, we can start with a standalone Search & AI Visibility Setup — aligning your Google Business Profile, Bing Places, Apple Business Connect, and Yelp listings, adding connected business schema, and setting up AI referral tracking.",
   },
   {
-    q: "Who owns the website and the domain once it's live?",
-    a: "You do, completely, from day one. The code, the domain and the hosting account are all in your name. Plenty of companies keep your site on their system and charge monthly to keep it switched on — cancel and you lose everything. Not here. If you ever want someone else to take over, hand it to them.",
+    q: "How does pricing work, and why don't you list fixed package prices?",
+    a: "Every project is scoped to what your business actually needs and the return it can generate. A focused website build requires very different work than a multi-market search and AI campaign. On our first 15-minute call, I look at your goals and market competition, tell you plainly what will move the needle, and give you a straight upfront quote.",
   },
   {
-    q: "Can we keep our existing booking or ordering system?",
-    a: "Usually, yes. If it gives you a link or an embed — most do — I can put it on the page without slowing things down. Tell me what you run and I'll confirm before you pay anything.",
+    q: "What if I don't like the website design?",
+    a: "You don't pay a deposit just to see what I'd build. For website projects, we talk for 15 minutes and I put together a working preview with your real words so you can try it on your phone. If you don't like how it looks and reads, we stop there and you owe nothing.",
+  },
+  {
+    q: "Who owns the website, domain, and marketing accounts?",
+    a: "You do, completely, from day one. The code, the domain, your Google Business Profile, and your analytics accounts are all in your name. Plenty of agencies keep your site on their system and charge monthly just to keep it switched on — cancel and you lose everything. Not here. Any ongoing monthly work is strictly month-to-month.",
   },
 ];
 
 // --- Schema.org Structured Metadata ---
 // Only things shown on the page. Google expects structured data to match what visitors see.
 export const knowsAbout = [
-  "Web design",
-  "Local SEO",
-  "Website speed",
+  "Custom web design and development",
+  "Search engine optimization (SEO)",
+  "Google Maps and Local SEO",
+  "Generative Engine Optimization (GEO) and AI search visibility",
+  "AI search analytics and lead attribution",
+  "Website speed and Core Web Vitals optimization",
   "Web accessibility (WCAG 2.1 AA)",
-  "Websites for medical practices",
-  "HIPAA-aware web design",
+  "Websites for medical practices and HIPAA-aware web design",
   "Bilingual English and Spanish websites",
 ];
 
-// Mirrors the price tags in `plans`.
+// Mirrors the engagement models in `plans`.
 export const hasOfferCatalog = {
   "@type": "OfferCatalog",
-  "name": "Websites",
+  "name": "Web Design, Search & AI Marketing Services",
   "itemListElement": [
     {
       "@type": "Offer",
-      "name": "Starter",
-      "price": "1500",
-      "priceCurrency": "USD",
-      "description": "A custom one-page website, live in about a week. Includes working phone preview before payment, done-for-you words, call & search tracking, 90 days of free fixes, and full ownership.",
+      "name": "Custom Website Build",
+      "description": "Custom hand-coded website opening in under 0.4s on mobile with 100/100 Google PageSpeed, working phone preview before payment, done-for-you copywriting, call & search tracking, 90 days of free fixes, and 100% client ownership.",
     },
     {
       "@type": "Offer",
-      "name": "Growth",
-      "price": "2500",
-      "priceCurrency": "USD",
-      "description": "3–5 pages with dedicated town and service pages and full Spanish version. Includes working phone preview, done-for-you words, call & search tracking, 90 days of free fixes, and full ownership.",
+      "name": "Search & AI Visibility Setup",
+      "description": "Standalone or add-on Search and AI Optimization (SEO & GEO): four-directory sync across Google Business Profile, Bing Places, Apple Business Connect, and Yelp, connected JSON-LD schema, fact-dense answer architecture, and GA4 AI referral tracking.",
     },
     {
       "@type": "Offer",
-      "name": "Flagship",
-      "price": "3500",
-      "priceCurrency": "USD",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "price": "3500",
-        "priceCurrency": "USD",
-        "minPrice": "3500",
-      },
-      "description": "Custom multi-page or multi-location design with booking or intake, built to accessibility and privacy rules, with working phone preview, call & search tracking, and 90 days of free fixes.",
+      "name": "Ongoing Search & AI Growth",
+      "description": "Month-to-month search and AI marketing partnership: new high-intent service and market pages, Google Maps and AI citation growth, review systems, monthly lead attribution reporting, and same-day updates.",
     },
   ],
 };
@@ -269,7 +295,7 @@ export const business = {
   "url": "https://cloviswebdesign.com",
   "telephone": "+15596280142",
   "email": EMAIL,
-  "priceRange": "From $1,500",
+  "priceRange": "$$",
   "image": "https://cloviswebdesign.com/images/hero.jpg",
   "address": {
     "@type": "PostalAddress",
@@ -305,6 +331,8 @@ export const business = {
     { "@type": "City", "name": "Clovis, CA" },
     { "@type": "City", "name": "Fresno, CA" },
     { "@type": "City", "name": "Madera, CA" },
+    { "@type": "State", "name": "California" },
+    { "@type": "Country", "name": "United States" },
   ],
   "knowsAbout": knowsAbout,
   "hasOfferCatalog": hasOfferCatalog,
@@ -421,5 +449,3 @@ export function caseStudySchema(path: string, cs: {
     ],
   };
 }
-
-

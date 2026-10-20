@@ -126,25 +126,31 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`w-full overflow-hidden rounded-[32px] border border-ink/15 bg-cream/95 text-ink shadow-[0_30px_70px_-25px_rgba(30,43,35,0.2)] ${compact ? "p-5 sm:p-6" : "p-6 sm:p-12"}`}>
       {ai === null && (
-        <form onSubmit={ask}>
+        <form
+          onSubmit={ask}
+          {...({
+            toolname: "audit_ai_visibility",
+            tooldescription: "Check whether Google Maps and Google Gemini AI recommend a business for its industry and city.",
+          } as Record<string, string>)}
+        >
           {/* h2 as the #check section's own heading; h3 under the drawer's "Free AI check" h2. */}
           <Title className={`font-display font-[420] leading-[0.95] text-ink ${compact ? "text-4xl" : "h-section"}`}>Can AI find you?</Title>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
-            Customers ask Google Maps and AI who to call. Type your business and see whether it names you.
+            Customers ask Google Maps and AI who to hire. Type your business and see whether it names you right now.
           </p>
 
           <div className={`mt-8 grid gap-4 ${compact ? "" : "sm:grid-cols-3"}`}>
             <label className="block" htmlFor={`${id}-name`}>
               <span className={labelClass}>Your business</span>
-              <input id={`${id}-name`} type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Olsen Roofing" className={inputClass} />
+              <input id={`${id}-name`} name="businessName" type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Sierra View Dental or Valley Law" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-trade`}>
               <span className={labelClass}>What you do</span>
-              <input id={`${id}-trade`} type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. bakery, auto shop, roofer, dentist" className={inputClass} />
+              <input id={`${id}-trade`} name="trade" type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. dentist, CPA, medspa, restaurant, contractor" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-city`}>
-              <span className={labelClass}>Your town</span>
-              <input id={`${id}-city`} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
+              <span className={labelClass}>Your city</span>
+              <input id={`${id}-city`} name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
             </label>
           </div>
 
@@ -154,7 +160,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           >
             Ask Google's AI
           </button>
-          <p className="mt-3 text-center text-sm text-ink-soft">Free. Takes a few seconds.</p>
+          <p className="mt-3 text-center text-sm text-ink-soft">Free live check · Grounded in Google Maps · Takes a few seconds.</p>
         </form>
       )}
 
@@ -252,7 +258,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
               </ul>
             </details>
             <p className="mx-auto mt-6 max-w-lg font-mono text-[11px] leading-relaxed text-ink-soft">
-              One question, asked just now. Google's AI Mode, the Gemini app and other AI apps can answer differently, and answers change.
+              One question, asked just now. Google's AI Mode, the Gemini app, ChatGPT, and Claude check different directories and can answer differently.
             </p>
             <div className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
               <button type="button" onClick={copyReportLink} className="min-h-12 px-2 text-[13px] font-medium underline decoration-persimmon decoration-2 underline-offset-4 hover:text-persimmon-deep">
@@ -271,7 +277,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <p className={`font-display leading-tight ${compact ? "text-3xl" : "text-4xl sm:text-5xl"}`}>
               {ai === "limit" ? "That's 10 checks this hour." : "Google's AI didn't answer this time."}
             </p>
-            <p className="mt-3 text-ink/70">{ai === "limit" ? "I'll look it up for you." : "Give it another try in a minute."}</p>
+            <p className="mt-3 text-ink/75">{ai === "limit" ? "I'll look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
               {ai === "limit" ? (
                 <a href={reach(askAdam)} className="rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream transition hover:bg-ink">

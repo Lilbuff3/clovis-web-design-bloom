@@ -211,6 +211,7 @@ assert.ok(rivalCopy.emailSubject.includes('Olsen Roofing and Cen-Cal Roofing'));
 
 const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
 assert.ok(robots.includes('Sitemap: https://cloviswebdesign.com/sitemap.xml'));
+assert.ok(robots.includes('Agentmap: https://cloviswebdesign.com/.well-known/ai-catalog.json'));
 for (const bot of ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']) {
   assert.ok(robots.includes(`User-agent: ${bot}`), `Expected User-agent: ${bot} in robots.txt`);
 }
@@ -228,43 +229,59 @@ for (const canonical of [
 }
 assert.ok(!sitemap.includes('/services/web-design-clovis/'), 'Retired route must not appear in sitemap.xml');
 
-// Public llms.txt discoverability verification
+// Public llms.txt, llms-full.txt & ai-catalog.json discoverability verification
 const llmsTxt = fs.readFileSync(new URL('../public/llms.txt', import.meta.url), 'utf8');
 assert.ok(llmsTxt.includes('# Clovis Web Design'));
-assert.ok(llmsTxt.includes('Starter ($1,500)'));
-assert.ok(llmsTxt.includes('Growth ($2,500)'));
-assert.ok(llmsTxt.includes('Flagship (From $3,500)'));
-assert.ok(llmsTxt.includes('Care Plan ($99/mo)'));
-assert.ok(llmsTxt.includes('Care Plus ($249/mo)'));
+assert.ok(llmsTxt.includes('Custom Web Design & Engineering'));
+assert.ok(llmsTxt.includes('Search Engine & Google Maps SEO'));
+assert.ok(llmsTxt.includes('AI Search & Answer Optimization'));
+assert.ok(llmsTxt.includes('AI & Search Lead Attribution'));
+assert.ok(llmsTxt.includes('Custom Website Build'));
+assert.ok(llmsTxt.includes('Search & AI Visibility Setup'));
+assert.ok(llmsTxt.includes('Ongoing Search & AI Growth'));
 assert.ok(llmsTxt.includes('/case-studies/dumpster-rental-fresno/'));
 assert.ok(llmsTxt.includes('/case-studies/kidney-specialist-fresno/'));
 assert.ok(llmsTxt.includes('(559) 628-0142'));
 assert.ok(!/youssef/i.test(llmsTxt), 'llms.txt must never contain Adam\'s last name');
 
+const llmsFullTxt = fs.readFileSync(new URL('../public/llms-full.txt', import.meta.url), 'utf8');
+assert.ok(llmsFullTxt.includes('# Clovis Web Design'));
+assert.ok(!/youssef/i.test(llmsFullTxt), 'llms-full.txt must never contain Adam\'s last name');
+
+const aiCatalogRaw = fs.readFileSync(new URL('../public/.well-known/ai-catalog.json', import.meta.url), 'utf8');
+const aiCatalog = JSON.parse(aiCatalogRaw);
+assert.equal(aiCatalog.$schema, 'https://json.schemastore.org/ard-schema.json');
+assert.ok(Array.isArray(aiCatalog.resources) && aiCatalog.resources.length >= 6);
+assert.ok(!/youssef/i.test(aiCatalogRaw), 'ai-catalog.json must never contain Adam\'s last name');
+
 const rootLayout = fs.readFileSync(new URL('../src/layouts/RootLayout.astro', import.meta.url), 'utf8');
 assert.ok(rootLayout.includes('/_vercel/insights/script.js'), 'Expected Vercel Web Analytics script in RootLayout.astro');
 assert.ok(rootLayout.includes('google-site-verification'), 'Expected Google Search Console verification tag in RootLayout.astro');
+assert.ok(rootLayout.includes('rel="ai-catalog"'), 'Expected <link rel="ai-catalog"> in RootLayout.astro');
 for (const eventName of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open', 'ai_audit_run']) {
   assert.ok(rootLayout.includes(eventName), `RootLayout.astro must contain event tracker for ${eventName}`);
 }
 
 const contactSrc = fs.readFileSync(new URL('../src/components/Contact.tsx', import.meta.url), 'utf8');
 assert.ok(!contactSrc.includes('No tracking pixels on this page'), 'Footer in Contact.tsx must not contain "No tracking pixels on this page"');
-assert.ok(contactSrc.includes('Built in Clovis, CA · Serving Fresno &amp; the Central Valley') || contactSrc.includes('Built in Clovis, CA · Serving Fresno & the Central Valley'), 'Footer in Contact.tsx must contain location attribution');
+assert.ok(contactSrc.includes('Built in Clovis, CA · Serving Fresno'), 'Footer in Contact.tsx must contain location attribution');
+assert.ok(contactSrc.includes('toolname: "contact_adam"'), 'Contact.tsx must include WebMCP toolname attribute');
 
 const medicalSrc = fs.readFileSync(new URL('../src/pages/services/medical-web-design.astro', import.meta.url), 'utf8');
 assert.ok(!medicalSrc.includes('No ad-tracking pixels'), 'medical-web-design.astro must not contain "No ad-tracking pixels"');
 assert.ok(medicalSrc.includes('Privacy-safe call &amp; referral tracking') || medicalSrc.includes('Privacy-safe call & referral tracking'), 'medical-web-design.astro must contain "Privacy-safe call & referral tracking"');
-assert.ok(medicalSrc.includes("offers: [offer('Growth'), offer('Flagship')]") || medicalSrc.includes('offers: [offer("Growth"), offer("Flagship")]'), 'Expected offers in medical-web-design.astro schema');
+assert.ok(medicalSrc.includes("offers: [offer('Custom Website Build'), offer('Search & AI Visibility Setup')]"), 'Expected offers in medical-web-design.astro schema');
 assert.ok(medicalSrc.includes('/case-studies/kidney-specialist-fresno/'), 'medical-web-design.astro must link to Kidney Specialist case study');
 
 const localSeoSrc = fs.readFileSync(new URL('../src/pages/services/local-seo-fresno.astro', import.meta.url), 'utf8');
 assert.ok(localSeoSrc.includes('<LeadLeakAudit client:visible />'), 'local-seo-fresno.astro must embed LeadLeakAudit');
 assert.ok(localSeoSrc.includes('Foundational setup vs. ongoing monthly growth'), 'local-seo-fresno.astro must explain foundational vs growth');
+assert.ok(localSeoSrc.includes('Why AI and Google pick different businesses'), 'local-seo-fresno.astro must explain why AI and Google pick different businesses');
 assert.ok(localSeoSrc.includes('/case-studies/dumpster-rental-fresno/'), 'local-seo-fresno.astro must link to Big Bros case study');
 
 const auditSrc = fs.readFileSync(new URL('../src/components/LeadLeakAudit.tsx', import.meta.url), 'utf8');
 assert.ok(auditSrc.includes('ai_audit_run'), 'LeadLeakAudit.tsx must dispatch ai_audit_run');
+assert.ok(auditSrc.includes('toolname: "audit_ai_visibility"'), 'LeadLeakAudit.tsx must include WebMCP toolname attribute');
 
 // Behavioral unit test for RootLayout event tracking logic
 {
@@ -366,38 +383,33 @@ assert.equal(pingRes.ok, true);
 assert.deepEqual(indexNowPayload.urlList, CANONICAL_URLS);
 console.log('Outreach URLs, Analytics & SEO discovery files: 5 cases ✓');
 
-// Verify Requirement R3: Plans, Care Plans & Side-by-Side Compare Table
-import { care, plans, hasOfferCatalog } from '../src/lib/data.ts';
+// Verify Requirement R3: 4 Core Services, 3 Scoped Engagement Models & Side-by-Side Compare Table
+import { services, plans, hasOfferCatalog } from '../src/lib/data.ts';
 
-// 1. Plans integrity
-assert.equal(plans.length, 3, 'Expected exactly 3 pricing plans');
-assert.equal(plans[0].price, '$1,500');
-assert.equal(plans[0].not.length, 0, 'Starter plan must have zero negative bullets');
-assert.equal(plans[1].price, '$2,500');
-assert.equal(plans[2].price, 'From $3,500', 'Flagship price display must be "From $3,500"');
-
-for (const p of plans) {
-  const itemsStr = p.items.join(' ');
-  assert.ok(itemsStr.includes('preview before you pay'), `${p.name} must include working phone preview before payment`);
-  assert.ok(itemsStr.includes('15-minute call'), `${p.name} must include done-for-you words from 15-minute call`);
-  assert.ok(itemsStr.includes('tracking'), `${p.name} must include call & search tracking`);
-  assert.ok(itemsStr.includes('90 days of free fixes'), `${p.name} must include 90 days of free fixes after launch`);
+// 1. Services integrity (4 Core Services + Why Each Matters)
+assert.equal(services.length, 4, 'Expected exactly 4 core agency services');
+for (const s of services) {
+  assert.ok(s.title && s.title.length > 5, 'Service must have a title');
+  assert.ok(s.what && s.what.length > 20, `${s.title} must explain what it is`);
+  assert.ok(s.whyItMatters && s.whyItMatters.length > 20, `${s.title} must explain why it matters`);
 }
 
-// 2. Care plans integrity
-assert.equal(care.length, 2, 'Expected exactly 2 care plans (no $0 plan)');
-assert.equal(care[0].name, 'Care Plan');
-assert.equal(care[0].price, '$99');
-assert.ok(care[0].blurb.includes('text-me updates'), 'Care Plan blurb must mention text-me updates');
-assert.equal(care[1].name, 'Care Plus');
-assert.equal(care[1].price, '$249');
-assert.ok(care[1].blurb.includes('town and service pages') || care[1].blurb.includes('town'), 'Care Plus blurb must mention new town/service pages');
-assert.ok(!care.some(c => c.name === 'No plan'), 'No plan must be removed from care array');
+// 2. Scoped Engagement Models integrity
+assert.equal(plans.length, 3, 'Expected exactly 3 scoped engagement models');
+assert.equal(plans[0].name, 'Custom Website Build');
+assert.equal(plans[1].name, 'Search & AI Visibility Setup');
+assert.equal(plans[2].name, 'Ongoing Search & AI Growth');
+for (const p of plans) {
+  assert.equal(p.not.length, 0, `${p.name} must have zero negative bullets`);
+  assert.ok(p.items.length >= 5, `${p.name} must list at least 5 deliverables`);
+}
 
-// 3. Offer Catalog schema matches visible prices
-const flagshipOffer = hasOfferCatalog.itemListElement.find(o => o.name === 'Flagship');
-assert.ok(flagshipOffer, 'Expected Flagship offer in hasOfferCatalog');
-assert.equal(flagshipOffer.price, '3500');
+// 3. Offer Catalog schema matches visible engagement models
+assert.equal(hasOfferCatalog.itemListElement.length, 3);
+for (const p of plans) {
+  const matchedOffer = hasOfferCatalog.itemListElement.find(o => o.name === p.name);
+  assert.ok(matchedOffer, `Expected ${p.name} in hasOfferCatalog`);
+}
 
 // 4. Chrome.tsx breakpoint verification
 const chromeSrc = fs.readFileSync(new URL('../src/components/Chrome.tsx', import.meta.url), 'utf8');
@@ -417,12 +429,13 @@ if (fs.existsSync(distIndexPath)) {
   const distHtml = fs.readFileSync(distIndexPath, 'utf8');
   assert.ok(distHtml.includes('Typical agency'), 'dist/index.html must render "Typical agency"');
   assert.ok(distHtml.includes('With me'), 'dist/index.html must render "With me"');
-  assert.ok(distHtml.includes('From $3,500'), 'dist/index.html must render "From $3,500"');
-  assert.ok(!distHtml.includes('No multi-page site or blog'), 'dist/index.html must not contain negative bullets');
-  assert.ok(!distHtml.includes('No plan'), 'dist/index.html must not contain "No plan"');
+  assert.ok(distHtml.includes('Why it matters:'), 'dist/index.html must explain "Why it matters:" for each service');
+  assert.ok(distHtml.includes('Custom Website Build'), 'dist/index.html must render "Custom Website Build"');
+  assert.ok(distHtml.includes('Search &amp; AI Visibility Setup') || distHtml.includes('Search & AI Visibility Setup'), 'dist/index.html must render "Search & AI Visibility Setup"');
+  assert.ok(distHtml.includes('Ongoing Search &amp; AI Growth') || distHtml.includes('Ongoing Search & AI Growth'), 'dist/index.html must render "Ongoing Search & AI Growth"');
 }
 
-console.log('Requirement R3 (Pricing, Care Plans, Compare Table & Navigation): 6 suites ✓');
+console.log('Requirement R3 (4 Core Services, 3 Scoped Engagement Models, Compare Table & Navigation): 6 suites ✓');
 
 // Verify Requirement R4: Case Studies, Schema/GEO, Service Pages & llms.txt
 import { business, cases } from '../src/lib/data.ts';
@@ -453,6 +466,3 @@ for (const p of ['case-studies/dumpster-rental-fresno/index.html', 'case-studies
 }
 
 console.log('Requirement R4 (Case Studies, Schema/GEO, Service Pages & llms.txt): 4 suites ✓');
-
-
-

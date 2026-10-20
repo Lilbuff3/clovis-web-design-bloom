@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-20T10:14:54.334Z",
+  "timestamp": "2026-10-20T23:26:05.767Z",
   "total": 37,
   "passed": 37,
   "failed": 0,
@@ -84,7 +84,7 @@
           "title": "Core business identity (name, telephone: +15596280142, priceRange)",
           "status": "PASS",
           "error": null,
-          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15596280142\", priceRange: \"From $1,500\""
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15596280142\", priceRange: \"$$\""
         },
         {
           "id": "T2.4",
@@ -100,7 +100,7 @@
           "title": "areaServed names Clovis and Fresno, with no wrong Wikidata IDs",
           "status": "PASS",
           "error": null,
-          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA"
+          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA, California, United States"
         },
         {
           "id": "T2.6",
@@ -121,10 +121,10 @@
         {
           "id": "T2.8",
           "tier": 2,
-          "title": "hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services",
+          "title": "hasOfferCatalog matches the 3 scoped engagement models",
           "status": "PASS",
           "error": null,
-          "details": "hasOfferCatalog successfully configured with Starter ($1,500) and Growth ($2,500) offerings"
+          "details": "hasOfferCatalog configured with Custom Website Build, Search & AI Visibility Setup, and Ongoing Search & AI Growth"
         }
       ]
     },
@@ -150,18 +150,18 @@
         {
           "id": "T3.4",
           "tier": 3,
-          "title": "Homepage leads hero → client results → the two topic pages",
+          "title": "Homepage leads hero → 4 core services (#who) → live AI check (#check) → client results (#harvest)",
           "status": "PASS",
           "error": null,
-          "details": "Homepage order: #top → #harvest → #who → #check; #who links to both topic pages"
+          "details": "Homepage order: #top → #who → #check → #harvest; #who renders 4 services + Why it matters and links to all service pages"
         },
         {
           "id": "T3.3",
           "tier": 3,
-          "title": "Hero section displays headline, $1,500 pricing anchor, and primary CTA for mobile fold compliance",
+          "title": "Hero section displays headline, preview guarantee, and primary CTA for mobile fold compliance",
           "status": "PASS",
           "error": null,
-          "details": "Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
+          "details": "Hero section contains headline, preview guarantee, and primary CTA ensuring mobile fold compliance"
         },
         {
           "id": "T3.5",
@@ -206,7 +206,7 @@
           "title": "Adam's last name appears nowhere in the built site",
           "status": "PASS",
           "error": null,
-          "details": "First name only across 7 pages"
+          "details": "First name only across 12 built files"
         },
         {
           "id": "T4.4",
@@ -280,7 +280,7 @@
           "title": "Each route has its own Service node, and FAQPage only lists questions shown on the page",
           "status": "PASS",
           "error": null,
-          "details": "4 distinct Services: Custom website design in Clovis, CA | Local businesses; Local SEO in Fresno, CA | Local service businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
+          "details": "4 distinct Services: Custom web design, SEO & AI search marketing in Clovis, CA | Growth-minded businesses; Search Engine, Google Maps & AI Search Marketing (SEO & GEO) | Growth-minded businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
         },
         {
           "id": "T6.5",
@@ -296,7 +296,7 @@
           "title": "Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)",
           "status": "PASS",
           "error": null,
-          "details": "knowsAbout: Web design, Local SEO, Website speed, Web accessibility (WCAG 2.1 AA), Websites for medical practices, HIPAA-aware web design, Bilingual English and Spanish websites"
+          "details": "knowsAbout: Custom web design and development, Search engine optimization (SEO), Google Maps and Local SEO, Generative Engine Optimization (GEO) and AI search visibility, AI search analytics and lead attribution, Website speed and Core Web Vitals optimization, Web accessibility (WCAG 2.1 AA), Websites for medical practices and HIPAA-aware web design, Bilingual English and Spanish websites"
         },
         {
           "id": "T6.10",
@@ -325,10 +325,10 @@
         {
           "id": "T6.13",
           "tier": 6,
-          "title": "Public discoverability: llms.txt and robots.txt AI search bot allowances",
+          "title": "Public discoverability: llms.txt, llms-full.txt, ai-catalog.json, and robots.txt AI search allowances",
           "status": "PASS",
           "error": null,
-          "details": "llms.txt and robots.txt verified for all 8 AI crawlers with zero surname leaks"
+          "details": "llms.txt, llms-full.txt, ai-catalog.json, and robots.txt verified for all 8 AI crawlers with zero surname leaks"
         }
       ]
     }

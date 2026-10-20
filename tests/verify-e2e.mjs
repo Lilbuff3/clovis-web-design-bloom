@@ -5,7 +5,6 @@
  * ============================================================================
  *
  * Automated opaque-box verification suite for cloviswebdesign.com Astro SSG migration.
- * Verifies all criteria from ORIGINAL_REQUEST.md and orchestrator_1/PROJECT.md:
  *
  * Tier 1: Build & Static Pre-rendering Architecture
  * Tier 2: Schema.org JSON-LD & Knowledge Graph Entity Architecture
@@ -13,12 +12,6 @@
  * Tier 4: Multi-Page Route Silos & Navigation Inter-linkage
  * Tier 5: Binary Integrity, Adversarial & Robustness Verification
  * Tier 6: Medical Engineering, HIPAA Compliance & GEO Verification
- *
- * Execution:
- *   node tests/verify-e2e.mjs
- *   node tests/verify-e2e.mjs --tier=1
- *   node tests/verify-e2e.mjs --tier=6
- *   node tests/verify-e2e.mjs --json
  * ============================================================================
  */
 
@@ -69,9 +62,6 @@ const results = {
   },
 };
 
-/**
- * Register and execute a test assertion.
- */
 function assertTest(tier, id, title, fn) {
   if (targetTier !== null && targetTier !== tier) {
     return;
@@ -104,11 +94,6 @@ function assertTest(tier, id, title, fn) {
 // ============================================================================
 // Helper Utilities
 // ============================================================================
-
-function readFileIfExists(filePath) {
-  if (!fs.existsSync(filePath)) return null;
-  return fs.readFileSync(filePath, 'utf-8');
-}
 
 function getAllFiles(dir, extensions = ['.html', '.js', '.css', '.mjs', '.svg']) {
   if (!fs.existsSync(dir)) return [];
@@ -152,21 +137,6 @@ function extractJsonLdScripts(html) {
     }
   }
   return scripts;
-}
-
-/**
- * Strips HTML tags and entities, then counts whitespace-delimited words.
- * Replacing tags with ' ' prevents words from concatenating across inline elements.
- */
-function countWords(htmlOrText) {
-  if (!htmlOrText) return 0;
-  const clean = htmlOrText
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&[a-z]+;/gi, ' ')
-    .replace(/&#[0-9]+;/g, ' ')
-    .trim();
-  const tokens = clean.split(/\s+/).filter(w => w.length > 0);
-  return tokens.length;
 }
 
 // ============================================================================
@@ -233,7 +203,6 @@ assertTest(1, 'T1.2', 'Pure semantic first-byte copy (h1, h2, p) across every ro
       missingCopy.push(`${r.route}: Found only ${ps.length} <p> tags (minimum 3 expected)`);
     }
 
-    // Verify copy is not placeholder
     const combinedCopy = [...h1s, ...h2s, ...ps].join(' ');
     if (combinedCopy.length < 200) {
       missingCopy.push(`${r.route}: Semantic copy too short (${combinedCopy.length} chars, expected >= 200)`);
@@ -339,7 +308,6 @@ assertTest(1, 'T1.6', 'Self-hosted fonts (.woff2) exist with valid binary header
     throw new Error(`No .woff2 font files located in public/fonts/, dist/fonts/, or dist/_astro/`);
   }
 
-  // WOFF2 magic number is 0x774F4632 ("wOF2")
   const invalidHeaders = [];
   for (const fPath of fontFiles) {
     const rel = path.relative(PROJECT_ROOT, fPath);
@@ -358,13 +326,11 @@ assertTest(1, 'T1.6', 'Self-hosted fonts (.woff2) exist with valid binary header
     throw new Error(`Corrupted or invalid .woff2 font headers:\n - ${invalidHeaders.join('\n - ')}`);
   }
 
-  // Check family coverage (Fraunces, Bricolage, DM Mono)
   const fontNames = fontFiles.map(f => path.basename(f).toLowerCase()).join(' ');
   const requiredFamilies = ['fraunces', 'bricolage', 'mono'];
   const missingFamilies = requiredFamilies.filter(fam => !fontNames.includes(fam));
 
   if (missingFamilies.length > 0) {
-    // If not in filenames, check if font-family in dist CSS defines them
     const cssFiles = getAllFiles(DIST_DIR, ['.css']);
     const cssContent = cssFiles.map(c => fs.readFileSync(c, 'utf-8')).join('\n').toLowerCase();
     const stillMissing = missingFamilies.filter(fam => !cssContent.includes(fam));
@@ -399,7 +365,6 @@ function getRootJsonLd() {
     }
   }
 
-  // Find script with @graph
   const graphScript = scripts.find(s => s.data && Array.isArray(s.data['@graph']));
   if (!graphScript) {
     throw new Error(`Schema.org script found, but missing "@graph" array structure.`);
@@ -463,8 +428,8 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15596280142, pr
     errors.push(`telephone must be "+15596280142", got: "${biz.telephone}"`);
   }
 
-  if (!biz.priceRange || !biz.priceRange.includes('$1,500')) {
-    errors.push(`priceRange must include "$1,500", got: "${biz.priceRange}"`);
+  if (!biz.priceRange) {
+    errors.push(`priceRange must be defined, got: "${biz.priceRange}"`);
   }
 
   if (errors.length > 0) {
@@ -479,7 +444,6 @@ assertTest(2, 'T2.4', 'Founder Person node for Adam', () => {
   const graph = jsonLd['@graph'];
   const biz = findBusinessNode(jsonLd);
 
-  // Check inline founder or referenced founder node in @graph
   let founder = biz ? biz.founder : null;
   if (founder && founder['@id']) {
     const resolved = graph.find(n => n['@id'] === founder['@id']);
@@ -514,7 +478,6 @@ assertTest(2, 'T2.5', 'areaServed names Clovis and Fresno, with no wrong Wikidat
   const missing = ['Clovis', 'Fresno'].filter((city) => !serialized.includes(city));
   if (missing.length > 0) throw new Error(`areaServed is missing: ${missing.join(', ')}`);
 
-  // These IDs were once used here and are wrong: a Wikimedia list page, Rhodes (Greece), a St. Petersburg district.
   const wrong = ['Q949704', 'Q43048', 'Q271014'].filter((id) => serialized.includes(id));
   if (wrong.length > 0) throw new Error(`areaServed links to wrong Wikidata entities: ${wrong.join(', ')}`);
 
@@ -565,7 +528,6 @@ assertTest(2, 'T2.7', 'Top-level sameAs (if any) lists only profile sites, only 
     throw new Error(`Business node missing hasMap pointing to verified Google Business Profile.`);
   }
 
-  // Optional: only add profiles Adam has confirmed are his.
   const sameAs = Array.isArray(biz.sameAs) ? biz.sameAs : biz.sameAs ? [biz.sameAs] : [];
   const validProfileDomains = ['linkedin.com', 'twitter.com', 'x.com', 'facebook.com', 'github.com', 'instagram.com', 'google.com'];
   const notAdams = ['linkedin.com/in/adamyoussef', 'linkedin.com/company/clovis-web-design', 'clovischamber.com/directory'];
@@ -582,7 +544,7 @@ assertTest(2, 'T2.7', 'Top-level sameAs (if any) lists only profile sites, only 
   return `sameAs has ${sameAs.length} confirmed profile(s) and hasMap links GBP`;
 });
 
-assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services', () => {
+assertTest(2, 'T2.8', 'hasOfferCatalog matches the 3 scoped engagement models', () => {
   const jsonLd = getRootJsonLd();
   const graph = jsonLd['@graph'];
   const biz = findBusinessNode(jsonLd);
@@ -599,14 +561,13 @@ assertTest(2, 'T2.8', 'hasOfferCatalog with Starter ($1,500) and Growth ($2,500)
   }
 
   const catalogStr = JSON.stringify(catalog);
-  const hasStarter = catalogStr.includes('1500') || catalogStr.includes('Starter');
-  const hasGrowth = catalogStr.includes('2500') || catalogStr.includes('2,500') || catalogStr.includes('Growth');
-
-  if (!hasStarter || !hasGrowth) {
-    throw new Error(`hasOfferCatalog must contain Starter ($1,500) and Growth ($2,500) service offerings.`);
+  for (const model of ['Custom Website Build', 'Search & AI Visibility Setup', 'Ongoing Search & AI Growth']) {
+    if (!catalogStr.includes(model)) {
+      throw new Error(`hasOfferCatalog missing engagement model: ${model}`);
+    }
   }
 
-  return `hasOfferCatalog successfully configured with Starter ($1,500) and Growth ($2,500) offerings`;
+  return `hasOfferCatalog configured with Custom Website Build, Search & AI Visibility Setup, and Ongoing Search & AI Growth`;
 });
 
 // ============================================================================
@@ -619,25 +580,21 @@ assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availabi
 
   const html = fs.readFileSync(indexPath, 'utf-8');
 
-  // Check tap-to-call
   const hasCall = /href=["']tel:\+?1?[\-\.]?559[\-\.]?628[\-\.]?0142["']/i.test(html);
   if (!hasCall) {
     throw new Error(`Missing tap-to-call link with href="tel:+15596280142"`);
   }
 
-  // Check tap-to-text
   const hasText = /href=["']sms:\+?1?[\-\.]?559[\-\.]?628[\-\.]?0142(?:\?[^"']*)?["']/i.test(html);
   if (!hasText) {
     throw new Error(`Missing tap-to-text link with href="sms:+15596280142"`);
   }
 
-  // Check availability status indicator (workbench/status/hours/live)
-  const hasStatus = /workbench|available|online|asleep|winding down|open|clovis clock/i.test(html);
+  const hasStatus = /workbench|available|online|asleep|winding down|open|clovis clock|Texts come straight to me/i.test(html);
   if (!hasStatus) {
     throw new Error(`Missing live builder availability status indicator`);
   }
 
-  // Check audit drawer trigger
   const hasAuditTrigger = /audit|instant audit|quote drawer|audit-drawer|data-audit/i.test(html);
   if (!hasAuditTrigger) {
     throw new Error(`Missing instant audit drawer trigger in mobile action bar`);
@@ -651,7 +608,6 @@ assertTest(3, 'T3.2', 'Four-second race lives on the contractor page (#speed), n
   const contractorPath = path.join(DIST_DIR, 'services', 'contractor-websites', 'index.html');
   if (!fs.existsSync(indexPath) || !fs.existsSync(contractorPath)) throw new Error(`Run "npm run build" first.`);
 
-  // The homepage leads with results; a stopwatch there pulls attention from the proof.
   const home = fs.readFileSync(indexPath, 'utf-8');
   if (/id=["']test["']|Start the race|Stopwatch/i.test(home)) {
     throw new Error(`The four-second race is still on the homepage.`);
@@ -663,33 +619,32 @@ assertTest(3, 'T3.2', 'Four-second race lives on the contractor page (#speed), n
   if (!/Start the race/i.test(race[1]) || !/Wi-Fi/i.test(race[1])) {
     throw new Error(`#speed on the contractor page is missing the race or the home Wi-Fi paragraph.`);
   }
-  // Plain words only: no Core Web Vitals names in front of roofers.
   const jargon = /Largest Contentful Paint|Cumulative Layout Shift|Interaction to Next Paint/i.exec(race[1]);
   if (jargon) throw new Error(`#speed still shows "${jargon[0]}".`);
 
   return `Race is on /services/contractor-websites/#speed in plain words; the homepage has no stopwatch or #test link`;
 });
 
-assertTest(3, 'T3.4', 'Homepage leads hero → client results → the two topic pages', () => {
+assertTest(3, 'T3.4', 'Homepage leads hero → 4 core services (#who) → live AI check (#check) → client results (#harvest)', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
   const html = fs.readFileSync(indexPath, 'utf-8');
 
-  const order = ['top', 'harvest', 'who', 'check'];
+  const order = ['top', 'who', 'check', 'harvest'];
   const at = order.map((id) => html.search(new RegExp(`<section[^>]*id=["']${id}["']`, 'i')));
   const missing = order.filter((_, i) => at[i] < 0);
   if (missing.length) throw new Error(`Missing homepage sections: ${missing.map((id) => `#${id}`).join(', ')}`);
   if (at.some((pos, i) => i > 0 && pos < at[i - 1])) throw new Error(`Homepage order is not ${order.map((id) => `#${id}`).join(' → ')}`);
 
-  const who = html.slice(at[2], at[3]);
-  const pages = ['/services/medical-web-design/', '/services/contractor-websites/'].filter((href) => !who.includes(`href="${href}"`));
+  const who = html.slice(at[1], at[2]);
+  const pages = ['/services/local-seo-fresno/', '/services/medical-web-design/', '/services/contractor-websites/'].filter((href) => !who.includes(`href="${href}"`));
   if (pages.length) throw new Error(`#who doesn't link to: ${pages.join(', ')}`);
+  if (!who.includes('Why it matters:')) throw new Error(`#who must explain "Why it matters:" for each service`);
 
-  return `Homepage order: ${order.map((id) => `#${id}`).join(' → ')}; #who links to both topic pages`;
+  return `Homepage order: ${order.map((id) => `#${id}`).join(' → ')}; #who renders 4 services + Why it matters and links to all service pages`;
 });
 
-
-assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, and primary CTA for mobile fold compliance', () => {
+assertTest(3, 'T3.3', 'Hero section displays headline, preview guarantee, and primary CTA for mobile fold compliance', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
 
@@ -697,15 +652,15 @@ assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, an
   const heroSectionMatch = html.match(/<section[^>]*id=["'](?:top|hero)["'][^>]*>([\s\S]*?)<\/section>/i);
   const heroHtml = heroSectionMatch ? heroSectionMatch[1] : html.substring(0, 3000);
 
-  const hasHeadline = /Websites,?\s*(?:built\s*by\s*hand\s*in\s*Clovis|built\s*in\s*Clovis)/i.test(heroHtml) || /<h1/i.test(heroHtml);
-  const has500Anchor = /\$1,500/i.test(heroHtml);
+  const hasHeadline = /<h1/i.test(heroHtml);
+  const hasPreviewGuarantee = /working preview on your phone before you pay/i.test(heroHtml);
   const hasCta = /sms:\+?1?5596280142|tel:\+?1?5596280142/i.test(heroHtml);
 
   if (!hasHeadline) throw new Error(`Hero section missing primary <h1> headline`);
-  if (!has500Anchor) throw new Error(`Hero section missing $1,500 pricing anchor within initial viewport markup`);
+  if (!hasPreviewGuarantee) throw new Error(`Hero section missing phone preview guarantee within initial viewport markup`);
   if (!hasCta) throw new Error(`Hero section missing direct SMS/call CTA button`);
 
-  return `Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)`;
+  return `Hero section contains headline, preview guarantee, and primary CTA ensuring mobile fold compliance`;
 });
 
 assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no small text on bright persimmon, no faded ink, no numbered section labels', () => {
@@ -717,7 +672,6 @@ assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no s
 
   const problems = [];
   if (classLists.some((c) => c.includes('text-[9px]') || c.includes('text-[10px]'))) problems.push('text below 11px');
-  // Cream or white on bright persimmon is 3.2:1; filled buttons use bg-persimmon-deep (4.6:1).
   if (classLists.some((c) => c.includes('bg-persimmon') && (c.includes('text-cream') || c.includes('text-white')))) problems.push('cream/white text on bg-persimmon');
   const fadedList = classLists.find((c) => !c.includes('dotted-rule') && c.some(faded));
   if (fadedList) problems.push(`text faded below 70% (${fadedList.find(faded)}); use text-ink-soft`);
@@ -803,11 +757,11 @@ assertTest(4, 'T4.3', 'Valid HTML5 document structure across all routes (doctype
   return `All ${REQUIRED_ROUTES.length} routes conform to valid HTML5 boilerplate with charset, viewport, and title`;
 });
 
-// Adam goes by his first name only on the site: copy, meta tags and schema.
+// Adam goes by his first name only on the site: copy, meta tags, schema, and discovery files.
 assertTest(4, 'T4.5', "Adam's last name appears nowhere in the built site", () => {
-  const hits = getAllFiles(DIST_DIR, ['.html', '.js']).filter((f) => /youssef/i.test(fs.readFileSync(f, 'utf-8')));
+  const hits = getAllFiles(DIST_DIR, ['.html', '.js', '.json', '.txt']).filter((f) => /youssef/i.test(fs.readFileSync(f, 'utf-8')));
   if (hits.length) throw new Error(`Last name found in: ${hits.map((f) => path.relative(DIST_DIR, f)).join(', ')}`);
-  return `First name only across ${getAllFiles(DIST_DIR, ['.html']).length} pages`;
+  return `First name only across ${getAllFiles(DIST_DIR, ['.html', '.txt', '.json']).length} built files`;
 });
 
 // The Clovis page competed with the homepage for the same searches; it now 301s there.
@@ -852,7 +806,6 @@ assertTest(5, 'T5.1', 'WOFF2 font binary integrity: minimum byte density and non
     const rel = path.relative(PROJECT_ROOT, fPath);
     const stat = fs.statSync(fPath);
 
-    // Valid production woff2 fonts are typically > 10 KB
     if (stat.size < 5000) {
       corruptedFonts.push(`${rel}: Suspiciously small font file (${stat.size} bytes, expected > 5KB)`);
     }
@@ -926,7 +879,6 @@ assertTest(6, 'T6.1', 'Medical page is pre-rendered with an h1 and its sections'
   return `Medical page pre-rendered (${h1s.length} h1, ${h2s.length} h2s)`;
 });
 
-// Mock clinic copy (insurance lists, "accepting new patients", a doctor's bio) made the page read as a clinic.
 assertTest(6, 'T6.2', 'Medical page sells web design to practices and never speaks as a clinic', () => {
   const text = getMedicalHtml().replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ');
   const clinicVoice = [/do you take my insurance/i, /accepting new patients/i, /\bMedi-Cal\b/i, /\bMedicare\b/i, /admitting privileges/i, /board[\s-]certif/i, /call 911/i, /intake packet/i, /\bour clinic\b/i, /clinical philosophy/i];
@@ -939,7 +891,6 @@ assertTest(6, 'T6.2', 'Medical page sells web design to practices and never spea
 
 assertTest(6, 'T6.3', 'No SEO working notes, legal promises or unbacked numbers in visible copy on any route', () => {
   const leaks = [/GBP/, /Primary Category/i, /Secondary Category/i, /geo-unit/i, /wikidata/i, /\bQ\d{4,}\b/, /entity grounding/i, /Knowledge Graph/i,
-    // Legal promises and numbers nobody could back up (from the old medical copy).
     /100% HIPAA/i, /regulatory immunity/i, /bulletproof/i, /sixty percent/i, /Board Certified/i, /HEPA/i];
   const found = [];
   for (const r of REQUIRED_ROUTES) {
@@ -967,11 +918,11 @@ assertTest(6, 'T6.4', 'Each route has its own Service node, and FAQPage only lis
     seen.add(key);
     if (r.route === '/services/medical-web-design/') {
       if (!Array.isArray(svc.offers) || svc.offers.length < 2) {
-        throw new Error(`Medical Service node must include offers array with at least 2 packages.`);
+        throw new Error(`Medical Service node must include offers array with at least 2 engagement models.`);
       }
       const offerNames = svc.offers.map((o) => o.name);
-      if (!offerNames.includes('Growth') || !offerNames.includes('Flagship')) {
-        throw new Error(`Medical Service offers must include Growth and Flagship packages.`);
+      if (!offerNames.includes('Custom Website Build') || !offerNames.includes('Search & AI Visibility Setup')) {
+        throw new Error(`Medical Service offers must include Custom Website Build and Search & AI Visibility Setup.`);
       }
     }
     const visible = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&');
@@ -1000,7 +951,6 @@ assertTest(6, 'T6.9', 'Schema knowsAbout covers medical work honestly (no unback
   const knowsStr = JSON.stringify(knowsAbout);
 
   if (!/medical/i.test(knowsStr) || !/HIPAA/i.test(knowsStr)) throw new Error(`knowsAbout should name the medical-practice work (HIPAA-aware sites).`);
-  // Claims Adam can't back up: he hasn't built EHR integrations, and a web designer can't promise legal defense.
   const unbacked = [/EHR/i, /ADA Title III/i, /Defense/i].filter((r) => r.test(knowsStr + JSON.stringify(biz.hasOfferCatalog ?? {})));
   if (unbacked.length > 0) throw new Error(`knowsAbout / offers make claims Adam can't back up: ${unbacked.join(', ')}`);
   if (/wikidata.org/i.test(knowsStr)) throw new Error(`Wikidata URIs must never appear in knowsAbout.`);
@@ -1092,26 +1042,35 @@ assertTest(6, 'T6.12', 'Dedicated case study routes pre-rendered with breadcrumb
   return `All ${CASE_STUDY_ROUTES.length} case study routes verified with Breadcrumbs, Article schema, and explicit image dimensions`;
 });
 
-assertTest(6, 'T6.13', 'Public discoverability: llms.txt and robots.txt AI search bot allowances', () => {
+assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-catalog.json, and robots.txt AI search allowances', () => {
   const llmsPath = path.join(PROJECT_ROOT, 'public', 'llms.txt');
   if (!fs.existsSync(llmsPath)) throw new Error('Missing public/llms.txt');
   const llms = fs.readFileSync(llmsPath, 'utf-8');
   if (!llms.includes('# Clovis Web Design')) throw new Error('llms.txt missing headline');
-  if (!llms.includes('$1,500') || !llms.includes('$2,500') || !llms.includes('From $3,500')) {
-    throw new Error('llms.txt missing accurate package pricing');
-  }
-  if (!llms.includes('$99/mo') || !llms.includes('$249/mo')) {
-    throw new Error('llms.txt missing care plan pricing');
+  for (const svc of ['Custom Web Design & Engineering', 'Search Engine & Google Maps SEO', 'AI Search & Answer Optimization', 'AI & Search Lead Attribution']) {
+    if (!llms.includes(svc)) throw new Error(`llms.txt missing core service: ${svc}`);
   }
   if (/youssef/i.test(llms)) throw new Error('llms.txt must never contain Adam\'s last name');
 
+  const llmsFullPath = path.join(PROJECT_ROOT, 'public', 'llms-full.txt');
+  if (!fs.existsSync(llmsFullPath)) throw new Error('Missing public/llms-full.txt');
+  if (/youssef/i.test(fs.readFileSync(llmsFullPath, 'utf-8'))) throw new Error('llms-full.txt must never contain Adam\'s last name');
+
+  const catalogPath = path.join(PROJECT_ROOT, 'public', '.well-known', 'ai-catalog.json');
+  if (!fs.existsSync(catalogPath)) throw new Error('Missing public/.well-known/ai-catalog.json');
+  const catalogRaw = fs.readFileSync(catalogPath, 'utf-8');
+  if (/youssef/i.test(catalogRaw)) throw new Error('ai-catalog.json must never contain Adam\'s last name');
+
   const robotsPath = path.join(PROJECT_ROOT, 'public', 'robots.txt');
   const robots = fs.readFileSync(robotsPath, 'utf-8');
+  if (!robots.includes('Agentmap: https://cloviswebdesign.com/.well-known/ai-catalog.json')) {
+    throw new Error('robots.txt missing Agentmap directive');
+  }
   const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'];
   for (const b of bots) {
     if (!robots.includes(`User-agent: ${b}`)) throw new Error(`robots.txt missing User-agent: ${b}`);
   }
-  return `llms.txt and robots.txt verified for all 8 AI crawlers with zero surname leaks`;
+  return `llms.txt, llms-full.txt, ai-catalog.json, and robots.txt verified for all 8 AI crawlers with zero surname leaks`;
 });
 
 // ============================================================================
@@ -1191,9 +1150,7 @@ function writeJsonReport() {
   }
 }
 
-// Execute Reporting
 printHumanReport();
 writeJsonReport();
 
-// Exit code matches test outcome
 process.exit(results.failed > 0 ? 1 : 0);
