@@ -1,5 +1,5 @@
-export const PHONE_DISPLAY = "(559) 575-3014";
-export const PHONE_TEL = "+15595753014";
+export const PHONE_DISPLAY = "(559) 628-0142";
+export const PHONE_TEL = "+15596280142";
 // A text with the first message already written. "?&body=" works on both iOS and Android.
 export const smsTo = (body: string) => `sms:${PHONE_TEL}?&body=${encodeURIComponent(body)}`;
 export const SMS_LINK = smsTo("Hi Adam, I'm interested in a website for my business. Can we talk?");
@@ -267,7 +267,7 @@ export const business = {
   "@id": "https://cloviswebdesign.com/#business",
   "name": "Clovis Web Design",
   "url": "https://cloviswebdesign.com",
-  "telephone": "+15595753014",
+  "telephone": "+15596280142",
   "email": EMAIL,
   "priceRange": "From $1,500",
   "image": "https://cloviswebdesign.com/images/hero.jpg",

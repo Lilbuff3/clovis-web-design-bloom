@@ -22,8 +22,8 @@ export function buildOutreachCopy(business, trade, city = 'Clovis, CA', competit
   const url = buildAuditUrl(business, trade, city);
   const compClean = competitors.trim();
   const sms = compClean
-    ? `Hi — I asked Google's AI for a ${trade} in ${city} and noticed it recommended ${compClean} instead of ${business}. Here's the live check I ran for you: ${url} — Adam in Clovis, (559) 575-3014`
-    : `Hi — I ran a quick check to see who Google's AI recommends when someone asks for a ${trade} in ${city}. Here's the live result for ${business}: ${url} — Adam in Clovis, (559) 575-3014`;
+    ? `Hi — I asked Google's AI for a ${trade} in ${city} and noticed it recommended ${compClean} instead of ${business}. Here's the live check I ran for you: ${url} — Adam in Clovis, (559) 628-0142`
+    : `Hi — I ran a quick check to see who Google's AI recommends when someone asks for a ${trade} in ${city}. Here's the live result for ${business}: ${url} — Adam in Clovis, (559) 628-0142`;
   const emailSubject = compClean
     ? `Google's AI recommended ${compClean} for a ${trade} in ${city}`
     : `Who Google's AI recommends for a ${trade} in ${city}`;
@@ -38,11 +38,11 @@ ${url}
 
 I'm an independent web developer based here in Clovis. I build fast, custom websites for Central Valley businesses (starting at $1,500, no monthly fees, and you own the code and domain).
 
-If you'd like to talk about getting more calls from Google Search and Maps, reply here or text my cell at (559) 575-3014.
+If you'd like to talk about getting more calls from Google Search and Maps, reply here or text my cell at (559) 628-0142.
 
 Best,
 Adam
-Clovis Web Design · (559) 575-3014`;
+Clovis Web Design · (559) 628-0142`;
 
   return { url, sms, emailSubject, emailBody };
 }

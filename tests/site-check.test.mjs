@@ -238,7 +238,7 @@ assert.ok(llmsTxt.includes('Care Plan ($99/mo)'));
 assert.ok(llmsTxt.includes('Care Plus ($249/mo)'));
 assert.ok(llmsTxt.includes('/case-studies/dumpster-rental-fresno/'));
 assert.ok(llmsTxt.includes('/case-studies/kidney-specialist-fresno/'));
-assert.ok(llmsTxt.includes('(559) 575-3014'));
+assert.ok(llmsTxt.includes('(559) 628-0142'));
 assert.ok(!/youssef/i.test(llmsTxt), 'llms.txt must never contain Adam\'s last name');
 
 const rootLayout = fs.readFileSync(new URL('../src/layouts/RootLayout.astro', import.meta.url), 'utf8');
@@ -314,7 +314,7 @@ assert.ok(auditSrc.includes('ai_audit_run'), 'LeadLeakAudit.tsx must dispatch ai
   // Simulate tel click
   docListeners.click({
     target: {
-      closest: (sel) => sel === 'a' ? { href: 'tel:+15595753014', getAttribute: () => 'tel:+15595753014', textContent: 'Call (559) 575-3014' } : null
+      closest: (sel) => sel === 'a' ? { href: 'tel:+15596280142', getAttribute: () => 'tel:+15596280142', textContent: 'Call (559) 628-0142' } : null
     }
   });
   const callEvt = dispatchedEvents.find(e => e.payload?.name === 'lead_call_click');
@@ -324,7 +324,7 @@ assert.ok(auditSrc.includes('ai_audit_run'), 'LeadLeakAudit.tsx must dispatch ai
   // Simulate sms click
   docListeners.click({
     target: {
-      closest: (sel) => sel === 'a' ? { href: 'sms:+15595753014?body=test', getAttribute: () => 'sms:+15595753014?body=test', textContent: 'Text Adam' } : null
+      closest: (sel) => sel === 'a' ? { href: 'sms:+15596280142?body=test', getAttribute: () => 'sms:+15596280142?body=test', textContent: 'Text Adam' } : null
     }
   });
   const smsEvt = dispatchedEvents.find(e => e.payload?.name === 'lead_sms_click');

@@ -448,7 +448,7 @@ assertTest(2, 'T2.2', '@type includes ["LocalBusiness", "ProfessionalService"]',
   return `Business entity node correctly typed as ["LocalBusiness", "ProfessionalService"]`;
 });
 
-assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, priceRange)', () => {
+assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15596280142, priceRange)', () => {
   const jsonLd = getRootJsonLd();
   const biz = findBusinessNode(jsonLd);
   if (!biz) throw new Error(`Business node not found.`);
@@ -459,8 +459,8 @@ assertTest(2, 'T2.3', 'Core business identity (name, telephone: +15595753014, pr
   }
 
   const telClean = (biz.telephone || '').replace(/[\s\-\(\)\.]/g, '');
-  if (telClean !== '+15595753014' && telClean !== '15595753014' && telClean !== '5595753014') {
-    errors.push(`telephone must be "+15595753014", got: "${biz.telephone}"`);
+  if (telClean !== '+15596280142' && telClean !== '15596280142' && telClean !== '5596280142') {
+    errors.push(`telephone must be "+15596280142", got: "${biz.telephone}"`);
   }
 
   if (!biz.priceRange || !biz.priceRange.includes('$1,500')) {
@@ -620,15 +620,15 @@ assertTest(3, 'T3.1', 'Mobile Action Bar with tap-to-call, tap-to-text, availabi
   const html = fs.readFileSync(indexPath, 'utf-8');
 
   // Check tap-to-call
-  const hasCall = /href=["']tel:\+?1?[\-\.]?559[\-\.]?575[\-\.]?3014["']/i.test(html);
+  const hasCall = /href=["']tel:\+?1?[\-\.]?559[\-\.]?628[\-\.]?0142["']/i.test(html);
   if (!hasCall) {
-    throw new Error(`Missing tap-to-call link with href="tel:+15595753014"`);
+    throw new Error(`Missing tap-to-call link with href="tel:+15596280142"`);
   }
 
   // Check tap-to-text
-  const hasText = /href=["']sms:\+?1?[\-\.]?559[\-\.]?575[\-\.]?3014(?:\?[^"']*)?["']/i.test(html);
+  const hasText = /href=["']sms:\+?1?[\-\.]?559[\-\.]?628[\-\.]?0142(?:\?[^"']*)?["']/i.test(html);
   if (!hasText) {
-    throw new Error(`Missing tap-to-text link with href="sms:+15595753014"`);
+    throw new Error(`Missing tap-to-text link with href="sms:+15596280142"`);
   }
 
   // Check availability status indicator (workbench/status/hours/live)
@@ -699,7 +699,7 @@ assertTest(3, 'T3.3', 'Hero section displays headline, $1,500 pricing anchor, an
 
   const hasHeadline = /Websites,?\s*(?:built\s*by\s*hand\s*in\s*Clovis|built\s*in\s*Clovis)/i.test(heroHtml) || /<h1/i.test(heroHtml);
   const has500Anchor = /\$1,500/i.test(heroHtml);
-  const hasCta = /sms:\+?1?5595753014|tel:\+?1?5595753014/i.test(heroHtml);
+  const hasCta = /sms:\+?1?5596280142|tel:\+?1?5596280142/i.test(heroHtml);
 
   if (!hasHeadline) throw new Error(`Hero section missing primary <h1> headline`);
   if (!has500Anchor) throw new Error(`Hero section missing $1,500 pricing anchor within initial viewport markup`);
@@ -739,7 +739,7 @@ assertTest(4, 'T4.1', 'Direct founder phone / SMS contact links present on every
     if (!fs.existsSync(fullPath)) continue;
 
     const html = fs.readFileSync(fullPath, 'utf-8');
-    const hasPhone = /href=["'](?:tel|sms):\+?1?5595753014(?:\?[^"']*)?["']/i.test(html) || /559[\.\-\s]?575[\.\-\s]?3014/.test(html);
+    const hasPhone = /href=["'](?:tel|sms):\+?1?5596280142(?:\?[^"']*)?["']/i.test(html) || /559[\.\-\s]?628[\.\-\s]?0142/.test(html);
     if (!hasPhone) {
       missingContact.push(r.route);
     }
