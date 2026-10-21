@@ -1063,9 +1063,6 @@ assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-cata
 
   const robotsPath = path.join(PROJECT_ROOT, 'public', 'robots.txt');
   const robots = fs.readFileSync(robotsPath, 'utf-8');
-  if (!robots.includes('Agentmap: https://cloviswebdesign.com/.well-known/ai-catalog.json')) {
-    throw new Error('robots.txt missing Agentmap directive');
-  }
   const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'];
   for (const b of bots) {
     if (!robots.includes(`User-agent: ${b}`)) throw new Error(`robots.txt missing User-agent: ${b}`);

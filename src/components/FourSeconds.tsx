@@ -6,7 +6,7 @@ const END = 7200;
 function Phone({ children, label, tone }: { children: React.ReactNode; label: string; tone: "slow" | "fast" }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.18em] text-ink/70">
+      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.18em] text-ink/85">
         <span className={`h-2 w-2 rounded-full ${tone === "fast" ? "bg-leaf" : "bg-ink/30"}`} />
         {label}
       </div>
@@ -43,7 +43,7 @@ function SlowSite({ t }: { t: number }) {
   return (
     <div className="relative h-full">
       <StatusBar bars={2} />
-      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/50">olsenroofing-template.biz</div>
+      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[11px] text-ink/80">olsenroofing-template.biz</div>
       {!skeleton && (
         <div className="flex h-[70%] items-center justify-center">
           <div className="h-9 w-9 animate-spin rounded-full border-[3px] border-ink/10 border-t-ink/40" />
@@ -112,7 +112,7 @@ function FastSite({ t }: { t: number }) {
   return (
     <div className="relative h-full bg-[#fbf6ea]">
       <StatusBar bars={2} />
-      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/50">olsenroofing.com</div>
+      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[11px] text-ink/80">olsenroofing.com</div>
       {a && (
         <div className="px-5 pt-4">
           <div className="flex items-center justify-between">
@@ -221,7 +221,7 @@ export function FourSeconds() {
             <div className="reveal mt-10 rounded-3xl border border-ink/10 bg-cream p-6" style={{ ["--d" as string]: "300ms" }}>
               <div className="flex items-baseline justify-between">
                 <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Stopwatch</span>
-                <span className={`font-mono text-[11px] uppercase tracking-[.18em] ${t > 4000 ? "text-persimmon-deep" : "text-leaf"}`}>
+                <span className={`font-mono text-[11px] font-semibold uppercase tracking-[.18em] ${t > 4000 ? "text-ink" : "text-leaf"}`}>
                   {t === 0 ? "ready" : t < 4000 ? "within patience" : "patience expired"}
                 </span>
               </div>

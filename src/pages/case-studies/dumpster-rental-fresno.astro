@@ -23,7 +23,7 @@ const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
 >
   <Nav client:load />
 
-  <main class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
+  <main id="main" class="relative z-10 mx-auto max-w-5xl px-5 pt-32 pb-24 md:px-8 md:pt-40">
     <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-ink-soft">
       <a href="/" class="underline decoration-ink/25 underline-offset-4 hover:text-persimmon-deep">Clovis Web Design</a>
       <span aria-hidden="true" class="mx-2">/</span>
@@ -36,7 +36,7 @@ const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
       {c.headline}
     </h1>
 
-    <p class="mt-3 font-mono text-xs uppercase tracking-[.18em] text-persimmon-deep font-semibold">
+    <p class="mt-3 font-mono text-xs uppercase tracking-[.18em] text-ink/80 font-semibold">
       {c.trade} · {c.place} · {c.year}
     </p>
 

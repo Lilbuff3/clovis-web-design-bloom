@@ -199,7 +199,7 @@ export function Contact() {
                     if (needReach && e.target.value.trim()) setNeedReach(false);
                   }}
                   placeholder="(559) 555-0123 or sarah@example.com"
-                  autoComplete="email tel"
+                  autoComplete="email"
                   aria-invalid={needReach ? "true" : undefined}
                   aria-describedby={needReach ? "contact-reach-hint" : undefined}
                   className={`mt-2 w-full border-b-2 bg-transparent py-2 font-display text-2xl outline-none transition placeholder:text-ink-soft/70 focus:border-persimmon ${

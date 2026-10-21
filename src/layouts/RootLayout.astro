@@ -97,11 +97,19 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         });
       }
     </script>
-    <!-- Vercel Speed Insights & Web Analytics: plain-HTML install, no package needed. -->
-    <script is:inline>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
-    <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
-    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
-    <script is:inline defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights & Web Analytics: plain-HTML install, no package needed. Skipped on localhost so local audits don't 404. -->
+    <script is:inline>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        ['/_vercel/speed-insights/script.js', '/_vercel/insights/script.js'].forEach(function(src) {
+          var s = document.createElement('script');
+          s.defer = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      }
+    </script>
 
     <!-- Lightweight Conversion & AI Referrer Event Tracking -->
     <script is:inline>

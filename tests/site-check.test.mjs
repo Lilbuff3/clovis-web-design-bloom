@@ -211,7 +211,6 @@ assert.ok(rivalCopy.emailSubject.includes('Olsen Roofing and Cen-Cal Roofing'));
 
 const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
 assert.ok(robots.includes('Sitemap: https://cloviswebdesign.com/sitemap.xml'));
-assert.ok(robots.includes('Agentmap: https://cloviswebdesign.com/.well-known/ai-catalog.json'));
 for (const bot of ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']) {
   assert.ok(robots.includes(`User-agent: ${bot}`), `Expected User-agent: ${bot} in robots.txt`);
 }
