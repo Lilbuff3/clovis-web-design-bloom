@@ -1,6 +1,6 @@
 # Clovis Web Design (cloviswebdesign.com) — agent instructions
 
-Adam Youssef's web engineering, search (SEO), and AI search marketing (GEO) studio site. This repo is the live site; the old Astro build in `../clovis-web-design` is retired.
+Adam Youssef's brand positioning, web engineering, search (SEO), and AI search marketing (GEO) studio site. This repo is the live site; the old Astro build in `../clovis-web-design` is retired.
 
 ## Stack
 
@@ -25,11 +25,12 @@ On the site Adam is just "Adam": never his last name, in copy, meta tags or sche
 
 ## Positioning & Services
 
-Clovis Web Design offers **four unbundled core services** to businesses in Clovis, Fresno, across California, and nationwide:
-1. **Custom Web Design & Engineering** (`<0.4s` static builds, 100/100 PageSpeed, WCAG 2.1 AA, 100% client ownership)
-2. **Search Engine & Google Maps Optimization (SEO)**
-3. **AI Search & Answer Engine Optimization (GEO — ChatGPT, Gemini, Claude & Siri)**
-4. **AI & Search Lead Tracking (GA4 custom AI channels & conversion attribution)**
+Clovis Web Design offers **five full-lifecycle services** to businesses in Clovis, Fresno, across California, and nationwide:
+1. **Brand Positioning & Conversion Copy**
+2. **Custom Web Design & Engineering** (`<0.4s` static builds, 100/100 PageSpeed, WCAG 2.1 AA, 100% client ownership)
+3. **Search Engine & Google Maps Optimization (SEO)**
+4. **AI Search & Answer Engine Optimization (GEO — ChatGPT, Gemini, Claude, Perplexity & Siri)**
+5. **AI & Search Lead Attribution & Retention** (GA4 custom AI channels, call/SMS tracking & review automation)
 
 - **Always explain why it matters**: Every service and technical feature must state its commercial impact (more calls, higher conversion, beating AI bot timeouts, winning citations).
 - **Scoped to ROI (No fixed retail price tags)**: Do not plaster fixed `$1,500 / $2,500 / $99` retail price stickers on the site. Engagements are scoped to the client's business, market, and ROI—with a working preview before payment on website builds and 100% client ownership of website code.
@@ -40,7 +41,9 @@ Each URL owns one set of searches. Don't add a page that competes with another f
 
 | URL | Owns |
 | --- | --- |
-| `/` | Clovis web design / web studio, custom websites, search & AI marketing overview |
+| `/` | Clovis web design / digital growth studio, brand, custom websites, search & AI marketing overview |
+| `/services/` | Full-lifecycle services overview (5 pillars) & agency-vs-direct-engineer comparison |
+| `/packages/` | Modular growth packages (`01 Base -> 02 Customize Channels -> 03 Scale`) & scope builder |
 | `/services/local-seo-fresno/` | Search Engine, Google Maps 3-Pack & AI Search (GEO) Marketing — full breakdown of how Google, ChatGPT, Gemini, Claude & Siri pick businesses |
 | `/services/medical-web-design/` | Medical, dental and healthcare practice web design & referral growth |
 | `/services/contractor-websites/` | Contractor and trade website design & local lead generation |
@@ -55,8 +58,8 @@ Each URL owns one set of searches. Don't add a page that competes with another f
 
 | Doc | Covers |
 | --- | --- |
-| [PRODUCT.md](PRODUCT.md) | Users, 4 core services, positioning, brand commitments, product principles |
-| [DESIGN.md](DESIGN.md) | Colours, type, layout, components, do's and don'ts |
+| [PRODUCT.md](PRODUCT.md) | Users, 5 lifecycle services, positioning, brand commitments, product principles |
+| [DESIGN.md](DESIGN.md) | High-contrast obsidian/white architectural design system, colours, type, layout, do's & don'ts |
 | [TONE_AND_VOICE.md](TONE_AND_VOICE.md) | Voice, 2026 AI Search & SEO messaging rules, component mapping |
 | [CONTEXT.md](CONTEXT.md) | Agency and white-label vocabulary — use these terms |
 | [outreach/ai-search-field-guide.md](outreach/ai-search-field-guide.md) | Primary-source verified 2026 AI Search (GEO), GA4 AI tracking & Lighthouse 13.5 reference |
