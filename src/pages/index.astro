@@ -7,15 +7,15 @@ import { Season, Compare } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
 import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
-import { faqs, hasOfferCatalog, pageSchema, services, smsTo } from '../lib/data';
+import { faqs, hasOfferCatalog, industries, pageSchema, services, smsTo } from '../lib/data';
 
 const agencyText = smsTo("Hi Adam! I'm with an agency and have a Figma project for you.");
 
 const schema = pageSchema('/', {
-  name: 'Custom web design, SEO & AI search marketing in Clovis, CA',
-  serviceType: 'Web design and search marketing',
-  audience: 'Growth-minded businesses',
-  description: 'Hand-coded websites, Google Maps SEO, and AI search optimization (ChatGPT, Gemini, Claude, Perplexity) for businesses in Clovis, Fresno, and across the US.',
+  name: 'Brand positioning, custom web design, SEO & AI search marketing in Clovis, CA',
+  serviceType: 'Brand positioning, web design, and search marketing',
+  audience: 'Growth-minded businesses across industries',
+  description: 'End-to-end brand positioning, sub-second custom websites, Google Maps SEO, AI search optimization (ChatGPT, Gemini, Claude, Perplexity), and lead attribution for businesses in Clovis, Fresno, and across the US.',
   offers: hasOfferCatalog.itemListElement,
 }, faqs);
 ---
@@ -31,25 +31,25 @@ const schema = pageSchema('/', {
       <div class="mx-auto max-w-7xl">
         <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <h2 class="font-display h-section">
-            <span class="line-mask"><span>Four services.</span></span>{" "}
-            <span class="line-mask" style="--d: 120ms"><span>Buy one or all four.</span></span>
+            <span class="line-mask"><span>Growth at every stage.</span></span>{" "}
+            <span class="line-mask" style="--d: 120ms"><span>Buy one or all five.</span></span>
           </h2>
           <p class="reveal max-w-md text-lg leading-relaxed text-ink/80">
-            Built for any business that wants more customers online — whether you need a brand-new website, stronger rankings on Google Maps and AI, or clear proof of what your marketing brings in.
+            Your end-to-end digital growth partner. From brand positioning and sub-second custom web engineering to Google Maps, AI search visibility, and retention — hire me for a single channel or the complete system.
           </p>
         </div>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
             <a
               href={s.href}
-              class={`reveal group flex flex-col rounded-[28px] border border-ink/10 ${s.tint} p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)] md:p-8`}
-              style={`--d: ${i * 80}ms`}
+              class={`reveal group flex flex-col rounded-[28px] border border-ink/10 ${s.tint} p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)] md:p-8 ${i === 0 ? 'lg:col-span-2' : ''}`}
+              style={`--d: ${i * 70}ms`}
             >
-              <span class="font-display text-[clamp(1.75rem,2.6vw,2.35rem)] font-[420] leading-[1.05] text-ink">{s.title}</span>
+              <span class="font-display text-[clamp(1.65rem,2.4vw,2.25rem)] font-[420] leading-[1.06] text-ink">{s.title}</span>
               <span class="mt-2 font-mono text-[12px] uppercase tracking-[.12em] text-ink-soft">{s.who}</span>
-              <span class="mt-4 text-[16.5px] leading-relaxed text-ink/85">{s.what}</span>
-              <span class="mt-4 border-t border-ink/15 pt-4 text-[15.5px] leading-relaxed text-ink/80">
+              <span class="mt-4 text-[16px] leading-relaxed text-ink/85">{s.what}</span>
+              <span class="mt-4 border-t border-ink/15 pt-4 text-[15px] leading-relaxed text-ink/80">
                 <strong class="font-semibold text-ink">Why it matters: </strong>{s.whyItMatters}
               </span>
               <span class="mt-auto pt-6 inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-3 font-medium text-cream transition-colors group-hover:bg-persimmon-deep">
@@ -59,19 +59,37 @@ const schema = pageSchema('/', {
           ))}
         </div>
 
-        <div class="reveal mt-8 flex flex-col gap-3 border-t border-ink/15 pt-6 text-[16.5px] leading-relaxed text-ink/80 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
-          <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <strong class="font-semibold text-ink">Specialized playbooks:</strong>
-            <a href="/services/local-seo-fresno/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Search, Maps &amp; AI Marketing</a>
-            <span aria-hidden="true" class="text-ink-soft">·</span>
-            <a href="/services/medical-web-design/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Medical &amp; Dental Practices</a>
-            <span aria-hidden="true" class="text-ink-soft">·</span>
-            <a href="/services/contractor-websites/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Contractors &amp; Home Services</a>
-          </p>
-          <p>
-            Agency or designer? I also build from your Figma files, under your name.
-            <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
-          </p>
+        <div class="reveal mt-12 border-t border-ink/15 pt-8">
+          <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+            <div class="max-w-xl">
+              <h3 class="font-display text-2xl font-[420] text-ink md:text-3xl">Industry-agnostic strategy across sectors.</h3>
+              <p class="mt-2 text-[15.5px] leading-relaxed text-ink/80">
+                Working across industries lets me spot high-margin search opportunities and conversion patterns single-niche agencies miss.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 lg:max-w-xl lg:justify-end">
+              {industries.map((ind) => (
+                <span class="rounded-full border border-ink/15 bg-paper px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[.1em] text-ink">
+                  {ind}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col gap-3 border-t border-ink/15 pt-5 text-[15.5px] leading-relaxed text-ink/80 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
+            <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <strong class="font-semibold text-ink">Deep-dive playbooks:</strong>
+              <a href="/services/local-seo-fresno/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Search, Maps &amp; AI Marketing</a>
+              <span aria-hidden="true" class="text-ink-soft">·</span>
+              <a href="/services/medical-web-design/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Healthcare &amp; Medical Architecture</a>
+              <span aria-hidden="true" class="text-ink-soft">·</span>
+              <a href="/services/contractor-websites/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Home &amp; Commercial Services</a>
+            </p>
+            <p>
+              Agency or designer? I also build from your Figma files, under your name.
+              <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -93,3 +111,4 @@ const schema = pageSchema('/', {
 
   <Footer client:visible />
 </RootLayout>
+

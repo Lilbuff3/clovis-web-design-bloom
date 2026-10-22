@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-20T23:26:05.767Z",
+  "timestamp": "2026-10-22T00:57:35.879Z",
   "total": 37,
   "passed": 37,
   "failed": 0,
@@ -280,7 +280,7 @@
           "title": "Each route has its own Service node, and FAQPage only lists questions shown on the page",
           "status": "PASS",
           "error": null,
-          "details": "4 distinct Services: Custom web design, SEO & AI search marketing in Clovis, CA | Growth-minded businesses; Search Engine, Google Maps & AI Search Marketing (SEO & GEO) | Growth-minded businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
+          "details": "4 distinct Services: Brand positioning, custom web design, SEO & AI search marketing in Clovis, CA | Growth-minded businesses across industries; Search Engine, Google Maps & AI Search Marketing (SEO & GEO) | Growth-minded businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
         },
         {
           "id": "T6.5",
@@ -296,7 +296,7 @@
           "title": "Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)",
           "status": "PASS",
           "error": null,
-          "details": "knowsAbout: Custom web design and development, Search engine optimization (SEO), Google Maps and Local SEO, Generative Engine Optimization (GEO) and AI search visibility, AI search analytics and lead attribution, Website speed and Core Web Vitals optimization, Web accessibility (WCAG 2.1 AA), Websites for medical practices and HIPAA-aware web design, Bilingual English and Spanish websites"
+          "details": "knowsAbout: Brand positioning and conversion copywriting, Custom web design and development, Search engine optimization (SEO), Google Maps and Local SEO, Generative Engine Optimization (GEO) and AI search visibility, AI search analytics, lead attribution, and retention automation, Website speed and Core Web Vitals optimization, Web accessibility (WCAG 2.1 AA), Websites for medical practices and HIPAA-aware web design, Bilingual English and Spanish websites"
         },
         {
           "id": "T6.10",

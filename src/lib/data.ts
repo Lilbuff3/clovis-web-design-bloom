@@ -8,11 +8,32 @@ export const EMAIL = "adam@cloviswebdesign.com";
 export const mailTo = (subject: string, body = "") =>
   `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}${body && `&body=${encodeURIComponent(body)}`}`;
 
+export const industries = [
+  "Professional & Legal Services",
+  "Health & Medical",
+  "Consumer & Retail Brands",
+  "Home & Commercial Services",
+  "B2B & Technology",
+  "Hospitality & Local Brands",
+  "Financial & Advisory",
+  "Creative & Marketing Agencies",
+];
+
 export const services = [
   {
     code: "01",
+    title: "Brand Positioning & Conversion Copy",
+    who: "Positioning · Messaging architecture · Visual direction · Buyer copy",
+    what: "Clear brand positioning, visual direction, and customer-facing copy written from a 15-minute interview — so visitors know within three seconds what you do and why they should pick you.",
+    whyItMatters: "Traffic is wasted if your message sounds like every other company in your market. Strong positioning turns casual browsers into high-intent inquiries before they compare prices.",
+    href: "/#pricing",
+    cta: "See brand & web builds",
+    tint: "bg-cream",
+  },
+  {
+    code: "02",
     title: "Custom Web Design & Engineering",
-    who: "Any business · Multi-page · Bilingual /es/ · Booking & intake",
+    who: "Any industry · Multi-page · Bilingual /es/ · Booking & intake",
     what: "Hand-coded websites that open in under 0.4 seconds on mobile, score 100/100 on Google PageSpeed, and put tap-to-call, text, and booking right where thumbs land.",
     whyItMatters: "Over half of mobile visitors leave a page that takes 3–4 seconds to open, and AI search crawlers time out on slow WordPress templates before reading a single word.",
     href: "/#pricing",
@@ -20,7 +41,7 @@ export const services = [
     tint: "bg-citrus",
   },
   {
-    code: "02",
+    code: "03",
     title: "Search Engine & Google Maps SEO",
     who: "Google Maps 3-Pack · High-intent service & market pages · Authority",
     what: "Google Business Profile optimization, dedicated service and market pages, and review systems that put your business at the top of Google Search and the Maps 3-Pack.",
@@ -30,7 +51,7 @@ export const services = [
     tint: "bg-sage",
   },
   {
-    code: "03",
+    code: "04",
     title: "AI Search & Answer Optimization",
     who: "ChatGPT · Google Gemini · Claude · Perplexity · Apple Siri",
     what: "Four-directory profile alignment across Google, Bing, Apple Maps, and Yelp, connected business schema, and fact-dense answer sections built for AI citation.",
@@ -40,14 +61,32 @@ export const services = [
     tint: "bg-sky",
   },
   {
-    code: "04",
-    title: "AI & Search Lead Attribution",
-    who: "Custom GA4 AI channel · Call, text & form tracking · Live audits",
-    what: "Privacy-safe analytics that separate AI search referrals (ChatGPT, Gemini, Claude, Perplexity) from regular traffic and track every phone call, text, and form lead.",
-    whyItMatters: "Default analytics buries AI referrals inside generic traffic. Clear attribution proves exactly which pages, searches, and AI answers generate your revenue.",
+    code: "05",
+    title: "AI & Search Lead Attribution & Retention",
+    who: "Custom GA4 AI channel · Call & text tracking · Review & SMS automation",
+    what: "Privacy-safe analytics that track every phone call, text, form, and AI referral — paired with automated review requests and lead follow-ups that turn first-time buyers into repeat revenue.",
+    whyItMatters: "Default analytics buries AI referrals inside generic traffic, and slow follow-up loses warm leads. Clear attribution and automated retention compound the value of every visitor.",
     href: "/#check",
     cta: "Run a live AI check",
     tint: "bg-blush",
+  },
+];
+
+export const modularSteps = [
+  {
+    step: "01",
+    title: "Choose Your Foundation",
+    body: "Start with a custom website and brand build, a standalone Search & AI visibility overhaul on your current site, or a monthly growth plan.",
+  },
+  {
+    step: "02",
+    title: "Customize Your Channels",
+    body: "Pick only the deliverables that move the needle right now — SEO and AI pages, conversion landing pages, review velocity, or lead attribution.",
+  },
+  {
+    step: "03",
+    title: "Scale As You Grow",
+    body: "Add or shift channels month-to-month as your revenue grows. No 12-month agency lock-in, and you own 100% of your code and accounts from day one.",
   },
 ];
 
@@ -57,7 +96,7 @@ export const cases = [
     client: "Kidney Specialist Inc.",
     url: "https://www.kidneyspecialistinc.com",
     urlDisplay: "kidneyspecialistinc.com",
-    trade: "Nephrology practice",
+    trade: "Healthcare & Medical Group",
     place: "Madera & Fresno, CA",
     year: "2025",
     caseStudyPath: "/case-studies/kidney-specialist-fresno/",
@@ -67,10 +106,10 @@ export const cases = [
     photoWidth: 1600,
     photoHeight: 995,
     tint: "bg-sky",
-    headline: "A medical site that never touches patient data — and scores a perfect 100.",
+    headline: "Repositioned a multi-office specialty practice for frictionless physician referrals and 100/100 speed.",
     problem: "The old forms asked patients for health details a website shouldn't be holding.",
     planted: ["Zero patient data collected online", "Printable registration & direct referral routing", "Accessible guides patients actually understand"],
-    stack: ["English + Español"],
+    stack: ["Brand & Copy", "Custom Web", "Search & AI Schema"],
     quote: {
       text: "HIPAA was my big worry. Most web people I talked to didn't really know what it meant for a website. Adam did. Our site doesn't collect any patient information, it looks professional, and referrals from other doctors are up more than 40%.",
       name: "Dr. Sheikh Mohammad Masood, MD",
@@ -87,7 +126,7 @@ export const cases = [
     client: "Big Bros Dumpster Rentals",
     url: "https://bigbrosdumpster.com",
     urlDisplay: "bigbrosdumpster.com",
-    trade: "Roll-off dumpster rental",
+    trade: "Commercial & Fleet Services",
     place: "Fresno & Clovis, CA",
     year: "2025",
     caseStudyPath: "/case-studies/dumpster-rental-fresno/",
@@ -97,10 +136,10 @@ export const cases = [
     photoWidth: 1067,
     photoHeight: 730,
     tint: "bg-blush",
-    headline: "Number one on Google for “dumpster rental Fresno.”",
+    headline: "Outranked national lead brokers to capture #1 on Google and scale from 1 truck to 5.",
     problem: "National brokers were outranking the company that actually owns the trucks.",
     planted: ["Dedicated service area pages for Fresno & Clovis", "Upfront flat pricing on the page", "Driveway protection highlighted for trust"],
-    stack: ["English + Español", "Text-to-book"],
+    stack: ["Brand Positioning", "Custom Web", "Search & Maps SEO"],
     quote: {
       text: "The national brokers were getting the calls and taking a cut of every rental. Since Adam redid our site, contractors and homeowners in Fresno and Clovis just text us straight. We had to buy 4 more trucks to keep up.",
       name: "William Maldonado Ramirez",
@@ -121,9 +160,9 @@ export const steps = [
     body: "A 15-minute call about your business, your market, and what a new customer is worth to you — plus a live check of how you show up on Google Maps, ChatGPT, Gemini, and Claude. If I don't see a clear return on investment, I'll tell you right there.",
   },
   {
-    name: "Words & Preview",
+    name: "Positioning & Preview",
     when: "Days 2–4",
-    body: "I write every word from our call and build a working preview you can try on your phone. For website builds, you see and approve the preview before you pay a dollar.",
+    body: "I clarify your positioning, write every word from our call, and build a working preview you can try on your phone. For website builds, you see and approve the preview before you pay a dollar.",
   },
   {
     name: "Engineering & Sync",
@@ -132,16 +171,16 @@ export const steps = [
   },
   {
     name: "Launch & Attribution",
-    when: "Launch + 90 Days",
-    body: "Your site and search setup go live with phone call, text, form, and AI referral tracking in Google Analytics 4. Fixes in the first 90 days are included.",
+    when: "Launch + Ongoing",
+    body: "Your site and search system go live with phone call, text, form, and AI referral tracking in Google Analytics 4 — plus optional monthly growth channels as you scale.",
   },
 ];
 
 export const compare = [
   {
     q: "Who actually does the work?",
-    them: ["An account manager", "You meet the senior strategist on the sales call. Then your website and SEO get handed off to a junior coordinator or template shop."],
-    me: ["Me. Start to finish.", "I design the pages, write the code, configure the search schema, and wire the analytics myself. When you call or text, the person doing the work picks up."],
+    them: ["An account manager", "You meet the senior strategist on the sales call. Then your brand, website, and SEO get handed off to a junior coordinator or template shop."],
+    me: ["Me. Start to finish.", "I shape the positioning, design the pages, write the code, configure the search schema, and wire the analytics myself. When you call or text, the person doing the work picks up."],
   },
   {
     q: "Who owns the website and accounts?",
@@ -154,9 +193,9 @@ export const compare = [
     me: ["Engineered for search & AI", "Pages open in under 0.4 seconds, score 100/100 on Google PageSpeed, and sync your business facts across the exact directories Google, ChatGPT, Gemini, Claude, and Siri check."],
   },
   {
-    q: "Who writes the copy?",
+    q: "Who writes the positioning and copy?",
     them: ["You do, somehow", "A blank questionnaire and a deadline — or generic machine-written filler that sounds like every other company in your industry."],
-    me: ["I do", "We talk for 15 minutes. I write clear, specific copy that answers real buyer questions and gives search engines and AI assistants the exact facts they cite."],
+    me: ["I do", "We talk for 15 minutes. I write clear, specific copy that positions your brand, answers real buyer questions, and gives search engines and AI assistants the exact facts they cite."],
   },
   {
     q: "How do you know if it's working?",
@@ -169,7 +208,7 @@ export const plans = [
   {
     code: "01",
     name: "Custom Website Build",
-    kind: "Design & Engineering",
+    kind: "Brand, Design & Engineering",
     time: "1–4 weeks",
     price: "Custom Scoped",
     terms: "one-time build · $0 until you approve the preview",
@@ -177,16 +216,16 @@ export const plans = [
     color: "bg-citrus",
     hole: "bg-paper",
     items: [
+      "Brand positioning & done-for-you copy from a 15-minute call",
       "Custom hand-coded site (<0.4s mobile load, 100/100 PageSpeed)",
-      "Working phone preview before you pay",
-      "Done-for-you words from a 15-minute call",
-      "Tap-to-call, text, form & Google Search tracking",
-      "Optional full Spanish version (/es/) or compliant intake routing",
+      "Working phone preview before you pay a dollar",
+      "Tap-to-call, text, form & Google Search conversion tracking",
+      "Optional full Spanish version (/es/) or custom intake flows",
       "90 days of free fixes after launch",
-      "You own the code, domain, and keys on day one",
+      "You own 100% of the code, domain, and keys on day one",
     ],
     not: [],
-    for: "Any business needing a fast, high-converting website they own outright — with zero monthly hostage fees.",
+    for: "Any business needing sharp positioning and a fast, high-converting website they own outright — with zero monthly hostage fees.",
   },
   {
     code: "02",
@@ -212,30 +251,34 @@ export const plans = [
   {
     code: "03",
     name: "Ongoing Search & AI Growth",
-    kind: "Monthly Marketing Partnership",
+    kind: "Modular Monthly Growth Plan",
     time: "Monthly · No lock-in",
     price: "Monthly Retainer",
-    terms: "scoped to your market & ROI · cancel with one text",
-    cta: "Discuss growth retainer",
+    terms: "pick your active channels · cancel or adjust with one text",
+    cta: "Customize a growth plan",
     color: "bg-sky",
     hole: "bg-paper",
     items: [
+      "Modular monthly deliverables tailored to your highest-ROI channel",
       "New high-intent service, product, and market pages each month",
       "Ongoing Google Maps, ChatGPT, Gemini & Claude citation growth",
-      "Review generation & reputation velocity systems",
+      "Automated review generation, SMS follow-up & retention flows",
       "Monthly lead attribution & ROI report (calls, texts, AI referrals)",
-      "Same-day text-me updates for hours, promos, photos, or copy",
-      "Priority engineering support & continuous conversion tuning",
+      "Same-day text-me updates & continuous conversion tuning",
     ],
     not: [],
-    for: "Growth-focused companies in competitive markets that want compounding search traffic, AI recommendations, and measurable monthly ROI.",
+    for: "Growth-focused companies across any industry that want an end-to-end partner for compounding search traffic, AI citations, and retention.",
   },
 ];
 
 export const faqs = [
   {
-    q: "Can I hire you just for SEO and AI search visibility if I already have a website?",
-    a: "Yes. All four services are available individually or together. If your current website converts well and loads fast, we can start with a standalone Search & AI Visibility Setup — aligning your Google Business Profile, Bing Places, Apple Business Connect, and Yelp listings, adding connected business schema, and setting up AI referral tracking.",
+    q: "Can I hire you for just one service, or customize a monthly package?",
+    a: "Yes. Every service — brand positioning, custom web engineering, Google Maps SEO, AI search optimization, and lead attribution/retention — is available standalone or combined. You can start with a single project and add or adjust monthly growth channels as your business scales.",
+  },
+  {
+    q: "Do you only work with specific industries?",
+    a: "No — I work with ambitious businesses across industries, from healthcare, legal, and professional services to retail brands, B2B companies, and commercial fleets. Working across sectors lets me bring proven conversion and search strategies from one industry into another where competitors haven't caught on yet.",
   },
   {
     q: "How does pricing work, and why don't you list fixed package prices?",
@@ -254,11 +297,12 @@ export const faqs = [
 // --- Schema.org Structured Metadata ---
 // Only things shown on the page. Google expects structured data to match what visitors see.
 export const knowsAbout = [
+  "Brand positioning and conversion copywriting",
   "Custom web design and development",
   "Search engine optimization (SEO)",
   "Google Maps and Local SEO",
   "Generative Engine Optimization (GEO) and AI search visibility",
-  "AI search analytics and lead attribution",
+  "AI search analytics, lead attribution, and retention automation",
   "Website speed and Core Web Vitals optimization",
   "Web accessibility (WCAG 2.1 AA)",
   "Websites for medical practices and HIPAA-aware web design",
@@ -268,12 +312,12 @@ export const knowsAbout = [
 // Mirrors the engagement models in `plans`.
 export const hasOfferCatalog = {
   "@type": "OfferCatalog",
-  "name": "Web Design, Search & AI Marketing Services",
+  "name": "Brand, Web Design, Search & AI Marketing Services",
   "itemListElement": [
     {
       "@type": "Offer",
       "name": "Custom Website Build",
-      "description": "Custom hand-coded website opening in under 0.4s on mobile with 100/100 Google PageSpeed, working phone preview before payment, done-for-you copywriting, call & search tracking, 90 days of free fixes, and 100% client ownership.",
+      "description": "Brand positioning and custom hand-coded website opening in under 0.4s on mobile with 100/100 Google PageSpeed, working phone preview before payment, done-for-you copywriting, call & search tracking, 90 days of free fixes, and 100% client ownership.",
     },
     {
       "@type": "Offer",
@@ -283,7 +327,7 @@ export const hasOfferCatalog = {
     {
       "@type": "Offer",
       "name": "Ongoing Search & AI Growth",
-      "description": "Month-to-month search and AI marketing partnership: new high-intent service and market pages, Google Maps and AI citation growth, review systems, monthly lead attribution reporting, and same-day updates.",
+      "description": "Modular month-to-month growth partnership: new high-intent service and market pages, Google Maps and AI citation growth, review and retention automation, monthly lead attribution reporting, and same-day updates.",
     },
   ],
 };

@@ -354,7 +354,7 @@ export function Footer() {
           </div>
           <div className="font-mono text-[12px] uppercase leading-7 tracking-[.14em]">
             <div className={footerTitle}>Services</div>
-            <a href="/#who" className="block hover:underline">All 4 Services</a>
+            <a href="/#who" className="block hover:underline">All 5 Services</a>
             <a href="/services/local-seo-fresno/" className="block hover:underline">Search, Maps &amp; AI</a>
             <a href="/services/medical-web-design/" className="block hover:underline">Medical Web Design</a>
             <a href="/services/contractor-websites/" className="block hover:underline">Contractor Sites</a>
@@ -387,3 +387,4 @@ export function Footer() {
     </footer>
   );
 }
+

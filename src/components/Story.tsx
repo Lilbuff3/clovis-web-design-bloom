@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { faqs, plans, smsTo } from "../lib/data";
+import { faqs, modularSteps, plans, smsTo } from "../lib/data";
 import { useGlobalReveal } from "../lib/hooks";
 
 export function Grower() {
@@ -52,7 +52,7 @@ export function Grower() {
           </h2>
           <div className="reveal mt-8 max-w-2xl space-y-5 text-[18px] leading-relaxed text-ink/85">
             <p>
-              I'm <strong className="font-semibold">Adam</strong>. Based in Clovis, California, I work with businesses across California and the US — and I do the work myself from start to finish. When you call or text, you talk straight to the person who designed your pages, wrote the code, and configured your search and AI visibility.
+              I'm <strong className="font-semibold">Adam</strong>. Based in Clovis, California, I work with businesses across California and the US — and I do the work myself from start to finish. When you call or text, you talk straight to the person who shaped your brand positioning, engineered your pages, and configured your search and AI visibility.
             </p>
             <p>
               I write every word from our 15-minute call, align your business across Google Search, Google Maps, Bing, Apple Maps, and Yelp so both search engines and AI assistants recommend you, and wire your analytics so you see every call, text, and lead.
@@ -83,16 +83,29 @@ export function Stand() {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <h2 className="font-display h-section mx-auto max-w-4xl">
-            <span className="line-mask"><span>How we can work</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>together.</span></span>
+            <span className="line-mask"><span>Modular growth,</span></span>{" "}
+            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>built around what you need.</span></span>
           </h2>
           <p className="reveal mx-auto mt-6 max-w-2xl text-lg text-ink/80">
-            Every engagement is scoped to your goals, your market competition, and the return it can generate for your business. Hire me for a custom website build, a standalone Search &amp; AI overhaul, or an ongoing monthly growth partnership.
+            Every engagement is scoped to your goals, your market competition, and the return it can generate. Start with one focused service or combine channels as you grow.
           </p>
         </div>
 
+        {/* Branded-style 3-Step Modular Selector Framework */}
+        <ol className="reveal mt-12 grid gap-8 border-y border-ink/15 py-8 md:grid-cols-3">
+          {modularSteps.map((m) => (
+            <li key={m.step} className="flex flex-col">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-xs font-semibold uppercase tracking-[.16em] text-persimmon-deep">Step {m.step}</span>
+                <h3 className="font-display text-2xl font-[440] text-ink">{m.title}</h3>
+              </div>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-ink/80">{m.body}</p>
+            </li>
+          ))}
+        </ol>
+
         {/* Scoped Engagement Cards */}
-        <div className="mt-16">
+        <div className="mt-12">
           <div className="grid gap-8 md:grid-cols-3 lg:gap-8">
             {plans.map((pl) => (
               <div key={pl.code} className="flex flex-col">

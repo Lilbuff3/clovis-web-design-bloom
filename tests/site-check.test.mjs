@@ -386,7 +386,7 @@ console.log('Outreach URLs, Analytics & SEO discovery files: 5 cases ✓');
 import { services, plans, hasOfferCatalog } from '../src/lib/data.ts';
 
 // 1. Services integrity (4 Core Services + Why Each Matters)
-assert.equal(services.length, 4, 'Expected exactly 4 core agency services');
+assert.equal(services.length, 5, 'Expected 5 lifecycle agency services');
 for (const s of services) {
   assert.ok(s.title && s.title.length > 5, 'Service must have a title');
   assert.ok(s.what && s.what.length > 20, `${s.title} must explain what it is`);
@@ -465,3 +465,4 @@ for (const p of ['case-studies/dumpster-rental-fresno/index.html', 'case-studies
 }
 
 console.log('Requirement R4 (Case Studies, Schema/GEO, Service Pages & llms.txt): 4 suites ✓');
+

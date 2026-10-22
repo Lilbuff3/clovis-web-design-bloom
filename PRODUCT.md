@@ -15,7 +15,7 @@ web
 
 ## Product Purpose
 
-Clovis Web Design is a modern web engineering and search/AI marketing studio that helps businesses grow their online visibility, leads, and revenue. We offer four distinct, unbundled services—Custom High-Performance Web Design, Search Engine & Google Maps Optimization (SEO), AI Search & Answer Engine Optimization (GEO for ChatGPT, Gemini, Claude, and Siri), and AI/Search Lead Attribution—each scoped to the client's goals, market, and ROI.
+Clovis Web Design is a modern web engineering and search/AI marketing studio that helps businesses grow their online visibility, leads, and revenue. We offer five distinct, unbundled lifecycle services—Brand Positioning & Conversion Copy, Custom High-Performance Web Design, Search Engine & Google Maps Optimization (SEO), AI Search & Answer Engine Optimization (GEO for ChatGPT, Gemini, Claude, and Siri), and AI/Search Lead Attribution & Retention—each scoped to the client's goals, market, and ROI.
 
 ## Positioning
 
@@ -61,3 +61,4 @@ An authoritative, modern web engineering and online marketing partner based in C
 
 - Compliance Target: WCAG 2.1 AA and 100% Accessibility Tree naming for both human screen readers and autonomous AI browsing agents.
 - High outdoor contrast and minimum 48x48px touch targets on mobile.
+

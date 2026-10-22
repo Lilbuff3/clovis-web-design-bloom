@@ -1,8 +1,8 @@
 # Clovis Web Design
 
-> Custom web design, Google Maps SEO, AI search optimization (ChatGPT, Gemini, Claude, Perplexity, Siri), and lead attribution for growth-minded businesses. Built and operated by Adam in Clovis, California.
+> End-to-end brand positioning, custom web design, Google Maps SEO, AI search optimization (ChatGPT, Gemini, Claude, Perplexity, Siri), and lead attribution & retention for growth-minded businesses across industries. Built and operated by Adam in Clovis, California.
 
-Clovis Web Design is an independent web engineering and search/AI marketing studio operated by Adam in Clovis, California, serving businesses in Fresno, Clovis, the Central Valley, and across the United States. Sites are hand-coded with modern web standards (Astro, React, Tailwind CSS) for sub-0.4-second mobile loading, 100/100 Google PageSpeed, Google Maps 3-Pack rankings, and AI answer engine citations. No WordPress templates, no page builders, zero monthly hostage fees, and 100% client asset ownership from day one.
+Clovis Web Design is an independent brand, web engineering, and search/AI marketing studio operated by Adam in Clovis, California, serving businesses in Fresno, Clovis, the Central Valley, and across the United States. Sites are hand-coded with modern web standards (Astro, React, Tailwind CSS) for sub-0.4-second mobile loading, 100/100 Google PageSpeed, Google Maps 3-Pack rankings, and AI answer engine citations. No WordPress templates, no page builders, zero monthly hostage fees, and 100% client asset ownership from day one.
 
 ## Contact Information
 - Location: Clovis, CA (serving Fresno, Clovis, California, and the US)
@@ -14,21 +14,22 @@ Clovis Web Design is an independent web engineering and search/AI marketing stud
 - [Full AI Documentation](https://cloviswebdesign.com/llms-full.txt): Comprehensive technical and service reference.
 - [AI Resource Catalog](https://cloviswebdesign.com/.well-known/ai-catalog.json): Machine-readable resource and tool catalog.
 
-## Four Core Services (Available Individually or Combined)
+## Five Lifecycle Services (Available Individually or Combined)
+- [Brand Positioning & Conversion Copy](https://cloviswebdesign.com/#who): Clear brand positioning, visual direction, and customer-facing copy written from a 15-minute interview so buyers understand within three seconds what you do and why they should pick you.
 - [Custom Web Design & Engineering](https://cloviswebdesign.com/#who): Hand-coded static websites opening in under 0.4s on mobile, scoring 100/100 on Google PageSpeed, built to WCAG 2.1 AA accessibility, with optional full Spanish (/es/) and compliant intake routing. Over half of mobile visitors abandon pages that take 3–4 seconds to load, and live AI search crawlers time out on slow templates before reading a single word.
 - [Search Engine & Google Maps SEO](https://cloviswebdesign.com/services/local-seo-fresno/): Google Business Profile optimization, dedicated high-intent service and market pages, and review velocity systems to rank in the Google Maps 3-Pack and organic search results. Captures ready-to-buy searchers at the top of Google without paying per click.
 - [AI Search & Answer Optimization (GEO)](https://cloviswebdesign.com/services/local-seo-fresno/#ai-search): Four-directory entity sync across Google Business Profile, Bing Places, Apple Business Connect, and Yelp, connected JSON-LD @graph schema, fact-dense answer blocks, and /llms.txt discovery files so ChatGPT, Google Gemini, Claude, Perplexity, and Apple Siri recommend the business.
-- [AI & Search Lead Attribution](https://cloviswebdesign.com/#check): Custom Google Analytics 4 (GA4) channel configuration isolating referrals from ChatGPT, Gemini, Claude, and Perplexity alongside phone call, SMS, and form conversion tracking.
+- [AI & Search Lead Attribution & Retention](https://cloviswebdesign.com/#check): Custom Google Analytics 4 (GA4) channel configuration isolating referrals from ChatGPT, Gemini, Claude, and Perplexity alongside phone call, SMS, form conversion tracking, and automated review/lead retention flows.
 
-## Specialized Industry Playbooks
+## Specialized Playbooks
 - [Search, Google Maps & AI Marketing](https://cloviswebdesign.com/services/local-seo-fresno/): Full breakdown of how Google, ChatGPT, Gemini, Claude, and Siri verify and recommend businesses.
 - [Medical & Dental Practice Web Design](https://cloviswebdesign.com/services/medical-web-design/): Websites for clinics, physicians, and dentists that collect zero patient health information online, built to WCAG 2.1 AA accessibility standards.
 - [Contractor & Trade Websites](https://cloviswebdesign.com/services/contractor-websites/): Built for contractors and home service companies with tap-to-call and tap-to-text on every screen and sub-second field cellular loading.
 
 ## Engagement Models
-- [Custom Website Build](https://cloviswebdesign.com/#pricing): Hand-coded custom website (<0.4s mobile load, 100/100 PageSpeed), working phone preview before you pay anything ($0 if you don't approve the preview), done-for-you copywriting from a 15-minute discovery call, tap-to-call/SMS/search tracking, 90 days of free fixes after launch, and 100% client ownership of code, domain, and hosting.
+- [Custom Website Build](https://cloviswebdesign.com/#pricing): Brand positioning and hand-coded custom website (<0.4s mobile load, 100/100 PageSpeed), working phone preview before you pay anything ($0 if you don't approve the preview), done-for-you copywriting from a 15-minute discovery call, tap-to-call/SMS/search tracking, 90 days of free fixes after launch, and 100% client ownership of code, domain, and hosting.
 - [Search & AI Visibility Setup](https://cloviswebdesign.com/#pricing): Standalone overhaul or add-on including four-directory profile sync across Google Maps, Bing Places, Apple Business Connect, and Yelp, connected LocalBusiness/Service/FAQPage JSON-LD structured data, fact-dense answer architecture, /llms.txt discovery files, and custom GA4 AI referral tracking.
-- [Ongoing Search & AI Growth](https://cloviswebdesign.com/#pricing): Month-to-month partnership including new high-intent service and market pages each month, ongoing Google Maps, ChatGPT, Gemini, and Claude citation and review growth, monthly lead attribution reporting, and same-day text-me website updates. Cancel anytime with one text.
+- [Ongoing Search & AI Growth](https://cloviswebdesign.com/#pricing): Modular month-to-month partnership including new high-intent service and market pages each month, ongoing Google Maps, ChatGPT, Gemini, and Claude citation and review growth, monthly lead attribution reporting, and same-day text-me website updates. Cancel anytime with one text.
 
 ## Verified Case Studies
 - [Big Bros Dumpster Rentals Case Study](https://cloviswebdesign.com/case-studies/dumpster-rental-fresno/): Roll-off dumpster rental in Fresno & Clovis, CA. Ranked #1 on Google for "dumpster rental Fresno" and added 4 trucks to keep up with calls.

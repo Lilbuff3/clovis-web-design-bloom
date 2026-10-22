@@ -63,9 +63,10 @@ export function Hero() {
 
         <div className="mt-6 grid max-w-4xl gap-6 opacity-100 md:grid-cols-[1.4fr_1fr]">
           <p className="max-w-xl text-lg leading-relaxed text-ink md:text-xl">
-            Based in Clovis, California, I build{" "}
-            <strong className="font-semibold">sub-second custom websites</strong> and run{" "}
-            <strong className="font-semibold">Google Maps &amp; AI search marketing</strong> for businesses that want more calls, leads, and revenue. Hire me for a single service or the full system — and for websites, you see a working preview on your phone before you pay a dollar.
+            Your end-to-end digital growth partner in Clovis, California. I unite{" "}
+            <strong className="font-semibold">brand positioning</strong>,{" "}
+            <strong className="font-semibold">sub-second custom websites</strong>, and{" "}
+            <strong className="font-semibold">Google Maps &amp; AI search marketing</strong> for businesses across industries. Hire me for a single channel or the full growth system — and for websites, you see a working preview on your phone before you pay a dollar.
           </p>
           <div className="flex flex-col items-start gap-4">
             <a href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")} data-magnetic="0.3" className="group relative flex items-center gap-3 rounded-full bg-ink py-2.5 pl-2.5 pr-7 text-cream transition-all duration-300 hover:bg-persimmon-deep hover:shadow-[0_10px_30px_-10px_rgba(238,90,47,.5)]">
