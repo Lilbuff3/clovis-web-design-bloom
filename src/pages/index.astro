@@ -2,12 +2,13 @@
 import RootLayout from '../layouts/RootLayout.astro';
 import { Nav } from '../components/Chrome';
 import { Hero } from '../components/Hero';
+import { LifecycleExplorer } from '../components/LifecycleExplorer';
 import { Harvest } from '../components/Harvest';
 import { Season, Compare } from '../components/Season';
 import { Grower, Stand, FAQ } from '../components/Story';
 import { LeadLeakAudit } from '../components/LeadLeakAudit';
 import { Contact, Footer } from '../components/Contact';
-import { faqs, hasOfferCatalog, industries, pageSchema, services, smsTo } from '../lib/data';
+import { faqs, hasOfferCatalog, industries, pageSchema, smsTo } from '../lib/data';
 
 const agencyText = smsTo("Hi Adam! I'm with an agency and have a Figma project for you.");
 
@@ -23,78 +24,331 @@ const schema = pageSchema('/', {
 <RootLayout schema={schema} preloadImage="/images/hero.webp">
   <Nav client:load />
 
-  <main id="main" class="relative z-10 rounded-b-[40px] shadow-[0_40px_60px_-30px_rgba(30,43,35,.35)] md:rounded-b-[72px] bg-paper">
+  <main id="main" class="relative z-10 bg-white text-ink">
     <Hero client:load />
 
-    <section id="who" class="relative px-5 py-14 md:px-8 md:py-20">
+    <section id="who" class="relative overflow-hidden">
       <span id="services" class="absolute -top-24 pointer-events-none" aria-hidden="true"></span>
-      <div class="mx-auto max-w-7xl">
-        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <h2 class="font-display h-section">
-            <span class="line-mask"><span>Growth at every stage.</span></span>{" "}
-            <span class="line-mask" style="--d: 120ms"><span>Buy one or all five.</span></span>
-          </h2>
-          <p class="reveal max-w-md text-lg leading-relaxed text-ink/80">
-            Your end-to-end digital growth partner. From brand positioning and sub-second custom web engineering to Google Maps, AI search visibility, and retention — hire me for a single channel or the complete system.
-          </p>
-        </div>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <a
-              href={s.href}
-              class={`reveal group flex flex-col rounded-[28px] border border-ink/10 ${s.tint} p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(30,43,35,.3)] md:p-8 ${i === 0 ? 'lg:col-span-2' : ''}`}
-              style={`--d: ${i * 70}ms`}
-            >
-              <span class="font-display text-[clamp(1.65rem,2.4vw,2.25rem)] font-[420] leading-[1.06] text-ink">{s.title}</span>
-              <span class="mt-2 font-mono text-[12px] uppercase tracking-[.12em] text-ink-soft">{s.who}</span>
-              <span class="mt-4 text-[16px] leading-relaxed text-ink/85">{s.what}</span>
-              <span class="mt-4 border-t border-ink/15 pt-4 text-[15px] leading-relaxed text-ink/80">
-                <strong class="font-semibold text-ink">Why it matters: </strong>{s.whyItMatters}
-              </span>
-              <span class="mt-auto pt-6 inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-3 font-medium text-cream transition-colors group-hover:bg-persimmon-deep">
-                {s.cta} <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </a>
-          ))}
-        </div>
-
-        <div class="reveal mt-12 border-t border-ink/15 pt-8">
-          <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
-            <div class="max-w-xl">
-              <h3 class="font-display text-2xl font-[420] text-ink md:text-3xl">Industry-agnostic strategy across sectors.</h3>
-              <p class="mt-2 text-[15.5px] leading-relaxed text-ink/80">
-                Working across industries lets me spot high-margin search opportunities and conversion patterns single-niche agencies miss.
-              </p>
+      <!-- Part A: Deep Obsidian 5-Pillar Lifecycle Explorer -->
+      <div class="bg-[#151515] px-5 py-20 text-white md:px-8 md:py-28">
+        <div class="mx-auto max-w-7xl">
+          <div class="flex flex-col justify-between gap-6 border-b border-white/12 pb-10 lg:flex-row lg:items-end">
+            <div class="max-w-3xl">
+              <h2 class="font-sans text-[clamp(2.25rem,4.8vw,4.25rem)] font-medium leading-[0.96] tracking-[-0.045em] text-white">
+                Growth at every stage.{" "}
+                <span class="text-[#FF4D1C]">Hire me for one channel or all five.</span>
+              </h2>
             </div>
-            <div class="flex flex-wrap gap-2 lg:max-w-xl lg:justify-end">
-              {industries.map((ind) => (
-                <span class="rounded-full border border-ink/15 bg-paper px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[.1em] text-ink">
-                  {ind}
-                </span>
-              ))}
+            <p class="max-w-md text-[17px] leading-relaxed text-white/80">
+              Your end-to-end digital growth partner. From brand positioning and sub-second custom web engineering to Google Maps, AI search visibility, and retention — deploy a single high-impact service or the complete system.
+            </p>
+          </div>
+
+          <LifecycleExplorer client:load />
+        </div>
+      </div>
+
+      <!-- Part B: Editorial White "We Find Green Space" Cross-Industry Section -->
+      <div class="bg-white px-5 py-20 text-[#151515] md:px-8 md:py-28">
+        <div class="mx-auto max-w-7xl">
+          <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+            <!-- Left Column: Thesis & 16-Industry Matrix -->
+            <div class="lg:col-span-7">
+              <h3 class="font-sans text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[0.98] tracking-[-0.045em] text-[#151515]">
+                We find green space, not just market share.
+              </h3>
+              <p class="mt-5 max-w-2xl text-[17.5px] leading-relaxed text-ink/80">
+                Single-niche agencies recycle the exact same layout, stock headlines, and keyword playbook for fifty businesses in the same category — until every competitor looks and sounds identical.
+              </p>
+              <p class="mt-3 max-w-2xl text-[16.5px] leading-relaxed text-ink/80">
+                Engineering across 16+ industries lets me bring proven conversion mechanics, sub-second static architecture, and four-directory AI citation strategies from high-velocity markets into yours before local competitors catch on.
+              </p>
+
+              <div class="mt-8">
+                <div class="font-mono text-[11px] uppercase tracking-[.12em] text-ink-soft">
+                  CROSS-SECTOR EXPERIENCE · 16 INDUSTRIES SERVED
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {industries.map((ind) => (
+                    <span class="rounded-[8px] border border-[#151515]/12 bg-[#EDEDED] px-3.5 py-2 font-mono text-[11px] uppercase tracking-[.08em] text-[#151515]">
+                      {ind}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Architectural Overlapping Venn Diagram Card -->
+            <div class="lg:col-span-5">
+              <div class="rounded-[16px] border border-[#151515]/12 bg-[#151515] p-7 text-white md:p-8">
+                <div class="flex items-center justify-between border-b border-white/12 pb-3">
+                  <span class="font-mono text-[11px] uppercase tracking-[.12em] text-white/75">
+                    MARKET POSITIONING TOPOLOGY
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[.1em] text-[#00FF08]">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#00FF08]"></span>
+                    HIGH-MARGIN ZONE
+                  </span>
+                </div>
+
+                <div class="my-4 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 420 260"
+                    class="h-auto w-full max-w-[390px]"
+                    aria-label="Venn diagram comparing crowded market templates with custom green space opportunity"
+                  >
+                    <!-- Subtle Architectural Grid Lines -->
+                    <line x1="16" y1="130" x2="404" y2="130" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <line x1="210" y1="16" x2="210" y2="244" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+                    <!-- Left Circle: Crowded Market -->
+                    <circle
+                      cx="142"
+                      cy="130"
+                      r="94"
+                      fill="rgba(255,255,255,0.03)"
+                      stroke="rgba(255,255,255,0.28)"
+                      stroke-width="1.25"
+                      stroke-dasharray="4 4"
+                    />
+                    <text
+                      x="92"
+                      y="102"
+                      text-anchor="middle"
+                      fill="rgba(255,255,255,0.75)"
+                      font-size="11"
+                      font-family="var(--font-mono), monospace"
+                      letter-spacing="0.06em"
+                    >
+                      CROWDED
+                    </text>
+                    <text
+                      x="92"
+                      y="124"
+                      text-anchor="middle"
+                      fill="rgba(255,255,255,0.85)"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                    >
+                      Slow WP Sites
+                    </text>
+                    <text
+                      x="92"
+                      y="142"
+                      text-anchor="middle"
+                      fill="rgba(255,255,255,0.85)"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                    >
+                      Lead Brokers
+                    </text>
+                    <text
+                      x="92"
+                      y="160"
+                      text-anchor="middle"
+                      fill="rgba(255,255,255,0.85)"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                    >
+                      Lookalike Copy
+                    </text>
+
+                    <!-- Right Circle: Your Green Space -->
+                    <circle
+                      cx="278"
+                      cy="130"
+                      r="94"
+                      fill="rgba(255, 77, 28, 0.14)"
+                      stroke="#FF4D1C"
+                      stroke-width="2"
+                    />
+                    <circle
+                      cx="278"
+                      cy="130"
+                      r="102"
+                      fill="none"
+                      stroke="#FF4D1C"
+                      stroke-width="1"
+                      stroke-dasharray="3 5"
+                      opacity="0.55"
+                    />
+                    <text
+                      x="328"
+                      y="102"
+                      text-anchor="middle"
+                      fill="#00FF08"
+                      font-size="11"
+                      font-family="var(--font-mono), monospace"
+                      font-weight="600"
+                      letter-spacing="0.06em"
+                    >
+                      GREEN SPACE
+                    </text>
+                    <text
+                      x="328"
+                      y="124"
+                      text-anchor="middle"
+                      fill="#FFFFFF"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                      font-weight="500"
+                    >
+                      &lt;0.4s Static
+                    </text>
+                    <text
+                      x="328"
+                      y="142"
+                      text-anchor="middle"
+                      fill="#FFFFFF"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                      font-weight="500"
+                    >
+                      4-Dir AI Sync
+                    </text>
+                    <text
+                      x="328"
+                      y="160"
+                      text-anchor="middle"
+                      fill="#FFFFFF"
+                      font-size="11.5"
+                      font-family="var(--font-sans), sans-serif"
+                      font-weight="500"
+                    >
+                      Direct SMS/Call
+                    </text>
+
+                    <!-- Center Intersection Highlight Node -->
+                    <circle cx="210" cy="130" r="18" fill="#151515" stroke="#00FF08" stroke-width="1.5" />
+                    <circle cx="210" cy="130" r="4" fill="#00FF08" />
+                    <text
+                      x="210"
+                      y="164"
+                      text-anchor="middle"
+                      fill="#FFFFFF"
+                      font-size="11"
+                      font-family="var(--font-mono), monospace"
+                      font-weight="600"
+                    >
+                      ROI EDGE
+                    </text>
+                  </svg>
+                </div>
+
+                <div class="border-t border-white/12 pt-4 text-[14px] leading-relaxed text-white/80">
+                  When your positioning is clear, your pages load in 0.4 seconds, and AI assistants verify your facts across all four directories, you stop competing on price.
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="mt-6 flex flex-col gap-3 border-t border-ink/15 pt-5 text-[15.5px] leading-relaxed text-ink/80 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
-            <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <strong class="font-semibold text-ink">Deep-dive playbooks:</strong>
-              <a href="/services/local-seo-fresno/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Search, Maps &amp; AI Marketing</a>
-              <span aria-hidden="true" class="text-ink-soft">·</span>
-              <a href="/services/medical-web-design/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Healthcare &amp; Medical Architecture</a>
-              <span aria-hidden="true" class="text-ink-soft">·</span>
-              <a href="/services/contractor-websites/" class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Home &amp; Commercial Services</a>
-            </p>
-            <p>
-              Agency or designer? I also build from your Figma files, under your name.
-              <a href={agencyText} class="inline-flex min-h-12 items-center font-medium text-ink underline decoration-persimmon decoration-2 underline-offset-4">Text me the project</a>
-            </p>
+          <!-- Deep-Dive Industry & Search Playbooks Bar -->
+          <div class="mt-14 border-t border-[#151515]/12 pt-10">
+            <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+              <div>
+                <h4 class="font-sans text-2xl font-medium tracking-[-0.03em] text-[#151515]">
+                   Specialized playbooks &amp; modular architecture
+                </h4>
+                <p class="mt-1 text-[15.5px] text-ink/80">
+                  Explore how the 5-stage system adapts to high-intent local search, healthcare referrals, and commercial fleets.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <a
+                  href="/services/"
+                  class="inline-flex items-center gap-2 rounded-[8px] border border-[#151515]/15 bg-white px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[.1em] text-[#151515] transition hover:border-[#151515] hover:bg-[#EDEDED]"
+                >
+                  All 5 Lifecycle Services →
+                </a>
+                <a
+                  href="/packages/"
+                  class="inline-flex items-center gap-2 rounded-[8px] bg-[#151515] px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[.1em] text-white transition hover:bg-[#FF4D1C] hover:text-[#151515]"
+                >
+                  Modular Growth Packages →
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-6 grid gap-5 md:grid-cols-3">
+              <a
+                href="/services/local-seo-fresno/"
+                class="group flex flex-col justify-between rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition hover:-translate-y-0.5 hover:border-[#151515]/30"
+              >
+                <div>
+                  <span class="font-mono text-[11px] uppercase tracking-[.12em] text-ink-soft">
+                    PLAYBOOK 01 · SEARCH &amp; AI
+                  </span>
+                  <div class="mt-2 font-sans text-xl font-medium tracking-[-0.02em] text-[#151515]">
+                    Search, Google Maps &amp; AI Marketing
+                  </div>
+                  <p class="mt-2 text-[14.5px] leading-relaxed text-ink/80">
+                    How Google Maps, ChatGPT, Gemini, Claude, and Siri choose which businesses to recommend first.
+                  </p>
+                </div>
+                <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[.1em] text-[#151515] group-hover:text-persimmon-deep">
+                  Explore Search &amp; GEO Playbook <span aria-hidden="true">→</span>
+                </span>
+              </a>
+
+              <a
+                href="/services/medical-web-design/"
+                class="group flex flex-col justify-between rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition hover:-translate-y-0.5 hover:border-[#151515]/30"
+              >
+                <div>
+                  <span class="font-mono text-[11px] uppercase tracking-[.12em] text-ink-soft">
+                    PLAYBOOK 02 · HEALTHCARE
+                  </span>
+                  <div class="mt-2 font-sans text-xl font-medium tracking-[-0.02em] text-[#151515]">
+                    Healthcare &amp; Medical Practice Web Design
+                  </div>
+                  <p class="mt-2 text-[14.5px] leading-relaxed text-ink/80">
+                    Privacy-safe architecture, frictionless physician referral routing, and WCAG 2.1 AA patient accessibility.
+                  </p>
+                </div>
+                <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[.1em] text-[#151515] group-hover:text-persimmon-deep">
+                  Explore Medical Web Architecture <span aria-hidden="true">→</span>
+                </span>
+              </a>
+
+              <a
+                href="/services/contractor-websites/"
+                class="group flex flex-col justify-between rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition hover:-translate-y-0.5 hover:border-[#151515]/30"
+              >
+                <div>
+                  <span class="font-mono text-[11px] uppercase tracking-[.12em] text-ink-soft">
+                    PLAYBOOK 03 · TRADES &amp; FLEETS
+                  </span>
+                  <div class="mt-2 font-sans text-xl font-medium tracking-[-0.02em] text-[#151515]">
+                    Contractor &amp; Commercial Fleet Websites
+                  </div>
+                  <p class="mt-2 text-[14.5px] leading-relaxed text-ink/80">
+                    Outrank national lead brokers with sub-second service area pages and direct thumb-zone call and text dispatch.
+                  </p>
+                </div>
+                <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[.1em] text-[#151515] group-hover:text-persimmon-deep">
+                  Explore Contractor &amp; Fleet Builds <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="mt-6 flex flex-col justify-between gap-3 rounded-[12px] border border-[#151515]/10 bg-white px-5 py-4 text-[15px] text-ink/80 sm:flex-row sm:items-center">
+              <span>
+                <strong class="font-semibold text-[#151515]">Creative agency or design studio?</strong> I also engineer white-label builds straight from your Figma files under your brand.
+              </span>
+              <a
+                href={agencyText}
+                class="inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[.1em] text-[#151515] underline decoration-[#FF4D1C] decoration-2 underline-offset-4"
+              >
+                Text me the project →
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="check" class="px-5 pb-14 md:px-8 md:pb-20">
+    <section id="check" class="bg-[#151515] px-5 py-16 md:px-8 md:py-24">
       <div class="mx-auto max-w-7xl">
         <LeadLeakAudit client:visible />
       </div>
@@ -111,4 +365,3 @@ const schema = pageSchema('/', {
 
   <Footer client:visible />
 </RootLayout>
-

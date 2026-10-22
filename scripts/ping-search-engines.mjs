@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Submits all 4 canonical cloviswebdesign.com URLs to IndexNow (Bing, ChatGPT Search,
+ * Submits all canonical cloviswebdesign.com URLs to IndexNow (Bing, ChatGPT Search,
  * DuckDuckGo, Yandex) so new/updated pages are crawled immediately upon deploy.
  */
 
@@ -10,6 +10,8 @@ const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
 export const CANONICAL_URLS = [
   `https://${HOST}/`,
+  `https://${HOST}/services/`,
+  `https://${HOST}/packages/`,
   `https://${HOST}/services/medical-web-design/`,
   `https://${HOST}/services/contractor-websites/`,
   `https://${HOST}/services/local-seo-fresno/`,

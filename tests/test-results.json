@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-22T00:57:35.879Z",
+  "timestamp": "2026-10-22T05:58:25.094Z",
   "total": 37,
   "passed": 37,
   "failed": 0,
@@ -31,7 +31,7 @@
           "title": "Zero empty client-side mounting shells (<div id=\"root\"></div>) in dist/",
           "status": "PASS",
           "error": null,
-          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 7 HTML files"
+          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 9 HTML files"
         },
         {
           "id": "T1.4",
@@ -206,7 +206,7 @@
           "title": "Adam's last name appears nowhere in the built site",
           "status": "PASS",
           "error": null,
-          "details": "First name only across 12 built files"
+          "details": "First name only across 14 built files"
         },
         {
           "id": "T4.4",
