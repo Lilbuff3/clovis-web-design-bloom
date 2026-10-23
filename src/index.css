@@ -2,29 +2,50 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f7f0e3;
-  --color-cream: #fcf8f0;
-  --color-ink: #1e2b23;
-  --color-ink-soft: #4a5a4f;
-  --color-persimmon: #ee5a2f;
-  --color-persimmon-deep: #c9431d;
-  --color-citrus: #ffb43b;
-  --color-leaf: #2e6a4c;
-  --color-sage: #dbe5cf;
-  --color-sky: #cfe2ee;
-  --color-blush: #f7d3bf;
+  --color-paper: #ffffff;
+  --color-cream: #ededed;
+  --color-ink: #151515;
+  --color-ink-soft: #525252;
+  --color-persimmon: #ff4d1c;
+  --color-persimmon-deep: #e03e10;
+  --color-citrus: #ff4d1c;
+  --color-leaf: #00a843;
+  --color-sage: #ededed;
+  --color-sky: #ededed;
+  --color-blush: #ededed;
+  --color-obsidian: #151515;
+  --color-obsidian-surface: #1e1e1e;
+  --color-stone: #ededed;
+  --color-signal: #ff4d1c;
+  --color-emerald: #00ff08;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
 
   --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-up: marquee-up 34s linear infinite;
+  --animate-marquee-down: marquee-down 38s linear infinite;
   --animate-sway: sway 5s ease-in-out infinite;
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes marquee-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+.animate-marquee-up {
+  animation: marquee-up 34s linear infinite;
+}
+.animate-marquee-down {
+  animation: marquee-down 38s linear infinite;
 }
 @keyframes sway {
   0%, 100% { transform: rotate(-2.2deg); }
@@ -71,13 +92,13 @@
 
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(238, 90, 47, 0.55);
+    box-shadow: 0 0 0 0 rgba(255, 77, 28, 0.55);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(238, 90, 47, 0);
+    box-shadow: 0 0 0 10px rgba(255, 77, 28, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(238, 90, 47, 0);
+    box-shadow: 0 0 0 0 rgba(255, 77, 28, 0);
   }
 }
 
@@ -132,23 +153,31 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size-adjust: from-font;
   overflow-x: hidden;
 }
 ::selection {
-  background: var(--color-citrus);
-  color: var(--color-ink);
+  background: var(--color-persimmon);
+  color: #ffffff;
 }
-/* Keyboard focus: an ink ring set off the element, so it shows on dark buttons, paper, citrus and the orange footer.
+/* Keyboard focus: an ink ring set off the element, so it shows on dark buttons, paper, stone and the footer.
    In the base layer so a component's own focus style (inputs, chips) still wins. */
 @layer base {
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-persimmon);
     outline-offset: 3px;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p, li, blockquote {
+    text-wrap: pretty;
   }
 }
 
 .font-display {
   font-family: var(--font-display);
+  font-size-adjust: from-font;
   font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
   letter-spacing: -0.02em;
 }
@@ -156,25 +185,19 @@ body {
 .wonk {
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
 }
-/* Section heading role: one size for every section between the hero and the closing "Start with a text.",
-   so the hero and the close stay the only display-size moments. */
+/* Section heading role: tightly tracked geometric sans display styling modeled on Branded Agency's Satoshi. */
 .h-section {
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
-  font-weight: 420;
-  line-height: 0.95;
+  font-family: var(--font-sans);
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
   text-wrap: balance;
 }
 
-/* Paper grain overlay */
+/* Paper grain overlay disabled for crisp architectural surfaces */
 .grain::after {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.09;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0 0.05 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+  display: none;
 }
 
 /* Reveal on scroll */
@@ -194,13 +217,11 @@ body {
 .line-mask {
   display: block;
   overflow: hidden;
-  /* room for Fraunces descenders (y, g, p) under the tight leading-[0.9x] headlines */
   padding-bottom: 0.2em;
   margin-bottom: -0.2em;
 }
 .line-mask > span {
   display: inline-block;
-  /* must clear the padding too: (0.9 + 0.2) / 0.9 ≈ 122% */
   transform: translateY(130%);
   transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.1, 1);
   transition-delay: var(--d, 0ms);
@@ -211,7 +232,7 @@ body {
 }
 
 .arch {
-  border-radius: 999px 999px 28px 28px;
+  border-radius: 16px;
 }
 
 .dotted-rule {
@@ -223,13 +244,13 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #e9e2d4 25%, #f4eee3 50%, #e9e2d4 75%);
+  background: linear-gradient(90deg, #ededed 25%, #ffffff 50%, #ededed 75%);
   background-size: 200% 100%;
   animation: shimmer 1.2s linear infinite;
 }
 
 .tag-hole {
-  box-shadow: inset 0 1px 2px rgba(30, 43, 35, 0.25);
+  box-shadow: inset 0 1px 2px rgba(21, 21, 21, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {

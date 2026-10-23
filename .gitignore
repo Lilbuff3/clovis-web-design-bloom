@@ -41,3 +41,7 @@ running_site_*.html
 prototype.html
 public/prototype.html
 
+# Git worktrees
+.worktrees/
+worktrees/
+

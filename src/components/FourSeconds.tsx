@@ -6,13 +6,13 @@ const END = 7200;
 function Phone({ children, label, tone }: { children: React.ReactNode; label: string; tone: "slow" | "fast" }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.18em] text-ink/70">
-        <span className={`h-2 w-2 rounded-full ${tone === "fast" ? "bg-leaf" : "bg-ink/30"}`} />
+      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.18em] text-[#151515]/85">
+        <span className={`h-2 w-2 rounded-full ${tone === "fast" ? "bg-[#FF4D1C]" : "bg-[#151515]/30"}`} />
         {label}
       </div>
-      <div className="relative w-[250px] rounded-[42px] bg-ink p-[9px] shadow-[0_40px_80px_-30px_rgba(30,43,35,.55)] sm:w-[270px]">
+      <div className="relative w-[250px] rounded-[42px] bg-[#151515] p-[9px] shadow-[0_32px_64px_-24px_rgba(21,21,21,.45)] sm:w-[270px]">
         <div className="relative h-[500px] overflow-hidden rounded-[34px] bg-white sm:h-[540px]">
-          <div className="absolute left-1/2 top-2 z-30 h-6 w-24 -translate-x-1/2 rounded-full bg-ink" />
+          <div className="absolute left-1/2 top-2 z-30 h-6 w-24 -translate-x-1/2 rounded-full bg-[#151515]" />
           {children}
         </div>
       </div>
@@ -22,13 +22,13 @@ function Phone({ children, label, tone }: { children: React.ReactNode; label: st
 
 function StatusBar({ bars = 2 }: { bars?: number }) {
   return (
-    <div className="relative z-20 flex items-center justify-between px-6 pt-3 text-[11px] font-semibold text-ink">
+    <div className="relative z-20 flex items-center justify-between px-6 pt-3 text-[11px] font-semibold text-[#151515]">
       <span>9:41</span>
       <span className="flex items-end gap-[2px]">
         {[1, 2, 3, 4].map((b) => (
-          <span key={b} className={`w-[3px] rounded-sm ${b <= bars ? "bg-ink" : "bg-ink/20"}`} style={{ height: 3 + b * 2 }} />
+          <span key={b} className={`w-[3px] rounded-sm ${b <= bars ? "bg-[#151515]" : "bg-[#151515]/20"}`} style={{ height: 3 + b * 2 }} />
         ))}
-        <span className="ml-1 font-mono text-[9px]">LTE</span>
+        <span className="ml-1 font-mono text-[11px]">LTE</span>
       </span>
     </div>
   );
@@ -43,16 +43,16 @@ function SlowSite({ t }: { t: number }) {
   return (
     <div className="relative h-full">
       <StatusBar bars={2} />
-      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/50">olsenroofing-template.biz</div>
+      <div className="mx-3 mt-3 truncate rounded-lg bg-[#151515]/5 px-3 py-1.5 font-mono text-[11px] text-[#151515]/80">olsenroofing-template.biz</div>
       {!skeleton && (
         <div className="flex h-[70%] items-center justify-center">
-          <div className="h-9 w-9 animate-spin rounded-full border-[3px] border-ink/10 border-t-ink/40" />
+          <div className="h-9 w-9 animate-spin rounded-full border-[3px] border-[#151515]/10 border-t-[#151515]/40" />
         </div>
       )}
       {skeleton && (
         <div className="px-4 pt-3">
           {banner && (
-            <div className="mb-3 rounded-lg bg-[#6b5cff] px-3 py-3 text-[11px] font-semibold text-white" style={{ animation: "pop .4s ease" }}>
+            <div className="mb-3 rounded-lg bg-[#2b2b6b] px-3 py-3 text-[11px] font-semibold text-white" style={{ animation: "pop .4s ease" }}>
               🎉 SPRING SALE! Subscribe to our newsletter!!
             </div>
           )}
@@ -60,9 +60,9 @@ function SlowSite({ t }: { t: number }) {
             <div className="mb-3 flex items-center justify-between">
               <div className="h-5 w-24 rounded bg-[#2b2b6b]" />
               <div className="space-y-1">
-                <div className="h-[2px] w-5 bg-ink/60" />
-                <div className="h-[2px] w-5 bg-ink/60" />
-                <div className="h-[2px] w-5 bg-ink/60" />
+                <div className="h-[2px] w-5 bg-[#151515]/60" />
+                <div className="h-[2px] w-5 bg-[#151515]/60" />
+                <div className="h-[2px] w-5 bg-[#151515]/60" />
               </div>
             </div>
           ) : (
@@ -78,26 +78,26 @@ function SlowSite({ t }: { t: number }) {
         </div>
       )}
       {banner && !left && (
-        <div className="absolute right-3 top-40 rounded-full bg-persimmon px-2.5 py-1 font-mono text-[10px] text-white shadow" style={{ animation: "pop .4s ease" }}>
+        <div className="absolute right-3 top-40 rounded-full bg-[#b93412] px-2.5 py-1 font-mono text-[11px] text-white shadow" style={{ animation: "pop .4s ease" }}>
           layout jumped ↕
         </div>
       )}
       {t > 2200 && (
-        <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-ink/90 p-3 text-[10px] leading-snug text-white" style={{ animation: "pop .4s ease" }}>
+        <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-[#151515] p-3 text-[11px] leading-snug text-white" style={{ animation: "pop .4s ease" }}>
           We use cookies 🍪 to improve your experience.
           <div className="mt-2 flex gap-2">
             <span className="rounded bg-white/20 px-2 py-1">Accept</span>
-            <span className="rounded bg-white/10 px-2 py-1">Preferences</span>
+            <span className="rounded bg-white/15 px-2 py-1">Preferences</span>
           </div>
         </div>
       )}
       {left && (
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-paper/85 px-6 text-center backdrop-blur-[2px]" style={{ animation: "pop .5s ease" }}>
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/95 px-6 text-center backdrop-blur-[2px]" style={{ animation: "pop .5s ease" }}>
           <div className="text-5xl" style={{ animation: "wiggle 1s ease 2" }}>🚶</div>
-          <div className="font-display wonk mt-3 text-3xl italic leading-tight">They left.</div>
-          <div className="mt-2 font-mono text-[11px] uppercase tracking-widest text-ink-soft">gave up at 4.0s</div>
-          <div className="mt-4 text-[13px] leading-snug text-ink/70">…and called the next roofer on the list.</div>
-          {done && <div className="mt-4 rounded-full border border-ink/20 px-3 py-1 font-mono text-[11px] text-ink-soft">page finally loaded · 6.8s</div>}
+          <div className="font-sans mt-3 text-3xl font-medium tracking-[-0.03em] leading-tight text-[#151515]">They left.</div>
+          <div className="mt-2 font-mono text-[11px] uppercase tracking-widest text-[#151515]/70">gave up at 4.0s</div>
+          <div className="mt-4 text-[13px] leading-snug text-[#151515]/80">…and called the next roofer on the list.</div>
+          {done && <div className="mt-4 rounded-full border border-[#151515]/20 px-3 py-1 font-mono text-[11px] text-[#151515]/75">page finally loaded · 6.8s</div>}
         </div>
       )}
     </div>
@@ -110,32 +110,32 @@ function FastSite({ t }: { t: number }) {
   const c = t > 700;
   const tapped = t > 1300;
   return (
-    <div className="relative h-full bg-[#fbf6ea]">
+    <div className="relative h-full bg-white">
       <StatusBar bars={2} />
-      <div className="mx-3 mt-3 truncate rounded-lg bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/50">olsenroofing.com</div>
+      <div className="mx-3 mt-3 truncate rounded-lg bg-[#151515]/5 px-3 py-1.5 font-mono text-[11px] text-[#151515]/80">olsenroofing.com</div>
       {a && (
         <div className="px-5 pt-4">
           <div className="flex items-center justify-between">
-            <span className="font-display text-[15px] font-semibold">Olsen Roofing</span>
-            <span className="rounded-full bg-leaf px-2.5 py-1 text-[10px] font-medium text-white">Clovis, CA</span>
+            <span className="font-sans text-[15px] font-semibold text-[#151515]">Olsen Roofing</span>
+            <span className="rounded-[6px] bg-[#151515] px-2.5 py-1 text-[11px] font-medium text-white">Clovis, CA</span>
           </div>
-          <h4 className="font-display mt-5 text-[30px] font-medium leading-[1.02] text-ink">
-            Roof leaking? <em className="wonk text-persimmon">We're 10 minutes away.</em>
+          <h4 className="font-sans mt-5 text-[28px] font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">
+            Roof leaking? <span className="text-[#b93412]">We're 10 minutes away.</span>
           </h4>
           {b && (
-            <p className="mt-3 text-[12.5px] leading-snug text-ink/70">
+            <p className="mt-3 text-[12.5px] leading-snug text-[#151515]/75">
               Family-owned since 1998. Free same-day estimates across Clovis &amp; Fresno. Se habla español.
             </p>
           )}
           {c && (
             <>
-              <div className={`mt-5 flex items-center justify-center gap-2 rounded-2xl py-3.5 text-[14px] font-semibold text-white transition ${tapped ? "scale-95 bg-leaf" : "bg-persimmon-deep"}`}>
+              <div className={`mt-5 flex items-center justify-center gap-2 rounded-[8px] py-3.5 text-[14px] font-semibold text-white transition ${tapped ? "scale-95 bg-[#151515]" : "bg-[#b93412]"}`}>
                 📞 Call now — free estimate
               </div>
-              <div className="mt-2 flex items-center justify-center rounded-2xl border border-ink/15 py-3 text-[13px] font-medium">💬 Or send a text</div>
+              <div className="mt-2 flex items-center justify-center rounded-[8px] border border-[#151515]/20 py-3 text-[13px] font-medium text-[#151515]">💬 Or send a text</div>
               <div className="mt-5 grid grid-cols-3 gap-2 text-center">
                 {["★ 4.9", "24/7", "Licensed"].map((x) => (
-                  <div key={x} className="rounded-xl bg-white px-1 py-2.5 text-[11px] font-semibold shadow-sm">
+                  <div key={x} className="rounded-[8px] bg-[#EDEDED] px-1 py-2.5 text-[11px] font-semibold text-[#151515]">
                     {x}
                   </div>
                 ))}
@@ -145,9 +145,9 @@ function FastSite({ t }: { t: number }) {
         </div>
       )}
       {tapped && (
-        <div className="absolute bottom-4 left-3 right-3 z-20 rounded-2xl bg-leaf p-3 text-white shadow-lg" style={{ animation: "pop .5s ease" }}>
-          <div className="font-mono text-[10px] uppercase tracking-widest text-white/70">1.3s · customer</div>
-          <div className="font-display wonk text-xl italic">Tapped “Call now.” ✓</div>
+        <div className="absolute bottom-4 left-3 right-3 z-20 rounded-[12px] bg-[#151515] p-3 text-white shadow-lg" style={{ animation: "pop .5s ease" }}>
+          <div className="font-mono text-[11px] uppercase tracking-widest text-white/80">1.3s · customer</div>
+          <div className="font-sans text-xl font-medium">Tapped “Call now.” ✓</div>
         </div>
       )}
     </div>
@@ -200,40 +200,40 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="speed" className="relative px-5 py-14 md:px-8 md:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section id="speed" className="relative px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-5xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <h2 className="font-display text-[clamp(2.6rem,5.6vw,5rem)] font-[420] leading-[0.95]">
+            <h2 className="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">
               <span className="line-mask"><span>Forty feet away.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Phone in one hand.</span></span>{" "}
               <span className="line-mask" style={{ ["--d" as string]: "240ms" }}>
-                <span><em className="wonk text-persimmon">Four seconds.</em></span>
+                <span className="text-[#b93412]">Four seconds.</span>
               </span>
             </h2>
-            <p className="reveal mt-6 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "200ms" }}>
+            <p className="reveal mt-6 max-w-md text-lg leading-relaxed text-[#151515]/80" style={{ ["--d" as string]: "200ms" }}>
               Your next customer is forty feet away, with four seconds of attention and two bars left on their phone. If your site isn't up in time, they go back and call the next business on the list. I build websites for this exact moment.
             </p>
-            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-ink/80" style={{ ["--d" as string]: "230ms" }}>
-              <span className="font-medium text-ink">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
+            <p className="reveal mt-4 max-w-md text-lg leading-relaxed text-[#151515]/80" style={{ ["--d" as string]: "230ms" }}>
+              <span className="font-medium text-[#151515]">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
             </p>
 
-            <div className="reveal mt-10 rounded-3xl border border-ink/10 bg-cream p-6" style={{ ["--d" as string]: "300ms" }}>
+            <div className="reveal mt-10 rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7" style={{ ["--d" as string]: "300ms" }}>
               <div className="flex items-baseline justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Stopwatch</span>
-                <span className={`font-mono text-[11px] uppercase tracking-[.18em] ${t > 4000 ? "text-persimmon-deep" : "text-leaf"}`}>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-[#151515]/70">Stopwatch</span>
+                <span className={`font-mono text-[11px] font-semibold uppercase tracking-[.18em] ${t > 4000 ? "text-[#b93412]" : "text-[#151515]"}`}>
                   {t === 0 ? "ready" : t < 4000 ? "within patience" : "patience expired"}
                 </span>
               </div>
-              <div className="font-display mt-2 text-7xl font-[380] tabular-nums md:text-8xl">
+              <div className="font-sans mt-2 text-7xl font-medium tracking-[-0.04em] tabular-nums text-[#151515] md:text-8xl">
                 {(t / 1000).toFixed(2)}
-                <span className="text-4xl text-ink-soft">s</span>
+                <span className="text-4xl text-[#151515]/60">s</span>
               </div>
-              <div className="relative mt-4 h-2 overflow-hidden rounded-full bg-ink/10">
-                <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-leaf via-citrus to-persimmon" style={{ width: `${pct * 100}%` }} />
-                <div className="absolute inset-y-[-4px] w-[2px] bg-ink" style={{ left: `${(4000 / END) * 100}%` }} />
+              <div className="relative mt-4 h-2 overflow-hidden rounded-full bg-[#151515]/15">
+                <div className="absolute inset-y-0 left-0 rounded-full bg-[#FF4D1C]" style={{ width: `${pct * 100}%` }} />
+                <div className="absolute inset-y-[-4px] w-[2px] bg-[#151515]" style={{ left: `${(4000 / END) * 100}%` }} />
               </div>
-              <div className="relative mt-1.5 h-4 font-mono text-[11px] text-ink-soft">
+              <div className="relative mt-1.5 h-4 font-mono text-[11px] text-[#151515]/75">
                 <span className="absolute left-0">0s</span>
                 <span className="absolute whitespace-nowrap" style={{ left: `${(4000 / END) * 100}%`, transform: "translateX(-50%)" }}>
                   ↑ 4s: most people bail
@@ -243,7 +243,7 @@ export function FourSeconds() {
               <button
                 onClick={run}
                 disabled={running}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-ink py-4 text-cream transition hover:bg-persimmon-deep disabled:opacity-50"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#151515] py-4 font-medium text-white transition hover:bg-[#b93412] disabled:opacity-50"
               >
                 {running ? "Racing…" : ran ? "↻ Run the race again" : "▶ Start the race"}
               </button>
@@ -251,8 +251,7 @@ export function FourSeconds() {
           </div>
 
           <div ref={ref} className="lg:col-span-7" data-cursor={running ? "Racing" : "Race"} onClick={() => !running && run()}>
-            <div className="relative flex flex-col items-center justify-center gap-10 rounded-[40px] bg-sage/70 px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
-              <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-citrus/70 blur-2xl" />
+            <div className="relative flex flex-col items-center justify-center gap-10 rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
               <Phone label="Typical template" tone="slow">
                 <SlowSite t={t} />
               </Phone>
@@ -260,9 +259,9 @@ export function FourSeconds() {
                 <FastSite t={t} />
               </Phone>
             </div>
-            <p className="mt-4 text-center font-mono text-[11px] text-ink-soft">
+            <p className="mt-4 text-center font-mono text-[11px] text-[#151515]/75">
               Simulation on a mid-range phone, two bars of LTE. Try it for real: turn off your Wi-Fi and open{" "}
-              <a href="https://bigbrosdumpster.com" target="_blank" rel="noopener noreferrer" className="underline decoration-persimmon underline-offset-2 hover:text-ink">
+              <a href="https://bigbrosdumpster.com" target="_blank" rel="noopener noreferrer" className="underline decoration-[#FF4D1C] underline-offset-2 hover:text-[#151515]">
                 bigbrosdumpster.com
               </a>{" "}
               on your phone.
@@ -270,7 +269,7 @@ export function FourSeconds() {
           </div>
         </div>
 
-        <div className="mt-14 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-4">
+        <div className="mt-14 md:mt-16 grid grid-cols-2 gap-4 md:grid-cols-4">
           {/* Only numbers a visitor can check: no load-time figure until PageSpeed backs it up on a real build. */}
           {[
             ["Things that jump around", "0", "Buttons stay put while the page loads, so nobody taps the wrong one."],
@@ -278,10 +277,10 @@ export function FourSeconds() {
             ["Middlemen on your leads", "0", "Calls and texts go straight to your phone."],
             ["First page live in", "1 wk", "For a one-page site, start to finish."],
           ].map(([k, v, d], i) => (
-            <div key={k} className="reveal group bg-cream p-6 transition hover:bg-citrus md:p-8" style={{ ["--d" as string]: `${i * 90}ms` }}>
-              <div className="font-mono text-[11px] uppercase tracking-[.16em] text-ink-soft">{k}</div>
-              <div className="font-display mt-4 text-5xl font-[400] md:text-6xl">{v}</div>
-              <div className="mt-3 text-sm text-ink/70">{d}</div>
+            <div key={k} className="reveal rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition hover:bg-white md:p-7" style={{ ["--d" as string]: `${i * 90}ms` }}>
+              <div className="font-mono text-[11px] uppercase tracking-[.16em] text-[#151515]/75">{k}</div>
+              <div className="font-sans mt-4 text-5xl font-medium tracking-[-0.04em] text-[#151515] md:text-6xl">{v}</div>
+              <div className="mt-3 text-sm text-[#151515]/80">{d}</div>
             </div>
           ))}
         </div>

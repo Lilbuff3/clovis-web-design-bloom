@@ -1,16 +1,16 @@
 ---
-import { PHONE_DISPLAY, PHONE_TEL } from '../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, smsTo } from '../lib/data';
 import { LeadLeakAudit } from './LeadLeakAudit';
 import Icon from './Icon.astro';
 ---
 
-<aside class="fixed inset-x-0 bottom-0 z-40 block md:hidden bg-cream/95 backdrop-blur-md border-t border-ink/10 px-4 py-2.5 shadow-[0_-10px_25px_-5px_rgba(30,43,35,0.15)]">
+<aside class="fixed inset-x-0 bottom-0 z-40 block md:hidden bg-[#151515]/95 backdrop-blur-xl border-t border-white/15 px-4 py-2.5 text-white shadow-[0_-10px_30px_rgba(0,0,0,0.45)]">
   <div class="flex items-center justify-between gap-2 max-w-lg mx-auto">
     <!-- Availability indicator -->
-    <div class="hidden min-w-0 items-center gap-1.5 font-mono text-[11px] text-ink/75 min-[430px]:flex">
+    <div class="hidden min-w-0 items-center gap-1.5 font-mono text-[11px] text-white/80 min-[430px]:flex">
       <span class="relative flex h-2 w-2 shrink-0">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-leaf opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-leaf"></span>
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00FF08] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00FF08]"></span>
       </span>
       <span class="truncate">Texts come straight to me</span>
     </div>
@@ -19,14 +19,14 @@ import Icon from './Icon.astro';
     <div class="flex flex-1 items-center gap-2">
       <a
         href={`tel:${PHONE_TEL}`}
-        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-full bg-ink/10 px-4 py-3 font-mono text-[13px] font-semibold text-ink transition active:scale-95 hover:bg-ink/20"
+        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-[8px] border border-white/25 bg-[#1E1E1E] px-4 py-3 font-mono text-[13px] font-semibold text-white transition active:scale-95 hover:bg-white/10"
         aria-label="Call Adam"
       >
         <Icon name="phone" /> Call
       </a>
       <a
-        href={`sms:${PHONE_TEL}`}
-        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-full bg-persimmon-deep px-4 py-3 font-mono text-[13px] font-semibold text-cream shadow-md transition active:scale-95 hover:bg-ink"
+        href={smsTo("Hi Adam, I'm on your website and have a quick question about getting a site built.")}
+        class="flex-1 min-h-[48px] inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-white px-4 py-3 font-mono text-[13px] font-semibold text-[#070707] shadow-md transition active:scale-95 hover:bg-[#E03E10] hover:text-white"
         aria-label="Text Adam"
       >
         <Icon name="text" /> Text
@@ -35,7 +35,7 @@ import Icon from './Icon.astro';
         type="button"
         data-audit="true"
         id="audit-drawer-btn"
-        class="min-h-[48px] inline-flex items-center justify-center gap-1 rounded-full border border-ink/20 bg-cream px-3.5 py-3 font-mono text-[12px] font-medium text-ink transition active:scale-95 hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-persimmon focus-visible:ring-offset-2"
+        class="min-h-[48px] inline-flex items-center justify-center gap-1 rounded-[8px] border border-white/25 bg-[#1E1E1E] px-3.5 py-3 font-mono text-[12px] font-medium text-white transition active:scale-95 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1C] focus-visible:ring-offset-2"
       >
         AI check
       </button>
@@ -44,22 +44,22 @@ import Icon from './Icon.astro';
 </aside>
 
 <!-- Slide-up Instant Audit Drawer Dialog -->
-<dialog id="audit-modal" class="fixed inset-x-0 bottom-0 top-auto z-50 m-0 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-3xl border-t border-ink/15 bg-paper p-5 sm:p-6 shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-sm">
+<dialog id="audit-modal" class="fixed inset-x-0 bottom-0 top-auto z-50 m-0 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-[16px] border-t border-white/15 bg-[#151515] p-5 text-white sm:p-6 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-sm">
   <div class="flex items-start justify-between">
     <div>
-      <h2 class="font-display text-2xl font-semibold text-ink">Free AI check</h2>
+      <h2 class="font-sans text-2xl font-medium tracking-[-0.035em] text-white">Free AI check</h2>
     </div>
-    <button type="button" id="close-audit-modal" class="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full text-ink-soft hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2" aria-label="Close dialog">
+    <button type="button" id="close-audit-modal" class="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-[8px] border border-white/15 bg-[#1E1E1E] text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1C] focus-visible:ring-offset-2" aria-label="Close dialog">
       ✕
     </button>
   </div>
   <div class="mt-4">
     <LeadLeakAudit compact client:idle />
   </div>
-  <div class="mt-4 border-t border-ink/10 pt-3 text-center">
+  <div class="mt-4 border-t border-white/10 pt-3 text-center">
     <a
-      href={`sms:${PHONE_TEL}?body=${encodeURIComponent("Hi Adam, could you take a quick look at my website?")}`}
-      class="text-xs font-mono text-ink-soft underline hover:text-persimmon-deep"
+      href={smsTo("Hi Adam, could you take a quick look at my website?")}
+      class="text-xs font-mono text-white/80 underline hover:text-[#FF4D1C]"
     >
       Or text me directly at {PHONE_DISPLAY}
     </a>

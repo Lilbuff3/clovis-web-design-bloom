@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-16T03:26:41.942Z",
-  "total": 33,
-  "passed": 33,
+  "timestamp": "2026-10-22T05:58:25.094Z",
+  "total": 37,
+  "passed": 37,
   "failed": 0,
   "skipped": 0,
   "successRate": 100,
@@ -31,7 +31,7 @@
           "title": "Zero empty client-side mounting shells (<div id=\"root\"></div>) in dist/",
           "status": "PASS",
           "error": null,
-          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 5 HTML files"
+          "details": "Verified 0 empty <div id=\"root\"></div> containers across all 9 HTML files"
         },
         {
           "id": "T1.4",
@@ -81,10 +81,10 @@
         {
           "id": "T2.3",
           "tier": 2,
-          "title": "Core business identity (name, telephone: +15595753014, priceRange)",
+          "title": "Core business identity (name, telephone: +15596280142, priceRange)",
           "status": "PASS",
           "error": null,
-          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15595753014\", priceRange: \"From $1,500\""
+          "details": "Verified name: \"Clovis Web Design\", telephone: \"+15596280142\", priceRange: \"$$\""
         },
         {
           "id": "T2.4",
@@ -100,7 +100,7 @@
           "title": "areaServed names Clovis and Fresno, with no wrong Wikidata IDs",
           "status": "PASS",
           "error": null,
-          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA"
+          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA, California, United States"
         },
         {
           "id": "T2.6",
@@ -116,15 +116,15 @@
           "title": "Top-level sameAs (if any) lists only profile sites, only ones Adam confirmed",
           "status": "PASS",
           "error": null,
-          "details": "sameAs has 0 confirmed profile(s)"
+          "details": "sameAs has 1 confirmed profile(s) and hasMap links GBP"
         },
         {
           "id": "T2.8",
           "tier": 2,
-          "title": "hasOfferCatalog with Starter ($1,500) and Growth ($2,500) services",
+          "title": "hasOfferCatalog matches the 3 scoped engagement models",
           "status": "PASS",
           "error": null,
-          "details": "hasOfferCatalog successfully configured with Starter ($1,500) and Growth ($2,500) offerings"
+          "details": "hasOfferCatalog configured with Custom Website Build, Search & AI Visibility Setup, and Ongoing Search & AI Growth"
         }
       ]
     },
@@ -150,18 +150,18 @@
         {
           "id": "T3.4",
           "tier": 3,
-          "title": "Homepage leads hero → client results → the two topic pages",
+          "title": "Homepage leads hero → 4 core services (#who) → live AI check (#check) → client results (#harvest)",
           "status": "PASS",
           "error": null,
-          "details": "Homepage order: #top → #harvest → #who → #check; #who links to both topic pages"
+          "details": "Homepage order: #top → #who → #check → #harvest; #who renders 4 services + Why it matters and links to all service pages"
         },
         {
           "id": "T3.3",
           "tier": 3,
-          "title": "Hero section displays headline, $1,500 pricing anchor, and primary CTA for mobile fold compliance",
+          "title": "Hero section displays headline, preview guarantee, and primary CTA for mobile fold compliance",
           "status": "PASS",
           "error": null,
-          "details": "Hero section contains headline, $1,500 anchor, and primary CTA ensuring mobile fold compliance (<750px)"
+          "details": "Hero section contains headline, preview guarantee, and primary CTA ensuring mobile fold compliance"
         },
         {
           "id": "T3.5",
@@ -206,7 +206,7 @@
           "title": "Adam's last name appears nowhere in the built site",
           "status": "PASS",
           "error": null,
-          "details": "First name only across 5 pages"
+          "details": "First name only across 14 built files"
         },
         {
           "id": "T4.4",
@@ -256,7 +256,7 @@
           "title": "Medical page is pre-rendered with an h1 and its sections",
           "status": "PASS",
           "error": null,
-          "details": "Medical page pre-rendered (1 h1, 9 h2s)"
+          "details": "Medical page pre-rendered (1 h1, 10 h2s)"
         },
         {
           "id": "T6.2",
@@ -280,7 +280,7 @@
           "title": "Each route has its own Service node, and FAQPage only lists questions shown on the page",
           "status": "PASS",
           "error": null,
-          "details": "4 distinct Services: Custom website design in Clovis, CA | Local businesses; Local SEO in Fresno, CA | Local service businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
+          "details": "4 distinct Services: Brand positioning, custom web design, SEO & AI search marketing in Clovis, CA | Growth-minded businesses across industries; Search Engine, Google Maps & AI Search Marketing (SEO & GEO) | Growth-minded businesses; Contractor website design | Contractors and trade businesses; Medical practice web design | Medical and dental practices"
         },
         {
           "id": "T6.5",
@@ -296,7 +296,39 @@
           "title": "Schema knowsAbout covers medical work honestly (no unbacked EHR or legal-defense claims)",
           "status": "PASS",
           "error": null,
-          "details": "knowsAbout: Web design, Local SEO, Website speed, Web accessibility (WCAG 2.1 AA), Websites for medical practices, HIPAA-aware web design, Bilingual English and Spanish websites"
+          "details": "knowsAbout: Brand positioning and conversion copywriting, Custom web design and development, Search engine optimization (SEO), Google Maps and Local SEO, Generative Engine Optimization (GEO) and AI search visibility, AI search analytics, lead attribution, and retention automation, Website speed and Core Web Vitals optimization, Web accessibility (WCAG 2.1 AA), Websites for medical practices and HIPAA-aware web design, Bilingual English and Spanish websites"
+        },
+        {
+          "id": "T6.10",
+          "tier": 6,
+          "title": "Google CWV & SERP Breadcrumbs: explicit image dimensions, LCP fetchpriority, and BreadcrumbList schema",
+          "status": "PASS",
+          "error": null,
+          "details": "All images carry explicit width/height, hero LCP image is preloaded with fetchpriority=\"high\", and all service pages emit BreadcrumbList"
+        },
+        {
+          "id": "T6.11",
+          "tier": 6,
+          "title": "Conversion tracking, AI referrers & privacy-safe client analytics",
+          "status": "PASS",
+          "error": null,
+          "details": "All routes contain lightweight event tracking; zero tracking pixel claims; medical page reframed cleanly"
+        },
+        {
+          "id": "T6.12",
+          "tier": 6,
+          "title": "Dedicated case study routes pre-rendered with breadcrumbs, Article schema, and explicit image dimensions",
+          "status": "PASS",
+          "error": null,
+          "details": "All 2 case study routes verified with Breadcrumbs, Article schema, and explicit image dimensions"
+        },
+        {
+          "id": "T6.13",
+          "tier": 6,
+          "title": "Public discoverability: llms.txt, llms-full.txt, ai-catalog.json, and robots.txt AI search allowances",
+          "status": "PASS",
+          "error": null,
+          "details": "llms.txt, llms-full.txt, ai-catalog.json, and robots.txt verified for all 8 AI crawlers with zero surname leaks"
         }
       ]
     }

@@ -5,155 +5,170 @@ import { Footer } from '../../components/Contact';
 import Icon from '../../components/Icon.astro';
 import { FourSeconds } from '../../components/FourSeconds';
 import { LeadLeakAudit } from '../../components/LeadLeakAudit';
-import { PHONE_DISPLAY, PHONE_TEL, cases, offer, pageSchema, plans, smsTo, type Faq } from '../../lib/data';
+import { PHONE_DISPLAY, PHONE_TEL, cases, offer, pageSchema, smsTo, type Faq } from '../../lib/data';
 
-// Written for an owner reading on a phone between jobs: short lines, prices up front, one tap to text.
-const [starter, growth] = plans;
+// Written for an owner reading on a phone between jobs: short lines, clear scope, one tap to text.
 const bigBros = cases[1];
-const textAdam = smsTo("Hi Adam, I run a contracting business and I'd like a website that gets calls. Can we talk?");
+const textAdam = smsTo("Hi Adam, I run a contracting business and I'd like a website and search setup that gets calls. Can we talk?");
 
 const faqs: Faq[] = [
   {
-    q: 'How much does a contractor website cost?',
-    a: `${starter.price} for a one-page site, live in about a week. ${growth.price} for 3–5 pages, a page for every town you serve and a full Spanish version, in ${growth.time}.`,
+    q: 'How is a contractor website and search setup priced?',
+    a: "Every build is scoped to how many services and towns you cover — whether you need a focused one-page site live in a week, or a multi-page system with dedicated city pages, a full Spanish version (/es/), and Google Maps & AI search setup. Either way, I build a working preview after our first call — if you don't like it, you don't pay.",
   },
   {
-    q: 'Can customers text me from the site?',
-    a: 'Yes. Every page has tap-to-call and tap-to-text buttons that go straight to your phone, with no form or call center in between.',
+    q: 'Can customers text me straight from the site?',
+    a: 'Yes. Every page has tap-to-call and tap-to-text buttons that go straight to your phone, with no call center or lead broker in between. If you want a quick quote-request form for customers who prefer email or want to describe their project before calling, I include that too.',
   },
   {
     q: "I'm on job sites all day. How much of my time does this take?",
-    a: 'About an hour. A 45-minute call about your work, then a few minutes to check a link on your phone and tell me what to change. I write every word.',
+    a: 'About 20 minutes total. A 15-minute call about your work, then 5 minutes to check a link on your phone and tell me what to change. I write every word.',
   },
 ];
 
 const schema = pageSchema('/services/contractor-websites/', {
   name: 'Contractor website design',
-  serviceType: 'Web design',
+  serviceType: 'Web design and local search optimization',
   audience: 'Contractors and trade businesses',
-  description: 'Websites for roofers, HVAC companies, plumbers and other trades in Clovis and Fresno, with tap-to-call and tap-to-text on every page.',
-  offers: [offer('Starter'), offer('Growth')],
+  description: 'Sub-second websites, Google Maps SEO, and AI search setup for roofers, HVAC companies, plumbers and trades, with tap-to-call and tap-to-text on every page.',
+  offers: [offer('Custom Website Build'), offer('Search & AI Visibility Setup')],
 }, faqs);
 
 const gets = [
   ['Call and text buttons on every screen.', "A customer who's ready never has to scroll for your number. Calls and texts come straight to your phone, and nobody resells the lead."],
-  ['It loads on two bars of signal.', 'People looking for a roofer are on a phone, often standing outside. If your page is slow, they call the next name on the list.'],
-  ['Your prices and service area on the page.', "Fewer calls asking whether you come out to Sanger, more calls asking when you can start."],
-  [`A page for every town you serve (${growth.name}, ${growth.price}).`, 'So Google has a page to show someone searching "roofer Clovis" and someone searching "roofer Fresno."'],
-  [`A full Spanish version (${growth.name}).`, 'Spanish-speaking customers can read the whole site, not just a "se habla español" line.'],
-  ['Nothing to update.', "Plain hand-written files: no WordPress, no plugins to patch, nothing that breaks while you're on a roof."],
-  ["You don't write anything.", 'We talk for 45 minutes. I write every word and send you a link to check on your phone.'],
+  ['It loads on two bars of signal.', 'People looking for a contractor are on a phone, often standing outside. If your page is slow, they call the next name on the list.'],
+  ['Your services and service area on the page.', "Fewer calls asking whether you cover their town, more calls asking when you can start."],
+  ['A dedicated page for every town and trade you serve.', 'So Google Maps, ChatGPT, and Gemini have a specific page to cite when someone searches for your trade in each city.'],
+  ['An optional full Spanish version (/es/).', 'Spanish-speaking customers can read the whole site, not just a "se habla español" line.'],
+  ['Nothing to update or babysit.', "Plain hand-written files: no WordPress, no plugins to patch, nothing that breaks while you're on a job site."],
+  ["You don't write anything.", 'We talk for 15 minutes. I write every word and send you a working preview to check on your phone.'],
 ];
 ---
 
 <RootLayout
-  title="Contractor & Trade Websites — Clovis & Fresno, CA"
-  description="Websites for roofers, HVAC, plumbers and other trades in Clovis and Fresno. One page from $1,500, live in a week, with call and text buttons on every screen. Built by Adam."
+  title="Contractor & Trade Websites + Search Marketing — Clovis & Fresno, CA"
+  description="Sub-second websites, Google Maps SEO, and AI search visibility for roofers, HVAC, plumbers and trades. Working phone preview before you pay, 100% client-owned."
   schema={schema}
 >
   <Nav client:load />
 
-  <main class="relative z-10 pt-32 pb-24 md:pt-40">
-    <div class="mx-auto max-w-5xl px-5 md:px-8">
-      <h1 class="font-display text-4xl text-ink md:text-6xl lg:text-7xl font-[420] leading-[0.95]">
-        Contractor websites built to get you calls.
-      </h1>
+  <main id="main" class="relative z-10 bg-white text-[#151515]">
+    <header class="bg-[#151515] pt-32 pb-20 md:pt-40 md:pb-24 text-white">
+      <div class="mx-auto max-w-5xl px-5 md:px-8">
+        <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-white/70">
+          <a href="/" class="underline decoration-white/30 underline-offset-4 hover:text-white">Clovis Web Design</a>
+          <span aria-hidden="true" class="mx-2">/</span>
+          <a href="/services/" class="underline decoration-white/30 underline-offset-4 hover:text-white">Services</a>
+          <span aria-hidden="true" class="mx-2">/</span>
+          <span class="text-white" aria-current="page">Contractor website design</span>
+        </nav>
+        <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-[-0.045em] leading-[0.98] text-white">
+          Contractor websites built to get you calls.
+        </h1>
 
-      <p class="mt-6 text-xl leading-relaxed text-ink/85 max-w-3xl">
-        Call and text buttons where a thumb lands, on a page that loads on two bars of signal. The customer in the driveway calls you, not the next name on the list.
-      </p>
-      <p class="mt-4 text-lg text-ink">
-        <strong>{starter.price}, live in a week.</strong> I build it and write it. You text me when you need a change.
-      </p>
+        <p class="mt-6 text-xl leading-relaxed text-white/80 max-w-3xl">
+          Call and text buttons where a thumb lands, on a page that opens in under half a second on two bars of signal — paired with the Google Maps and AI search setup that puts your company ahead of national lead brokers.
+        </p>
+        <p class="mt-4 text-lg text-white/90 max-w-3xl">
+          <strong class="text-white">You see a working preview on your phone before you pay a dollar.</strong> Every build is scoped to your trade and service area, with zero required monthly fees and 100% ownership from day one.
+        </p>
 
-      <div class="mt-8 flex flex-wrap gap-4 items-center">
-        <a href={textAdam} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink">
-          <Icon name="text" /> Text me: {PHONE_DISPLAY}
-        </a>
-        <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-medium text-cream shadow transition hover:bg-ink/80">
-          <Icon name="phone" /> Call
-        </a>
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <a href={textAdam} class="inline-flex items-center gap-2 rounded-[8px] bg-white px-6 py-3.5 font-medium text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white">
+            <Icon name="text" /> Text me: {PHONE_DISPLAY}
+          </a>
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-[8px] border border-white/80 px-6 py-3.5 font-medium text-white transition hover:bg-white hover:text-[#070707]">
+            <Icon name="phone" /> Call
+          </a>
+        </div>
+        <p class="mt-4 text-sm text-white/75">Texts go to my cell. I answer 7 a.m. to 7 p.m., Monday to Saturday.</p>
       </div>
-      <p class="mt-3 text-sm text-ink-soft">Texts go to my cell. I answer 7 a.m. to 7 p.m., Monday to Saturday.</p>
+    </header>
 
-      <section class="mt-16 border-t border-ink/10 pt-12">
-        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">
+    <div class="mx-auto max-w-5xl px-5 pt-16 md:px-8 md:pt-24">
+      <section>
+        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">
           Big Bros bought 4 more trucks to keep up with the calls
         </h2>
-        <p class="mt-4 text-lg text-ink/80 leading-relaxed max-w-3xl">
+        <p class="mt-4 text-lg text-[#151515]/80 leading-relaxed max-w-3xl">
           {bigBros.client} owns its trucks, but national brokers were outranking them and taking a cut of every rental. Now Big Bros is #1 on Google for “dumpster rental Fresno,” and contractors and homeowners text them directly.
         </p>
-        <p class="mt-4 text-lg text-ink/80 leading-relaxed"><strong class="text-ink">What I built:</strong></p>
-        <ul class="mt-2 space-y-1.5 text-lg text-ink/85">
+        <p class="mt-4 text-lg text-[#151515]/80 leading-relaxed"><strong class="text-[#151515]">What I built:</strong></p>
+        <ul class="mt-2 space-y-1.5 text-lg text-[#151515]/85">
           {bigBros.planted.map((p) => <li>{p}</li>)}
           <li>{bigBros.stack.join(' · ')}</li>
         </ul>
 
-        <figure class="mt-8 rounded-3xl border border-ink/10 bg-paper p-6 md:p-8">
-          <blockquote class="text-lg text-ink/90 italic leading-relaxed">“{bigBros.quote.text}”</blockquote>
-          <figcaption class="mt-4 text-ink">
-            <span class="font-display font-medium">{bigBros.quote.name}</span>
-            <span class="block font-mono text-xs text-ink-soft">{bigBros.quote.role}, {bigBros.client} · <a href={bigBros.url} class="underline hover:text-persimmon-deep">{bigBros.urlDisplay}</a></span>
+        <figure class="mt-8 rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 md:p-8">
+          <blockquote class="text-lg text-[#151515]/90 italic leading-relaxed">“{bigBros.quote.text}”</blockquote>
+          <figcaption class="mt-4 text-[#151515]">
+            <span class="font-sans font-medium">{bigBros.quote.name}</span>
+            <span class="block font-mono text-xs text-[#151515]/70">{bigBros.quote.role}, {bigBros.client} · <a href={bigBros.url} class="underline decoration-[#151515]/40 underline-offset-4 hover:text-[#b93412]">{bigBros.urlDisplay}</a></span>
           </figcaption>
         </figure>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+          <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
             <div class="aspect-[16/10] overflow-hidden">
-              <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+              <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">One of the Big Bros trucks in Fresno.</figcaption>
+            <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">One of the Big Bros trucks in Fresno.</figcaption>
           </figure>
-          <figure class="overflow-hidden rounded-2xl border border-ink/10 bg-cream shadow-sm">
+          <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
             <div class="aspect-[16/10] overflow-hidden">
-              <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+              <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" width="600" height="600" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-ink/10 text-sm text-ink/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
+            <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="mt-16 border-t border-ink/10 pt-12">
-        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">What the site does for your business</h2>
-        <ul class="mt-6 space-y-4 text-lg text-ink/85 leading-relaxed max-w-3xl">
-          {gets.map(([lead, rest]) => <li><strong class="text-ink">{lead}</strong> {rest}</li>)}
-        </ul>
-      </section>
-
-      {/* Desktop visitors never see the phone drawer's copy of this check. */}
-      <section class="mt-16">
-        <LeadLeakAudit client:visible />
+      <section class="mt-16 border-t border-[#151515]/10 pt-12">
+        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">What the site does for your business</h2>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {gets.map(([lead, rest]) => (
+            <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
+              <strong class="block text-[#151515] mb-1">{lead}</strong>
+              <span>{rest}</span>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
 
     <FourSeconds client:visible />
 
-    <div class="mx-auto max-w-5xl px-5 md:px-8">
-      <section>
-        <h2 class="font-display text-2xl md:text-4xl text-ink font-[420]">Contractor website questions</h2>
+    <div class="mx-auto max-w-5xl px-5 pb-16 md:px-8 md:pb-24">
+      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+      <section class="mb-16">
+        <LeadLeakAudit client:visible />
+      </section>
+
+      <section class="border-t border-[#151515]/10 pt-12">
+        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">Contractor website questions</h2>
         <div class="mt-8 space-y-4">
           {faqs.map((f) => (
-            <details class="group rounded-2xl border border-ink/10 bg-paper p-5 transition open:bg-cream/40">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-ink">
+            <details class="group rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition open:bg-white">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-lg font-medium text-[#151515]">
                 <span>{f.q}</span>
                 <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
               </summary>
-              <p class="mt-3 text-ink/80 leading-relaxed">{f.a}</p>
+              <p class="mt-3 text-[#151515]/80 leading-relaxed">{f.a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section class="mt-16 border-t border-ink/10 pt-12 text-center">
-        <h2 class="font-display text-3xl md:text-5xl text-ink font-[420]">Text me your trade and your town.</h2>
-        <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto leading-relaxed">
-          I'll tell you what I'd build and what it costs. If one page is enough, I'll say so.
+      <section class="mt-16 rounded-[16px] bg-[#151515] p-8 md:p-12 text-center text-white">
+        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-white">Text me your trade and your town.</h2>
+        <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+          I'll check how you currently show up on Google Maps and AI, tell you what I'd build, and give you a straight quote. If a focused one-page site is enough, I'll say so.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-          <a href={smsTo("Hi Adam, I'm a contractor looking for a website that gets calls. What would you build for me, and what would it cost?")} class="inline-flex items-center gap-2 rounded-full bg-persimmon-deep px-8 py-4 font-medium text-cream shadow transition hover:bg-ink text-base">
+          <a href={smsTo("Hi Adam, I'm a contractor looking for a website that gets calls. What would you build for me?")} class="inline-flex items-center gap-2 rounded-[8px] bg-white px-8 py-4 font-medium text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white text-base">
             <Icon name="text" /> Text me: {PHONE_DISPLAY}
           </a>
-          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-medium text-cream shadow transition hover:bg-ink/80 text-base">
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-[8px] border border-white/80 px-8 py-4 font-medium text-white transition hover:bg-white hover:text-[#070707] text-base">
             <Icon name="phone" /> Call
           </a>
         </div>

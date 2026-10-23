@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://cloviswebdesign.com/services/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cloviswebdesign.com/packages/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://cloviswebdesign.com/services/medical-web-design/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -17,6 +27,16 @@
   </url>
   <url>
     <loc>https://cloviswebdesign.com/services/local-seo-fresno/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cloviswebdesign.com/case-studies/dumpster-rental-fresno/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cloviswebdesign.com/case-studies/kidney-specialist-fresno/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

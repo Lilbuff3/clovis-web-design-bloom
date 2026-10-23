@@ -1,0 +1,379 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+import { Nav } from "../../components/Chrome";
+import { Compare } from "../../components/Season";
+import { Contact, Footer } from "../../components/Contact";
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  hasOfferCatalog,
+  industries,
+  pageSchema,
+  smsTo,
+  type Faq,
+} from "../../lib/data";
+
+const serviceFaqs: Faq[] = [
+  {
+    q: "Can I hire you for a single service, or do I need a full-service retainer?",
+    a: "Every discipline is unbundled. You can hire me for a standalone custom website build, a one-time Search & AI Visibility Setup on your existing website, or an ongoing monthly growth partnership where we add and shift channels as your revenue grows.",
+  },
+  {
+    q: "How do you handle all five disciplines without an account-management team?",
+    a: "Traditional agencies split your project across five people who rarely talk to each other: a copywriter, a template designer, an SEO specialist, and an account coordinator. Because I engineer the brand copy, static code, structured schema, and analytics myself, every layer reinforces the others from day one — with zero handoff delays.",
+  },
+  {
+    q: "Why does website engineering affect Google Maps and AI search rankings?",
+    a: "When buyers ask ChatGPT, Perplexity, or Claude who to hire, live AI crawlers fetch candidate websites under a strict 1 to 3 second timeout. Slow WordPress themes overloaded with plugins frequently time out before the bot reads your page, and over half of human mobile visitors leave after three seconds.",
+  },
+  {
+    q: "Do you build white-label websites for design studios and marketing agencies?",
+    a: "Yes. If your agency has approved Figma designs and needs a senior developer to ship clean, accessible Astro, React, and TypeScript code scoring 100/100 on Google PageSpeed, I build under your brand and hit your launch deadline.",
+  },
+];
+
+const schema = pageSchema(
+  "/services/",
+  {
+    name: "Full-Lifecycle Brand, Web Engineering, SEO & AI Search Services",
+    serviceType: "Digital agency and web engineering services",
+    audience: "Growth-minded businesses across industries",
+    description:
+      "Unbundled or end-to-end brand positioning, <0.4s custom web design, Google Maps SEO, AI search optimization (GEO), and GA4 lead attribution.",
+    offers: hasOfferCatalog.itemListElement,
+  },
+  serviceFaqs
+);
+
+const pillars = [
+  {
+    code: "01",
+    title: "Brand Positioning & Conversion Copy",
+    subtitle: "Positioning · Messaging architecture · Visual direction · Buyer copy",
+    summary:
+      "Clear brand positioning, visual hierarchy, and done-for-you buyer copy written from a 15-minute interview — so visitors understand within three seconds what you do and why they should call you first.",
+    commercialImpact:
+      "Traffic is wasted when your message sounds identical to every competitor in your city. Strong positioning turns casual visitors into high-intent inquiries before they shop around on price.",
+    deliverables: [
+      "15-minute founder discovery interview (zero blank questionnaires)",
+      "Primary value proposition & above-the-fold conversion hook",
+      "Service-by-service buyer copy answering real objections",
+      "Visual direction, typography, and high-contrast color architecture",
+      "Proof integration: verified customer quotes & measurable outcomes",
+    ],
+    ctaLabel: "Scope brand & web copy",
+    ctaHref: "/packages/",
+  },
+  {
+    code: "02",
+    title: "Custom Web Design & Engineering",
+    subtitle: "Sub-second static builds · 100/100 PageSpeed · WCAG 2.1 AA · Bilingual /es/",
+    summary:
+      "Hand-coded Astro, React, and TypeScript websites that open in under 0.4 seconds on mobile, score 100/100 on Google PageSpeed, and put tap-to-call, text, and booking right where thumbs land.",
+    commercialImpact:
+      "Over half of mobile visitors abandon pages that take 3–4 seconds to load, and live AI search crawlers time out on bloated templates before reading a single word.",
+    deliverables: [
+      "Custom mobile-first responsive engineering (<0.4s load time)",
+      "Working phone preview before you pay a dollar",
+      "100/100 Google Lighthouse Performance, Accessibility & SEO architecture",
+      "Optional native human-written Spanish version (/es/) with hreflang routing",
+      "100% client ownership of source code, domain, and hosting from day one",
+    ],
+    ctaLabel: "Compare website packages",
+    ctaHref: "/packages/",
+  },
+  {
+    code: "03",
+    title: "Search Engine & Google Maps SEO",
+    subtitle: "Google Maps 3-Pack · High-intent service & city pages · Local authority",
+    summary:
+      "Google Business Profile optimization, dedicated service and market pages, and review velocity workflows engineered to put your business at the top of Google Search and the Maps 3-Pack.",
+    commercialImpact:
+      "When a buyer searches for your service, Google displays three map listings above all organic links — capturing ready-to-hire calls without paying per click.",
+    deliverables: [
+      "Full Google Business Profile category, service, and Q&A optimization",
+      "Dedicated high-intent service and target-city landing pages",
+      "Semantic HTML hierarchy and internal authority routing",
+      "Competitor gap analysis and local citation cleanup",
+      "Direct review generation links and response frameworks",
+    ],
+    ctaLabel: "Explore Search & Maps SEO",
+    ctaHref: "/services/local-seo-fresno/",
+  },
+  {
+    code: "04",
+    title: "AI Search & Answer Optimization",
+    subtitle: "ChatGPT · Google Gemini · Claude · Perplexity · Apple Siri",
+    summary:
+      "Four-directory profile alignment across Google Business Profile, Bing Places, Apple Business Connect, and Yelp, paired with connected JSON-LD schema and fact-dense answer blocks built for AI citation.",
+    commercialImpact:
+      "Millions of buyers now ask AI assistants who to hire. Unlike ten blue links, AI engines name only 1 to 3 businesses — and each AI checks a different directory before trusting a company.",
+    deliverables: [
+      "Four-directory alignment (Google Maps, Bing Places, Apple Maps, Yelp)",
+      "Connected LocalBusiness, Service, and FAQPage JSON-LD schema graph",
+      "Fact-dense question-and-answer blocks structured for AI extraction",
+      "Machine-readable /llms.txt and /.well-known/ai-catalog.json discovery files",
+      "Before-and-after live AI citation audit across Gemini and ChatGPT",
+    ],
+    ctaLabel: "How AI picks businesses",
+    ctaHref: "/services/local-seo-fresno/#ai-search",
+  },
+  {
+    code: "05",
+    title: "AI & Search Lead Attribution & Retention",
+    subtitle: "Custom GA4 AI channels · Call & SMS tracking · Review automation",
+    summary:
+      "Privacy-safe analytics that track every phone call, text message, form submission, and AI referral — paired with automated review requests and follow-up flows that turn first-time buyers into repeat revenue.",
+    commercialImpact:
+      "Default analytics buries ChatGPT and Gemini referrals inside generic direct traffic, and slow follow-up loses warm leads. Clear attribution proves your exact return on investment.",
+    deliverables: [
+      "Custom Google Analytics 4 channel group isolating AI referrals",
+      "Tap-to-call, SMS click, and form conversion event tracking",
+      "Automated post-service review request and SMS follow-up workflows",
+      "Plain-English monthly ROI reporting tied to real customer inquiries",
+      "Zero creepy third-party ad pixels or bloated tracking scripts",
+    ],
+    ctaLabel: "Run a live AI visibility check",
+    ctaHref: "/#check",
+  },
+];
+
+const playbooks = [
+  {
+    tag: "Search & GEO Playbook",
+    title: "Search, Google Maps & AI Marketing",
+    body: "See the exact directory and schema signals Google Maps, ChatGPT, Gemini, Claude, and Siri verify before recommending a business.",
+    href: "/services/local-seo-fresno/",
+    cta: "Read the Search & AI breakdown →",
+  },
+  {
+    tag: "Healthcare & Clinical Playbook",
+    title: "Medical & Dental Practice Web Design",
+    body: "Privacy-first architecture with zero online patient health data collection, frictionless physician referral routing, and 100/100 mobile speed.",
+    href: "/services/medical-web-design/",
+    cta: "See medical web engineering →",
+  },
+  {
+    tag: "Commercial & Trade Playbook",
+    title: "Contractor & Fleet Website Systems",
+    body: "Outrank national lead brokers in Fresno, Clovis, and your target service areas with upfront pricing pages and instant tap-to-text dispatch.",
+    href: "/services/contractor-websites/",
+    cta: "See contractor lead systems →",
+  },
+];
+---
+
+<RootLayout
+  title="Brand, Custom Web Engineering, Google Maps SEO & AI Search Services — Clovis Web Design"
+  description="Five unbundled disciplines engineered by one senior builder: brand positioning, <0.4s custom websites, Google Maps 3-Pack SEO, AI search optimization (GEO), and GA4 lead attribution."
+  schema={schema}
+>
+  <Nav client:load />
+
+  <main id="main" class="relative z-10">
+    <!-- 1. #151515 Obsidian Hero -->
+    <section class="bg-[#151515] px-5 pb-16 pt-28 text-white md:px-8 md:pb-20 md:pt-32">
+      <div class="mx-auto max-w-7xl">
+        <nav aria-label="Breadcrumb" class="mb-5 font-mono text-xs uppercase tracking-[.14em] text-white/70">
+          <a href="/" class="underline decoration-white/30 underline-offset-4 hover:text-[#FF4D1C]">Clovis Web Design</a>
+          <span aria-hidden="true" class="mx-2">/</span>
+          <span class="text-white" aria-current="page">Services &amp; Capabilities</span>
+        </nav>
+
+        <div class="grid items-end gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-8">
+            <h1 class="font-sans text-[clamp(2.35rem,4.5vw,4.25rem)] font-medium leading-[0.98] tracking-[-0.045em] text-white">
+              Five disciplines. One senior engineer. Zero agency bloat.
+            </h1>
+            <p class="mt-5 max-w-3xl text-lg leading-relaxed text-white/80 sm:text-xl">
+              Every service is engineered to do one commercial job: make sure high-intent buyers find you on Google Maps and AI search, trust your positioning within three seconds, and call or text you directly. Hire me for a single focused build or combine disciplines as you grow.
+            </p>
+
+            <div class="mt-7 flex flex-wrap items-center gap-3.5">
+              <a
+                href="/packages/"
+                class="inline-flex items-center gap-2 rounded-[8px] bg-white px-6 py-4 font-sans text-base font-semibold text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white"
+              >
+                Configure a modular package →
+              </a>
+              <a
+                href={smsTo("Hi Adam, I'm reviewing your services page and would like to talk about my business.")}
+                class="inline-flex items-center gap-2 rounded-[8px] border border-white/20 bg-[#1E1E1E] px-6 py-4 font-sans text-base font-semibold text-white transition hover:border-white/50"
+              >
+                Text me at {PHONE_DISPLAY}
+              </a>
+              <a
+                href={`tel:${PHONE_TEL}`}
+                class="inline-flex min-h-12 items-center px-3 font-mono text-xs uppercase tracking-[.14em] text-white/80 underline decoration-[#FF4D1C] underline-offset-4 hover:text-white"
+              >
+                Or call {PHONE_DISPLAY}
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4">
+            <div class="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-6">
+              <div class="font-mono text-[11px] uppercase tracking-[.14em] text-[#FF4D1C]">Cross-Industry Execution</div>
+              <div class="mt-2 font-sans text-xl font-bold text-white">Built for ambitious brands</div>
+              <p class="mt-2 text-sm leading-relaxed text-white/75">
+                I bring high-converting architecture across sectors so you outpace local and regional competitors still stuck on slow agency templates.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {industries.map((ind) => (
+                  <span class="rounded-[6px] border border-white/10 bg-[#151515] px-2.5 py-1 font-mono text-[11px] text-white/85">
+                    {ind}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Comprehensive 5-Pillar Deliverable Matrix -->
+    <section id="pillars" class="bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="max-w-3xl">
+          <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+            Core Capabilities Matrix
+          </div>
+          <h2 class="mt-2 h-section font-sans font-bold tracking-[-0.035em] text-[#151515]">
+            What each discipline includes — and why it drives revenue.
+          </h2>
+          <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+            No mystery retainers or vague deliverables. Here is the exact engineering, copy, schema, and attribution work inside each of the five pillars.
+          </p>
+        </div>
+
+        <div class="mt-12 space-y-6">
+          {pillars.map((p) => (
+            <article class="rounded-[16px] border border-[#151515]/15 bg-[#EDEDED] p-6 transition hover:border-[#151515]/40 sm:p-9">
+              <div class="grid gap-8 lg:grid-cols-12">
+                <div class="lg:col-span-7">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <span class="inline-flex items-center rounded-[6px] bg-[#151515] px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[.14em] text-white">
+                      Pillar {p.code}
+                    </span>
+                    <span class="font-mono text-xs uppercase tracking-[.12em] text-ink-soft">
+                      {p.subtitle}
+                    </span>
+                  </div>
+                  <h3 class="mt-4 font-sans text-2xl font-bold tracking-[-0.025em] text-[#151515] sm:text-3xl">
+                    {p.title}
+                  </h3>
+                  <p class="mt-3 text-[16.5px] leading-relaxed text-[#151515]">
+                    {p.summary}
+                  </p>
+
+                  <div class="mt-5 rounded-[12px] border border-[#151515]/12 bg-white p-4">
+                    <div class="font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+                      Commercial Impact — Why It Matters
+                    </div>
+                    <p class="mt-1.5 text-[15px] leading-relaxed text-ink-soft">
+                      {p.commercialImpact}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex flex-col justify-between rounded-[12px] border border-[#151515]/12 bg-white p-6 lg:col-span-5">
+                  <div>
+                    <div class="font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-[#151515]">
+                      Included Deliverables
+                    </div>
+                    <ul class="mt-4 space-y-2.5 text-[14.5px] leading-snug text-[#151515]">
+                      {p.deliverables.map((d) => (
+                        <li class="flex gap-2.5">
+                          <span class="mt-[1px] font-bold text-[#00A843]">✓</span>
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="mt-6 pt-4 border-t border-[#151515]/10">
+                    <a
+                      href={p.ctaHref}
+                      class="inline-flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#151515] px-5 py-3.5 font-sans text-sm font-semibold text-white transition hover:bg-[#FF4D1C]"
+                    >
+                      {p.ctaLabel} →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Specialized Industry & Search Playbooks -->
+        <div class="mt-16 rounded-[16px] bg-[#151515] p-7 text-white sm:p-10">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#00FF08]">
+                Specialized Technical Playbooks
+              </div>
+              <h3 class="mt-1 font-sans text-2xl font-bold tracking-[-0.025em] text-white sm:text-3xl">
+                Deep-dive architectures by search channel and sector
+              </h3>
+            </div>
+            <a
+              href="/packages/"
+              class="rounded-[8px] border border-white/20 bg-[#1E1E1E] px-4 py-2.5 font-mono text-xs uppercase tracking-[.12em] text-white transition hover:border-white/50"
+            >
+              View modular packages →
+            </a>
+          </div>
+
+          <div class="mt-8 grid gap-5 md:grid-cols-3">
+            {playbooks.map((pb) => (
+              <a
+                href={pb.href}
+                class="group flex flex-col justify-between rounded-[16px] border border-white/12 bg-[#1E1E1E] p-6 transition hover:border-[#FF4D1C]"
+              >
+                <div>
+                  <div class="font-mono text-[11px] uppercase tracking-[.14em] text-[#FF4D1C]">{pb.tag}</div>
+                  <h4 class="mt-2 font-sans text-xl font-bold tracking-[-0.02em] text-white group-hover:text-[#FF4D1C]">
+                    {pb.title}
+                  </h4>
+                  <p class="mt-2.5 text-sm leading-relaxed text-white/75">{pb.body}</p>
+                </div>
+                <div class="mt-6 font-sans text-sm font-semibold text-white group-hover:text-[#FF4D1C]">
+                  {pb.cta}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Compare Section (Typical agency vs With me) -->
+    <Compare client:visible />
+
+    <!-- 4. Visible FAQ Section matching serviceFaqs -->
+    <section id="service-faq" class="border-t border-[#151515]/12 bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
+      <div class="mx-auto max-w-5xl">
+        <div class="max-w-2xl">
+          <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+            Service &amp; Scope FAQ
+          </div>
+          <h2 class="mt-2 font-sans text-3xl font-bold tracking-[-0.03em] text-[#151515] md:text-5xl">
+            Common questions about unbundled services.
+          </h2>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {serviceFaqs.map((f) => (
+            <div class="rounded-[16px] border border-[#151515]/15 bg-[#EDEDED] p-6">
+              <h3 class="font-sans text-lg font-bold leading-snug text-[#151515]">{f.q}</h3>
+              <p class="mt-3 text-[15.5px] leading-relaxed text-ink-soft">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact client:visible />
+  <Footer client:visible />
+</RootLayout>

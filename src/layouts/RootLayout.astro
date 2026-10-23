@@ -8,14 +8,18 @@ interface Props {
   description?: string;
   canonicalURL?: string;
   schema?: object;
+  preloadImage?: string;
 }
 
 const {
-  title = "Clovis Web Design — High-Converting Custom Websites · Clovis & Fresno, CA",
-  description = "Fast, custom-built websites for Clovis, Fresno & Central Valley businesses. 100/100 Google PageSpeed, built to win Google Maps, 100% client-owned. Start with a text.",
+  title = "Clovis Web Design — Custom Websites, Google Maps SEO & AI Search Marketing",
+  description = "Sub-second custom websites, Google Maps 3-Pack SEO, and AI search optimization (ChatGPT, Gemini, Claude, Perplexity) for businesses in Clovis, Fresno & across the US.",
   canonicalURL = Astro.url.href,
   schema = { "@context": "https://schema.org", "@graph": [business] },
+  preloadImage,
 } = Astro.props;
+
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -30,6 +34,7 @@ const {
     <meta name="google-site-verification" content="o3GJhf1cxHaDi2kwMGuH8lXb-iQllnntRh3pru_cPmM" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
     <meta name="theme-color" content="#F7F0E3" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23EE5A2F'/%3E%3Cpath d='M32 4c4 8 10 10 16 8-2 6-8 10-16 8' fill='%232E6A4C'/%3E%3C/svg%3E" />
     
@@ -41,17 +46,33 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://cloviswebdesign.com/images/hero.jpg" />
+    <meta property="og:image:width" content="1693" />
+    <meta property="og:image:height" content="929" />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://cloviswebdesign.com/images/hero.jpg" />
     
-    <!-- Self-hosted Font Preloads (Zero Google Fonts links) -->
+    <!-- Self-hosted Font & LCP Image Preloads (Zero Google Fonts links) -->
     <link rel="preload" href="/fonts/bricolage-grotesque-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    {preloadImage && <link rel="preload" href={preloadImage} as="image" type="image/webp" fetchpriority="high" />}
 
     <!-- Schema.org JSON-LD @graph -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+
+    {gaMeasurementId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gaMeasurementId}');
+        `}></script>
+      </>
+    )}
   </head>
   <body class="grain">
     <a href="#main" class="fixed left-3 top-3 z-[60] -translate-y-[200%] rounded-full bg-ink px-5 py-3 font-medium text-cream transition-transform focus:translate-y-0">Skip to content</a>
@@ -76,10 +97,102 @@ const {
         });
       }
     </script>
-    <!-- Vercel Speed Insights & Web Analytics: plain-HTML install, no package needed. -->
-    <script is:inline>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
-    <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
-    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
-    <script is:inline defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights & Web Analytics: plain-HTML install, no package needed. Skipped on localhost so local audits don't 404. -->
+    <script is:inline>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        ['/_vercel/speed-insights/script.js', '/_vercel/insights/script.js'].forEach(function(src) {
+          var s = document.createElement('script');
+          s.defer = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      }
+    </script>
+
+    <!-- Lightweight Conversion & AI Referrer Event Tracking -->
+    <script is:inline>
+      (function() {
+        function track(name, data) {
+          try {
+            window.va?.('event', { name: name, ...(data || {}) });
+            window.gtag?.('event', name, data || {});
+          } catch (e) {}
+        }
+        window.cwTrackEvent = track;
+
+        // 1. Delegated click listener on tel:, sms:, mailto: links
+        document.addEventListener('click', function(e) {
+          var el = e.target && e.target.closest ? e.target.closest('a') : null;
+          if (!el || !el.href) return;
+          var href = el.getAttribute('href') || el.href;
+          if (href.indexOf('tel:') === 0) {
+            track('lead_call_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          } else if (href.indexOf('sms:') === 0) {
+            track('lead_sms_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          } else if (href.indexOf('mailto:') === 0) {
+            track('lead_email_click', { label: (el.textContent || '').trim().slice(0, 60) });
+          }
+        }, { capture: true });
+
+        // 2. Custom event listener for ai_audit_run (from LeadLeakAudit)
+        window.addEventListener('ai_audit_run', function(e) {
+          track('ai_audit_run', e && e.detail ? e.detail : {});
+        });
+
+        // 3. Personalized outreach link opens (?biz= or autorun=1)
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var isOutreach = params.has('biz') || params.has('business') || params.get('autorun') === '1' || params.get('autorun') === 'true';
+          if (isOutreach) {
+            var biz = params.get('biz') || params.get('business') || '';
+            var trade = params.get('trade') || '';
+            var city = params.get('city') || '';
+            var sessionKey = 'cw_outreach_' + biz + '_' + trade;
+            if (!sessionStorage.getItem(sessionKey)) {
+              sessionStorage.setItem(sessionKey, '1');
+              track('outreach_link_open', { biz: biz, trade: trade, city: city });
+            }
+          }
+        } catch (e) {}
+
+        // 4. Initial visits from AI search engines
+        try {
+          var ref = document.referrer;
+          if (ref) {
+            var refHost = new URL(ref).hostname.toLowerCase();
+            var aiEngines = [
+              'chatgpt.com',
+              'chat.openai.com',
+              'perplexity.ai',
+              'gemini.google.com',
+              'claude.ai',
+              'copilot.microsoft.com',
+              'deepseek.com',
+              'grok.com',
+              'x.ai',
+              'meta.ai',
+              'you.com',
+              'phind.com',
+              'duck.ai'
+            ];
+            var matched = null;
+            for (var i = 0; i < aiEngines.length; i++) {
+              if (refHost === aiEngines[i] || refHost.endsWith('.' + aiEngines[i])) {
+                matched = aiEngines[i];
+                break;
+              }
+            }
+            if (matched) {
+              if (!sessionStorage.getItem('cw_ai_ref_tracked')) {
+                sessionStorage.setItem('cw_ai_ref_tracked', matched);
+                track('ai_referrer_visit', { engine: matched, referrer: ref });
+              }
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>
