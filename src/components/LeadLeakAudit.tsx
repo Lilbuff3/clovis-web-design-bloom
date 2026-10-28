@@ -115,15 +115,21 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
           <div className={`mt-8 grid gap-4 ${compact ? "" : "sm:grid-cols-3"}`}>
             <label className="block" htmlFor={`${id}-name`}>
-              <span className={labelClass}>Your business</span>
+              <span className={labelClass}>
+                Your business <span className="text-persimmon-deep" aria-hidden="true">*</span>
+              </span>
               <input id={`${id}-name`} type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Olsen Roofing" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-trade`}>
-              <span className={labelClass}>What you do</span>
+              <span className={labelClass}>
+                What you do <span className="text-persimmon-deep" aria-hidden="true">*</span>
+              </span>
               <input id={`${id}-trade`} type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. roofer, dentist" className={inputClass} />
             </label>
             <label className="block" htmlFor={`${id}-city`}>
-              <span className={labelClass}>Your town</span>
+              <span className={labelClass}>
+                Your town <span className="lowercase tracking-normal">(optional)</span>
+              </span>
               <input id={`${id}-city`} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
             </label>
           </div>
