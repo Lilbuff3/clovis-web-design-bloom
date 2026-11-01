@@ -1051,10 +1051,12 @@ assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-cata
     if (!llms.includes(svc)) throw new Error(`llms.txt missing core service: ${svc}`);
   }
   if (/youssef/i.test(llms)) throw new Error('llms.txt must never contain Adam\'s last name');
+  if (/\bundefined\b|\bNaN\b/i.test(llms)) throw new Error('llms.txt contains uninterpolated undefined/NaN values');
 
   const llmsFullPath = path.join(PROJECT_ROOT, 'public', 'llms-full.txt');
   if (!fs.existsSync(llmsFullPath)) throw new Error('Missing public/llms-full.txt');
   if (/youssef/i.test(fs.readFileSync(llmsFullPath, 'utf-8'))) throw new Error('llms-full.txt must never contain Adam\'s last name');
+  if (/\bundefined\b|\bNaN\b/i.test(fs.readFileSync(llmsFullPath, 'utf-8'))) throw new Error('llms-full.txt contains uninterpolated undefined/NaN values');
 
   const catalogPath = path.join(PROJECT_ROOT, 'public', '.well-known', 'ai-catalog.json');
   if (!fs.existsSync(catalogPath)) throw new Error('Missing public/.well-known/ai-catalog.json');
@@ -1063,7 +1065,7 @@ assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-cata
 
   const robotsPath = path.join(PROJECT_ROOT, 'public', 'robots.txt');
   const robots = fs.readFileSync(robotsPath, 'utf-8');
-  const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'];
+  const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'DuckAssistBot', 'Amzn-SearchBot', 'Meta-ExternalAgent', 'MistralAI-User', 'Applebot'];
   for (const b of bots) {
     if (!robots.includes(`User-agent: ${b}`)) throw new Error(`robots.txt missing User-agent: ${b}`);
   }

@@ -290,6 +290,9 @@ assert.ok(llmsTxt.includes('/case-studies/dumpster-rental-fresno/'));
 assert.ok(llmsTxt.includes('/case-studies/kidney-specialist-fresno/'));
 assert.ok(llmsTxt.includes('(559) 628-0142'));
 assert.ok(!/youssef/i.test(llmsTxt), 'llms.txt must never contain Adam\'s last name');
+assert.ok(!/\bundefined\b|\bNaN\b/i.test(llmsTxt), 'llms.txt must never contain uninterpolated undefined/NaN values');
+assert.ok(llmsTxt.includes('Fresno & Clovis, CA'), 'llms.txt must include Big Bros case study location');
+assert.ok(llmsTxt.includes('Dr. Sheikh Mohammad Masood, MD'), 'llms.txt must include Dr. Masood attribution');
 
 const llmsFullTxt = fs.readFileSync(new URL('../public/llms-full.txt', import.meta.url), 'utf8');
 assert.equal(norm(llmsFullTxt), norm(buildLlmsFullTxt()), 'public/llms-full.txt must match buildLlmsFullTxt() from src/lib/discovery.ts');
@@ -297,6 +300,8 @@ assert.ok(llmsFullTxt.includes('# Clovis Web Design'));
 assert.ok(llmsFullTxt.includes('## 3. Five Lifecycle Services'), 'llms-full.txt must reflect all 5 Lifecycle Pillars');
 assert.ok(llmsFullTxt.includes('Brand Positioning & Conversion Copy'));
 assert.ok(!/youssef/i.test(llmsFullTxt), 'llms-full.txt must never contain Adam\'s last name');
+assert.ok(!/\bundefined\b|\bNaN\b/i.test(llmsFullTxt), 'llms-full.txt must never contain uninterpolated undefined/NaN values');
+assert.ok(llmsFullTxt.includes('Dr. Sheikh Mohammad Masood, MD'), 'llms-full.txt must include Dr. Masood attribution');
 
 assert.equal(norm(sitemap), norm(buildSitemapXml()), 'public/sitemap.xml must match buildSitemapXml() from src/lib/discovery.ts');
 
@@ -312,6 +317,7 @@ const rootLayout = fs.readFileSync(new URL('../src/layouts/RootLayout.astro', im
 assert.ok(rootLayout.includes('/_vercel/insights/script.js'), 'Expected Vercel Web Analytics script in RootLayout.astro');
 assert.ok(rootLayout.includes('google-site-verification'), 'Expected Google Search Console verification tag in RootLayout.astro');
 assert.ok(rootLayout.includes('rel="ai-catalog"'), 'Expected <link rel="ai-catalog"> in RootLayout.astro');
+assert.ok(rootLayout.includes('rel="describedby" href="/llms.txt"'), 'Expected llms.txt v2 <link rel="describedby" href="/llms.txt"> in RootLayout.astro');
 assert.ok(rootLayout.includes('INLINE_ANALYTICS_SCRIPT'), 'Expected RootLayout.astro to inline INLINE_ANALYTICS_SCRIPT from outreach-analytics.ts');
 
 import {
@@ -437,7 +443,41 @@ assert.ok(auditSrc.includes('toolname: "audit_ai_visibility"'), 'LeadLeakAudit.t
   initClientAnalytics({ window: mockWindow, document: mockDoc, sessionStorage: mockSessionStorage });
   const countAfter = dispatchedEvents.length;
   assert.equal(countAfter, countBefore, 'SessionStorage must guard against duplicate outreach and AI referrer events');
-  console.log('Conversion and AI Referrer Tracking behavioral unit tests: 6 cases ✓');
+
+  // Verify Layer 2 UTM fallback when document.referrer is stripped (e.g. mobile webview or rel="noreferrer")
+  // and Layer 3 scroll-to-text fragment (#:~:text=) deep-citation listener
+  const utmEvents = [];
+  const utmStorage = new Map();
+  initClientAnalytics({
+    window: {
+      addEventListener: () => {},
+      location: {
+        search: '?utm_source=chatgpt.com',
+        hash: '',
+        pathname: '/services/local-seo-fresno/',
+        href: 'https://cloviswebdesign.com/services/local-seo-fresno/?utm_source=chatgpt.com#:~:text=Four-Directory%20Profile%20Alignment',
+      },
+      va: (action, payload) => { utmEvents.push(payload); },
+    },
+    document: {
+      addEventListener: () => {},
+      referrer: '',
+    },
+    sessionStorage: {
+      getItem: (k) => utmStorage.get(k) || null,
+      setItem: (k, v) => utmStorage.set(k, String(v)),
+    },
+  });
+  const utmRefEvt = utmEvents.find(e => e?.name === 'ai_referrer_visit');
+  assert.ok(utmRefEvt, 'Expected ai_referrer_visit from utm_source=chatgpt.com even when document.referrer is empty');
+  assert.equal(utmRefEvt.engine, 'chatgpt.com');
+  assert.equal(utmRefEvt.referrer, 'utm:chatgpt.com');
+
+  const citationEvt = utmEvents.find(e => e?.name === 'ai_citation_view');
+  assert.ok(citationEvt, 'Expected ai_citation_view from #:~:text= scroll-to-text fragment');
+  assert.equal(citationEvt.citation_text_snippet, 'Four-Directory Profile Alignment');
+  assert.equal(citationEvt.page_location, '/services/local-seo-fresno/');
+  console.log('Conversion and AI Referrer Tracking behavioral unit tests: 8 cases ✓');
 }
 
 import { CANONICAL_URLS, pingIndexNow } from '../scripts/ping-search-engines.mjs';

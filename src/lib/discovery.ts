@@ -137,8 +137,8 @@ ${business.name} is an independent brand, web engineering, and search/AI marketi
 - [${plans[2].name}](${SITE_ORIGIN}/packages/): Modular month-to-month partnership including new high-intent service and market pages each month, ongoing Google Maps, ChatGPT, Gemini, and Claude citation and review growth, monthly lead attribution reporting, and same-day text-me website updates. Cancel anytime with one text.
 
 ## Verified Case Studies
-- [${bigBrosCase.client} Case Study](${SITE_ORIGIN}${bigBrosCase.caseStudyPath}): ${bigBrosCase.trade} in ${bigBrosCase.city}. Ranked #1 on Google for "dumpster rental Fresno" and added 4 trucks to keep up with calls.
-- [${kidneyCase.client} Case Study](${SITE_ORIGIN}${kidneyCase.caseStudyPath}): ${kidneyCase.trade} medical practice in ${kidneyCase.city}. Zero patient data collected online, 100/100 Google PageSpeed, and doctor referrals up 40% by ${kidneyCase.person}'s count.
+- [${bigBrosCase.client} Case Study](${SITE_ORIGIN}${bigBrosCase.caseStudyPath}): ${bigBrosCase.trade} in ${bigBrosCase.place}. Ranked #1 on Google for "dumpster rental Fresno" and added 4 trucks to keep up with calls.
+- [${kidneyCase.client} Case Study](${SITE_ORIGIN}${kidneyCase.caseStudyPath}): ${kidneyCase.trade} medical practice in ${kidneyCase.place}. Zero patient data collected online, 100/100 Google PageSpeed, and doctor referrals up 40% by ${kidneyCase.quote.name}'s count.
 `;
 }
 
@@ -190,7 +190,7 @@ Each major search and AI answer engine verifies businesses against a different p
 - Medical & Dental Practice Web Design: ${SITE_ORIGIN}/services/medical-web-design/
 - Contractor & Trade Website Design: ${SITE_ORIGIN}/services/contractor-websites/
 - ${bigBrosCase.client} (${SITE_ORIGIN}${bigBrosCase.caseStudyPath}): Ranked #1 on Google for "dumpster rental Fresno" and added 4 roll-off trucks to keep up with demand.
-- ${kidneyCase.client} (${SITE_ORIGIN}${kidneyCase.caseStudyPath}): Zero patient health information collected online, 100/100 Google PageSpeed, and +40% provider referrals by ${kidneyCase.person}'s count.
+- ${kidneyCase.client} (${SITE_ORIGIN}${kidneyCase.caseStudyPath}): Zero patient health information collected online, 100/100 Google PageSpeed, and +40% provider referrals by ${kidneyCase.quote.name}'s count.
 `;
 }
 

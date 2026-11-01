@@ -1,17 +1,30 @@
 export const AI_ENGINES = [
   "chatgpt.com",
   "chat.openai.com",
+  "openai.com",
   "perplexity.ai",
   "gemini.google.com",
+  "bard.google.com",
+  "notebooklm.google.com",
+  "aistudio.google.com",
   "claude.ai",
+  "anthropic.com",
   "copilot.microsoft.com",
+  "copilot.cloud.microsoft",
+  "edgeservices.bing.com",
   "deepseek.com",
   "grok.com",
   "x.ai",
   "meta.ai",
+  "mistral.ai",
   "you.com",
   "phind.com",
   "duck.ai",
+  "poe.com",
+  "kagi.com",
+  "qwen.ai",
+  "kimi.com",
+  "kimi.ai",
 ] as const;
 
 /** Builds a Personalized Audit Link (`/?biz=...&trade=...&city=...&autorun=1#check`). */
@@ -69,8 +82,9 @@ export type ClientAnalyticsEnv = {
 
 /**
  * Wires lightweight conversion tracking (`tel:`, `sms:`, `mailto:`, `ai_audit_run`),
- * Personalized Audit Link attribution (`outreach_link_open`), and 13-engine AI
- * referrer detection (`ai_referrer_visit`).
+ * Personalized Audit Link attribution (`outreach_link_open`), dual-mode AI referrer
+ * detection (`ai_referrer_visit` via `document.referrer` and `utm_source`/`utm_medium`),
+ * and scroll-to-text fragment citation tracking (`ai_citation_view` via `#:~:text=`).
  *
  * Uses a typed function expression with zero interior TypeScript annotations so
  * `initClientAnalytics.toString()` is valid browser JS with zero regex stripping.
@@ -132,18 +146,62 @@ export const initClientAnalytics: (env: ClientAnalyticsEnv) => void = function (
     }
   } catch {}
 
-  // 4. Initial visits from AI search engines
+  // 4. Dual-detection AI referrer visits (document.referrer + utm_source / utm_medium=ai_search)
   try {
-    const ref = doc.referrer;
-    if (ref) {
-      const refHost = new UrlCtor(ref).hostname.toLowerCase();
-      const matched = engines.find(function (eng) {
-        return refHost === eng || refHost.endsWith("." + eng);
-      });
-      if (matched && !storage.getItem("cw_ai_ref_tracked")) {
-        storage.setItem("cw_ai_ref_tracked", matched);
-        track("ai_referrer_visit", { engine: matched, referrer: ref });
+    let matchedEngine = "";
+    let refSource = doc.referrer || "";
+    if (refSource) {
+      const refHost = new UrlCtor(refSource).hostname.toLowerCase();
+      matchedEngine =
+        engines.find(function (eng) {
+          return refHost === eng || refHost.endsWith("." + eng);
+        }) || "";
+    }
+    if (!matchedEngine && win.location && win.location.search) {
+      const qParams = new Params(win.location.search);
+      const utmSource = (qParams.get("utm_source") || "").trim().toLowerCase();
+      const utmMedium = (qParams.get("utm_medium") || "").trim().toLowerCase();
+      if (utmSource) {
+        const byDomain = engines.find(function (eng) {
+          return (
+            utmSource === eng ||
+            utmSource.endsWith("." + eng) ||
+            eng.indexOf(utmSource + ".") === 0
+          );
+        });
+        if (byDomain) {
+          matchedEngine = byDomain;
+          refSource = "utm:" + utmSource;
+        } else if (utmSource === "llms_txt" || utmSource === "llms.txt" || utmMedium === "ai_search") {
+          matchedEngine = utmSource;
+          refSource = "utm:" + utmSource;
+        }
+      } else if (utmMedium === "ai_search" || utmMedium === "ai-assistant") {
+        matchedEngine = utmMedium;
+        refSource = "utm_medium:" + utmMedium;
       }
+    }
+    if (matchedEngine && !storage.getItem("cw_ai_ref_tracked")) {
+      storage.setItem("cw_ai_ref_tracked", matchedEngine);
+      track("ai_referrer_visit", { engine: matchedEngine, referrer: refSource });
+    }
+  } catch {}
+
+  // 5. Scroll-to-text fragment (#:~:text=) deep-citation listener (Perplexity & Google AI Overviews)
+  try {
+    const navEntry =
+      win.performance && win.performance.getEntriesByType
+        ? win.performance.getEntriesByType("navigation")[0]
+        : null;
+    const rawUrl = (navEntry && navEntry.name) || (win.location && win.location.href) || "";
+    const fragMatch = rawUrl.match(/#:~:text=([^&]+)/);
+    if (fragMatch && fragMatch[1] && !storage.getItem("cw_ai_citation_tracked")) {
+      const snippet = decodeURIComponent(fragMatch[1]).slice(0, 120);
+      storage.setItem("cw_ai_citation_tracked", snippet);
+      track("ai_citation_view", {
+        citation_text_snippet: snippet,
+        page_location: (win.location && win.location.pathname) || "/",
+      });
     }
   } catch {}
 };
