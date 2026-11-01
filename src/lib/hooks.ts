@@ -1,39 +1,84 @@
 import { useEffect, useRef, useState } from "react";
 
-/** Marks every `.reveal` / `.line-mask` / .clip-reveal / [data-reveal] element with `data-in` as it enters the viewport.
- *  An attribute, not a class: React rewrites `className` when a card's classes change, which would hide it again. */
-export function useGlobalReveal() {
-  useEffect(() => {
-    // Skip islands React hasn't hydrated yet: stamping their server HTML makes hydration mismatch.
-    // Each of those islands calls this hook itself once it hydrates.
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .line-mask, .clip-reveal, [data-reveal]")).filter(
-      (el) => !el.closest("astro-island[ssr]")
-    );
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.setAttribute("data-in", "");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
-    );
+export type RevealEnv = {
+  innerHeight?: number;
+  window?: { innerHeight: number };
+  document: any;
+  IntersectionObserver?: any;
+  MutationObserver?: any;
+};
 
-    // Immediately mark visible or already scrolled-past elements to avoid hydration flashes or scroll-up hiding
-    els.forEach((el) => {
+/**
+ * Marks every `.reveal, .line-mask, .clip-reveal, [data-reveal]` element with `data-in`
+ * as it enters the viewport. Skips elements inside unhydrated `<astro-island ssr>` containers
+ * until Astro removes the `ssr` attribute upon React hydration, preventing hydration attribute
+ * mismatches while requiring zero hook calls inside React components.
+ *
+ * Defined as a typed function expression with zero interior TS annotations so
+ * `initDocumentReveal.toString()` is valid browser JS with zero regex stripping.
+ */
+export const initDocumentReveal: (env: RevealEnv) => void = function (env) {
+  const doc = env.document;
+  const IO = env.IntersectionObserver;
+  const MO = env.MutationObserver;
+  if (!doc || !IO) return;
+
+  const SELECTOR = ".reveal, .line-mask, .clip-reveal, [data-reveal]";
+  const io = new IO(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute("data-in", "");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
+  );
+
+  function viewportHeight() {
+    return env.window ? env.window.innerHeight : env.innerHeight || 0;
+  }
+
+  function registerElements(nodes) {
+    const vh = viewportHeight();
+    nodes.forEach(function (el) {
+      if (el.hasAttribute("data-in")) return;
+      if (el.closest && el.closest("astro-island[ssr]")) return;
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
+      if (rect.top < vh) {
         el.setAttribute("data-in", "");
       } else {
         io.observe(el);
       }
     });
+  }
 
-    return () => io.disconnect();
-  }, []);
-}
+  registerElements(Array.from(doc.querySelectorAll(SELECTOR)));
+
+  if (MO && doc.documentElement) {
+    const mo = new MO(function (mutations) {
+      mutations.forEach(function (m) {
+        if (
+          m.type === "attributes" &&
+          m.attributeName === "ssr" &&
+          m.target &&
+          !m.target.hasAttribute("ssr") &&
+          m.target.querySelectorAll
+        ) {
+          registerElements(Array.from(m.target.querySelectorAll(SELECTOR)));
+        }
+      });
+    });
+    mo.observe(doc.documentElement, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["ssr"],
+    });
+  }
+};
+
+export const INLINE_REVEAL_SCRIPT = `(${initDocumentReveal.toString()})({ window, document, IntersectionObserver: window.IntersectionObserver, MutationObserver: window.MutationObserver });`;
 
 export function usePageScroll() {
   const [y, setY] = useState(0);

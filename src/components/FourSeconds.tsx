@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useGlobalReveal } from "../lib/hooks";
 
 const END = 7200;
 
@@ -155,7 +154,6 @@ function FastSite({ t }: { t: number }) {
 }
 
 export function FourSeconds() {
-  useGlobalReveal();
   const [t, setT] = useState(0);
   const [running, setRunning] = useState(false);
   const [ran, setRan] = useState(false);

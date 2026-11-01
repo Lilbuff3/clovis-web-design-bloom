@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { PHONE_DISPLAY, mailTo, smsTo } from "../lib/data";
+import { buildAuditUrl, parseAuditSearch } from "../lib/outreach-analytics";
 
 type Link = { title: string; uri: string };
 type Answer = { question: string; answer: string; places: Link[]; sources: Link[]; named: string | null; lookedFor: boolean };
@@ -62,21 +63,17 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   // Support personalized outreach links: /?biz=Olsen+Roofing&trade=roofer&city=Clovis,+CA&autorun=1#check
   useEffect(() => {
     if (compact || typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const qBiz = params.get("biz")?.trim() || params.get("business")?.trim() || "";
-    const qTrade = params.get("trade")?.trim() || "";
-    const qCity = params.get("city")?.trim() || "Clovis, CA";
-    const autorun = params.get("autorun") === "1" || params.get("autorun") === "true";
+    const parsed = parseAuditSearch(window.location.search, window.location.hash);
 
-    if (qBiz) setName(qBiz);
-    if (qTrade) setTrade(qTrade);
-    if (params.has("city") && qCity) setCity(qCity);
+    if (parsed.biz) setName(parsed.biz);
+    if (parsed.trade) setTrade(parsed.trade);
+    if (parsed.hasCity) setCity(parsed.city);
 
-    if (qTrade && (autorun || (qBiz && window.location.hash === "#check"))) {
+    if (parsed.shouldAutorun) {
       document.getElementById("check")?.scrollIntoView({ behavior: "smooth", block: "center" });
       runCheck(
-        { name: qBiz, trade: qTrade, city: qCity },
-        autorun ? "outreach" : "organic"
+        { name: parsed.biz, trade: parsed.trade, city: parsed.city },
+        parsed.autorun ? "outreach" : "organic"
       );
     }
   }, [compact]);
@@ -95,13 +92,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   };
 
   const copyReportLink = () => {
-    const params = new URLSearchParams({
-      biz: sent.name,
-      trade: sent.trade,
-      city: sent.city,
-      autorun: "1",
-    });
-    const shareUrl = `https://cloviswebdesign.com/?${params.toString()}#check`;
+    const shareUrl = buildAuditUrl(sent.name, sent.trade, sent.city);
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(shareUrl).then(() => {
         setCopiedReport(true);

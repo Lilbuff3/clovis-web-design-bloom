@@ -1,36 +1,34 @@
+import {
+  type EdgeDeps,
+  clientIp,
+  createRateLimiter,
+  deliverLeadAlert,
+  oneLine,
+  parsePostJsonBody,
+} from "../src/lib/lead-delivery.ts";
+
 export const config = {
-  runtime: 'edge',
+  runtime: "edge",
 };
 
 // Asks Gemini, with live Google Maps data, the question a customer asks ("I need a roofer in
 // Clovis, CA. Who do you recommend?") and says whether the visitor's business was in the answer.
 // Only Maps-grounded answers go back: without Maps sources the page would be claiming a source it doesn't have.
 
-const MODEL = 'gemini-3.5-flash-lite';
+const MODEL = "gemini-3.5-flash-lite";
 
 // ponytail: in-memory limiter is per edge instance, so it only slows casual abuse.
 // 10 an hour leaves room for "Try another business". Use Vercel Firewall rate limiting if it gets hammered.
-const hits = new Map<string, { count: number; resetAt: number }>();
-function rateLimited(ip: string, limit = 10, windowMs = 3_600_000): boolean {
-  const now = Date.now();
-  for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
-  const rec = hits.get(ip);
-  if (!rec) {
-    hits.set(ip, { count: 1, resetAt: now + windowMs });
-    return false;
-  }
-  rec.count += 1;
-  return rec.count > limit;
-}
+const rateLimited = createRateLimiter(10, 3_600_000);
 
 type Link = { title: string; uri: string };
 
-const FILLER = new Set(['inc', 'llc', 'co', 'corp', 'company', 'the', 'and']);
-const plain = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f'’]/g, '').toLowerCase();
+const FILLER = new Set(["inc", "llc", "co", "corp", "company", "the", "and"]);
+const plain = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f'’]/g, "").toLowerCase();
 const words = (s: string) =>
   plain(s)
     .split(/[^a-z0-9]+/)
-    .map((w) => w.replace(/s$/, ''))
+    .map((w) => w.replace(/s$/, ""))
     .filter((w) => w && !FILLER.has(w));
 
 /** The place title that is the visitor's business; null if none. */
@@ -40,11 +38,10 @@ export function namedIn(titles: string[], businessName: string): string | null {
   return (want.length > 0 && titles.find((t) => want.every((w) => words(t).includes(w)))) || null;
 }
 
-const an = (w: string) => (/^[aeiou]/i.test(w) ? 'an' : 'a');
-const oneLine = (v: unknown, n: number) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
-const linkable = (l: { title: string; uri?: string }): l is Link => /^https:\/\//.test(l.uri ?? '');
+const an = (w: string) => (/^[aeiou]/i.test(w) ? "an" : "a");
+const linkable = (l: { title: string; uri?: string }): l is Link => /^https:\/\//.test(l.uri ?? "");
 const unique = (links: Link[]) => links.filter((l, i) => links.findIndex((m) => m.uri === l.uri) === i);
-const unsuffixed = (title: string) => title.replace(/\s+[-–—]\s+Google Maps$/i, '').trim();
+const unsuffixed = (title: string) => title.replace(/\s+[-–—]\s+Google Maps$/i, "").trim();
 
 const SYSTEM = `Answer the way you would for someone choosing a local business.
 Plain text, no markdown, no emoji. Name up to 5 businesses, one line each in the format "Business Name: short reason". Under 120 words.`;
@@ -61,46 +58,48 @@ type Chunk = {
   };
 };
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'POST') return Response.json({ error: 'Method not allowed' }, { status: 405, headers: { Allow: 'POST' } });
+export default async function handler(req: Request, deps: EdgeDeps = {}): Promise<Response> {
+  const fetchImpl = deps.fetch ?? globalThis.fetch;
+  const env = deps.env ?? process.env;
 
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'anonymous';
-  if (rateLimited(ip)) return Response.json({ error: 'Too many checks this hour' }, { status: 429 });
-
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return Response.json({ error: 'Invalid request' }, { status: 400 });
-    }
-  } catch {
-    return Response.json({ error: 'Invalid request' }, { status: 400 });
+  if (req.method !== "POST") {
+    return Response.json({ error: "Method not allowed" }, { status: 405, headers: { Allow: "POST" } });
   }
+
+  if (rateLimited(clientIp(req))) {
+    return Response.json({ error: "Too many checks this hour" }, { status: 429 });
+  }
+
+  const parsed = await parsePostJsonBody(req, "Invalid request");
+  if (!parsed.ok) return parsed.response;
+  const { body } = parsed;
+
   const business = oneLine(body.businessName, 60);
-  const city = oneLine(body.city, 50) || 'Clovis, CA';
+  const city = oneLine(body.city, 50) || "Clovis, CA";
   const trade = oneLine(body.trade, 50);
-  if (!trade) return Response.json({ error: 'Say what your business does' }, { status: 400 });
+  if (!trade) return Response.json({ error: "Say what your business does" }, { status: 400 });
 
-  const source: 'outreach' | 'organic' = body.source === 'outreach' ? 'outreach' : 'organic';
+  const source: "outreach" | "organic" = body.source === "outreach" ? "outreach" : "organic";
 
-  const key = (process.env.GEMINI_API_KEY || process.env.gemini_key)?.trim(); // gemini_key is its name on Vercel
-  if (!key) return Response.json({ error: 'Gemini isn’t set up' }, { status: 503 });
+  const key = (env.GEMINI_API_KEY || env.gemini_key)?.trim(); // gemini_key is its name on Vercel
+  if (!key) return Response.json({ error: "Gemini isn’t set up" }, { status: 503 });
 
   const question = `I need ${an(trade)} ${trade} in ${city}. Who do you recommend?`;
   // Now and then Gemini answers without looking anything up on Maps (about 1 in 10 on production); a second try covers it.
-  const result = (await askGemini(key, question, city)) ?? (await askGemini(key, question, city));
-  if (!result) return Response.json({ error: 'Gemini didn’t answer' }, { status: 502 });
+  const result =
+    (await askGemini(key, question, city, fetchImpl)) ?? (await askGemini(key, question, city, fetchImpl));
+  if (!result) return Response.json({ error: "Gemini didn’t answer" }, { status: 502 });
 
   const named = namedIn(result.places.map((p) => p.title), business);
   const lookedFor = words(business).length > 0;
   const topCompetitors = result.places.slice(0, 3).map((p) => p.title);
 
-  if (key !== 'fake-key-for-tests') {
+  if (key !== "fake-key-for-tests") {
     console.info(
       JSON.stringify({
-        event: 'ai_audit_lead',
+        event: "ai_audit_lead",
         timestamp: new Date().toISOString(),
-        business: business || '(none)',
+        business: business || "(none)",
         trade,
         city,
         source,
@@ -110,9 +109,27 @@ export default async function handler(req: Request): Promise<Response> {
     );
   }
 
-  const webhookUrl = process.env.LEAD_ALERT_WEBHOOK_URL?.trim();
+  const webhookUrl = env.LEAD_ALERT_WEBHOOK_URL?.trim();
   if (webhookUrl) {
-    await notifyLeadWebhook(webhookUrl, { business, trade, city, source, named, topCompetitors });
+    const status = named ? `FOUND (${named})` : "MISSED";
+    const tag = source === "outreach" ? "[OUTREACH LINK]" : "[ORGANIC CHECK]";
+    const summary = `${tag} "${business || "Visitor"}" (${trade} in ${city}) -> ${status}. Top picks: ${topCompetitors.join(", ")}`;
+    const delivery = await deliverLeadAlert(
+      webhookUrl,
+      {
+        rawTitle: `Clovis Web Design Lead: ${business || trade}`,
+        fallbackTitle: "Clovis Web Design Lead",
+        priority: "high",
+        tags: "mag,briefcase",
+        summary,
+        jsonPayload: { business, trade, city, source, named, topCompetitors },
+        timeoutMs: 2_500,
+      },
+      fetchImpl
+    );
+    if (!delivery.ok && delivery.error) {
+      console.warn("Lead webhook notification failed", delivery.error);
+    }
   }
 
   return Response.json(
@@ -122,71 +139,47 @@ export default async function handler(req: Request): Promise<Response> {
       named,
       lookedFor,
     },
-    { headers: { 'Cache-Control': 'no-store' } }
+    { headers: { "Cache-Control": "no-store" } }
   );
 }
 
-/** Sends a fast, non-fatal lead notification to ntfy.sh, Discord, Slack, or a generic webhook. */
-async function notifyLeadWebhook(
-  webhookUrl: string,
-  lead: {
-    business: string;
-    trade: string;
-    city: string;
-    source: 'outreach' | 'organic';
-    named: string | null;
-    topCompetitors: string[];
-  }
-): Promise<void> {
-  const status = lead.named ? `FOUND (${lead.named})` : `MISSED`;
-  const tag = lead.source === 'outreach' ? '[OUTREACH LINK]' : '[ORGANIC CHECK]';
-  const summary = `${tag} "${lead.business || 'Visitor'}" (${lead.trade} in ${lead.city}) -> ${status}. Top picks: ${lead.topCompetitors.join(', ')}`;
-  try {
-    const isNtfy = /ntfy\.sh\//i.test(webhookUrl);
-    const rawTitle = `Clovis Web Design Lead: ${lead.business || lead.trade}`;
-    const safeTitle = rawTitle.replace(/[^\x20-\x7E]/g, '').trim() || 'Clovis Web Design Lead';
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: isNtfy
-        ? { Title: safeTitle, Priority: 'high', Tags: 'mag,briefcase' }
-        : { 'content-type': 'application/json' },
-      body: isNtfy ? summary : JSON.stringify({ content: summary, text: summary, ...lead }),
-      signal: AbortSignal.timeout(2_500),
-    });
-  } catch (err) {
-    console.warn('Lead webhook notification failed', err);
-  }
-}
-
 /** One question to Gemini with Google Maps; falls back to gemini-2.5-flash + googleSearch if Maps quota returns 429. */
-async function askGemini(key: string, question: string, city = 'Clovis, CA'): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
+async function askGemini(
+  key: string,
+  question: string,
+  city = "Clovis, CA",
+  fetchImpl: typeof globalThis.fetch = globalThis.fetch
+): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents: [{ role: 'user', parts: [{ text: question }] }],
-        tools: [{ googleMaps: {} }],
-        generationConfig: { maxOutputTokens: 800 },
-      }),
-      // Two tries at 11s each stay inside the 25 seconds an edge function gets to start answering.
-      signal: AbortSignal.timeout(11_000),
-    });
+    const res = await fetchImpl(
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM }] },
+          contents: [{ role: "user", parts: [{ text: question }] }],
+          tools: [{ googleMaps: {} }],
+          generationConfig: { maxOutputTokens: 800 },
+        }),
+        // Two tries at 11s each stay inside the 25 seconds an edge function gets to start answering.
+        signal: AbortSignal.timeout(11_000),
+      }
+    );
     if (res.status === 429) {
-      return await askGeminiSearchFallback(key, question, city);
+      return await askGeminiSearchFallback(key, question, city, fetchImpl);
     }
     if (!res.ok) {
-      console.warn('Gemini returned', res.status, (await res.text()).slice(0, 300));
+      console.warn("Gemini returned", res.status, (await res.text()).slice(0, 300));
       return null;
     }
     const candidate = (await res.json())?.candidates?.[0];
     const parts: { text?: string; thought?: boolean }[] = candidate?.content?.parts ?? [];
     const answer = parts
       .filter((p) => !p.thought)
-      .map((p) => p.text ?? '')
-      .join('')
-      .replace(/[*#`_]/g, '') // shown as plain text on the page
+      .map((p) => p.text ?? "")
+      .join("")
+      .replace(/[*#`_]/g, "") // shown as plain text on the page
       .trim();
 
     // Google requires every Maps source to be shown right after the answer. In practice titles end in
@@ -195,52 +188,64 @@ async function askGemini(key: string, question: string, city = 'Clovis, CA'): Pr
     const chunks: Chunk[] = candidate?.groundingMetadata?.groundingChunks ?? [];
     const sources = unique(
       [
-        ...chunks.map((c) => ({ title: c.maps?.title ?? '', uri: c.maps?.uri })),
+        ...chunks.map((c) => ({ title: c.maps?.title ?? "", uri: c.maps?.uri })),
         ...chunks
           .flatMap((c) => c.maps?.placeAnswerSources?.reviewSnippets ?? [])
-          .map((r) => ({ title: r.title ?? '', uri: r.googleMapsUri })),
+          .map((r) => ({ title: r.title ?? "", uri: r.googleMapsUri })),
       ].filter(linkable)
-    ).map((s) => ({ ...s, title: unsuffixed(s.title) || 'A review' }));
+    ).map((s) => ({ ...s, title: unsuffixed(s.title) || "A review" }));
     // The businesses named, in the answer's order, each with its first Maps link: "Review of X" counts for X.
     const places: Link[] = [];
     for (const c of chunks) {
-      const title = unsuffixed(c.maps?.title ?? '').replace(/^Review of\s+/i, '').replace(/\.$/, '');
-      const uri = c.maps?.uri ?? '';
-      if (title && uri.startsWith('https://') && !places.some((p) => p.title === title)) places.push({ title, uri });
+      const title = unsuffixed(c.maps?.title ?? "")
+        .replace(/^Review of\s+/i, "")
+        .replace(/\.$/, "");
+      const uri = c.maps?.uri ?? "";
+      if (title && uri.startsWith("https://") && !places.some((p) => p.title === title)) {
+        places.push({ title, uri });
+      }
     }
     if (!answer || !places.length) {
-      console.warn('Gemini answered without Google Maps sources');
+      console.warn("Gemini answered without Google Maps sources");
       return null;
     }
     return { answer, places, sources };
   } catch (err) {
-    console.warn('Gemini request failed', err);
+    console.warn("Gemini request failed", err);
     return null;
   }
 }
 
 /** Fallback when Maps grounding returns 429: uses gemini-2.5-flash with live Google Search grounding. */
-async function askGeminiSearchFallback(key: string, question: string, city: string): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
+async function askGeminiSearchFallback(
+  key: string,
+  question: string,
+  city: string,
+  fetchImpl: typeof globalThis.fetch = globalThis.fetch
+): Promise<{ answer: string; places: Link[]; sources: Link[] } | null> {
   try {
-    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents: [{ role: 'user', parts: [{ text: question }] }],
-        tools: [{ googleSearch: {} }],
-        generationConfig: { maxOutputTokens: 800 },
-      }),
-      signal: AbortSignal.timeout(11_000),
-    });
+    const res = await fetchImpl(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM }] },
+          contents: [{ role: "user", parts: [{ text: question }] }],
+          tools: [{ googleSearch: {} }],
+          generationConfig: { maxOutputTokens: 800 },
+        }),
+        signal: AbortSignal.timeout(11_000),
+      }
+    );
     if (!res.ok) return null;
     const candidate = (await res.json())?.candidates?.[0];
     const parts: { text?: string; thought?: boolean }[] = candidate?.content?.parts ?? [];
     const answer = parts
       .filter((p) => !p.thought)
-      .map((p) => p.text ?? '')
-      .join('')
-      .replace(/[*#`_]/g, '')
+      .map((p) => p.text ?? "")
+      .join("")
+      .replace(/[*#`_]/g, "")
       .trim();
     if (!answer) return null;
 
@@ -256,7 +261,7 @@ async function askGeminiSearchFallback(key: string, question: string, city: stri
 
     const chunks: Chunk[] = candidate?.groundingMetadata?.groundingChunks ?? [];
     const webSources = unique(
-      chunks.map((c) => ({ title: c.web?.title ?? '', uri: c.web?.uri })).filter(linkable)
+      chunks.map((c) => ({ title: c.web?.title ?? "", uri: c.web?.uri })).filter(linkable)
     );
     const sources = webSources.length ? webSources : places;
     if (!places.length) return null;

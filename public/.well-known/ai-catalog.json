@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/ard-schema.json",
   "version": "1.0",
   "name": "Clovis Web Design",
-  "description": "Custom web design, Google Maps SEO, AI search optimization (GEO), and GA4 AI lead attribution for growth-minded businesses. Operated by Adam in Clovis, California.",
+  "description": "Brand positioning, custom web design, Google Maps SEO, AI search optimization (GEO), and GA4 AI lead attribution for growth-minded businesses. Operated by Adam in Clovis, California.",
   "url": "https://cloviswebdesign.com/",
   "llmsTxtUrl": "https://cloviswebdesign.com/llms.txt",
   "llmsFullTxtUrl": "https://cloviswebdesign.com/llms-full.txt",
@@ -10,22 +10,17 @@
     {
       "title": "Clovis Web Design — Services & Engagement Models",
       "url": "https://cloviswebdesign.com/",
-      "description": "Overview of our four core services (Custom Web Design, Search & Google Maps SEO, AI Search Optimization, and AI Lead Attribution), client case studies, and engagement models."
+      "description": "Overview of our five lifecycle services (Brand Positioning & Conversion Copy, Custom Web Design & Engineering, Search Engine & Google Maps SEO, AI Search & Answer Optimization, AI & Search Lead Attribution & Retention), client case studies, and engagement models."
     },
     {
       "title": "Services & Capabilities Overview",
       "url": "https://cloviswebdesign.com/services/",
-      "description": "Unbundled breakdown of our four core services: Custom Web Design & Engineering, Search Engine & Google Maps SEO, AI Search Optimization (GEO), and AI Lead Tracking."
+      "description": "Full breakdown of our five lifecycle services: Brand Positioning & Conversion Copy, Custom Web Design & Engineering, Search Engine & Google Maps SEO, AI Search & Answer Optimization, AI & Search Lead Attribution & Retention."
     },
     {
       "title": "Packages & Engagement Models",
       "url": "https://cloviswebdesign.com/packages/",
-      "description": "How engagements are scoped to your business and ROI: Custom Website Build, Search & AI Visibility Setup, and Ongoing Search & AI Growth."
-    },
-    {
-      "title": "Search, Google Maps & AI Search Marketing (SEO & GEO)",
-      "url": "https://cloviswebdesign.com/services/local-seo-fresno/",
-      "description": "How Google Search, Gemini, ChatGPT, Claude, Perplexity, and Apple Siri verify and recommend businesses across the four core directories."
+      "description": "How engagements are scoped to your business and ROI: Custom Website Build, Search & AI Visibility Setup, Ongoing Search & AI Growth."
     },
     {
       "title": "Medical & Dental Practice Web Design",
@@ -36,6 +31,11 @@
       "title": "Contractor & Trade Website Design",
       "url": "https://cloviswebdesign.com/services/contractor-websites/",
       "description": "Sub-second mobile websites and Google Maps / AI search setup for contractors and home service businesses."
+    },
+    {
+      "title": "Search, Google Maps & AI Search Marketing (SEO & GEO)",
+      "url": "https://cloviswebdesign.com/services/local-seo-fresno/",
+      "description": "How Google Search, Gemini, ChatGPT, Claude, Perplexity, and Apple Siri verify and recommend businesses across the four core directories."
     },
     {
       "title": "Case Study: Big Bros Dumpster Rentals",

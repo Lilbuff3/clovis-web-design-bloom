@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { faqs, modularSteps, plans, smsTo } from "../lib/data";
-import { useGlobalReveal } from "../lib/hooks";
 
 const customChannels = [
   {
@@ -42,7 +41,6 @@ const customChannels = [
 ];
 
 export function Grower() {
-  useGlobalReveal();
   const video = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const v = video.current;
@@ -131,7 +129,6 @@ export function Grower() {
 }
 
 export function Stand() {
-  useGlobalReveal();
   const [selectedPlan, setSelectedPlan] = useState<string>(plans[0].name);
   const [selectedChannels, setSelectedChannels] = useState<string[]>([
     customChannels[0].title,
@@ -351,7 +348,6 @@ export function Stand() {
 }
 
 export function FAQ() {
-  useGlobalReveal();
   const [open, setOpen] = useState<number | null>(0);
   const id = useId();
   return (

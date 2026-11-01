@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cases, smsTo } from "../lib/data";
-import { useCountUp, useGlobalReveal } from "../lib/hooks";
+import { useCountUp } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string };
 
@@ -22,7 +22,6 @@ function PrimaryMetric({ y }: { y: Y }) {
 }
 
 export function ClientWork() {
-  useGlobalReveal();
   const [activeCase, setActiveCase] = useState<string>("01");
   const [viewMode, setViewMode] = useState<Record<string, "preview" | "photo">>({});
 

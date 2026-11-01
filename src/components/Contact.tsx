@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { EMAIL, mailTo, PHONE_DISPLAY, PHONE_TEL, smsTo } from "../lib/data";
 import { SunMark } from "./Chrome";
-import { useGlobalReveal } from "../lib/hooks";
 
 const needs = ["Custom Website", "Search & AI Marketing", "Website + Marketing", "Free Visibility Audit"];
 const whens = ["ASAP", "This month", "Just looking"];
@@ -33,7 +32,6 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 export function Contact() {
-  useGlobalReveal();
   const [name, setName] = useState("");
   const [reach, setReach] = useState("");
   const [trade, setTrade] = useState("");

@@ -4,20 +4,13 @@
  * DuckDuckGo, Yandex) so new/updated pages are crawled immediately upon deploy.
  */
 
+import { CANONICAL_URLS } from '../src/lib/discovery.ts';
+
 const HOST = 'cloviswebdesign.com';
 const KEY = '8f4b2e9a1c7d4e6f8a2b3c4d5e6f7a8b';
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
-export const CANONICAL_URLS = [
-  `https://${HOST}/`,
-  `https://${HOST}/services/`,
-  `https://${HOST}/packages/`,
-  `https://${HOST}/services/medical-web-design/`,
-  `https://${HOST}/services/contractor-websites/`,
-  `https://${HOST}/services/local-seo-fresno/`,
-  `https://${HOST}/case-studies/dumpster-rental-fresno/`,
-  `https://${HOST}/case-studies/kidney-specialist-fresno/`,
-];
+export { CANONICAL_URLS };
 
 export async function pingIndexNow(fetchImpl = globalThis.fetch) {
   const res = await fetchImpl('https://api.indexnow.org/indexnow', {

@@ -1,5 +1,4 @@
 import { compare, steps } from "../lib/data";
-import { useGlobalReveal } from "../lib/hooks";
 
 const STEP_ACCENTS = [
   "bg-[#002FA7]/12 text-[#002FA7]",
@@ -9,7 +8,6 @@ const STEP_ACCENTS = [
 ];
 
 export function Season() {
-  useGlobalReveal();
   return (
     <section
       id="season"
@@ -53,7 +51,6 @@ export function Season() {
 }
 
 export function Compare() {
-  useGlobalReveal();
   return (
     <section
       id="compare"

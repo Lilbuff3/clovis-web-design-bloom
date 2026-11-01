@@ -8,15 +8,9 @@
  *   node scripts/outreach-links.mjs
  */
 
-export function buildAuditUrl(business, trade, city = 'Clovis, CA') {
-  const params = new URLSearchParams({
-    biz: business.trim(),
-    trade: trade.trim(),
-    city: city.trim() || 'Clovis, CA',
-    autorun: '1',
-  });
-  return `https://cloviswebdesign.com/?${params.toString()}#check`;
-}
+import { buildAuditUrl } from '../src/lib/outreach-analytics.ts';
+
+export { buildAuditUrl };
 
 export function buildOutreachCopy(business, trade, city = 'Clovis, CA', competitors = '') {
   const url = buildAuditUrl(business, trade, city);

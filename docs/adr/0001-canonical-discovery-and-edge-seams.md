@@ -1,0 +1,9 @@
+# 0001. Canonical Discovery Manifests, Edge Lead Delivery Seam, and Inline Analytics Module
+
+We generate all four **Discovery Manifests** (`public/llms.txt`, `public/llms-full.txt`, `public/sitemap.xml`, and `public/.well-known/ai-catalog.json`) deterministically from `src/lib/discovery.ts` (backed by `src/lib/data.ts`), unify Edge rate-limiting and **Lead Alert** webhook delivery in `src/lib/lead-delivery.ts` behind an injectable transport adapter (`handler(req, deps)`), centralize **Personalized Audit Link** URL encoding/parsing and client analytics in `src/lib/outreach-analytics.ts`, and run a single hydration-aware viewport reveal observer in `src/layouts/RootLayout.astro`.
+
+## Context & Trade-offs
+
+1. **Pre-build static files vs. runtime/endpoint-only manifests**: Acceptance tests (`tests/site-check.test.mjs` and `tests/verify-e2e.mjs` T6.13) inspect `public/` before `astro build` runs. Generating and verifying `public/*` from `src/lib/discovery.ts` eliminates multi-file drift (phone numbers, 24/7 hours, service areas, 5 Lifecycle Pillars, 8 canonical URLs) while keeping static files immediately available on disk.
+2. **Injectable `deps` seam on Vercel Edge handlers**: Vercel Edge invokes `handler(req)` with one argument in production, while unit tests pass `handler(req, { fetch, env })` to test rate limiting, Gemini fallback, and `ntfy.sh` ByteString header sanitization without mutating `globalThis.fetch` or `process.env`.
+3. **Inline client analytics & reveal observation**: Keeping the client analytics and viewport reveal scripts inline in `RootLayout.astro` preserves zero render-blocking JS requests (`100/100` PageSpeed), while exporting `initClientAnalytics(env)` from `src/lib/outreach-analytics.ts` lets tests exercise the exact module interface without regex-scraping HTML.
