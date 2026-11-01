@@ -30,7 +30,7 @@ ${compClean ? `I asked Google's AI (backed by live Google Maps data) for a ${tra
 You can run the live check for ${business} with one click here:
 ${url}
 
-I'm an independent web developer based here in Clovis. I build fast, custom websites for Central Valley businesses (starting at $1,500, no monthly fees, and you own the code and domain).
+I'm an independent web engineer based here in Clovis. I build sub-second custom websites and search/AI visibility systems scoped to your business and ROI — with a working preview on your phone before you pay a dollar, zero monthly hostage fees, and 100% ownership of your code and domain.
 
 If you'd like to talk about getting more calls from Google Search and Maps, reply here or text my cell at (559) 628-0142.
 

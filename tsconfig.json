@@ -8,6 +8,8 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
@@ -17,6 +19,7 @@
   },
   "include": [
     "src/**/*",
+    "api/**/*",
     ".astro/types.d.ts",
     "astro.config.mjs"
   ],

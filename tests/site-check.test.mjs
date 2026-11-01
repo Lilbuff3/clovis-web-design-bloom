@@ -116,11 +116,11 @@ import contactHandler from '../api/contact.ts';
 
 {
   // 1. Method validation
-  let cRes = await contactHandler(new Request('http://test/api/contact', { method: 'GET', headers: { 'x-forwarded-for': 'ip-1' } }), { env: {} });
+  let cRes = await contactHandler(new Request('http://test/api/contact/', { method: 'GET', headers: { 'x-forwarded-for': 'ip-1' } }), { env: {} });
   assert.equal(cRes.status, 405, 'Expected 405 for GET on contact endpoint');
 
   // 2. Input validation (missing reach)
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-2' },
     body: JSON.stringify({ name: 'Sarah', message: 'Hi Adam, auto-drafted message without reach' }),
@@ -128,7 +128,7 @@ import contactHandler from '../api/contact.ts';
   assert.equal(cRes.status, 400, 'Expected 400 when reach (phone/email) is missing');
 
   // 3. Fail-closed: 503 when LEAD_ALERT_WEBHOOK_URL is unset
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-3' },
     body: JSON.stringify({ name: 'Bob', reach: '559-555-0100', message: 'Hello' }),
@@ -136,7 +136,7 @@ import contactHandler from '../api/contact.ts';
   assert.equal(cRes.status, 503, 'Expected 503 when LEAD_ALERT_WEBHOOK_URL is unset');
 
   // 4. Fail-closed: 503 when webhook fetch returns non-2xx
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-4' },
     body: JSON.stringify({ name: 'Bob', reach: '559-555-0100', message: 'Hello' }),
@@ -147,7 +147,7 @@ import contactHandler from '../api/contact.ts';
   assert.equal(cRes.status, 503, 'Expected 503 when webhook returns 500');
 
   // 5. Fail-closed: 503 when webhook fetch throws
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-5' },
     body: JSON.stringify({ name: 'Bob', reach: '559-555-0100', message: 'Hello' }),
@@ -159,7 +159,7 @@ import contactHandler from '../api/contact.ts';
 
   // 6. Success: 200 when webhook succeeds (ntfy)
   let contactWebhookHit = null;
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-6' },
     body: JSON.stringify({ name: 'Sarah', reach: '559-555-0123', trade: 'Bakery', message: 'Hi Adam' }),
@@ -177,7 +177,7 @@ import contactHandler from '../api/contact.ts';
 
   // 7. Success: 200 when webhook succeeds (generic JSON webhook)
   contactWebhookHit = null;
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-7' },
     body: JSON.stringify({ name: 'Sarah', reach: 'sarah@example.com', message: 'Hi Adam' }),
@@ -195,13 +195,13 @@ import contactHandler from '../api/contact.ts';
   assert.equal(parsedPayload.reach, 'sarah@example.com');
 
   // 8. Body type validation: literal null and non-object payloads return 400 without crashing
-  cRes = await contactHandler(new Request('http://test/api/contact', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8a' }, body: 'null' }), { env: {} });
+  cRes = await contactHandler(new Request('http://test/api/contact/', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8a' }, body: 'null' }), { env: {} });
   assert.equal(cRes.status, 400, 'Expected 400 for JSON literal null body');
 
-  cRes = await contactHandler(new Request('http://test/api/contact', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8b' }, body: '[]' }), { env: {} });
+  cRes = await contactHandler(new Request('http://test/api/contact/', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8b' }, body: '[]' }), { env: {} });
   assert.equal(cRes.status, 400, 'Expected 400 for JSON array body');
 
-  cRes = await contactHandler(new Request('http://test/api/contact', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8c' }, body: '"plain string"' }), { env: {} });
+  cRes = await contactHandler(new Request('http://test/api/contact/', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8c' }, body: '"plain string"' }), { env: {} });
   assert.equal(cRes.status, 400, 'Expected 400 for JSON primitive string body');
 
   let geminiNullRes = await handler(new Request('http://test/api/ask-gemini', { method: 'POST', headers: { 'x-forwarded-for': 'ip-8d' }, body: 'null' }), { env: {} });
@@ -209,7 +209,7 @@ import contactHandler from '../api/contact.ts';
 
   // 9. Non-ASCII in ntfy header: sanitized to ASCII without throwing ByteString TypeError
   contactWebhookHit = null;
-  cRes = await contactHandler(new Request('http://test/api/contact', {
+  cRes = await contactHandler(new Request('http://test/api/contact/', {
     method: 'POST',
     headers: { 'x-forwarded-for': 'ip-9' },
     body: JSON.stringify({ name: '🌮 Taco Shop — Best in Clovis', reach: '559-555-0199', message: 'Taco catering inquiry' }),
@@ -252,6 +252,8 @@ for (const bot of ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Clau
 const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 for (const canonical of [
   'https://cloviswebdesign.com/',
+  'https://cloviswebdesign.com/services/',
+  'https://cloviswebdesign.com/packages/',
   'https://cloviswebdesign.com/services/medical-web-design/',
   'https://cloviswebdesign.com/services/contractor-websites/',
   'https://cloviswebdesign.com/services/local-seo-fresno/',
@@ -263,6 +265,8 @@ for (const canonical of [
 assert.ok(!sitemap.includes('/services/web-design-clovis/'), 'Retired route must not appear in sitemap.xml');
 
 // Public llms.txt, llms-full.txt & ai-catalog.json discoverability verification
+import os from 'node:os';
+import path from 'node:path';
 import {
   CANONICAL_URLS as DISCOVERY_URLS,
   buildLlmsTxt,
@@ -271,8 +275,6 @@ import {
   buildAiCatalog,
   syncDiscoveryManifests,
 } from '../src/lib/discovery.ts';
-
-syncDiscoveryManifests();
 
 const norm = (s) => s.replace(/\r\n/g, '\n').trim();
 const llmsTxt = fs.readFileSync(new URL('../public/llms.txt', import.meta.url), 'utf8');
@@ -310,8 +312,26 @@ assert.equal(norm(aiCatalogRaw), norm(JSON.stringify(buildAiCatalog(), null, 2))
 const aiCatalog = JSON.parse(aiCatalogRaw);
 assert.equal(aiCatalog.$schema, 'https://json.schemastore.org/ard-schema.json');
 assert.equal(aiCatalog.resources.length, DISCOVERY_URLS.length);
+assert.ok(aiCatalog.tools.every((t) => t.endpoint.endsWith('/')), 'All ai-catalog.json tool endpoints must end with a trailing slash');
 assert.ok(!aiCatalogRaw.includes('four core services'), 'ai-catalog.json must not reference outdated "four core services"');
 assert.ok(!/youssef/i.test(aiCatalogRaw), 'ai-catalog.json must never contain Adam\'s last name');
+
+// Non-mutating test of syncDiscoveryManifests against an OS temporary directory
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cwd-discovery-'));
+  try {
+    syncDiscoveryManifests(tmpDir);
+    assert.equal(norm(fs.readFileSync(path.join(tmpDir, 'llms.txt'), 'utf8')), norm(buildLlmsTxt()));
+    assert.equal(norm(fs.readFileSync(path.join(tmpDir, 'llms-full.txt'), 'utf8')), norm(buildLlmsFullTxt()));
+    assert.equal(norm(fs.readFileSync(path.join(tmpDir, 'sitemap.xml'), 'utf8')), norm(buildSitemapXml()));
+    assert.equal(
+      norm(fs.readFileSync(path.join(tmpDir, '.well-known', 'ai-catalog.json'), 'utf8')),
+      norm(JSON.stringify(buildAiCatalog(), null, 2))
+    );
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
 
 const rootLayout = fs.readFileSync(new URL('../src/layouts/RootLayout.astro', import.meta.url), 'utf8');
 assert.ok(rootLayout.includes('/_vercel/insights/script.js'), 'Expected Vercel Web Analytics script in RootLayout.astro');
@@ -336,7 +356,7 @@ assert.equal(parsedOutreach.autorun, true);
 assert.equal(parsedOutreach.isOutreach, true);
 assert.equal(parsedOutreach.shouldAutorun, true);
 
-for (const eventName of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open', 'ai_audit_run']) {
+for (const eventName of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open', 'ai_audit_run', 'ai_citation_view']) {
   assert.ok(INLINE_ANALYTICS_SCRIPT.includes(eventName), `INLINE_ANALYTICS_SCRIPT must contain event tracker for ${eventName}`);
 }
 
@@ -645,3 +665,91 @@ for (const p of ['case-studies/dumpster-rental-fresno/index.html', 'case-studies
 
 console.log('Requirement R4 (Case Studies, Schema/GEO, Service Pages & llms.txt): 4 suites ✓');
 
+// Verify browser-serialized inline scripts (and raw .ts function bodies before Node type-stripping)
+// parse as valid standard JS, ai_audit_run deduplication, trailing-slash contact fetch, P2.1 voice/404, and P3 cleanup
+import { modularChannels } from '../src/lib/data.ts';
+{
+  // 1. Browser-serialized inline scripts AND raw .ts source function bodies must parse cleanly via new Function()
+  assert.doesNotThrow(() => new Function(INLINE_ANALYTICS_SCRIPT), 'INLINE_ANALYTICS_SCRIPT must be valid browser JS without interior TS syntax');
+  assert.doesNotThrow(() => new Function(hooksMod.INLINE_REVEAL_SCRIPT), 'INLINE_REVEAL_SCRIPT must be valid browser JS without interior TS syntax');
+
+  const analyticsRawTs = fs.readFileSync(new URL('../src/lib/outreach-analytics.ts', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+  const hooksRawTs = fs.readFileSync(new URL('../src/lib/hooks.ts', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+  for (const [label, src, marker] of [
+    ['parseAuditSearch', analyticsRawTs, 'export const parseAuditSearch'],
+    ['initClientAnalytics', analyticsRawTs, 'export const initClientAnalytics'],
+    ['initDocumentReveal', hooksRawTs, 'export const initDocumentReveal'],
+  ]) {
+    const startIdx = src.indexOf(marker);
+    assert.ok(startIdx !== -1, `Missing ${marker} in source`);
+    const fnStart = src.indexOf('= function', startIdx);
+    const fnEnd = src.indexOf('\n};', fnStart);
+    assert.ok(fnStart !== -1 && fnEnd !== -1, `Expected '= function ... \\n};' for ${label}`);
+    const rawFnExpr = src.slice(fnStart + 2, fnEnd + 2).trim();
+    assert.doesNotThrow(
+      () => new Function(`return (${rawFnExpr});`),
+      `Raw unstripped .ts source of ${label} must be valid standard JS with zero interior TypeScript syntax`
+    );
+  }
+
+  // 2. LeadLeakAudit.tsx must dispatch CustomEvent("ai_audit_run") once without duplicate direct .va/.gtag calls
+  assert.ok(auditSrc.includes('new CustomEvent("ai_audit_run"'), 'LeadLeakAudit.tsx must dispatch CustomEvent("ai_audit_run")');
+  assert.ok(!auditSrc.includes('.va?.("event"'), 'LeadLeakAudit.tsx must not fire duplicate direct .va?.("event") call');
+  assert.ok(!auditSrc.includes('.gtag?.("event"'), 'LeadLeakAudit.tsx must not fire duplicate direct .gtag?.("event") call');
+
+  // 3. Contact.tsx must fetch /api/contact/ with a trailing slash to avoid 308 redirect under trailingSlash: 'always'
+  const contactSrc = fs.readFileSync(new URL('../src/components/Contact.tsx', import.meta.url), 'utf8');
+  assert.ok(contactSrc.includes('fetch("/api/contact/"'), 'Contact.tsx must POST to "/api/contact/" with a trailing slash');
+
+  // 4. modularChannels in data.ts must hold 6 customizable growth channels and be imported by Story.tsx
+  assert.equal(modularChannels.length, 6, 'Expected 6 customizable growth channels in modularChannels');
+  const storySrc = fs.readFileSync(new URL('../src/components/Story.tsx', import.meta.url), 'utf8');
+  assert.ok(storySrc.includes('modularChannels'), 'Story.tsx must import and render modularChannels from @/lib/data');
+
+  // 5. P2.1 First-person voice & 404 recovery links
+  const page404Src = fs.readFileSync(new URL('../src/pages/404.astro', import.meta.url), 'utf8');
+  assert.ok(page404Src.includes('text me at (559) 628-0142'), '404.astro description must use first-person "text me"');
+  assert.ok(!page404Src.includes('text Adam at'), '404.astro must not use third-person "text Adam"');
+  assert.ok(page404Src.includes('href="/services/"'), '404.astro must include /services/ recovery card');
+  assert.ok(page404Src.includes('href="/packages/"'), '404.astro must include /packages/ recovery card');
+  assert.ok(page404Src.includes('Search, Google Maps &amp; AI Marketing'), '404.astro must use updated Search, Google Maps & AI Marketing label');
+
+  const mobileBarSrc = fs.readFileSync(new URL('../src/components/MobileActionBar.astro', import.meta.url), 'utf8');
+  assert.ok(mobileBarSrc.includes('aria-label="Call me"'), 'MobileActionBar.astro must use aria-label="Call me"');
+  assert.ok(mobileBarSrc.includes('aria-label="Text me"'), 'MobileActionBar.astro must use aria-label="Text me"');
+  assert.ok(!mobileBarSrc.includes('aria-label="Call Adam"') && !mobileBarSrc.includes('aria-label="Text Adam"'), 'MobileActionBar.astro must not use third-person aria-labels');
+
+  const heroSrc = fs.readFileSync(new URL('../src/components/Hero.tsx', import.meta.url), 'utf8');
+  assert.ok(heroSrc.includes('Clovis, CA · Working directly with me'), 'Hero.tsx ClovisClock SSR fallback must use first-person "with me"');
+  assert.ok(!heroSrc.includes('Working directly with Adam'), 'Hero.tsx must not use third-person "with Adam"');
+
+  // 6. P3 Chrome.tsx dead exports, deleted files & package-lock sync
+  assert.ok(!chromeSrc.includes('export function Marquee'), 'Chrome.tsx must not export unused Marquee');
+  assert.ok(!chromeSrc.includes('export function SunCursor'), 'Chrome.tsx must not export unused SunCursor');
+  assert.ok(!chromeSrc.includes('export function ChapterIndicator'), 'Chrome.tsx must not export unused ChapterIndicator');
+
+  for (const deletedRel of [
+    '../src/components/index.ts',
+    '../src/styles/global.css',
+    '../src/utils/cn.ts',
+    '../scripts/clean-legacy.mjs',
+    '../scripts/build-and-verify-m1.mjs',
+    '../public/images/bigbros.jpg',
+    '../public/images/hands-craft.jpg',
+    '../public/images/seedling.jpg',
+    '../public/images/studio-still-life.jpg',
+    '../public/images/valley-orchard.jpg',
+    '../public/videos',
+  ]) {
+    assert.equal(fs.existsSync(new URL(deletedRel, import.meta.url)), false, `Expected legacy file/dir ${deletedRel} to be deleted`);
+  }
+
+  const pkgJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+  const pkgLock = JSON.parse(fs.readFileSync(new URL('../package-lock.json', import.meta.url), 'utf8'));
+  assert.deepEqual(
+    Object.keys(pkgJson.dependencies).sort(),
+    Object.keys(pkgLock.packages[''].dependencies).sort(),
+    'package.json and package-lock.json root dependencies must be in sync'
+  );
+}
+console.log('Inline script JS syntax, ai_audit_run deduplication, /api/contact/, P2.1 & P3 hygiene: 6 suites ✓');

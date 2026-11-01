@@ -53,7 +53,7 @@ An authoritative, modern web engineering and online marketing partner based in C
 ## Product Principles
 
 1. **Always Explain Why It Matters**: Never list a technical feature without explaining how it brings in customers, prevents lost leads, or increases revenue.
-2. **Unbundled, Professional Services**: Offer Web Design, Search & Maps SEO, AI Search (GEO), and Analytics as distinct services that businesses can hire us for individually or together.
+2. **Unbundled, Professional Services**: Offer Brand Positioning & Conversion Copy, Custom Web Design, Search & Maps SEO, AI Search (GEO), and Lead Attribution & Retention as distinct services that businesses can hire us for individually or together.
 3. **Speed & Specificity Win AI Search**: Sub-second static HTML (`<0.4s`) prevents AI crawler timeouts, and specific, fact-dense page copy wins citations in ChatGPT, Gemini, and Claude.
 4. **Transparent Ownership, Real Marketing**: Zero hostage fees for basic website hosting; ongoing monthly partnerships are built around active SEO, AI visibility, and verifiable lead growth.
 

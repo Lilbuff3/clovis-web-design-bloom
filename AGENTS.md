@@ -13,7 +13,9 @@ Adam Youssef's brand positioning, web engineering, search (SEO), and AI search m
 
 - `npm run dev` — dev server on 4321 (or `$PORT`).
 - `npm run build`, `npm run preview`.
-- `npm test` — `tests/site-check.test.mjs`, then `tests/verify-e2e.mjs`.
+- `npm run typecheck` — `tsc --noEmit` across `src/`, `api/`, and `tests/`.
+- `npm run sync:discovery` — sync `/llms.txt`, `/llms-full.txt`, and `/.well-known/ai-catalog.json` from `src/lib/discovery.ts`.
+- `npm test` — `npm run typecheck`, `tests/site-check.test.mjs`, then `tests/verify-e2e.mjs`.
 
 ## Deploy
 
@@ -59,7 +61,7 @@ Each URL owns one set of searches. Don't add a page that competes with another f
 | Doc | Covers |
 | --- | --- |
 | [PRODUCT.md](PRODUCT.md) | Users, 5 lifecycle services, positioning, brand commitments, product principles |
-| [DESIGN.md](DESIGN.md) | High-contrast obsidian/white architectural design system, colours, type, layout, do's & don'ts |
+| [DESIGN.md](DESIGN.md) | Sunlit Glazier Colorfield & Architectural Daylight design system (`#EAE6DF` / `#F6F4EF` / `#141311` / `#002FA7`), colours, type, layout, do's & don'ts |
 | [TONE_AND_VOICE.md](TONE_AND_VOICE.md) | Voice, 2026 AI Search & SEO messaging rules, component mapping |
 | [CONTEXT.md](CONTEXT.md) | Agency and white-label vocabulary — use these terms |
 | [outreach/ai-search-field-guide.md](outreach/ai-search-field-guide.md) | Primary-source verified 2026 AI Search (GEO), GA4 AI tracking & Lighthouse 13.5 reference |

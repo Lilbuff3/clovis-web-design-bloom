@@ -235,7 +235,7 @@ export function buildAiCatalog() {
       {
         name: "contact_adam",
         description: `Send a project or audit inquiry directly to ${business.founder.name} at ${business.name}.`,
-        endpoint: `${SITE_ORIGIN}/api/contact`,
+        endpoint: `${SITE_ORIGIN}/api/contact/`,
         method: "POST",
       },
     ],
@@ -246,6 +246,7 @@ export function buildAiCatalog() {
 export function syncDiscoveryManifests(
   publicDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../public")
 ): void {
+  fs.mkdirSync(path.join(publicDir, ".well-known"), { recursive: true });
   fs.writeFileSync(path.join(publicDir, "llms.txt"), buildLlmsTxt(), "utf8");
   fs.writeFileSync(path.join(publicDir, "llms-full.txt"), buildLlmsFullTxt(), "utf8");
   fs.writeFileSync(path.join(publicDir, "sitemap.xml"), buildSitemapXml(), "utf8");

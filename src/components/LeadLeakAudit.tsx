@@ -42,8 +42,6 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
     if (typeof window !== "undefined") {
       const detail = { business: now.name, trade: now.trade, city: now.city, source };
       window.dispatchEvent(new CustomEvent("ai_audit_run", { detail }));
-      (window as any).va?.("event", { name: "ai_audit_run", ...detail });
-      (window as any).gtag?.("event", "ai_audit_run", detail);
     }
     fetch("/api/ask-gemini/", {
       method: "POST",

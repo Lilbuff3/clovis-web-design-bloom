@@ -16,7 +16,7 @@ node scripts/outreach-links.mjs "Valley Roofing" "roofer" "Clovis, CA" "Olsen Ro
 
 ---
 
-## 1. Contractors & Home Services (`$1,500 Starter` / `$2,500 Growth` + `$99–$249 Care`)
+## 1. Contractors & Home Services (`Custom Website Build` + `Search & AI Visibility Setup` / `Ongoing Search & AI Growth`)
 
 | ID | Trade | City | 1-Click Personalized Audit Link |
 | :--- | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ Hi — I'm Adam, a web developer here in Clovis. I built a tool that checks who 
 
 ---
 
-## 2. Medical, Dental & Specialist Practices (`$2,500 Growth` / `Custom Flagship`)
+## 2. Medical, Dental & Specialist Practices (`Custom Website Build` + `Search & AI Visibility Setup` / `Ongoing Search & AI Growth`)
 
 | ID | Specialty | City | 1-Click Personalized Audit Link |
 | :--- | :--- | :--- | :--- |

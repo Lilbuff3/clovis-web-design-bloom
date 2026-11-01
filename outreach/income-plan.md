@@ -10,7 +10,7 @@
 - MediLab: a live lead. Not ready on their end yet.
 - Neurology prototype: built, never closed.
 - Cold outreach sent so far: **0**. 20 agency emails are drafted and unsent (`batch_01`, `batch_02`).
-- Site offer: $500 launch page, $2,500, $5,000. Care plans $99 / $249.
+- Site offer: Scoped to client ROI across three modular engagement models (`Custom Website Build`, `Search & AI Visibility Setup`, `Ongoing Search & AI Growth`) with a working phone preview before payment and 100% client ownership.
 
 **What this means:** everything that has worked so far came through people Adam knows. Positioning hasn't been the problem. Hardly anyone has been asked to buy. So this plan is mostly about sending asks, not about building pages.
 
@@ -20,12 +20,12 @@ Pick any combination:
 
 | Source | Unit | Needed for ~$5k/mo |
 |---|---|---|
-| Practice or business site | $1,500–2,500 | 2 builds a month |
-| Care plans | $99–249/mo | ~8 add ~$1–2k and grow every month |
+| Practice or business site (`Custom Website Build` / `Search & AI Setup`) | Scoped to client ROI | 2 builds a month |
+| Monthly growth retainers (`Ongoing Search & AI Growth`) | Monthly ROI-scoped retainer | ~5–8 active growth retainers |
 | Contract frontend hours | $40–60/hr | ~25 hrs/week |
 | Agency white-label build | $1,500–2,000 | 1–2 a month |
 
-A realistic mix by December: 1–2 builds a month, 5+ care plans, and some contract hours filling the gaps.
+A realistic mix by December: 1–2 custom builds a month, 5+ ongoing Search & AI growth retainers, and some contract hours filling the gaps.
 
 ## Track A — Cash in 30 days
 
@@ -39,7 +39,7 @@ A realistic mix by December: 1–2 builds a month, 5+ care plans, and some contr
 2. **Pitch the neurology prototype properly:** in person, to whoever decides, with a price.
 3. **Prototype-first pitching, 2 a week.** Find Fresno and Clovis practices or service businesses with slow or dated sites. Build a one-page mockup of their homepage (half a day each), then show it in person or by email. This is your best sales tool.
 4. **Aim for 10 real pitches a week.** Walk-ins, calls, emails. Count them.
-5. **Pricing:** the starter is now $1,500 (the site was updated Sep 30). Offer a care plan with every build.
+5. **Pricing:** engagements are custom-scoped to the business's market and ROI (`Custom Website Build`, `Search & AI Visibility Setup`, `Ongoing Search & AI Growth`), with a working phone preview before payment on web builds.
 
 ## Track C — Agency test (cheap, no new page)
 
@@ -55,7 +55,7 @@ A realistic mix by December: 1–2 builds a month, 5+ care plans, and some contr
 - **Afternoons:** prototypes and paid work.
 - **Friday:** fill in the scoreboard below.
 
-| Week of | Asks sent | Conversations | Proposals | Closed $ | Care plans |
+| Week of | Asks sent | Conversations | Proposals | Closed $ | Growth retainers |
 |---|---|---|---|---|---|
 | Oct 5 | | | | | |
 | Oct 12 | | | | | |
@@ -70,7 +70,7 @@ A realistic mix by December: 1–2 builds a month, 5+ care plans, and some contr
 
 ## Decisions for Adam
 
-- [x] Starter price: **$1,500**
+- [x] Pricing model: **Scoped to client ROI (no fixed retail price stickers)**
 - [x] Contract work: **yes**
 - [x] Dr. Masood: **don't ask** (in treatment)
 
@@ -83,4 +83,4 @@ A realistic mix by December: 1–2 builds a month, 5+ care plans, and some contr
 - [ ] Send AG-11 to AG-18
 - [ ] Set up an Upwork or Contra profile and apply to 5 gigs
 - [ ] Pick 2 local businesses and start their mockups
-- [ ] Push the $1,500 pricing update to the live site
+- [x] Push the ROI-scoped modular engagement models to the live site

@@ -58,7 +58,7 @@
     {
       "name": "contact_adam",
       "description": "Send a project or audit inquiry directly to Adam at Clovis Web Design.",
-      "endpoint": "https://cloviswebdesign.com/api/contact",
+      "endpoint": "https://cloviswebdesign.com/api/contact/",
       "method": "POST"
     }
   ]

@@ -31,7 +31,7 @@ A deep link (`/?biz=...&trade=...&city=...&autorun=1#check`) sent in 1-to-1 outr
 _Avoid_: Campaign URL, Tracking pixel link
 
 **Lead Alert**:
-A real-time notification dispatched from an Edge endpoint (`/api/contact` or `/api/ask-gemini/`) to `ntfy.sh` or a JSON webhook when a prospect submits an inquiry or runs a Visibility Audit.
+A real-time notification dispatched from an Edge endpoint (`/api/contact/` or `/api/ask-gemini/`) to `ntfy.sh` or a JSON webhook when a prospect submits an inquiry or runs a Visibility Audit.
 _Avoid_: Email blast, CRM sync
 
 ## Agency Engineering & White-Label Partnering

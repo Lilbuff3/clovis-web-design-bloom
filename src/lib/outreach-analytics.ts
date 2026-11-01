@@ -71,9 +71,25 @@ export const parseAuditSearch: (
 };
 
 export type ClientAnalyticsEnv = {
-  window: any;
-  document: any;
-  sessionStorage: any;
+  window: {
+    addEventListener: (type: string, listener: (e: any) => void, options?: any) => void;
+    location?: any;
+    performance?: any;
+    va?: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
+    cwTrackEvent?: (name: string, data?: Record<string, any>) => void;
+    [key: string]: any;
+  };
+  document: {
+    addEventListener: (type: string, listener: (e: any) => void, options?: any) => void;
+    referrer?: string;
+    [key: string]: any;
+  };
+  sessionStorage: {
+    getItem: (key: string) => string | null;
+    setItem: (key: string, value: string) => void;
+    [key: string]: any;
+  };
   URLSearchParams?: typeof URLSearchParams;
   URL?: typeof URL;
   parseAuditSearch?: typeof parseAuditSearch;
@@ -98,13 +114,12 @@ export const initClientAnalytics: (env: ClientAnalyticsEnv) => void = function (
   const parseQuery = env.parseAuditSearch || parseAuditSearch;
   const engines = env.aiEngines || AI_ENGINES;
 
-  function track(name, data) {
+  const track = (win.cwTrackEvent = function (name, data) {
     try {
       win.va?.("event", { name: name, ...(data || {}) });
       win.gtag?.("event", name, data || {});
     } catch {}
-  }
-  win.cwTrackEvent = track;
+  });
 
   // 1. Delegated click listener on tel:, sms:, mailto: links
   doc.addEventListener(

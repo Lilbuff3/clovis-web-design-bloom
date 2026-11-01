@@ -144,6 +144,8 @@ function extractJsonLdScripts(html) {
 // ============================================================================
 const REQUIRED_ROUTES = [
   { path: 'index.html', route: '/' },
+  { path: path.join('services', 'index.html'), route: '/services/' },
+  { path: path.join('packages', 'index.html'), route: '/packages/' },
   { path: path.join('services', 'local-seo-fresno', 'index.html'), route: '/services/local-seo-fresno/' },
   { path: path.join('services', 'contractor-websites', 'index.html'), route: '/services/contractor-websites/' },
   { path: path.join('services', 'medical-web-design', 'index.html'), route: '/services/medical-web-design/' },
@@ -712,6 +714,8 @@ assertTest(4, 'T4.2', 'Inter-silo navigation linkage across all service silos', 
 
   const html = fs.readFileSync(indexPath, 'utf-8');
   const serviceSilos = [
+    '/services/',
+    '/packages/',
     '/services/local-seo-fresno/',
     '/services/contractor-websites/',
     '/services/medical-web-design/',
@@ -1002,7 +1006,7 @@ assertTest(6, 'T6.11', 'Conversion tracking, AI referrers & privacy-safe client 
     if (html.includes('No ad-tracking pixels')) {
       throw new Error(`${r.route}: contains obsolete "No ad-tracking pixels"`);
     }
-    for (const token of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open']) {
+    for (const token of ['lead_call_click', 'lead_sms_click', 'lead_email_click', 'ai_referrer_visit', 'outreach_link_open', 'ai_audit_run', 'ai_citation_view']) {
       if (!html.includes(token)) {
         throw new Error(`${r.route}: missing conversion tracking token "${token}"`);
       }
@@ -1047,7 +1051,7 @@ assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-cata
   if (!fs.existsSync(llmsPath)) throw new Error('Missing public/llms.txt');
   const llms = fs.readFileSync(llmsPath, 'utf-8');
   if (!llms.includes('# Clovis Web Design')) throw new Error('llms.txt missing headline');
-  for (const svc of ['Custom Web Design & Engineering', 'Search Engine & Google Maps SEO', 'AI Search & Answer Optimization', 'AI & Search Lead Attribution']) {
+  for (const svc of ['Brand Positioning & Conversion Copy', 'Custom Web Design & Engineering', 'Search Engine & Google Maps SEO', 'AI Search & Answer Optimization', 'AI & Search Lead Attribution']) {
     if (!llms.includes(svc)) throw new Error(`llms.txt missing core service: ${svc}`);
   }
   if (/youssef/i.test(llms)) throw new Error('llms.txt must never contain Adam\'s last name');
@@ -1055,8 +1059,12 @@ assertTest(6, 'T6.13', 'Public discoverability: llms.txt, llms-full.txt, ai-cata
 
   const llmsFullPath = path.join(PROJECT_ROOT, 'public', 'llms-full.txt');
   if (!fs.existsSync(llmsFullPath)) throw new Error('Missing public/llms-full.txt');
-  if (/youssef/i.test(fs.readFileSync(llmsFullPath, 'utf-8'))) throw new Error('llms-full.txt must never contain Adam\'s last name');
-  if (/\bundefined\b|\bNaN\b/i.test(fs.readFileSync(llmsFullPath, 'utf-8'))) throw new Error('llms-full.txt contains uninterpolated undefined/NaN values');
+  const llmsFull = fs.readFileSync(llmsFullPath, 'utf-8');
+  for (const svc of ['Brand Positioning & Conversion Copy', 'Custom Web Design & Engineering', 'Search Engine & Google Maps SEO', 'AI Search & Answer Optimization', 'AI & Search Lead Attribution']) {
+    if (!llmsFull.includes(svc)) throw new Error(`llms-full.txt missing core service: ${svc}`);
+  }
+  if (/youssef/i.test(llmsFull)) throw new Error('llms-full.txt must never contain Adam\'s last name');
+  if (/\bundefined\b|\bNaN\b/i.test(llmsFull)) throw new Error('llms-full.txt contains uninterpolated undefined/NaN values');
 
   const catalogPath = path.join(PROJECT_ROOT, 'public', '.well-known', 'ai-catalog.json');
   if (!fs.existsSync(catalogPath)) throw new Error('Missing public/.well-known/ai-catalog.json');

@@ -5,17 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "sync:discovery": "node -e \"import('./src/lib/discovery.ts').then(m => m.syncDiscoveryManifests())\"",
+    "build": "npm run sync:discovery && astro build",
     "preview": "astro preview",
-    "test": "node tests/site-check.test.mjs && node tests/verify-e2e.mjs"
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && node tests/site-check.test.mjs && node tests/verify-e2e.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.1",
     "astro": "^5.4.2",
-    "clsx": "2.1.1",
     "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "tailwind-merge": "3.4.0"
+    "react-dom": "19.2.6"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.1.17",

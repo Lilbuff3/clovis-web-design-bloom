@@ -157,7 +157,7 @@ To formulate Clovis Web Design's market-leading posture, we conducted a rigorous
 │ Stack (Profound,   │ Peec AI, Otterly.ai, Limy.ai,   │ Otterly: $29–$99/mo;            │ URL #:~:text= listener;     │
 │ Peec, Limy, Ryze)  │ Attrifast, Ryze AI               │ Profound: $1k–$5k/mo custom     │ Dual-Series Governance rule  │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────┼──────────────────────────────┤
-│ Branded Agency     │ High-contrast architectural      │ Premium brand & web agency;     │ Obsidian/White contrast;     │
+│ Branded Agency     │ High-contrast architectural      │ Premium brand & web agency;     │ Sunlit Glazier Colorfield;   │
 │ (brandedagency.com)│ rhythm (#151515/#FFFFFF);        │ $10,000 – $35,000+ custom builds│ kinetic hero proof; 5-pillar │
 │                    │ kinetic hero proof; bento grids  │ $3,000 – $7,500/mo retainers    │ architectural rhythm         │
 └────────────────────┴──────────────────────────────────┴─────────────────────────────────┴──────────────────────────────┘
@@ -211,7 +211,7 @@ To formulate Clovis Web Design's market-leading posture, we conducted a rigorous
 ### 2.8 Branded Agency (`brandedagency.com`) Teardown
 - **Methodology**: Branded Agency sets the global gold standard for modern architectural agency web design: abandoning warm, rustic paper textures and generic templates in favor of a commanding **high-contrast obsidian and white architectural rhythm** (`#151515` Deep Obsidian, `#1E1E1E` Elevated Carbon, `#FFFFFF` Crisp Editorial White, `#EDEDED` Soft Architectural Stone, `#FF4D1C` Signal Persimmon, `#00FF08` Telemetry Green).
 - **Core Design Components**: Split-screen kinetic hero proof, 5-stage orbital lifecycle frameworks, bento grid showcases, and sales-conversation wireframes addressing executive buying criteria.
-- **Clovis Web Design Adaptation**: Complete adoption of the Branded Agency architectural design system and editorial standards across `cloviswebdesign.com`.
+- **Clovis Web Design Adaptation**: Adapt structural bento rigor and executive sales-conversation wireframes into Clovis Web Design's **Sunlit Glazier Colorfield & Architectural Daylight System** (`#EAE6DF` Sunlit Travertine, `#DFDBD2` Quarried Stone, `#F6F4EF` Warm Alabaster, `#141311` Foundry Basalt, `#002FA7` International Klein Blue) codified in `DESIGN.md`.
 
 ---
 
@@ -389,35 +389,34 @@ While servicing 16+ industries, the studio maintains battle-tested specialized e
 
 ---
 
-## 5. The Branded Agency High-Contrast Architectural Design System
+## 5. The Sunlit Glazier Colorfield & Architectural Daylight Design System
 
-Clovis Web Design adheres strictly to the architectural design system modeled after Branded Agency (`brandedagency.com`), as codified in `DESIGN.md`. All outdated rustic paper textures (`#f7f0e3`), dark green ink (`#1e2b23`), and farm/orchard metaphors are permanently retired.
+Clovis Web Design adheres strictly to the **Sunlit Glazier Colorfield & Architectural Daylight System** codified in `DESIGN.md`. All outdated rustic paper textures (`#f7f0e3`), dark green ink (`#1e2b23`), retired obsidian dark-mode canvases (`#151515`), and farm/orchard metaphors are permanently retired.
 
-### 5.1 Color Tokens & Architectural Contrast Rhythm
-The design system employs an authoritative, high-contrast rhythm alternating between deep carbon surfaces, crisp white typography, and precision telemetry accents:
+### 5.1 Color Tokens & Architectural Daylight Rhythm
+The design system employs a warm daylight stone canvas paired with deep foundry basalt ink and four structural glazier accents:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                              ARCHITECTURAL COLOR TOKENS                                │
-├─────────────────────┬───────────┬──────────────────────────────────────────────────────┤
-│ Token Name          │ Hex Value │ Architectural Purpose & Usage                        │
-├─────────────────────┼───────────┼──────────────────────────────────────────────────────┤
-│ Deep Obsidian       │ #151515   │ Primary dark canvas (`bg-[#151515]`), text-ink       │
-│ Elevated Carbon     │ #1E1E1E   │ Surface cards, structural containers, button backs   │
-│ Crisp White         │ #FFFFFF   │ Primary light canvas, pure surfaces, dark text       │
-│ Soft Stone          │ #EDEDED   │ Light section card surfaces (`bg-[#EDEDED]`), borders│
-│ Signal Persimmon    │ #FF4D1C   │ High-energy conversion accents, active hover states  │
-│ Persimmon Deep      │ #E03E10   │ High-contrast button hover state                     │
-│ Telemetry Green     │ #00FF08   │ Live status pulse, telemetry speed bar, uptime       │
-│ Leaf Green          │ #00A843   │ Contrast-safe telemetry green for light backgrounds  │
-│ Ink-Soft            │ #525252   │ Secondary body text on light surfaces                │
-└─────────────────────┴───────────┴──────────────────────────────────────────────────────┘
+├──────────────────────────┬───────────┬─────────────────────────────────────────────────┤
+│ Token Name               │ Hex Value │ Architectural Purpose & Usage                   │
+├──────────────────────────┼───────────┼─────────────────────────────────────────────────┤
+│ Sunlit Travertine        │ #EAE6DF   │ Primary warm stone canvas (`--color-paper`)     │
+│ Quarried Stone           │ #DFDBD2   │ Recessed bento wells (`--color-paper-deep`)     │
+│ Warm Alabaster           │ #F6F4EF   │ Elevated specimen cards (`--color-surface`)     │
+│ Foundry Basalt           │ #141311   │ Primary display & body ink (`--color-ink`)      │
+│ Tempered Slate           │ #4A4742   │ Secondary body & captions (`--color-ink-soft`)  │
+│ International Klein Blue │ #002FA7   │ Primary action & focus (`--color-klein`)        │
+│ Vermilion Terracotta     │ #C83E14   │ Conversion emphasis (`--color-terracotta`)      │
+│ Raw Ochre                │ #B87D1E   │ Editorial highlight (`--color-ochre`)           │
+│ Deep Mineral Jade        │ #0B6E3F   │ Verified status & PageSpeed (`--color-jade`)    │
+└──────────────────────────┴───────────┴─────────────────────────────────────────────────┘
 ```
 
 ### 5.2 Typographic Hierarchy & Font Specifications
-- **Display & Headings**: `Plus Jakarta Sans` / `Bricolage Grotesque` (`font-sans`), styled with tight architectural tracking (`letter-spacing: -0.045em`), compact line-height (`0.98` to `1.05`), and medium weight (`font-medium` / `500`) for commanding editorial authority.
-- **Editorial Accents & Pull-Quotes**: `Fraunces` variable serif (`font-display` / `font-serif`), reserved for navigation wordmark accents, founder quotes, and client case study highlights.
-- **Telemetry & Monospace**: `JetBrains Mono` / `DM Mono` (`font-mono`), uppercase tracking for technical specifications, latency metrics, JSON-LD schema previews, and live telemetry data.
+- **Display, Headings & Body**: `Bricolage Grotesque` (`font-display` / `font-sans`), styled with tight architectural tracking (`letter-spacing: -0.04em`), compact line-height (`0.95` to `1.06`), and semi-bold weight (`font-semibold` / `600`) for commanding editorial authority.
+- **Telemetry & Monospace**: `DM Mono` (`font-mono`), uppercase tracking for technical specifications, latency metrics, JSON-LD schema previews, and live telemetry data.
 - **Zero-CLS Declaration**: `font-size-adjust: from-font` declared in inlined CSS for seamless system font fallback matching (`T6.10`).
 
 ### 5.3 Component Radii & Layout Grid
@@ -434,7 +433,7 @@ The design system employs an authoritative, high-contrast rhythm alternating bet
    - Zero text below `11px` (`T3.5`).
    - No small numbered eyebrow labels above headings (no `"01 — "` labels).
    - No nested cards inside cards.
-   - No low-contrast button styling (never white text on `#FF4D1C` persimmon; use `#151515` text or `#1E1E1E` containers).
+   - High-contrast accessible buttons and surface pairings across all interactive elements.
 
 ---
 
@@ -501,7 +500,7 @@ Clients remain on ongoing growth retainers because the service directly produces
 Cold outreach fails when it offers generic services ("Do you need web design?"). Clovis Web Design's outreach leads with a **live, personalized revenue leak audit**:
 1. Adam identifies a local business with high commercial ticket value ($3,000–$15,000 job size) suffering from mobile load delays or AI invisibility.
 2. Adam generates a personalized audit link using the studio's live diagnostic engine:
-   `https://cloviswebdesign.com/services/local-seo-fresno/?biz=[BusinessName]&trade=[Trade]&city=[City]`
+   `https://cloviswebdesign.com/?biz=[BusinessName]&trade=[Trade]&city=[City]&autorun=1#check`
 3. When clicked, the page dynamically runs the live Gemini + Google Maps lookup, showing the prospect exactly how Google's AI recommends their top 3 local competitors while leaving them out.
 
 ### 7.2 Multi-Touch Outreach Sequences (Using Direct Cell `(559) 628-0142`)
@@ -517,7 +516,7 @@ Cold outreach fails when it offers generic services ("Do you need web design?").
   > Right now, when a homeowner asks Google's AI who to hire, it recommends [Competitor 1] and [Competitor 2] by name. [Business Name] doesn't get cited because your site is missing the structured entity schema that AI models require.
   >
   > Here is the live audit link showing what Google's AI sees:  
-  > `https://cloviswebdesign.com/services/local-seo-fresno/?biz=[BusinessName]&trade=[Trade]&city=[City]`
+  > `https://cloviswebdesign.com/?biz=[BusinessName]&trade=[Trade]&city=[City]&autorun=1#check`
   >
   > I'm a web engineer based here in Clovis. I build sub-second mobile websites and AI search systems for local trades (like Big Bros Dumpster Rentals here in town).
   >
@@ -543,7 +542,7 @@ Cold outreach fails when it offers generic services ("Do you need web design?").
   > I authored the 2026 technical case study for Kidney Specialist Inc. here in Fresno, rebuilding their digital infrastructure with a Zero-PHI architecture, sub-second PageSpeed (100/100), and structured physician referral pathways that increased direct patient inquiries over 40%.
   >
   > Here is the live AI visibility check for [Practice Name]:  
-  > `https://cloviswebdesign.com/services/local-seo-fresno/?biz=[PracticeName]&trade=[Specialty]&city=[City]`
+  > `https://cloviswebdesign.com/?biz=[PracticeName]&trade=[Specialty]&city=[City]&autorun=1#check`
   >
   > If you would like to review your practice's generative search visibility and referral speed, please text or call my cell at (559) 628-0142.
   >

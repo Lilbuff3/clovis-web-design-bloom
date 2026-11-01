@@ -1,44 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { faqs, modularSteps, plans, smsTo } from "../lib/data";
+import { faqs, modularChannels, modularSteps, plans, smsTo } from "../lib/data";
 
-const customChannels = [
-  {
-    id: "seo-pages",
-    title: "SEO & High-Intent Market Pages",
-    tag: "Search & Maps",
-    impact: "Dedicated service and city pages engineered to rank in the Google Maps 3-Pack and organic results without paying per click.",
-  },
-  {
-    id: "ai-citation",
-    title: "AI Answer & Citation Architecture",
-    tag: "ChatGPT, Gemini, Claude & Siri",
-    impact: "Four-directory profile alignment, connected JSON-LD schema, and fact-dense Q&A blocks built to win AI recommendations.",
-  },
-  {
-    id: "paid-landing",
-    title: "Paid Search & Conversion Landing Pages",
-    tag: "High-ROI Ad Capture",
-    impact: "Sub-second (<0.4s) campaign landing pages with instant tap-to-call and text routing that cut wasted ad spend.",
-  },
-  {
-    id: "review-sms",
-    title: "Automated Review & SMS Follow-Up",
-    tag: "Retention & Velocity",
-    impact: "Automated post-service review requests and instant missed-call text-back flows that compound local trust and repeat business.",
-  },
-  {
-    id: "ga4-attribution",
-    title: "Custom GA4 AI & Call Attribution",
-    tag: "Real ROI Reporting",
-    impact: "Custom Google Analytics 4 channels separating ChatGPT, Gemini, Perplexity, and Maps referrals from generic web traffic.",
-  },
-  {
-    id: "bilingual-es",
-    title: "Bilingual English / Español (/es/)",
-    tag: "Full Market Coverage",
-    impact: "Native human-written Spanish architecture with proper hreflang routing to capture bilingual buyers across California and the US.",
-  },
-];
 
 export function Grower() {
   const video = useRef<HTMLVideoElement>(null);
@@ -131,8 +93,8 @@ export function Grower() {
 export function Stand() {
   const [selectedPlan, setSelectedPlan] = useState<string>(plans[0].name);
   const [selectedChannels, setSelectedChannels] = useState<string[]>([
-    customChannels[0].title,
-    customChannels[1].title,
+    modularChannels[0].title,
+    modularChannels[1].title,
   ]);
 
   const toggleChannel = (title: string) => {
@@ -278,7 +240,7 @@ export function Stand() {
               </div>
 
               <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {customChannels.map((ch) => {
+                {modularChannels.map((ch) => {
                   const active = selectedChannels.includes(ch.title);
                   return (
                     <button

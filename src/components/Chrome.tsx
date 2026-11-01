@@ -179,27 +179,3 @@ export function Nav() {
     </>
   );
 }
-
-export function Marquee({ items, className = "", reverse = false }: { items: string[]; className?: string; base?: number; reverse?: boolean }) {
-  const row = [...items, ...items];
-  return (
-    <div className={`relative overflow-hidden py-4 ${className}`}>
-      <div className={`flex w-max gap-10 whitespace-nowrap animate-marquee ${reverse ? "[animation-direction:reverse]" : ""}`}>
-        {row.map((t, i) => (
-          <span key={i} className="flex items-center gap-10">
-            <span className="font-sans text-xl font-medium tracking-[-0.03em] md:text-2xl">{t}</span>
-            <span className="h-2 w-2 shrink-0 rounded-full bg-[#002FA7]" aria-hidden="true" />
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function SunCursor() {
-  return null;
-}
-
-export function ChapterIndicator() {
-  return null;
-}

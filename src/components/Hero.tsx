@@ -8,7 +8,7 @@ function ClovisClock() {
     const id = setInterval(() => setNow(new Date()), 20000);
     return () => clearInterval(id);
   }, []);
-  if (!now) return <span>Clovis, CA · Working directly with Adam</span>;
+  if (!now) return <span>Clovis, CA · Working directly with me</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
   const status =

@@ -3,9 +3,25 @@ import { useEffect, useRef, useState } from "react";
 export type RevealEnv = {
   innerHeight?: number;
   window?: { innerHeight: number };
-  document: any;
-  IntersectionObserver?: any;
-  MutationObserver?: any;
+  document: {
+    documentElement?: any;
+    querySelectorAll: (selector: string) => ArrayLike<any>;
+    [key: string]: any;
+  };
+  IntersectionObserver?: new (
+    callback: (entries: any[]) => void,
+    options?: Record<string, unknown>
+  ) => {
+    observe: (target: any) => void;
+    unobserve: (target: any) => void;
+    disconnect?: () => void;
+  };
+  MutationObserver?: new (
+    callback: (mutations: any[]) => void
+  ) => {
+    observe: (target: any, options?: Record<string, unknown>) => void;
+    disconnect?: () => void;
+  };
 };
 
 /**
@@ -40,7 +56,7 @@ export const initDocumentReveal: (env: RevealEnv) => void = function (env) {
     return env.window ? env.window.innerHeight : env.innerHeight || 0;
   }
 
-  function registerElements(nodes) {
+  function registerElements(nodes = Array.from(doc.querySelectorAll(SELECTOR))) {
     const vh = viewportHeight();
     nodes.forEach(function (el) {
       if (el.hasAttribute("data-in")) return;
