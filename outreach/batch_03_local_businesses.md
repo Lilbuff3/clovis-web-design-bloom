@@ -8,7 +8,7 @@ node scripts/outreach-links.mjs "Valley Roofing" "roofer" "Clovis, CA" "Olsen Ro
 ```
 
 ### The 5-Platform Local & AI Citation Loop (Do Once — Takes 20 Mins)
-1. **Google Business Profile (`business.google.com`):** Service-Area Business (`Clovis Web Design`, `(559) 575-3014`, Primary Category: `Website designer`, Areas: `Clovis, CA`, `Fresno, CA`, `Madera, CA`). Ask Big Bros and Kidney Specialist Inc. for 1 review each.
+1. **Google Business Profile (`business.google.com`):** Service-Area Business (`Clovis Web Design`, `(559) 628-0142`, Primary Category: `Website designer`, Hours: `24/7`, Areas: `Clovis, CA`, `Fresno, CA`, `Madera, CA`, `Selma, CA`, `Sanger, CA`, `Visalia, CA`). Ask Big Bros and Kidney Specialist Inc. for 1 review each.
 2. **Bing Places (`bingplaces.com`):** Click **"Import from Google Business Profile"** — verifies in 60 seconds and feeds **ChatGPT Search** and Microsoft Copilot directly.
 3. **Apple Business Connect (`businessconnect.apple.com`):** Feeds Apple Maps & Siri voice lookups.
 4. **Nextdoor Business Page (`business.nextdoor.com`):** Free local Clovis business page + post the interactive thread below.
@@ -33,7 +33,7 @@ node scripts/outreach-links.mjs "Valley Roofing" "roofer" "Clovis, CA" "Olsen Ro
 
 ### Contractor Text / Walk-in Script
 ```text
-Hi — I'm Adam, a web developer here in Clovis. I built a tool that checks who Google's AI recommends when someone asks for a [trade] in [Clovis/Fresno]. Here is the live check for [Business Name]: [1-Click Link] — If you ever want a faster site that gets more direct calls (like I built for Big Bros Dumpster Rentals here in town), text me back at (559) 575-3014.
+Hi — I'm Adam, a web developer here in Clovis. I built a tool that checks who Google's AI recommends when someone asks for a [trade] in [Clovis/Fresno]. Here is the live check for [Business Name]: [1-Click Link] — If you ever want a faster site that gets more direct calls (like I built for Big Bros Dumpster Rentals here in town), text me back at (559) 628-0142.
 ```
 
 ---
@@ -65,6 +65,6 @@ If your website is due for a refresh this year, I'd be glad to stop by your offi
 
 Best,
 Adam
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 adam@cloviswebdesign.com
 ```

@@ -1,19 +1,20 @@
+import { useState } from "react";
 import { cases, smsTo } from "../lib/data";
 import { useCountUp, useGlobalReveal } from "../lib/hooks";
 
 type Y = { value: number; prefix?: string; suffix?: string; label: string };
 
 function PrimaryMetric({ y }: { y: Y }) {
-  const [ref, v] = useCountUp(y.value, 1400);
+  const [ref, v] = useCountUp(y.value, 900);
   const shown = v.toFixed(0);
   return (
-    <div>
-      <div className="font-sans text-6xl font-medium tabular-nums leading-none tracking-[-0.05em] text-[#151515] md:text-7xl">
-        <span className="text-[#FF4D1C]">{y.prefix}</span>
+    <div aria-label={`${y.prefix ?? ""}${y.value}${y.suffix ?? ""} ${y.label}`}>
+      <div className="font-sans text-5xl font-semibold tabular-nums leading-none tracking-[-0.045em] text-[#141311] md:text-6xl">
+        <span className="text-[#C83E14]">{y.prefix}</span>
         <span ref={ref}>{shown}</span>
-        <span className="text-[#FF4D1C]">{y.suffix}</span>
+        <span className="text-[#002FA7]">{y.suffix}</span>
       </div>
-      <div className="mt-2.5 text-[14px] font-medium leading-snug text-ink/80">
+      <div className="mt-1.5 text-[13.5px] font-medium leading-snug text-[#4A4742]">
         {y.label}
       </div>
     </div>
@@ -22,111 +23,266 @@ function PrimaryMetric({ y }: { y: Y }) {
 
 export function ClientWork() {
   useGlobalReveal();
+  const [activeCase, setActiveCase] = useState<string>("01");
+  const [viewMode, setViewMode] = useState<Record<string, "preview" | "photo">>({});
+
   return (
     <section
       id="harvest"
-      className="relative overflow-hidden bg-white px-5 py-20 text-[#151515] md:px-8 md:py-28"
+      className="relative overflow-hidden border-t border-[#141311]/12 bg-[#EAE6DF] px-5 py-10 text-[#141311] md:px-8 md:py-12"
     >
-      <span id="work" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
+      <span id="work" className="pointer-events-none absolute -top-24" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="flex flex-col justify-between gap-6 border-b border-[#151515]/12 pb-10 lg:flex-row lg:items-end">
+        {/* Calm Header + Smooth Pill Switcher */}
+        <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
-            <h2 className="font-sans text-[clamp(2.25rem,4.6vw,4rem)] font-medium leading-[0.96] tracking-[-0.045em] text-[#151515]">
+            <h2 className="font-sans text-[clamp(1.85rem,3.3vw,2.85rem)] font-semibold leading-[1.02] tracking-[-0.038em] text-[#141311]">
               A proven track record across industries.
             </h2>
           </div>
-          <p className="reveal max-w-md text-[17px] leading-relaxed text-ink/80">
-            When you align brand positioning, sub-second web engineering, and search visibility under one roof, the numbers move — whether you rely on professional referrals, online bookings, or direct phone calls.
-          </p>
+
+          {/* Interactive Case Study Switcher (Both Case Studies Remain in Static DOM) */}
+          <div
+            role="tablist"
+            aria-label="Verified Client Case Studies"
+            className="flex flex-wrap items-center gap-2 rounded-full bg-[#DFDBD2]/75 p-1"
+          >
+            {cases.map((c) => {
+              const isSelected = activeCase === c.no;
+              return (
+                <button
+                  key={c.no}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  onClick={() => setActiveCase(c.no)}
+                  className={`cursor-pointer rounded-full px-4 py-2 font-sans text-[13px] font-semibold transition-all duration-200 ${
+                    isSelected
+                      ? "bg-[#141311] text-[#F6F4EF] shadow-sm"
+                      : "text-[#4A4742] hover:text-[#141311]"
+                  }`}
+                >
+                  {c.client} ({c.yields[0].prefix ?? ""}{c.yields[0].value}{c.yields[0].suffix ?? ""})
+                </button>
+              );
+            })}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeCase === "all"}
+              onClick={() => setActiveCase("all")}
+              className={`cursor-pointer rounded-full px-3.5 py-2 font-sans text-[13px] font-semibold transition-all duration-200 ${
+                activeCase === "all"
+                  ? "bg-[#002FA7] text-[#F6F4EF] shadow-sm"
+                  : "text-[#4A4742] hover:text-[#141311]"
+              }`}
+            >
+              {activeCase === "all" ? "Showing both" : "Compare both"}
+            </button>
+          </div>
         </div>
 
-        {/* Full-Width Horizontal 3-Zone Editorial Cards */}
-        <div className="mt-12 space-y-6">
+        {/* Smooth Rounded-2xl Case Study Cards (Both Pre-Rendered in Static DOM) */}
+        <div className="mt-6 space-y-6">
           {cases.map((c, i) => {
             const secondaryYield = c.yields[1];
+            const mode = viewMode[c.no] ?? "preview";
+            const accentBar = i === 0 ? "bg-[#002FA7]" : "bg-[#C83E14]";
+            const isVisible = activeCase === "all" || activeCase === c.no;
+
             return (
               <article
                 key={c.no}
-                className="reveal grid gap-8 rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 transition-all duration-300 hover:border-[#151515]/25 md:p-10 lg:grid-cols-12 lg:items-center"
-                style={{ ["--d" as string]: `${i * 90}ms` }}
+                className={`${
+                  isVisible ? "block" : "hidden"
+                } overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)]`}
               >
-                {/* Zone 1: Framing & Stack */}
-                <div className="flex flex-col justify-between lg:col-span-4 lg:border-r lg:border-[#151515]/12 lg:pr-8">
-                  <div>
-                    <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.14em] text-ink-soft">
-                      <span className="h-2 w-2 rounded-full bg-[#FF4D1C]" />
-                      CASE {c.no} · {c.year}
-                    </div>
-                    <h3 className="mt-3 font-sans text-2xl font-medium tracking-[-0.03em] text-[#151515] md:text-3xl">
-                      {c.client}
-                    </h3>
-                    <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[.1em] text-ink-soft">
+                {/* Top Metadata Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#141311]/10 bg-[#EAE6DF]/55 px-6 py-3">
+                  <div className="flex items-center gap-3 text-[12.5px] font-medium text-[#4A4742]">
+                    <span className="font-mono font-semibold text-[#141311]">
+                      {c.year}
+                    </span>
+                    <span>·</span>
+                    <span>
                       {c.trade} · {c.place}
-                    </div>
+                    </span>
                   </div>
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {c.stack.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-[8px] border border-[#151515]/10 bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-[.08em] text-[#151515]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Zone 2: Giant -0.05em Metrics */}
-                <div className="flex flex-col justify-center gap-6 border-y border-[#151515]/12 py-6 lg:col-span-4 lg:border-y-0 lg:border-r lg:py-0 lg:pr-8">
-                  <PrimaryMetric y={c.yields[0]} />
-
-                  {secondaryYield && (
-                    <div className="flex items-baseline gap-3 border-t border-[#151515]/10 pt-4">
-                      <span className="font-sans text-2xl font-medium tabular-nums tracking-[-0.04em] text-[#151515] md:text-3xl">
-                        {secondaryYield.prefix}
-                        {secondaryYield.value}
-                        <span className="text-[#FF4D1C]">{secondaryYield.suffix}</span>
-                      </span>
-                      <span className="text-[13.5px] leading-snug text-ink-soft">
-                        {secondaryYield.label}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Zone 3: Story, Quote & Case Study Link */}
-                <div className="flex flex-col justify-between lg:col-span-4">
-                  <div>
-                    <p className="text-[16.5px] font-medium leading-snug text-[#151515]">
-                      {c.headline}
-                    </p>
-                    <p className="mt-3 text-[14.5px] italic leading-relaxed text-ink/80">
-                      “{c.quote.text}” —{" "}
-                      <span className="not-italic font-medium text-[#151515]">
-                        {c.quote.name}
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#151515]/12 pt-5">
-                    {c.caseStudyPath && (
-                      <a
-                        href={c.caseStudyPath}
-                        className="inline-flex items-center gap-2 rounded-[8px] bg-[#151515] px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[.1em] text-white transition hover:bg-[#FF4D1C] hover:text-[#151515]"
-                      >
-                        Read full case study →
-                      </a>
-                    )}
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full bg-[#0B6E3F]/12 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-[#0B6E3F]">
+                      100/100 PageSpeed
+                    </span>
                     <a
                       href={c.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-[11px] uppercase tracking-[.08em] text-ink-soft transition hover:text-[#151515]"
+                      className="text-[12.5px] font-semibold text-[#002FA7] hover:underline"
                     >
                       {c.urlDisplay} ↗
                     </a>
+                  </div>
+                </div>
+
+                {/* 3-Bay Specimen Grid */}
+                <div className="grid divide-y divide-[#141311]/10 lg:grid-cols-12 lg:divide-x lg:divide-y-0">
+                  {/* Bay 1 (5 cols): Live Website / On-Site Photo Preview */}
+                  <div className="flex flex-col justify-between bg-[#EAE6DF]/40 p-5 lg:col-span-5">
+                    <div className="overflow-hidden rounded-xl border border-[#141311]/12 bg-white shadow-sm">
+                      <div className="flex items-center justify-between border-b border-[#141311]/10 bg-[#F6F4EF] px-3.5 py-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-[#C83E14]/75" />
+                          <span className="h-2 w-2 rounded-full bg-[#B87D1E]/75" />
+                          <span className="h-2 w-2 rounded-full bg-[#0B6E3F]/75" />
+                        </div>
+                        <span className="font-mono text-[11px] text-[#4A4742]">
+                          {c.urlDisplay}
+                        </span>
+                        <span className="font-mono text-[11px] font-semibold text-[#0B6E3F]">
+                          ● Live
+                        </span>
+                      </div>
+
+                      <div className="relative aspect-[16/9] max-h-[215px] w-full overflow-hidden bg-[#DFDBD2]">
+                        {mode === "preview" ? (
+                          <img
+                            src={c.previewImg}
+                            alt={`${c.client} live custom website interface`}
+                            width={1280}
+                            height={720}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
+                          />
+                        ) : (
+                          <img
+                            src={c.photoImg}
+                            alt={`${c.client} in ${c.place}`}
+                            width={c.photoWidth}
+                            height={c.photoHeight}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2">
+                      <div className="inline-flex rounded-full bg-[#DFDBD2]/80 p-0.5" role="tablist" aria-label={`${c.client} visual view`}>
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={mode === "preview"}
+                          onClick={() => setViewMode((prev) => ({ ...prev, [c.no]: "preview" }))}
+                          className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
+                            mode === "preview"
+                              ? "bg-[#141311] text-[#F6F4EF]"
+                              : "text-[#4A4742] hover:text-[#141311]"
+                          }`}
+                        >
+                          Live website
+                        </button>
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={mode === "photo"}
+                          onClick={() => setViewMode((prev) => ({ ...prev, [c.no]: "photo" }))}
+                          className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
+                            mode === "photo"
+                              ? "bg-[#141311] text-[#F6F4EF]"
+                              : "text-[#4A4742] hover:text-[#141311]"
+                          }`}
+                        >
+                          On-site photo
+                        </button>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {c.stack.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-md bg-[#F6F4EF] px-2 py-0.5 text-[11.5px] font-medium text-[#4A4742]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bay 2 (3 cols): Metrics & Deliverables */}
+                  <div className="flex flex-col justify-between p-5 lg:col-span-3">
+                    <div>
+                      <h3 className="font-sans text-xl font-semibold tracking-[-0.03em] text-[#141311]">
+                        {c.client}
+                      </h3>
+                      <div className="mt-3">
+                        <PrimaryMetric y={c.yields[0]} />
+                      </div>
+
+                      {secondaryYield && (
+                        <div className="mt-3.5 flex items-baseline gap-2.5 border-t border-[#141311]/10 pt-3">
+                          <span className="font-sans text-xl font-semibold tabular-nums tracking-[-0.04em] text-[#141311]">
+                            {secondaryYield.prefix}
+                            {secondaryYield.value}
+                            <span className="text-[#002FA7]">{secondaryYield.suffix}</span>
+                          </span>
+                          <span className="text-[12.5px] font-medium leading-snug text-[#4A4742]">
+                            {secondaryYield.label}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-4 border-t border-[#141311]/10 pt-3">
+                      <ul className="space-y-1.5 text-[13px] leading-snug text-[#4A4742]">
+                        {c.planted.map((item) => (
+                          <li key={item} className="flex items-start gap-2">
+                            <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${accentBar}`} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Bay 3 (4 cols): Story, Verified Quote & Case Study Link */}
+                  <div className="flex flex-col justify-between p-5 lg:col-span-4">
+                    <div>
+                      <p className="font-sans text-[16px] font-semibold leading-snug text-[#141311]">
+                        {c.headline}
+                      </p>
+                      <p className="mt-2 text-[13.5px] leading-relaxed text-[#4A4742]">
+                        <strong className="font-semibold text-[#141311]">The challenge: </strong>
+                        {c.problem}
+                      </p>
+
+                      <blockquote className="mt-4 rounded-xl bg-[#EAE6DF]/65 p-4 text-[13.5px] leading-relaxed text-[#141311]">
+                        “{c.quote.text}”
+                        <footer className="mt-2 text-[12px] font-medium text-[#4A4742]">
+                          — {c.quote.name}, {c.quote.role}
+                        </footer>
+                      </blockquote>
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#141311]/10 pt-4">
+                      {c.caseStudyPath && (
+                        <a
+                          href={c.caseStudyPath}
+                          className="inline-flex items-center gap-1.5 rounded-full bg-[#141311] px-4 py-2 font-sans text-[13px] font-semibold text-[#F6F4EF] transition hover:bg-[#002FA7]"
+                        >
+                          Read full case study →
+                        </a>
+                      )}
+                      <a
+                        href={c.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[13px] font-semibold text-[#4A4742] hover:text-[#141311]"
+                      >
+                        Open live site ↗
+                      </a>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -134,24 +290,18 @@ export function ClientWork() {
           })}
         </div>
 
-        {/* Bottom Obsidian ROI Bar */}
-        <div className="reveal mt-8 flex flex-col items-start justify-between gap-6 rounded-[16px] bg-[#151515] p-8 text-white sm:flex-row sm:items-center md:px-10">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.12em] text-[#00FF08]">
-              <span className="h-2 w-2 rounded-full bg-[#00FF08]" />
-              ROI-SCOPED ENGAGEMENTS
-            </div>
-            <p className="mt-2 text-[17px] leading-relaxed text-white/90">
-              <strong className="font-semibold text-white">
-                Want to see what this looks like for your industry?
-              </strong>{" "}
-              If I don't see a clear way for our work to pay for itself, I'll tell you on our first 15-minute call.
-            </p>
-          </div>
+        {/* Quiet ROI Guarantee Strip */}
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl bg-[#002FA7] px-6 py-4 text-[#F6F4EF] sm:flex-row sm:items-center">
+          <p className="text-[14.5px] leading-snug text-[#F6F4EF]">
+            <strong className="font-semibold text-white">
+              Want to see what this looks like for your industry?
+            </strong>{" "}
+            If I don't see a clear way for our work to pay for itself, I'll tell you on our first 15-minute call.
+          </p>
           <a
             href={smsTo("Hi Adam, I saw your site and I'd like to talk about growing my business online.")}
             data-magnetic
-            className="inline-flex shrink-0 items-center gap-2 rounded-[8px] bg-white px-5 py-3.5 font-mono text-[12px] font-medium uppercase tracking-[.1em] text-[#151515] transition hover:bg-[#FF4D1C] hover:text-[#151515]"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#F6F4EF] px-4 py-2 font-sans text-[13px] font-semibold text-[#141311] transition hover:bg-[#141311] hover:text-[#F6F4EF]"
           >
             Text me to get started <span aria-hidden>→</span>
           </a>

@@ -52,83 +52,83 @@ const gets = [
 >
   <Nav client:load />
 
-  <main id="main" class="relative z-10 bg-white text-[#151515]">
-    <header class="bg-[#151515] pt-32 pb-20 md:pt-40 md:pb-24 text-white">
+  <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
+    <header class="border-b-2 border-[#141311] bg-[#DFDBD2] pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">
       <div class="mx-auto max-w-5xl px-5 md:px-8">
-        <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-white/70">
-          <a href="/" class="underline decoration-white/30 underline-offset-4 hover:text-white">Clovis Web Design</a>
+        <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
+          <a href="/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <a href="/services/" class="underline decoration-white/30 underline-offset-4 hover:text-white">Services</a>
+          <a href="/services/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Services</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <span class="text-white" aria-current="page">Contractor website design</span>
+          <span class="text-[#141311]" aria-current="page">Contractor website design</span>
         </nav>
-        <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-[-0.045em] leading-[0.98] text-white">
+        <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-bold tracking-[-0.045em] leading-[0.98] text-[#141311]">
           Contractor websites built to get you calls.
         </h1>
 
-        <p class="mt-6 text-xl leading-relaxed text-white/80 max-w-3xl">
+        <p class="mt-6 text-xl leading-relaxed text-[#4A4742] max-w-3xl">
           Call and text buttons where a thumb lands, on a page that opens in under half a second on two bars of signal — paired with the Google Maps and AI search setup that puts your company ahead of national lead brokers.
         </p>
-        <p class="mt-4 text-lg text-white/90 max-w-3xl">
-          <strong class="text-white">You see a working preview on your phone before you pay a dollar.</strong> Every build is scoped to your trade and service area, with zero required monthly fees and 100% ownership from day one.
+        <p class="mt-4 text-lg text-[#141311] max-w-3xl">
+          <strong class="text-[#141311]">You see a working preview on your phone before you pay a dollar.</strong> Every build is scoped to your trade and service area, with zero required monthly fees and 100% ownership from day one.
         </p>
 
         <div class="mt-8 flex flex-wrap gap-4 items-center">
-          <a href={textAdam} class="inline-flex items-center gap-2 rounded-[8px] bg-white px-6 py-3.5 font-medium text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white">
+          <a href={textAdam} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-6 py-3.5 font-semibold text-white transition hover:bg-[#141311]">
             <Icon name="text" /> Text me: {PHONE_DISPLAY}
           </a>
-          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-[8px] border border-white/80 px-6 py-3.5 font-medium text-white transition hover:bg-white hover:text-[#070707]">
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:bg-white">
             <Icon name="phone" /> Call
           </a>
         </div>
-        <p class="mt-4 text-sm text-white/75">Texts go to my cell. I answer 7 a.m. to 7 p.m., Monday to Saturday.</p>
+        <p class="mt-4 text-sm text-[#4A4742]">Texts go to my cell. I answer 7 a.m. to 7 p.m., Monday to Saturday.</p>
       </div>
     </header>
 
     <div class="mx-auto max-w-5xl px-5 pt-16 md:px-8 md:pt-24">
       <section>
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">
           Big Bros bought 4 more trucks to keep up with the calls
         </h2>
-        <p class="mt-4 text-lg text-[#151515]/80 leading-relaxed max-w-3xl">
+        <p class="mt-4 text-lg text-[#4A4742] leading-relaxed max-w-3xl">
           {bigBros.client} owns its trucks, but national brokers were outranking them and taking a cut of every rental. Now Big Bros is #1 on Google for “dumpster rental Fresno,” and contractors and homeowners text them directly.
         </p>
-        <p class="mt-4 text-lg text-[#151515]/80 leading-relaxed"><strong class="text-[#151515]">What I built:</strong></p>
-        <ul class="mt-2 space-y-1.5 text-lg text-[#151515]/85">
+        <p class="mt-4 text-lg text-[#4A4742] leading-relaxed"><strong class="text-[#141311]">What I built:</strong></p>
+        <ul class="mt-2 space-y-1.5 text-lg text-[#141311]">
           {bigBros.planted.map((p) => <li>{p}</li>)}
           <li>{bigBros.stack.join(' · ')}</li>
         </ul>
 
-        <figure class="mt-8 rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 md:p-8">
-          <blockquote class="text-lg text-[#151515]/90 italic leading-relaxed">“{bigBros.quote.text}”</blockquote>
-          <figcaption class="mt-4 text-[#151515]">
-            <span class="font-sans font-medium">{bigBros.quote.name}</span>
-            <span class="block font-mono text-xs text-[#151515]/70">{bigBros.quote.role}, {bigBros.client} · <a href={bigBros.url} class="underline decoration-[#151515]/40 underline-offset-4 hover:text-[#b93412]">{bigBros.urlDisplay}</a></span>
+        <figure class="mt-8 border-2 border-[#141311] bg-[#F6F4EF] p-7 md:p-8">
+          <blockquote class="text-lg text-[#141311] leading-relaxed">“{bigBros.quote.text}”</blockquote>
+          <figcaption class="mt-4 text-[#141311]">
+            <span class="font-sans font-bold">{bigBros.quote.name}</span>
+            <span class="block font-mono text-xs text-[#4A4742]">{bigBros.quote.role}, {bigBros.client} · <a href={bigBros.url} class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">{bigBros.urlDisplay}</a></span>
           </figcaption>
         </figure>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
+          <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
             <div class="aspect-[16/10] overflow-hidden">
               <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">One of the Big Bros trucks in Fresno.</figcaption>
+            <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">One of the Big Bros trucks in Fresno.</figcaption>
           </figure>
-          <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
+          <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
             <div class="aspect-[16/10] overflow-hidden">
               <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" width="600" height="600" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
-            <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
+            <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">William Maldonado Ramirez, co-owner, with family.</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="mt-16 border-t border-[#151515]/10 pt-12">
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">What the site does for your business</h2>
+      <section class="mt-16 border-t-2 border-[#141311] pt-12 pb-16">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">What the site does for your business</h2>
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           {gets.map(([lead, rest]) => (
-            <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
-              <strong class="block text-[#151515] mb-1">{lead}</strong>
+            <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+              <strong class="block text-[#141311] mb-1">{lead}</strong>
               <span>{rest}</span>
             </div>
           ))}
@@ -138,37 +138,36 @@ const gets = [
 
     <FourSeconds client:visible />
 
-    <div class="mx-auto max-w-5xl px-5 pb-16 md:px-8 md:pb-24">
-      {/* Desktop visitors never see the phone drawer's copy of this check. */}
+    <div class="mx-auto max-w-5xl px-5 pb-16 pt-12 md:px-8 md:pb-24">
       <section class="mb-16">
         <LeadLeakAudit client:visible />
       </section>
 
-      <section class="border-t border-[#151515]/10 pt-12">
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">Contractor website questions</h2>
+      <section class="border-t-2 border-[#141311] pt-12">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">Contractor website questions</h2>
         <div class="mt-8 space-y-4">
           {faqs.map((f) => (
-            <details class="group rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-6 transition open:bg-white">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-lg font-medium text-[#151515]">
+            <details class="group border-2 border-[#141311] bg-[#F6F4EF] p-6 transition open:bg-white">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-lg font-bold text-[#141311]">
                 <span>{f.q}</span>
                 <span aria-hidden="true" class="transition group-open:rotate-180">▾</span>
               </summary>
-              <p class="mt-3 text-[#151515]/80 leading-relaxed">{f.a}</p>
+              <p class="mt-3 text-[#4A4742] leading-relaxed">{f.a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section class="mt-16 rounded-[16px] bg-[#151515] p-8 md:p-12 text-center text-white">
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-white">Text me your trade and your town.</h2>
-        <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      <section class="mt-16 border-2 border-[#141311] bg-[#DFDBD2] p-8 md:p-12 text-center text-[#141311]">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">Text me your trade and your town.</h2>
+        <p class="mt-4 text-lg text-[#4A4742] max-w-2xl mx-auto leading-relaxed">
           I'll check how you currently show up on Google Maps and AI, tell you what I'd build, and give you a straight quote. If a focused one-page site is enough, I'll say so.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-          <a href={smsTo("Hi Adam, I'm a contractor looking for a website that gets calls. What would you build for me?")} class="inline-flex items-center gap-2 rounded-[8px] bg-white px-8 py-4 font-medium text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white text-base">
+          <a href={smsTo("Hi Adam, I'm a contractor looking for a website that gets calls. What would you build for me?")} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-8 py-4 font-semibold text-white transition hover:bg-[#141311] text-base">
             <Icon name="text" /> Text me: {PHONE_DISPLAY}
           </a>
-          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-[8px] border border-white/80 px-8 py-4 font-medium text-white transition hover:bg-white hover:text-[#070707] text-base">
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-8 py-4 font-semibold text-[#141311] transition hover:bg-white text-base">
             <Icon name="phone" /> Call
           </a>
         </div>

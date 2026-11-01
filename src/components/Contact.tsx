@@ -21,10 +21,10 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-[8px] border px-4 py-2.5 font-sans text-[14px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#151515] ${
+      className={`rounded-full px-4 py-2 font-sans text-[13.5px] font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#002FA7] ${
         active
-          ? "border-white bg-white text-[#070707]"
-          : "border-white/15 bg-[#1E1E1E] text-white/85 hover:border-white/40 hover:text-white"
+          ? "bg-[#141311] text-white"
+          : "bg-[#EAE6DF] text-[#141311] hover:bg-[#DFDBD2]"
       }`}
     >
       {children}
@@ -149,35 +149,32 @@ export function Contact() {
   }
 
   const fieldInputClass =
-    "mt-2 w-full rounded-[8px] border border-white/15 bg-[#151515] px-4 py-3 font-sans text-lg text-white outline-none transition placeholder:text-white/40 focus:border-[#FF4D1C]";
+    "mt-1 w-full rounded-xl border border-[#141311]/15 bg-white px-3.5 py-2.5 font-sans text-[15px] text-[#141311] outline-none transition placeholder:text-[#4A4742] focus:border-[#002FA7] focus:ring-2 focus:ring-[#002FA7]/20";
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#151515] px-5 py-16 text-white md:px-8 md:py-24">
+    <section id="contact" className="relative overflow-hidden border-t border-[#141311]/12 bg-[#EAE6DF] px-5 py-10 text-[#141311] md:px-8 md:py-12">
       <form
         onSubmit={handleSubmit}
         {...({
           toolname: "contact_adam",
           tooldescription: "Send a project inquiry to Adam at Clovis Web Design for custom web design, Google Maps SEO, or AI search optimization.",
         } as Record<string, string>)}
-        className="relative mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-12 lg:items-center lg:gap-14"
+        className="relative mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-12 lg:items-center"
       >
         <div className="lg:col-span-7">
-          <h2 className="font-sans text-[clamp(2.75rem,7vw,5.75rem)] font-bold leading-[0.94] tracking-[-0.04em] text-white">
-            <span className="line-mask"><span>Start with</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}>
-              <span>
-                <em className="font-display italic font-normal text-[#FF4D1C]">a text.</em>
-              </span>
-            </span>
-          </h2>
-          <p className="reveal mt-5 max-w-xl text-lg leading-relaxed text-white/80">
-            No 20-page questionnaires, no sales pressure, and no deposit to see a website preview. Pick what you need below and I'll draft the first message for you.
-          </p>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="font-sans text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-[#141311]">
+              Start with a text.
+            </h2>
+            <p className="max-w-sm text-[14px] leading-relaxed text-[#4A4742]">
+              No 20-page questionnaires and no deposit to see a website preview. Pick what you need below.
+            </p>
+          </div>
 
-          <div className="reveal mt-8 space-y-6 rounded-[16px] border border-white/12 bg-[#1E1E1E] p-6 sm:p-8">
-            <div className="grid gap-4 sm:grid-cols-2">
+          <div className="mt-5 space-y-4 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-5 shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)] sm:p-6">
+            <div className="grid gap-3.5 sm:grid-cols-3">
               <label className="block" htmlFor="contact-name">
-                <span className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">Your name</span>
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Your name</span>
                 <input
                   id="contact-name"
                   name="name"
@@ -190,18 +187,18 @@ export function Contact() {
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">What you do</span>
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">What you do</span>
                 <input
                   id="contact-trade"
                   name="trade"
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  placeholder="a law firm, medspa, shop, or clinic"
+                  placeholder="law firm, medspa, contractor"
                   className={fieldInputClass}
                 />
               </label>
-              <label className="block sm:col-span-2" htmlFor="contact-reach">
-                <span className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">Your phone or email</span>
+              <label className="block" htmlFor="contact-reach">
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Phone or email</span>
                 <input
                   id="contact-reach"
                   name="reach"
@@ -211,74 +208,76 @@ export function Contact() {
                     setReach(e.target.value);
                     if (needReach && e.target.value.trim()) setNeedReach(false);
                   }}
-                  placeholder="(559) 555-0123 or sarah@example.com"
+                  placeholder="(559) 555-0123"
                   autoComplete="email"
                   aria-invalid={needReach ? "true" : undefined}
                   aria-describedby={needReach ? "contact-reach-hint" : undefined}
-                  className={`mt-2 w-full rounded-[8px] border bg-[#151515] px-4 py-3 font-sans text-lg text-white outline-none transition placeholder:text-white/40 focus:border-[#FF4D1C] ${
-                    needReach ? "border-[#FF4D1C]" : "border-white/15"
+                  className={`mt-1 w-full rounded-xl border bg-white px-3.5 py-2.5 font-sans text-[15px] text-[#141311] outline-none transition placeholder:text-[#4A4742] focus:border-[#002FA7] ${
+                    needReach ? "border-[#C83E14]" : "border-[#141311]/15"
                   }`}
                 />
                 {needReach && (
-                  <span id="contact-reach-hint" role="alert" className="mt-1.5 block text-sm font-medium text-[#FF4D1C]">
+                  <span id="contact-reach-hint" role="alert" className="mt-1 block text-xs font-semibold text-[#C83E14]">
                     Add your phone or email above so I know where to reply — or click email below.
                   </span>
                 )}
               </label>
             </div>
-            <div>
-              <div id="contact-needs-label" className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">What you need</div>
-              <input type="hidden" name="need" value={need} />
-              <div role="group" aria-labelledby="contact-needs-label" className="mt-2.5 flex flex-wrap gap-2">
-                {needs.map((n) => (
-                  <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
-                    {n}
-                  </Chip>
-                ))}
+            <div className="grid gap-4 sm:grid-cols-12">
+              <div className="sm:col-span-7">
+                <div id="contact-needs-label" className="font-sans text-[12px] font-semibold text-[#4A4742]">What you need</div>
+                <input type="hidden" name="need" value={need} />
+                <div role="group" aria-labelledby="contact-needs-label" className="mt-2 flex flex-wrap gap-1.5">
+                  {needs.map((n) => (
+                    <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
+                      {n}
+                    </Chip>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <div id="contact-whens-label" className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">When</div>
-              <input type="hidden" name="when" value={when} />
-              <div role="group" aria-labelledby="contact-whens-label" className="mt-2.5 flex flex-wrap gap-2">
-                {whens.map((w) => (
-                  <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
-                    {w}
-                  </Chip>
-                ))}
+              <div className="sm:col-span-5">
+                <div id="contact-whens-label" className="font-sans text-[12px] font-semibold text-[#4A4742]">When</div>
+                <input type="hidden" name="when" value={when} />
+                <div role="group" aria-labelledby="contact-whens-label" className="mt-2 flex flex-wrap gap-1.5">
+                  {whens.map((w) => (
+                    <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
+                      {w}
+                    </Chip>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="lg:col-span-5">
-          <div className="reveal mx-auto w-full max-w-[380px]">
-            <div className="overflow-hidden rounded-[16px] border border-white/15 bg-[#1E1E1E] shadow-2xl">
-              <div className="flex items-center gap-3 border-b border-white/12 bg-[#151515] px-5 py-4">
-                <SunMark className="h-9 w-9 shrink-0" />
+          <div className="mx-auto w-full max-w-[390px]">
+            <div className="overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.12)]">
+              <div className="flex items-center gap-3 border-b border-[#141311]/10 bg-[#EAE6DF]/70 px-4 py-3">
+                <SunMark className="h-7 w-7 shrink-0" />
                 <div>
-                  <div className="font-sans text-sm font-bold text-white">Adam · Clovis Web Design</div>
-                  <div className="font-mono text-[11px] text-[#00FF08]">{PHONE_DISPLAY} · Direct Line</div>
+                  <div className="font-sans text-sm font-semibold text-[#141311]">Adam · Clovis Web Design</div>
+                  <div className="font-mono text-[11px] font-medium text-[#0B6E3F]">{PHONE_DISPLAY} · Direct Line</div>
                 </div>
               </div>
-              <div className="flex min-h-[230px] flex-col justify-end gap-2 bg-[#1E1E1E] px-5 py-6">
+              <div className="flex min-h-[140px] flex-col justify-end gap-1.5 bg-white px-4 py-4">
                 <div
                   key={message}
-                  className="max-w-[92%] self-end rounded-[12px] rounded-br-[4px] bg-white px-4 py-3.5 text-[14.5px] font-medium leading-snug text-[#070707] shadow-md"
+                  className="max-w-[94%] self-end rounded-2xl rounded-br-sm bg-[#002FA7] px-4 py-3 text-[13.5px] font-medium leading-snug text-white"
                   style={{ animation: "pop .35s cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   {message}
                 </div>
-                <div className="self-end font-mono text-[11px] text-white/60">Preview · ready to send</div>
+                <div className="self-end text-[11.5px] text-[#4A4742]">Preview · ready to send</div>
               </div>
-              <div className="flex items-center gap-2 border-t border-white/12 bg-[#151515] px-4 py-3">
-                <div className="flex-1 truncate rounded-[8px] border border-white/15 bg-[#1E1E1E] px-3.5 py-2 text-[13px] text-white/70">
+              <div className="flex items-center gap-2 border-t border-[#141311]/10 bg-[#EAE6DF]/60 px-4 py-2.5">
+                <div className="flex-1 truncate rounded-full bg-[#F6F4EF] px-3.5 py-1.5 text-[12px] text-[#4A4742]">
                   iMessage / Direct Text
                 </div>
                 {isTouch ? (
                   <a
                     href={smsHref}
-                    className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#FF4D1C] font-bold text-white transition hover:bg-white hover:text-[#070707]"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#002FA7] font-bold text-white transition hover:bg-[#141311]"
                     aria-label="Send text"
                   >
                     ↑
@@ -287,7 +286,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#FF4D1C] font-bold text-white transition hover:bg-white hover:text-[#070707] disabled:opacity-70"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#002FA7] font-bold text-white transition hover:bg-[#141311] disabled:opacity-70"
                     aria-label="Send message"
                   >
                     ↑
@@ -297,23 +296,23 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="mt-3.5 flex flex-col items-center gap-1.5">
             {status === "success" ? (
-              <div className="w-full max-w-[380px] rounded-[16px] border border-[#00FF08]/40 bg-[#1E1E1E] p-5 text-center">
-                <div className="font-sans text-lg font-bold text-[#00FF08]">Message sent!</div>
-                <p className="mt-1 text-sm leading-relaxed text-white/80">
+              <div className="w-full max-w-[390px] rounded-2xl border border-[#0B6E3F] bg-[#F6F4EF] p-4 text-center">
+                <div className="font-sans text-base font-semibold text-[#0B6E3F]">Message sent!</div>
+                <p className="mt-1 text-xs leading-relaxed text-[#4A4742]">
                   I received your note and will get back to you shortly. You can also call or text me directly at{" "}
-                  <a href={`tel:${PHONE_TEL}`} className="font-semibold text-white underline decoration-[#FF4D1C] underline-offset-2">
+                  <a href={`tel:${PHONE_TEL}`} className="font-semibold text-[#141311] underline decoration-[#C83E14] underline-offset-2">
                     {PHONE_DISPLAY}
                   </a>.
                 </p>
               </div>
             ) : status === "fallback" ? (
-              <div className="w-full max-w-[380px] rounded-[16px] border border-[#FF4D1C]/40 bg-[#1E1E1E] p-5 text-center">
-                <div className="font-sans text-lg font-bold text-white">Opening email draft...</div>
-                <p className="mt-1 text-sm leading-relaxed text-white/80">
+              <div className="w-full max-w-[390px] rounded-2xl border border-[#C83E14] bg-[#F6F4EF] p-4 text-center">
+                <div className="font-sans text-base font-semibold text-[#141311]">Opening email draft...</div>
+                <p className="mt-1 text-xs leading-relaxed text-[#4A4742]">
                   {copied ? "Your message has been copied to your clipboard." : "Your email app is opening with your message drafted."} You can also call or text me directly at{" "}
-                  <a href={`tel:${PHONE_TEL}`} className="font-semibold text-white underline decoration-[#FF4D1C] underline-offset-2">
+                  <a href={`tel:${PHONE_TEL}`} className="font-semibold text-[#141311] underline decoration-[#C83E14] underline-offset-2">
                     {PHONE_DISPLAY}
                   </a>.
                 </p>
@@ -322,7 +321,7 @@ export function Contact() {
               <a
                 href={smsHref}
                 data-magnetic="0.2"
-                className="flex w-full max-w-[380px] items-center justify-center gap-2 rounded-[8px] bg-white py-4 font-sans text-base font-semibold text-[#070707] transition-colors hover:bg-[#FF4D1C] hover:text-white"
+                className="flex w-full max-w-[390px] items-center justify-center gap-2 rounded-full bg-[#002FA7] py-3 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[#141311]"
               >
                 Send this text →
               </a>
@@ -331,18 +330,18 @@ export function Contact() {
                 type="submit"
                 disabled={status === "submitting"}
                 data-magnetic="0.2"
-                className="flex w-full max-w-[380px] items-center justify-center gap-2 rounded-[8px] bg-white py-4 font-sans text-base font-semibold text-[#070707] transition-colors hover:bg-[#FF4D1C] hover:text-white disabled:opacity-70"
+                className="flex w-full max-w-[390px] items-center justify-center gap-2 rounded-full bg-[#002FA7] py-3 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[#141311] disabled:opacity-70"
               >
                 {status === "submitting" ? "Sending..." : "Send this message →"}
               </button>
             )}
-            <p className="text-center text-[14px] text-white/75">
+            <p className="text-center text-[13px] text-[#4A4742]">
               or{" "}
-              <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-12 items-center text-white underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]">
+              <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-9 items-center font-semibold text-[#141311] hover:text-[#002FA7] hover:underline">
                 call {PHONE_DISPLAY}
               </a>{" "}
               <span aria-hidden="true">·{" "}</span>
-              <a href={emailHref} className="inline-flex min-h-12 items-center text-white underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]">
+              <a href={emailHref} className="inline-flex min-h-9 items-center font-semibold text-[#141311] hover:text-[#002FA7] hover:underline">
                 email {EMAIL}
               </a>{" "}
               <span aria-hidden="true">·{" "}</span>
@@ -354,7 +353,7 @@ export function Contact() {
                     setTimeout(() => setCopied(false), 2000);
                   }).catch(() => {});
                 }}
-                className="inline-flex min-h-12 items-center text-white underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]"
+                className="inline-flex min-h-9 items-center font-semibold text-[#141311] hover:text-[#002FA7] hover:underline"
               >
                 {copied ? "copied!" : "copy message"}
               </button>
@@ -366,65 +365,63 @@ export function Contact() {
   );
 }
 
-const footerTitle = "font-mono text-xs font-semibold uppercase tracking-[.16em] text-white mb-3";
+const footerTitle = "font-sans text-[12px] font-semibold text-[#141311] mb-2";
 
 export function Footer() {
   return (
-    <footer className="relative z-0 border-t border-white/12 bg-[#0D0D0D] px-5 pb-28 pt-16 text-white sm:pb-12 md:px-8 md:pt-20">
+    <footer className="relative z-0 border-t border-[#141311]/12 bg-[#DFDBD2]/60 px-5 pb-20 pt-8 text-[#141311] sm:pb-8 md:px-8 md:pt-10">
       <div data-footer-inner className="mx-auto max-w-7xl">
-        <div className="grid gap-10 md:grid-cols-6">
+        <div className="grid gap-6 md:grid-cols-6">
           <div className="md:col-span-2">
-            <div className="font-sans text-xl font-bold tracking-[-0.03em] text-white">
-              Clovis Web Design
+            <div className="flex items-center gap-2.5">
+              <SunMark className="h-5 w-5" />
+              <div className="font-sans text-lg font-semibold tracking-[-0.03em] text-[#141311]">
+                Clovis Web Design
+              </div>
             </div>
-            <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-white/75">
+            <p className="mt-2 max-w-sm text-[13.5px] leading-relaxed text-[#4A4742]">
               Sub-second custom websites, Google Maps 3-Pack SEO, and AI search optimization engineered to bring in high-intent customers.
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-[8px] border border-white/12 bg-[#1E1E1E] px-3.5 py-2 font-mono text-[11px] uppercase tracking-[.12em] text-[#00FF08]">
-              <span className="h-2 w-2 rounded-full bg-[#00FF08]" aria-hidden="true" />
-              Direct Senior Engineering
-            </div>
           </div>
 
-          <div className="font-sans text-[14px] leading-8 text-white/80">
+          <div className="font-sans text-[13px] leading-6 text-[#4A4742]">
             <div className={footerTitle}>Services</div>
-            <a href="/services/" className="block hover:text-white hover:underline">All 5 Services</a>
-            <a href="/packages/" className="block hover:text-white hover:underline">Modular Packages</a>
-            <a href="/services/local-seo-fresno/" className="block hover:text-white hover:underline">Search, Maps &amp; AI</a>
-            <a href="/services/medical-web-design/" className="block hover:text-white hover:underline">Medical Web Design</a>
-            <a href="/services/contractor-websites/" className="block hover:text-white hover:underline">Contractor Sites</a>
+            <a href="/services/" className="block hover:text-[#002FA7]">All 5 Services</a>
+            <a href="/packages/" className="block hover:text-[#002FA7]">Modular Packages</a>
+            <a href="/services/local-seo-fresno/" className="block hover:text-[#002FA7]">Search, Maps &amp; AI</a>
+            <a href="/services/medical-web-design/" className="block hover:text-[#002FA7]">Medical Web Design</a>
+            <a href="/services/contractor-websites/" className="block hover:text-[#002FA7]">Contractor Sites</a>
           </div>
 
-          <div className="font-sans text-[14px] leading-8 text-white/80">
+          <div className="font-sans text-[13px] leading-6 text-[#4A4742]">
             <div className={footerTitle}>Case Studies</div>
-            <a href="/case-studies/kidney-specialist-fresno/" className="block hover:text-white hover:underline">Kidney Specialist Inc.</a>
-            <a href="/case-studies/dumpster-rental-fresno/" className="block hover:text-white hover:underline">Big Bros Dumpster</a>
-            <a href="/#work" className="block hover:text-white hover:underline">All Client Results</a>
-            <a href="/#check" className="block hover:text-white hover:underline">Live AI Visibility Check</a>
+            <a href="/case-studies/kidney-specialist-fresno/" className="block hover:text-[#002FA7]">Kidney Specialist Inc.</a>
+            <a href="/case-studies/dumpster-rental-fresno/" className="block hover:text-[#002FA7]">Big Bros Dumpster</a>
+            <a href="/#work" className="block hover:text-[#002FA7]">All Client Results</a>
+            <a href="/#check" className="block hover:text-[#002FA7]">Live AI Visibility Check</a>
           </div>
 
-          <div className="font-sans text-[14px] leading-8 text-white/80">
+          <div className="font-sans text-[13px] leading-6 text-[#4A4742]">
             <div className={footerTitle}>Explore</div>
-            <a href="/#who" className="block hover:text-white hover:underline">Capabilities</a>
-            <a href="/#process" className="block hover:text-white hover:underline">4-Stage Process</a>
-            <a href="/#pricing" className="block hover:text-white hover:underline">Package Builder</a>
-            <a href="/#faq" className="block hover:text-white hover:underline">Common Questions</a>
+            <a href="/#who" className="block hover:text-[#002FA7]">Capabilities</a>
+            <a href="/#process" className="block hover:text-[#002FA7]">4-Stage Process</a>
+            <a href="/#pricing" className="block hover:text-[#002FA7]">Package Builder</a>
+            <a href="/#faq" className="block hover:text-[#002FA7]">Common Questions</a>
           </div>
 
-          <div className="font-sans text-[14px] leading-8 text-white/80">
+          <div className="font-sans text-[13px] leading-6 text-[#4A4742]">
             <div className={footerTitle}>Reach</div>
-            <a href={smsTo("Hi Adam, I'm visiting your website and have a question.")} className="block hover:text-white hover:underline">Text {PHONE_DISPLAY}</a>
-            <a href={`tel:${PHONE_TEL}`} className="block hover:text-white hover:underline">Call {PHONE_DISPLAY}</a>
-            <a href={mailTo("Website & marketing question")} className="block [overflow-wrap:anywhere] hover:text-white hover:underline">{EMAIL}</a>
-            <span className="block text-white/60">Clovis, California</span>
-            <span className="block text-white/60">Serving CA &amp; the US</span>
+            <a href={smsTo("Hi Adam, I'm visiting your website and have a question.")} className="block font-semibold text-[#141311] hover:text-[#002FA7]">Text {PHONE_DISPLAY}</a>
+            <a href={`tel:${PHONE_TEL}`} className="block font-semibold text-[#141311] hover:text-[#002FA7]">Call {PHONE_DISPLAY}</a>
+            <a href={mailTo("Website & marketing question")} className="block [overflow-wrap:anywhere] hover:text-[#002FA7]">{EMAIL}</a>
+            <span className="block text-[#4A4742]">Clovis, CA · Serving the US</span>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/12 pt-6 font-mono text-[11px] uppercase tracking-[.14em] text-white/75 md:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-[#141311]/10 pt-5 text-[12px] text-[#4A4742] md:flex-row">
           <span>© {new Date().getFullYear()} Clovis Web Design</span>
           <span>Built in Clovis, CA · Serving Fresno, the Central Valley &amp; the US</span>
-          <a href="#top" className="text-white hover:text-[#FF4D1C] hover:underline">Back to top ↑</a>
+          <a href="#top" className="font-medium text-[#141311] hover:text-[#002FA7]">Back to top ↑</a>
         </div>
       </div>
     </footer>

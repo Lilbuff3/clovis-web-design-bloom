@@ -16,9 +16,9 @@ const rise = (delayMs: number) => ({ animation: `rise .7s cubic-bezier(.16,1,.3,
 const MAPS_CREDIT = { fontFamily: "Roboto, sans-serif", fontWeight: 400, fontSize: 12, color: "#5e5e5e", whiteSpace: "nowrap" } as const;
 
 const inputClass =
-  "mt-1.5 w-full rounded-[8px] border border-[#151515]/20 bg-white px-4 py-3.5 font-sans text-base text-[#151515] outline-none transition placeholder:text-ink-soft focus:border-[#151515] focus:ring-1 focus:ring-[#151515]";
-const labelClass = "font-mono text-[11px] uppercase tracking-[.16em] text-ink-soft";
-const smallLabel = "font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft";
+  "mt-1 w-full rounded-xl border border-[#141311]/15 bg-white px-3.5 py-2.5 font-sans text-[15px] text-[#141311] outline-none transition placeholder:text-[#4A4742] focus:border-[#002FA7] focus:ring-2 focus:ring-[#002FA7]/20";
+const labelClass = "font-sans text-[12px] font-semibold text-[#4A4742]";
+const smallLabel = "font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-[#4A4742]";
 
 export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const [name, setName] = useState("");
@@ -124,19 +124,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const recheck = `Hi Adam! Could you re-ask Gemini for ${asked} next month and text me whether ${sent.name} shows up?`;
 
   return (
-    <div className={`w-full overflow-hidden rounded-[16px] border border-[#151515]/15 bg-[#EDEDED] text-[#151515] shadow-sm ${compact ? "p-5 sm:p-6" : "p-6 sm:p-12"}`}>
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-2 border-b border-[#151515]/12 pb-4">
-        <div className="inline-flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FF4D1C]" aria-hidden="true" />
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[.16em] text-[#151515]">
-            LIVE GOOGLE MAPS + GEMINI DIAGNOSTIC
-          </span>
-        </div>
-        <span className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-soft">
-          Real-Time Citation Check
-        </span>
-      </div>
-
+    <div className={`w-full overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] text-[#141311] ${compact ? "p-4 sm:p-5" : "p-6 sm:p-8 shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)]"}`}>
       {ai === null && (
         <form
           onSubmit={ask}
@@ -145,51 +133,53 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             tooldescription: "Check whether Google Maps and Google Gemini AI recommend a business for its industry and city.",
           } as Record<string, string>)}
         >
-          {/* h2 as the #check section's own heading; h3 under the drawer's "Free AI check" h2. */}
-          <Title className={`font-sans font-bold leading-[1.02] tracking-[-0.035em] text-[#151515] ${compact ? "text-3xl" : "h-section"}`}>
-            Can AI find you?
-          </Title>
-          <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-            Customers ask Google Maps and AI who to hire. Type your business and see whether it names you right now.
-          </p>
+          <div className={compact ? "" : "lg:grid lg:grid-cols-12 lg:items-end lg:gap-8"}>
+            <div className={compact ? "" : "lg:col-span-4"}>
+              {/* h2 as the #check section's own heading; h3 under the drawer's "Free AI check" h2. */}
+              <Title className={`font-sans font-semibold leading-[1.02] tracking-[-0.035em] text-[#141311] ${compact ? "text-2xl" : "text-[clamp(1.75rem,3vw,2.4rem)]"}`}>
+                Can AI find you?
+              </Title>
+              <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#4A4742]">
+                Customers ask Google Maps and AI who to hire. Type your business and see whether it names you right now.
+              </p>
+            </div>
 
-          <div className={`mt-7 grid gap-4 ${compact ? "" : "sm:grid-cols-3"}`}>
-            <label className="block" htmlFor={`${id}-name`}>
-              <span className={labelClass}>Your business</span>
-              <input id={`${id}-name`} name="businessName" type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Sierra View Dental or Valley Law" className={inputClass} />
-            </label>
-            <label className="block" htmlFor={`${id}-trade`}>
-              <span className={labelClass}>What you do</span>
-              <input id={`${id}-trade`} name="trade" type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. dentist, CPA, medspa, restaurant, contractor" className={inputClass} />
-            </label>
-            <label className="block" htmlFor={`${id}-city`}>
-              <span className={labelClass}>Your city</span>
-              <input id={`${id}-city`} name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
-            </label>
+            <div className={compact ? "mt-4 space-y-3" : "mt-5 grid gap-3 sm:grid-cols-2 lg:col-span-8 lg:mt-0 lg:grid-cols-12 lg:items-end"}>
+              <label className={compact ? "block" : "block lg:col-span-4"} htmlFor={`${id}-name`}>
+                <span className={labelClass}>Your business</span>
+                <input id={`${id}-name`} name="businessName" type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Sierra View Dental" className={inputClass} />
+              </label>
+              <label className={compact ? "block" : "block lg:col-span-3"} htmlFor={`${id}-trade`}>
+                <span className={labelClass}>What you do</span>
+                <input id={`${id}-trade`} name="trade" type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. dentist, CPA, roofer" className={inputClass} />
+              </label>
+              <label className={compact ? "block" : "block lg:col-span-2"} htmlFor={`${id}-city`}>
+                <span className={labelClass}>Your city</span>
+                <input id={`${id}-city`} name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
+              </label>
+              <div className={compact ? "pt-1" : "sm:col-span-2 lg:col-span-3"}>
+                <button
+                  type="submit"
+                  className="w-full cursor-pointer rounded-full bg-[#002FA7] px-5 py-2.5 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[#141311]"
+                >
+                  Ask Google's AI →
+                </button>
+              </div>
+            </div>
           </div>
-
-          <button
-            type="submit"
-            className="mt-5 w-full rounded-[8px] bg-[#151515] py-4 font-sans text-lg font-semibold text-white transition hover:bg-[#FF4D1C]"
-          >
-            Ask Google's AI →
-          </button>
-          <p className="mt-3 text-center font-mono text-xs text-ink-soft">
-            Free live check · Grounded in Google Maps · Takes a few seconds.
-          </p>
         </form>
       )}
 
       <div aria-live="polite">
         {ai === "asking" && (
-          <div className={`flex flex-col items-center justify-center text-center ${compact ? "min-h-[260px]" : "min-h-[380px]"}`}>
+          <div className={`flex flex-col items-center justify-center text-center ${compact ? "min-h-[260px]" : "min-h-[340px]"}`}>
             <div className="flex gap-2.5" aria-hidden="true">
               {[0, 1, 2].map((i) => (
-                <span key={i} className="h-3.5 w-3.5 animate-pulse rounded-full bg-[#FF4D1C]" style={{ animationDuration: "1.2s", animationDelay: `${i * 200}ms` }} />
+                <span key={i} className="h-3 w-3 animate-pulse rounded-full bg-[#002FA7]" style={{ animationDuration: "1.2s", animationDelay: `${i * 200}ms` }} />
               ))}
             </div>
             <p className={`mt-7 ${smallLabel}`}>Asking Google's AI…</p>
-            <p className={`mt-3 max-w-2xl font-sans font-bold leading-tight tracking-[-0.025em] text-[#151515] ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}>
+            <p className={`mt-3 max-w-2xl font-sans font-semibold leading-tight tracking-[-0.025em] text-[#141311] ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}>
               “I need {asked}. Who do you recommend?”
             </p>
           </div>
@@ -198,10 +188,10 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
         {answer && (
           <div ref={resultRef} tabIndex={-1} className="text-center outline-none">
             <p className={smallLabel}>We asked Google's AI</p>
-            <p className="mt-2 text-base text-ink-soft sm:text-lg">“{answer.question}”</p>
+            <p className="mt-2 text-base text-[#4A4742] sm:text-lg">“{answer.question}”</p>
 
             <p
-              className={`mt-6 font-sans font-bold leading-[0.95] tracking-[-0.035em] ${compact ? "text-4xl" : "text-[clamp(3rem,8vw,5.5rem)]"} ${named ? "text-[#00A843]" : missing ? "text-[#FF4D1C]" : "text-[#151515]"}`}
+              className={`mt-6 font-sans font-semibold leading-[0.95] tracking-[-0.035em] ${compact ? "text-4xl" : "text-[clamp(3rem,8vw,5.5rem)]"} ${named ? "text-[#0B6E3F]" : missing ? "text-[#C83E14]" : "text-[#141311]"}`}
               style={rise(0)}
             >
               {named ? "Yes. It found you." : missing ? "No. It doesn't." : "Here's who it picks."}
@@ -210,18 +200,18 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <div className="mx-auto mt-8 max-w-lg" style={rise(250)}>
               <a
                 href={reach(text)}
-                className="flex items-center justify-center gap-2 rounded-[8px] bg-[#151515] px-6 py-4 font-sans text-lg font-semibold text-white transition hover:bg-[#FF4D1C]"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#002FA7] px-6 py-4 font-sans text-lg font-semibold text-white transition hover:bg-[#141311]"
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                   <path d="M4 5h16v11H8l-4 4z" strokeLinejoin="round" />
                 </svg>
                 {named ? "Ask me if your site's ready for them" : "Ask me why AI picks them"}
               </a>
-              <p className="mt-3 text-sm text-ink-soft">
+              <p className="mt-3 text-sm text-[#4A4742]">
                 {onPhone() ? `Opens a text to my cell, already written · ${PHONE_DISPLAY}` : `Opens an email to me, already written · or call ${PHONE_DISPLAY}`}
               </p>
               {!named && (
-                <a href={reach(recheck)} className="inline-flex min-h-12 items-center px-2 text-[13px] font-medium text-[#151515] underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]">
+                <a href={reach(recheck)} className="inline-flex min-h-12 items-center px-2 text-[13px] font-semibold text-[#141311] underline decoration-[#C83E14] decoration-2 underline-offset-4 hover:text-[#C83E14]">
                   Not ready? Ask me to re-check next month
                 </a>
               )}
@@ -233,38 +223,37 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 <li
                   key={p.uri}
                   style={rise(450 + i * 150)}
-                  className={`relative flex items-center gap-4 rounded-[12px] border px-5 py-4 ${
-                    p.title === named ? "border-[#00A843] bg-white" : "border-[#151515]/15 bg-white"
+                  className={`relative flex items-center gap-4 rounded-xl border px-5 py-4 ${
+                    p.title === named ? "border-[#0B6E3F] bg-white" : "border-[#141311]/15 bg-white"
                   }`}
                 >
-                  <span className="font-mono text-sm text-ink-soft">{i + 1}</span>
+                  <span className="font-mono text-sm font-semibold text-[#4A4742]">{i + 1}</span>
                   <span className="min-w-0 flex-1">
-                    {/* The ::after stretches the link over the whole card, so the tap target is the card. */}
-                    <a href={p.uri} target="_blank" rel="noopener noreferrer" className={`block font-sans font-bold leading-tight text-[#151515] after:absolute after:inset-0 after:rounded-[12px] hover:text-[#FF4D1C] ${compact ? "text-lg" : "text-xl sm:text-2xl"}`}>
+                    <a href={p.uri} target="_blank" rel="noopener noreferrer" className={`block font-sans font-semibold leading-tight text-[#141311] after:absolute after:inset-0 hover:text-[#002FA7] ${compact ? "text-lg" : "text-xl sm:text-2xl"}`}>
                       {p.title}
                     </a>
                     <span translate="no" style={MAPS_CREDIT}>
                       Google Maps
                     </span>
                   </span>
-                  {p.title === named && <span className="rounded-[6px] bg-[#00A843] px-2.5 py-1 font-mono text-[11px] font-bold uppercase text-white">You</span>}
+                  {p.title === named && <span className="rounded-full bg-[#0B6E3F] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase text-white">You</span>}
                 </li>
               ))}
             </ol>
 
             {/* Google's terms: the generated answer, then every Maps source right after it (collapsing is allowed). */}
             <details className="mx-auto mt-6 max-w-lg text-left">
-              <summary className="cursor-pointer py-4 font-mono text-[11px] text-ink-soft hover:text-[#151515]">
+              <summary className="cursor-pointer py-4 font-mono text-[11px] font-semibold text-[#4A4742] hover:text-[#141311]">
                 What Gemini said, with sources from{" "}
                 <span translate="no" style={MAPS_CREDIT}>
                   Google Maps
                 </span>
               </summary>
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#151515]">{answer.answer}</p>
-              <ul className="mt-3 space-y-1.5 border-t border-[#151515]/15 pt-3 text-[13px]">
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#141311]">{answer.answer}</p>
+              <ul className="mt-3 space-y-1.5 border-t border-[#141311]/15 pt-3 text-[13px]">
                 {answer.sources.map((s) => (
                   <li key={s.uri}>
-                    <a href={s.uri} target="_blank" rel="noopener noreferrer" className="underline decoration-[#151515]/30 underline-offset-2 hover:text-[#FF4D1C]">
+                    <a href={s.uri} target="_blank" rel="noopener noreferrer" className="underline decoration-[#141311] underline-offset-2 hover:text-[#002FA7]">
                       {s.title}
                     </a>
                     {" · "}
@@ -275,15 +264,15 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 ))}
               </ul>
             </details>
-            <p className="mx-auto mt-6 max-w-lg font-mono text-[11px] leading-relaxed text-ink-soft">
+            <p className="mx-auto mt-6 max-w-lg font-mono text-[11px] leading-relaxed text-[#4A4742]">
               One question, asked just now. Google's AI Mode, the Gemini app, ChatGPT, and Claude check different directories and can answer differently.
             </p>
             <div className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-              <button type="button" onClick={copyReportLink} className="min-h-12 px-2 text-[13px] font-medium text-[#151515] underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]">
+              <button type="button" onClick={copyReportLink} className="min-h-12 px-2 text-[13px] font-semibold text-[#141311] underline decoration-[#C83E14] decoration-2 underline-offset-4 hover:text-[#C83E14]">
                 {copiedReport ? "Report link copied ✓" : "Copy link to this report"}
               </button>
-              <span aria-hidden="true" className="text-ink-soft">·</span>
-              <button type="button" onClick={() => setAi(null)} className="min-h-12 px-2 text-[13px] text-[#151515] underline decoration-[#151515]/30 underline-offset-4 hover:text-[#FF4D1C]">
+              <span aria-hidden="true" className="text-[#4A4742]">·</span>
+              <button type="button" onClick={() => setAi(null)} className="min-h-12 px-2 text-[13px] font-semibold text-[#141311] underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">
                 Try another business
               </button>
             </div>
@@ -292,22 +281,22 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
         {(ai === "failed" || ai === "limit") && (
           <div ref={resultRef} tabIndex={-1} className={`flex flex-col items-center justify-center text-center outline-none ${compact ? "min-h-[220px]" : "min-h-[300px]"}`}>
-            <p className={`font-sans font-bold leading-tight text-[#151515] ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}>
+            <p className={`font-sans font-semibold leading-tight text-[#141311] ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}>
               {ai === "limit" ? "That's 10 checks this hour." : "Google's AI didn't answer this time."}
             </p>
-            <p className="mt-3 text-ink-soft">{ai === "limit" ? "I'll look it up for you." : "Give it another try in a minute."}</p>
+            <p className="mt-3 text-[#4A4742]">{ai === "limit" ? "I'll look it up for you." : "Give it another try in a minute."}</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
               {ai === "limit" ? (
-                <a href={reach(askAdam)} className="rounded-[8px] bg-[#151515] px-6 py-3.5 font-sans font-semibold text-white transition hover:bg-[#FF4D1C]">
+                <a href={reach(askAdam)} className="rounded-full bg-[#002FA7] px-6 py-3.5 font-sans font-semibold text-white transition hover:bg-[#141311]">
                   Ask me to check for you
                 </a>
               ) : (
                 <>
-                  <button type="button" onClick={() => setAi(null)} className="rounded-[8px] bg-[#151515] px-6 py-3.5 font-sans font-semibold text-white transition hover:bg-[#FF4D1C]">
+                  <button type="button" onClick={() => setAi(null)} className="rounded-full bg-[#002FA7] px-6 py-3.5 font-sans font-semibold text-white transition hover:bg-[#141311]">
                     Try again
                   </button>
-                  <a href={reach(askAdam)} className="inline-flex min-h-12 items-center px-2 text-[15px] font-medium text-[#151515] underline decoration-[#FF4D1C] decoration-2 underline-offset-4 hover:text-[#FF4D1C]">
-                    Or ask me
+                  <a href={reach(askAdam)} className="min-h-12 inline-flex items-center px-2 text-sm font-semibold text-[#141311] underline decoration-[#141311] underline-offset-4 hover:text-[#C83E14]">
+                    or ask me to check
                   </a>
                 </>
               )}

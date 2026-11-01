@@ -18,7 +18,7 @@ export function useGlobalReveal() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
     );
 
     // Immediately mark visible or already scrolled-past elements to avoid hydration flashes or scroll-up hiding
@@ -68,29 +68,40 @@ export function usePageScroll() {
   return { y, p };
 }
 
-/** Count up to a number when visible. Starts at the real number, so the built HTML (and anyone without JS) never shows 0. */
-export function useCountUp(target: number, duration = 1600) {
+/** Count up to a number when visible. Never zeroes out the DOM on mount, so SSR HTML, AI crawlers,
+ *  screen readers, and anchor-link jumps always read the real metric value. */
+export function useCountUp(target: number, duration = 900) {
   const ref = useRef<HTMLSpanElement>(null);
   const [val, setVal] = useState(target);
   useEffect(() => {
     const el = ref.current;
-    if (!el || el.getBoundingClientRect().top < window.innerHeight) return;
-    setVal(0);
+    if (!el) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVal(target);
+      return;
+    }
+    // If already visible in the initial viewport or for small rank numbers (#1, +4), keep exact value
+    if (el.getBoundingClientRect().top < window.innerHeight || target <= 5) {
+      setVal(target);
+      return;
+    }
     let raf = 0;
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
         io.disconnect();
+        const startVal = Math.max(1, Math.round(target * 0.35));
         const t0 = performance.now();
         const step = (t: number) => {
           const k = Math.min(1, (t - t0) / duration);
           const eased = 1 - Math.pow(1 - k, 3);
-          setVal(target * eased);
+          setVal(startVal + (target - startVal) * eased);
           if (k < 1) raf = requestAnimationFrame(step);
+          else setVal(target);
         };
         raf = requestAnimationFrame(step);
       },
-      { threshold: 0.4 }
+      { threshold: 0.2 }
     );
     io.observe(el);
     return () => {

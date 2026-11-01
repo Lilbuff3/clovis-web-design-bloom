@@ -170,41 +170,41 @@ const playbooks = [
 >
   <Nav client:load />
 
-  <main id="main" class="relative z-10">
-    <!-- 1. #151515 Obsidian Hero -->
-    <section class="bg-[#151515] px-5 pb-16 pt-28 text-white md:px-8 md:pb-20 md:pt-32">
+  <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
+    <!-- 1. Sunlit Glazier Colorfield Hero -->
+    <section class="border-b-2 border-[#141311] bg-[#DFDBD2] px-5 pb-16 pt-28 text-[#141311] md:px-8 md:pb-20 md:pt-32">
       <div class="mx-auto max-w-7xl">
-        <nav aria-label="Breadcrumb" class="mb-5 font-mono text-xs uppercase tracking-[.14em] text-white/70">
-          <a href="/" class="underline decoration-white/30 underline-offset-4 hover:text-[#FF4D1C]">Clovis Web Design</a>
+        <nav aria-label="Breadcrumb" class="mb-5 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
+          <a href="/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <span class="text-white" aria-current="page">Services &amp; Capabilities</span>
+          <span class="text-[#141311]" aria-current="page">Services &amp; Capabilities</span>
         </nav>
 
         <div class="grid items-end gap-10 lg:grid-cols-12">
           <div class="lg:col-span-8">
-            <h1 class="font-sans text-[clamp(2.35rem,4.5vw,4.25rem)] font-medium leading-[0.98] tracking-[-0.045em] text-white">
+            <h1 class="font-sans text-[clamp(2.35rem,4.5vw,4.25rem)] font-bold leading-[0.98] tracking-[-0.045em] text-[#141311]">
               Five disciplines. One senior engineer. Zero agency bloat.
             </h1>
-            <p class="mt-5 max-w-3xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            <p class="mt-5 max-w-3xl text-lg leading-relaxed text-[#4A4742] sm:text-xl">
               Every service is engineered to do one commercial job: make sure high-intent buyers find you on Google Maps and AI search, trust your positioning within three seconds, and call or text you directly. Hire me for a single focused build or combine disciplines as you grow.
             </p>
 
             <div class="mt-7 flex flex-wrap items-center gap-3.5">
               <a
                 href="/packages/"
-                class="inline-flex items-center gap-2 rounded-[8px] bg-white px-6 py-4 font-sans text-base font-semibold text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white"
+                class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-6 py-4 font-sans text-base font-semibold text-white transition hover:bg-[#141311]"
               >
                 Configure a modular package →
               </a>
               <a
                 href={smsTo("Hi Adam, I'm reviewing your services page and would like to talk about my business.")}
-                class="inline-flex items-center gap-2 rounded-[8px] border border-white/20 bg-[#1E1E1E] px-6 py-4 font-sans text-base font-semibold text-white transition hover:border-white/50"
+                class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-4 font-sans text-base font-semibold text-[#141311] transition hover:bg-white"
               >
                 Text me at {PHONE_DISPLAY}
               </a>
               <a
                 href={`tel:${PHONE_TEL}`}
-                class="inline-flex min-h-12 items-center px-3 font-mono text-xs uppercase tracking-[.14em] text-white/80 underline decoration-[#FF4D1C] underline-offset-4 hover:text-white"
+                class="inline-flex min-h-12 items-center px-3 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#141311] underline decoration-[#C83E14] underline-offset-4 hover:text-[#002FA7]"
               >
                 Or call {PHONE_DISPLAY}
               </a>
@@ -212,15 +212,15 @@ const playbooks = [
           </div>
 
           <div class="lg:col-span-4">
-            <div class="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-6">
-              <div class="font-mono text-[11px] uppercase tracking-[.14em] text-[#FF4D1C]">Cross-Industry Execution</div>
-              <div class="mt-2 font-sans text-xl font-bold text-white">Built for ambitious brands</div>
-              <p class="mt-2 text-sm leading-relaxed text-white/75">
+            <div class="border-2 border-[#141311] bg-[#F6F4EF] p-6">
+              <div class="font-mono text-[11px] font-bold uppercase tracking-[.14em] text-[#C83E14]">Cross-Industry Execution</div>
+              <div class="mt-2 font-sans text-xl font-bold text-[#141311]">Built for ambitious brands</div>
+              <p class="mt-2 text-sm leading-relaxed text-[#4A4742]">
                 I bring high-converting architecture across sectors so you outpace local and regional competitors still stuck on slow agency templates.
               </p>
               <div class="mt-4 flex flex-wrap gap-1.5">
                 {industries.map((ind) => (
-                  <span class="rounded-[6px] border border-white/10 bg-[#151515] px-2.5 py-1 font-mono text-[11px] text-white/85">
+                  <span class="border border-[#141311] bg-[#EAE6DF] px-2.5 py-1 font-mono text-[11px] font-semibold text-[#141311]">
                     {ind}
                   </span>
                 ))}
@@ -232,69 +232,69 @@ const playbooks = [
     </section>
 
     <!-- 2. Comprehensive 5-Pillar Deliverable Matrix -->
-    <section id="pillars" class="bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
+    <section id="pillars" class="bg-[#EAE6DF] px-5 py-16 text-[#141311] md:px-8 md:py-24">
       <div class="mx-auto max-w-7xl">
         <div class="max-w-3xl">
-          <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+          <div class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#002FA7]">
             Core Capabilities Matrix
           </div>
-          <h2 class="mt-2 h-section font-sans font-bold tracking-[-0.035em] text-[#151515]">
+          <h2 class="mt-2 h-section font-sans font-bold tracking-[-0.035em] text-[#141311]">
             What each discipline includes — and why it drives revenue.
           </h2>
-          <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+          <p class="mt-4 text-lg leading-relaxed text-[#4A4742]">
             No mystery retainers or vague deliverables. Here is the exact engineering, copy, schema, and attribution work inside each of the five pillars.
           </p>
         </div>
 
         <div class="mt-12 space-y-6">
           {pillars.map((p) => (
-            <article class="rounded-[16px] border border-[#151515]/15 bg-[#EDEDED] p-6 transition hover:border-[#151515]/40 sm:p-9">
+            <article class="border-2 border-[#141311] bg-[#F6F4EF] p-6 sm:p-9">
               <div class="grid gap-8 lg:grid-cols-12">
                 <div class="lg:col-span-7">
                   <div class="flex flex-wrap items-center gap-3">
-                    <span class="inline-flex items-center rounded-[6px] bg-[#151515] px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[.14em] text-white">
+                    <span class="inline-flex items-center border border-[#141311] bg-[#141311] px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-[.14em] text-white">
                       Pillar {p.code}
                     </span>
-                    <span class="font-mono text-xs uppercase tracking-[.12em] text-ink-soft">
+                    <span class="font-mono text-xs font-semibold uppercase tracking-[.12em] text-[#4A4742]">
                       {p.subtitle}
                     </span>
                   </div>
-                  <h3 class="mt-4 font-sans text-2xl font-bold tracking-[-0.025em] text-[#151515] sm:text-3xl">
+                  <h3 class="mt-4 font-sans text-2xl font-bold tracking-[-0.025em] text-[#141311] sm:text-3xl">
                     {p.title}
                   </h3>
-                  <p class="mt-3 text-[16.5px] leading-relaxed text-[#151515]">
+                  <p class="mt-3 text-[16.5px] leading-relaxed text-[#141311]">
                     {p.summary}
                   </p>
 
-                  <div class="mt-5 rounded-[12px] border border-[#151515]/12 bg-white p-4">
-                    <div class="font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+                  <div class="mt-5 border-2 border-[#141311] bg-white p-4">
+                    <div class="font-mono text-[11px] font-bold uppercase tracking-[.14em] text-[#C83E14]">
                       Commercial Impact — Why It Matters
                     </div>
-                    <p class="mt-1.5 text-[15px] leading-relaxed text-ink-soft">
+                    <p class="mt-1.5 text-[15px] leading-relaxed text-[#4A4742]">
                       {p.commercialImpact}
                     </p>
                   </div>
                 </div>
 
-                <div class="flex flex-col justify-between rounded-[12px] border border-[#151515]/12 bg-white p-6 lg:col-span-5">
+                <div class="flex flex-col justify-between border-2 border-[#141311] bg-white p-6 lg:col-span-5">
                   <div>
-                    <div class="font-mono text-[11px] font-semibold uppercase tracking-[.14em] text-[#151515]">
+                    <div class="font-mono text-[11px] font-bold uppercase tracking-[.14em] text-[#141311]">
                       Included Deliverables
                     </div>
-                    <ul class="mt-4 space-y-2.5 text-[14.5px] leading-snug text-[#151515]">
+                    <ul class="mt-4 space-y-2.5 text-[14.5px] leading-snug text-[#141311]">
                       {p.deliverables.map((d) => (
                         <li class="flex gap-2.5">
-                          <span class="mt-[1px] font-bold text-[#00A843]">✓</span>
+                          <span class="mt-[1px] font-bold text-[#0B6E3F]">✓</span>
                           <span>{d}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div class="mt-6 pt-4 border-t border-[#151515]/10">
+                  <div class="mt-6 border-t-2 border-[#141311] pt-4">
                     <a
                       href={p.ctaHref}
-                      class="inline-flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#151515] px-5 py-3.5 font-sans text-sm font-semibold text-white transition hover:bg-[#FF4D1C]"
+                      class="inline-flex w-full items-center justify-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-5 py-3.5 font-sans text-sm font-semibold text-white transition hover:bg-[#141311]"
                     >
                       {p.ctaLabel} →
                     </a>
@@ -306,19 +306,19 @@ const playbooks = [
         </div>
 
         <!-- Specialized Industry & Search Playbooks -->
-        <div class="mt-16 rounded-[16px] bg-[#151515] p-7 text-white sm:p-10">
+        <div class="mt-16 border-2 border-[#141311] bg-[#DFDBD2] p-7 text-[#141311] sm:p-10">
           <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#00FF08]">
+              <div class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#0B6E3F]">
                 Specialized Technical Playbooks
               </div>
-              <h3 class="mt-1 font-sans text-2xl font-bold tracking-[-0.025em] text-white sm:text-3xl">
+              <h3 class="mt-1 font-sans text-2xl font-bold tracking-[-0.025em] text-[#141311] sm:text-3xl">
                 Deep-dive architectures by search channel and sector
               </h3>
             </div>
             <a
               href="/packages/"
-              class="rounded-[8px] border border-white/20 bg-[#1E1E1E] px-4 py-2.5 font-mono text-xs uppercase tracking-[.12em] text-white transition hover:border-white/50"
+              class="border-2 border-[#141311] bg-[#F6F4EF] px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-[.12em] text-[#141311] transition hover:bg-white"
             >
               View modular packages →
             </a>
@@ -328,16 +328,16 @@ const playbooks = [
             {playbooks.map((pb) => (
               <a
                 href={pb.href}
-                class="group flex flex-col justify-between rounded-[16px] border border-white/12 bg-[#1E1E1E] p-6 transition hover:border-[#FF4D1C]"
+                class="group flex flex-col justify-between border-2 border-[#141311] bg-[#F6F4EF] p-6 transition hover:bg-white"
               >
                 <div>
-                  <div class="font-mono text-[11px] uppercase tracking-[.14em] text-[#FF4D1C]">{pb.tag}</div>
-                  <h4 class="mt-2 font-sans text-xl font-bold tracking-[-0.02em] text-white group-hover:text-[#FF4D1C]">
+                  <div class="font-mono text-[11px] font-bold uppercase tracking-[.14em] text-[#C83E14]">{pb.tag}</div>
+                  <h4 class="mt-2 font-sans text-xl font-bold tracking-[-0.02em] text-[#141311] group-hover:text-[#002FA7]">
                     {pb.title}
                   </h4>
-                  <p class="mt-2.5 text-sm leading-relaxed text-white/75">{pb.body}</p>
+                  <p class="mt-2.5 text-sm leading-relaxed text-[#4A4742]">{pb.body}</p>
                 </div>
-                <div class="mt-6 font-sans text-sm font-semibold text-white group-hover:text-[#FF4D1C]">
+                <div class="mt-6 font-sans text-sm font-semibold text-[#141311] group-hover:text-[#C83E14]">
                   {pb.cta}
                 </div>
               </a>
@@ -351,22 +351,22 @@ const playbooks = [
     <Compare client:visible />
 
     <!-- 4. Visible FAQ Section matching serviceFaqs -->
-    <section id="service-faq" class="border-t border-[#151515]/12 bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
+    <section id="service-faq" class="border-t-2 border-[#141311] bg-[#EAE6DF] px-5 py-16 text-[#141311] md:px-8 md:py-24">
       <div class="mx-auto max-w-5xl">
         <div class="max-w-2xl">
-          <div class="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">
+          <div class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#C83E14]">
             Service &amp; Scope FAQ
           </div>
-          <h2 class="mt-2 font-sans text-3xl font-bold tracking-[-0.03em] text-[#151515] md:text-5xl">
+          <h2 class="mt-2 font-sans text-3xl font-bold tracking-[-0.03em] text-[#141311] md:text-5xl">
             Common questions about unbundled services.
           </h2>
         </div>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
           {serviceFaqs.map((f) => (
-            <div class="rounded-[16px] border border-[#151515]/15 bg-[#EDEDED] p-6">
-              <h3 class="font-sans text-lg font-bold leading-snug text-[#151515]">{f.q}</h3>
-              <p class="mt-3 text-[15.5px] leading-relaxed text-ink-soft">{f.a}</p>
+            <div class="border-2 border-[#141311] bg-[#F6F4EF] p-6">
+              <h3 class="font-sans text-lg font-bold leading-snug text-[#141311]">{f.q}</h3>
+              <p class="mt-3 text-[15.5px] leading-relaxed text-[#4A4742]">{f.a}</p>
             </div>
           ))}
         </div>

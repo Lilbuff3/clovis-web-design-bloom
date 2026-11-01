@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PHONE_DISPLAY, smsTo } from "../lib/data";
 
 function ClovisClock() {
-  // Set after mount: the page is built once, so a build-time clock never matches the browser's and breaks hydration.
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
     setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 20000);
     return () => clearInterval(id);
   }, []);
-  if (!now) return <span>Clovis, California · Direct Senior Engineer</span>;
+  if (!now) return <span>Clovis, CA · Working directly with Adam</span>;
   const time = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
   const hour = Number(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hour12: false }));
   const status =
     hour >= 7 && hour < 19
-      ? "I'm working"
+      ? "I'm working — texts come straight to me"
       : hour >= 19 && hour < 23
-        ? "I'm winding down — text anyway"
-        : "I'm asleep — I'll text back at sunrise";
+        ? "Winding down — text anytime"
+        : "In Clovis — I'll reply at sunrise";
   return (
     <span>
       {time} in Clovis · {status}
@@ -25,141 +24,94 @@ function ClovisClock() {
   );
 }
 
-interface MarqueeCard {
-  tag: string;
-  metric: string;
-  sub: string;
-  accent: "emerald" | "persimmon" | "white";
-  bar?: string;
-}
-
-const col1Cards: MarqueeCard[] = [
+const SHOWCASE_PANES = [
   {
-    tag: "Healthcare Case Study",
-    metric: "+40% Physician Referrals",
-    sub: "Kidney Specialist Inc. · Madera & Fresno",
-    accent: "emerald",
-    bar: "88%",
+    id: "kidney",
+    domain: "kidneyspecialistinc.com",
+    badge: "100/100",
+    img: "/images/kidney-preview.webp",
+    alt: "Kidney Specialist Inc. custom website engineered in Clovis",
+    caption: "Kidney Specialist Inc. · +40% referrals",
   },
   {
-    tag: "Core Web Vitals",
-    metric: "0.38s Mobile FCP",
-    sub: "Beat AI crawler 1–3s timeouts",
-    accent: "emerald",
-    bar: "96%",
-  },
-  {
-    tag: "Local Maps 3-Pack",
-    metric: "#1 Google Maps 3-Pack",
-    sub: '"dumpster rental Fresno" · Big Bros',
-    accent: "persimmon",
-  },
-  {
-    tag: "Lighthouse 13.5",
-    metric: "100/100 PageSpeed",
-    sub: "Zero bloat Astro + React static architecture",
-    accent: "emerald",
-    bar: "100%",
+    id: "bigbros",
+    domain: "bigbrosdumpster.com",
+    badge: "#1 Maps",
+    img: "/images/big-bros-preview.webp",
+    alt: "Big Bros Dumpster Rentals custom website engineered in Clovis",
+    caption: "Big Bros Dumpster · #1 on Google",
   },
 ];
 
-const col2Cards: MarqueeCard[] = [
-  {
-    tag: "GEO Verification",
-    metric: "AI Citation Verified",
-    sub: "ChatGPT, Gemini, Claude & Siri 4-directory sync",
-    accent: "persimmon",
-  },
-  {
-    tag: "Commercial ROI",
-    metric: "+4 Fleet Trucks Added",
-    sub: "Direct customer calls & SMS dispatch",
-    accent: "emerald",
-    bar: "92%",
-  },
-  {
-    tag: "Clinical Security",
-    metric: "Zero Patient Data Held",
-    sub: "HIPAA-safe clinical web architecture",
-    accent: "white",
-  },
-  {
-    tag: "Client Sovereignty",
-    metric: "100% Code Ownership",
-    sub: "GitHub, domain & analytics in your name",
-    accent: "white",
-  },
+const PROOF_STRIP = [
+  { metric: "0.38s", label: "Mobile load · 100/100 PageSpeed" },
+  { metric: "+40%", label: "Referrals · Kidney Specialist Inc." },
+  { metric: "#1 Maps", label: "+4 trucks · Big Bros Dumpster" },
+  { metric: "100%", label: "Code & domain ownership" },
 ];
-
-const col3Cards: MarqueeCard[] = [
-  {
-    tag: "Lead Attribution",
-    metric: "GA4 AI Attribution",
-    sub: "Track ChatGPT, Perplexity & Gemini leads",
-    accent: "persimmon",
-  },
-  {
-    tag: "Zero-Risk Build",
-    metric: "$0 Before Preview",
-    sub: "Working phone preview before you pay a dollar",
-    accent: "emerald",
-  },
-  {
-    tag: "Accessibility",
-    metric: "WCAG 2.1 AA Verified",
-    sub: "Full keyboard & screen reader compliance",
-    accent: "white",
-  },
-  {
-    tag: "Studio Model",
-    metric: "Direct Senior Engineer",
-    sub: "Zero junior account-manager handoffs",
-    accent: "persimmon",
-  },
-];
-
-function ProofCard({ card, duplicate }: { card: MarqueeCard; duplicate?: boolean }) {
-  const dotColor =
-    card.accent === "emerald"
-      ? "bg-[#00FF08]"
-      : card.accent === "persimmon"
-        ? "bg-[#FF4D1C]"
-        : "bg-white";
-
-  return (
-    <div
-      aria-hidden={duplicate ? "true" : undefined}
-      className="rounded-[16px] border border-white/10 bg-[#1E1E1E] p-4 text-left shadow-[0_12px_30px_rgba(0,0,0,0.35)]"
-    >
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-mono text-[11px] uppercase tracking-[.08em] text-white/70">
-          {card.tag}
-        </span>
-        <span className={`h-2 w-2 shrink-0 rounded-full ${dotColor}`} />
-      </div>
-      <div className="mt-2.5 font-sans text-lg font-medium leading-tight tracking-[-0.03em] text-white sm:text-xl">
-        {card.metric}
-      </div>
-      <p className="mt-1.5 text-[13px] leading-snug text-white/75">{card.sub}</p>
-      {card.bar && (
-        <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-          <div
-            className="h-full rounded-full bg-[#00FF08]"
-            style={{ width: card.bar }}
-          />
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function Hero() {
+  const [frontIdx, setFrontIdx] = useState<number>(0);
+  const assemblyRef = useRef<HTMLDivElement>(null);
+  const pointerTarget = useRef({ x: -0.1, y: 0.06, scroll: 0 });
+  const springCurrent = useRef({ x: -0.1, y: 0.06, scroll: 0 });
+
+  // Smooth damped-spring 3D glide on pointer move, gentle idle breathing, and scroll
+  useEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const onScroll = () => {
+      pointerTarget.current.scroll = Math.min(1, Math.max(0, window.scrollY / 700));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    let rafId = 0;
+    const tick = (t: number) => {
+      const cur = springCurrent.current;
+      const tgt = pointerTarget.current;
+      const idleX = Math.sin(t * 0.0008) * 0.05;
+      const idleY = Math.cos(t * 0.0006) * 0.04;
+
+      cur.x += (tgt.x + idleX - cur.x) * 0.055;
+      cur.y += (tgt.y + idleY - cur.y) * 0.055;
+      cur.scroll += (tgt.scroll - cur.scroll) * 0.07;
+
+      if (assemblyRef.current) {
+        const rotY = -11 + cur.x * 13 - cur.scroll * 9;
+        const rotX = 6 - cur.y * 8 + cur.scroll * 6;
+        assemblyRef.current.style.transform = `rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerTarget.current.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    pointerTarget.current.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  };
+
+  const handlePointerLeave = () => {
+    pointerTarget.current.x = -0.1;
+    pointerTarget.current.y = 0.06;
+  };
+
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-[#151515] text-white"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      className="relative flex min-h-[100dvh] flex-col justify-between overflow-hidden bg-[#EAE6DF] pt-28 pb-10 text-[#141311] md:pt-32 md:pb-12"
     >
-      {/* Preloaded LCP asset at subtle architectural luminosity so T6.10 hero preload is consumed with explicit width/height */}
+      {/* Preloaded LCP asset at subtle daylight paper grain so T6.10 hero preload is consumed with explicit width/height */}
       <img
         src="/images/hero.webp"
         alt=""
@@ -167,94 +119,163 @@ export function Hero() {
         height={929}
         fetchPriority="high"
         decoding="async"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.03] mix-blend-luminosity"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.02] mix-blend-multiply"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl items-center gap-8 px-5 pt-20 pb-20 md:px-8 lg:grid-cols-12 lg:gap-8 lg:py-20">
-        {/* Left Column: Status Bar, Tightly Tracked Display H1, Subcopy, and 8px CTA Row */}
-        <div className="flex flex-col justify-between lg:col-span-6 lg:py-2 xl:col-span-6">
-          <div className="inline-flex w-fit items-center gap-2.5 rounded-[8px] border border-white/12 bg-[#1E1E1E] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[.1em] text-white/90">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00FF08] opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00FF08]" />
-            </span>
-            <ClovisClock />
-          </div>
+      <div className="relative z-10 mx-auto my-auto w-full max-w-7xl px-5 md:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* LEFT 7 COLUMNS: Calm, Uncluttered Studio Positioning */}
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2.5 text-[13.5px] font-medium text-[#4A4742]">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0B6E3F] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0B6E3F]" />
+              </span>
+              <ClovisClock />
+            </div>
 
-          <div className="mt-5 lg:mt-6">
-            <h1 className="font-sans text-[clamp(2.1rem,4vw,3.85rem)] font-medium leading-[0.98] tracking-[-0.045em] text-white">
-              We unite world-class branding, sub-second web engineering, and proof-driven AI search.
+            <h1 className="mt-5 max-w-[15.5ch] font-sans text-[clamp(2.5rem,4.7vw,4.35rem)] font-semibold leading-[0.97] tracking-[-0.04em] text-[#141311]">
+              We unite brand positioning, sub-second websites, and AI search.
             </h1>
 
-            <p className="mt-4 max-w-xl text-[15.5px] leading-snug text-white/80 md:text-[17px] md:leading-relaxed">
-              Full-lifecycle digital growth engineered in Clovis, California. You get{" "}
-              <strong className="font-semibold text-white">agency-scale brand positioning</strong>,{" "}
-              <strong className="font-semibold text-white">custom &lt;0.4s static websites</strong>, and{" "}
-              <strong className="font-semibold text-white">four-directory AI search optimization</strong> — working directly with the senior engineer from day one. You own 100% of your code, and for websites, you see a working preview on your phone before you pay a dollar.
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#4A4742] md:text-[18px]">
+              Work directly with the senior engineer in Clovis, California from day one. You own 100% of your code, and for websites, you see a working preview on your phone before you pay a dollar.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-5">
               <a
                 href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")}
-                data-magnetic="0.25"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-[8px] bg-white px-5 py-3.5 font-sans text-[15px] font-semibold text-[#070707] transition hover:bg-[#E03E10] hover:text-white"
+                data-magnetic="0.2"
+                className="inline-flex min-h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#002FA7] px-7 py-3.5 font-sans text-[15px] font-semibold text-[#F6F4EF] shadow-[0_16px_34px_-10px_rgba(0,47,167,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141311]"
               >
-                <span className="h-2 w-2 rounded-full bg-[#00FF08]" />
+                <span className="h-2 w-2 rounded-full bg-[#34D399]" />
                 Start with a text · {PHONE_DISPLAY}
               </a>
 
               <a
                 href="#check"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[8px] border border-white/80 bg-transparent px-5 py-3.5 font-sans text-[15px] font-medium text-white transition hover:bg-white hover:text-[#070707]"
+                className="inline-flex min-h-[50px] items-center gap-1.5 px-2 py-3 font-sans text-[15px] font-semibold text-[#141311] transition-colors hover:text-[#002FA7]"
               >
                 Can AI find you? <span aria-hidden="true">→</span>
               </a>
+            </div>
+          </div>
 
-              <a
-                href="#stand"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[8px] border border-white/20 bg-[#1E1E1E] px-4 py-3.5 font-mono text-[12px] uppercase tracking-[.12em] text-white/90 transition hover:border-white/50 hover:text-white"
+          {/* RIGHT 5 COLUMNS: Smooth, Visual 3D Sunlit Architectural Glass Sculpture */}
+          <div className="relative hidden min-h-[380px] items-center justify-center lg:col-span-5 lg:flex">
+            {/* Soft Sunlit Caustic Glow Behind the 3D Glass */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-2 rounded-full opacity-60 blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(circle at 42% 48%, rgba(0, 47, 167, 0.22), rgba(200, 62, 20, 0.14) 52%, rgba(184, 125, 30, 0.10) 75%, transparent 100%)",
+              }}
+            />
+
+            <div
+              className="relative flex w-full items-center justify-center"
+              style={{ perspective: "1400px" }}
+            >
+              <div
+                ref={assemblyRef}
+                className="relative h-[340px] w-full max-w-[430px]"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: "rotateX(6deg) rotateY(-11deg)",
+                }}
               >
-                Build a package
-              </a>
+                {/* Rear Plane (-54px Z): Warm Amber & Persimmon Architectural Colorfield Glass */}
+                <div
+                  aria-hidden="true"
+                  style={{ transform: "translate3d(-24px, -20px, -54px)" }}
+                  className="absolute inset-x-6 top-4 h-[265px] rounded-2xl border border-white/55 bg-gradient-to-br from-[#C83E14]/75 via-[#B87D1E]/65 to-[#EAE6DF]/70 shadow-[0_24px_50px_-15px_rgba(200,62,20,0.20)] backdrop-blur-md"
+                />
+
+                {/* Interactive Client Preview Glass Panes (+36px Front / -12px Middle) */}
+                {SHOWCASE_PANES.map((pane, idx) => {
+                  const isFront = idx === frontIdx;
+                  return (
+                    <div
+                      key={pane.id}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Inspect ${pane.caption}`}
+                      onClick={() => setFrontIdx(isFront ? (idx + 1) % SHOWCASE_PANES.length : idx)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setFrontIdx(isFront ? (idx + 1) % SHOWCASE_PANES.length : idx);
+                        }
+                      }}
+                      style={{
+                        transform: isFront
+                          ? "translate3d(0px, 0px, 36px) scale(1)"
+                          : "translate3d(26px, 20px, -12px) scale(0.95)",
+                        transition:
+                          "transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, box-shadow 0.5s ease",
+                        zIndex: isFront ? 30 : 20,
+                      }}
+                      className={`group absolute inset-x-2 top-3 cursor-pointer overflow-hidden rounded-2xl border border-white/90 p-3 backdrop-blur-xl ${
+                        isFront
+                          ? "bg-[#F6F4EF]/90 opacity-100 shadow-[0_32px_70px_-18px_rgba(20,19,17,0.20),inset_0_1px_0_rgba(255,255,255,0.95)]"
+                          : "bg-[#DCE6FF]/75 opacity-80 shadow-[0_20px_45px_-15px_rgba(0,47,167,0.22)] hover:opacity-95"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between px-1.5 pb-2.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-[#002FA7]" />
+                          <span className="h-2 w-2 rounded-full bg-[#C83E14]" />
+                          <span className="h-2 w-2 rounded-full bg-[#B87D1E]" />
+                        </div>
+                        <span className="font-mono text-[11px] font-medium text-[#4A4742]">
+                          {pane.domain}
+                        </span>
+                        <span className="rounded-full bg-[#0B6E3F]/12 px-2 py-0.5 font-mono text-[11px] font-semibold text-[#0B6E3F]">
+                          {pane.badge}
+                        </span>
+                      </div>
+
+                      <div className="overflow-hidden rounded-xl border border-[#141311]/10 bg-[#EAE6DF]">
+                        <img
+                          src={pane.img}
+                          alt={pane.alt}
+                          width={1280}
+                          height={720}
+                          decoding="async"
+                          className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                        />
+                      </div>
+
+                      <div className="mt-2.5 flex items-center justify-between px-1.5 pt-0.5 text-[12.5px]">
+                        <span className="font-semibold text-[#141311]">
+                          {pane.caption}
+                        </span>
+                        <span className="font-medium text-[#002FA7]">
+                          {isFront ? "Click to switch ↻" : "Bring forward"}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Right Column: 3-Column Vertical Marquee Grid */}
-        <div className="relative h-[380px] overflow-hidden sm:h-[480px] lg:col-span-6 lg:h-[620px] xl:col-span-6">
-          {/* Top and bottom obsidian fade masks */}
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-[#151515] to-transparent"
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-[#151515] to-transparent"
-            aria-hidden="true"
-          />
-
-          <div className="grid h-full grid-cols-2 gap-3.5 sm:grid-cols-3">
-            {/* Column 1: Upward Marquee */}
-            <div className="flex flex-col gap-3.5 pb-3.5 animate-marquee-up">
-              {[...col1Cards, ...col1Cards].map((card, i) => (
-                <ProofCard key={`col1-${i}`} card={card} duplicate={i >= col1Cards.length} />
-              ))}
+      {/* Bottom of Viewport 1: Quiet Horizontal Proof Strip (Like Bakken & Bæck / Work & Co) */}
+      <div className="relative z-10 mx-auto mt-10 w-full max-w-7xl px-5 md:px-8">
+        <div className="grid grid-cols-2 gap-6 border-t border-[#141311]/12 pt-6 sm:grid-cols-4">
+          {PROOF_STRIP.map((item) => (
+            <div key={item.metric}>
+              <div className="font-sans text-xl font-semibold tabular-nums tracking-[-0.03em] text-[#141311] sm:text-2xl">
+                {item.metric}
+              </div>
+              <div className="mt-0.5 text-[13px] text-[#4A4742]">{item.label}</div>
             </div>
-
-            {/* Column 2: Downward Marquee */}
-            <div className="flex flex-col gap-3.5 pb-3.5 animate-marquee-down">
-              {[...col2Cards, ...col2Cards].map((card, i) => (
-                <ProofCard key={`col2-${i}`} card={card} duplicate={i >= col2Cards.length} />
-              ))}
-            </div>
-
-            {/* Column 3: Upward Marquee (sm and up) */}
-            <div className="hidden flex-col gap-3.5 pb-3.5 animate-marquee-up sm:flex">
-              {[...col3Cards, ...col3Cards].map((card, i) => (
-                <ProofCard key={`col3-${i}`} card={card} duplicate={i >= col3Cards.length} />
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

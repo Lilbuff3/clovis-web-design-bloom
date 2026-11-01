@@ -5,10 +5,10 @@
 Clovis Web Design is an independent brand, web engineering, and search/AI marketing studio operated by Adam in Clovis, California, serving businesses in Fresno, Clovis, the Central Valley, and across the United States. Sites are hand-coded with modern web standards (Astro, React, Tailwind CSS) for sub-0.4-second mobile loading, 100/100 Google PageSpeed, Google Maps 3-Pack rankings, and AI answer engine citations. No WordPress templates, no page builders, zero monthly hostage fees, and 100% client asset ownership from day one.
 
 ## Contact Information
-- Location: Clovis, CA (serving Fresno, Clovis, California, and the US)
+- Location: Clovis, CA (serving Clovis, Fresno, Madera, Selma, Sanger, Visalia, California, and the US)
 - Phone / Text: (559) 628-0142
 - Email: adam@cloviswebdesign.com
-- Hours: Monday – Saturday, 7:00 AM – 7:00 PM PT
+- Hours: Open 24/7 (Sunday – Saturday, 00:00 – 23:59 PT)
 - [Clovis Web Design Homepage](https://cloviswebdesign.com/): Overview of services, client results, and engagement models.
 - [Services & Capabilities Overview](https://cloviswebdesign.com/services/): Full breakdown of custom web engineering, Google Maps SEO, AI search optimization (GEO), and GA4 AI lead tracking.
 - [Packages & Engagement Models](https://cloviswebdesign.com/packages/): How custom website builds, Search & AI visibility setups, and ongoing monthly growth partnerships are scoped.

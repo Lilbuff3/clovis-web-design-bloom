@@ -35,8 +35,8 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
-    <meta name="theme-color" content="#F7F0E3" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23EE5A2F'/%3E%3Cpath d='M32 4c4 8 10 10 16 8-2 6-8 10-16 8' fill='%232E6A4C'/%3E%3C/svg%3E" />
+    <meta name="theme-color" content="#EAE6DF" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='6' width='52' height='52' fill='%23EAE6DF' stroke='%23141311' stroke-width='4'/%3E%3Crect x='10' y='10' width='22' height='44' fill='%23002FA7'/%3E%3Crect x='36' y='10' width='18' height='20' fill='%23C83E14'/%3E%3Crect x='36' y='34' width='18' height='20' fill='%23B87D1E'/%3E%3C/svg%3E" />
     
     <!-- Open Graph & Twitter Social Image Cards -->
     <meta property="og:type" content="website" />
@@ -56,7 +56,6 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     
     <!-- Self-hosted Font & LCP Image Preloads (Zero Google Fonts links) -->
     <link rel="preload" href="/fonts/bricolage-grotesque-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     {preloadImage && <link rel="preload" href={preloadImage} as="image" type="image/webp" fetchpriority="high" />}
 
     <!-- Schema.org JSON-LD @graph -->
@@ -75,7 +74,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     )}
   </head>
   <body class="grain">
-    <a href="#main" class="fixed left-3 top-3 z-[60] -translate-y-[200%] rounded-full bg-ink px-5 py-3 font-medium text-cream transition-transform focus:translate-y-0">Skip to content</a>
+    <a href="#main" class="fixed left-3 top-3 z-[60] -translate-y-[200%] border-2 border-[#141311] bg-[#002FA7] px-5 py-3 font-medium text-[#F6F4EF] transition-transform focus:translate-y-0">Skip to content</a>
     <slot />
     <MobileActionBar />
 
@@ -88,7 +87,7 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
         // React islands reveal their own content (useGlobalReveal) once hydrated; stamping their
         // server HTML before React hydrates it makes the attributes mismatch.

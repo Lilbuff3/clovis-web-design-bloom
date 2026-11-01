@@ -447,9 +447,9 @@ export const business = {
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "07:00",
-      "closes": "19:00",
+      "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "00:00",
+      "closes": "23:59",
     },
   ],
   "founder": {
@@ -466,6 +466,9 @@ export const business = {
     { "@type": "City", "name": "Clovis, CA" },
     { "@type": "City", "name": "Fresno, CA" },
     { "@type": "City", "name": "Madera, CA" },
+    { "@type": "City", "name": "Selma, CA" },
+    { "@type": "City", "name": "Sanger, CA" },
+    { "@type": "City", "name": "Visalia, CA" },
     { "@type": "State", "name": "California" },
     { "@type": "Country", "name": "United States" },
   ],

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-22T05:58:25.094Z",
+  "timestamp": "2026-11-01T04:39:53.860Z",
   "total": 37,
   "passed": 37,
   "failed": 0,
@@ -100,7 +100,7 @@
           "title": "areaServed names Clovis and Fresno, with no wrong Wikidata IDs",
           "status": "PASS",
           "error": null,
-          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA, California, United States"
+          "details": "areaServed names Clovis, CA, Fresno, CA, Madera, CA, Selma, CA, Sanger, CA, Visalia, CA, California, United States"
         },
         {
           "id": "T2.6",

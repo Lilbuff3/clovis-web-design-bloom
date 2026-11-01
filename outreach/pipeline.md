@@ -46,7 +46,7 @@ Do you have any dev overflow or client builds sitting on your backburner for Oct
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -71,7 +71,7 @@ Do you have any web builds in queue this month that need an extra set of hands?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -96,7 +96,7 @@ Are you running into any dev capacity constraints on upcoming client projects?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -123,7 +123,7 @@ Would an extra frontend engineering partner be helpful for your upcoming Q4 deli
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -148,7 +148,7 @@ Do you have any web builds on your backburner that need engineering support this
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -173,7 +173,7 @@ Are you dealing with any dev overflow on upcoming client projects?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -198,7 +198,7 @@ Do you currently have any web projects in your queue that need frontend developm
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -223,7 +223,7 @@ Do you have any web builds coming up that need dedicated frontend support?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -248,7 +248,7 @@ Do you have any client web projects on your schedule this month that could use d
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -273,5 +273,5 @@ Are you experiencing any dev bottlenecks or overflow on client web builds right 
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```

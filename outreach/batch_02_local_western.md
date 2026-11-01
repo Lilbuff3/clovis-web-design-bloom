@@ -45,7 +45,7 @@ If your team is ever dealing with dev bottlenecks or overflow on client web buil
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -69,7 +69,7 @@ Do you currently have any client web builds in queue that need engineering suppo
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -93,7 +93,7 @@ Are you running into any dev capacity constraints on upcoming client launches?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -118,7 +118,7 @@ If your digital department ever needs a reliable local engineering partner for o
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -142,7 +142,7 @@ Do you have any web builds on your backburner this month?
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -166,7 +166,7 @@ If your team ever needs a dependable local developer to handle the coding so you
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -190,7 +190,7 @@ I deliver full builds in 4–5 days for a flat white-label fee ($1,500–$2,000)
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```
 
 ---
@@ -214,5 +214,5 @@ Always glad to connect with other local builders in Fresno County.
 
 Best,
 Adam Youssef
-Clovis, CA · (559) 575-3014
+Clovis, CA · (559) 628-0142
 ```

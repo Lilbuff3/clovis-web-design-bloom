@@ -44,9 +44,6 @@ const customChannels = [
 export function Grower() {
   useGlobalReveal();
   const video = useRef<HTMLVideoElement>(null);
-  // This island hydrates as the section scrolls into view, so the video only downloads then.
-  // It plays once (about 3s, under WCAG's 5s limit for motion without a pause button) and holds on the
-  // last frame. Visitors who ask for reduced motion keep the still.
   useEffect(() => {
     const v = video.current;
     if (!v || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -54,86 +51,79 @@ export function Grower() {
     v.play().catch(() => {});
   }, []);
   return (
-    <section id="grower" className="relative overflow-hidden bg-[#151515] px-5 py-16 text-white md:px-8 md:py-24">
+    <section
+      id="grower"
+      className="relative flex flex-col justify-between overflow-hidden border-b border-[#141311]/12 p-6 text-[#141311] md:p-8 lg:col-span-6 lg:border-r lg:border-b-0"
+    >
       <span id="about" className="pointer-events-none absolute -top-24" aria-hidden="true" />
-      <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">
-        <div className="reveal relative lg:col-span-5">
-          <div className="clip-reveal relative aspect-video overflow-hidden rounded-[16px] border border-white/12 bg-[#1E1E1E] shadow-2xl">
-            <video
-              ref={video}
-              src="/images/studio-desk.mp4"
-              poster="/images/studio-desk.webp"
-              muted
-              playsInline
-              preload="none"
-              aria-label="Animation: an empty desk fills up with code and website plans on two screens"
-              className="h-full w-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#070707]/40 via-transparent to-[#FF4D1C]/10" aria-hidden="true" />
-          </div>
-          <div className="mt-4 flex items-center justify-between rounded-[16px] border border-white/12 bg-[#1E1E1E] px-5 py-4 text-white">
-            <div>
-              <div className="font-mono text-[11px] uppercase tracking-[.16em] text-white/70">Engineering Studio</div>
-              <div className="mt-0.5 font-sans text-base font-semibold text-white">Clovis, California</div>
+      <div>
+        <h2 className="font-sans text-[clamp(1.65rem,2.6vw,2.3rem)] font-semibold leading-[1.02] tracking-[-0.038em] text-[#141311]">
+          One senior engineer. Start to finish.
+        </h2>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-12 sm:items-center">
+          <div className="sm:col-span-5">
+            <div className="clip-reveal relative aspect-video overflow-hidden rounded-xl border border-[#141311]/12 bg-[#F6F4EF] shadow-sm">
+              <video
+                ref={video}
+                src="/images/studio-desk.mp4"
+                poster="/images/studio-desk.webp"
+                muted
+                playsInline
+                preload="none"
+                aria-label="Animation: an empty desk fills up with code and website plans on two screens"
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="text-right font-mono text-[11px] leading-relaxed text-[#00FF08]">
-              36.82° N / 119.70° W
+            <div className="mt-2.5 grid grid-cols-3 divide-x divide-[#141311]/10 rounded-xl border border-[#141311]/10 bg-[#F6F4EF] text-center">
+              <div className="p-2">
+                <div className="text-[11px] font-medium text-[#4A4742]">Access</div>
+                <div className="font-sans text-xs font-semibold text-[#141311]">1-on-1</div>
+              </div>
+              <div className="p-2">
+                <div className="text-[11px] font-medium text-[#4A4742]">Load</div>
+                <div className="font-sans text-xs font-semibold text-[#0B6E3F]">&lt;0.4s</div>
+              </div>
+              <div className="p-2">
+                <div className="text-[11px] font-medium text-[#4A4742]">Code</div>
+                <div className="font-sans text-xs font-semibold text-[#002FA7]">100% Yours</div>
+              </div>
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            <div className="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-4">
-              <div className="font-mono text-[11px] uppercase tracking-[.12em] text-white/70">Access</div>
-              <div className="mt-1 font-sans text-lg font-bold text-white">1-on-1</div>
-              <div className="mt-0.5 text-xs text-white/75">Zero account reps</div>
-            </div>
-            <div className="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-4">
-              <div className="font-mono text-[11px] uppercase tracking-[.12em] text-white/70">Mobile Load</div>
-              <div className="mt-1 font-sans text-lg font-bold text-[#00FF08]">&lt;0.4s</div>
-              <div className="mt-0.5 text-xs text-white/75">100/100 PageSpeed</div>
-            </div>
-            <div className="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-4">
-              <div className="font-mono text-[11px] uppercase tracking-[.12em] text-white/70">Ownership</div>
-              <div className="mt-1 font-sans text-lg font-bold text-white">100%</div>
-              <div className="mt-0.5 text-xs text-white/75">Code &amp; domain</div>
-            </div>
+          <div className="space-y-2.5 text-[14.5px] leading-relaxed text-[#141311] sm:col-span-7">
+            <p>
+              I'm <strong className="font-semibold text-[#002FA7]">Adam</strong>. Based in Clovis, California, I partner with growth-minded businesses across California and the US — engineering every layer myself from discovery to launch.
+            </p>
+            <p className="text-[#4A4742]">
+              I shape your positioning, write buyer copy, hand-code &lt;0.4s static pages, align your business across Google Maps, Bing, Apple Maps, and Yelp so AI assistants cite you, and wire GA4 call/text attribution.
+            </p>
           </div>
         </div>
 
-        <div className="lg:col-span-7 lg:pl-6">
-          <h2 className="h-section font-sans font-bold tracking-[-0.035em] text-white">
-            <span className="line-mask"><span>One senior engineer.</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>Start to finish.</span></span>
-          </h2>
-          <div className="reveal mt-8 max-w-2xl space-y-5 text-[17.5px] leading-relaxed text-white/85">
-            <p>
-              I'm <strong className="font-semibold text-white">Adam</strong>. Based in Clovis, California, I partner with growth-minded businesses across California and the US — and I engineer every layer myself from discovery to launch. You never get sold by a senior strategist only to be handed off to a junior account coordinator or template shop.
-            </p>
-            <p>
-              From our first 15-minute call, I shape your positioning, write every word of buyer copy, hand-code static pages that open in under 0.4 seconds on mobile, align your business across Google Search, Google Maps, Bing, Apple Maps, and Yelp so AI assistants cite you, and wire your analytics so every call, text, and AI lead is attributed.
-            </p>
-            <div className="rounded-[16px] border border-white/12 bg-[#1E1E1E] p-5 text-[15.5px] text-white/85">
-              <strong className="font-semibold text-white">Agencies and creative directors:</strong> I also provide white-label engineering from your Figma files in Astro, React, and TypeScript — shipped on deadline under your brand with 100/100 Core Web Vitals.
-            </div>
-          </div>
-          <blockquote className="reveal font-display wonk relative mt-9 max-w-2xl border-l-2 border-[#FF4D1C] pl-6 text-[clamp(1.55rem,2.6vw,2.2rem)] italic leading-[1.2] text-white">
-            “You don't rent your website from an agency. You own the code, the domain, and your marketing accounts from day one.”
-          </blockquote>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href={smsTo("Hi Adam, I read about how you work and I'd like to talk to you directly about my business.")}
-              data-magnetic
-              className="inline-flex items-center gap-2 rounded-[8px] bg-white px-6 py-3.5 font-sans font-semibold text-[#070707] transition-colors hover:bg-[#FF4D1C] hover:text-white"
-            >
-              Text me directly →
-            </a>
-            <a
-              href="/services/"
-              className="inline-flex items-center gap-2 rounded-[8px] border border-white/20 bg-[#1E1E1E] px-5 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:border-white/50"
-            >
-              Explore all 5 services →
-            </a>
-          </div>
+        <div className="mt-4 rounded-xl bg-[#F6F4EF] p-3.5 text-[13.5px] leading-relaxed text-[#4A4742]">
+          <strong className="font-semibold text-[#141311]">Agencies &amp; creative directors:</strong> I also engineer white-label builds from your Figma files in Astro, React, and TypeScript under your brand with 100/100 Core Web Vitals.
+        </div>
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#141311]/10 pt-4">
+        <span className="text-[13px] font-medium text-[#4A4742]">
+          “You own the code, the domain, and your accounts from day one.”
+        </span>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <a
+            href={smsTo("Hi Adam, I read about how you work and I'd like to talk to you directly about my business.")}
+            data-magnetic
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#141311] px-4 py-2 font-sans text-[13px] font-semibold text-[#F6F4EF] transition-colors hover:bg-[#002FA7]"
+          >
+            Text me directly →
+          </a>
+          <a
+            href="/services/"
+            className="inline-flex items-center gap-1 rounded-full bg-[#F6F4EF] px-3.5 py-2 font-sans text-[13px] font-semibold text-[#141311] transition-colors hover:bg-[#DFDBD2]"
+          >
+            5 Services →
+          </a>
         </div>
       </div>
     </section>
@@ -165,111 +155,98 @@ export function Stand() {
   };
 
   return (
-    <section id="stand" className="relative overflow-hidden bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
+    <section
+      id="stand"
+      className="relative overflow-hidden border-t border-[#141311]/12 bg-[#DFDBD2]/45 px-5 py-10 text-[#141311] md:px-8 md:py-12"
+    >
       <span id="pricing" className="pointer-events-none absolute -top-24" aria-hidden="true" />
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <h2 className="h-section font-sans font-bold tracking-[-0.035em] text-[#151515]">
-            <span className="line-mask"><span>Modular growth packages,</span></span>{" "}
-            <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>scoped around your ROI.</span></span>
-          </h2>
-          <p className="reveal mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-            Every engagement is scoped to your goals, your market competition, and the return it can generate. Choose your foundation below, toggle the channels you need right now, and scale month-to-month without agency lock-in.
-          </p>
-        </div>
-
-        {/* Branded-style 3-Step Modular Architecture Overview */}
-        <ol className="reveal mt-10 grid gap-4 md:grid-cols-3">
-          {modularSteps.map((m) => (
-            <li key={m.step} className="flex flex-col rounded-[16px] border border-[#151515]/12 bg-[#EDEDED] p-6">
-              <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex items-center rounded-[6px] bg-[#151515] px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[.14em] text-white">
-                  Step {m.step}
-                </span>
-                <span className="font-mono text-xs uppercase tracking-[.12em] text-ink-soft">Modular Architecture</span>
-              </div>
-              <h3 className="mt-4 font-sans text-xl font-bold tracking-[-0.02em] text-[#151515]">{m.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{m.body}</p>
-            </li>
-          ))}
-        </ol>
-
-        {/* STEP 01: Choose Your Foundation */}
-        <div className="mt-14">
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#151515]/15 pb-4">
-            <div>
-              <div className="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">Step 01 · Base Engagement</div>
-              <h3 className="mt-1 font-sans text-2xl font-bold tracking-[-0.025em] text-[#151515] md:text-3xl">
-                Choose Your Foundation
-              </h3>
-            </div>
-            <p className="text-sm text-ink-soft">Click any foundation to select it in your live scope builder below.</p>
+        {/* Calm Header + 3-Step Modular Strip */}
+        <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
+          <div className="max-w-2xl">
+            <h2 className="font-sans text-[clamp(1.85rem,3.3vw,2.85rem)] font-semibold leading-[1.02] tracking-[-0.038em] text-[#141311]">
+              Modular growth packages, scoped around your ROI.
+            </h2>
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <ol className="grid grid-cols-3 divide-x divide-[#141311]/10 overflow-hidden rounded-xl border border-[#141311]/12 bg-[#F6F4EF] lg:max-w-md">
+            {modularSteps.map((m) => (
+              <li key={m.step} className="px-3.5 py-2.5">
+                <span className="font-mono text-[11px] font-semibold text-[#002FA7]">
+                  Step {m.step}
+                </span>
+                <h3 className="mt-0.5 font-sans text-xs font-semibold leading-tight text-[#141311]">{m.title}</h3>
+                <p className="sr-only">{m.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Single-Viewport 12-Column Scope Configurator */}
+        <div className="mt-6 grid gap-5 lg:grid-cols-12">
+          {/* LEFT 7 COLS: Step 01 · Choose Your Foundation (3 Cards) */}
+          <div className="grid gap-4 md:grid-cols-3 lg:col-span-7">
             {plans.map((pl) => {
               const isSelected = selectedPlan === pl.name;
               return (
-                <div key={pl.code} className="flex flex-col">
-                  <div
-                    onClick={() => setSelectedPlan(pl.name)}
-                    role="button"
-                    tabIndex={0}
-                    aria-pressed={isSelected}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedPlan(pl.name);
-                      }
-                    }}
-                    className={`relative flex flex-1 cursor-pointer flex-col rounded-[16px] border p-7 transition-all duration-200 ${
-                      isSelected
-                        ? "border-[#151515] bg-[#151515] text-white shadow-xl"
-                        : "border-[#151515]/15 bg-[#EDEDED] text-[#151515] hover:border-[#151515]/40"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className={`font-mono text-[11px] uppercase tracking-[.14em] ${isSelected ? "text-white/75" : "text-ink-soft"}`}>
-                        {pl.kind}
-                      </div>
-                      {isSelected ? (
-                        <span className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#00FF08]/15 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.1em] text-[#00FF08]">
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#00FF08]" aria-hidden="true" />
-                          Selected Foundation
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center rounded-[6px] border border-[#151515]/20 bg-white px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] text-[#151515]">
-                          Select {pl.code}
-                        </span>
-                      )}
+                <div
+                  key={pl.code}
+                  onClick={() => setSelectedPlan(pl.name)}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedPlan(pl.name);
+                    }
+                  }}
+                  className={`relative flex cursor-pointer flex-col justify-between rounded-2xl border p-5 transition-all duration-200 ${
+                    isSelected
+                      ? "border-[#002FA7] bg-[#002FA7] text-[#F6F4EF] shadow-[0_20px_50px_-18px_rgba(0,47,167,0.4)]"
+                      : "border-[#141311]/12 bg-[#F6F4EF] text-[#141311] hover:border-[#141311]/30"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <span className={`font-mono text-[11px] ${isSelected ? "text-[#DCE6FF]" : "text-ink-soft"}`}>
+                        {pl.code}
+                      </span>
+                      <span
+                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
+                          isSelected
+                            ? "bg-[#F6F4EF] text-[#141311]"
+                            : "bg-[#EAE6DF] text-[#4A4742]"
+                        }`}
+                      >
+                        {isSelected ? "Selected" : "Select"}
+                      </span>
                     </div>
 
-                    <div className={`mt-4 font-sans text-2xl font-bold tracking-[-0.025em] lg:text-3xl ${isSelected ? "text-white" : "text-[#151515]"}`}>
+                    <div className={`mt-2.5 font-sans text-lg font-semibold leading-tight tracking-[-0.025em] ${isSelected ? "text-[#F6F4EF]" : "text-[#141311]"}`}>
                       {pl.name}
                     </div>
-                    <div className={`mt-3 font-display text-xl italic ${isSelected ? "text-[#00FF08]" : "text-[#151515]"}`}>
-                      {pl.price}
-                    </div>
-                    <div className={`mt-1.5 font-mono text-[11px] uppercase tracking-[.12em] ${isSelected ? "text-white/70" : "text-ink-soft"}`}>
-                      {pl.time} · {pl.terms}
+                    <div className={`mt-1 font-mono text-[11px] font-medium ${isSelected ? "text-[#DCE6FF]" : "text-[#C83E14]"}`}>
+                      {pl.price} · {pl.time}
                     </div>
 
-                    <div className={`my-5 border-t ${isSelected ? "border-white/15" : "border-[#151515]/15"}`} />
+                    <div className={`my-3 border-t ${isSelected ? "border-[#F6F4EF]/20" : "border-[#141311]/10"}`} />
 
-                    <ul className="space-y-2.5 text-[14.5px] leading-snug">
+                    <ul className="space-y-1.5 text-[12.5px] leading-snug">
                       {pl.items.map((it) => (
-                        <li key={it} className="flex gap-2.5">
-                          <span className={`mt-[2px] font-bold ${isSelected ? "text-[#00FF08]" : "text-[#00A843]"}`}>✓</span>
-                          <span className={isSelected ? "text-white/90" : "text-[#151515]"}>{it}</span>
+                        <li key={it} className="flex gap-1.5">
+                          <span className={`font-bold ${isSelected ? "text-[#34D399]" : "text-[#0B6E3F]"}`}>✓</span>
+                          <span className={isSelected ? "text-[#F6F4EF]/95" : "text-[#141311]"}>{it}</span>
                         </li>
                       ))}
                     </ul>
+                  </div>
 
-                    <p className={`mt-auto pt-6 text-[13.5px] leading-snug ${isSelected ? "text-white/75" : "text-ink-soft"}`}>
-                      <span className={`font-semibold ${isSelected ? "text-white" : "text-[#151515]"}`}>Best for: </span>
+                  <div className="mt-4 pt-2">
+                    <p className={`mb-3 text-[11.5px] leading-snug ${isSelected ? "text-[#DCE6FF]" : "text-ink-soft"}`}>
+                      <span className={`font-semibold ${isSelected ? "text-white" : "text-[#141311]"}`}>Best for: </span>
                       {pl.for}
                     </p>
-
                     <a
                       href="#contact"
                       onClick={(e) => {
@@ -277,153 +254,95 @@ export function Stand() {
                         setSelectedPlan(pl.name);
                         dispatchScope(pl.name, selectedChannels);
                       }}
-                      className={`mt-6 flex items-center justify-center gap-2 rounded-[8px] py-3.5 font-sans text-sm font-semibold transition ${
+                      className={`flex items-center justify-center gap-1 rounded-full py-2 font-sans text-xs font-semibold transition ${
                         isSelected
-                          ? "bg-white text-[#070707] hover:bg-[#FF4D1C] hover:text-white"
-                          : "bg-[#151515] text-white hover:bg-[#FF4D1C]"
+                          ? "bg-[#F6F4EF] text-[#141311] hover:bg-[#141311] hover:text-[#F6F4EF]"
+                          : "bg-[#141311] text-[#F6F4EF] hover:bg-[#002FA7]"
                       }`}
                     >
-                      {pl.cta ?? `Ask about ${pl.name}`} →
+                      {pl.cta ?? `Select ${pl.name}`} →
                     </a>
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
 
-        {/* STEP 02: Customize Your Channels */}
-        <div className="mt-16">
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#151515]/15 pb-4">
+          {/* RIGHT 5 COLS: Step 02 (6 Channel Toggles) + Step 03 (Live Scope Summary) */}
+          <div className="flex flex-col justify-between rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-5 text-[#141311] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)] lg:col-span-5">
             <div>
-              <div className="font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#FF4D1C]">Step 02 · Modular Add-Ons</div>
-              <h3 className="mt-1 font-sans text-2xl font-bold tracking-[-0.025em] text-[#151515] md:text-3xl">
-                Customize Your Channels
-              </h3>
-            </div>
-            <p className="text-sm text-ink-soft">Toggle the priority growth channels you want included in your custom scope.</p>
-          </div>
+              <div className="flex items-center justify-between gap-2 border-b border-[#141311]/10 pb-3">
+                <span className="font-sans text-[13.5px] font-semibold text-[#141311]">
+                  Step 02 · Toggle priority channels ({selectedChannels.length})
+                </span>
+                <a href="/packages/" className="text-[12.5px] font-semibold text-[#002FA7] hover:underline">
+                  Full specs →
+                </a>
+              </div>
 
-          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {customChannels.map((ch) => {
-              const active = selectedChannels.includes(ch.title);
-              return (
-                <button
-                  key={ch.id}
-                  type="button"
-                  onClick={() => toggleChannel(ch.title)}
-                  aria-pressed={active}
-                  className={`flex flex-col justify-between rounded-[16px] border p-5 text-left transition-all ${
-                    active
-                      ? "border-[#151515] bg-[#151515] text-white shadow-md"
-                      : "border-[#151515]/15 bg-[#EDEDED] text-[#151515] hover:border-[#151515]/40"
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className={`font-mono text-[11px] uppercase tracking-[.12em] ${active ? "text-[#00FF08]" : "text-ink-soft"}`}>
-                        {ch.tag}
-                      </span>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {customChannels.map((ch) => {
+                  const active = selectedChannels.includes(ch.title);
+                  return (
+                    <button
+                      key={ch.id}
+                      type="button"
+                      onClick={() => toggleChannel(ch.title)}
+                      aria-pressed={active}
+                      title={ch.impact}
+                      className={`flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left transition-all ${
+                        active
+                          ? "border-[#141311] bg-[#141311] text-[#F6F4EF]"
+                          : "border-[#141311]/10 bg-[#EAE6DF]/60 text-[#141311] hover:bg-[#EAE6DF]"
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <div className="truncate font-sans text-[12.5px] font-semibold leading-tight">
+                          {ch.title}
+                        </div>
+                        <div className={`text-[11px] ${active ? "text-[#DCE6FF]" : "text-ink-soft"}`}>
+                          {ch.tag}
+                        </div>
+                      </div>
                       <span
-                        className={`inline-flex h-6 w-6 items-center justify-center rounded-[6px] font-mono text-xs font-bold ${
-                          active ? "bg-[#00FF08] text-[#070707]" : "border border-[#151515]/25 bg-white text-[#151515]"
+                        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${
+                          active ? "bg-[#0B6E3F] text-[#F6F4EF]" : "bg-[#F6F4EF] text-[#141311]"
                         }`}
                       >
                         {active ? "✓" : "+"}
                       </span>
-                    </div>
-                    <div className={`mt-3 font-sans text-lg font-bold tracking-[-0.015em] ${active ? "text-white" : "text-[#151515]"}`}>
-                      {ch.title}
-                    </div>
-                    <p className={`mt-2 text-[13.5px] leading-relaxed ${active ? "text-white/80" : "text-ink-soft"}`}>
-                      {ch.impact}
-                    </p>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 border-t border-[#141311]/10 pt-3">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="text-[12px] font-semibold text-ink-soft">
+                    Step 03 · Active scope
+                  </span>
+                  <span className="font-sans text-sm font-semibold text-[#002FA7]">{selectedPlan}</span>
+                </div>
+                <div className="mt-2.5 grid gap-2 text-[12px] leading-snug text-ink-soft sm:grid-cols-2">
+                  <div className="rounded-xl bg-[#EAE6DF]/60 p-2.5">
+                    <strong className="font-semibold text-[#141311]">Phone preview first: </strong>
+                    See your working site on your phone before you pay a dollar.
                   </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* STEP 03: Scale As You Grow — Live Scope Summary Bar */}
-        <div className="mt-12 rounded-[16px] border border-[#151515] bg-[#151515] p-7 text-white shadow-2xl md:p-9">
-          <div className="grid items-center gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="rounded-[6px] bg-[#FF4D1C] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-white">
-                  Step 03 · Scale As You Grow
-                </span>
-                <span className="font-mono text-xs uppercase tracking-[.12em] text-white/70">
-                  Live Scope Configuration
-                </span>
-              </div>
-
-              <div className="mt-4 font-sans text-2xl font-bold tracking-[-0.02em] text-white md:text-3xl">
-                Foundation: <span className="text-[#00FF08]">{selectedPlan}</span>
-              </div>
-
-              <div className="mt-4">
-                <div className="font-mono text-[11px] uppercase tracking-[.14em] text-white/70">
-                  Active Custom Channels ({selectedChannels.length} selected):
-                </div>
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {selectedChannels.length > 0 ? (
-                    selectedChannels.map((c) => (
-                      <span
-                        key={c}
-                        className="inline-flex items-center gap-1.5 rounded-[8px] border border-white/15 bg-[#1E1E1E] px-3 py-1.5 text-xs font-medium text-white"
-                      >
-                        <span className="text-[#00FF08]">●</span> {c}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-sm text-white/70">
-                      Core foundation deliverables selected — toggle any optional channels above to add them.
-                    </span>
-                  )}
+                  <div className="rounded-xl bg-[#EAE6DF]/60 p-2.5">
+                    <strong className="font-semibold text-[#141311]">Scoped for ROI: </strong>
+                    Tied to customer value; zero long-term contracts.
+                  </div>
                 </div>
               </div>
-
-              <p className="mt-5 font-mono text-xs leading-relaxed text-white/75">
-                Working phone preview before you pay a dollar · 100% code &amp; domain ownership · Zero lock-in
-              </p>
             </div>
 
-            <div className="flex flex-col gap-3 lg:col-span-4 lg:items-end">
-              <a
-                href="#contact"
-                onClick={() => dispatchScope(selectedPlan, selectedChannels)}
-                className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-white px-6 py-4 text-center font-sans text-base font-semibold text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white"
-              >
-                Lock in this scope &amp; start with a text →
-              </a>
-              <a
-                href="/packages/"
-                className="flex w-full items-center justify-center gap-1.5 rounded-[8px] border border-white/20 bg-[#1E1E1E] px-5 py-3 text-center font-mono text-xs uppercase tracking-[.12em] text-white transition hover:border-white/50"
-              >
-                Compare full package deliverables →
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Risk-Reversal & ROI Guarantee */}
-        <div className="reveal mt-12 grid gap-6 md:grid-cols-2">
-          <div className="rounded-[16px] border border-[#151515]/12 bg-[#EDEDED] p-7">
-            <h3 className="font-sans text-xl font-bold tracking-[-0.02em] text-[#151515] md:text-2xl">
-              See the website preview before you pay.
-            </h3>
-            <p className="mt-2.5 text-[15.5px] leading-relaxed text-ink-soft">
-              For website builds, we talk for 15 minutes and I build a working preview with your real copy that you can open on your phone. If you don't like how it looks and reads, walk away and owe nothing.
-            </p>
-          </div>
-          <div className="rounded-[16px] border border-[#151515]/12 bg-[#EDEDED] p-7">
-            <h3 className="font-sans text-xl font-bold tracking-[-0.02em] text-[#151515] md:text-2xl">
-              Scoped to pay for itself.
-            </h3>
-            <p className="mt-2.5 text-[15.5px] leading-relaxed text-ink-soft">
-              Your scope is tied directly to what a new customer is worth to you and what it takes to win in your market. If I don't see a clear way for a new site or search campaign to earn back its cost, I'll tell you upfront on our first call.
-            </p>
+            <a
+              href="#contact"
+              onClick={() => dispatchScope(selectedPlan, selectedChannels)}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#002FA7] px-5 py-3 text-center font-sans text-[14.5px] font-semibold text-[#F6F4EF] transition hover:bg-[#141311]"
+            >
+              Lock in this scope &amp; start with a text →
+            </a>
           </div>
         </div>
       </div>
@@ -436,64 +355,57 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   const id = useId();
   return (
-    <section id="faq" className="relative bg-white px-5 py-16 text-[#151515] md:px-8 md:py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <div className="lg:sticky lg:top-28">
-            <h2 className="h-section font-sans font-bold tracking-[-0.035em] text-[#151515]">
-              <span className="line-mask"><span>What people ask</span></span>{" "}
-              <span className="line-mask" style={{ ["--d" as string]: "120ms" }}><span>before they text.</span></span>
-            </h2>
-            <p className="reveal mt-5 text-lg leading-relaxed text-ink-soft">
-              Didn't see your question? Text it. You'll get a straight answer, even if it's “you don't need a new website yet.”
-            </p>
-          </div>
-        </div>
-        <div className="lg:col-span-7">
-          <div className="divide-y divide-[#151515]/15 rounded-[16px] border border-[#151515]/15 bg-[#EDEDED]/50 px-6">
-            {faqs.map((f, i) => {
-              const isOpen = open === i;
-              const btnId = `${id}-q${i}`;
-              const panelId = `${id}-a${i}`;
-              return (
-                <div key={f.q}>
-                  <button
-                    id={btnId}
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="group flex w-full items-center justify-between gap-6 py-6 text-left"
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
+    <section
+      id="faq"
+      className="relative flex flex-col justify-between p-6 text-[#141311] md:p-8 lg:col-span-6"
+    >
+      <div>
+        <h2 className="font-sans text-[clamp(1.65rem,2.6vw,2.3rem)] font-semibold leading-[1.02] tracking-[-0.038em] text-[#141311]">
+          What people ask before they text.
+        </h2>
+
+        <div className="mt-5 divide-y divide-[#141311]/10 overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] px-5 shadow-[0_20px_50px_-24px_rgba(20,19,17,0.08)]">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            const btnId = `${id}-q${i}`;
+            const panelId = `${id}-a${i}`;
+            return (
+              <div key={f.q}>
+                <button
+                  id={btnId}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="group flex w-full cursor-pointer items-center justify-between gap-3 py-3.5 text-left"
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                >
+                  <span className={`font-sans text-[15px] font-semibold leading-snug tracking-[-0.015em] transition ${isOpen ? "text-[#002FA7]" : "text-[#141311] group-hover:text-[#002FA7]"}`}>
+                    {f.q}
+                  </span>
+                  <span
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 ${
+                      isOpen
+                        ? "rotate-45 bg-[#141311] text-[#F6F4EF]"
+                        : "bg-[#EAE6DF] text-[#141311] group-hover:bg-[#141311] group-hover:text-[#F6F4EF]"
+                    }`}
                   >
-                    <span className={`font-sans text-xl font-bold leading-snug tracking-[-0.015em] transition md:text-2xl ${isOpen ? "text-[#FF4D1C]" : "text-[#151515] group-hover:translate-x-1"}`}>
-                      {f.q}
-                    </span>
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border text-xl font-bold transition-all duration-300 ${
-                        isOpen
-                          ? "rotate-45 border-[#FF4D1C] bg-[#FF4D1C] text-white"
-                          : "border-[#151515]/20 bg-white text-[#151515] group-hover:border-[#151515]"
-                      }`}
-                    >
-                      +
-                    </span>
-                  </button>
-                  {/* inert: a closed answer is only squashed to zero height, so without it screen readers still read it. */}
-                  <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={btnId}
-                    inert={!isOpen}
-                    className="grid transition-all duration-300 ease-out"
-                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="max-w-2xl pb-6 text-[16.5px] leading-relaxed text-ink-soft">{f.a}</p>
-                    </div>
+                    +
+                  </span>
+                </button>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={btnId}
+                  inert={!isOpen}
+                  className="grid transition-all duration-300 ease-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <p className="pb-3.5 text-[13.5px] leading-relaxed text-ink-soft">{f.a}</p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

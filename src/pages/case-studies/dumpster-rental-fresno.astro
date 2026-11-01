@@ -23,42 +23,42 @@ const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
 >
   <Nav client:load />
 
-  <main id="main" class="relative z-10 bg-white text-[#151515]">
-    <header class="bg-[#151515] pt-32 pb-20 md:pt-40 md:pb-24 text-white">
+  <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
+    <header class="border-b-2 border-[#141311] bg-[#DFDBD2] pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">
       <div class="mx-auto max-w-5xl px-5 md:px-8">
-        <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs uppercase tracking-[.14em] text-white/70">
-          <a href="/" class="underline decoration-white/30 underline-offset-4 hover:text-white">Clovis Web Design</a>
+        <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
+          <a href="/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <a href="/#harvest" class="underline decoration-white/30 underline-offset-4 hover:text-white">Case Studies</a>
+          <a href="/#harvest" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Case Studies</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <span class="text-white" aria-current="page">{c.client}</span>
+          <span class="text-[#141311]" aria-current="page">{c.client}</span>
         </nav>
 
-        <p class="mb-3 font-mono text-xs uppercase tracking-[.18em] text-white/75 font-semibold">
+        <p class="mb-3 font-mono text-xs uppercase tracking-[.18em] text-[#C83E14] font-bold">
           {c.trade} · {c.place} · {c.year}
         </p>
 
-        <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-[-0.045em] leading-[0.98] text-white">
+        <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-bold tracking-[-0.045em] leading-[0.98] text-[#141311]">
           {c.headline}
         </h1>
 
-        <p class="mt-6 text-xl leading-relaxed text-white/80 max-w-3xl">
+        <p class="mt-6 text-xl leading-relaxed text-[#4A4742] max-w-3xl">
           National brokers were taking orders online, taking a cut of every rental, and outranking the local company that actually owned the trucks and dropped off the dumpsters.
         </p>
 
         <!-- Key Metrics Grid -->
-        <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-white/15 pt-8">
-          <div class="rounded-[16px] border border-white/15 bg-white/5 p-6">
-            <div class="font-sans text-4xl sm:text-5xl font-medium tracking-[-0.04em] text-white">#1</div>
-            <div class="mt-2 text-sm text-white/75">On Google for “dumpster rental Fresno”</div>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 border-2 border-[#141311] bg-[#F6F4EF]">
+          <div class="p-6 sm:border-r-2 sm:border-[#141311]">
+            <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#C83E14]">#1</div>
+            <div class="mt-2 text-sm font-medium text-[#4A4742]">On Google for “dumpster rental Fresno”</div>
           </div>
-          <div class="rounded-[16px] border border-white/15 bg-white/5 p-6">
-            <div class="font-sans text-4xl sm:text-5xl font-medium tracking-[-0.04em] text-white">+4</div>
-            <div class="mt-2 text-sm text-white/75">Trucks added to keep up with demand</div>
+          <div class="border-t-2 border-[#141311] p-6 sm:border-r-2 sm:border-t-0">
+            <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#002FA7]">+4</div>
+            <div class="mt-2 text-sm font-medium text-[#4A4742]">Trucks added to keep up with demand</div>
           </div>
-          <div class="rounded-[16px] border border-white/15 bg-white/5 p-6">
-            <div class="font-sans text-4xl sm:text-5xl font-medium tracking-[-0.04em] text-white">&lt;0.4s</div>
-            <div class="mt-2 text-sm text-white/75">Mobile load time on field cellular</div>
+          <div class="border-t-2 border-[#141311] p-6 sm:border-t-0">
+            <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#0B6E3F]">&lt;0.4s</div>
+            <div class="mt-2 text-sm font-medium text-[#4A4742]">Mobile load time on field cellular</div>
           </div>
         </div>
       </div>
@@ -66,71 +66,71 @@ const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
 
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
       <!-- Verified Client Quote -->
-      <figure class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 md:p-8">
-        <blockquote class="text-lg md:text-xl text-[#151515]/90 italic leading-relaxed">
+      <figure class="border-2 border-[#141311] bg-[#F6F4EF] p-7 md:p-8">
+        <blockquote class="text-lg md:text-xl text-[#141311] leading-relaxed">
           “{c.quote.text}”
         </blockquote>
-        <figcaption class="mt-4 text-[#151515]">
-          <span class="font-sans font-medium text-base">{c.quote.name}</span>
-          <span class="block font-mono text-xs text-[#151515]/70">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline decoration-[#151515]/40 underline-offset-4 hover:text-[#b93412]">{c.urlDisplay} ↗</a></span>
+        <figcaption class="mt-4 text-[#141311]">
+          <span class="font-sans font-bold text-base">{c.quote.name}</span>
+          <span class="block font-mono text-xs text-[#4A4742]">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">{c.urlDisplay} ↗</a></span>
         </figcaption>
       </figure>
 
       <!-- Photo Gallery -->
       <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
+        <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
           <div class="aspect-[16/10] overflow-hidden">
             <img src="/images/bigbros-truck.webp" alt="Big Bros Dumpster Rentals roll-off truck in Fresno, CA" width="1067" height="730" class="h-full w-full object-cover" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">Roll-off dumpster delivery truck in Fresno, CA.</figcaption>
+          <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">Roll-off dumpster delivery truck in Fresno, CA.</figcaption>
         </figure>
-        <figure class="overflow-hidden rounded-[16px] border border-[#151515]/10 bg-[#EDEDED]">
+        <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
           <div class="aspect-[16/10] overflow-hidden">
             <img src="/images/bigbros-family.webp" alt="William Maldonado Ramirez and family, owners of Big Bros Dumpster Rentals" width="600" height="600" class="h-full w-full object-cover" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="p-4 border-t border-[#151515]/10 text-sm text-[#151515]/80">William Maldonado Ramirez, co-owner, with family.</figcaption>
+          <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">William Maldonado Ramirez, co-owner, with family.</figcaption>
         </figure>
       </div>
 
       <!-- The Problem & What Was Built -->
-      <section class="mt-16 border-t border-[#151515]/10 pt-12">
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">The Challenge</h2>
-        <p class="mt-4 text-lg text-[#151515]/80 leading-relaxed max-w-3xl">
+      <section class="mt-16 border-t-2 border-[#141311] pt-12">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">The Challenge</h2>
+        <p class="mt-4 text-lg text-[#4A4742] leading-relaxed max-w-3xl">
           When homeowners or contractors needed a roll-off dumpster in Fresno or Clovis, third-party lead brokers dominated search results. These brokers don't own trucks or dumpsters—they capture the lead, charge a middleman fee, and subcontract the delivery. Big Bros had the trucks, the friendly local crew, and driveway-protection boards, but their old site was buried on Google.
         </p>
 
-        <h2 class="mt-12 font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-[#151515]">What Was Built</h2>
+        <h2 class="mt-12 font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">What Was Built</h2>
         <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
-            <strong class="block text-[#151515] mb-1">Dedicated service area pages</strong>
+          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+            <strong class="block text-[#141311] mb-1">Dedicated service area pages</strong>
             Individual pages for Fresno, Clovis, Madera, and Sanger, giving Google an exact geographic match for searchers.
           </div>
-          <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
-            <strong class="block text-[#151515] mb-1">Upfront flat-rate pricing</strong>
+          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+            <strong class="block text-[#141311] mb-1">Upfront flat-rate pricing</strong>
             Transparent dimensions, weight limits, and rental periods right on the screen so customers can order without phone tag.
           </div>
-          <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
-            <strong class="block text-[#151515] mb-1">Driveway protection highlighted</strong>
+          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+            <strong class="block text-[#141311] mb-1">Driveway protection highlighted</strong>
             Clearly communicates that wood planks protect customer concrete, removing the primary hesitation homeowners have with roll-off bins.
           </div>
-          <div class="rounded-[16px] border border-[#151515]/10 bg-[#EDEDED] p-7 text-lg text-[#151515]/85 leading-relaxed">
-            <strong class="block text-[#151515] mb-1">Text-to-book &amp; bilingual copy</strong>
+          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+            <strong class="block text-[#141311] mb-1">Text-to-book &amp; bilingual copy</strong>
             Instant SMS dispatch buttons and a complete Spanish version so bilingual contractors can book directly from job sites.
           </div>
         </div>
       </section>
 
       <!-- Closing CTA Section -->
-      <section class="mt-16 rounded-[16px] bg-[#151515] p-8 md:p-12 text-center text-white">
-        <h2 class="font-sans text-3xl md:text-5xl font-medium tracking-[-0.04em] leading-[1.02] text-white">Need rankings and calls like this?</h2>
-        <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      <section class="mt-16 border-2 border-[#141311] bg-[#DFDBD2] p-8 md:p-12 text-center text-[#141311]">
+        <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">Need rankings and calls like this?</h2>
+        <p class="mt-4 text-lg text-[#4A4742] max-w-2xl mx-auto leading-relaxed">
           I build custom contractor sites that rank in the Google Maps 3-Pack and turn mobile clicks into direct phone calls and text inquiries.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-          <a href={textAdam} class="inline-flex items-center gap-2 rounded-[8px] bg-white px-8 py-4 font-medium text-[#070707] transition hover:bg-[#FF4D1C] hover:text-white text-base">
+          <a href={textAdam} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-8 py-4 font-semibold text-white transition hover:bg-[#141311] text-base">
             <Icon name="text" /> Text me: {PHONE_DISPLAY}
           </a>
-          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-[8px] border border-white/80 px-8 py-4 font-medium text-white transition hover:bg-white hover:text-[#070707] text-base">
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-8 py-4 font-semibold text-[#141311] transition hover:bg-white text-base">
             <Icon name="phone" /> Call {PHONE_DISPLAY}
           </a>
         </div>
