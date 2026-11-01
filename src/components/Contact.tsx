@@ -87,7 +87,9 @@ export function Contact() {
           <div className="reveal mt-10 space-y-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block" htmlFor="contact-name">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">Your name</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">
+                  Your name<span className="tracking-normal normal-case ml-1 font-sans">(optional)</span>
+                </span>
                 <input
                   id="contact-name"
                   ref={nameInputRef}
@@ -98,7 +100,9 @@ export function Contact() {
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you do</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">
+                  What you do<span className="tracking-normal normal-case ml-1 font-sans">(optional)</span>
+                </span>
                 <input
                   id="contact-trade"
                   value={trade}
@@ -109,7 +113,9 @@ export function Contact() {
               </label>
             </div>
             <div>
-              <div id="contact-needs-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">What you need</div>
+              <div id="contact-needs-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">
+                What you need<span className="tracking-normal normal-case ml-1 font-sans">(optional)</span>
+              </div>
               <div role="group" aria-labelledby="contact-needs-label" className="mt-3 flex flex-wrap gap-2">
                 {needs.map((n) => (
                   <Chip key={n} active={need === n} onClick={() => setNeed(n)}>
@@ -119,7 +125,9 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <div id="contact-whens-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">When</div>
+              <div id="contact-whens-label" className="font-mono text-[11px] uppercase tracking-[.18em] text-ink-soft">
+                When<span className="tracking-normal normal-case ml-1 font-sans">(optional)</span>
+              </div>
               <div role="group" aria-labelledby="contact-whens-label" className="mt-3 flex flex-wrap gap-2">
                 {whens.map((w) => (
                   <Chip key={w} active={when === w} onClick={() => setWhen(w)}>
