@@ -28,23 +28,8 @@
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
-
-  --animate-marquee: marquee 38s linear infinite;
-  --animate-sway: sway 5s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes sway {
-  0%, 100% { transform: rotate(-2.2deg); }
-  50% { transform: rotate(2.2deg); }
-}
-@keyframes pop {
-  from { transform: scale(.92); opacity: 0; }
-  to { transform: none; opacity: 1; }
-}
 @keyframes rise {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
@@ -53,14 +38,11 @@
   from { background-position: -200% 0; }
   to { background-position: 200% 0; }
 }
-@keyframes scrollhint {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(200%); }
-}
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(-8deg); }
-  75% { transform: rotate(8deg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 :root {
@@ -91,6 +73,15 @@ html {
   ::-webkit-scrollbar-track {
     background: var(--scrollbar-track);
   }
+}
+
+/* Native modal dialog scroll-chaining containment (modern-web-guidance: prevent-page-scroll-under-modal-dialog) */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 /* Image wipe-in */
@@ -177,42 +168,6 @@ button:tool-submit-active {
   letter-spacing: -0.035em;
 }
 
-/* Section heading role: tightly tracked architectural display typography */
-.h-section {
-  font-family: var(--font-sans);
-  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 0.96;
-  text-wrap: balance;
-}
-
-/* Architectural Steel Mullion Grid & Sunlit Glass Utilities */
-.mullion-frame {
-  border: 2px solid var(--color-ink);
-  background-color: var(--color-paper);
-}
-.mullion-cell {
-  border-color: var(--color-ink);
-}
-.glass-pane-cobalt {
-  background: linear-gradient(135deg, rgba(0, 47, 167, 0.92) 0%, rgba(0, 34, 122, 0.96) 100%);
-  color: #f6f4ef;
-}
-.glass-pane-persimmon {
-  background: linear-gradient(135deg, rgba(200, 62, 20, 0.94) 0%, rgba(163, 47, 12, 0.97) 100%);
-  color: #f6f4ef;
-}
-.glass-pane-amber {
-  background: linear-gradient(135deg, rgba(184, 125, 30, 0.22) 0%, rgba(184, 125, 30, 0.08) 100%);
-}
-.glass-pane-seeded {
-  background:
-    radial-gradient(circle at 20% 25%, rgba(246, 244, 239, 0.88), transparent 55%),
-    linear-gradient(145deg, rgba(246, 244, 239, 0.88) 0%, rgba(223, 219, 210, 0.76) 100%);
-  backdrop-filter: blur(12px);
-}
-
 /* Paper grain overlay disabled for crisp architectural surfaces */
 .grain::after {
   display: none;
@@ -256,18 +211,6 @@ button:tool-submit-active {
 .line-mask:is(.in, [data-in]) > span {
   transform: none;
   animation: none;
-}
-
-.arch {
-  border-radius: 0px;
-}
-
-.dotted-rule {
-  background-image: radial-gradient(circle, currentColor 1px, transparent 1.4px);
-  background-size: 8px 8px;
-  background-repeat: repeat-x;
-  background-position: left center;
-  height: 8px;
 }
 
 .skeleton {

@@ -40,8 +40,9 @@ const schema = pageSchema('/services/medical-web-design/', {
   title="Medical & Dental Practice Web Design — Fresno, Clovis & California"
   description="Websites and search visibility for medical and dental practices. Zero patient data collected online, built to WCAG 2.1 AA, 100/100 Google PageSpeed."
   schema={schema}
+  ogImage="/images/kidney-preview.webp"
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <header class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 pt-28 pb-16 md:pt-36 md:pb-20 text-[#141311]">

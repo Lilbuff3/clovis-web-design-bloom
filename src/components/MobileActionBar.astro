@@ -44,10 +44,10 @@ import Icon from './Icon.astro';
 </aside>
 
 <!-- Slide-up Instant Audit Drawer Dialog -->
-<dialog id="audit-modal" class="fixed inset-x-0 bottom-0 top-auto z-50 m-0 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border-t border-[#141311]/12 bg-[#EAE6DF] p-5 text-[#141311] shadow-2xl backdrop:bg-[#141311]/45 backdrop:backdrop-blur-sm sm:p-6">
+<dialog id="audit-modal" closedby="any" aria-labelledby="audit-modal-title" class="fixed inset-x-0 bottom-0 top-auto z-50 m-0 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border-t border-[#141311]/12 bg-[#EAE6DF] p-5 text-[#141311] shadow-2xl backdrop:bg-[#141311]/45 backdrop:backdrop-blur-sm sm:p-6">
   <div class="flex items-center justify-between border-b border-[#141311]/10 pb-3">
     <div>
-      <h2 class="font-sans text-2xl font-semibold tracking-[-0.035em] text-[#141311]">Free AI check</h2>
+      <h2 id="audit-modal-title" class="font-sans text-2xl font-semibold tracking-[-0.035em] text-[#141311]">Free AI check</h2>
     </div>
     <button type="button" id="close-audit-modal" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#F6F4EF] font-sans text-sm font-semibold text-[#141311] hover:bg-[#141311] hover:text-[#F6F4EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#002FA7]" aria-label="Close dialog">
       ✕
@@ -77,10 +77,14 @@ import Icon from './Icon.astro';
   closeBtn?.addEventListener('click', () => {
     modal?.close();
   });
-  modal?.addEventListener('click', (e) => {
-    const rect = modal.getBoundingClientRect();
-    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-    if (!isInDialog) modal.close();
-  });
+  // Fallback for browsers without native <dialog closedby="any"> support (e.g. Safari)
+  if (modal && !('closedBy' in HTMLDialogElement.prototype)) {
+    modal.addEventListener('click', (e) => {
+      if (e.target !== modal) return;
+      const rect = modal.getBoundingClientRect();
+      const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+      if (!isInDialog) modal.close();
+    });
+  }
 </script>

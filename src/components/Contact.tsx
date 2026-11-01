@@ -361,7 +361,6 @@ export function Contact() {
             ) : isTouch ? (
               <a
                 href={smsHref}
-                data-magnetic="0.2"
                 className="flex w-full max-w-[390px] items-center justify-center gap-2 rounded-full bg-[#002FA7] py-3 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[#141311]"
               >
                 Send this text →
@@ -370,7 +369,6 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                data-magnetic="0.2"
                 className="flex w-full max-w-[390px] items-center justify-center gap-2 rounded-full bg-[#002FA7] py-3 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[#141311] disabled:opacity-70"
               >
                 {status === "submitting" ? "Sending..." : "Send this message →"}

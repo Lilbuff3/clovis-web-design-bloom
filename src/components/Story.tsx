@@ -74,7 +74,6 @@ export function Grower() {
         <div className="flex flex-wrap items-center gap-2.5">
           <a
             href={smsTo("Hi Adam, I read about how you work and I'd like to talk to you directly about my business.")}
-            data-magnetic
             className="inline-flex items-center gap-1.5 rounded-full bg-[#141311] px-4 py-2 font-sans text-[13px] font-semibold text-[#F6F4EF] transition-colors hover:bg-[#002FA7]"
           >
             Text me directly →
@@ -367,6 +366,3 @@ export function FAQ() {
     </section>
   );
 }
-
-export const About = Grower;
-export const Pricing = Stand;

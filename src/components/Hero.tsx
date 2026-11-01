@@ -146,7 +146,6 @@ export function Hero() {
             <div className="mt-8 flex flex-wrap items-center gap-5">
               <a
                 href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")}
-                data-magnetic="0.2"
                 className="inline-flex min-h-[50px] items-center justify-center gap-2.5 rounded-full bg-[#002FA7] px-7 py-3.5 font-sans text-[15px] font-semibold text-[#F6F4EF] shadow-[0_16px_34px_-10px_rgba(0,47,167,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141311]"
               >
                 <span className="h-2 w-2 rounded-full bg-[#34D399]" />
@@ -243,6 +242,8 @@ export function Hero() {
                           alt={pane.alt}
                           width={1280}
                           height={720}
+                          fetchPriority={idx === 0 ? "high" : "low"}
+                          loading={idx === 0 ? "eager" : "lazy"}
                           decoding="async"
                           className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
                         />

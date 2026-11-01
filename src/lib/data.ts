@@ -485,6 +485,7 @@ export type Faq = { q: string; a: string };
 // FAQPage only from questions the page shows; Google drops markup that isn't visible.
 export function pageSchema(path: string, service: { name: string; serviceType: string; audience: string; description: string; offers?: object[] }, pageFaqs: Faq[] = []) {
   const url = `https://cloviswebdesign.com${path}`;
+  const isNestedService = path.startsWith("/services/") && path !== "/services/";
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -501,20 +502,41 @@ export function pageSchema(path: string, service: { name: string; serviceType: s
         : [{
             "@type": "BreadcrumbList",
             "@id": `${url}#breadcrumb`,
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Clovis Web Design",
-                "item": "https://cloviswebdesign.com/",
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": service.name,
-                "item": url,
-              },
-            ],
+            "itemListElement": isNestedService
+              ? [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Clovis Web Design",
+                    "item": "https://cloviswebdesign.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://cloviswebdesign.com/services/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": service.name,
+                    "item": url,
+                  },
+                ]
+              : [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Clovis Web Design",
+                    "item": "https://cloviswebdesign.com/",
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": service.name,
+                    "item": url,
+                  },
+                ],
           }]),
       {
         "@type": "Service",
@@ -545,8 +567,12 @@ export function caseStudySchema(path: string, cs: {
   description: string;
   client: string;
   trade: string;
+  image?: string;
 }) {
   const url = `https://cloviswebdesign.com${path}`;
+  const matchedCase = cases.find((x) => x.caseStudyPath === path);
+  const rawImg = cs.image ?? matchedCase?.previewImg ?? "/images/hero.jpg";
+  const imageUrl = rawImg.startsWith("http") ? rawImg : `https://cloviswebdesign.com${rawImg}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -579,8 +605,11 @@ export function caseStudySchema(path: string, cs: {
         "@type": "Article",
         "@id": `${url}#article`,
         "url": url,
+        "mainEntityOfPage": url,
         "headline": cs.title,
         "description": cs.description,
+        "image": imageUrl,
+        "datePublished": "2025-01-15",
         "author": { "@id": business.founder["@id"] },
         "publisher": { "@id": business["@id"] },
         "about": { "@id": business["@id"] },

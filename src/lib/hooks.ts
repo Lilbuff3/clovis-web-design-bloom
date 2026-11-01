@@ -140,35 +140,22 @@ export const INLINE_REVEAL_SCRIPT = `(${initDocumentReveal.toString()})({ window
 
 export function usePageScroll() {
   const [y, setY] = useState(0);
-  const [p, setP] = useState(0);
   useEffect(() => {
     let raf = 0;
-    let max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    const measure = () => {
-      max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    };
     const on = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const sy = window.scrollY;
-        setY(sy);
-        setP(max > 0 ? Math.min(1, sy / max) : 0);
+        setY(window.scrollY);
       });
     };
-    measure();
     on();
-    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
-    ro?.observe(document.documentElement);
-    window.addEventListener("resize", measure, { passive: true });
     window.addEventListener("scroll", on, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
-      ro?.disconnect();
-      window.removeEventListener("resize", measure);
       window.removeEventListener("scroll", on);
     };
   }, []);
-  return { y, p };
+  return { y };
 }
 
 /** Count up to a number when visible. Never zeroes out the DOM on mount, so SSR HTML, AI crawlers,

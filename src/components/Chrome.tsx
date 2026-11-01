@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePageScroll } from "../lib/hooks";
 import { PHONE_DISPLAY, smsTo } from "../lib/data";
 
-export function SunMark({ className = "" }: { className?: string; progress?: number }) {
+export function SunMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
       <rect x="4" y="4" width="40" height="40" rx="8" fill="#F6F4EF" stroke="#141311" strokeWidth="2.5" />
@@ -32,13 +32,28 @@ const mobileMenuLinks = [
   { href: "/#contact", label: "Contact", meta: "Direct Senior Engineer" },
 ];
 
-export function Nav() {
+function normalizePath(p: string): string {
+  if (!p) return "";
+  const clean = p.split(/[?#]/)[0];
+  return clean.endsWith("/") ? clean : `${clean}/`;
+}
+
+export function Nav({ currentPath = "" }: { currentPath?: string }) {
   const { y } = usePageScroll();
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [activePath, setActivePath] = useState(() => normalizePath(currentPath));
   const lastY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   const menuBtn = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!currentPath && typeof window !== "undefined") {
+      setActivePath(normalizePath(window.location.pathname));
+    } else if (currentPath) {
+      setActivePath(normalizePath(currentPath));
+    }
+  }, [currentPath]);
 
   useEffect(() => {
     const d = y - lastY.current;
@@ -81,6 +96,7 @@ export function Nav() {
           {/* Left: Studio Wordmark */}
           <a
             href="/#top"
+            aria-current={activePath === "/" ? "page" : undefined}
             className="group inline-flex items-center gap-2.5 text-left"
             onClick={() => setOpen(false)}
           >
@@ -92,22 +108,34 @@ export function Nav() {
 
           {/* Center: Quiet Editorial Links */}
           <div className="hidden items-center gap-7 lg:flex">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="font-sans text-[14.5px] font-medium text-[#4A4742] transition-colors duration-200 hover:text-[#141311]"
-              >
-                {l.label}
-              </a>
-            ))}
+            {navLinks.map((l) => {
+              const isRoute = !l.href.includes("#");
+              const isExact = isRoute && activePath === l.href;
+              const isSection =
+                (l.href === "/services/" && activePath.startsWith("/services/")) ||
+                (l.href === "/#harvest" && activePath.startsWith("/case-studies/"));
+              const isActive = isExact || isSection;
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  aria-current={isExact ? "page" : isSection ? "true" : undefined}
+                  className={`font-sans text-[14.5px] transition-colors duration-200 ${
+                    isActive
+                      ? "font-bold text-[#002FA7] underline decoration-[#002FA7] decoration-2 underline-offset-8"
+                      : "font-medium text-[#4A4742] hover:text-[#141311]"
+                  }`}
+                >
+                  {l.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* Right: Smooth Pill CTA + Mobile Trigger */}
           <div className="flex items-center gap-2.5">
             <a
               href={smsTo("Hi Adam, I'm interested in growing my business online. Can we talk?")}
-              data-magnetic="0.2"
               className="hidden items-center gap-2 rounded-full bg-[#141311] px-4 py-2 font-sans text-[13.5px] font-medium text-[#F6F4EF] transition-all duration-200 hover:bg-[#002FA7] sm:inline-flex"
             >
               <span className="h-2 w-2 rounded-full bg-[#34D399]" />
@@ -151,22 +179,30 @@ export function Nav() {
         }}
       >
         <div className="flex flex-col divide-y divide-[#141311]/12 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-2">
-          {mobileMenuLinks.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="flex items-baseline justify-between rounded-xl px-4 py-3.5 text-lg font-semibold tracking-[-0.025em] text-[#141311] transition-colors hover:bg-[#EAE6DF]"
-              style={{
-                transitionDelay: open ? `${60 + i * 25}ms` : "0ms",
-                opacity: open ? 1 : 0,
-                transform: open ? "none" : "translateY(10px)",
-              }}
-            >
-              <span>{l.label}</span>
-              <span className="font-mono text-[11px] uppercase tracking-[.08em] text-[#4A4742]">{l.meta}</span>
-            </a>
-          ))}
+          {mobileMenuLinks.map((l, i) => {
+            const isExact = !l.href.includes("#") && activePath === l.href;
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={isExact ? "page" : undefined}
+                onClick={() => setOpen(false)}
+                className={`flex items-baseline justify-between rounded-xl px-4 py-3.5 text-lg font-semibold tracking-[-0.025em] transition-colors ${
+                  isExact
+                    ? "bg-[#002FA7]/8 text-[#002FA7]"
+                    : "text-[#141311] hover:bg-[#EAE6DF]"
+                }`}
+                style={{
+                  transitionDelay: open ? `${60 + i * 25}ms` : "0ms",
+                  opacity: open ? 1 : 0,
+                  transform: open ? "none" : "translateY(10px)",
+                }}
+              >
+                <span>{l.label}</span>
+                <span className="font-mono text-[11px] uppercase tracking-[.08em] text-[#4A4742]">{l.meta}</span>
+              </a>
+            );
+          })}
         </div>
         <a
           href={smsTo("Hi Adam, I was looking through your site and wanted to talk about growing my business online.")}

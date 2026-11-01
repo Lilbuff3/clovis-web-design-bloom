@@ -215,6 +215,7 @@ export function ClientWork() {
                             if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
                               e.preventDefault();
                               setViewMode((prev) => ({ ...prev, [c.no]: mode === "preview" ? "photo" : "preview" }));
+                              ((e.currentTarget.nextElementSibling ?? e.currentTarget.previousElementSibling) as HTMLElement | null)?.focus();
                             }
                           }}
                           className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
@@ -235,6 +236,7 @@ export function ClientWork() {
                             if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
                               e.preventDefault();
                               setViewMode((prev) => ({ ...prev, [c.no]: mode === "preview" ? "photo" : "preview" }));
+                              ((e.currentTarget.nextElementSibling ?? e.currentTarget.previousElementSibling) as HTMLElement | null)?.focus();
                             }
                           }}
                           className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
@@ -350,7 +352,6 @@ export function ClientWork() {
           </p>
           <a
             href={smsTo("Hi Adam, I saw your site and I'd like to talk about growing my business online.")}
-            data-magnetic
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#F6F4EF] px-4 py-2 font-sans text-[13px] font-semibold text-[#141311] transition hover:bg-[#141311] hover:text-[#F6F4EF]"
           >
             Text me to get started <span aria-hidden>→</span>

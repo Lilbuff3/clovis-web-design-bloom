@@ -168,7 +168,7 @@ const playbooks = [
   description="Five unbundled disciplines engineered by one senior builder: brand positioning, <0.4s custom websites, Google Maps 3-Pack SEO, AI search optimization (GEO), and GA4 lead attribution."
   schema={schema}
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <!-- 1. Sunlit Glazier Colorfield Hero -->

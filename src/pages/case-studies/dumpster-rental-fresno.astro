@@ -20,8 +20,9 @@ const schema = caseStudySchema('/case-studies/dumpster-rental-fresno/', {
   title="Case Study: Big Bros Dumpster Rentals — #1 on Google in Fresno"
   description="How Big Bros Dumpster Rentals reached #1 on Google for 'dumpster rental Fresno' and added 4 trucks to keep up with demand. Hand-coded by Adam."
   schema={schema}
+  ogImage="/images/big-bros-preview.webp"
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <header class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">

@@ -22,7 +22,7 @@ const schema = pageSchema('/', {
 ---
 
 <RootLayout schema={schema} preloadImage="/images/hero.webp">
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <Hero client:load />

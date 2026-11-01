@@ -11,7 +11,7 @@ const textAdam = smsTo("Hi Adam, I was looking for a page on cloviswebdesign.com
   title="Page Not Found — Clovis Web Design"
   description="That page isn't here. Go back to Clovis Web Design or text me at (559) 628-0142."
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 mx-auto max-w-4xl px-5 pt-36 pb-24 md:px-8 md:pt-44">
     <h1 class="font-sans text-4xl font-bold tracking-[-0.04em] leading-[0.98] text-[#141311] md:text-6xl">

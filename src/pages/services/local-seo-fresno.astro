@@ -64,7 +64,7 @@ const aiEngines = [
   description="Rank in the Google Maps 3-Pack and get recommended by ChatGPT, Google Gemini, Claude, Perplexity, and Siri. Four-directory alignment, business schema, and AI lead tracking."
   schema={schema}
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <header class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 pt-28 pb-16 md:pt-36 md:pb-20 text-[#141311]">

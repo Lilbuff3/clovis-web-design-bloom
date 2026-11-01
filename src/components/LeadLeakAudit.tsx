@@ -46,6 +46,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
     return fetch("/api/ask-gemini/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: typeof AbortSignal !== "undefined" && "timeout" in AbortSignal ? AbortSignal.timeout(16_000) : undefined,
       body: JSON.stringify({
         businessName: now.name,
         trade: now.trade,

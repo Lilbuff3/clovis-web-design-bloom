@@ -21,8 +21,9 @@ const schema = caseStudySchema('/case-studies/kidney-specialist-fresno/', {
   title="Case Study: Kidney Specialist Inc. — HIPAA-Safe Practice Web Design"
   description="How Kidney Specialist Inc. boosted provider referrals 40% with zero patient data collected online and 100/100 PageSpeed. Hand-coded by Adam."
   schema={schema}
+  ogImage="/images/kidney-preview.webp"
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <header class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">

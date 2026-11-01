@@ -133,7 +133,7 @@ const deliverableMatrix = [
   description="Big-agency capabilities modularly scoped to your ROI. Choose your foundation (Custom Website Build, Search & AI Visibility Setup, or Ongoing Growth), customize channels, and scale month-to-month."
   schema={schema}
 >
-  <Nav client:load />
+  <Nav client:load currentPath={Astro.url.pathname} />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <!-- 1. Sunlit Glazier Colorfield Hero with 01 Base -> 02 Customize -> 03 Scale Overview -->

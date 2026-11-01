@@ -999,12 +999,16 @@ assertTest(6, 'T6.10', 'Google CWV & SERP Breadcrumbs: explicit image dimensions
     if (r.route !== '/') {
       const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
       const bc = graph.find((n) => n['@type'] === 'BreadcrumbList');
-      if (!bc || !Array.isArray(bc.itemListElement) || bc.itemListElement.length < 2) {
-        throw new Error(`${r.route}: missing BreadcrumbList in JSON-LD @graph.`);
+      const expectedMinItems = r.route.startsWith('/services/') && r.route !== '/services/' ? 3 : 2;
+      if (!bc || !Array.isArray(bc.itemListElement) || bc.itemListElement.length < expectedMinItems) {
+        throw new Error(`${r.route}: expected at least ${expectedMinItems} items in BreadcrumbList JSON-LD @graph.`);
       }
       if (!/<nav[^>]*aria-label=["']Breadcrumb["']/i.test(html)) {
         throw new Error(`${r.route}: missing visible <nav aria-label="Breadcrumb">.`);
       }
+    }
+    if (!/aria-current=["']page["']/i.test(html)) {
+      throw new Error(`${r.route}: missing aria-current="page" current-page indication.`);
     }
   }
   if (missingDims.length) {
@@ -1048,6 +1052,9 @@ assertTest(6, 'T6.12', 'Dedicated case study routes pre-rendered with breadcrumb
     const graph = extractJsonLdScripts(html).find((x) => x.data?.['@graph'])?.data['@graph'] ?? [];
     const article = graph.find((n) => n['@type'] === 'Article');
     if (!article) throw new Error(`${cs.route}: missing Article in JSON-LD @graph`);
+    if (!article.image || !article.datePublished || !article.mainEntityOfPage) {
+      throw new Error(`${cs.route}: Article schema missing image, datePublished, or mainEntityOfPage`);
+    }
     const breadcrumb = graph.find((n) => n['@type'] === 'BreadcrumbList');
     if (!breadcrumb || !Array.isArray(breadcrumb.itemListElement) || breadcrumb.itemListElement.length < 3) {
       throw new Error(`${cs.route}: missing 3-item BreadcrumbList in JSON-LD @graph`);

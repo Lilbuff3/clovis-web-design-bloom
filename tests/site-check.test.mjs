@@ -737,15 +737,24 @@ import { modularChannels } from '../src/lib/data.ts';
   assert.ok(mobileBarSrc.includes('aria-label="Call me"'), 'MobileActionBar.astro must use aria-label="Call me"');
   assert.ok(mobileBarSrc.includes('aria-label="Text me"'), 'MobileActionBar.astro must use aria-label="Text me"');
   assert.ok(!mobileBarSrc.includes('aria-label="Call Adam"') && !mobileBarSrc.includes('aria-label="Text Adam"'), 'MobileActionBar.astro must not use third-person aria-labels');
+  assert.ok(mobileBarSrc.includes('closedby="any"'), 'MobileActionBar.astro <dialog> must declare closedby="any"');
+
+  const indexCssSrc = fs.readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.ok(indexCssSrc.includes('@view-transition'), 'src/index.css must enable cross-document @view-transition');
+  assert.ok(indexCssSrc.includes('dialog::backdrop') && indexCssSrc.includes('overscroll-behavior: contain'), 'src/index.css must contain scroll-chaining under modal dialog');
+
+  assert.ok(auditSrc.includes('AbortSignal.timeout(16_000)'), 'LeadLeakAudit.tsx must guard fetch with AbortSignal.timeout(16_000)');
 
   const heroSrc = fs.readFileSync(new URL('../src/components/Hero.tsx', import.meta.url), 'utf8');
   assert.ok(heroSrc.includes('Clovis, CA · Working directly with me'), 'Hero.tsx ClovisClock SSR fallback must use first-person "with me"');
   assert.ok(!heroSrc.includes('Working directly with Adam'), 'Hero.tsx must not use third-person "with Adam"');
+  assert.ok(heroSrc.includes('fetchPriority={idx === 0 ? "high" : "low"}'), 'Hero.tsx must prioritize foreground showcase pane and deprioritize background pane');
 
   // 6. P3 Chrome.tsx dead exports, deleted files & package-lock sync
   assert.ok(!chromeSrc.includes('export function Marquee'), 'Chrome.tsx must not export unused Marquee');
   assert.ok(!chromeSrc.includes('export function SunCursor'), 'Chrome.tsx must not export unused SunCursor');
   assert.ok(!chromeSrc.includes('export function ChapterIndicator'), 'Chrome.tsx must not export unused ChapterIndicator');
+  assert.ok(chromeSrc.includes('aria-current='), 'Chrome.tsx Nav must indicate current page with aria-current');
 
   for (const deletedRel of [
     '../src/components/index.ts',
