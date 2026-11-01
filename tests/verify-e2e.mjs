@@ -665,7 +665,7 @@ assertTest(3, 'T3.3', 'Hero section displays headline, preview guarantee, and pr
   return `Hero section contains headline, preview guarantee, and primary CTA ensuring mobile fold compliance`;
 });
 
-assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no small text on bright persimmon, no faded ink, no numbered section labels', () => {
+assertTest(3, 'T3.5', 'All routes follow DESIGN.md & WebMCP rules: 11px minimum, no small mono kickers above headings, and WebMCP agentic form attributes', () => {
   const indexPath = path.join(DIST_DIR, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error(`dist/index.html not found.`);
   const html = fs.readFileSync(indexPath, 'utf-8');
@@ -679,8 +679,24 @@ assertTest(3, 'T3.5', 'Homepage follows DESIGN.md text rules: 11px minimum, no s
   if (fadedList) problems.push(`text faded below 70% (${fadedList.find(faded)}); use text-ink-soft`);
   if (/>\s*0[1-9] — /.test(html)) problems.push('numbered label ("0X — …") above a section heading');
 
+  // Verify WebMCP declarative agentic form attributes on homepage
+  for (const attr of ['toolname="audit_ai_visibility"', 'toolname="contact_adam"', 'toolautosubmit', 'toolparamdescription=']) {
+    if (!html.includes(attr)) problems.push(`Missing WebMCP attribute in dist/index.html: ${attr}`);
+  }
+
+  // Verify zero small mono uppercase kicker tags immediately preceding <h1>..<h4> across all routes
+  const kickerBeforeHeadingRe = /<(?:p|div|span)\b[^>]*class="[^"]*font-mono[^"]*uppercase[^"]*"[^>]*>[^<]*<\/(?:p|div|span)>\s*<h[1-4]\b/i;
+  for (const r of [...REQUIRED_ROUTES, ...CASE_STUDY_ROUTES]) {
+    const rPath = path.join(DIST_DIR, r.path);
+    if (!fs.existsSync(rPath)) continue;
+    const rHtml = fs.readFileSync(rPath, 'utf-8');
+    if (kickerBeforeHeadingRe.test(rHtml)) {
+      problems.push(`${r.route}: small mono uppercase kicker found immediately above a heading`);
+    }
+  }
+
   if (problems.length) throw new Error(problems.join('\n - '));
-  return 'No sub-11px text, no small text on bright persimmon, no faded ink text, no numbered section labels';
+  return 'No sub-11px text, no small mono kickers above headings across all routes, and WebMCP agentic form attributes verified';
 });
 
 // ============================================================================
@@ -1151,7 +1167,9 @@ function writeJsonReport() {
     successRate: results.total > 0 ? Number(((results.passed / results.total) * 100).toFixed(1)) : 0,
     tiers: results.tiers,
   };
-  fs.writeFileSync(jsonPath, JSON.stringify(payload, null, 2), 'utf-8');
+  if (jsonOutput || process.env.WRITE_TEST_RESULTS === '1') {
+    fs.writeFileSync(jsonPath, JSON.stringify(payload, null, 2), 'utf-8');
+  }
   if (jsonOutput) {
     console.log(JSON.stringify(payload, null, 2));
   }

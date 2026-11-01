@@ -622,15 +622,34 @@ assert.equal(hooksMod.useGlobalReveal, undefined, 'useGlobalReveal should be del
     disconnect() {}
   }
 
+  const revealDocListeners = {};
   hooksMod.initDocumentReveal({
     innerHeight: 800,
     document: {
       documentElement: {},
       querySelectorAll: () => [aboveFoldStatic, belowFoldStatic, insideSsrIsland],
+      addEventListener: (type, cb, capture) => { revealDocListeners[`${type}:${Boolean(capture)}`] = cb; },
     },
     IntersectionObserver: FakeIntersectionObserver,
     MutationObserver: FakeMutationObserver,
   });
+
+  // Verify :user-invalid to aria-invalid="true" synchronization on capture-phase blur/input
+  assert.equal(typeof revealDocListeners['blur:true'], 'function', 'Expected capture-phase blur listener');
+  assert.equal(typeof revealDocListeners['input:true'], 'function', 'Expected capture-phase input listener');
+  let isUserInvalid = true;
+  const fakeFieldAttrs = new Map();
+  const fakeField = {
+    matches: (sel) => sel === 'input, textarea, select' ? true : sel === ':user-invalid' ? isUserInvalid : false,
+    setAttribute: (k, v) => fakeFieldAttrs.set(k, v),
+    getAttribute: (k) => fakeFieldAttrs.get(k) ?? null,
+    removeAttribute: (k) => fakeFieldAttrs.delete(k),
+  };
+  revealDocListeners['blur:true']({ target: fakeField });
+  assert.equal(fakeField.getAttribute('aria-invalid'), 'true', 'Field matching :user-invalid on blur must receive aria-invalid="true"');
+  isUserInvalid = false;
+  revealDocListeners['input:true']({ target: fakeField });
+  assert.equal(fakeField.getAttribute('aria-invalid'), null, 'Field no longer matching :user-invalid on input must have aria-invalid removed');
 
   assert.equal(aboveFoldStatic.hasAttribute('data-in'), true, 'Above-the-fold static element should be stamped immediately');
   assert.equal(belowFoldStatic.hasAttribute('data-in'), false, 'Below-the-fold static element should wait for intersection');

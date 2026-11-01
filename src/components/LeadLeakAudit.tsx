@@ -35,7 +35,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
   const runCheck = (
     now: { name: string; trade: string; city: string },
     source: "outreach" | "organic" = "organic"
-  ) => {
+  ): Promise<string> => {
     setSent(now);
     setCopiedReport(false);
     setAi("asking");
@@ -43,7 +43,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
       const detail = { business: now.name, trade: now.trade, city: now.city, source };
       window.dispatchEvent(new CustomEvent("ai_audit_run", { detail }));
     }
-    fetch("/api/ask-gemini/", {
+    return fetch("/api/ask-gemini/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -54,8 +54,14 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
       }),
     })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((a: Answer) => setAi(a))
-      .catch((status) => setAi(status === 429 ? "limit" : "failed"));
+      .then((a: Answer) => {
+        setAi(a);
+        return JSON.stringify(a);
+      })
+      .catch((status) => {
+        setAi(status === 429 ? "limit" : "failed");
+        return status === 429 ? "Rate limit reached (10 checks per hour)." : "Gemini lookup failed.";
+      });
   };
 
   // Support personalized outreach links: /?biz=Olsen+Roofing&trade=roofer&city=Clovis,+CA&autorun=1#check
@@ -81,12 +87,33 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
     if (ai && ai !== "asking") resultRef.current?.focus();
   }, [ai]);
 
-  const ask = (e: React.FormEvent) => {
+  const ask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    runCheck(
-      { name: name.trim(), trade: trade.trim(), city: city.trim() || "Clovis, CA" },
+    const nativeEvt = e.nativeEvent as SubmitEvent & {
+      agentInvoked?: boolean;
+      respondWith?: (p: Promise<unknown>) => void;
+    };
+    const trimmedName = name.trim();
+    const trimmedTrade = trade.trim();
+    const trimmedCity = city.trim() || "Clovis, CA";
+
+    if (!trimmedName || !trimmedTrade) {
+      if (nativeEvt?.agentInvoked && typeof nativeEvt.respondWith === "function") {
+        const missingFields: string[] = [];
+        if (!trimmedName) missingFields.push("businessName (required)");
+        if (!trimmedTrade) missingFields.push("trade (required)");
+        nativeEvt.respondWith(Promise.resolve(`Validation failed: ${missingFields.join(", ")}`));
+      }
+      return;
+    }
+
+    const resultPromise = runCheck(
+      { name: trimmedName, trade: trimmedTrade, city: trimmedCity },
       "organic"
     );
+    if (nativeEvt?.agentInvoked && typeof nativeEvt.respondWith === "function") {
+      nativeEvt.respondWith(resultPromise);
+    }
   };
 
   const copyReportLink = () => {
@@ -120,6 +147,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
           {...({
             toolname: "audit_ai_visibility",
             tooldescription: "Check whether Google Maps and Google Gemini AI recommend a business for its industry and city.",
+            toolautosubmit: "",
           } as Record<string, string>)}
         >
           <div className={compact ? "" : "lg:grid lg:grid-cols-12 lg:items-end lg:gap-8"}>
@@ -136,15 +164,44 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
             <div className={compact ? "mt-4 space-y-3" : "mt-5 grid gap-3 sm:grid-cols-2 lg:col-span-8 lg:mt-0 lg:grid-cols-12 lg:items-end"}>
               <label className={compact ? "block" : "block lg:col-span-4"} htmlFor={`${id}-name`}>
                 <span className={labelClass}>Your business</span>
-                <input id={`${id}-name`} name="businessName" type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Sierra View Dental" className={inputClass} />
+                <input
+                  id={`${id}-name`}
+                  name="businessName"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Sierra View Dental"
+                  {...({ toolparamdescription: "e.g. Sierra View Dental, Olsen Roofing" } as Record<string, string>)}
+                  className={inputClass}
+                />
               </label>
               <label className={compact ? "block" : "block lg:col-span-3"} htmlFor={`${id}-trade`}>
                 <span className={labelClass}>What you do</span>
-                <input id={`${id}-trade`} name="trade" type="text" required value={trade} onChange={(e) => setTrade(e.target.value)} placeholder="e.g. dentist, CPA, roofer" className={inputClass} />
+                <input
+                  id={`${id}-trade`}
+                  name="trade"
+                  type="text"
+                  required
+                  value={trade}
+                  onChange={(e) => setTrade(e.target.value)}
+                  placeholder="e.g. dentist, CPA, roofer"
+                  {...({ toolparamdescription: "e.g. dentist, CPA, roofer" } as Record<string, string>)}
+                  className={inputClass}
+                />
               </label>
               <label className={compact ? "block" : "block lg:col-span-2"} htmlFor={`${id}-city`}>
                 <span className={labelClass}>Your city</span>
-                <input id={`${id}-city`} name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Clovis, CA" className={inputClass} />
+                <input
+                  id={`${id}-city`}
+                  name="city"
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Clovis, CA"
+                  {...({ toolparamdescription: "e.g. Clovis, CA" } as Record<string, string>)}
+                  className={inputClass}
+                />
               </label>
               <div className={compact ? "pt-1" : "sm:col-span-2 lg:col-span-3"}>
                 <button

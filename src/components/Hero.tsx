@@ -201,7 +201,7 @@ export function Hero() {
                       key={pane.id}
                       role="button"
                       tabIndex={0}
-                      aria-label={`Inspect ${pane.caption}`}
+                      aria-pressed={isFront} aria-label={`Inspect ${pane.caption}`}
                       onClick={() => setFrontIdx(isFront ? (idx + 1) % SHOWCASE_PANES.length : idx)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {

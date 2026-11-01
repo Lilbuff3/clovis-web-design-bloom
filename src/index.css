@@ -65,6 +65,8 @@
 
 :root {
   interpolate-size: allow-keywords;
+  --scrollbar-thumb: var(--color-ink);
+  --scrollbar-track: var(--color-paper);
 }
 
 html {
@@ -72,7 +74,23 @@ html {
   -webkit-font-smoothing: antialiased;
   background-color: var(--color-paper);
   color: var(--color-ink);
-  scrollbar-color: var(--color-ink) var(--color-paper);
+  caret-color: var(--color-cobalt);
+  accent-color: var(--color-cobalt);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
 }
 
 /* Image wipe-in */
@@ -127,12 +145,30 @@ body {
     outline: 2px solid var(--color-cobalt);
     outline-offset: 3px;
   }
-  h1, h2, h3, h4 {
+  a {
+    text-underline-offset: 3px;
+  }
+  h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
   }
   p, li, blockquote, dd {
     text-wrap: pretty;
   }
+  input:user-invalid,
+  textarea:user-invalid,
+  select:user-invalid {
+    border-color: var(--color-persimmon);
+  }
+}
+
+/* WebMCP Declarative Agentic Form active states */
+form:tool-form-active {
+  outline: 2px dashed var(--color-cobalt);
+  outline-offset: 4px;
+}
+button:tool-submit-active {
+  outline: 2px dashed var(--color-persimmon);
+  outline-offset: 3px;
 }
 
 .font-display {
@@ -244,10 +280,24 @@ body {
   html {
     scroll-behavior: auto;
   }
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+  .reveal,
+  .line-mask > span {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
-  .reveal, .line-mask > span { opacity: 1; transform: none; }
-  .clip-reveal { clip-path: none; }
+  .clip-reveal,
+  .clip-reveal > img:not([style]) {
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .animate-ping,
+  .animate-pulse,
+  .animate-spin,
+  .skeleton {
+    animation: none !important;
+  }
 }

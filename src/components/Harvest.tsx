@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { cases, smsTo } from "../lib/data";
 import { useCountUp } from "../lib/hooks";
 
@@ -21,9 +21,31 @@ function PrimaryMetric({ y }: { y: Y }) {
   );
 }
 
+const CASE_TABS = [...cases.map((c) => c.no), "all"] as const;
+
 export function ClientWork() {
   const [activeCase, setActiveCase] = useState<string>("01");
   const [viewMode, setViewMode] = useState<Record<string, "preview" | "photo">>({});
+  const caseTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const handleCaseTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, idx: number) => {
+    const count = CASE_TABS.length;
+    let nextIdx: number | null = null;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      nextIdx = (idx + 1) % count;
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      nextIdx = (idx - 1 + count) % count;
+    } else if (e.key === "Home") {
+      nextIdx = 0;
+    } else if (e.key === "End") {
+      nextIdx = count - 1;
+    }
+    if (nextIdx !== null) {
+      e.preventDefault();
+      setActiveCase(CASE_TABS[nextIdx]);
+      caseTabRefs.current[nextIdx]?.focus();
+    }
+  };
 
   return (
     <section
@@ -46,15 +68,22 @@ export function ClientWork() {
             aria-label="Verified Client Case Studies"
             className="flex flex-wrap items-center gap-2 rounded-full bg-[#DFDBD2]/75 p-1"
           >
-            {cases.map((c) => {
+            {cases.map((c, idx) => {
               const isSelected = activeCase === c.no;
               return (
                 <button
                   key={c.no}
+                  ref={(el) => {
+                    caseTabRefs.current[idx] = el;
+                  }}
                   type="button"
                   role="tab"
+                  id={`case-tab-${c.no}`}
+                  aria-controls={`case-panel-${c.no}`}
+                  tabIndex={isSelected ? 0 : -1}
                   aria-selected={isSelected}
                   onClick={() => setActiveCase(c.no)}
+                  onKeyDown={(e) => handleCaseTabKeyDown(e, idx)}
                   className={`cursor-pointer rounded-full px-4 py-2 font-sans text-[13px] font-semibold transition-all duration-200 ${
                     isSelected
                       ? "bg-[#141311] text-[#F6F4EF] shadow-sm"
@@ -66,10 +95,16 @@ export function ClientWork() {
               );
             })}
             <button
+              ref={(el) => {
+                caseTabRefs.current[cases.length] = el;
+              }}
               type="button"
               role="tab"
+              id="case-tab-all"
+              tabIndex={activeCase === "all" ? 0 : -1}
               aria-selected={activeCase === "all"}
               onClick={() => setActiveCase("all")}
+              onKeyDown={(e) => handleCaseTabKeyDown(e, cases.length)}
               className={`cursor-pointer rounded-full px-3.5 py-2 font-sans text-[13px] font-semibold transition-all duration-200 ${
                 activeCase === "all"
                   ? "bg-[#002FA7] text-[#F6F4EF] shadow-sm"
@@ -81,7 +116,7 @@ export function ClientWork() {
           </div>
         </div>
 
-        {/* Smooth Rounded-2xl Case Study Cards (Both Pre-Rendered in Static DOM) */}
+        {/* Smooth Rounded-2xl Case Study Specimens (Both Pre-Rendered in Static DOM) */}
         <div className="mt-6 space-y-6">
           {cases.map((c, i) => {
             const secondaryYield = c.yields[1];
@@ -92,6 +127,8 @@ export function ClientWork() {
             return (
               <article
                 key={c.no}
+                id={`case-panel-${c.no}`}
+                aria-labelledby={`case-tab-${c.no}`}
                 className={`${
                   isVisible ? "block" : "hidden"
                 } overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)]`}
@@ -171,8 +208,15 @@ export function ClientWork() {
                         <button
                           type="button"
                           role="tab"
+                          tabIndex={mode === "preview" ? 0 : -1}
                           aria-selected={mode === "preview"}
                           onClick={() => setViewMode((prev) => ({ ...prev, [c.no]: "preview" }))}
+                          onKeyDown={(e) => {
+                            if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                              e.preventDefault();
+                              setViewMode((prev) => ({ ...prev, [c.no]: mode === "preview" ? "photo" : "preview" }));
+                            }
+                          }}
                           className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
                             mode === "preview"
                               ? "bg-[#141311] text-[#F6F4EF]"
@@ -184,8 +228,15 @@ export function ClientWork() {
                         <button
                           type="button"
                           role="tab"
+                          tabIndex={mode === "photo" ? 0 : -1}
                           aria-selected={mode === "photo"}
                           onClick={() => setViewMode((prev) => ({ ...prev, [c.no]: "photo" }))}
+                          onKeyDown={(e) => {
+                            if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                              e.preventDefault();
+                              setViewMode((prev) => ({ ...prev, [c.no]: mode === "preview" ? "photo" : "preview" }));
+                            }
+                          }}
                           className={`cursor-pointer rounded-full px-3 py-1 text-[12px] font-semibold transition-colors ${
                             mode === "photo"
                               ? "bg-[#141311] text-[#F6F4EF]"
@@ -256,9 +307,9 @@ export function ClientWork() {
                         {c.problem}
                       </p>
 
-                      <blockquote className="mt-4 rounded-xl bg-[#EAE6DF]/65 p-4 text-[13.5px] leading-relaxed text-[#141311]">
+                      <blockquote className="mt-4 border-t border-[#141311]/10 pt-3.5 text-[13.5px] leading-relaxed text-[#141311]">
                         “{c.quote.text}”
-                        <footer className="mt-2 text-[12px] font-medium text-[#4A4742]">
+                        <footer className="mt-1.5 text-[12px] font-medium text-[#4A4742]">
                           — {c.quote.name}, {c.quote.role}
                         </footer>
                       </blockquote>

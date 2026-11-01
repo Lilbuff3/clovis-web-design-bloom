@@ -14,47 +14,46 @@ const textAdam = smsTo("Hi Adam, I was looking for a page on cloviswebdesign.com
   <Nav client:load />
 
   <main id="main" class="relative z-10 mx-auto max-w-4xl px-5 pt-36 pb-24 md:px-8 md:pt-44">
-    <p class="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#C83E14]">404 · Page not found</p>
-    <h1 class="font-sans mt-3 text-4xl font-bold leading-[0.95] text-[#141311] md:text-6xl">
-      That page isn't here.
+    <h1 class="font-sans text-4xl font-bold tracking-[-0.04em] leading-[0.98] text-[#141311] md:text-6xl">
+      <span class="text-[#C83E14]">404</span> — That page isn't here.
     </h1>
     <p class="mt-5 max-w-xl text-lg leading-relaxed text-[#4A4742]">
       If you followed an old link, here are the pages on the site — or text me directly at {PHONE_DISPLAY}.
     </p>
 
     <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/" class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-6 py-3.5 font-semibold text-white transition hover:bg-[#141311]">
+      <a href="/" class="inline-flex items-center gap-2 rounded-full bg-[#002FA7] px-6 py-3.5 font-semibold text-white transition hover:bg-[#141311]">
         Back to homepage →
       </a>
-      <a href={textAdam} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:bg-white">
+      <a href={textAdam} class="inline-flex items-center gap-2 rounded-full border border-[#141311]/15 bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:border-[#141311] hover:bg-white">
         Text {PHONE_DISPLAY}
       </a>
-      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:bg-white">
+      <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full border border-[#141311]/15 bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:border-[#141311] hover:bg-white">
         Call
       </a>
-      <a href={mailTo("Website question")} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:bg-white">
+      <a href={mailTo("Website question")} class="inline-flex items-center gap-2 rounded-full border border-[#141311]/15 bg-[#F6F4EF] px-6 py-3.5 font-semibold text-[#141311] transition hover:border-[#141311] hover:bg-white">
         Email {EMAIL}
       </a>
     </div>
 
-    <div class="mt-14 grid border-2 border-[#141311] bg-[#F6F4EF] sm:grid-cols-3">
-      <a href="/services/medical-web-design/" class="p-5 transition hover:bg-white sm:border-r-2 sm:border-[#141311]">
+    <div class="mt-14 grid rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] overflow-hidden sm:grid-cols-3">
+      <a href="/services/medical-web-design/" class="p-5 transition hover:bg-white sm:border-r sm:border-[#141311]/12">
         <div class="font-sans text-xl font-bold text-[#141311]">Medical &amp; dental sites</div>
         <p class="mt-1 text-sm text-[#4A4742]">Websites for practices in Fresno, Clovis and Madera.</p>
       </a>
-      <a href="/services/contractor-websites/" class="border-t-2 border-[#141311] p-5 transition hover:bg-white sm:border-r-2 sm:border-t-0">
+      <a href="/services/contractor-websites/" class="border-t border-[#141311]/12 p-5 transition hover:bg-white sm:border-r sm:border-t-0">
         <div class="font-sans text-xl font-bold text-[#141311]">Contractor websites</div>
         <p class="mt-1 text-sm text-[#4A4742]">Fast mobile pages with tap-to-call and tap-to-text.</p>
       </a>
-      <a href="/services/local-seo-fresno/" class="border-t-2 border-[#141311] p-5 transition hover:bg-white sm:border-t-0">
+      <a href="/services/local-seo-fresno/" class="border-t border-[#141311]/12 p-5 transition hover:bg-white sm:border-t-0">
         <div class="font-sans text-xl font-bold text-[#141311]">Search, Google Maps &amp; AI Marketing</div>
         <p class="mt-1 text-sm text-[#4A4742]">Google Business Profile, business schema and AI citations.</p>
       </a>
-      <a href="/services/" class="border-t-2 border-[#141311] p-5 transition hover:bg-white sm:border-r-2 sm:border-[#141311]">
+      <a href="/services/" class="border-t border-[#141311]/12 p-5 transition hover:bg-white sm:border-r sm:border-[#141311]/12">
         <div class="font-sans text-xl font-bold text-[#141311]">All 5 Lifecycle Services</div>
         <p class="mt-1 text-sm text-[#4A4742]">Brand positioning, custom web design, SEO, AI search and attribution.</p>
       </a>
-      <a href="/packages/" class="border-t-2 border-[#141311] p-5 transition hover:bg-white sm:col-span-2">
+      <a href="/packages/" class="border-t border-[#141311]/12 p-5 transition hover:bg-white sm:col-span-2">
         <div class="font-sans text-xl font-bold text-[#141311]">Modular Growth Packages</div>
         <p class="mt-1 text-sm text-[#4A4742]">Custom website builds, Search &amp; AI setups, and ongoing monthly growth scoped to your ROI.</p>
       </a>

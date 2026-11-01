@@ -180,7 +180,7 @@ export function FourSeconds() {
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting && !autoStarted.current) {
+        if (e.isIntersecting && !autoStarted.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           autoStarted.current = true;
           setTimeout(run, 500);
         }
@@ -198,7 +198,7 @@ export function FourSeconds() {
   const pct = Math.min(1, t / END);
 
   return (
-    <section id="speed" className="relative border-t-2 border-[#141311] bg-[#EAE6DF] px-5 py-16 md:px-8 md:py-24">
+    <section id="speed" className="relative border-t border-[#141311]/12 bg-[#EAE6DF] px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -216,7 +216,7 @@ export function FourSeconds() {
               <span className="font-semibold text-[#141311]">Your own site probably feels fast.</span> You check it at home on Wi-Fi, and your phone saved a copy last time. Customers open it for the first time, on two bars. Turn off your Wi-Fi and open it in a private tab. That's what your customers see.
             </p>
 
-            <div className="reveal mt-10 border-2 border-[#141311] bg-[#F6F4EF] p-7" style={{ ["--d" as string]: "300ms" }}>
+            <div className="reveal mt-10 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-7" style={{ ["--d" as string]: "300ms" }}>
               <div className="flex items-baseline justify-between">
                 <span className="font-mono text-[11px] font-bold uppercase tracking-[.18em] text-[#4A4742]">Stopwatch</span>
                 <span className={`font-mono text-[11px] font-bold uppercase tracking-[.18em] ${t > 4000 ? "text-[#C83E14]" : "text-[#141311]"}`}>
@@ -227,7 +227,7 @@ export function FourSeconds() {
                 {(t / 1000).toFixed(2)}
                 <span className="text-4xl text-[#4A4742]">s</span>
               </div>
-              <div className="relative mt-4 h-3 overflow-hidden border border-[#141311] bg-[#DFDBD2]">
+              <div className="relative mt-4 h-3 overflow-hidden rounded-full border border-[#141311]/20 bg-[#DFDBD2]">
                 <div className="absolute inset-y-0 left-0 bg-[#002FA7]" style={{ width: `${pct * 100}%` }} />
                 <div className="absolute inset-y-[-4px] w-[2px] bg-[#C83E14]" style={{ left: `${(4000 / END) * 100}%` }} />
               </div>
@@ -241,7 +241,7 @@ export function FourSeconds() {
               <button
                 onClick={run}
                 disabled={running}
-                className="mt-6 flex w-full items-center justify-center gap-2 border-2 border-[#141311] bg-[#002FA7] py-4 font-semibold text-white transition hover:bg-[#141311] disabled:opacity-50"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#002FA7] py-4 font-semibold text-white transition hover:bg-[#141311] disabled:opacity-50"
               >
                 {running ? "Racing…" : ran ? "↻ Run the race again" : "▶ Start the race"}
               </button>
@@ -249,7 +249,7 @@ export function FourSeconds() {
           </div>
 
           <div ref={ref} className="lg:col-span-7" data-cursor={running ? "Racing" : "Race"} onClick={() => !running && run()}>
-            <div className="relative flex flex-col items-center justify-center gap-10 border-2 border-[#141311] bg-[#F6F4EF] px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
+            <div className="relative flex flex-col items-center justify-center gap-10 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] px-4 py-12 sm:flex-row sm:items-start sm:gap-6 md:gap-10">
               <Phone label="Typical template" tone="slow">
                 <SlowSite t={t} />
               </Phone>
@@ -267,17 +267,17 @@ export function FourSeconds() {
           </div>
         </div>
 
-        <div className="mt-14 md:mt-16 grid grid-cols-2 border-2 border-[#141311] bg-[#F6F4EF] md:grid-cols-4">
+        <div className="mt-14 md:mt-16 grid grid-cols-2 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] overflow-hidden md:grid-cols-4">
           {[
             ["Things that jump around", "0", "Buttons stay put while the page loads, so nobody taps the wrong one."],
             ["Plugins to update", "0", "Plain hand-written files. Nothing to patch, nothing that breaks on its own."],
             ["Middlemen on your leads", "0", "Calls and texts go straight to your phone."],
             ["First page live in", "1 wk", "For a one-page site, start to finish."],
           ].map(([k, v, d], i) => (
-            <div key={k} className={`reveal p-6 md:p-7 ${i > 0 ? "border-t-2 md:border-l-2 md:border-t-0 border-[#141311]" : ""}`} style={{ ["--d" as string]: `${i * 90}ms` }}>
-              <div className="font-mono text-[11px] font-bold uppercase tracking-[.16em] text-[#4A4742]">{k}</div>
-              <div className="font-sans mt-4 text-5xl font-bold tracking-[-0.04em] text-[#141311] md:text-6xl">{v}</div>
-              <div className="mt-3 text-sm text-[#4A4742]">{d}</div>
+            <div key={k} className={`reveal p-6 md:p-7 ${i > 0 ? "border-t md:border-l md:border-t-0 border-[#141311]/12" : ""}`} style={{ ["--d" as string]: `${i * 90}ms` }}>
+              <div className="font-sans text-5xl font-bold tracking-[-0.04em] text-[#141311] md:text-6xl">{v}</div>
+              <div className="mt-2 font-mono text-[11px] font-bold uppercase tracking-[.16em] text-[#4A4742]">{k}</div>
+              <div className="mt-2 text-sm text-[#4A4742]">{d}</div>
             </div>
           ))}
         </div>

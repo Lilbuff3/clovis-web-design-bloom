@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { faqs, modularChannels, modularSteps, plans, smsTo } from "../lib/data";
 
-
 export function Grower() {
   const video = useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -23,30 +22,32 @@ export function Grower() {
 
         <div className="mt-5 grid gap-5 sm:grid-cols-12 sm:items-center">
           <div className="sm:col-span-5">
-            <div className="clip-reveal relative aspect-video overflow-hidden rounded-xl border border-[#141311]/12 bg-[#F6F4EF] shadow-sm">
-              <video
-                ref={video}
-                src="/images/studio-desk.mp4"
-                poster="/images/studio-desk.webp"
-                muted
-                playsInline
-                preload="none"
-                aria-label="Animation: an empty desk fills up with code and website plans on two screens"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="mt-2.5 grid grid-cols-3 divide-x divide-[#141311]/10 rounded-xl border border-[#141311]/10 bg-[#F6F4EF] text-center">
-              <div className="p-2">
-                <div className="text-[11px] font-medium text-[#4A4742]">Access</div>
-                <div className="font-sans text-xs font-semibold text-[#141311]">1-on-1</div>
+            <div className="overflow-hidden rounded-xl border border-[#141311]/12 bg-[#F6F4EF] shadow-sm">
+              <div className="clip-reveal relative aspect-video overflow-hidden">
+                <video
+                  ref={video}
+                  src="/images/studio-desk.mp4"
+                  poster="/images/studio-desk.webp"
+                  muted
+                  playsInline
+                  preload="none"
+                  aria-label="Animation: an empty desk fills up with code and website plans on two screens"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="p-2">
-                <div className="text-[11px] font-medium text-[#4A4742]">Load</div>
-                <div className="font-sans text-xs font-semibold text-[#0B6E3F]">&lt;0.4s</div>
-              </div>
-              <div className="p-2">
-                <div className="text-[11px] font-medium text-[#4A4742]">Code</div>
-                <div className="font-sans text-xs font-semibold text-[#002FA7]">100% Yours</div>
+              <div className="grid grid-cols-3 divide-x divide-[#141311]/10 border-t border-[#141311]/10 text-center">
+                <div className="p-2">
+                  <div className="text-[11px] font-medium text-[#4A4742]">Access</div>
+                  <div className="font-sans text-xs font-semibold text-[#141311]">1-on-1</div>
+                </div>
+                <div className="p-2">
+                  <div className="text-[11px] font-medium text-[#4A4742]">Load</div>
+                  <div className="font-sans text-xs font-semibold text-[#0B6E3F]">&lt;0.4s</div>
+                </div>
+                <div className="p-2">
+                  <div className="text-[11px] font-medium text-[#4A4742]">Code</div>
+                  <div className="font-sans text-xs font-semibold text-[#002FA7]">100% Yours</div>
+                </div>
               </div>
             </div>
           </div>
@@ -61,9 +62,9 @@ export function Grower() {
           </div>
         </div>
 
-        <div className="mt-4 rounded-xl bg-[#F6F4EF] p-3.5 text-[13.5px] leading-relaxed text-[#4A4742]">
+        <p className="mt-4 border-t border-[#141311]/10 pt-3.5 text-[13.5px] leading-relaxed text-[#4A4742]">
           <strong className="font-semibold text-[#141311]">Agencies &amp; creative directors:</strong> I also engineer white-label builds from your Figma files in Astro, React, and TypeScript under your brand with 100/100 Core Web Vitals.
-        </div>
+        </p>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#141311]/10 pt-4">
@@ -148,17 +149,11 @@ export function Stand() {
             {plans.map((pl) => {
               const isSelected = selectedPlan === pl.name;
               return (
-                <div
+                <article
                   key={pl.code}
-                  onClick={() => setSelectedPlan(pl.name)}
-                  role="button"
-                  tabIndex={0}
-                  aria-pressed={isSelected}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedPlan(pl.name);
-                    }
+                  onClick={(e) => {
+                    if ((e.target as HTMLElement).closest("a, button")) return;
+                    setSelectedPlan(pl.name);
                   }}
                   className={`relative flex cursor-pointer flex-col justify-between rounded-2xl border p-5 transition-all duration-200 ${
                     isSelected
@@ -171,20 +166,24 @@ export function Stand() {
                       <span className={`font-mono text-[11px] ${isSelected ? "text-[#DCE6FF]" : "text-ink-soft"}`}>
                         {pl.code}
                       </span>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
+                      <button
+                        type="button"
+                        aria-pressed={isSelected}
+                        aria-label={`Select ${pl.name} foundation`}
+                        onClick={() => setSelectedPlan(pl.name)}
+                        className={`cursor-pointer rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition-colors ${
                           isSelected
                             ? "bg-[#F6F4EF] text-[#141311]"
-                            : "bg-[#EAE6DF] text-[#4A4742]"
+                            : "bg-[#EAE6DF] text-[#4A4742] hover:bg-[#141311] hover:text-[#F6F4EF]"
                         }`}
                       >
                         {isSelected ? "Selected" : "Select"}
-                      </span>
+                      </button>
                     </div>
 
-                    <div className={`mt-2.5 font-sans text-lg font-semibold leading-tight tracking-[-0.025em] ${isSelected ? "text-[#F6F4EF]" : "text-[#141311]"}`}>
+                    <h3 className={`mt-2.5 font-sans text-lg font-semibold leading-tight tracking-[-0.025em] ${isSelected ? "text-[#F6F4EF]" : "text-[#141311]"}`}>
                       {pl.name}
-                    </div>
+                    </h3>
                     <div className={`mt-1 font-mono text-[11px] font-medium ${isSelected ? "text-[#DCE6FF]" : "text-[#C83E14]"}`}>
                       {pl.price} · {pl.time}
                     </div>
@@ -208,8 +207,7 @@ export function Stand() {
                     </p>
                     <a
                       href="#contact"
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={() => {
                         setSelectedPlan(pl.name);
                         dispatchScope(pl.name, selectedChannels);
                       }}
@@ -222,7 +220,7 @@ export function Stand() {
                       {pl.cta ?? `Select ${pl.name}`} →
                     </a>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
@@ -282,12 +280,12 @@ export function Stand() {
                   </span>
                   <span className="font-sans text-sm font-semibold text-[#002FA7]">{selectedPlan}</span>
                 </div>
-                <div className="mt-2.5 grid gap-2 text-[12px] leading-snug text-ink-soft sm:grid-cols-2">
-                  <div className="rounded-xl bg-[#EAE6DF]/60 p-2.5">
+                <div className="mt-2.5 grid gap-3 border-t border-[#141311]/10 pt-2.5 text-[12px] leading-snug text-ink-soft sm:grid-cols-2 sm:divide-x sm:divide-[#141311]/10">
+                  <div>
                     <strong className="font-semibold text-[#141311]">Phone preview first: </strong>
                     See your working site on your phone before you pay a dollar.
                   </div>
-                  <div className="rounded-xl bg-[#EAE6DF]/60 p-2.5">
+                  <div className="sm:pl-3">
                     <strong className="font-semibold text-[#141311]">Scoped for ROI: </strong>
                     Tied to customer value; zero long-term contracts.
                   </div>

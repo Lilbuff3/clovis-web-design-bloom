@@ -104,11 +104,18 @@ export function Contact() {
     window.location.href = emailHref;
   }
 
-  async function handleSubmit(e?: React.FormEvent) {
+  async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     if (e) e.preventDefault();
     if (status === "submitting") return;
 
-    if (isTouch) {
+    const nativeEvt = e?.nativeEvent as
+      | (SubmitEvent & {
+          agentInvoked?: boolean;
+          respondWith?: (p: Promise<unknown>) => void;
+        })
+      | undefined;
+
+    if (isTouch && !nativeEvt?.agentInvoked) {
       window.location.href = smsHref;
       return;
     }
@@ -116,33 +123,46 @@ export function Contact() {
     if (!reach.trim()) {
       setNeedReach(true);
       reachInputRef.current?.focus();
+      if (nativeEvt?.agentInvoked && typeof nativeEvt.respondWith === "function") {
+        nativeEvt.respondWith(
+          Promise.resolve("Validation failed: reach (Please provide a phone number or email address).")
+        );
+      }
       return;
     }
 
     setNeedReach(false);
     setStatus("submitting");
 
-    try {
-      const res = await fetch("/api/contact/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          trade: trade.trim(),
-          reach: reach.trim(),
-          need,
-          when,
-          message,
-        }),
-      });
+    const submitTask = (async () => {
+      try {
+        const res = await fetch("/api/contact/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            trade: trade.trim(),
+            reach: reach.trim(),
+            need,
+            when,
+            message,
+          }),
+        });
 
-      if (res.ok) {
-        setStatus("success");
-      } else {
-        triggerFallback();
+        if (res.ok) {
+          setStatus("success");
+          return "Inquiry sent to Adam at Clovis Web Design.";
+        }
+        if (!nativeEvt?.agentInvoked) triggerFallback();
+        return "Inquiry drafted via fallback.";
+      } catch {
+        if (!nativeEvt?.agentInvoked) triggerFallback();
+        return "Inquiry drafted via fallback.";
       }
-    } catch {
-      triggerFallback();
+    })();
+
+    if (nativeEvt?.agentInvoked && typeof nativeEvt.respondWith === "function") {
+      nativeEvt.respondWith(submitTask);
     }
   }
 
@@ -181,6 +201,7 @@ export function Contact() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Sarah"
                   autoComplete="name"
+                  {...({ toolparamdescription: "e.g. Sarah" } as Record<string, string>)}
                   className={fieldInputClass}
                 />
               </label>
@@ -192,6 +213,7 @@ export function Contact() {
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
                   placeholder="law firm, medspa, contractor"
+                  {...({ toolparamdescription: "e.g. law firm, medspa, contractor" } as Record<string, string>)}
                   className={fieldInputClass}
                 />
               </label>
@@ -210,6 +232,7 @@ export function Contact() {
                   autoComplete="email"
                   aria-invalid={needReach ? "true" : undefined}
                   aria-describedby={needReach ? "contact-reach-hint" : undefined}
+                  {...({ toolparamdescription: "e.g. (559) 555-0123 or sarah@example.com" } as Record<string, string>)}
                   className={`mt-1 w-full rounded-xl border bg-white px-3.5 py-2.5 font-sans text-[15px] text-[#141311] outline-none transition placeholder:text-[#4A4742] focus:border-[#002FA7] ${
                     needReach ? "border-[#C83E14]" : "border-[#141311]/15"
                   }`}
@@ -245,6 +268,26 @@ export function Contact() {
                 </div>
               </div>
             </div>
+
+            {customChannels.length > 0 && (
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#141311]/10 pt-3 text-xs">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="font-semibold text-[#141311]">Scoped channels:</span>
+                  {customChannels.map((ch) => (
+                    <span key={ch} className="rounded-full bg-[#EAE6DF] px-2.5 py-0.5 font-medium text-[#141311]">
+                      {ch}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setCustomChannels([])}
+                  className="font-semibold text-[#4A4742] underline hover:text-[#141311]"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

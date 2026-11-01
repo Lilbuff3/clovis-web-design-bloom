@@ -137,16 +137,16 @@ const deliverableMatrix = [
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
     <!-- 1. Sunlit Glazier Colorfield Hero with 01 Base -> 02 Customize -> 03 Scale Overview -->
-    <section class="border-b-2 border-[#141311] bg-[#DFDBD2] px-5 pb-16 pt-28 text-[#141311] md:px-8 md:pb-20 md:pt-32">
+    <section class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 px-5 pb-16 pt-28 text-[#141311] md:px-8 md:pb-20 md:pt-32">
       <div class="mx-auto max-w-7xl">
-        <nav aria-label="Breadcrumb" class="mb-5 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
-          <a href="/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
+        <nav aria-label="Breadcrumb" class="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#4A4742]">
+          <a href="/" class="underline decoration-[#141311]/40 underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
           <span aria-hidden="true" class="mx-2">/</span>
           <span class="text-[#141311]" aria-current="page">Modular Growth Packages</span>
         </nav>
 
         <div class="max-w-4xl">
-          <h1 class="font-sans text-[clamp(2.35rem,4.5vw,4.25rem)] font-bold leading-[0.98] tracking-[-0.045em] text-[#141311]">
+          <h1 class="font-sans text-[clamp(2.35rem,4.5vw,4.25rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-[#141311]">
             Big-agency capabilities, modularly scoped to your ROI.
           </h1>
           <p class="mt-5 max-w-3xl text-lg leading-relaxed text-[#4A4742] sm:text-xl">
@@ -156,19 +156,19 @@ const deliverableMatrix = [
           <div class="mt-7 flex flex-wrap items-center gap-3.5">
             <a
               href="#stand"
-              class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-6 py-4 font-sans text-base font-semibold text-white transition hover:bg-[#141311]"
+              class="inline-flex items-center gap-2 rounded-full bg-[#002FA7] px-6 py-3.5 font-sans text-[15px] font-semibold text-white transition hover:bg-[#141311]"
             >
               Build your package below ↓
             </a>
             <a
               href={smsTo("Hi Adam, I'm looking at your modular packages page and want to scope a project.")}
-              class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-6 py-4 font-sans text-base font-semibold text-[#141311] transition hover:bg-white"
+              class="inline-flex items-center gap-2 rounded-full border border-[#141311]/15 bg-[#F6F4EF] px-6 py-3.5 font-sans text-[15px] font-semibold text-[#141311] transition hover:bg-white"
             >
               Text me at {PHONE_DISPLAY}
             </a>
             <a
               href={`tel:${PHONE_TEL}`}
-              class="inline-flex min-h-12 items-center px-3 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#141311] underline decoration-[#C83E14] underline-offset-4 hover:text-[#002FA7]"
+              class="inline-flex min-h-12 items-center px-3 font-sans text-sm font-semibold text-[#141311] underline decoration-[#C83E14] underline-offset-4 hover:text-[#002FA7]"
             >
               Or call {PHONE_DISPLAY}
             </a>
@@ -176,36 +176,27 @@ const deliverableMatrix = [
         </div>
 
         <!-- 01 Base -> 02 Customize -> 03 Scale Architectural Strip -->
-        <div class="mt-14 grid border-2 border-[#141311] bg-[#F6F4EF] sm:grid-cols-3">
-          <div class="p-6 sm:border-r-2 sm:border-[#141311]">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#002FA7]">01 · Base</span>
-              <span class="font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#4A4742]">Foundation</span>
-            </div>
-            <h2 class="mt-3 font-sans text-xl font-bold text-[#141311]">Choose Your Foundation</h2>
-            <p class="mt-2 text-sm leading-relaxed text-[#4A4742]">
+        <div class="mt-12 grid divide-y divide-[#141311]/10 overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <div class="p-6">
+            <h2 class="font-sans text-xl font-semibold tracking-[-0.025em] text-[#141311]">Choose Your Foundation</h2>
+            <p class="mt-1 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#002FA7]">Step 01 · Base</p>
+            <p class="mt-2.5 text-sm leading-relaxed text-[#4A4742]">
               Start with a custom website build, a standalone Search &amp; AI Visibility Setup on your current site, or a monthly growth partnership.
             </p>
           </div>
 
-          <div class="border-t-2 border-[#141311] p-6 sm:border-r-2 sm:border-t-0">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#C83E14]">02 · Customize</span>
-              <span class="font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#4A4742]">Channels</span>
-            </div>
-            <h2 class="mt-3 font-sans text-xl font-bold text-[#141311]">Customize Your Channels</h2>
-            <p class="mt-2 text-sm leading-relaxed text-[#4A4742]">
+          <div class="p-6">
+            <h2 class="font-sans text-xl font-semibold tracking-[-0.025em] text-[#141311]">Customize Your Channels</h2>
+            <p class="mt-1 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#C83E14]">Step 02 · Channels</p>
+            <p class="mt-2.5 text-sm leading-relaxed text-[#4A4742]">
               Toggle high-intent SEO market pages, four-directory AI citation architecture, review automation, bilingual /es/, or GA4 attribution.
             </p>
           </div>
 
-          <div class="border-t-2 border-[#141311] p-6 sm:border-t-0">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#0B6E3F]">03 · Scale</span>
-              <span class="font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#4A4742]">Zero Lock-In</span>
-            </div>
-            <h2 class="mt-3 font-sans text-xl font-bold text-[#141311]">Scale As You Grow</h2>
-            <p class="mt-2 text-sm leading-relaxed text-[#4A4742]">
+          <div class="p-6">
+            <h2 class="font-sans text-xl font-semibold tracking-[-0.025em] text-[#141311]">Scale As You Grow</h2>
+            <p class="mt-1 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-[#0B6E3F]">Step 03 · Zero Lock-In</p>
+            <p class="mt-2.5 text-sm leading-relaxed text-[#4A4742]">
               Add or shift channels month-to-month as revenue compounds. Pause or adjust anytime with a single text message.
             </p>
           </div>
@@ -217,13 +208,10 @@ const deliverableMatrix = [
     <Stand client:load />
 
     <!-- 3. Architectural Deliverable Comparison Matrix -->
-    <section id="deliverables" class="border-t-2 border-[#141311] bg-[#DFDBD2] px-5 py-16 text-[#141311] md:px-8 md:py-24">
+    <section id="deliverables" class="border-t border-[#141311]/12 bg-[#DFDBD2]/55 px-5 py-16 text-[#141311] md:px-8 md:py-20">
       <div class="mx-auto max-w-7xl">
         <div class="max-w-3xl">
-          <div class="font-mono text-xs font-bold uppercase tracking-[.14em] text-[#002FA7]">
-            Full Deliverable Matrix
-          </div>
-          <h2 class="mt-2 h-section font-sans font-bold tracking-[-0.035em] text-[#141311]">
+          <h2 class="h-section font-sans font-semibold tracking-[-0.038em] text-[#141311]">
             Compare foundations side by side.
           </h2>
           <p class="mt-4 text-lg leading-relaxed text-[#4A4742]">
@@ -231,59 +219,59 @@ const deliverableMatrix = [
           </p>
         </div>
 
-        <div class="mt-12 overflow-x-auto border-2 border-[#141311] bg-[#F6F4EF]">
+        <div class="mt-10 overflow-x-auto rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)]">
           <table class="w-full min-w-[720px] border-collapse text-left">
             <caption class="sr-only">Deliverable comparison across Custom Website Build, Search and AI Visibility Setup, and Ongoing Search and AI Growth</caption>
             <thead>
-              <tr class="border-b-2 border-[#141311] bg-[#EAE6DF] text-[#141311]">
-                <th scope="col" class="w-[40%] border-r-2 border-[#141311] p-5 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
+              <tr class="border-b border-[#141311]/12 bg-[#EAE6DF]/80 text-[#141311]">
+                <th scope="col" class="w-[40%] border-r border-[#141311]/10 p-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#4A4742]">
                   Deliverable / Capability
                 </th>
-                <th scope="col" class="w-[20%] border-r-2 border-[#141311] p-5 font-sans text-sm font-bold text-[#141311]">
+                <th scope="col" class="w-[20%] border-r border-[#141311]/10 p-5 font-sans text-sm font-semibold text-[#141311]">
                   01 · Custom Website Build
                 </th>
-                <th scope="col" class="w-[20%] border-r-2 border-[#141311] p-5 font-sans text-sm font-bold text-[#141311]">
+                <th scope="col" class="w-[20%] border-r border-[#141311]/10 p-5 font-sans text-sm font-semibold text-[#141311]">
                   02 · Search &amp; AI Setup
                 </th>
-                <th scope="col" class="w-[20%] bg-[#002FA7] p-5 font-sans text-sm font-bold text-white">
+                <th scope="col" class="w-[20%] bg-[#002FA7] p-5 font-sans text-sm font-semibold text-white">
                   03 · Ongoing Growth
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y-2 divide-[#141311] text-[14.5px]">
+            <tbody class="divide-y divide-[#141311]/10 text-[14.5px]">
               {deliverableMatrix.map((group) => (
                 <>
-                  <tr class="bg-[#DFDBD2]">
+                  <tr class="bg-[#DFDBD2]/65">
                     <th
                       colspan="4"
                       scope="colgroup"
-                      class="px-5 py-3 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#141311]"
+                      class="px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[.14em] text-[#141311]"
                     >
                       {group.category}
                     </th>
                   </tr>
                   {group.rows.map((r) => (
                     <tr class="transition-colors hover:bg-white">
-                      <th scope="row" class="border-r-2 border-[#141311] p-5 font-sans font-semibold text-[#141311]">
+                      <th scope="row" class="border-r border-[#141311]/10 p-4 font-sans font-semibold text-[#141311]">
                         {r.feature}
                       </th>
-                      <td class="border-r-2 border-[#141311] p-5 font-mono text-xs text-[#141311]">
+                      <td class="border-r border-[#141311]/10 p-4 font-mono text-xs text-[#141311]">
                         {r.web === "Included" ? (
-                          <span class="inline-flex items-center gap-1.5 font-bold text-[#0B6E3F]">✓ Included</span>
+                          <span class="inline-flex items-center gap-1.5 font-semibold text-[#0B6E3F]">✓ Included</span>
                         ) : (
                           <span class="text-[#4A4742]">{r.web}</span>
                         )}
                       </td>
-                      <td class="border-r-2 border-[#141311] p-5 font-mono text-xs text-[#141311]">
+                      <td class="border-r border-[#141311]/10 p-4 font-mono text-xs text-[#141311]">
                         {r.setup === "Included" ? (
-                          <span class="inline-flex items-center gap-1.5 font-bold text-[#0B6E3F]">✓ Included</span>
+                          <span class="inline-flex items-center gap-1.5 font-semibold text-[#0B6E3F]">✓ Included</span>
                         ) : (
                           <span class="text-[#4A4742]">{r.setup}</span>
                         )}
                       </td>
-                      <td class="bg-white p-5 font-mono text-xs font-semibold text-[#141311]">
+                      <td class="bg-white/60 p-4 font-mono text-xs font-semibold text-[#141311]">
                         {r.growth.startsWith("Included") ? (
-                          <span class="inline-flex items-center gap-1.5 font-bold text-[#0B6E3F]">✓ {r.growth}</span>
+                          <span class="inline-flex items-center gap-1.5 font-semibold text-[#0B6E3F]">✓ {r.growth}</span>
                         ) : (
                           <span>{r.growth}</span>
                         )}
@@ -299,7 +287,11 @@ const deliverableMatrix = [
     </section>
 
     <!-- 4. FAQ Section -->
-    <FAQ client:visible />
+    <div class="border-t border-[#141311]/12 bg-[#EAE6DF]">
+      <div class="mx-auto max-w-4xl">
+        <FAQ client:visible />
+      </div>
+    </div>
   </main>
 
   <Contact client:visible />

@@ -25,39 +25,39 @@ const schema = caseStudySchema('/case-studies/kidney-specialist-fresno/', {
   <Nav client:load />
 
   <main id="main" class="relative z-10 bg-[#EAE6DF] text-[#141311]">
-    <header class="border-b-2 border-[#141311] bg-[#DFDBD2] pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">
+    <header class="border-b border-[#141311]/12 bg-[#DFDBD2]/60 pt-32 pb-20 md:pt-40 md:pb-24 text-[#141311]">
       <div class="mx-auto max-w-5xl px-5 md:px-8">
         <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs font-bold uppercase tracking-[.14em] text-[#4A4742]">
-          <a href="/" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
+          <a href="/" class="underline decoration-[#141311]/30 underline-offset-4 hover:text-[#002FA7]">Clovis Web Design</a>
           <span aria-hidden="true" class="mx-2">/</span>
-          <a href="/#harvest" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">Case Studies</a>
+          <a href="/#harvest" class="underline decoration-[#141311]/30 underline-offset-4 hover:text-[#002FA7]">Case Studies</a>
           <span aria-hidden="true" class="mx-2">/</span>
           <span class="text-[#141311]" aria-current="page">{c.client}</span>
         </nav>
 
-        <p class="mb-3 font-mono text-xs uppercase tracking-[.18em] text-[#002FA7] font-bold">
-          {c.trade} · {c.place} · {c.year}
-        </p>
-
         <h1 class="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-bold tracking-[-0.045em] leading-[0.98] text-[#141311]">
           {c.headline}
         </h1>
+
+        <p class="mt-4 font-mono text-xs uppercase tracking-[.18em] text-[#002FA7] font-bold">
+          {c.trade} · {c.place} · {c.year}
+        </p>
 
         <p class="mt-6 text-xl leading-relaxed text-[#4A4742] max-w-3xl">
           Medical practices cannot afford data breaches or contact forms that harvest sensitive health details into unsecured email inboxes. I built a site that holds zero patient data online.
         </p>
 
         <!-- Key Metrics Grid -->
-        <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 border-2 border-[#141311] bg-[#F6F4EF]">
-          <div class="p-6 sm:border-r-2 sm:border-[#141311]">
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#141311]/12 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] overflow-hidden">
+          <div class="p-6">
             <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#002FA7]">+40%</div>
             <div class="mt-2 text-sm font-medium text-[#4A4742]">Provider referrals, by Dr. Masood's count</div>
           </div>
-          <div class="border-t-2 border-[#141311] p-6 sm:border-r-2 sm:border-t-0">
+          <div class="p-6">
             <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#0B6E3F]">100/100</div>
             <div class="mt-2 text-sm font-medium text-[#4A4742]">Google PageSpeed Mobile score</div>
           </div>
-          <div class="border-t-2 border-[#141311] p-6 sm:border-t-0">
+          <div class="p-6">
             <div class="font-sans text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-[#141311]">0</div>
             <div class="mt-2 text-sm font-medium text-[#4A4742]">Patient health records stored online</div>
           </div>
@@ -67,54 +67,54 @@ const schema = caseStudySchema('/case-studies/kidney-specialist-fresno/', {
 
     <div class="mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
       <!-- Verified Client Quote -->
-      <figure class="border-2 border-[#141311] bg-[#F6F4EF] p-7 md:p-8">
+      <figure class="rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-7 md:p-8">
         <blockquote class="text-lg md:text-xl text-[#141311] leading-relaxed">
           “{c.quote.text}”
         </blockquote>
         <figcaption class="mt-4 text-[#141311]">
           <span class="font-sans font-bold text-base">{c.quote.name}</span>
-          <span class="block font-mono text-xs text-[#4A4742]">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline decoration-[#141311] underline-offset-4 hover:text-[#002FA7]">{c.urlDisplay} ↗</a></span>
+          <span class="block font-mono text-xs text-[#4A4742]">{c.quote.role}, {c.client} · <a href={c.url} target="_blank" rel="noopener noreferrer" class="underline decoration-[#141311]/30 underline-offset-4 hover:text-[#002FA7]">{c.urlDisplay} ↗</a></span>
         </figcaption>
       </figure>
 
       <!-- Visual Showcase -->
       <div class="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         <div class="md:col-span-6">
-          <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
+          <figure class="overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF]">
             <img src={c.previewImg} alt={`${c.client} website interface on desktop`} width="1280" height="720" class="w-full object-cover" loading="lazy" decoding="async" />
-            <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">{c.client} custom web application.</figcaption>
+            <figcaption class="p-4 border-t border-[#141311]/12 text-sm font-semibold text-[#141311]">{c.client} custom web application.</figcaption>
           </figure>
         </div>
         <div class="md:col-span-6">
-          <figure class="overflow-hidden border-2 border-[#141311] bg-[#F6F4EF]">
+          <figure class="overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF]">
             <img src={c.photoImg} alt={`${c.client} clinic photography in Madera and Fresno`} width={c.photoWidth} height={c.photoHeight} class="w-full object-cover" loading="lazy" decoding="async" />
-            <figcaption class="p-4 border-t-2 border-[#141311] text-sm font-semibold text-[#141311]">Clinical facilities serving Madera &amp; Fresno, CA.</figcaption>
+            <figcaption class="p-4 border-t border-[#141311]/12 text-sm font-semibold text-[#141311]">Clinical facilities serving Madera &amp; Fresno, CA.</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- The Problem & What Was Built -->
-      <section class="mt-16 border-t-2 border-[#141311] pt-12">
+      <section class="mt-16 border-t border-[#141311]/12 pt-12">
         <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">The Challenge</h2>
         <p class="mt-4 text-lg text-[#4A4742] leading-relaxed max-w-3xl">
           The practice's old website used generic web forms that prompted visitors for symptoms and personal health information. Under HIPAA, transmitting and storing electronic Protected Health Information through standard web hosting exposes physicians to severe federal penalties and breach disclosures. Additionally, referring physicians had no fast way to download registration forms or verify accepted insurance plans.
         </p>
 
         <h2 class="mt-12 font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">What Was Built</h2>
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 border border-[#141311]/12 rounded-2xl bg-[#F6F4EF] overflow-hidden divide-[#141311]/12">
+          <div class="p-7 text-lg text-[#4A4742] leading-relaxed">
             <strong class="block text-[#141311] mb-1">Zero patient data architecture</strong>
             The website collects no patient health data online. Any digital booking or intake links directly to third-party HIPAA-compliant portals holding their own Business Associate Agreements (BAAs).
           </div>
-          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+          <div class="p-7 text-lg text-[#4A4742] leading-relaxed md:border-l md:border-[#141311]/12">
             <strong class="block text-[#141311] mb-1">Doctor referral portal</strong>
             A dedicated page for referring physicians providing downloadable registration forms, direct fax routing, and accepted insurance lists.
           </div>
-          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+          <div class="p-7 text-lg text-[#4A4742] leading-relaxed md:border-t md:border-[#141311]/12">
             <strong class="block text-[#141311] mb-1">WCAG 2.1 AA accessibility</strong>
             Engineered for older and low-vision kidney care patients with high contrast, legible typography, and full keyboard navigation.
           </div>
-          <div class="border-2 border-[#141311] bg-[#F6F4EF] p-7 text-lg text-[#4A4742] leading-relaxed">
+          <div class="p-7 text-lg text-[#4A4742] leading-relaxed md:border-l md:border-t md:border-[#141311]/12">
             <strong class="block text-[#141311] mb-1">Bilingual English &amp; Español</strong>
             Complete mirrored Spanish language version ensuring accessible healthcare information across the Central Valley.
           </div>
@@ -123,16 +123,16 @@ const schema = caseStudySchema('/case-studies/kidney-specialist-fresno/', {
       </section>
 
       <!-- Closing CTA Section -->
-      <section class="mt-16 border-2 border-[#141311] bg-[#DFDBD2] p-8 md:p-12 text-center text-[#141311]">
+      <section class="mt-16 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-8 md:p-12 text-center text-[#141311]">
         <h2 class="font-sans text-3xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.02] text-[#141311]">Let's talk about your practice's website</h2>
         <p class="mt-4 text-lg text-[#4A4742] max-w-2xl mx-auto leading-relaxed">
           You'll talk directly to the developer who codes your site. Tell me what your front desk gets asked most and I'll tell you how I'd build it.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-4 items-center">
-          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#002FA7] px-8 py-4 font-semibold text-white transition hover:bg-[#141311] text-base">
+          <a href={`tel:${PHONE_TEL}`} class="inline-flex items-center gap-2 rounded-full bg-[#002FA7] px-8 py-4 font-semibold text-white transition hover:bg-[#141311] text-base">
             <Icon name="phone" /> Call me: {PHONE_DISPLAY}
           </a>
-          <a href={textAdam} class="inline-flex items-center gap-2 border-2 border-[#141311] bg-[#F6F4EF] px-8 py-4 font-semibold text-[#141311] transition hover:bg-white text-base">
+          <a href={textAdam} class="inline-flex items-center gap-2 rounded-full border border-[#141311]/15 bg-white px-8 py-4 font-semibold text-[#141311] transition hover:border-[#141311] text-base">
             <Icon name="text" /> Text
           </a>
         </div>

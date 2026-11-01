@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { services } from "../lib/data";
 
 const PANE_STYLES = [
@@ -41,13 +41,34 @@ const PANE_STYLES = [
 
 export function LifecycleExplorer() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const handleTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, idx: number) => {
+    const count = services.length;
+    let nextIdx: number | null = null;
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      nextIdx = (idx + 1) % count;
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      nextIdx = (idx - 1 + count) % count;
+    } else if (e.key === "Home") {
+      nextIdx = 0;
+    } else if (e.key === "End") {
+      nextIdx = count - 1;
+    }
+    if (nextIdx !== null) {
+      e.preventDefault();
+      setActiveIndex(nextIdx);
+      tabRefs.current[nextIdx]?.focus();
+    }
+  };
 
   return (
     <div className="mt-6">
       <div className="grid overflow-hidden rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)] lg:grid-cols-12">
-        {/* Left: Smooth 5-Stage Architectural Selector (Accessible Tablist) */}
+        {/* Left: Smooth 5-Stage Architectural Selector (Accessible WAI-ARIA Tablist) */}
         <div
           role="tablist"
+          aria-orientation="vertical"
           aria-label="Growth Lifecycle Stages"
           className="flex flex-col justify-between gap-1.5 border-b border-[#141311]/10 bg-[#EAE6DF]/70 p-4 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-5"
         >
@@ -57,13 +78,18 @@ export function LifecycleExplorer() {
             return (
               <button
                 key={s.code}
+                ref={(el) => {
+                  tabRefs.current[idx] = el;
+                }}
                 type="button"
                 role="tab"
+                tabIndex={isSelected ? 0 : -1}
                 aria-selected={isSelected}
                 aria-controls={`lifecycle-panel-${s.code}`}
                 id={`lifecycle-tab-${s.code}`}
                 onClick={() => setActiveIndex(idx)}
                 onMouseEnter={() => setActiveIndex(idx)}
+                onKeyDown={(e) => handleTabKeyDown(e, idx)}
                 className={`flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-left transition-all duration-300 ${
                   isSelected
                     ? `${st.solidBadge} shadow-[0_12px_28px_-10px_rgba(20,19,17,0.22)]`

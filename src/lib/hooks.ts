@@ -6,6 +6,11 @@ export type RevealEnv = {
   document: {
     documentElement?: any;
     querySelectorAll: (selector: string) => ArrayLike<any>;
+    addEventListener?: (
+      type: string,
+      listener: (event: any) => void,
+      useCapture?: boolean
+    ) => void;
     [key: string]: any;
   };
   IntersectionObserver?: new (
@@ -26,9 +31,8 @@ export type RevealEnv = {
 
 /**
  * Marks every `.reveal, .line-mask, .clip-reveal, [data-reveal]` element with `data-in`
- * as it enters the viewport. Skips elements inside unhydrated `<astro-island ssr>` containers
- * until Astro removes the `ssr` attribute upon React hydration, preventing hydration attribute
- * mismatches while requiring zero hook calls inside React components.
+ * as it enters the viewport, and synchronizes `:user-invalid` form control states with
+ * `aria-invalid="true"` on blur/input (per modern-web-guidance `accessible-error-announcement`).
  *
  * Defined as a typed function expression with zero interior TS annotations so
  * `initDocumentReveal.toString()` is valid browser JS with zero regex stripping.
@@ -37,7 +41,45 @@ export const initDocumentReveal: (env: RevealEnv) => void = function (env) {
   const doc = env.document;
   const IO = env.IntersectionObserver;
   const MO = env.MutationObserver;
-  if (!doc || !IO) return;
+  if (!doc) return;
+
+  if (doc.addEventListener) {
+    doc.addEventListener(
+      "blur",
+      function (event) {
+        const input = event && event.target;
+        if (!input || !input.matches || !input.matches("input, textarea, select")) return;
+        try {
+          if (input.matches(":user-invalid")) {
+            input.setAttribute("aria-invalid", "true");
+          } else if (input.getAttribute("aria-invalid") === "true") {
+            input.removeAttribute("aria-invalid");
+          }
+        } catch {
+          // Ignore if :user-invalid is unsupported
+        }
+      },
+      true
+    );
+    doc.addEventListener(
+      "input",
+      function (event) {
+        const input = event && event.target;
+        if (!input || !input.matches || !input.matches("input, textarea, select")) return;
+        if (input.getAttribute("aria-invalid") !== "true") return;
+        try {
+          if (!input.matches(":user-invalid")) {
+            input.removeAttribute("aria-invalid");
+          }
+        } catch {
+          // Ignore if :user-invalid is unsupported
+        }
+      },
+      true
+    );
+  }
+
+  if (!IO) return;
 
   const SELECTOR = ".reveal, .line-mask, .clip-reveal, [data-reveal]";
   const io = new IO(
