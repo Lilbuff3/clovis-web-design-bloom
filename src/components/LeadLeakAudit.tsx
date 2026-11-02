@@ -164,7 +164,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
 
             <div className={compact ? "mt-4 space-y-3" : "mt-5 grid gap-3 sm:grid-cols-2 lg:col-span-8 lg:mt-0 lg:grid-cols-12 lg:items-end"}>
               <label className={compact ? "block" : "block lg:col-span-4"} htmlFor={`${id}-name`}>
-                <span className={labelClass}>Your business</span>
+                <span className={labelClass}>Your business <span aria-hidden="true" className="text-persimmon-deep">*</span></span>
                 <input
                   id={`${id}-name`}
                   name="businessName"
@@ -178,7 +178,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 />
               </label>
               <label className={compact ? "block" : "block lg:col-span-3"} htmlFor={`${id}-trade`}>
-                <span className={labelClass}>What you do</span>
+                <span className={labelClass}>What you do <span aria-hidden="true" className="text-persimmon-deep">*</span></span>
                 <input
                   id={`${id}-trade`}
                   name="trade"
@@ -192,7 +192,7 @@ export function LeadLeakAudit({ compact = false }: { compact?: boolean }) {
                 />
               </label>
               <label className={compact ? "block" : "block lg:col-span-2"} htmlFor={`${id}-city`}>
-                <span className={labelClass}>Your city</span>
+                <span className={labelClass}>Your city <span className="font-normal text-ink-soft">(optional)</span></span>
                 <input
                   id={`${id}-city`}
                   name="city"

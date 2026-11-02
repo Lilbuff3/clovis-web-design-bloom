@@ -192,7 +192,7 @@ export function Contact() {
           <div className="mt-5 space-y-4 rounded-2xl border border-[#141311]/12 bg-[#F6F4EF] p-5 shadow-[0_24px_60px_-24px_rgba(20,19,17,0.08)] sm:p-6">
             <div className="grid gap-3.5 sm:grid-cols-3">
               <label className="block" htmlFor="contact-name">
-                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Your name</span>
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Your name <span className="font-normal text-ink-soft">(optional)</span></span>
                 <input
                   id="contact-name"
                   name="name"
@@ -206,7 +206,7 @@ export function Contact() {
                 />
               </label>
               <label className="block" htmlFor="contact-trade">
-                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">What you do</span>
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">What you do <span className="font-normal text-ink-soft">(optional)</span></span>
                 <input
                   id="contact-trade"
                   name="trade"
@@ -218,7 +218,7 @@ export function Contact() {
                 />
               </label>
               <label className="block" htmlFor="contact-reach">
-                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Phone or email</span>
+                <span className="font-sans text-[12px] font-semibold text-[#4A4742]">Phone or email <span aria-hidden="true" className="text-persimmon-deep">*</span></span>
                 <input
                   id="contact-reach"
                   name="reach"
