@@ -44,7 +44,7 @@ I work on a flat white-label fee ($1,200–$1,800/build) with 4-to-5-day deliver
 If your team is ever dealing with dev bottlenecks or overflow on client web builds this quarter, I’d love to buy you a coffee at Kuppa Joy in Old Town or drop by for 10 minutes to introduce myself.
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -68,7 +68,7 @@ I deliver full custom builds in 4–5 days on a flat project rate ($1,500–$2,0
 Do you currently have any client web builds in queue that need engineering support?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -92,7 +92,7 @@ I handle builds on a flat white-label fee ($1,200–$1,800) in 4–5 days. You h
 Are you running into any dev capacity constraints on upcoming client launches?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -117,7 +117,7 @@ Production proof:
 If your digital department ever needs a reliable local engineering partner for overflow builds or technical compliance sprints, I’d love to connect.
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -141,7 +141,7 @@ I partner with agencies on flat white-label rates ($1,500–$2,000/build) with 4
 Do you have any web builds on your backburner this month?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -165,7 +165,7 @@ I handle client builds for a flat project rate ($1,200–$1,800) in 4–5 days.
 If your team ever needs a dependable local developer to handle the coding so you can stay focused on creative and strategy, I’d be glad to introduce myself over coffee.
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -189,7 +189,7 @@ Sample live build:
 I deliver full builds in 4–5 days for a flat white-label fee ($1,500–$2,000). Would an extra frontend partner be helpful for your upcoming delivery schedule?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -213,6 +213,6 @@ If your engineering queue is ever backed up or you need an extra set of hands on
 Always glad to connect with other local builders in Fresno County.
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```

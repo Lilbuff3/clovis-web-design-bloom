@@ -162,8 +162,8 @@ async function askGemini(
           tools: [{ googleMaps: {} }],
           generationConfig: { maxOutputTokens: 800 },
         }),
-        // Two tries at 11s each stay inside the 25 seconds an edge function gets to start answering.
-        signal: AbortSignal.timeout(11_000),
+        // Three tries (2x Maps + 1x Search fallback) at 7s each stay inside the 25 seconds an edge function gets.
+        signal: AbortSignal.timeout(7_000),
       }
     );
     if (res.status === 429) {
@@ -235,7 +235,7 @@ async function askGeminiSearchFallback(
           tools: [{ googleSearch: {} }],
           generationConfig: { maxOutputTokens: 800 },
         }),
-        signal: AbortSignal.timeout(11_000),
+        signal: AbortSignal.timeout(7_000),
       }
     );
     if (!res.ok) return null;
