@@ -45,7 +45,7 @@ I partner with design studios on a flat white-label fee per project ($1,500–$2
 Do you have any dev overflow or client builds sitting on your backburner for October?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -70,7 +70,7 @@ If you ever experience engineering bottlenecks or need reliable US-based overflo
 Do you have any web builds in queue this month that need an extra set of hands?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -95,7 +95,7 @@ I deliver full custom builds in 4–5 days for a predictable flat project fee ($
 Are you running into any dev capacity constraints on upcoming client projects?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -122,7 +122,7 @@ I work on a flat white-label fee ($1,500–$2,000 per build) with 4-day turnarou
 Would an extra frontend engineering partner be helpful for your upcoming Q4 delivery schedule?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -147,7 +147,7 @@ I handle frontend code on a flat white-label basis ($1,500–$2,000/site) with 5
 Do you have any web builds on your backburner that need engineering support this month?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -172,7 +172,7 @@ I provide fixed-price turnarounds ($1,500–$2,000 per build) in 4–5 days, ope
 Are you dealing with any dev overflow on upcoming client projects?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -197,7 +197,7 @@ I work on a flat project rate ($1,500–$2,000) with 4-to-5-day turnaround, givi
 Do you currently have any web projects in your queue that need frontend development?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -222,7 +222,7 @@ I white-label for design-forward studios on a flat project fee ($1,500–$2,000)
 Do you have any web builds coming up that need dedicated frontend support?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -247,7 +247,7 @@ I deliver full client builds in 4–5 days for a flat white-label fee ($1,500–
 Do you have any client web projects on your schedule this month that could use dev overflow support?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```
 
@@ -272,6 +272,6 @@ I work on flat-rate project fees ($1,500–$2,000) with 4-to-5-day delivery. Sam
 Are you experiencing any dev bottlenecks or overflow on client web builds right now?
 
 Best,
-Adam Youssef
+Adam
 Clovis, CA · (559) 628-0142
 ```

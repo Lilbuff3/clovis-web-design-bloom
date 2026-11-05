@@ -40,6 +40,18 @@ export default async function handler(req: Request, deps: EdgeDeps = {}): Promis
     return Response.json({ error: "Please provide your phone or email so I can reply" }, { status: 400 });
   }
 
+  const leadPayload = {
+    name,
+    reach,
+    trade,
+    need,
+    when,
+    message,
+    source: "contact_form",
+    timestamp: new Date().toISOString(),
+  };
+  console.info(JSON.stringify({ event: "contact_form_lead", ...leadPayload }));
+
   const webhookUrl = env.LEAD_ALERT_WEBHOOK_URL?.trim();
   if (!webhookUrl) {
     console.error("LEAD_ALERT_WEBHOOK_URL is unset; failing closed");
@@ -56,16 +68,7 @@ export default async function handler(req: Request, deps: EdgeDeps = {}): Promis
       priority: "urgent",
       tags: "incoming_envelope,phone,sparkles",
       summary,
-      jsonPayload: {
-        name,
-        reach,
-        trade,
-        need,
-        when,
-        message,
-        source: "contact_form",
-        timestamp: new Date().toISOString(),
-      },
+      jsonPayload: leadPayload,
       timeoutMs: 5_000,
     },
     fetchImpl
